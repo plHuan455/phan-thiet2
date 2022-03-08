@@ -1,0 +1,42 @@
+image: node:lts-fermium
+
+definitions:
+  services:
+    docker:
+      memory: 2048
+  caches:
+    sonar: ~/.sonar/cache
+  steps:
+    - step: &sonarcloud
+        name: Analyze on SonarCloud
+        clone:
+          depth: full
+        caches:
+          - sonar
+        script:
+          - pipe: sonarsource/sonarcloud-scan:1.2.1
+          - pipe: sonarsource/sonarcloud-quality-gate:0.1.4
+
+pipelines:
+  pull-requests:
+    "**":
+      - parallel:
+          - step:
+              name: Build and Test
+              caches:
+                - node
+              script:
+                - yarn install --frozen-lockfile
+                - yarn lint:style
+                - yarn lint:script
+                # - yarn test
+          - step: *sonarcloud
+
+  branches:
+    develop:
+      - parallel:
+          - step:
+              name: Security Scan
+              script:
+                - pipe: atlassian/git-secrets-scan:0.4.3
+          - step: *sonarcloud
