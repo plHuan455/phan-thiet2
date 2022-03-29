@@ -1,5 +1,6 @@
 import { Story, Meta } from '@storybook/react';
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 
 import Button from '.';
 
@@ -14,6 +15,13 @@ export default {
       },
       defaultValue: 'primary-blue',
     },
+    size: {
+      control: {
+        type: 'select',
+        options: ['md', 'lg'],
+      },
+      defaultValue: 'lg',
+    },
     loading: {
       control: {
         type: 'boolean',
@@ -24,9 +32,12 @@ export default {
 
 export const normal: Story = ({
   variant,
+  size,
   loading,
 }) => (
-  <Button variant={variant} loading={loading}>
-    Đăng ký nhận thông tin
-  </Button>
+  <BrowserRouter>
+    <Button variant={variant} size={size} loading={loading}>
+      Đăng ký nhận thông
+    </Button>
+  </BrowserRouter>
 );

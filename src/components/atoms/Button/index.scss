@@ -1,60 +1,67 @@
 .a-button {
   $root: &;
-  position: relative;
+  color: $white;
   font-family: inherit;
+  font-weight: bold;
+  position: relative;
   @include adjust-flex();
   @include reset-button();
   @include prefixed(transition-duration, 0.3s);
   @include prefixed(transition-property, 'box-shadow, transform');
+  @include font-base(14, 20);
+
+  &::after,
+  &::before {
+    border-radius: inherit;
+    transition: all $transition-long;
+  }
+
+  &::before {
+    bottom: 0;
+    content: '';
+    display: block;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+   
+  }
+
+  &::after {
+    background-color: transparent;
+    bottom: 2px;
+    content: '';
+    display: block;
+    left: 2px;
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    z-index: 1;
+    @include mobile-down {
+      bottom: 1px;
+      left: 1px;
+      right: 1px;
+      top: 1px;
+    }
+  }
 
   &-lg {
     border-radius: rem(30);
     height: rem(56);
     padding: 0 rem(32);
-    @include font-base(14, 20);
-    font-weight: bold;
-    color: $white;
 
     @include mobile-down {
-      height: rem(44);
       border-radius: rem(25);
+      height: rem(44);
       padding: 0 rem(20);
     }
+  }
 
-    &::after,
-    &::before {
-      border-radius: inherit;
-      transition: all $transition-long;
-    }
-
-    &::before {
-      content: '';
-      display: block;
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      right: 0;
-      z-index: 1;
-     
-    }
-    &::after {
-      content: '';
-      display: block;
-      position: absolute;
-      left: 2px;
-      top: 2px;
-      bottom: 2px;
-      right: 2px;
-      z-index: 1;
-      background-color: transparent;
-      @include mobile-down {
-        left: 1px;
-        top: 1px;
-        bottom: 1px;
-        right: 1px;
-      }
-    }
+  &-md {
+    border-radius: rem(30);
+    height: rem(40);
+    padding: 0 rem(32);
   }
 
   &_text {
@@ -63,28 +70,28 @@
   }
 
   &_loading {
-    position: absolute;
-    z-index: 3;
-    top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
   }
 
   &-primary-blue {
     &::before {
-      background: linear-gradient(270.29deg, $green-blue 43.68%, $picton-blue 105.59%);
+      background: $gradient-blue-2;
     }
   }
 
   &-primary-green {
     &::before {
-      background: linear-gradient(180deg, $persian-green 0%, $skobeloff 100%);
+      background: $gradient-green;
     }
   }
 
   &-outline-green {
     &::before {
-      background: linear-gradient(180deg, $persian-green 0%, $skobeloff 100%);
+      background: $gradient-green;
     }
     
     &::after {
@@ -92,7 +99,7 @@
     }
 
     #{$root}_text {
-      background: linear-gradient(180deg, $persian-green 0%, $skobeloff 100%);
+      background: $gradient-green;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -101,7 +108,7 @@
   &:hover,
   &:focus,
   &:active {
-    box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 10px -10px rgba($black, 0.5);
     @include prefixed(transform, scale(1.02));
   }
 

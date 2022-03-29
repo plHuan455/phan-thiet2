@@ -1,12 +1,14 @@
 /* eslint-disable react/button-has-type */
 import React from 'react';
 
+import Icon from '../Icon';
+
 import Link from 'components/atoms/Link';
 import mapModifiers from 'utils/functions';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary-blue' | 'primary-green' | 'outline-green';
-  size?: 'lg';
+  size?: 'md' | 'lg';
   href?: string;
   target?: string;
   loading?: boolean;
@@ -22,11 +24,13 @@ const Button: React.FC<ButtonProps> = ({
   loading,
 }) => {
   if (href) {
-    <Link href={href} target={target} className={mapModifiers('a-button', variant, size)}>
-      <span className="a-button_text">
-        {children}
-      </span>
-    </Link>;
+    return (
+      <Link href={href} target={target} className={mapModifiers('a-button', variant, size)}>
+        <span className="a-button_text">
+          {children}
+        </span>
+      </Link>
+    );
   }
   return (
     <button type={type || 'button'} className={mapModifiers('a-button', variant, size, loading && 'loading')}>
@@ -35,7 +39,7 @@ const Button: React.FC<ButtonProps> = ({
       </span>
       {loading && (
       <span className="a-button_loading">
-        loading
+        <Icon iconName="loadingWhite" />
       </span>
       )}
     </button>
