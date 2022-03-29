@@ -1,0 +1,67 @@
+.a-heading {
+  margin: 0;
+  @include font-base(24, 36);
+  @include mobile-down {
+    @include font-base(20, 30);
+  }
+
+  &-64x84 {
+    @include font-base(64, 84);
+
+    @include mobile-down {
+      @include font-base(32, 52);
+    }
+  }
+
+  &-48x64 {
+    @include font-base(48, 64); 
+
+    @include mobile-down {
+      @include font-base(24, 32);
+    }
+  }
+
+  &-40x56 {
+    @include font-base(40, 56);
+
+    @include mobile-down {
+      @include font-base(20, 30);
+    }
+  }
+
+  &-32x48 {
+    @include font-base(32, 48);
+    @include mobile-down {
+      @include font-base(20, 30);
+    }
+  }
+
+  &-28x40 {
+    @include font-base(28, 40);
+    @include mobile-down {
+      @include font-base(20, 30);
+    }
+  }
+
+  &-gradientGreen {
+    background: $gradient-green;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  &-gradientBlue {
+    background: $gradient-blue;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  &-gradientBittersweet {
+    background: $gradient-bittersweet;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  @include style-color();
+  @include style-font-weight();
+  @include style-general();
+}

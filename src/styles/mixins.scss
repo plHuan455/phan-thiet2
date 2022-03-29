@@ -145,6 +145,22 @@
 
 $colors-design: (
   'white': $white,
+  'black': $black,
+  'raisinBlack': $raisin-black,
+  'snow': $snow,
+  'antiFlashWhite': $anti-flash-white,
+  'taupeGray': $taupe-gray,
+  'davyGrey': $davy-grey,
+  'antiFlashWhite2': $anti-flash-white2,
+  'seaBlue': $sea-blue,
+  'cyan': $cyan,
+  'antiqueWhite': $antique-white,
+  'copper': $copper,
+  'carminePink': $carmine-pink,
+  'isabelline': $isabelline,
+  'yaleBlue': $yale-blue,
+  'gambogeOrange': $gamboge-orange,
+  'deer': $deer,
 );
 
 @mixin style-color {
