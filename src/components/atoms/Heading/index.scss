@@ -1,0 +1,78 @@
+.a-heading {
+  margin: 0;
+  @include font-base(24, 36);
+  @include mobile-down {
+    @include font-base(20, 30);
+  }
+
+  &-h1 {
+    @include font-base(64, 84);
+
+    @include mobile-down {
+      @include font-base(32, 52);
+    }
+  }
+
+  &-h2 {
+    @include font-base(48, 64); 
+
+    @include mobile-down {
+      @include font-base(24, 32);
+    }
+  }
+
+  &-h3 {
+    @include font-base(40, 56);
+
+    @include mobile-down {
+      @include font-base(20, 30);
+    }
+  }
+
+  &-h4 {
+    @include font-base(32, 48);
+    @include mobile-down {
+      @include font-base(20, 30);
+    }
+  }
+
+  &-h5 {
+    @include font-base(28, 40);
+    @include mobile-down {
+      @include font-base(20, 30);
+    }
+  }
+
+  &-h6 {
+    @include font-base(24, 36);
+    @include mobile-down {
+      @include font-base(20, 30);
+    }
+  }
+
+  &-gradientGreen {
+    background: $gradient-green;
+    background-clip: text;
+    color: transparent;
+  }
+
+  &-gradientBlue {
+    background: $gradient-blue;
+    background-clip: text;
+    color: transparent;
+  }
+
+  &-gradientBittersweet {
+    background: $gradient-bittersweet;
+    background-clip: text;
+    color: transparent;
+  }
+
+  &-fontOswald {
+    font-family: $font-oswald;
+  }
+
+  @include style-color();
+  @include style-font-weight();
+  @include style-general();
+}
