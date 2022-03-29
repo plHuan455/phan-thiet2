@@ -45,20 +45,24 @@
 
   &-gradientGreen {
     background: $gradient-green;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
   }
 
   &-gradientBlue {
     background: $gradient-blue;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
   }
 
   &-gradientBittersweet {
     background: $gradient-bittersweet;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
+
+  &-fontOswald {
+    font-family: $font-oswald;
   }
 
   @include style-color();

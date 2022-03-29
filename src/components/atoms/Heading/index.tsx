@@ -10,9 +10,7 @@ export type Sizes =
   | '28x40'
   | '24x36';
 
-export type Gradients = 'gradientGreen' | 'gradientBlue' | 'gradientBittersweet';
-
-export type TextStyle = (GeneralTextStyle | Sizes | Gradients)[];
+export type TextStyle = (GeneralTextStyle | Sizes)[];
 
 interface HeadingProps {
   type?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5';

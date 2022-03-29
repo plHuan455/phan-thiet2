@@ -40,6 +40,11 @@ type ColorStyle =
   | 'isabelline'
   | 'yaleBlue'
   | 'gambogeOrange'
-  | 'deer';
+  | 'deer'
+  | 'gradientGreen'
+  | 'gradientBlue'
+  | 'gradientBittersweet';
 
-type GeneralTextStyle = FontWeightStyle | TextStyle | ColorStyle;
+type FontFamily = 'fontOswald';
+
+type GeneralTextStyle = FontWeightStyle | TextStyle | ColorStyle | FontFamily;

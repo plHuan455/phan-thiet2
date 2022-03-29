@@ -44,6 +44,9 @@ export default {
           'davysGrey',
           'arsenic',
           'white',
+          'gradientGreen',
+          'gradientBlue',
+          'gradientBittersweet',
         ],
       },
       defaultValue: 'arsenic',
@@ -61,10 +64,10 @@ export default {
       },
       defaultValue: 'uppercase',
     },
-    gradient: {
+    font: {
       control: {
         type: 'select',
-        options: ['default', 'gradientGreen', 'gradientBlue', 'gradientBittersweet'],
+        options: ['default', 'fontOswald'],
       },
       defaultValue: 'default',
     },
@@ -78,9 +81,9 @@ export const normal: Story = ({
   fontWeight,
   style,
   text,
-  gradient,
+  font,
 }) => (
-  <Heading type={type} modifiers={[color, fontWeight, style, size, gradient]}>
+  <Heading type={type} modifiers={[color, fontWeight, style, size, font]}>
     {text}
   </Heading>
 );

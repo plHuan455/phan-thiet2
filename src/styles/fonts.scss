@@ -1,7 +1,7 @@
 // fonts
 @font-face {
   font-display: swap;
-  font-family: $font-main;
+  font-family: $font-oswald;
   font-style: normal;
   font-weight: 400;
   src: url('#{$font-path}Oswald-Regular.woff2') format('woff2'),
@@ -10,7 +10,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: $font-main;
+  font-family: $font-oswald;
   font-style: normal;
   font-weight: bold;
   src: url('#{$font-path}Oswald-Bold.woff2') format('woff2'),
@@ -19,7 +19,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: $font-main;
+  font-family: $font-svn-gotham;
   font-style: normal;
   font-weight: 400;
   src: url('#{$font-path}SVN-Gotham.woff2') format('woff2'),
@@ -28,7 +28,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: $font-main;
+  font-family: $font-svn-gotham;
   font-style: normal;
   font-weight: bold;
   src: url('#{$font-path}SVN-GothamBold.woff2') format('woff2'),
