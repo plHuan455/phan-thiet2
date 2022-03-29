@@ -1,0 +1,40 @@
+.a-image {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 100%;
+  position: relative;
+  transition: $transition-long ease;
+  width: 100%;
+
+  img {
+    height: 100%;
+    left: 0;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+
+  &-inherit {
+    img {
+      object-fit: inherit;
+    }
+  }
+
+  &-initial {
+    img {
+      object-fit: initial;
+    }
+  }
+
+  &-contain {
+    img {
+      object-fit: contain;
+    }
+  }
+
+  &-1x1 {
+    @include aspect-ratio(1, 1);
+  }
+
+}
