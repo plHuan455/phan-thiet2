@@ -2,18 +2,12 @@ import React from 'react';
 
 import mapModifiers from 'utils/functions';
 
-export type Sizes =
-  | '64x84'
-  | '48x64'
-  | '40x56'
-  | '32x48'
-  | '28x40'
-  | '24x36';
+type Size = 'lg';
 
-export type TextStyle = (GeneralTextStyle | Sizes)[];
+export type TextStyle = (GeneralTextStyle | Size)[];
 
 interface HeadingProps {
-  type?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5';
+  type?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
   content?: string;
   modifiers?: TextStyle;
 }

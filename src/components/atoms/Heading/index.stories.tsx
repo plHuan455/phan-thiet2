@@ -10,9 +10,9 @@ export default {
     type: {
       control: {
         type: 'select',
-        options: ['h1', 'h2', 'h3', 'h4', 'h5'],
+        options: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
       },
-      defaultValue: 'h2',
+      defaultValue: 'h1',
     },
     size: {
       control: {

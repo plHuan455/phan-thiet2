@@ -5,7 +5,7 @@
     @include font-base(20, 30);
   }
 
-  &-64x84 {
+  &-h1 {
     @include font-base(64, 84);
 
     @include mobile-down {
@@ -13,7 +13,7 @@
     }
   }
 
-  &-48x64 {
+  &-h2 {
     @include font-base(48, 64); 
 
     @include mobile-down {
@@ -21,7 +21,7 @@
     }
   }
 
-  &-40x56 {
+  &-h3 {
     @include font-base(40, 56);
 
     @include mobile-down {
@@ -29,15 +29,22 @@
     }
   }
 
-  &-32x48 {
+  &-h4 {
     @include font-base(32, 48);
     @include mobile-down {
       @include font-base(20, 30);
     }
   }
 
-  &-28x40 {
+  &-h5 {
     @include font-base(28, 40);
+    @include mobile-down {
+      @include font-base(20, 30);
+    }
+  }
+
+  &-h6 {
+    @include font-base(24, 36);
     @include mobile-down {
       @include font-base(20, 30);
     }
