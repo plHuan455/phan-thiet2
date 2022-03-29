@@ -10,3 +10,9 @@ $transition-long: 0.4s;
 // z-index
 $z-header: 100;
 $z-modal: 101;
+
+// Browser Prefixes - Which CSS prefixes should be used?
+$webkit: true;
+$moz: false;
+$ms: false;
+$o: false;
