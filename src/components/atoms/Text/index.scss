@@ -1,0 +1,63 @@
+.a-text {
+  margin: 0;
+  transition: $transition ease;
+
+  &-inline {
+    display: inline-block;
+  }
+
+  &-11x18 {
+    @include font-base(11, 18);
+  }
+
+  &-12x20 {
+    @include font-base(12, 20);
+  }
+
+  &-14x20 {
+    @include font-base(14, 20);
+    @include mobile-down {
+      @include font-base(12, 20);
+    }
+  }
+
+  &-16x28 {
+    @include font-base(24, 32);
+  }
+
+  &-20x32 {
+    @include font-base(20, 32);
+    @include mobile-down {
+      @include font-base(16, 28);
+    }
+  }
+
+  &-24x36 {
+    @include font-base(24, 36);
+    @include mobile-down {
+      @include font-base(20, 32);
+    }
+  }
+
+  &-gradientGreen {
+    background: $gradient-green;
+    background-clip: text;
+    color: transparent;
+  }
+
+  &-gradientBlue {
+    background: $gradient-blue;
+    background-clip: text;
+    color: transparent;
+  }
+
+  &-gradientBittersweet {
+    background: $gradient-bittersweet;
+    background-clip: text;
+    color: transparent;
+  }
+
+  @include style-color();
+  @include style-font-weight();
+  @include style-general();
+}
