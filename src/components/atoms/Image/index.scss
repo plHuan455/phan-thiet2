@@ -49,4 +49,8 @@
     @include aspect-ratio(353, 221);
   }
 
+  &-148x59 {
+    @include aspect-ratio(148, 59);
+  }
+  
 }
