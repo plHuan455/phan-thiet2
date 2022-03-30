@@ -50,4 +50,4 @@ Text.defaultProps = {
   isInline: undefined,
 };
 
-export default Text;
+export default React.memo(Text);

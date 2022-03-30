@@ -1,6 +1,7 @@
 .a-text {
   margin: 0;
   transition: $transition ease;
+  font-family: $font-svn-gotham;
 
   &-inline {
     display: inline-block;
@@ -39,24 +40,11 @@
     }
   }
 
-  &-gradientGreen {
-    background: $gradient-green;
-    background-clip: text;
-    color: transparent;
+  &-fontOswald {
+    font-family: $font-oswald;
   }
 
-  &-gradientBlue {
-    background: $gradient-blue;
-    background-clip: text;
-    color: transparent;
-  }
-
-  &-gradientBittersweet {
-    background: $gradient-bittersweet;
-    background-clip: text;
-    color: transparent;
-  }
-
+  @include style-color-gradient();
   @include style-color();
   @include style-font-weight();
   @include style-general();

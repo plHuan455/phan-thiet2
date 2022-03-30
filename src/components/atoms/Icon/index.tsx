@@ -22,4 +22,4 @@ Icon.defaultProps = {
   size: '24',
 };
 
-export default Icon;
+export default React.memo(Icon);
