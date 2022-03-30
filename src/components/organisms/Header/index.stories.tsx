@@ -1,7 +1,10 @@
 import { Story, Meta } from '@storybook/react';
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 
 import Header from '.';
+
+import dataHeader from 'assets/dataDummy/header';
 
 export default {
   title: 'Components/organisms/Header',
@@ -10,5 +13,9 @@ export default {
 } as Meta;
 
 export const normal: Story = () => (
-  <Header />
+  <BrowserRouter>
+    <div style={{ height: '200vh' }}>
+      <Header {...dataHeader} />
+    </div>
+  </BrowserRouter>
 );

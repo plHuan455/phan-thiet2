@@ -98,11 +98,7 @@ ol {
   height: 100vh;
 }
 
-.arrow-animate {
-  display: none;
-  &:hover {
-    .a-icon {
-      animation: slide 1s ease infinite alternate;
-    }
-  }
+.overflow-body {
+  overflow: hidden;
+  touch-action: none;
 }

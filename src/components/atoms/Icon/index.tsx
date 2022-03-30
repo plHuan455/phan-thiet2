@@ -9,11 +9,13 @@ export const iconList = {
   closeOrange: 'closeOrange',
   chevronRight: 'chevronRight',
   arrowRightCopper: 'arrowRightCopper',
+  searchOrange: 'searchOrange',
+  closeWhite: 'searchWhite',
 };
 
 export type IconName = keyof typeof iconList;
 
-export type IconSize = '14' | '16' | '20' | '24';
+export type IconSize = '14' | '16' | '20' | '24' | '36';
 
 interface IconProps {
   iconName: IconName;
