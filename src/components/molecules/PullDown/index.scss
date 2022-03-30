@@ -24,6 +24,7 @@
     position: relative;
     width: 100%;
     z-index: 1;
+    box-shadow: 0 2px 0 rgba($black, 0.016);
 
     #{$root}-highLight & {
       background: $antique-white2;

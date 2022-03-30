@@ -21,6 +21,7 @@ export interface PulldownProps {
   error?: string;
   disabled?: boolean;
   isClear?: boolean;
+  empty?: string;
   variant?: 'normal' | 'highLight';
   size?: 'md' | 'lg';
   handleSelect?: (option?: OptionType) => void;
@@ -53,6 +54,7 @@ const Pulldown: React.FC<PulldownProps> = ({
   disabled,
   isClear,
   variant = 'normal',
+  empty,
   handleSelect,
   handleClear,
 }) => {
@@ -127,7 +129,7 @@ const Pulldown: React.FC<PulldownProps> = ({
               ))
             ) : (
               // TODO: Add translation later
-              <li className="m-pulldown_item none">No Option</li>
+              <li className="m-pulldown_item none">{empty}</li>
             )}
           </ul>
         </div>
@@ -140,4 +142,4 @@ const Pulldown: React.FC<PulldownProps> = ({
 Pulldown.defaultProps = {
 };
 
-export default Pulldown;
+export default React.memo(Pulldown);

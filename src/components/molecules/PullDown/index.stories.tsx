@@ -72,8 +72,8 @@ export const Normal: Story = ({
           { id: '7', value: '7', label: '7' },
           { id: '8', value: '8', label: '8' },
           { id: '9', value: '9', label: '9' },
-
         ]}
+        empty="No Option"
         handleSelect={(data) => setValue(data)}
         handleClear={() => setValue(undefined)}
         isClear={isClear}
