@@ -133,4 +133,4 @@ Banner.defaultProps = {
   search: undefined,
 };
 
-export default Banner;
+export default React.memo(Banner);

@@ -5,11 +5,13 @@ import mapModifiers from 'utils/functions';
 export const iconList = {
   searchWhite: 'searchWhite',
   loadingWhite: 'loadingWhite',
+  closeBlack: 'closeBlack',
+  closeOrange: 'closeOrange',
 };
 
 export type IconName = keyof typeof iconList;
 
-export type IconSize = '14' | '20' | '24';
+export type IconSize = '14' | '16' | '20' | '24';
 
 interface IconProps {
   iconName: IconName;
