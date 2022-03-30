@@ -5,7 +5,7 @@ import mapModifiers from 'utils/functions';
 
 export type SizeImageType = 'cover' | 'contain' | 'inherit' | 'initial';
 
-interface ImageProps {
+export interface ImageProps {
   src?: string;
   srcTablet?: string;
   srcMobile?: string;
@@ -15,12 +15,12 @@ interface ImageProps {
 }
 
 const Image: React.FC<ImageProps> = ({
-  src,
-  srcMobile,
-  srcTablet,
-  alt,
-  ratio,
-  size,
+  src = '',
+  srcMobile = undefined,
+  srcTablet = undefined,
+  alt = 'replacing',
+  ratio = '1x1',
+  size = 'cover',
 }) => {
   const { isMobile, isTablet } = useDeviceQueries();
   const sourceImage = useMemo(() => {
@@ -40,13 +40,6 @@ const Image: React.FC<ImageProps> = ({
   );
 };
 
-Image.defaultProps = {
-  srcMobile: undefined,
-  srcTablet: undefined,
-  src: undefined,
-  ratio: '1x1',
-  size: 'cover',
-  alt: 'replacing',
-};
+Image.defaultProps = {};
 
 export default React.memo(Image);
