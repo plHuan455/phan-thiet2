@@ -1,0 +1,123 @@
+.t-banner {
+  $root: &;
+  position: relative;
+
+  @mixin flex-search {
+    margin: auto;
+    max-width: rem(240);
+    width: 100%;
+    @include small-mobile-up {
+      max-width: rem(400);
+    }
+    @include mobile-up {
+      max-width: rem(520);
+    }
+    @include tablet-up {
+      max-width: rem(740);
+    }
+  }
+
+  &_wrapper .a-image {
+    @include desktop-down {
+      @include aspect-ratio(1366, 800);
+    }
+    #{$root}-layer & {
+      &::before {
+        background: linear-gradient(0deg, rgba($black, 0.3), rgba($black, 0.3));
+        content: '';
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 1;
+      }
+    }
+  }
+
+  &_content {
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    z-index: 2;
+  }
+
+  &_search {
+    @include adjust-flex(flex-start, center);
+    @include flex-search();
+
+    input {
+      @include font-base(14, 20);
+      appearance: none;
+      background-color: $white;
+      border: 1px solid $anti-flash-white;
+      font-family: $font-svn-gotham;
+      font-weight: 400;
+      outline: 0;
+      padding: rem(16) rem(10);
+      width: 100%;
+      @include tablet-down {
+        padding: rem(10) rem(8);
+        @include font-base(12, 20);
+      }
+
+      &::placeholder {
+        color: $taupe-gray;
+      }
+    }
+
+    button {
+      @include reset-button();
+      @include adjust-flex();
+      background: $gradient-green;
+      flex-shrink: 0;
+      height: rem(54);
+      padding: 0;
+      width: rem(54);
+      @include tablet-down {
+        height: rem(42);
+        width: rem(42);
+      }
+    }
+  }
+
+  &_tag {
+    @include adjust-flex(flex-start, center);
+    @include flex-search();
+    flex-wrap: wrap;
+
+    &_keywords {
+      margin-right: rem(18);
+      margin-top: rem(8);
+    }
+
+    &_list {
+      @include list-style-none();
+      @include adjust-flex(flex-start, center);
+      flex-wrap: wrap;
+      margin-left: rem(-6);
+      margin-right: rem(-6);
+    }
+
+    &_item {
+      margin-top: rem(8);
+      padding-left: rem(6);
+      padding-right: rem(6);
+      
+    }
+
+    &_wrap {
+      background: $gradient-blue-3;
+      border-radius: rem(2);
+      padding-left: rem(8);
+      padding-right: rem(8);
+      transition: $transition;
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+  }
+}

@@ -25,12 +25,12 @@ const Heading: React.FC<HeadingProps> = ({
       {
         content ? (
           <Element
-            className={mapModifiers('a-heading', modifiers)}
+            className={mapModifiers('a-heading', modifiers, type)}
             dangerouslySetInnerHTML={{ __html: content }}
             {...props}
           />
         ) : (
-          <Element className={mapModifiers('a-heading', modifiers)} {...props}>
+          <Element className={mapModifiers('a-heading', modifiers, type)} {...props}>
             {children}
           </Element>
         )

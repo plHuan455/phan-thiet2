@@ -1,5 +1,6 @@
 type Ratio =
-  | '1x1';
+  | '1x1'
+  | '1366x400';
 
 type FontWeightStyle =
   | '100'

@@ -37,4 +37,7 @@
     @include aspect-ratio(1, 1);
   }
 
+  &-1366x400 {
+    @include aspect-ratio(1366, 400);
+  }
 }
