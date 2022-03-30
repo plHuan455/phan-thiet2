@@ -128,7 +128,6 @@ const Pulldown: React.FC<PulldownProps> = ({
                 </li>
               ))
             ) : (
-              // TODO: Add translation later
               <li className="m-pulldown_item none">{empty}</li>
             )}
           </ul>
