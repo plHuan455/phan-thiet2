@@ -1,0 +1,60 @@
+.a-input {
+  $root: &;
+  position: relative;
+
+  &_input {
+    appearance: none;
+    font-family: inherit;
+    margin: 0;
+    outline: none;
+    transition: all $transition linear;
+    width: 100%;
+  }
+
+  &-default {
+    #{$root}_input {
+      background: transparent;
+      border: 1px solid $copper;
+      color: $davy-grey;
+
+      &:focus {
+        border-color: $sea-blue;
+      }
+
+      &::placeholder {
+        color: $davy-grey;
+      }
+    }
+  }
+
+  &-lg {
+    #{$root}_input {
+      border-radius: rem(4);
+      padding: rem(15) rem(16);
+      @include font-base(14, 20);
+    }
+  }
+
+  &-md {
+    #{$root}_input {
+      border-radius: rem(4);
+      padding: rem(12.5) rem(16);
+      @include font-base(14, 20);
+    }
+  }
+
+  &-error {
+    #{$root}_input {
+      border-color: $error !important;
+      color: $error;
+    }
+  }
+
+  &_error {
+    color: $error;
+    display: block;
+    margin-top: rem(4);
+    opacity: 0.8;
+    @include font-base(12, 16);
+  }
+}
