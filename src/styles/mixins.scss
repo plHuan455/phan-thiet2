@@ -15,8 +15,8 @@
 
 @mixin scroll-bars(
   $size: 12,
-  // $thumbColor: $celestial-blue,
-  // $trackColor: $alice-blue,
+  $thumb-color: $gamboge-orange,
+  $track-color: $antique-white,
   $border-radius-thumb: 5,
   $border-thumb: 2
 ) {
@@ -28,8 +28,8 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    // background: $thumb-color;
-    // border: rem($border-thumb) solid $track-color;
+    background: $thumb-color;
+    border: rem($border-thumb) solid $track-color;
     border-radius: rem($border-radius-thumb);
   }
 
