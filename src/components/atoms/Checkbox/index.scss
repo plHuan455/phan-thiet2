@@ -1,0 +1,45 @@
+.a-checkbox {
+  $root: &;
+
+  &_label {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    min-height: rem(24);
+    position: relative;
+    &:hover #{$root}_text {
+      opacity: 0.8;
+    }
+  }
+
+  input {
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+  
+    &:checked + #{$root}_checkMark {
+      background-image: url('~assets/icons/ic_checked.svg');
+    }
+
+    &:checked ~ #{$root}_text {
+      color: $sea-blue;
+    }
+  }
+
+  &_text {
+    @include font-base(14,20);
+    color: $davy-grey;
+    transition: $transition ease;
+  }
+
+  &_checkMark {
+    background-image: url('~assets/icons/ic_square.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    height: rem(24);
+    margin-right: rem(4);
+    width: rem(24);
+  }
+}
