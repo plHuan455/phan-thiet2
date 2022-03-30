@@ -11,7 +11,7 @@ export type Sizes =
   | '24x36';
 
 export type TextStyle = (GeneralTextStyle | Sizes)[];
-interface TextProps {
+interface TextProps extends React.HtmlHTMLAttributes<HTMLParagraphElement> {
   modifiers?: TextStyle;
   type?: 'p' | 'span' | 'div';
   content?: string;
@@ -24,6 +24,7 @@ const Text: React.FC<TextProps> = ({
   content,
   children,
   isInline,
+  ...props
 }) => {
   const Element = type;
   return (
@@ -32,9 +33,10 @@ const Text: React.FC<TextProps> = ({
         <Element
           className={mapModifiers('a-text', modifiers, isInline && 'inline')}
           dangerouslySetInnerHTML={{ __html: content }}
+          {...props}
         />
       ) : (
-        <Element className={mapModifiers('a-text', modifiers, isInline && 'inline')}>
+        <Element className={mapModifiers('a-text', modifiers, isInline && 'inline')} {...props}>
           {children}
         </Element>
       )}

@@ -22,6 +22,7 @@ const Button: React.FC<ButtonProps> = ({
   type,
   children,
   loading,
+  ...props
 }) => {
   if (href) {
     return (
@@ -33,7 +34,7 @@ const Button: React.FC<ButtonProps> = ({
     );
   }
   return (
-    <button type={type || 'button'} className={mapModifiers('a-button', variant, size, loading && 'loading')}>
+    <button type={type || 'button'} className={mapModifiers('a-button', variant, size, loading && 'loading')} {...props}>
       <span className="a-button_text">
         {children}
       </span>
@@ -54,4 +55,4 @@ Button.defaultProps = {
   loading: undefined,
 };
 
-export default Button;
+export default React.memo(Button);

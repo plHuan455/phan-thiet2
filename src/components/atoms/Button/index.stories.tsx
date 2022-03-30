@@ -36,8 +36,12 @@ export const normal: Story = ({
   loading,
 }) => (
   <BrowserRouter>
-    <Button variant={variant} size={size} loading={loading}>
+    <Button variant={variant} size={size} loading={loading} disabled>
       Đăng ký nhận thông
     </Button>
+    <br />
+    {variant.includes('outline') && (
+    <p>Outline will be not loading !!</p>
+    )}
   </BrowserRouter>
 );

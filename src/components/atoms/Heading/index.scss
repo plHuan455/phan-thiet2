@@ -1,7 +1,7 @@
 .a-heading {
   font-family: $font-oswald;
-  transition: $transition ease;
   margin: 0;
+  transition: $transition ease;
   @include font-base(24, 36);
   @include mobile-down {
     @include font-base(20, 30);
