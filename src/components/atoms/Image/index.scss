@@ -40,4 +40,9 @@
   &-1366x400 {
     @include aspect-ratio(1366, 400);
   }
+  
+  &-logo-footer {
+    @include aspect-ratio(154, 96);
+  }
+
 }

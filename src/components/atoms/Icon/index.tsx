@@ -7,6 +7,7 @@ export const iconList = {
   loadingWhite: 'loadingWhite',
   closeBlack: 'closeBlack',
   closeOrange: 'closeOrange',
+  chevronRight: 'chevronRight',
 };
 
 export type IconName = keyof typeof iconList;
