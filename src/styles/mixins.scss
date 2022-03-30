@@ -155,6 +155,9 @@ $colors-design: (
   'yaleBlue': $yale-blue,
   'gambogeOrange': $gamboge-orange,
   'deer': $deer,
+);
+
+$colors-gradient-design: (
   'gradientGreen': $gradient-green,
   'gradientBlue' : $gradient-blue,
   'gradientBittersweet': $gradient-bittersweet,
@@ -164,6 +167,16 @@ $colors-design: (
   @each $name, $color in $colors-design {
     &-#{$name} {
       color: $color;
+    }
+  }
+}
+
+@mixin style-color-gradient {
+  @each $name, $color in $colors-gradient-design {
+    &-#{$name} {
+      background: $color;
+      background-clip: text;
+      color: transparent;
     }
   }
 }

@@ -49,4 +49,4 @@ Image.defaultProps = {
   alt: 'replacing',
 };
 
-export default Image;
+export default React.memo(Image);

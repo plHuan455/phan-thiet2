@@ -41,4 +41,4 @@ Heading.defaultProps = {
   content: undefined,
 };
 
-export default Heading;
+export default React.memo(Heading);

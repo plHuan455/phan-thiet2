@@ -45,6 +45,6 @@ type ColorStyle =
   | 'gradientBlue'
   | 'gradientBittersweet';
 
-type FontFamily = 'fontOswald';
+type FontFamily = 'fontOswald' | 'fontSvnGotham';
 
 type GeneralTextStyle = FontWeightStyle | TextStyle | ColorStyle | FontFamily;
