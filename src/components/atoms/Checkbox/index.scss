@@ -41,5 +41,6 @@
     height: rem(24);
     margin-right: rem(4);
     width: rem(24);
+    transition: all $transition ease-in-out;
   }
 }

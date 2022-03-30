@@ -1,4 +1,4 @@
-import React, { useCallback, useLayoutEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { animated, useSpring } from 'react-spring';
 
 import Heading from 'components/atoms/Heading';
@@ -89,27 +89,23 @@ const Banner: React.FC<BannerProps> = ({
   tag,
   search,
 }) => {
-  const [props, api] = useSpring(() => ({
-    clipPath: 'polygon(0% 0%, 0% 100%, 0% 100%, 0% 0%)',
-  }));
-
-  useLayoutEffect(() => {
-    api.start({
-      from: {
-        clipPath: 'polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)',
-      },
-      to: {
-        clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
-      },
-      config: {
-        duration: 1500,
-      },
-    });
-  }, [api]);
+  const styles = useSpring({
+    from: {
+      clipPath: 'polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)',
+      opacity: 0,
+    },
+    to: {
+      clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+      opacity: 1,
+    },
+    config: {
+      duration: 750,
+    },
+  });
 
   return (
     <div className={mapModifiers('t-banner', isLayer && 'layer')}>
-      <animated.div className="t-banner_wrapper" style={props}>
+      <animated.div className="t-banner_wrapper" style={styles}>
         <Image {...image} ratio="1366x400" />
         <div className="t-banner_content">
           {title && (
