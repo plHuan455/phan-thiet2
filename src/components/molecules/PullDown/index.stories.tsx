@@ -19,6 +19,12 @@ export default {
       },
       defaultValue: false,
     },
+    disabled: {
+      control: {
+        type: 'boolean',
+      },
+      defaultValue: false,
+    },
     error: {
       control: {
         type: 'text',
@@ -35,13 +41,13 @@ export default {
   },
 } as Meta;
 
-export const normal: Story = ({
+export const Normal: Story = ({
   label,
   error,
   isClear,
   variant,
+  disabled,
 }) => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [value, setValue] = useState<OptionType>();
 
   return (
@@ -71,6 +77,7 @@ export const normal: Story = ({
         handleSelect={(data) => setValue(data)}
         handleClear={() => setValue(undefined)}
         isClear={isClear}
+        disabled={disabled}
       />
     </div>
   );
