@@ -22,6 +22,10 @@ $silver-lake-blue: rgb(86, 148, 193); //#5694c1
 $pearl-aqua: rgb(114, 216, 207); //#72d8cf
 $bittersweet: rgb(255, 122, 91); //#ff7a5b
 $atomic-tangerine: rgb(255, 161, 109); //#ffa16d
+$green-blue: rgb(25, 108, 165); // #196ca5
+$picton-blue: rgb(67, 183, 244); //#43b7f4
+
 $gradient-green: linear-gradient(180deg, $persian-green 0%, $skobeloff 100%);
 $gradient-blue: linear-gradient(180deg, $silver-lake-blue 25.24%, $pearl-aqua 100%);
 $gradient-bittersweet: linear-gradient(180deg, $bittersweet 25.24%, $atomic-tangerine 100%);
+$gradient-blue-2: linear-gradient(270.29deg, $green-blue 43.68%, $picton-blue 105.59%);
