@@ -1,0 +1,254 @@
+.t-footer {
+  $root: &;
+  &_logo {
+    max-width: rem(164);
+  }
+
+  &_content {
+    background-color: $antique-white;
+    padding: rem(56) 0 rem(34);
+
+    @include mobile-down {
+      padding: rem(30) 0 rem(20);
+    }
+
+    &-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      margin: rem(33) rem(-16) 0;
+
+      @include desktop-down {
+        margin-top: 0;
+      }
+
+      @include tablet-down {
+        margin-left: rem(-8);
+        margin-right: rem(-8);
+      }
+    }
+  }
+
+  &_address {
+    flex: 0 0 rem(383);
+    padding: 0 rem(16);
+    width: 100%;
+
+    @include desktop-down {
+      flex: 0 0 100%;
+      margin-top: rem(24);
+    }
+
+    @include tablet-down {
+      padding-left: rem(8);
+      padding-right: rem(8);
+    }
+
+    &-item {
+      margin-top: rem(16);
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+
+    &-subTitle {
+      margin-bottom: rem(16);
+    }
+  }
+
+  &_menuList {
+    flex: 0 0 rem(221);
+    padding: 0 rem(16);
+
+
+    @include desktop-down {
+      flex: 0 0 25%;
+      margin-top: rem(24);
+    }
+
+
+    @include tablet-down {
+      padding-left: rem(8);
+      padding-right: rem(8);
+      flex: 0 0 calc(80% / 3);
+    }
+
+    @include mobile-down {
+      flex: 0 0 100%;
+      margin-top: 0;
+    }
+  }
+
+  &_divisionList {
+    flex: 0 0 rem(179);
+    padding: 0 rem(16);
+
+    @include desktop-down {
+      flex: 0 0 25%;
+      margin-top: rem(24);
+    }
+
+    @include tablet-down {
+      padding-left: rem(8);
+      padding-right: rem(8);
+      flex: 0 0 calc(80% / 3);
+    }
+
+    @include mobile-down {
+      flex: 0 0 100%;
+      margin-top: 0;
+    }
+  }
+
+  &_serviceList {
+    flex: 0 0 rem(168);
+    padding: 0 rem(16);
+
+    @include desktop-down {
+      flex: 0 0 25%;
+      margin-top: rem(24);
+    }
+    
+    @include tablet-down {
+      padding-left: rem(8);
+      padding-right: rem(8);
+      flex: 0 0 calc(80% / 3);
+    }
+
+    @include mobile-down {
+      flex: 0 0 100%;
+      margin-top: 0;
+      #{$root}_menu {
+        margin-top: 0;
+        > .a-text {
+          display: none;
+        }
+      }
+    }
+  }
+
+  &_menu {
+    $menu: &;
+    width: 100%;
+    
+    @include tablet-down {
+      margin-top: rem(16);
+    }
+
+    &-list {
+      margin-top: rem(16);
+
+      @include mobile-down {
+        margin-top: rem(8);
+      }
+    }
+
+    &-item {
+      cursor: pointer;
+      margin-top: rem(10);
+
+      &:first-child {
+        margin-top: 0;
+      }
+
+      &-content {
+        @include adjust-flex(flex-start, center);
+      }
+
+      &:hover {
+        #{$menu}-icon {
+          margin-right: rem(6);
+        }
+      }
+    }
+
+    &-icon {
+      flex-shrink: 0;
+      margin-right: rem(2);
+      transition: all $transition linear;
+    }
+  }
+
+  &_social {
+    flex: 1;
+    padding: 0 rem(16);
+
+    @include desktop-down {
+      flex: 0 0 25%;
+      margin-top: rem(24);
+    }
+
+    @include tablet-down {
+      padding-left: rem(8);
+      padding-right: rem(8);
+      flex: 0 0 20%;
+    }
+
+
+    @include mobile-down {
+      flex: 0 0 100%;
+      margin-top: rem(16);
+    }
+
+    &-list {
+      display: flex;
+      margin: rem(16) rem(-2) 0;
+
+      @include mobile-down {
+        margin-top: rem(10);
+      }
+    }
+
+    &-item {
+      cursor: pointer;
+      max-width: rem(32);
+      padding: 0 rem(2);
+      width: 100%;
+    }
+  }
+
+  &_copyRight {
+    background-color: $eggshell;
+    padding: rem(10) 0;
+
+    &-wrap {
+      @include adjust-flex(space-between, center);
+
+      @include tablet-down {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    &-list {
+      @include adjust-flex(flex-start, center);
+      margin: 0 rem(-10);
+
+      @include tablet-down {
+        margin-bottom: rem(12);
+      }
+
+      @include mobile-down {
+        align-items: flex-start;
+        flex-direction: column;
+        #{$root}_copyRight-divider {
+          display: none;
+        }
+      }
+    }
+
+    &-item {
+      padding: 0 rem(10);
+      position: relative;
+
+      .a-link {
+        @include font-base(12, 20);
+        color: $davy-grey;
+        font-weight: 400;
+      }
+      @include mobile-down {
+        margin-top: rem(8);
+      }
+    }
+  }
+}

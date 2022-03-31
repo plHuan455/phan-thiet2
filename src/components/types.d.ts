@@ -1,6 +1,7 @@
 type Ratio =
   | '1x1'
-  | '1366x400';
+  | '1366x400'
+  | 'logo-footer';
 
 type FontWeightStyle =
   | '100'
