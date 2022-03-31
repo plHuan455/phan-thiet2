@@ -8,6 +8,7 @@ export const iconList = {
   closeBlack: 'closeBlack',
   closeOrange: 'closeOrange',
   chevronRight: 'chevronRight',
+  arrowRightCopper: 'arrowRightCopper',
 };
 
 export type IconName = keyof typeof iconList;
