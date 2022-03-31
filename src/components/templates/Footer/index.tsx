@@ -131,11 +131,14 @@ const Footer: React.FC<FooterProps> = ({
           <div className="t-footer_copyRight-list">
             {
             copyRight?.list.map((item, index) => (
-              <div key={`t-footer_copyRight-${index.toString()}`} className="t-footer_copyRight-item">
-                <Link href={item.url} target={item.target}>
-                  <Text content={item.text} />
-                </Link>
-              </div>
+              <React.Fragment key={`t-footer_copyRight-${index.toString()}`}>
+                {index !== 0 ? <div className="t-footer_copyRight-divider">|</div> : ''}
+                <div className="t-footer_copyRight-item">
+                  <Link href={item.url} target={item.target}>
+                    <Text content={item.text} />
+                  </Link>
+                </div>
+              </React.Fragment>
             ))
           }
           </div>
