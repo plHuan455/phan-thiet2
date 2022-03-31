@@ -8,7 +8,7 @@ import fb from 'assets/images/footer/fb.svg';
 import tiktok from 'assets/images/footer/tiktok.svg';
 import youtube from 'assets/images/footer/youtube.svg';
 import zalo from 'assets/images/footer/zalo.svg';
-import logo from 'assets/images/logo.svg';
+import logo from 'assets/images/logo_novaland.svg';
 
 export default {
   title: 'Components/templates/Footer',
