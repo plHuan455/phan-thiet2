@@ -1,0 +1,83 @@
+.t-projectPositionHome {
+  background-color: $antique-white;
+  background-image: url('~assets/images/projectPositionHome/bg.png');
+  background-position: 100% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: rem(197) 0 rem(92);
+  position: relative;
+
+  &_bgLeft {
+    max-width: rem(269);
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+
+    @include mobile-down {
+      max-width: rem(100);
+    }
+  }
+
+  &_bgRight {
+    max-width: rem(269);
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+
+    @include mobile-down {
+      max-width: rem(100);
+    }
+  }
+
+  @include mobile-down {
+    padding: rem(30) 0;
+  }
+
+  &_map {
+    position: relative;
+    z-index: 2;
+  }
+
+  &_info {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    z-index: 1;
+
+    @include desktop-down {
+      .a-heading {
+        @include font-base(48, 64); }
+    }
+
+    @include tablet-down {
+      position: relative;
+    }
+  }
+
+  &_wrap {
+    display: flex;
+    margin-top: rem(35);
+    @include tablet-down {
+      flex-direction: column;
+    }
+
+    @include tablet-down {
+      margin-top: rem(10);
+    }
+  }
+
+  &_utility {
+    margin-left: rem(17);
+
+    @include tablet-down {
+      margin-left: 0;
+      margin-top: rem(35);
+    }
+
+    @include mobile-down {
+      margin-top: rem(10);
+    }
+  }
+}

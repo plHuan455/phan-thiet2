@@ -1,0 +1,20 @@
+.t-projectMap {
+  &_title {
+    &-pulldown {
+      margin-top: rem(32);
+    }
+  }
+
+  &_map {
+    position: relative;
+    z-index: 2;
+  }
+
+  &_listDivision {
+    &-item {
+      max-width: 24px;
+      position: absolute;
+      width: 100%;
+    }
+  }
+}

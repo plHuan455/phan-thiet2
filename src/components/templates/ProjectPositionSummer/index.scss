@@ -1,0 +1,51 @@
+.t-projectPositionSummer {
+  background-color: $antique-white;
+  padding-top: rem(80);
+  position: relative;
+
+  &_bgLeft {
+    max-width: rem(269);
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+
+    @include mobile-down {
+      max-width: rem(100);
+    }
+  }
+
+  &_bgRight {
+    max-width: rem(269);
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+
+    @include mobile-down {
+      max-width: rem(100);
+    }
+  }
+
+  &_map {
+    padding-top: rem(240);
+    position: relative;
+    z-index: 0;
+
+    @include desktop-down {
+      padding-top: rem(210);
+    }
+
+    @include tablet-down {
+      padding-top: rem(180);
+    }
+
+    @include mobile-down {
+      padding-top: rem(80);
+    }
+  }
+
+  &_pulldown {
+    margin-top: rem(32);
+  }
+}
