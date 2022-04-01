@@ -10,10 +10,18 @@ import { schemasConsultancyForm } from 'utils/schemas';
 export default {
   title: 'Components/organisms/Consultancy',
   component: Consultancy,
-  argTypes: {},
+  argTypes: {
+    variant: {
+      control: {
+        type: 'select',
+        options: ['primary-blue', 'primary-green', 'outline-green', 'seaBlue', 'cyan', 'copper'],
+      },
+      defaultValue: 'primary-blue',
+    },
+  },
 } as Meta;
 
-export const Normal: Story = () => {
+export const Normal: Story = ({ variant }) => {
   const method = useForm<FormConsultancy>({
     resolver: yupResolver(schemasConsultancyForm),
     mode: 'onSubmit',
@@ -51,6 +59,7 @@ export const Normal: Story = () => {
           },
           btnText: 'Đăng ký nhận thông tin',
         }}
+        variantButton={variant}
       />
     </div>
   );

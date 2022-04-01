@@ -6,8 +6,15 @@ import Icon from '../Icon';
 import Link from 'components/atoms/Link';
 import mapModifiers from 'utils/functions';
 
+type Gradients =
+  | 'primary-blue'
+  | 'primary-green'
+  | 'outline-green';
+
+export type Variants = ColorStyle | Gradients;
+
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary-blue' | 'primary-green' | 'outline-green';
+  variant?: Variants;
   size?: 'md' | 'lg';
   href?: string;
   target?: string;
@@ -39,9 +46,9 @@ const Button: React.FC<ButtonProps> = ({
         {children}
       </span>
       {loading && (
-      <span className="a-button_loading">
-        <Icon iconName="loadingWhite" />
-      </span>
+        <span className="a-button_loading">
+          <Icon iconName="loadingWhite" />
+        </span>
       )}
     </button>
   );

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FormProvider, Controller, UseFormReturn } from 'react-hook-form';
 
-import Button from 'components/atoms/Button';
+import Button, { Variants } from 'components/atoms/Button';
 import Checkbox from 'components/atoms/Checkbox';
 import Input from 'components/atoms/Input';
 import Text from 'components/atoms/Text';
@@ -39,6 +39,7 @@ interface ConsultancyProps {
   handleSubmit: (data: FormConsultancy) => void;
   method: UseFormReturn<FormConsultancy>;
   loading?: boolean,
+  variantButton?: Variants;
 }
 
 const Consultancy: React.FC<ConsultancyProps> = ({
@@ -47,6 +48,7 @@ const Consultancy: React.FC<ConsultancyProps> = ({
   handleSubmit,
   method,
   loading,
+  variantButton,
 }) => {
   const [listCheckbox, setListCheckbox] = useState<string[]>([]);
   const handleChangeProduct = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -170,7 +172,7 @@ const Consultancy: React.FC<ConsultancyProps> = ({
             </div>
           </div>
           <div className="o-consultancy_button">
-            <Button variant="primary-green" loading={loading} type="submit">{consultancyInfo?.btnText}</Button>
+            <Button variant={variantButton} loading={loading} type="submit">{consultancyInfo?.btnText}</Button>
           </div>
         </form>
       </FormProvider>
@@ -181,6 +183,7 @@ const Consultancy: React.FC<ConsultancyProps> = ({
 Consultancy.defaultProps = {
   loading: false,
   consultancyInfo: undefined,
+  variantButton: 'copper',
 };
 
 export default Consultancy;
