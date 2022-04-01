@@ -13,30 +13,9 @@
     max-width: rem(314);
     padding: rem(16) rem(30);
     transform: translateY(rem(-39));
-
-    &-desc {
-      margin-top: rem(8);
-      @include text-overflow(2);
-    }
-
-    &-seeMore {
-      cursor: pointer;
-      margin-top: rem(8);
-      @include adjust-flex(flex-start, center);
-
-      .a-icon {
-        margin-left: rem(8);
-      }
-
-      &:hover {
-        .a-icon {
-          animation: slide 1s ease infinite alternate;
-        }
-      }
-    }
   }
-  @keyframes slide {
-    0% {transform: translateX(0);}
-    100% {transform: translateX(80%);}
+  
+  &_desc {
+    @include text-overflow(2);
   }
 }

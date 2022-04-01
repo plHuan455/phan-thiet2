@@ -27,17 +27,23 @@ const SubDivisionCard: React.FC<SubDivisionCardProps> = ({
       </div>
     </Link>
     <div className="m-subDivisionCard_content">
-      <div className="m-subDivisionCard_content-title">
-        <Text content={title} modifiers={['20x32', '700', 'raisinBlack']} />
-      </div>
-      <div className="m-subDivisionCard_content-desc">
+      <Link href={href} target={target}>
+        <div className="m-subDivisionCard_content-title">
+          <Text content={title} modifiers={['20x32', '700', 'raisinBlack', 's015']} />
+        </div>
+      </Link>
+      <div className="m-subDivisionCard_desc u-mt-8">
         <Text content={description} modifiers={['12x20', '400', 'davyGrey']} />
       </div>
-      <div className="m-subDivisionCard_content-seeMore">
-        {/* // TODO: Translation */}
-        <Text modifiers={['14x20', '400', 'copper']} content="Xem thêm" />
-        <Icon iconName="arrowRightCopper" size="16" />
-      </div>
+      <Link href={href} target={target}>
+        <div className="animate animate-arrowSlide d-flex align-items-center u-mt-12">
+          {/* // TODO: Translation */}
+          <Text modifiers={['14x20', '400', 'copper']} content="Xem thêm" />
+          <div className="u-ml-8">
+            <Icon iconName="arrowRightCopper" size="16" />
+          </div>
+        </div>
+      </Link>
     </div>
   </div>
 );

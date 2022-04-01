@@ -182,6 +182,12 @@ $colors-gradient-design: (
   }
 }
 
+@mixin style-letter-spacing {
+  &-s015 {
+    letter-spacing: 0.0015em;
+  }
+}
+
 // prefix declarations
 @mixin prefixed($property, $value) {
   @if $webkit == true {

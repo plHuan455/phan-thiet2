@@ -50,4 +50,6 @@ type ColorStyle =
 
 type FontFamily = 'fontOswald' | 'fontSvnGotham';
 
-type GeneralTextStyle = FontWeightStyle | TextStyle | ColorStyle | FontFamily;
+type LetterSpacing = 's015';
+
+type GeneralTextStyle = FontWeightStyle | TextStyle | ColorStyle | FontFamily | LetterSpacing;
