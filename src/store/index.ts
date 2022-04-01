@@ -1,11 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 
-import exampleReducer from './example';
+import systemReducer from './systems';
 
 export const store = configureStore({
   devTools: process.env.NODE_ENV === 'development',
   reducer: {
-    example: exampleReducer,
+    system: systemReducer,
   },
 });
 
