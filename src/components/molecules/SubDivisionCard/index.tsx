@@ -53,4 +53,4 @@ SubDivisionCard.defaultProps = {
   target: '_self',
 };
 
-export default SubDivisionCard;
+export default React.memo(SubDivisionCard);

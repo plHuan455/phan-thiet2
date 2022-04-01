@@ -152,4 +152,4 @@ const Footer: React.FC<FooterProps> = ({
 Footer.defaultProps = {
 };
 
-export default Footer;
+export default React.memo(Footer);
