@@ -16,8 +16,7 @@ const Link: React.FC<LinkProps> = ({
     return (
       <span
         {...props}
-        className="a-link"
-
+        className={props.className}
       >
         {children}
       </span>
@@ -29,7 +28,7 @@ const Link: React.FC<LinkProps> = ({
       <a
         {...props}
         href={href}
-        className="a-link"
+        className={props.className}
       >
         {children}
       </a>
@@ -44,7 +43,7 @@ const Link: React.FC<LinkProps> = ({
         search,
       }}
       aria-label="label"
-      className="a-link"
+      className={props.className}
     >
       {children}
     </RouterLink>

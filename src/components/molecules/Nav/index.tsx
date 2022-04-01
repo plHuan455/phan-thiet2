@@ -20,6 +20,8 @@ const recursiveMenuActive = (item: MenuItem, pathname: string, cb: () => void) =
   if (item.reference) {
     if (`/${item.reference.slug}` === pathname) {
       cb();
+    } else if (item.reference.slug === '/' && pathname === '/') {
+      cb();
     }
   }
   if (item.subMenu) {

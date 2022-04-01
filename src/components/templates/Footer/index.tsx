@@ -43,7 +43,7 @@ export const MenuFooter: React.FC<MenuFooterProps> = ({ data }) => (
       {
       data?.list?.map((item, index) => (
         <div key={`t-footer_menu-${index.toString()}`} className="t-footer_menu-item">
-          <Link href={item.url} target={item.target}>
+          <Link href={item.url} target={item.target} className="a-link">
             <div className="t-footer_menu-item-content">
               <div className="t-footer_menu-icon">
                 <Icon iconName="chevronRight" size="24" />
@@ -114,7 +114,7 @@ const Footer: React.FC<FooterProps> = ({
               {
                     socialList.list.map((item, index) => (
                       <div className="t-footer_social-item">
-                        <Link key={`t-footer_social-${index.toString()}`} href={item.url} target={item.target}>
+                        <Link key={`t-footer_social-${index.toString()}`} href={item.url} target={item.target} className="a-link">
                           <Image src={item.icon} ratio="1x1" alt={item.text} />
                         </Link>
                       </div>
@@ -134,7 +134,7 @@ const Footer: React.FC<FooterProps> = ({
               <React.Fragment key={`t-footer_copyRight-${index.toString()}`}>
                 {index !== 0 ? <div className="t-footer_copyRight-divider">|</div> : ''}
                 <div className="t-footer_copyRight-item">
-                  <Link href={item.url} target={item.target}>
+                  <Link href={item.url} target={item.target} className="a-link">
                     <Text content={item.text} />
                   </Link>
                 </div>
