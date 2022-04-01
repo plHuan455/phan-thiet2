@@ -26,7 +26,7 @@ interface BannerProps {
   };
 }
 
-const Search: React.FC<Pick<BannerProps, 'search'>> = ({ search }) => {
+export const Search: React.FC<Pick<BannerProps, 'search'>> = ({ search }) => {
   const [val, setVal] = useState('');
 
   const onKeyDown = useCallback(

@@ -14,6 +14,11 @@
     width: rem(16);
   }
 
+  &-16 {
+    height: rem(16);
+    width: rem(16);
+  }
+
   &-20 {
     height: rem(20);
     width: rem(20);
@@ -22,6 +27,11 @@
   &-24 {
     height: rem(24);
     width: rem(24);
+  }
+
+  &-36 {
+    height: rem(36);
+    width: rem(36);
   }
 
   &-searchWhite {
@@ -46,5 +56,13 @@
 
   &-arrowRightCopper {
     background-image: url('~assets/icons/ic_arrow_right_copper.svg');
+  }
+  
+  &-searchOrange {
+    background-image: url('~assets/icons/ic_search_orange.svg');
+  }
+
+  &-closeWhite {
+    background-image: url('~assets/icons/ic_close_white.svg');
   }
 }

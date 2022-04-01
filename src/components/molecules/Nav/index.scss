@@ -1,0 +1,209 @@
+
+.menu {
+  @include adjust-flex(flex-start);
+  flex-grow: 1;
+  list-style: none;
+
+  @include tablet-down {
+    display: block;
+    margin: 0;
+  }
+}
+
+.menu-item {
+  $root: &;
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  height: rem($height-header-main-desktop);
+  padding: 0 rem(16);
+  position: relative;
+  @include font-base(16, 28);
+
+  @include desktop-down {
+    height: rem($height-header-main-desktop-down);
+    padding: 0 rem(10);
+  }
+
+  @include tablet-down {
+    display: block;
+    height: auto;
+    margin-top: rem(30);
+    padding: 0;
+  }
+
+  &_line {
+    background-color: $white;
+    content: '';
+    height: 2px;
+    left: 50%;
+    position: absolute;
+    top: 0;
+    transform: translateX(-50%);
+    transition: $transition ease-in-out;
+    width: 0;
+    @include tablet-down {
+      display: none;
+    }
+
+    #{$root}:hover &,
+    #{$root}-active & {
+      width: 100%;
+    }
+  }
+
+  &-isChild {
+    height: auto;
+    margin: 0;
+
+    @include tablet-down {
+      margin-top: rem(16);
+    }
+  }
+
+  &_title {
+    color: $white;
+    @include tablet-down {
+      color: $davy-grey;
+    }
+
+    &:hover {
+      color: $white;
+      @include tablet-down {
+        color: $davy-grey;
+      }
+    }
+  }
+
+  &_link {
+    color: $white;
+    display: block;
+    position: relative;
+    transition: $transition ease-in-out;
+
+    @include tablet-down {
+      color: $davy-grey;
+    }
+
+    &:hover {
+      color: $white;
+      @include tablet-down {
+        color: $davy-grey;
+      }
+    }
+  
+    #{$root}-hasChild > & {
+      padding-right: rem(20);
+    }
+
+    #{$root}-hasChild > &::before {
+      background: url('~assets/icons/ic_chevron_down_white.svg') no-repeat center;
+      content: '';
+      height: rem(16);
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      transition: $transition-long linear;
+      width: rem(16);
+      @include tablet-down {
+        background: url('~assets/icons/ic_chevron_down_gray.svg') no-repeat center;
+      }
+    }
+
+    #{$root}:hover > &::before,
+    #{$root}-expand > &::before {
+      @include tablet-up {
+        transform: translateY(-50%) rotate(180deg) !important;
+      }
+    }
+
+    #{$root}-expand > &::before {
+      @include tablet-down {
+        transform: translateY(-50%) rotate(180deg) !important;
+      }
+    }
+
+    #{$root}-isChild > & {
+      width: 100%;
+      @include tablet-up {
+        opacity: 0.7;
+        padding: rem(14) rem(8);
+      }
+    }
+
+    #{$root}-active > & {
+      @include tablet-down {
+        color: $gamboge-orange;
+      }
+    }
+
+    &.active {
+      @include tablet-up {
+        opacity: 1;
+      }
+      @include tablet-down {
+        color: $gamboge-orange;
+      }
+    }
+  }
+
+  &_wrap {
+    max-height: 0;
+    min-width: rem(215);
+    overflow: hidden;
+    transition: $transition ease-in-out;
+    visibility: hidden;
+    z-index: 1;
+
+    @include desktop-down {
+      transition: $transition ease-in-out;
+    }
+
+    @include tablet-up {
+      left: 0;
+      padding-top: rem(8);
+      position: absolute;
+      top: 100%;
+    }
+
+    #{$root}-expand > & {
+      @include tablet-down {
+        max-height: rem(1000);
+        overflow: initial;
+        visibility: visible;
+      }
+    }
+
+    #{$root}:hover > & {
+      @include tablet-up {
+        max-height: rem(1000);
+        overflow: initial;
+        visibility: visible;
+      }
+    }
+
+    #{$root}_list & {
+      padding-top: 0;
+
+      @include tablet-up {
+        left: 100%;
+        padding-left: rem(6);
+        top: 0;
+      }
+    }
+  }
+
+  &_list {
+    list-style: none;
+
+    @include tablet-down {
+      margin-left: rem(30);
+    }
+
+    @include tablet-up {
+      background: $black06;
+      padding: rem(8) 0;
+    }
+  }
+}
