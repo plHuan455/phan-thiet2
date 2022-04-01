@@ -2,6 +2,8 @@
 
 @import '~bootstrap/dist/css/bootstrap-grid.min.css';
 @import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~slick-carousel/slick/slick-theme.css';
+@import '~slick-carousel/slick/slick.css';
 
 // Common
 @import 'common/Container';
@@ -9,5 +11,7 @@
 // Atom
 @import 'components/atoms/*/index.scss';
 @import 'components/molecules/*/index.scss';
+@import 'components/molecules/*/index.scss';
+@import 'components/organisms/*/index.scss';
 @import 'components/templates/*/index.scss';
 

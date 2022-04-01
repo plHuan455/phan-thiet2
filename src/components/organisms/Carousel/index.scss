@@ -1,0 +1,141 @@
+.o-carousel {
+  $root: &;
+  position: relative;
+
+  &_arrow {
+    $arrow: &;
+    border-radius: rem(100);
+    height: rem(40);
+    transition: $transition-long ease;
+    width: rem(40);
+    z-index: 1;
+
+    @include desktop-down {
+      height: rem(37);
+      width: rem(37);
+    }
+
+    @include tablet-down {
+      height: rem(32);
+      width: rem(32);
+    }
+
+    &:hover {
+      background: $gradient-green;
+    }
+
+    &::before {
+      background-color: transparent;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: rem(24);
+      content: '';
+      display: block;
+      height: 100%;
+      opacity: 1;
+      transition: $transition-long ease;
+      width: 100%;
+      @include tablet-down {
+        background-size: rem(20);
+      }
+    }
+
+    &_prev {
+      left: rem(-76);
+
+      &::before {
+        background-image: url('~assets/icons/ic_arrow_carousel_back.svg');
+      }
+
+      &:not(.slick-disabled):hover::before {
+        background-image: url('~assets/icons/ic_arrow_carousel_back_white.svg');
+      }
+    }
+
+    &_next {
+      right: rem(-76);
+
+      &::before {
+        background-image: url('~assets/icons/ic_arrow_carousel_next.svg');
+      }
+
+      &:not(.slick-disabled):hover::before {
+        background-image: url('~assets/icons/ic_arrow_carousel_next_white.svg');
+      }
+    }
+
+    &.slick-arrow {
+      &.slick-disabled {
+        background: $snow;
+        border-color: transparent;
+        cursor: no-drop;
+      }
+
+      &::before {
+        opacity: 1;
+      }
+    }
+  }
+
+  .slick-slide {
+    outline: none;
+
+    div {
+      &:focus {
+        outline: 0;
+      }
+    }
+  }
+
+  .slick-dots {
+    bottom: 0;
+    display: flex !important;
+    justify-content: center;
+    position: relative;
+
+    li {
+      display: block;
+      height: auto;
+      margin: 0 rem(4);
+      width: auto;
+    }
+  }
+
+  &-innerDots {
+    .slick-dots {
+      bottom: rem(80);
+      margin-top: 0;
+      position: absolute;
+    }
+  }
+
+  &_dot {
+    background-color: $davy-grey;
+    border-radius: 50%;
+    display: block;
+    height: rem(10);
+    width: rem(10);
+
+    &::before {
+      background-color: $white;
+      border-radius: 50%;
+      content: '';
+      height: 0;
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      transition: $transition-long ease-in-out;
+      width: 0;
+    }
+  }
+
+  .slick-active {
+    #{$root}_dot {
+      &::before {
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+}
