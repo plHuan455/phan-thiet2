@@ -1,0 +1,146 @@
+.m-cardBanner {
+  $root: &;
+  position: relative;
+
+  &_imgMain {
+    border-radius: 50%;
+    padding: 4px;
+    background-color: $white;
+    position: relative;
+    top: 0;
+    overflow: hidden;
+    #{$root}:hover & {
+      animation: ani-img-main 0.8s linear infinite alternate;
+    }
+  }
+
+  &_title {
+    position: relative;
+    z-index: 2;
+    margin-top: rem(-30);
+    background-color: $white;
+    padding: rem(8) rem(0) rem(8) rem(36);
+    min-height: rem(112);
+    display: flex;
+    align-items: center;
+    border-radius: rem(70);
+
+    @include break-min(1600px) {
+      padding: rem(8) rem(0) rem(8) rem(60);
+    }
+
+    @include desktop-down {
+      padding: rem(8) rem(0) rem(8) rem(25);
+    }
+
+    @include mobile-down {
+      padding: rem(4) rem(0) rem(4) rem(16);
+      min-height: rem(67);
+      margin-top: rem(-20);
+    }
+
+    .a-text {
+      @include text-overflow (3);
+      @include desktop-down {
+        @include font-base(18,24);
+      }
+      @include mobile-down {
+        @include font-base(12,18);
+      }
+    }
+  }
+
+  &_imgSub {
+    max-width: 42%;
+    margin-left: auto;
+    position: relative;
+    z-index: 3;
+    margin-top: rem(-50);
+    top: 0;
+    left: 0;
+    img {
+      max-width: 100%;
+    }
+  }
+
+  &_layer {
+    max-width: 82%;
+    position: absolute;
+    z-index: 4;
+    right: 0;
+    top: 0;
+    transform: translateY(-60%);
+    pointer-events: none;
+    img {
+      max-width: 100%;
+    }
+  }
+}
+
+@keyframes ani-img-main {
+  100% {
+    background-color: $copper;
+  }
+}
+
+
+.t-bannerHome {
+  position: relative;
+
+  .container {
+    @include break-min(1600px) {
+      max-width: rem(1440);
+    }
+    @include break-min(1920px) {
+      max-width: rem(1700);
+    }
+  }
+
+  &_image {
+    .a-image {
+      padding-top: 0;
+      height: 100vh;
+      min-height: rem(600);
+    }
+  }
+
+  &_content {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    bottom: 3%;
+    z-index: 1;
+  }
+
+  &_list {
+    .slick-list {
+      padding-top: rem(50);
+      margin: 0 rem(-16);
+      @include desktop-down {
+        margin: 0 rem(-10);
+      }
+    }
+    .slick-slide {
+      padding: 0 rem(16);
+      @include desktop-down {
+        padding: 0 rem(10);
+      }
+    }
+  }
+
+  &_description {
+    margin: 4% auto 0;
+    max-width: 90%;
+    @include desktop-down {
+      max-width: 100%
+    }
+    .a-text {
+      @include desktop-down {
+        @include font-base(16,24);
+      }
+      @include mobile-down {
+        @include font-base(14,20);
+      }
+    }
+  }
+}
