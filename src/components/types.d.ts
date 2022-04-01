@@ -5,7 +5,10 @@ type Ratio =
   | '354x221'
   | '184x59'
   | '367x204'
-  | '24x34';
+  | '24x34'
+  | '354x199'
+  | '354x221'
+  | 'logo-footer';
 
 type FontWeightStyle =
   | '100'
