@@ -61,16 +61,12 @@
     &:before {
       content: '';
       position: absolute;
-      bottom: rem(-30);
+      bottom: rem(-20);
       width: 100%;
       height: rem(50);
       background: $seal-brown;
       opacity: 0.3;
       filter: blur(40px);
-    }
-    @include mobile-down {
-      // max-width: 300px;
-      transform: translateX(10px);
     }
   }
 }
