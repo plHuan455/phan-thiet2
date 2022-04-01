@@ -101,6 +101,12 @@
     }
   }
 
+  &-outDots {
+    .slick-dots {
+      margin-top: rem(25);
+    }
+  }
+
   &-innerDots {
     .slick-dots {
       bottom: rem(80);
@@ -110,31 +116,48 @@
   }
 
   &_dot {
-    background-color: $davy-grey;
-    border-radius: 50%;
-    display: block;
-    height: rem(10);
-    width: rem(10);
-
-    &::before {
-      background-color: $white;
+    &.circle {
+      background-color: $davy-grey;
       border-radius: 50%;
-      content: '';
-      height: 0;
-      left: 50%;
-      position: absolute;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      transition: $transition-long ease-in-out;
-      width: 0;
+      display: block;
+      height: rem(10);
+      width: rem(10);
+  
+      &::before {
+        background-color: $white;
+        border-radius: 50%;
+        content: '';
+        height: 0;
+        left: 50%;
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        transition: $transition-long ease-in-out;
+        width: 0;
+      }
+    }
+
+    &.rect {
+      background-color: rgba($gamboge-orange, 0.5);
+      border-radius: 1px;
+      display: block;
+      height: rem(3);
+      transition: $transition-long ease;
+      width: rem(16);
     }
   }
 
   .slick-active {
     #{$root}_dot {
-      &::before {
+      &.circle::before {
         height: 100%;
         width: 100%;
+      }
+
+      &.rect {
+        background-color: $gamboge-orange;
+        border-radius: 4px;
+        width: rem(32);
       }
     }
   }

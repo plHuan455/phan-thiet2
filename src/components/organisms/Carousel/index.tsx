@@ -41,7 +41,10 @@ const Carousel = React.forwardRef<ReactSlick, CarouselProps>(
     settings, children, asNavFor, centerMode, innerDots,
   }, ref) => (
     <div
-      className={mapModifiers('o-carousel', centerMode && 'centerMode', settings?.arrows && 'hasArrow', innerDots && 'innerDots')}
+      className={mapModifiers('o-carousel',
+        centerMode && 'centerMode',
+        settings?.arrows && 'hasArrow',
+        innerDots ? 'innerDots' : 'outDots')}
     >
       <ReactSlick
         centerPadding="0"
