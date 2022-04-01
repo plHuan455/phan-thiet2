@@ -1,7 +1,8 @@
 type Ratio =
   | '1x1'
   | '1366x400'
-  | 'logo-footer';
+  | 'logo-footer'
+  | '354x221';
 
 type FontWeightStyle =
   | '100'
@@ -49,4 +50,6 @@ type ColorStyle =
 
 type FontFamily = 'fontOswald' | 'fontSvnGotham';
 
-type GeneralTextStyle = FontWeightStyle | TextStyle | ColorStyle | FontFamily;
+type LetterSpacing = 's015';
+
+type GeneralTextStyle = FontWeightStyle | TextStyle | ColorStyle | FontFamily | LetterSpacing;

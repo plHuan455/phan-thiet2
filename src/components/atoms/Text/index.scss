@@ -44,6 +44,7 @@
     font-family: $font-oswald;
   }
 
+  @include style-letter-spacing();
   @include style-color-gradient();
   @include style-color();
   @include style-font-weight();

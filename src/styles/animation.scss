@@ -142,6 +142,18 @@
   }
 }
 
+@keyframes arrowSlide {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(60%);
+  }
+}
+
+
+
 :root {
   --animate-duration: 1s;
   --animate-delay: 1s;
@@ -214,5 +226,13 @@
   &-scaleY {
     -webkit-animation-name: scaleY;
     animation-name: scaleY;
+  }
+
+  &-arrowSlide {
+    &:hover {
+      .a-icon {
+        animation: arrowSlide 0.75s ease infinite alternate;
+      }
+    }
   }
 }

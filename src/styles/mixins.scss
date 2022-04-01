@@ -1,5 +1,6 @@
 @mixin text-overflow ($number: 2) {
-  display: box;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
   -webkit-line-clamp: ($number);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -178,6 +179,12 @@ $colors-gradient-design: (
       background-clip: text;
       color: transparent;
     }
+  }
+}
+
+@mixin style-letter-spacing {
+  &-s015 {
+    letter-spacing: 0.0015em;
   }
 }
 
