@@ -139,4 +139,4 @@ const Nav: React.FC<NavProps> = ({
   </ul>
 );
 
-export default Nav;
+export default React.memo(Nav);
