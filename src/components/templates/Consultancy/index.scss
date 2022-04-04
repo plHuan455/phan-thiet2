@@ -1,0 +1,114 @@
+.t-consultancy {
+  $root: &;
+  background: $white;
+  &_layer {
+    position: relative;
+    &::before {
+      content: '';
+      background-repeat: no-repeat;
+      background-size: contain;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 70%;
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 150;
+      @include desktop-down {
+        z-index: 1;
+        background-size: 30%;
+      }
+    }
+    &-1 {
+      &::before {
+        background-image: url('~assets/images/consultancy/blue-background.png'),
+          url('~assets/images/consultancy/line-white.png'),
+          url('~assets/images/consultancy/orange-background.png');
+        background-position: center top rem(-30), center top rem(150),
+          center top rem(250);
+        background-repeat: no-repeat;
+        background-size: 100% 50%, 100% 20%, contain;
+      }
+      &::after {
+        background-image: url('~assets/images/consultancy/leaf-left.png'),
+          url('~assets/images/consultancy/leaf-right.png');
+        background-position: left bottom, right bottom;
+        background-repeat: no-repeat;
+      }
+    }
+    &-2 {
+      &::before {
+        background-image: url('~assets/images/consultancy/orange-background-2.png');
+        background-position: center top rem(250);
+      }
+    }
+    &-3 {
+      &::before {
+        background-image: url('~assets/images/consultancy/blue-background.png'),
+          url('~assets/images/consultancy/kingdom-background.png');
+        background-position: center top rem(50), center bottom;
+        background-repeat: no-repeat;
+        background-size: 100% 50%, 100%, 100%;
+      }
+
+      &::after {
+        background-image: url('~assets/images/consultancy/kingdom-left.png'),
+          url('~assets/images/consultancy/kingdom-right.png');
+        background-position: left bottom, right bottom;
+        background-repeat: no-repeat;
+      }
+    }
+    &-4 {
+      &::after {
+        background-image: url('~assets/images/consultancy/kingdom-left.png');
+        background-position: left bottom;
+        background-repeat: no-repeat;
+      }
+    }
+  }
+
+  &_wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 123;
+    padding: rem(80) 0;
+    @include tablet-down {
+      flex-direction: column;
+      padding: rem(40) 0;
+      gap: rem(20);
+    }
+  }
+  &_type {
+    &-home {
+      padding: rem(65) 0 rem(35);
+    }
+  }
+  &_left {
+    flex: 1;
+    z-index: 1;
+  }
+  &_right {
+    width: 100%;
+    max-width: rem(643);
+  }
+  &_title {
+    &-default {
+      max-width: rem(230);
+    }
+    &-kingdom,
+    &-boutique {
+      max-width: rem(316);
+    }
+    @include tablet-down {
+      text-align: center;
+    }
+  }
+}

@@ -8,7 +8,10 @@ type Ratio =
   | '24x34'
   | '354x199'
   | '354x221'
-  | 'logo-footer';
+  | 'logo-footer'
+  | '1369x372'
+  | '1366x378'
+  | '1369x167';
 
 type FontWeightStyle =
   | '100'
@@ -52,6 +55,7 @@ type ColorStyle =
   | 'deer'
   | 'gradientGreen'
   | 'gradientBlue'
+  | 'deepLemon'
   | 'gradientBittersweet';
 
 type FontFamily = 'fontOswald' | 'fontSvnGotham';

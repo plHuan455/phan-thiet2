@@ -28,18 +28,12 @@ $error: rgb(206, 49, 0); // #ce3100
 $gainsboro: rgb(217, 217, 217); //#d9d9d9
 $antique-white2: rgb(246, 234, 220); //#f6eadc
 $eggshell: rgb(242, 231, 215); //#f2e7d7
-
+$deep-lemon: rgb(240, 184, 28); //#f0b81c
 $gradient-green: linear-gradient(180deg, $persian-green 0%, $skobeloff 100%);
-$gradient-blue: linear-gradient(180deg,
-$silver-lake-blue 25.24%,
-$pearl-aqua 100%);
-$gradient-bittersweet: linear-gradient(180deg,
-$bittersweet 25.24%,
-$atomic-tangerine 100%);
-$gradient-blue-2: linear-gradient(270.29deg,
-$green-blue 43.68%,
-$picton-blue 105.59%);
+$gradient-blue: linear-gradient(180deg, $silver-lake-blue 25.24%, $pearl-aqua 100%);
+$gradient-blue-2: linear-gradient(270.29deg, $green-blue 43.68%, $picton-blue 105.59%);
 $gradient-blue-3: linear-gradient(180deg, #e9f7fc 0%, #6cd8ff 100%);
+$gradient-bittersweet: linear-gradient(180deg, $bittersweet 25.24%, $atomic-tangerine 100%);
 
 // Overlay
 $black085: rgba($black, 0.85);

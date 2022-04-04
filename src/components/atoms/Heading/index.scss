@@ -16,7 +16,7 @@
   }
 
   &-h2 {
-    @include font-base(48, 64); 
+    @include font-base(48, 64);
 
     @include mobile-down {
       @include font-base(24, 32);
@@ -54,6 +54,18 @@
 
   &-fontSvnGotham {
     font-family: $font-svn-gotham;
+  }
+  &-32x48 {
+    @include font-base(32, 48);
+    @include mobile-down {
+      @include font-base(20, 30);
+    }
+  }
+  &-48x64 {
+    @include font-base(48, 64);
+    @include mobile-down {
+      @include font-base(24, 32);
+    }
   }
 
   @include style-letter-spacing();
