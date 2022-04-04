@@ -100,4 +100,8 @@
   &-912x455 {
     @include aspect-ratio(912, 455);
   }
+
+  &-929x479 {
+    @include aspect-ratio(929, 479);
+  }
 }
