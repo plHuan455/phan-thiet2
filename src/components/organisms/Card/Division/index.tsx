@@ -5,7 +5,7 @@ import Image from 'components/atoms/Image';
 import Link from 'components/atoms/Link';
 import Text from 'components/atoms/Text';
 
-interface SubDivisionCardProps {
+export interface CardDivisionProps {
   imgSrc: string;
   title: string;
   description: string;
@@ -13,7 +13,7 @@ interface SubDivisionCardProps {
   target?: string;
 }
 
-const SubDivisionCard: React.FC<SubDivisionCardProps> = ({
+const CardDivision: React.FC<CardDivisionProps> = ({
   imgSrc,
   title,
   description,
@@ -48,9 +48,4 @@ const SubDivisionCard: React.FC<SubDivisionCardProps> = ({
   </div>
 );
 
-SubDivisionCard.defaultProps = {
-  href: undefined,
-  target: '_self',
-};
-
-export default React.memo(SubDivisionCard);
+export default React.memo(CardDivision);

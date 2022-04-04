@@ -67,4 +67,4 @@ const CardNormal: React.FC<CardNormalProps> = ({
   </div>
 );
 
-export default CardNormal;
+export default React.memo(CardNormal);

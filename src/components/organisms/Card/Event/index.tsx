@@ -83,4 +83,4 @@ const CardEvent: React.FC<CardEventProps> = ({
   );
 };
 
-export default CardEvent;
+export default React.memo(CardEvent);

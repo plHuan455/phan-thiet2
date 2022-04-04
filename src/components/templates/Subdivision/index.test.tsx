@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import SubDivisionCard from '.';
+import Subdivision from '.';
 
-describe('<SubDivisionCard />', () => {
+describe('<Subdivision />', () => {
   test('renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<SubDivisionCard title="" description="" imgSrc="" />, div);
+    ReactDOM.render(<Subdivision />, div);
     ReactDOM.unmountComponentAtNode(div);
   });
 });

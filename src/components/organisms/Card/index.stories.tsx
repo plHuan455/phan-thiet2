@@ -86,3 +86,15 @@ export const news: Story = () => (
     </div>
   </BrowserRouter>
 );
+
+export const division: Story = () => (
+  <BrowserRouter>
+    <div style={{ maxWidth: 394, background: 'gray', padding: 20 }}>
+      <Card.Division
+        imgSrc="https://source.unsplash.com/random"
+        title="The Florida"
+        description="Ocean Residence kiến tạo nơi đáng  sống mới cho cư dân khi tận hưởng giá trị Ocean Residence kiến tạo nơi đáng  sống mới cho cư dân khi tận hưởng giá trị .."
+      />
+    </div>
+  </BrowserRouter>
+);
