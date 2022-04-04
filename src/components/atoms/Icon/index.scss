@@ -4,21 +4,36 @@
   background-size: contain;
   display: block;
 
+  &-11 {
+    height: rem(11);
+    width: rem(11);
+  }
+
+  &-12x14 {
+    height: rem(14);
+    width: rem(12);
+  }
+
   &-14 {
     height: rem(14);
     width: rem(14);
   }
+
+  &-16 {
+    height: rem(16);
+    width: rem(16);
+  }
+
+  &-16 {
+    height: rem(16);
+    width: rem(16);
+  }
+
+  &-18 {
+    height: rem(18);
+    width: rem(18);
+  }
   
-  &-16 {
-    height: rem(16);
-    width: rem(16);
-  }
-
-  &-16 {
-    height: rem(16);
-    width: rem(16);
-  }
-
   &-20 {
     height: rem(20);
     width: rem(20);
@@ -41,7 +56,7 @@
   &-loadingWhite {
     background-image: url('~assets/icons/ic_loading_white.svg');
   }
-  
+
   &-closeBlack {
     background-image: url('~assets/icons/ic_close_black.svg');
   }
@@ -49,7 +64,7 @@
   &-closeOrange {
     background-image: url('~assets/icons/ic_close_orange.svg');
   }
-  
+
   &-chevronRight {
     background-image: url('~assets/icons/ic_chevron_right.svg');
   }
@@ -64,5 +79,29 @@
 
   &-closeWhite {
     background-image: url('~assets/icons/ic_close_white.svg');
+  }
+
+  &-calendar {
+    background-image: url('~assets/icons/ic_calendar.svg');
+  }
+
+  &-clock {
+    background-image: url('~assets/icons/ic_clock.svg');
+  }
+  
+  &-location {
+    background-image: url('~assets/icons/ic_location.svg');
+  }
+
+  &-downloadOrange {
+    background-image: url('~assets/icons/ic_download_orange.svg');
+  }
+
+  &-playVideo {
+    background-image: url('~assets/icons/ic_play_video.svg');
+  }
+
+  &-dot {
+    background-image: url('~assets/icons/ic_dot.svg');
   }
 }

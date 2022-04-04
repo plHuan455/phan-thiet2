@@ -20,8 +20,8 @@
     }
 
     @include tablet-down {
-      padding: rem(10);
       min-width: rem(250);
+      padding: rem(10);
     }
 
     @include small-mobile {
@@ -66,9 +66,9 @@
       width: rem(48);
       z-index: -1;
       @include mobile-down {
-        width: rem(16);
-        height: rem(16);
         bottom: rem(-5);
+        height: rem(16);
+        width: rem(16);
       }
     }
   }
@@ -117,9 +117,10 @@
 
 .t-projectMap {
   &_image {
-    width: 100%;
-    position: relative;
     overflow: hidden;
+    position: relative;
+    width: 100%;
+
     img {
       height: 100%;
       left: 0;

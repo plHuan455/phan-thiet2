@@ -11,11 +11,17 @@ export const iconList = {
   arrowRightCopper: 'arrowRightCopper',
   searchOrange: 'searchOrange',
   closeWhite: 'searchWhite',
+  calendar: 'calendar',
+  clock: 'clock',
+  location: 'location',
+  downloadOrange: 'downloadOrange',
+  playVideo: 'playVideo',
+  dot: 'dot',
 };
 
 export type IconName = keyof typeof iconList;
 
-export type IconSize = '14' | '16' | '20' | '24' | '36';
+export type IconSize = '11' | '12x14' | '14' | '16' | '18' | '20' | '24' | '36';
 
 interface IconProps {
   iconName: IconName;

@@ -114,3 +114,7 @@ export const handleScrollCenter = (ref: React.RefObject<HTMLDivElement | null>,
     behavior: 'smooth',
   });
 };
+
+export function countDownFn(day:string, hour:string, min:string, sec: string) {
+  return `${day ? `${day}:` : ''}${hour ? `${hour}:` : ''}${min ? `${min}:` : ''}${sec ? `${sec}` : ''}`;
+}

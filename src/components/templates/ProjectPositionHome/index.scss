@@ -11,17 +11,18 @@
 
   &_bgLeft {
     max-width: rem(192);
+    pointer-events: none;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     width: 100%;
-    pointer-events: none;
     @include break-max (1366px) {
       max-width: 14%;
     }
     @include mobile-down {
       max-width: rem(100);
     }
+
     .a-image {
       padding-bottom: calc(317 / 192 * 100%);
     }
@@ -29,17 +30,18 @@
 
   &_bgRight {
     max-width: rem(209);
+    pointer-events: none;
     position: absolute;
     right: 0;
     top: 0;
     width: 100%;
-    pointer-events: none;
-    @include break-max(1366px){
+    @include break-max(1366px) {
       max-width: 15.3%;
     }
     @include mobile-down {
       max-width: rem(100);
     }
+
     .a-image {
       padding-bottom: calc(348 / 209 * 100%);
     }

@@ -218,3 +218,13 @@ $colors-gradient-design: (
 
   #{$property}: #{$value};
 }
+
+@mixin thumbnail-scale-hover {
+  overflow: hidden;
+
+  &:hover {
+    .a-image {
+      transform: scale(1.2);
+    }
+  }
+}

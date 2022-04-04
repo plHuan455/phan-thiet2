@@ -1,0 +1,56 @@
+.o-cardPlayer {
+  $root: &;
+  border-radius: rem(12);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+
+  &_thumbnail {
+    @include reset-button();
+    background-color: transparent;
+    padding: 0;
+    position: relative;
+    width: 100%;
+
+    &:hover {
+      #{$root}_player {
+        height: rem(48);
+        width: rem(48);
+
+        .a-icon {
+          height: rem(18);
+          width: rem(16);
+        }
+      }
+    }
+  }
+
+  &_player {
+    background-color: $white;
+    border-radius: 50%;
+    height: rem(40);
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: all $transition linear;
+    width: rem(40);
+    @include adjust-flex();
+
+    .a-icon {
+      margin-left: rem(3);
+      transition: all $transition linear;
+    }
+  }
+
+  &_content {
+    background-color: $white;
+    display: flex;
+    flex-direction: column;
+    padding: rem(12) rem(16) rem(28);
+    #{$root}-reverse & {
+      flex-direction: column-reverse;
+    }
+  }
+}
