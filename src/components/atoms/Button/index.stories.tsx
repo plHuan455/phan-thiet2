@@ -11,7 +11,7 @@ export default {
     variant: {
       control: {
         type: 'select',
-        options: ['primary-blue', 'primary-green', 'outline-green'],
+        options: ['primary-blue', 'primary-green', 'outline-green', 'seaBlue', 'cyan', 'copper'],
       },
       defaultValue: 'primary-blue',
     },

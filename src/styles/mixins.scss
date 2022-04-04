@@ -158,11 +158,21 @@ $colors-design: (
   'deer': $deer,
 );
 
+
+
 $colors-gradient-design: (
   'gradientGreen': $gradient-green,
   'gradientBlue' : $gradient-blue,
   'gradientBittersweet': $gradient-bittersweet,
 );
+
+@mixin style-background-color {
+  @each $name, $color in $colors-design {
+    &-#{$name} {
+      background: $color;
+    }
+  }
+}
 
 @mixin style-color {
   @each $name, $color in $colors-design {
