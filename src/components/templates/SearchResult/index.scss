@@ -1,0 +1,198 @@
+.t-searchResult {
+  background: $antique-white url('~assets/images/projectPosition/summary/bg.png') no-repeat left bottom / 100% 45%;
+  padding-bottom: rem(80);
+  padding-top: rem(120);
+  position: relative;
+  
+  &_bgLeft {
+    max-width: rem(259);
+    pointer-events: none;
+    position: absolute;
+    top: rem(27);
+    transform: 0;
+    width: 100%;
+    @include break-max (1366px) {
+      max-width: 18.6%;
+    }
+    @include mobile-down {
+      max-width: rem(70);
+    }
+
+    .a-image {
+      padding-bottom: calc(178 / 259 * 100%);
+    }
+  }
+
+  &_bgRight {
+    max-width: rem(108);
+    pointer-events: none;
+    position: absolute;
+    right: rem(52);
+    top: rem(49);
+    width: 100%;
+
+    @include break-max (1366px) {
+      max-width: 8%;
+    }
+    @include mobile-down {
+      max-width: rem(50);
+    }
+
+    .a-image {
+      padding-bottom: calc(156 / 108 * 100%);
+    }
+  }
+
+  &_searchInput {
+    margin: auto;
+    margin-top: rem(40);
+    max-width: rem(740);
+
+    @include mobile-down {
+      margin-top: rem(26);
+    }
+
+    &_wrapper {
+      @include adjust-flex(flex-start, center);
+
+      &_general {
+        display: flex;
+        flex-grow: 1;
+        position: relative;
+
+        .a-icon {
+          position: absolute;
+          right: rem(10);
+          top: 50%;
+          transform: translateY(-50%);
+        }
+      }
+  
+      input {
+        @include font-base(14, 20);
+        appearance: none;
+        background-color: $white;
+        border: rem(1) solid $gainsboro;
+        font-family: $font-svn-gotham;
+        font-weight: 400;
+        outline: 0;
+        padding: rem(5) rem(28) rem(5) rem(12);
+        width: 100%;
+        @include tablet-down {
+          @include font-base(12, 20);
+        }
+  
+        &::placeholder {
+          @include font-base(14, 20);
+          color: $arsenic;
+          font-family: $font-svn-gotham;
+          font-weight: 400;
+        }
+      }
+  
+      button {
+        @include reset-button();
+        @include adjust-flex();
+        background: $white;
+        border: rem(1) solid $gainsboro;
+        flex-shrink: 0;
+        height: rem(32);
+        padding: 0;
+        width: rem(32);
+      }
+    }
+  }
+
+  &_amount {
+    margin-top: rem(16);
+    text-align: center;
+  }
+
+  &_wrapTabs {
+    margin-top: rem(32);
+    @include adjust-flex(space-between, center);
+
+    @include mobile-down {
+      display: block;
+      margin-top: rem(26);
+    }
+  }
+
+  &_tab {
+    .o-tabs {
+      &_labels {
+        overflow: auto hidden;
+        position: relative;
+        @include adjust-flex();
+      }
+
+      &_label {
+        color: $davy-grey;
+        cursor: pointer;
+        font-weight: 400;
+        white-space: nowrap;
+        @include font-base(14, 22);
+      }
+
+      &_tab {
+        background: transparent;
+        border: 0;
+        margin-right: rem(32);
+        padding: rem(12) 0;
+        position: relative;
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        &-active {
+          .o-tabs_label {
+            background: $gradient-green;
+            -webkit-background-clip: text;
+            font-weight: 500;
+            -webkit-text-fill-color: transparent;
+          }
+        }
+      
+        &::after {
+          bottom: 0;
+          content: '';
+          height: rem(2);
+          left: 50%;
+          opacity: 0;
+          position: absolute;
+          transform: translateX(-50%);
+          transition: all $transition linear;
+          visibility: hidden;
+          width: 0;
+        }
+
+        &:hover,
+        &-active {
+          &::after {
+            border-bottom: rem(2) solid;
+            border-image: $gradient-green 1;
+            opacity: 1;
+            visibility: visible;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  &_filter {
+    min-width: rem(200);
+    @include mobile-down {
+      margin-top: rem(10);
+      min-width: 100%;
+    }
+  }
+
+  &_showMore {
+    .a-button {
+      margin: rem(40) auto 0;
+      min-width: rem(217);
+    }
+  }
+}

@@ -59,7 +59,8 @@ type ColorStyle =
   | 'gradientGreen'
   | 'gradientBlue'
   | 'deepLemon'
-  | 'gradientBittersweet';
+  | 'gradientBittersweet'
+  | 'arsenic';
 
 type FontFamily = 'fontOswald' | 'fontSvnGotham';
 
