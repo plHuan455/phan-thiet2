@@ -30,16 +30,18 @@ export const Normal: Story = () => {
   return (
     <div>
       <Tabs variableMutate={indexActive}>
-        {
-            dummyData.map((item, index) => (
-              <Tab
-                key={`tab-${index.toString()}`}
-                label={item.label}
-                active={index === indexActive}
-                handleClick={() => setIndexActive(index)}
-              />
-            ))
-          }
+        <div className="d-flex">
+          {
+              dummyData.map((item, index) => (
+                <Tab
+                  key={`tab-${index.toString()}`}
+                  label={item.label}
+                  active={index === indexActive}
+                  handleClick={() => setIndexActive(index)}
+                />
+              ))
+            }
+        </div>
       </Tabs>
       {
           dummyData.map((item, index) => (
