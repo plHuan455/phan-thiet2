@@ -1,0 +1,61 @@
+.t-projectPositionSummary {
+  background: $antique-white url('~assets/images/projectPosition/summary/bg.png') no-repeat left bottom / 100% 45%;
+  padding-top: rem(80);
+  position: relative;
+
+  &_bgLeft {
+    max-width: rem(255);
+    position: absolute;
+    bottom: 0;
+    transform: 0;
+    width: 100%;
+    pointer-events: none;
+    @include break-max (1366px) {
+      max-width: 18.6%;
+    }
+    @include mobile-down {
+      max-width: rem(70);
+    }
+    .a-image {
+      padding-bottom: calc(357 / 255 * 100%);
+    }
+  }
+
+  &_bgRight {
+    max-width: rem(261);
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+    pointer-events: none;
+
+    @include break-max (1366px) {
+      max-width: 19%;
+    }
+    @include mobile-down {
+      max-width: rem(100);
+    }
+    .a-image {
+      padding-bottom: calc(216 / 261 * 100%);
+    }
+  }
+
+  &_map {
+    padding-top: rem(240);
+    position: relative;
+    z-index: 0;
+
+    @include desktop-down {
+      padding-top: rem(210);
+    }
+
+    @include mobile-down {
+      padding-top: rem(120);
+    }
+  }
+
+  &_pulldown {
+    max-width: rem(322);
+    margin: rem(32) auto 0;
+  }
+}
