@@ -1,86 +1,53 @@
 .m-cardVideo {
   $root: &;
-  &_wrapper {
-    width: 100%;
-    flex: 1;
-    max-width: rem(354);
-    border-radius: rem(16);
-    background: $white;
-    overflow: hidden;
-    filter: drop-shadow(0px 4px 16px rgba(0, 0, 0, 0.2));
-  }
-  &_flex {
-    position: relative;
-  }
-  &_type {
-    &-default {
-      flex-direction: column;
-    }
-    &-reverse {
-      flex-direction: column-reverse;
-    }
-  }
+  display: flex;
+  flex-direction: column;
+  border-radius: rem(12);
+  overflow: hidden;
+
   &_thumbnail {
-    width: 100%;
-    height: 100%;
+    @include reset-button();
     position: relative;
-    transition: all $transition linear;
-    max-height: rem(221);
-    img {
-      max-height: rem(221);
-    }
+    width: 100%;
+    padding: 0;
+    background-color: transparent;
+
     &:hover {
-      transform: scale(1.2);
-    }
-  }
-
-  &_video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    &_btnVideo {
-      width: rem(40);
-      height: rem(40);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      outline: none;
-      border: none;
-      background: $white;
-    }
-  }
-  &_content {
-    position: relative;
-    background: $white;
-    z-index: 2;
-    padding: rem(12) rem(24) rem(28);
-    display: flex;
-    gap: rem(12);
-  }
-
-  &_breadcrum {
-    display: flex;
-    align-items: center;
-    gap: rem(16);
-    &_time {
-      position: relative;
-      &::before {
-        content: '';
-        position: absolute;
-        right: rem(-8);
-        top: 50%;
-        width: rem(2);
-        height: rem(2);
-        border-radius: 50%;
-        background: $davy-grey;
+      #{$root}_player {
+        height: rem(48);
+        width: rem(48);
+        .a-icon {
+          width: rem(16);
+          height: rem(18);
+        }
       }
+    }
+  }
+
+  &_player {
+    width: rem(40);
+    height: rem(40);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: $white;
+    border-radius: 50%;
+    transition: all $transition linear;
+    @include adjust-flex();
+    .a-icon {
+      transition: all $transition linear;
+      margin-left: rem(3);
+    }
+  }
+
+  &_content {
+    background-color: $white;
+    padding: rem(12) rem(16) rem(28);
+    display: flex;
+    flex-direction: column;
+    #{$root}-reverse & {
+      flex-direction: column-reverse;
     }
   }
 }

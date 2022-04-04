@@ -15,27 +15,26 @@ const dataVideos = {
   location: 'The Kingdom', // all
   title: 'OCEAN RESIDENCE - MẢNH GHÉP ĐẶC SẮC MỚI TẠI NOVAWORLD PHAN THIET', // videos
   dateTime: '2 giờ trước', // videos
-  path: {
-    href: '/',
-    target: 'self',
-  },
 
 };
 
 export const Default: Story = () => (
   <BrowserRouter>
-    <CardVideo
-      {...dataVideos}
-      type="default"
-    />
+    <div style={{ maxWidth: 391, background: 'gray', padding: 20 }}>
+      <CardVideo
+        {...dataVideos}
+      />
+    </div>
   </BrowserRouter>
 );
 
 export const Reverse: Story = () => (
   <BrowserRouter>
-    <CardVideo
-      {...dataVideos}
-      type="reverse"
-    />
+    <div style={{ maxWidth: 391, background: 'gray', padding: 20 }}>
+      <CardVideo
+        {...dataVideos}
+        isReverse
+      />
+    </div>
   </BrowserRouter>
 );

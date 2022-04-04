@@ -9,6 +9,11 @@
     width: rem(11);
   }
 
+  &-12x14 {
+    height: rem(14);
+    width: rem(12);
+  }
+
   &-14 {
     height: rem(14);
     width: rem(14);
@@ -94,5 +99,9 @@
 
   &-playVideo {
     background-image: url('~assets/icons/ic_play_video.svg');
+  }
+
+  &-dot {
+    background-image: url('~assets/icons/ic_dot.svg');
   }
 }
