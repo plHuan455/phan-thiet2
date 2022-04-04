@@ -1,0 +1,29 @@
+.m-subDivisionCard {
+  filter: drop-shadow(0 rem(4) rem(16) rgba($black, 0.1));
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &_image {
+    border-radius: rem(12);
+    overflow: hidden;
+  }
+
+  &_content {
+    width: 100%;
+    background-color: $white;
+    border-radius: rem(12);
+    margin: rem(-39) auto 0;
+    max-width: rem(314);
+    padding: rem(16) rem(30);
+    position: relative;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &_desc {
+    @include text-overflow(2);
+  }
+}
