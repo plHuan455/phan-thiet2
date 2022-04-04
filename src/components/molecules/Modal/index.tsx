@@ -6,29 +6,27 @@ import mapModifiers from 'utils/functions';
 
 interface Props {
   isOpen: boolean;
-  isShowCloseButton?: boolean;
-  iconName?: IconName;
-  sizeIconClose?: IconSize;
-  isShowDivider?: boolean;
-  modifiers?: 'default' | 'video' | 'formRecruitment' | 'notify'; // add more modifiers
+  icon?: {
+    name: IconName;
+    size?: IconSize;
+  };
+  // modifiers?: 'default'; // add more modifiers
   handleClose?: () => void;
 }
 
 const CustomModal: React.FC<Props> = ({
   isOpen,
   children,
-  iconName,
-  isShowCloseButton,
-  sizeIconClose,
-  isShowDivider,
-  modifiers,
+  icon,
+  // modifiers,
   handleClose,
 }) => (
   <Modal
     isOpen={isOpen}
     onRequestClose={handleClose}
     closeTimeoutMS={250}
-    className={`${mapModifiers('o-modal', modifiers)}`}
+    // className={`${mapModifiers('o-modal', modifiers)}`}
+    className={`${mapModifiers('o-modal')}`}
     appElement={document.getElementById('root') as HTMLElement}
     ariaHideApp={false}
     portalClassName={mapModifiers('o-modal_portal', isOpen && 'open')}
@@ -37,11 +35,10 @@ const CustomModal: React.FC<Props> = ({
   >
     <div className="o-modal_main">
       <div className="o-modal_wrapper">
-        {isShowDivider && (<div className="o-modal_divider" />)}
-        {isShowCloseButton && (
-        <button type="button" className="o-modal_close" onClick={handleClose}>
-          <Icon iconName={iconName || 'closeOrange'} size={sizeIconClose} />
-        </button>
+        {icon && (
+          <button type="button" className="o-modal_close" onClick={handleClose}>
+            <Icon iconName={icon.name || 'closeOrange'} size={icon.size} />
+          </button>
         )}
         <div className="o-modal_body">{children}</div>
       </div>
@@ -51,11 +48,11 @@ const CustomModal: React.FC<Props> = ({
 
 CustomModal.defaultProps = {
   handleClose: undefined,
-  isShowCloseButton: true,
-  modifiers: undefined,
-  iconName: 'closeOrange',
-  sizeIconClose: '24',
-  isShowDivider: false,
+  // modifiers: undefined,
+  icon: {
+    name: 'closeOrange',
+    size: '24',
+  },
 };
 
 export default CustomModal;

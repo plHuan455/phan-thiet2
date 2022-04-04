@@ -30,10 +30,12 @@ export const Normal: Story = ({ iconClose }) => {
       </button>
       <Modal
         isOpen={isOpen}
-        iconName={iconClose}
-        modifiers="default"
+        icon={{
+          name: iconClose,
+          size: '24',
+        }}
+        // modifiers="default"
         handleClose={() => setIsOpen(false)}
-        isShowDivider
       >
         <div style={{
           color: '#000',
