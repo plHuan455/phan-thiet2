@@ -55,4 +55,4 @@ const CardPlayer: React.FC<CardPlayerProps> = ({
 
 CardPlayer.defaultProps = {};
 
-export default CardPlayer;
+export default React.memo(CardPlayer);

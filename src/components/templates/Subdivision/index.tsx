@@ -3,11 +3,12 @@ import { Col, Row } from 'react-bootstrap';
 
 import Container from 'common/Container';
 import Button from 'components/atoms/Button';
-import Heading from 'components/atoms/Heading';
-import SubDivisionCard, { SubDivisionCardProps } from 'components/molecules/SubDivisionCard';
+import Title from 'components/molecules/Title';
+import Card from 'components/organisms/Card';
+import { CardDivisionProps } from 'components/organisms/Card/Division';
 
 interface SubdivisionProps {
-  list?: SubDivisionCardProps[];
+  list?: CardDivisionProps[];
   title?: string;
   btn?: LinkTypes;
 }
@@ -18,7 +19,11 @@ const Subdivision: React.FC<SubdivisionProps> = ({
   btn,
 }) => (
   <div className="t-subdivision">
-    <Heading type="h4" content={title} modifiers={['700', 's015', 'center', 'gradientGreen', 'uppercase']} />
+    <Title
+      content={title}
+      type="h4"
+      modifiers={['700', 's015', 'center', 'gradientGreen', 'uppercase']}
+    />
     <Container>
       <Row className="u-mt-8">
         {list?.map((card, index) => (
@@ -28,7 +33,7 @@ const Subdivision: React.FC<SubdivisionProps> = ({
             md={6}
             lg={4}
           >
-            <SubDivisionCard
+            <Card.Division
               {...card}
             />
           </Col>
