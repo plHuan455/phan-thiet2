@@ -2,7 +2,7 @@ import React from 'react';
 
 import MarkerCard, { MarkerCardProps } from './component';
 
-import imgMap from 'assets/images/image_map.png';
+import imgMap from 'assets/images/projectPosition/image_map.png';
 
 export interface DivisionTypes extends MarkerCardProps{
   x: number;

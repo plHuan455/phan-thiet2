@@ -1,4 +1,4 @@
-import imageCard from 'assets/images/projectMap/imageCard.png';
+import imageCard from 'assets/images/projectPosition/image_card.png';
 
 export const listDivisionDummy = [
   {

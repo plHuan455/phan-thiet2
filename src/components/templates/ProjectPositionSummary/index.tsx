@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
-import bgLeft from 'assets/images/projectPositionSummary/bg_left.png';
-import bgRight from 'assets/images/projectPositionSummary/bg_right.png';
+import bgLeft from 'assets/images/projectPosition/summary/bg_left.png';
+import bgRight from 'assets/images/projectPosition/summary/bg_right.png';
 import Container from 'common/Container';
 import Image from 'components/atoms/Image';
 import PullDown, { OptionType } from 'components/molecules/PullDown';

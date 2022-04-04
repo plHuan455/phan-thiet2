@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import bgLeft from 'assets/images/projectPositionHome/bg_left.png';
-import bgRight from 'assets/images/projectPositionHome/bg_right.png';
+import bgLeft from 'assets/images/projectPosition/home/bg_left.png';
+import bgRight from 'assets/images/projectPosition/home/bg_right.png';
 import Container from 'common/Container';
 import Heading from 'components/atoms/Heading';
 import Image from 'components/atoms/Image';
