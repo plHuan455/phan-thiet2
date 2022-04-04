@@ -45,15 +45,18 @@ const ProjectPositionHome: React.FC<ProjectPositionHomeProps> = ({
           <div className="t-projectPositionHome_info">
             <div className="t-projectPositionHome_scale">
               <Text modifiers={['20x32', '400', 'copper', 'uppercase']} content={scale?.label} />
+              <div className="u-mt-8" />
               <Heading type="h1" modifiers={['700', 'gradientGreen', 'uppercase']} content={scale?.value} />
             </div>
             <div className="t-projectPositionHome_wrap">
               <div className="t-projectPositionHome_investment">
                 <Text modifiers={['20x32', '400', 'copper', 'uppercase']} content={investment?.label} />
+                <div className="u-mt-8" />
                 <Heading type="h2" modifiers={['700', 'gradientGreen', 'uppercase']} content={investment?.value} />
               </div>
               <div className="t-projectPositionHome_utility">
                 <Text modifiers={['20x32', '400', 'copper', 'uppercase']} content={utility?.label} />
+                <div className="u-mt-8" />
                 <Heading type="h2" modifiers={['700', 'gradientGreen', 'uppercase']} content={utility?.value} />
               </div>
             </div>

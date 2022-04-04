@@ -1,14 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
-import bgLeft from 'assets/images/projectPositionSummer/bg_left.png';
-import bgRight from 'assets/images/projectPositionSummer/bg_right.png';
+import bgLeft from 'assets/images/projectPositionSummary/bg_left.png';
+import bgRight from 'assets/images/projectPositionSummary/bg_right.png';
 import Container from 'common/Container';
 import Image from 'components/atoms/Image';
 import PullDown, { OptionType } from 'components/molecules/PullDown';
 import Title from 'components/molecules/Title';
 import LocationMap, { DivisionTypes } from 'components/organisms/LocationMap';
 
-interface ProjectPositionSummerProps {
+interface ProjectPositionSummaryProps {
   title?: string
   optionsDivision?: OptionType[];
   valueDivision?: OptionType;
@@ -17,7 +17,7 @@ interface ProjectPositionSummerProps {
   handleSelected?: (option?: OptionType) => void;
 }
 
-const ProjectPositionSummer: React.FC<ProjectPositionSummerProps> = ({
+const ProjectPositionSummary: React.FC<ProjectPositionSummaryProps> = ({
   title,
   optionsDivision,
   valueDivision,
@@ -42,20 +42,20 @@ const ProjectPositionSummer: React.FC<ProjectPositionSummerProps> = ({
   }, [valueDivision]);
 
   return (
-    <div className="t-projectPositionSummer">
+    <div className="t-projectPositionSummary">
       {/** TODO: Add animation later */}
-      <div className="t-projectPositionSummer_bgLeft">
+      <div className="t-projectPositionSummary_bgLeft">
         <Image src={bgLeft} ratio="1x1" size="contain" />
       </div>
       {/** TODO: Add animation later */}
-      <div className="t-projectPositionSummer_bgRight">
+      <div className="t-projectPositionSummary_bgRight">
         <Image src={bgRight} ratio="1x1" />
       </div>
       <Container>
-        <div className="t-projectPositionSummer_title">
+        <div className="t-projectPositionSummary_title">
           <Title type="h4" modifiers={['700', 'gradientGreen', 'center']} content={title} />
         </div>
-        <div className="t-projectPositionSummer_pulldown">
+        <div className="t-projectPositionSummary_pulldown">
           <PullDown
             variant="highLight"
             value={valueDivision}
@@ -64,7 +64,7 @@ const ProjectPositionSummer: React.FC<ProjectPositionSummerProps> = ({
             placeholder={placeholderPulldown}
           />
         </div>
-        <div className="t-projectPositionSummer_map">
+        <div className="t-projectPositionSummary_map">
           <LocationMap
             listDivision={listDivision}
             active={active}
@@ -77,7 +77,7 @@ const ProjectPositionSummer: React.FC<ProjectPositionSummerProps> = ({
   );
 };
 
-ProjectPositionSummer.defaultProps = {
+ProjectPositionSummary.defaultProps = {
   optionsDivision: [],
   valueDivision: undefined,
   handleSelected: undefined,
@@ -86,4 +86,4 @@ ProjectPositionSummer.defaultProps = {
   title: undefined,
 };
 
-export default ProjectPositionSummer;
+export default ProjectPositionSummary;
