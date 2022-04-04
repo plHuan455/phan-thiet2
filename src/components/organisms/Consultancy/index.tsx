@@ -21,7 +21,7 @@ export interface CheckboxTypes {
   value: string,
 }
 
-interface ConsultancyProps {
+export interface ConsultancyProps {
   title: string;
   consultancyInfo?: {
     placeholderName: string,
@@ -48,7 +48,7 @@ const Consultancy: React.FC<ConsultancyProps> = ({
   handleSubmit,
   method,
   loading,
-  variantButton,
+  variantButton = 'copper',
 }) => {
   const [listCheckbox, setListCheckbox] = useState<string[]>([]);
   const handleChangeProduct = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -181,9 +181,6 @@ const Consultancy: React.FC<ConsultancyProps> = ({
 };
 
 Consultancy.defaultProps = {
-  loading: false,
-  consultancyInfo: undefined,
-  variantButton: 'copper',
 };
 
 export default Consultancy;
