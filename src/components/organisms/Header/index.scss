@@ -26,6 +26,7 @@
 
     &_content {
       width: 100%;
+
       .a-heading {
         margin-bottom: rem(20);
       }
@@ -199,7 +200,7 @@
   .m-pulldown {
     &_header {
       background-color: transparent;
-      border: none;
+      border: 0;
 
       &_content {
         color: $white;

@@ -153,6 +153,15 @@
 }
 
 
+@keyframes download {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(1.4);
+  }
+}
 
 :root {
   --animate-duration: 1s;
@@ -232,6 +241,14 @@
     &:hover {
       .a-icon {
         animation: arrowSlide 0.75s ease infinite alternate;
+      }
+    }
+  }
+
+  &-download {
+    &:hover {
+      .a-icon {
+        animation: download 0.75s ease infinite alternate;
       }
     }
   }

@@ -1,51 +1,54 @@
-.m-cardVideo {
+.o-cardPlayer {
   $root: &;
+  border-radius: rem(12);
   display: flex;
   flex-direction: column;
-  border-radius: rem(12);
+  height: 100%;
   overflow: hidden;
 
   &_thumbnail {
     @include reset-button();
+    background-color: transparent;
+    padding: 0;
     position: relative;
     width: 100%;
-    padding: 0;
-    background-color: transparent;
 
     &:hover {
       #{$root}_player {
         height: rem(48);
         width: rem(48);
+
         .a-icon {
-          width: rem(16);
           height: rem(18);
+          width: rem(16);
         }
       }
     }
   }
 
   &_player {
-    width: rem(40);
-    height: rem(40);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     background-color: $white;
     border-radius: 50%;
+    height: rem(40);
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
     transition: all $transition linear;
+    width: rem(40);
     @include adjust-flex();
+
     .a-icon {
-      transition: all $transition linear;
       margin-left: rem(3);
+      transition: all $transition linear;
     }
   }
 
   &_content {
     background-color: $white;
-    padding: rem(12) rem(16) rem(28);
     display: flex;
     flex-direction: column;
+    padding: rem(12) rem(16) rem(28);
     #{$root}-reverse & {
       flex-direction: column-reverse;
     }
