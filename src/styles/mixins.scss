@@ -19,7 +19,8 @@
   $thumb-color: $gamboge-orange,
   $track-color: $antique-white,
   $border-radius-thumb: 5,
-  $border-thumb: 2
+  $border-thumb: 2,
+  $border-radius-track: 0
 ) {
   // For Google Chrome
   &::-webkit-scrollbar {
@@ -36,6 +37,7 @@
 
   &::-webkit-scrollbar-track {
     background: $track-color;
+    border-radius: rem($border-radius-track);
   }
 
   // For Internet Explorer

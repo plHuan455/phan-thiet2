@@ -1,0 +1,71 @@
+.m-addressItem {
+  cursor: pointer;
+  &_highlight {
+    color: $gamboge-orange;
+  }
+}
+
+.o-infoAddress {
+  &_heading {
+    background-color: $gamboge-orange;
+    padding: rem(16) rem(40);
+    @include tablet-down {
+      padding: rem(16);
+    }
+  }
+
+  &_content {
+    padding: rem(64) rem(32) rem(64) rem(40);
+    background-color: $antique-white;
+    @include tablet-down {
+      padding: rem(16);
+    }
+  }
+
+  &_item {
+    margin-top: rem(16);
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  &_list {
+    height: rem(338);
+    overflow: auto;
+    @include scroll-bars(8,$copper,$gainsboro,8,0,5);
+    @include tablet-down {
+      height: auto;
+      max-height: rem(250);
+    }
+  }
+}
+
+.o-googleMap {
+  position: relative;
+  height: 100%;
+  width: 100%;
+
+  @include tablet-down {
+    padding-bottom: 70%;
+  }
+
+  @include mobile-down {
+    padding-bottom: 100%;
+  }
+  
+  &_map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  &_marker {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    margin-top: rem(-20);
+    margin-left: rem(4);
+    cursor: pointer;
+  }
+}

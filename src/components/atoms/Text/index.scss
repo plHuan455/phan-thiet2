@@ -11,6 +11,10 @@
     @include font-base(11, 18);
   }
 
+  &-12x18 {
+    @include font-base(12, 18);
+  }
+
   &-12x20 {
     @include font-base(12, 20);
   }

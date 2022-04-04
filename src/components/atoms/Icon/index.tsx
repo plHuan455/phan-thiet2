@@ -18,6 +18,7 @@ export const iconList = {
   playVideo: 'playVideo',
   dot: 'dot',
   closeGreen: 'closeGreen',
+  marker: 'marker',
 };
 
 export type IconName = keyof typeof iconList;
