@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import bgLeft from 'assets/images/projectPositionSummer/bg_left.png';
 import bgRight from 'assets/images/projectPositionSummer/bg_right.png';
@@ -9,11 +9,12 @@ import Title from 'components/molecules/Title';
 import LocationMap, { DivisionTypes } from 'components/organisms/LocationMap';
 
 interface ProjectPositionSummerProps {
-  title: string
+  title?: string
   optionsDivision?: OptionType[];
   valueDivision?: OptionType;
-  listDivision: DivisionTypes[];
-  handleSelected?: (option: OptionType | undefined) => void;
+  listDivision?: DivisionTypes[];
+  placeholderPulldown?: string;
+  handleSelected?: (option?: OptionType) => void;
 }
 
 const ProjectPositionSummer: React.FC<ProjectPositionSummerProps> = ({
@@ -21,30 +22,34 @@ const ProjectPositionSummer: React.FC<ProjectPositionSummerProps> = ({
   optionsDivision,
   valueDivision,
   listDivision,
+  placeholderPulldown,
   handleSelected,
 }) => {
-  const [active, setActive] = useState<number | undefined>();
+  const [active, setActive] = useState<number>();
 
-  const handleLeave = () => {
+  const handleLeave = useCallback(() => {
     if (valueDivision) {
       setActive(Number(valueDivision.value));
     } else {
       setActive(undefined);
     }
-  };
+  }, [valueDivision]);
 
   useEffect(() => {
     if (valueDivision) {
       setActive(Number(valueDivision.value));
     }
   }, [valueDivision]);
+
   return (
     <div className="t-projectPositionSummer">
+      {/** TODO: Add animation later */}
       <div className="t-projectPositionSummer_bgLeft">
-        <Image src={bgLeft} ratio="269x314" />
+        <Image src={bgLeft} ratio="1x1" size="contain" />
       </div>
+      {/** TODO: Add animation later */}
       <div className="t-projectPositionSummer_bgRight">
-        <Image src={bgRight} ratio="269x314" />
+        <Image src={bgRight} ratio="1x1" />
       </div>
       <Container>
         <div className="t-projectPositionSummer_title">
@@ -56,8 +61,7 @@ const ProjectPositionSummer: React.FC<ProjectPositionSummerProps> = ({
             value={valueDivision}
             options={optionsDivision || []}
             handleSelect={handleSelected}
-          // TODO: Translation
-            placeholder="Chọn phân khu"
+            placeholder={placeholderPulldown}
           />
         </div>
         <div className="t-projectPositionSummer_map">
@@ -77,6 +81,9 @@ ProjectPositionSummer.defaultProps = {
   optionsDivision: [],
   valueDivision: undefined,
   handleSelected: undefined,
+  placeholderPulldown: undefined,
+  listDivision: undefined,
+  title: undefined,
 };
 
 export default ProjectPositionSummer;

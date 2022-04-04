@@ -36,7 +36,4 @@ const MarkerCard: React.FC<MarkerCardProps> = ({
   </div>
 );
 
-MarkerCard.defaultProps = {
-};
-
 export default MarkerCard;

@@ -64,9 +64,5 @@
   &-24x34 {
     @include aspect-ratio(24, 34);
   }
-
-  &-269x314 {
-    @include aspect-ratio(269, 314);
-  }
-
+  
 }

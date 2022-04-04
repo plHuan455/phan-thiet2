@@ -13,7 +13,7 @@ export default {
 } as Meta;
 
 export const Normal: Story = () => {
-  const [selected, setSelected] = useState<OptionType | undefined>();
+  const [selected, setSelected] = useState<OptionType>();
   return (
     <ProjectPositionSummer
       optionsDivision={optionDummy}
@@ -21,6 +21,7 @@ export const Normal: Story = () => {
       listDivision={listDivisionDummy}
       valueDivision={selected}
       handleSelected={(option) => setSelected(option)}
+      placeholderPulldown="Chọn phân khu"
     />
   );
 };

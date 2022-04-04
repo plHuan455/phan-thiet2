@@ -6,7 +6,6 @@ import Container from 'common/Container';
 import Heading from 'components/atoms/Heading';
 import Image from 'components/atoms/Image';
 import Text from 'components/atoms/Text';
-// import Title from 'components/molecules/Title';
 import LocationMap, { DivisionTypes } from 'components/organisms/LocationMap';
 
 interface InfoTypes {
@@ -15,7 +14,7 @@ interface InfoTypes {
 }
 
 interface ProjectPositionHomeProps {
-  listDivision: DivisionTypes[];
+  listDivision?: DivisionTypes[];
   scale?: InfoTypes;
   investment?: InfoTypes;
   utility?: InfoTypes;
@@ -24,14 +23,16 @@ interface ProjectPositionHomeProps {
 const ProjectPositionHome: React.FC<ProjectPositionHomeProps> = ({
   listDivision, scale, investment, utility,
 }) => {
-  const [active, setActive] = useState<number | undefined>();
+  const [active, setActive] = useState<number>();
   return (
     <div className="t-projectPositionHome">
+      {/** TODO: Add animation later */}
       <div className="t-projectPositionHome_bgLeft">
-        <Image src={bgLeft} ratio="269x314" />
+        <Image src={bgLeft} ratio="1x1" />
       </div>
+      {/** TODO: Add animation later */}
       <div className="t-projectPositionHome_bgRight">
-        <Image src={bgRight} ratio="269x314" />
+        <Image src={bgRight} ratio="1x1" />
       </div>
       <Container>
         <div className="t-projectPositionHome_map">
@@ -49,11 +50,11 @@ const ProjectPositionHome: React.FC<ProjectPositionHomeProps> = ({
             <div className="t-projectPositionHome_wrap">
               <div className="t-projectPositionHome_investment">
                 <Text modifiers={['20x32', '400', 'copper', 'uppercase']} content={investment?.label} />
-                <Heading type="h1" modifiers={['700', 'gradientGreen', 'uppercase']} content={investment?.value} />
+                <Heading type="h2" modifiers={['700', 'gradientGreen', 'uppercase']} content={investment?.value} />
               </div>
               <div className="t-projectPositionHome_utility">
                 <Text modifiers={['20x32', '400', 'copper', 'uppercase']} content={utility?.label} />
-                <Heading type="h1" modifiers={['700', 'gradientGreen', 'uppercase']} content={utility?.value} />
+                <Heading type="h2" modifiers={['700', 'gradientGreen', 'uppercase']} content={utility?.value} />
               </div>
             </div>
           </div>
@@ -67,6 +68,7 @@ ProjectPositionHome.defaultProps = {
   scale: undefined,
   investment: undefined,
   utility: undefined,
+  listDivision: undefined,
 };
 
 export default ProjectPositionHome;

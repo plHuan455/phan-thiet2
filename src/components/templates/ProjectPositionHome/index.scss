@@ -1,38 +1,48 @@
 .t-projectPositionHome {
-  background-color: $antique-white;
-  background-image: url('~assets/images/projectPositionHome/bg.png');
-  background-position: 100% 50%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  padding: rem(197) 0 rem(92);
+  background: $antique-white url('~assets/images/projectPositionHome/bg.png') no-repeat left bottom / 100% 60%;
+  padding: rem(197) 0 rem(138);
   position: relative;
+  @include tablet-down {
+    padding: rem(197) 0 rem(50);
+  }
+  @include mobile-down {
+    padding: rem(100) 0 rem(30);
+  }
 
   &_bgLeft {
-    max-width: rem(269);
+    max-width: rem(192);
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     width: 100%;
-
+    pointer-events: none;
+    @include break-max (1366px) {
+      max-width: 14%;
+    }
     @include mobile-down {
       max-width: rem(100);
+    }
+    .a-image {
+      padding-bottom: calc(317 / 192 * 100%);
     }
   }
 
   &_bgRight {
-    max-width: rem(269);
+    max-width: rem(209);
     position: absolute;
     right: 0;
     top: 0;
     width: 100%;
-
+    pointer-events: none;
+    @include break-max(1366px){
+      max-width: 15.3%;
+    }
     @include mobile-down {
       max-width: rem(100);
     }
-  }
-
-  @include mobile-down {
-    padding: rem(30) 0;
+    .a-image {
+      padding-bottom: calc(348 / 209 * 100%);
+    }
   }
 
   &_map {
@@ -46,11 +56,6 @@
     position: absolute;
     z-index: 1;
 
-    @include desktop-down {
-      .a-heading {
-        @include font-base(48, 64); }
-    }
-
     @include tablet-down {
       position: relative;
     }
@@ -59,24 +64,18 @@
   &_wrap {
     display: flex;
     margin-top: rem(35);
-    @include tablet-down {
-      flex-direction: column;
-    }
 
-    @include tablet-down {
+    @include mobile-down {
+      flex-direction: column;
       margin-top: rem(10);
     }
   }
 
   &_utility {
     margin-left: rem(17);
-
-    @include tablet-down {
-      margin-left: 0;
-      margin-top: rem(35);
-    }
-
+    
     @include mobile-down {
+      margin-left: 0;
       margin-top: rem(10);
     }
   }

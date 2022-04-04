@@ -5,8 +5,7 @@ type Ratio =
   | '354x221'
   | '184x59'
   | '367x204'
-  | '24x34'
-  | '269x314';
+  | '24x34';
 
 type FontWeightStyle =
   | '100'
