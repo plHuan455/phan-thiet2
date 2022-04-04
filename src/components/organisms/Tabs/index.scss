@@ -1,0 +1,20 @@
+.o-tabs {
+  &_labels {
+    position: relative;
+
+    @include adjust-flex();
+    @include scroll-bars(4);
+
+    @include small-mobile {
+      @include adjust-flex(flex-start, center);
+    }
+  }
+
+  &_panel {
+    display: none;
+
+    &-active {
+      display: block;
+    }
+  }
+}
