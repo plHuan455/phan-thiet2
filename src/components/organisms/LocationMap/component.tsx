@@ -1,6 +1,6 @@
 import React from 'react';
 
-import marker from 'assets/images/projectMap/marker.png';
+import marker from 'assets/images/projectPosition/marker.png';
 import Image from 'components/atoms/Image';
 import Text from 'components/atoms/Text';
 import mapModifiers from 'utils/functions';

@@ -1,0 +1,14 @@
+.o-tabs {
+  &_labels {
+    position: relative;
+    @include scroll-bars(4);
+  }
+
+  &_panel {
+    display: none;
+
+    &-active {
+      display: block;
+    }
+  }
+}
