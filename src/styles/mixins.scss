@@ -1,4 +1,4 @@
-@mixin text-overflow ($number: 2) {
+@mixin text-overflow($number: 2) {
   -webkit-box-orient: vertical;
   display: -webkit-box;
   -webkit-line-clamp: ($number);
@@ -39,7 +39,7 @@
   }
 
   // For Internet Explorer
-  
+
   scrollbar-face-color: $thumb-color;
   scrollbar-track-color: $track-color;
 }
@@ -156,13 +156,14 @@ $colors-design: (
   'yaleBlue': $yale-blue,
   'gambogeOrange': $gamboge-orange,
   'deer': $deer,
+  'deepLemon': $deep-lemon,
 );
 
 
 
 $colors-gradient-design: (
   'gradientGreen': $gradient-green,
-  'gradientBlue' : $gradient-blue,
+  'gradientBlue': $gradient-blue,
   'gradientBittersweet': $gradient-bittersweet,
 );
 

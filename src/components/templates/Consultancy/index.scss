@@ -1,0 +1,31 @@
+.t-consultancy {
+  $root: &;
+
+  &-md {
+    padding-bottom: rem(64);
+    padding-top: rem(64);
+    @include tablet-down {
+      padding-bottom: rem(32);
+      padding-top: rem(32);
+    }
+  }
+
+  &-lg {
+    padding-bottom: rem(80);
+    padding-top: rem(80);
+    @include tablet-down {
+      padding-bottom: rem(48);
+      padding-top: rem(48);
+    }
+  }
+
+  &_title {
+    text-align: center;
+    @include desktop-up {
+      align-items: center;
+      display: flex;
+      height: 100%;
+      text-align: left;
+    }
+  }
+}

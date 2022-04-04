@@ -1,6 +1,8 @@
 .o-consultancy {
+  background: $white;
   border-radius: rem(16);
   box-shadow: 0 4px 36px rgba($black, 0.1);
+  overflow: hidden;
   padding: rem(48);
 
   @include mobile-down {
@@ -12,7 +14,7 @@
   }
 
   &_formGroup {
-    @include adjust-flex(space-between,center);
+    @include adjust-flex(space-between, center);
     margin: 0 rem(-16);
 
     @include mobile-down {
@@ -34,9 +36,10 @@
       align-items: center;
       display: flex;
       flex-wrap: wrap;
-      margin: rem(16) rem(-8) 0;
+      margin: 0 rem(-8);
 
       &-item {
+        margin-top: rem(16);
         padding: 0 rem(8);
       }
     }

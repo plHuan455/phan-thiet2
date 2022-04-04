@@ -2,7 +2,7 @@ import React from 'react';
 
 import mapModifiers from 'utils/functions';
 
-type Size = 'lg';
+type Size = 'lg' | '32x48' | '48x64';
 
 export type TextStyle = (GeneralTextStyle | Size)[];
 
