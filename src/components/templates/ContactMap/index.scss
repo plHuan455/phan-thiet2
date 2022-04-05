@@ -1,5 +1,6 @@
 .m-addressItem {
   cursor: pointer;
+
   &_highlight {
     color: $gamboge-orange;
   }
@@ -15,8 +16,8 @@
   }
 
   &_content {
-    padding: rem(64) rem(32) rem(64) rem(40);
     background-color: $antique-white;
+    padding: rem(64) rem(32) rem(64) rem(40);
     @include tablet-down {
       padding: rem(16);
     }
@@ -24,6 +25,7 @@
 
   &_item {
     margin-top: rem(16);
+
     &:first-child {
       margin-top: 0;
     }
@@ -41,8 +43,8 @@
 }
 
 .o-googleMap {
-  position: relative;
   height: 100%;
+  position: relative;
   width: 100%;
 
   @include tablet-down {
@@ -54,18 +56,18 @@
   }
   
   &_map {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
     bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
   }
 
   &_marker {
+    cursor: pointer;
+    margin-left: rem(4);
+    margin-top: rem(-20);
     position: absolute;
     transform: translate(-50%, -50%);
-    margin-top: rem(-20);
-    margin-left: rem(4);
-    cursor: pointer;
   }
 }

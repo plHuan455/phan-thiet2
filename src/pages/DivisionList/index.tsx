@@ -3,9 +3,9 @@ import React from 'react';
 import Screen from './container';
 
 const DivisionList: React.FC = () => (
-  <main className="p-divisionList">
+  <div className="p-divisionList">
     <Screen />
-  </main>
+  </div>
 );
 
 export default DivisionList;

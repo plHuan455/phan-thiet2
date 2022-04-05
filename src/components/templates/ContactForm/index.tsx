@@ -41,7 +41,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
   loading,
   handleSubmit,
 }) => (
-  <div className="t-contactForm">
+  <div className="t-contactForm u-pt-md-80 u-pb-md-78 u-pt-48 u-pb-48">
     <Container>
       <Heading type="h4" modifiers={['700', 's015', 'gradientGreen', 'center']} content={titleForm} />
       <div className="t-contactForm_description">
@@ -49,8 +49,8 @@ const ContactForm: React.FC<ContactFormProps> = ({
       </div>
       <FormProvider {...method}>
         <form className="o-consultancy_form" onSubmit={method.handleSubmit(handleSubmit)} noValidate>
-          <Row className="u-mt-md-16">
-            <Col md={12} className="u-mt-16">
+          <Row className="u-mt-md-16 u-ml-negative-16 u-mr-negative-16">
+            <Col md={12} className="u-mt-16 u-pl-16 u-pr-16">
               <Controller
                 name="name"
                 render={({ field, fieldState: { error } }) => (
@@ -62,7 +62,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
                 )}
               />
             </Col>
-            <Col md={12} className="u-mt-16">
+            <Col md={12} className="u-mt-16 u-pl-16 u-pr-16">
               <Controller
                 name="address"
                 render={({ field, fieldState: { error } }) => (
@@ -74,7 +74,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
                 )}
               />
             </Col>
-            <Col md={6} className="u-mt-16">
+            <Col md={6} className="u-mt-16 u-pl-16 u-pr-16">
               <Controller
                 name="phone"
                 render={({ field, fieldState: { error } }) => (
@@ -86,7 +86,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
                 )}
               />
             </Col>
-            <Col md={6} className="u-mt-16">
+            <Col md={6} className="u-mt-16 u-pl-16 u-pr-16">
               <Controller
                 name="email"
                 render={({ field, fieldState: { error } }) => (
@@ -98,7 +98,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
                 )}
               />
             </Col>
-            <Col md={12} className="u-mt-16">
+            <Col md={12} className="u-mt-16 u-pl-16 u-pr-16">
               <Controller
                 name="content"
                 render={({ field, fieldState: { error } }) => (
