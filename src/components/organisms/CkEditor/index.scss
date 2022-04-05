@@ -1,9 +1,9 @@
 .o-ckeditor {
+  $root: &;
   background-color: $isabelline;
 
-  &_content {
+  &_wrapper {
     padding: rem(87) rem(120);
-
     @include desktop-down {
       padding: rem(40) rem(60);
     }
@@ -14,6 +14,21 @@
 
     @include mobile-down {
       padding: rem(25) rem(20);
+    }
+  }
+
+  &_content {
+    margin-bottom: rem(40);
+    @include tablet-down {
+      margin-bottom: rem(20);
+    }
+
+    @include mobile-down {
+      margin-bottom: rem(10);
+    }
+
+    &:last-child {
+      margin-bottom: 0;
     }
   }
 

@@ -14,12 +14,14 @@ const CkEditor: React.FC<CkEditorProps> = ({
 }) => (
   <div className="o-ckeditor">
     <Container>
-      <div className="o-ckeditor_content">
-        <div className="o-ckeditor_title">
-          <Text modifiers={['20x32', 'gradientGreen', '700']} content={title} />
-        </div>
-        <div className="o-ckeditor_description">
-          <Text type="span" modifiers={['20x32', 'davyGrey', '400']} content={description} />
+      <div className="o-ckeditor_wrapper">
+        <div className="o-ckeditor_content">
+          <div className="o-ckeditor_title">
+            <Text modifiers={['20x32', 'gradientGreen', '700']} content={title} />
+          </div>
+          <div className="o-ckeditor_description">
+            <Text type="span" modifiers={['20x32', 'davyGrey', '400']} content={description} />
+          </div>
         </div>
       </div>
     </Container>
