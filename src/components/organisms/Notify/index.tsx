@@ -22,7 +22,10 @@ const Notify: React.FC<NotifyProps> = ({
   <Modal
     isOpen={!!isOpen}
     modifiers="notify"
-    icon={undefined}
+    icon={{
+      name: 'closeGreen',
+      size: '24',
+    }}
     handleClose={onClose}
   >
     <div className="o-notify">
