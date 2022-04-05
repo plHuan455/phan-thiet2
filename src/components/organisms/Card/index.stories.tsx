@@ -4,6 +4,8 @@ import { BrowserRouter } from 'react-router-dom';
 
 import Card from '.';
 
+import Container from 'common/Container';
+
 export default {
   title: 'Components/organisms/Card',
   // component: Card,
@@ -68,7 +70,7 @@ export const document: Story = () => (
   </BrowserRouter>
 );
 
-export const news: Story = () => (
+export const normal: Story = () => (
   <BrowserRouter>
     <div style={{ maxWidth: 394, background: 'gray', padding: 20 }}>
       <Card.Normal
@@ -123,6 +125,26 @@ export const layer: Story = () => (
         modifiers={['filter', 'hover', 'r15']}
         description="Sân golf 89ha kề biển theo chuẩn PGA quốc tế tạo nên môi trường sống xanh trong lành, cho cả gia đình cùng trải nghiệm golf thư giãn ngay trước thềm nhà."
       />
+    </div>
+  </BrowserRouter>
+);
+
+export const news: Story = () => (
+  <BrowserRouter>
+    <div style={{ background: '#999', padding: '20px 0' }}>
+      <Container>
+        <Card.News
+          thumbnail="https://source.unsplash.com/random"
+          dateTime="1 phút trước"
+          tag="The Kingdom"
+          button={{
+            text: 'Xem thêm',
+            url: '/',
+          }}
+          title="Nova World phan thiết và chuỗi cung cấp tiện ích chăm sóc sức khỏe"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consequat egestas eu egestas sed viverra urna. Purus accumsan feugiat feugiat nisl pulvinar faucibus eu. "
+        />
+      </Container>
     </div>
   </BrowserRouter>
 );
