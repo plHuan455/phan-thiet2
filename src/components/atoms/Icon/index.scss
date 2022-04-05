@@ -9,11 +9,6 @@
     width: rem(11);
   }
 
-  &-12x14 {
-    height: rem(14);
-    width: rem(12);
-  }
-
   &-14 {
     height: rem(14);
     width: rem(14);
@@ -47,6 +42,26 @@
   &-36 {
     height: rem(36);
     width: rem(36);
+  }
+
+  &-40 {
+    height: rem(40);
+    width: rem(40);
+  }
+
+  &-80 {
+    height: rem(80);
+    width: rem(80);
+
+    @include desktop-down {
+      height: rem(60);
+      width: rem(60);
+    }
+
+    @include mobile-down {
+      height: rem(32);
+      width: rem(32);
+    }
   }
 
   &-searchWhite {
@@ -97,10 +112,6 @@
     background-image: url('~assets/icons/ic_download_orange.svg');
   }
 
-  &-playVideo {
-    background-image: url('~assets/icons/ic_play_video.svg');
-  }
-
   &-dot {
     background-image: url('~assets/icons/ic_dot.svg');
   }
@@ -111,5 +122,29 @@
 
   &-markerGgMap {
     background-image: url('~assets/icons/ic_marker_gg_map.svg');
+  }
+
+  &-playerBlue {
+    background-image: url('~assets/icons/ic_player_blue.svg');
+  }
+
+  &-playerCamel {
+    background-image: url('~assets/icons/ic_player_camel.svg');
+  }
+
+  &-playerLemon {
+    background-image: url('~assets/icons/ic_player_lemon.svg');
+  }
+
+  &-playerOcean {
+    background-image: url('~assets/icons/ic_player_ocean.svg');
+  }
+
+  &-playerPersian {
+    background-image: url('~assets/icons/ic_player_persian.svg');
+  }
+
+  &-playerSeaweed {
+    background-image: url('~assets/icons/ic_player_seaweed.svg');
   }
 }
