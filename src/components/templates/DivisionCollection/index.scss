@@ -1,0 +1,125 @@
+.t-divisionCollection {
+  &_content {
+    .slick-list {
+      margin: 0 rem(-16);
+    }
+    .o-carousel_item {
+      padding: 0 rem(16);
+    }
+    @include desktop-down {
+      .o-carousel_arrow_next {
+        right: rem(-40);
+      }
+      .o-carousel_arrow_prev {
+        left: rem(-40);
+      }
+    }
+    .slick-dots {
+      bottom: rem(-30);
+    }
+  }
+}
+
+.m-collection {
+  $root: &;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  max-width: rem(258);
+  margin: 0 auto;
+  height: rem(380);
+  @include small-mobile {
+    height: inherit;
+  }
+  &:hover {
+    #{$root}_link_text {
+      opacity: 1;
+      transform: scale(1);
+    }
+    #{$root}_link_btn {
+      opacity: 0;
+      transform: scale(0);
+    }
+  }
+  &_title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+  &_image {
+    position: relative;
+    img {
+      width: 100%;
+      object-fit: contain;
+      outline: none;
+      box-shadow: none;
+      border: none;
+    }
+  }
+  &_shadow {
+    position: relative;
+    width: 100%;
+    max-width: rem(135);
+    margin: 0 auto;
+    height: rem(55);
+    &::after {
+      content: '';
+      width: 100%;
+      height: rem(7);
+      position: absolute;
+      background: #595959;
+      filter: blur(20px);
+      transform: matrix(1, 0, 0, -1, 0, 0);
+      opacity: 1;
+      bottom: rem(12);
+    }
+  }
+
+  &_link {
+    &_btn {
+      position: absolute;
+      bottom: 0;
+      right: 15%;
+      width: rem(40);
+      height: rem(40);
+      background: $white;
+      outline: none;
+      border: none;
+      border-radius: 50%;
+      opacity: 1;
+      transition: all $transition linear;
+      @include adjust-flex();
+    }
+    &_text {
+      position: absolute;
+      bottom: -3%;
+      right: 5%;
+      width: rem(82);
+      height: rem(82);
+      border-radius: 50%;
+      transition: all $transition linear;
+      transform: scale(0);
+      display: none;
+      @include adjust-flex();
+      @include mobile-down {
+        width: rem(62);
+        height: rem(62);
+        right: 8%;
+      }
+      &-yaleBlue {
+        background: $yale-blue;
+      }
+      &-deepLemon {
+        background: $deep-lemon;
+      }
+      &-camel {
+        background: $camel;
+      }
+      &-cyan {
+        background: $cyan;
+      }
+    }
+  }
+}
