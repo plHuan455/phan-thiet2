@@ -7,12 +7,12 @@ import {
 
 import Container from 'common/Container';
 
-interface MapContactProps extends GoogleMapProps {
+interface ContactMapProps extends GoogleMapProps {
   title?: string;
   defaultPosition?: PositionMarker;
 }
 
-const MapContact: React.FC<MapContactProps> = ({
+const ContactMap: React.FC<ContactMapProps> = ({
   list,
   title,
   defaultPosition,
@@ -21,17 +21,17 @@ const MapContact: React.FC<MapContactProps> = ({
   const [zoomPosition, setZoomPosition] = useState<PositionMarker>();
 
   return (
-    <div className="t-mapContact">
+    <div className="t-contactMap u-pt-md-80 u-pb-md-80 u-pt-48 u-pb-48">
       <Container>
-        <Row>
-          <Col lg={6} className="t-mapContact_left">
+        <Row className="u-ml-negative-16 u-mr-negative-16">
+          <Col lg={6} className="t-contactMap_left u-pl-16 u-pr-16">
             <InfoAddress
               title={title}
               list={list}
               onClick={(position) => setZoomPosition(position)}
             />
           </Col>
-          <Col lg={6} className="t-mapContact_right">
+          <Col lg={6} className="t-contactMap_right u-pl-16 u-pr-16">
             {defaultPosition && (
             <GoogleMap
               list={list}
@@ -47,9 +47,9 @@ const MapContact: React.FC<MapContactProps> = ({
   );
 };
 
-MapContact.defaultProps = {
+ContactMap.defaultProps = {
   title: undefined,
   defaultPosition: undefined,
 };
 
-export default MapContact;
+export default ContactMap;

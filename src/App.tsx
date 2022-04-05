@@ -10,6 +10,7 @@ import {
 } from 'react-router-dom';
 
 import Layout from 'common/Layout';
+import Contact from 'pages/Contact';
 import DivisionList from 'pages/DivisionList';
 import Error from 'pages/Error';
 import { store } from 'store';
@@ -29,6 +30,7 @@ const App: React.FC = () => (
         <Route path="">
           <Route path="cac-phan-khu" element={<DivisionList />} />
           <Route path="404" element={<Error />} />
+          <Route path="lien-he" element={<Contact />} />
         </Route>
       </Route>
     </Routes>

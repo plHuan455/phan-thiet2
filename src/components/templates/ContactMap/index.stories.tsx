@@ -1,20 +1,20 @@
 import { Story, Meta } from '@storybook/react';
 import React from 'react';
 
-import MapContact from '.';
+import ContactMap from '.';
 
 import dummyContact from 'assets/dataDummy/contact';
 
 export default {
-  title: 'Components/templates/MapContact',
-  component: MapContact,
+  title: 'Components/templates/ContactMap',
+  component: ContactMap,
   argTypes: {},
 } as Meta;
 
 export const normal: Story = () => {
   const defaultPosition = dummyContact.list[0].position;
   return (
-    <MapContact
+    <ContactMap
       defaultPosition={defaultPosition}
       {...dummyContact}
     />

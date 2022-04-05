@@ -23,7 +23,7 @@
     }
     #{$root}-layer & {
       &::before {
-        background: linear-gradient(0deg, rgba($black, 0.3), rgba($black, 0.3));
+        background: linear-gradient(0deg, rgba($black, 0.6), rgba($black, 0.6));
         content: '';
         height: 100%;
         left: 0;

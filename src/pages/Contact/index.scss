@@ -1,0 +1,41 @@
+.p-contact {
+  background-color: $isabelline;
+
+  .s-contact_layer {
+    position: relative;
+    
+    &_ballon {
+      left: 0;
+      max-width: rem(213);
+      position: absolute;
+      top: rem(-60);
+      width: 100%;
+
+      .a-image {
+        padding-bottom: (153 / 213) * 100%;
+      }
+
+      @include mobile-down {
+        max-width: rem(120);
+        top: rem(-40);
+      }
+    }
+
+    &_leaf {
+      bottom: rem(-216);
+      max-width: rem(237);
+      position: absolute;
+      right: 0;
+      width: 100%;
+
+      .a-image {
+        padding-bottom: (414 / 238) * 100%;
+      }
+
+      @include mobile-down {
+        bottom: rem(-144);
+        max-width: rem(168);
+      }
+    }
+  }
+}
