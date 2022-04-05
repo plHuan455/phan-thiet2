@@ -1,6 +1,8 @@
 .t-error {
   $root: &;
   position: relative;
+  background: $isabelline url('~assets/images/error/BG.png') no-repeat bottom / contain;
+  
  
   &_layerLeft {
     position: absolute;
