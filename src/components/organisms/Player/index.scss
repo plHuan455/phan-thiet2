@@ -1,0 +1,51 @@
+
+
+.o-player {
+  $root: &;
+  padding-bottom: (526 / 934) * 100%;
+  position: relative;
+
+  video {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  &-r10 {
+    border-radius: rem(10);
+    overflow: hidden;
+  }
+
+  &-shadow {
+    box-shadow: 0 rem(4) rem(36) rgba($black, 0.25);
+  }
+
+  &_execute {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    transition: all $transition linear;
+    opacity: 1;
+    visibility: visible;
+    @include adjust-flex();
+    .a-icon {
+      transition: all $transition linear;
+    }
+
+    &:hover {
+      .a-icon {
+        transform: scale(1.25);
+      }
+    }
+  }
+
+  &-playing {
+    #{$root}_execute {
+      visibility: hidden;
+      opacity: 0;
+    }
+  }
+}

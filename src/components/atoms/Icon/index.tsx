@@ -15,15 +15,20 @@ export const iconList = {
   clock: 'clock',
   location: 'location',
   downloadOrange: 'downloadOrange',
-  playVideo: 'playVideo',
   dot: 'dot',
   closeGreen: 'closeGreen',
   markerGgMap: 'markerGgMap',
+  playerBlue: 'playerBlue',
+  playerCamel: 'playerCamel',
+  playerLemon: 'playerLemon',
+  playerOcean: 'playerOcean',
+  playerPersian: 'playerPersian',
+  playerSeaweed: 'playerSeaweed',
 };
 
 export type IconName = keyof typeof iconList;
 
-export type IconSize = '11' | '12x14' | '14' | '16' | '18' | '20' | '24' | '36';
+export type IconSize = '11' | '14' | '16' | '18' | '20' | '24' | '36' | '40' | '80';
 
 interface IconProps {
   iconName: IconName;
