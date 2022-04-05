@@ -55,10 +55,12 @@ const Error: React.FC<ErrorProps> = ({
 
   return (
     <div className="t-error">
+      {/* TODO: Add animation later */}
       <div className="t-error_layerLeft">
         <Image src={ballonLeft} alt="ballon_left" />
       </div>
       <div className="t-error_layerRight">
+        {/* TODO: Add animation later */}
         <Image src={ballonRight} alt="ballon_right" />
       </div>
       <Container>
@@ -73,7 +75,11 @@ const Error: React.FC<ErrorProps> = ({
             </div>
             <div className="t-error_group d-flex align-items-center justify-content-center u-mt-40">
               <div className="t-error_back">
-                <Button size="md" variant="primary-green" href={back?.url} target={back?.target}>{back?.text}</Button>
+                <Button size="md" variant="primary-green" href={back?.url} target={back?.target}>
+                  <span>
+                    {back?.text}
+                  </span>
+                </Button>
               </div>
               <div className="t-error_contact u-ml-12">
                 <Button size="md" variant="outline-green" href={contact?.url} target={contact?.target}>{contact?.text}</Button>
