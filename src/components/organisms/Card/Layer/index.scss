@@ -1,6 +1,5 @@
 .o-cardLayer {
   $root: &;
-  border-radius: rem(12);
   cursor: pointer;
   overflow: hidden;
   position: relative;
@@ -18,8 +17,12 @@
     }
   }
 
-  &-15 {
+  &-r15 {
     border-radius: rem(15);
+  }
+
+  &-r12 {
+    border-radius: rem(12);
   }
 
   &-filter {

@@ -5,7 +5,7 @@ import Link from 'components/atoms/Link';
 import Text from 'components/atoms/Text';
 import mapModifiers from 'utils/functions';
 
-type Radius = '15';
+// type Radius = '15';
 
 export interface CardLayerProps {
   thumbnail: string;
@@ -15,9 +15,10 @@ export interface CardLayerProps {
   target?: string;
   ratio?: Ratio;
   isBold?: boolean;
-  isHover?: boolean;
-  isFilter?: boolean;
-  radius?: Radius;
+  // isHover?: boolean;
+  // isFilter?: boolean;
+  // radius?: Radius;
+  modifiers?: ('r15' | 'r12' | 'filter' | 'hover')[]
 }
 
 const CardLayer: React.FC<CardLayerProps> = ({
@@ -28,11 +29,9 @@ const CardLayer: React.FC<CardLayerProps> = ({
   description,
   ratio,
   isBold,
-  isHover,
-  isFilter,
-  radius,
+  modifiers,
 }) => (
-  <div className={mapModifiers('o-cardLayer', isHover && 'hover', isFilter && 'filter', radius)}>
+  <div className={mapModifiers('o-cardLayer', modifiers)}>
     <Link href={href} target={target}>
       <div className="o-cardLayer_image">
         <Image src={thumbnail} alt={title} ratio={ratio || '258x334'} />
@@ -45,7 +44,7 @@ const CardLayer: React.FC<CardLayerProps> = ({
         </div>
       </Link>
       {
-        isHover && (
+        modifiers?.includes('hover') && (
           <div className="o-cardLayer_content-desc">
             <Text modifiers={['16x28', 'white', '400']} content={description} />
           </div>

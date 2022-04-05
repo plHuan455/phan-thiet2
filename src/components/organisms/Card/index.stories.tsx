@@ -119,10 +119,8 @@ export const layer: Story = () => (
         thumbnail="https://source.unsplash.com/random"
         title="OCEAN GOLF"
         ratio="354x221"
-        isHover
         isBold
-        isFilter
-        radius="15"
+        modifiers={['filter', 'hover', 'r15']}
         description="Sân golf 89ha kề biển theo chuẩn PGA quốc tế tạo nên môi trường sống xanh trong lành, cho cả gia đình cùng trải nghiệm golf thư giãn ngay trước thềm nhà."
       />
     </div>
