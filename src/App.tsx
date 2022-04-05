@@ -11,6 +11,7 @@ import {
 
 import Layout from 'common/Layout';
 import DivisionList from 'pages/DivisionList';
+import Error from 'pages/Error';
 import { store } from 'store';
 
 const App: React.FC = () => (
@@ -24,9 +25,10 @@ const App: React.FC = () => (
           </Layout>
       )}
       >
-        {/* TODO: Implement transplation later */}
+        {/* TODO: Implement translation later */}
         <Route path="">
           <Route path="cac-phan-khu" element={<DivisionList />} />
+          <Route path="404" element={<Error />} />
         </Route>
       </Route>
     </Routes>
