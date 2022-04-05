@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Container from 'common/Container';
-import Heading from 'components/atoms/Heading';
+import Heading, { TextStyle } from 'components/atoms/Heading';
 import Icon from 'components/atoms/Icon';
 import Link from 'components/atoms/Link';
 import Text from 'components/atoms/Text';
@@ -10,7 +10,10 @@ import { CardNormalProps } from 'components/organisms/Card/Normal';
 import Carousel, { NextArrow, PrevArrow } from 'components/organisms/Carousel';
 
 interface NewsHomeProps {
-  title: string;
+  title:{
+    text:string;
+    modifiers?: TextStyle;
+  }
   dataList: CardNormalProps[];
   btnMore: {
     href?: string;
@@ -51,7 +54,7 @@ const NewsHome: React.FC<NewsHomeProps> = ({ title, dataList, btnMore }) => (
     <Container>
       <div className="t-newsHome_wrapper">
         <div className="t-newsHome_header d-flex">
-          <Heading type="h2" modifiers={['700', '32x48', 'gradientGreen']}>{title}</Heading>
+          <Heading type="h2" modifiers={title.modifiers} content={title.text} />
           <Link target={btnMore?.target} href={btnMore?.href}>
             <div className="animate animate-arrowSlide d-flex align-items-center">
               <Text modifiers={['14x20', '400', 'copper']} content={btnMore.label} />

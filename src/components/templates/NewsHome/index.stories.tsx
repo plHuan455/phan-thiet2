@@ -27,7 +27,10 @@ export const normal: Story = () => (
   <BrowserRouter>
     <NewsHome
       dataList={dataList}
-      title="TIN TỨC CHUNG"
+      title={{
+        text: 'TIN TỨC CHUNG',
+        modifiers: ['700', '32x48', 'gradientGreen'],
+      }}
       btnMore={{
         label: 'Xem tất cả',
         href: '/',
