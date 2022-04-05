@@ -5,7 +5,7 @@ type MessageNotify = {
   type?: 'warning' | 'success',
 }
 
-type PageType = 'homepage' | 'subdivisions' | 'another';
+type PageType = 'default' | 'subdivisions';
 
 type InitialState = {
   messageNotify?: MessageNotify;
@@ -17,7 +17,7 @@ const initialState: InitialState = {
     message: undefined,
     type: undefined,
   },
-  pageType: undefined,
+  pageType: 'default',
 };
 
 const systemsSlice = createSlice({

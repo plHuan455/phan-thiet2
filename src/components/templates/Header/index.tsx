@@ -74,7 +74,7 @@ const Header: React.FC<HeaderProps> = ({
   ), [language]);
 
   const renderButtonSearch = useCallback((iconName:IconName) => (
-    <button type="button" className="o-header_btn-search" onClick={() => setIsOpenSearch(true)}>
+    <button type="button" className="t-header_btn-search" onClick={() => setIsOpenSearch(true)}>
       <Icon iconName={iconName} size="20" />
     </button>
   ), []);
@@ -90,23 +90,23 @@ const Header: React.FC<HeaderProps> = ({
   });
 
   return (
-    <header className="o-header">
-      <div className={mapModifiers('o-header_main', isScroll && 'isScroll')}>
+    <header className="t-header">
+      <div className={mapModifiers('t-header_main', isScroll && 'isScroll')}>
         <Container>
-          <div className={mapModifiers('o-header_layer-search', isOpenSearch && 'open')}>
+          <div className={mapModifiers('t-header_layer-search', isOpenSearch && 'open')}>
             <button className="button-close" type="button" onClick={() => setIsOpenSearch(false)}>
               <Icon iconName="closeWhite" size="36" />
             </button>
-            <div className="o-header_layer-search_content">
+            <div className="t-header_layer-search_content">
               <Heading type="h2" modifiers={['700', 'uppercase', 'center', 'white']}>
                 Tìm kiếm
               </Heading>
               <Search search={{ placeholder: 'Tìm kiếm nội dung' }} />
             </div>
           </div>
-          <div className="o-header_wrap">
+          <div className="t-header_wrap">
             <div
-              className="o-header_hamburger"
+              className="t-header_hamburger"
               onClick={() => setIsOpen(!isOpen)}
             >
               <div className={`hamburger ${isOpen ? 'active' : ''}`}>
@@ -115,16 +115,16 @@ const Header: React.FC<HeaderProps> = ({
                 <span />
               </div>
             </div>
-            <div className="o-header_left">
+            <div className="t-header_left">
               <Link href={logoUrl?.url} target={logoUrl?.target}>
                 <Image src={logo} ratio="184x59" />
               </Link>
             </div>
-            <div className={mapModifiers('o-header_right', isOpen && 'open')}>
-              <div className="o-header_search-mobile">
+            <div className={mapModifiers('t-header_right', isOpen && 'open')}>
+              <div className="t-header_search-mobile">
                 {renderButtonSearch('searchOrange')}
               </div>
-              <div className="o-header_nav">
+              <div className="t-header_nav">
                 <Nav
                   menu={menu}
                   idExpand={[idExpand?.child, idExpand?.parent]}
@@ -133,18 +133,18 @@ const Header: React.FC<HeaderProps> = ({
                   handleClickExpand={handleClickExpand}
                 />
               </div>
-              <div className="o-header_utility">
-                <div className="o-header_language-desktop">
+              <div className="t-header_utility">
+                <div className="t-header_language-desktop">
                   <div className="pulldown-lang">
                     {renderLang}
                   </div>
                 </div>
-                <div className="o-header_search">
+                <div className="t-header_search">
                   {renderButtonSearch('searchWhite')}
                 </div>
               </div>
             </div>
-            <div className="o-header_language-mobile">
+            <div className="t-header_language-mobile">
               <div className="pulldown-lang">
                 {renderLang}
               </div>

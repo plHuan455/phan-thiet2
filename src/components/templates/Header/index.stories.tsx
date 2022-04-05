@@ -7,7 +7,7 @@ import Header from '.';
 import dataHeader from 'assets/dataDummy/header';
 
 export default {
-  title: 'Components/organisms/Header',
+  title: 'Components/Templates/Header',
   component: Header,
   argTypes: {},
 } as Meta;

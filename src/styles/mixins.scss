@@ -229,3 +229,11 @@ $colors-gradient-design: (
     }
   }
 }
+
+@mixin margin-header-page($desktop-up, $desktop-down) {
+  margin-top: rem($desktop-up);
+  
+  @include desktop-down {
+    margin-top: rem($desktop-down);
+  }
+}
