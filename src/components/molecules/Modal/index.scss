@@ -46,6 +46,40 @@
       border-radius: rem(12);
     }
   }
+
+  &-image {
+    #{$root}_main {
+      max-width: rem(1170);
+    }
+
+    #{$root}_wrapper {
+      background: transparent;
+    }
+
+    #{$root}_close {
+      right: rem(140);
+
+      @include tablet-down {
+        right: rem(80);
+      }
+
+      @include mobile-down {
+        right: rem(30);
+      }
+    }
+
+    #{$root}_body {
+      padding: 0 rem(86);
+
+      @include tablet-down {
+        padding: 0 rem(30);
+      }
+
+      @include mobile-down {
+        padding: 0 rem(10);
+      }
+    }
+  }
 }
 
 .ReactModal__Overlay {

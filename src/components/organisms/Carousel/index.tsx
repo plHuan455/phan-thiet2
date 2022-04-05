@@ -15,7 +15,7 @@ export interface CarouselProps {
 
 interface ArrowProps extends CustomArrowProps {
   extendClassname?: string;
-  customArrow?: 'circleWhite' | 'default';
+  customArrow?: 'circleWhite' | 'default' | 'circleGray';
 }
 
 export const PrevArrow: React.FC<ArrowProps> = ({

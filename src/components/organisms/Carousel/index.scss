@@ -68,6 +68,16 @@
           background-image: url('~assets/icons/ic_arrow_carousel_back_white.svg');
         }
       }
+
+      &-circleGray {
+        &::before {
+          background-image: url('~assets/icons/ic_arrow_carousel_back_white.svg');
+        }
+  
+        &:not(.slick-disabled):hover {
+          background: $davy-grey;;
+        }
+      }
     }
 
     &_next {
@@ -86,6 +96,16 @@
 
         &:not(.slick-disabled):hover::before {
           background-image: url('~assets/icons/ic_arrow_carousel_next_white.svg');
+        }
+      }
+
+      &-circleGray {
+        &::before {
+          background-image: url('~assets/icons/ic_arrow_carousel_next_white.svg');
+        }
+  
+        &:not(.slick-disabled):hover {
+          background: $davy-grey;;
         }
       }
     }
