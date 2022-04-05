@@ -111,3 +111,20 @@ export const feeback: Story = () => (
     </div>
   </BrowserRouter>
 );
+
+export const layer: Story = () => (
+  <BrowserRouter>
+    <div style={{ maxWidth: 394, background: 'white', padding: 20 }}>
+      <Card.Layer
+        thumbnail="https://source.unsplash.com/random"
+        title="OCEAN GOLF"
+        ratio="354x221"
+        isHover
+        isBold
+        isFilter
+        radius="15"
+        description="Sân golf 89ha kề biển theo chuẩn PGA quốc tế tạo nên môi trường sống xanh trong lành, cho cả gia đình cùng trải nghiệm golf thư giãn ngay trước thềm nhà."
+      />
+    </div>
+  </BrowserRouter>
+);

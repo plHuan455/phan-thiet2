@@ -1,0 +1,52 @@
+.o-cardLayer {
+  $root: &;
+  border-radius: rem(12);
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+
+  &:not(&-hover) {
+    @include thumbnail-scale-hover();
+  }
+
+  &-hover {
+    &:hover {
+      #{$root}_content {
+        top: 0;
+        transition: all $transition ease-in-out;
+      }
+    }
+  }
+
+  &-15 {
+    border-radius: rem(15);
+  }
+
+  &-filter {
+    filter: drop-shadow(0 rem(4) rem(36) $black025);
+  }
+
+  &-title {
+    @include text-overflow(1);
+  }
+
+  &_content {
+    background: $black06;
+    bottom: 0;
+    left: 0;
+    padding: rem(6) rem(16);
+    position: absolute;
+    top: calc(100% - 40px);
+    transition: all $transition-long ease-in-out;
+    width: 100%;
+
+    &-desc {
+      margin-top: rem(14);
+      @include text-overflow(5);
+
+      @include mobile-down {
+        margin-top: rem(5);
+      }
+    }
+  }
+}
