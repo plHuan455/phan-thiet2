@@ -18,7 +18,7 @@ export const iconList = {
   playVideo: 'playVideo',
   dot: 'dot',
   closeGreen: 'closeGreen',
-  marker: 'marker',
+  markerGgMap: 'markerGgMap',
 };
 
 export type IconName = keyof typeof iconList;

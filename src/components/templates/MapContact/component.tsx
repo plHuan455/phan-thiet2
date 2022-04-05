@@ -84,7 +84,7 @@ export interface GoogleMapProps {
 
 export const MapContact: React.FC<PositionMarker> = () => (
   <div className="o-googleMap_marker">
-    <Icon size="36" iconName="marker" />
+    <Icon size="36" iconName="markerGgMap" />
   </div>
 );
 
