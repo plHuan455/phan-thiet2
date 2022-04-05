@@ -17,6 +17,7 @@ export const iconList = {
   downloadOrange: 'downloadOrange',
   playVideo: 'playVideo',
   dot: 'dot',
+  closeGreen: 'closeGreen',
 };
 
 export type IconName = keyof typeof iconList;

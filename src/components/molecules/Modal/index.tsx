@@ -10,7 +10,7 @@ interface Props {
     name: IconName;
     size?: IconSize;
   };
-  // modifiers?: 'default'; // add more modifiers
+  modifiers?: 'default' | 'notify'; // add more modifiers
   handleClose?: () => void;
 }
 
@@ -18,15 +18,14 @@ const CustomModal: React.FC<Props> = ({
   isOpen,
   children,
   icon,
-  // modifiers,
+  modifiers,
   handleClose,
 }) => (
   <Modal
     isOpen={isOpen}
     onRequestClose={handleClose}
     closeTimeoutMS={250}
-    // className={`${mapModifiers('o-modal', modifiers)}`}
-    className={`${mapModifiers('o-modal')}`}
+    className={`${mapModifiers('o-modal', modifiers)}`}
     appElement={document.getElementById('root') as HTMLElement}
     ariaHideApp={false}
     portalClassName={mapModifiers('o-modal_portal', isOpen && 'open')}
@@ -48,7 +47,7 @@ const CustomModal: React.FC<Props> = ({
 
 CustomModal.defaultProps = {
   handleClose: undefined,
-  // modifiers: undefined,
+  modifiers: undefined,
   icon: {
     name: 'closeOrange',
     size: '24',
