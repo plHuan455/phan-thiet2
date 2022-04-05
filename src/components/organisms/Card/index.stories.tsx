@@ -98,3 +98,16 @@ export const division: Story = () => (
     </div>
   </BrowserRouter>
 );
+
+export const feeback: Story = () => (
+  <BrowserRouter>
+    <div style={{ maxWidth: 394, background: '#999', marginTop: 100 }}>
+      <Card.Feedback
+        imgSrc="https://source.unsplash.com/random"
+        job="DOANH NHÂN"
+        name="Nguyễn Thanh Bình"
+        comment="“Điều mà tôi cảm thấy thích và ấn tượng là Novaland luôn lắng nghe khách hàng. Họ lấy những lời góp ý để cải thiện dịch vụ củ họ để ngày càng tốt hơn chứ không phải nghe qua chuyện”"
+      />
+    </div>
+  </BrowserRouter>
+);

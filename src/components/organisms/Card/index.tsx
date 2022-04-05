@@ -2,6 +2,7 @@ import React from 'react';
 
 import CardDivision, { CardDivisionProps } from './Division';
 import CardEvent, { CardEventProps } from './Event';
+import CardFeedback, { CardFeedbackProps } from './Feedback';
 import CardNormal, { CardNormalProps } from './Normal';
 import CardPlayer, { CardPlayerProps } from './Player';
 
@@ -10,6 +11,7 @@ interface CardResponse {
   Event: React.FC<CardEventProps>;
   Normal: React.FC<CardNormalProps>;
   Division: React.FC<CardDivisionProps>;
+  Feedback: React.FC<CardFeedbackProps>;
 }
 
 const Card: CardResponse = {
@@ -17,6 +19,7 @@ const Card: CardResponse = {
   Event: CardEvent,
   Normal: CardNormal,
   Division: CardDivision,
+  Feedback: CardFeedback,
 };
 
 export default Card;

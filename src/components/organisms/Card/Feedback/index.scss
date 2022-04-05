@@ -1,0 +1,49 @@
+.m-feedbackCard {
+  filter: drop-shadow(0 rem(4) rem(16) rgba($black, 0.1));
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: all $transition linear;
+  position: relative;
+
+  &_image {
+    border-radius: rem(500);
+    margin: auto;
+    max-width: rem(128);
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, rem(-76));
+    transition: all $transition linear;
+    width: 100%;
+    &:hover {
+      transform: translate(-50%, rem(-76)) scale(1.05);
+    }
+  }
+
+  &_content {
+    background-color: $white;
+    border-radius: rem(12);
+    cursor: pointer;
+    height: 100%;
+    margin-top: rem(80);
+    padding: rem(80) rem(32) rem(32);
+    position: relative;
+    @include mobile-down {
+      padding: rem(60) rem(15) rem(15);
+    }
+    &-name {
+      cursor: pointer;
+      margin-top: rem(8);
+    }
+    &-comment {
+      margin-top: rem(12);
+      @include text-overflow(6);
+    }
+  }
+
+  &_desc {
+    @include text-overflow(2);
+  }
+}
