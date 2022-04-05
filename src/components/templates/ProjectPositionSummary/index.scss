@@ -30,9 +30,9 @@
     top: 0;
     width: 100%;
 
-    // @include break-max (1366px) {
-    //   max-width: 19%;
-    // }
+    @include break-max (1366px) {
+      max-width: 19%;
+    }
     @include mobile-down {
       max-width: rem(100);
     }
