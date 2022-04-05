@@ -55,16 +55,16 @@ const Error: React.FC<ErrorProps> = ({
 
   return (
     <div className="t-error">
-      {/* TODO: Add animation later */}
-      <div className="t-error_layerLeft">
-        <Image src={ballonLeft} alt="ballon_left" />
-      </div>
-      <div className="t-error_layerRight">
-        {/* TODO: Add animation later */}
-        <Image src={ballonRight} alt="ballon_right" />
-      </div>
       <Container>
-        <div className="t-error_content d-flex flex-column align-items-center justify-content-center u-pt-80 u-pb-80">
+        {/* TODO: Add animation later */}
+        <div className="t-error_content d-flex flex-column align-items-center justify-content-center u-pt-md-147 u-pb-md-80 u-pt-80 u-pb-64">
+          <div className="t-error_layerLeft">
+            <Image src={ballonLeft} alt="ballon_left" />
+          </div>
+          <div className="t-error_layerRight">
+            {/* TODO: Add animation later */}
+            <Image src={ballonRight} alt="ballon_right" />
+          </div>
           <div className="t-error_thumbnail ">
             <Image ratio="1x1" src={imgSrc || error.imgSrc} size="cover" alt="" />
           </div>

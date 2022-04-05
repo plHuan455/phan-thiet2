@@ -2,28 +2,24 @@
   $root: &;
   position: relative;
   background: $isabelline url('~assets/images/error/BG.png') no-repeat bottom / contain;
-  
  
   &_layerLeft {
     position: absolute;
     width: 100%;
     max-width: rem(79);
-    top: rem(147);
-    left: rem(114);
+    top: rem(214);
+    left: 0;
     .a-image {
       padding-bottom: (114 / 79) * 100%;
     }
 
     @include tablet-down {
       max-width: rem(70);
-      left: 0;
-      top: rem(100);
     }
 
     @include mobile-down {
-      max-width: rem(60);
-      left: 0;
-      top: rem(50);
+      max-width: rem(32);
+      top: rem(160);
     }
   }
 
@@ -31,8 +27,8 @@
     position: absolute;
     width: 100%;
     max-width: rem(215);
-    top: rem(33);
-    right: rem(62);
+    top: rem(100);
+    right: rem(-62);
     .a-image {
       padding-bottom: (148 / 215) * 100%;
     }
@@ -40,14 +36,16 @@
     @include tablet-down {
       max-width: rem(170);
       right: 0;
-      top: rem(15);
     }
 
     @include mobile-down {
-      max-width: rem(130);
-      right: 0;
-      top: 0;
+      max-width: rem(88);
+      top: rem(80);
     }
+  }
+
+  &_content {
+    position: relative;
   }
 
   
