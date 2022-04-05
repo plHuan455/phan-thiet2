@@ -25,6 +25,8 @@ export const iconList = {
   playerPersian: 'playerPersian',
   playerSeaweed: 'playerSeaweed',
   searchGray: 'searchGray',
+  zalo: 'zalo',
+  facebook: 'facebook',
 };
 
 export type IconName = keyof typeof iconList;
