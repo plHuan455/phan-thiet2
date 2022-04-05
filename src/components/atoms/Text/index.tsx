@@ -4,6 +4,7 @@ import mapModifiers from 'utils/functions';
 
 export type Sizes =
   | '11x18'
+  | '12x18'
   | '12x20'
   | '14x20'
   | '16x28'
