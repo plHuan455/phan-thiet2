@@ -35,15 +35,6 @@ const setting = {
   },
   responsive: [
     {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2,
-        arrows: false,
-        dots: true,
-      },
-    },
-    {
       breakpoint: 767,
       settings: {
         slidesToShow: 1,

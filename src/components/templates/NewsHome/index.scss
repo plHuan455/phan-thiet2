@@ -1,6 +1,6 @@
 .t-newsHome {
   &_header {
-    margin-bottom: rem(40);
+    margin-bottom: rem(32);
     align-items: center;
     justify-content: space-between;
     @include mobile-down {
@@ -10,9 +10,17 @@
     }
   }
   &_content {
-    padding-bottom: rem(16);
+    @include desktop-down {
+      .o-carousel_arrow_next {
+        right: rem(-30);
+      }
+      .o-carousel_arrow_prev {
+        left: rem(-30);
+      }
+    }
     .o-cardNormal {
       filter: drop-shadow(0px 4px 16px rgba(0, 0, 0, 0.2));
+      padding-bottom: rem(16);
     }
     .slick-slider {
       margin: 0 rem(-16);
