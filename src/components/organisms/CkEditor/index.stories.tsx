@@ -15,7 +15,6 @@ export const normal: Story = () => (
     description="
     Theo ông Bùi Xuân Huy - tổng giám đốc Tập đoàn Novaland, dự án Novaworld Phan Thiết được UBND Bình Thuận cấp giấy chứng nhận đầu tư lần đầu từ tháng 7/2008. Dự án này đã trải qua khoảng 11 năm thực hiện đền bù, giải tỏa mặt bằng nên đã thu hẹp vòng đời (vòng đời dự án 50 năm).
     </br>
-    </br>
     Theo ông Bùi Xuân Huy - tổng giám đốc Tập đoàn Novaland, dự án Novaworld Phan Thiết được UBND Bình Thuận cấp giấy chứng nhận đầu tư lần đầu từ tháng 7/2008. Dự án này đã trải qua khoảng 11 năm thực hiện đền bù, giải tỏa mặt bằng nên đã thu hẹp vòng đời (vòng đời dự án 50 năm)."
   />
 );

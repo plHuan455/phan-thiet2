@@ -13,6 +13,7 @@ import Layout from 'common/Layout';
 import Contact from 'pages/Contact';
 import DivisionList from 'pages/DivisionList';
 import Error from 'pages/Error';
+import Policy from 'pages/Policy';
 import { store } from 'store';
 
 const App: React.FC = () => (
@@ -31,6 +32,7 @@ const App: React.FC = () => (
           <Route path="cac-phan-khu" element={<DivisionList />} />
           <Route path="404" element={<Error />} />
           <Route path="lien-he" element={<Contact />} />
+          <Route path="chinh-sach-dieu-khoan" element={<Policy />} />
         </Route>
       </Route>
     </Routes>

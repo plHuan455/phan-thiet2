@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Container from 'common/Container';
 import Text from 'components/atoms/Text';
 
 interface CkEditorProps {
@@ -13,18 +12,9 @@ const CkEditor: React.FC<CkEditorProps> = ({
   description,
 }) => (
   <div className="o-ckeditor">
-    <Container>
-      <div className="o-ckeditor_wrapper">
-        <div className="o-ckeditor_content">
-          <div className="o-ckeditor_title">
-            <Text modifiers={['20x32', 'gradientGreen', '700']} content={title} />
-          </div>
-          <div className="o-ckeditor_description">
-            <Text type="span" modifiers={['20x32', 'davyGrey', '400']} content={description} />
-          </div>
-        </div>
-      </div>
-    </Container>
+    <Text modifiers={['20x32', 'gradientGreen', '700', 's015']} content={title} />
+    <div className="u-mt-12" />
+    <Text type="div" modifiers={['20x32', 'davyGrey', '400', 's015']} content={description} />
   </div>
 );
 

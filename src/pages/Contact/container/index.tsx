@@ -4,9 +4,8 @@ import Banner from './banner';
 import Form from './form';
 import Map from './map';
 
-import imgBallon from 'assets/images/pages/contact/ballon.png';
+import imgBalloon from 'assets/images/pages/contact/balloon.png';
 import imgLeaf from 'assets/images/pages/contact/leaf.png';
-import Container from 'common/Container';
 import Image from 'components/atoms/Image';
 
 const Screen: React.FC = () => (
@@ -14,14 +13,12 @@ const Screen: React.FC = () => (
     <Banner />
     <Map />
     <section className="s-contact_layer">
-      <Container>
-        <div className="s-contact_layer_ballon">
-          <Image src={imgBallon} alt="ballon" />
-        </div>
-        <div className="s-contact_layer_leaf">
-          <Image src={imgLeaf} alt="leaf" />
-        </div>
-      </Container>
+      <div className="s-contact_layer_balloon">
+        <Image src={imgBalloon} alt="balloon" />
+      </div>
+      <div className="s-contact_layer_leaf">
+        <Image src={imgLeaf} alt="leaf" />
+      </div>
       <Form />
     </section>
   </>
