@@ -27,21 +27,22 @@ const Consultancy: React.FC<ConsultancyProps> = ({
 }) => (
   <div className={mapModifiers('t-consultancy', py)}>
     {layer}
-
-    <Container>
-      <Row>
-        <Col xl={5}>
-          <div className="t-consultancy_title">
-            <Heading content={title.text} type={title.type} modifiers={title.modifiers} />
-          </div>
-        </Col>
-        <Col xl={7} className="u-mt-xl-0 u-mt-32">
-          <div className="t-consultancy_form">
-            <ConsultancyForm {...form} />
-          </div>
-        </Col>
-      </Row>
-    </Container>
+    <div className="t-consultancy_content">
+      <Container>
+        <Row>
+          <Col xl={5}>
+            <div className="t-consultancy_title">
+              <Heading content={title.text} type="h2" modifiers={title.modifiers} />
+            </div>
+          </Col>
+          <Col xl={7} className="u-mt-xl-0 u-mt-32">
+            <div className="t-consultancy_form">
+              <ConsultancyForm {...form} />
+            </div>
+          </Col>
+        </Row>
+      </Container>
+    </div>
   </div>
 );
 

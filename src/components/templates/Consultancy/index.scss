@@ -1,6 +1,11 @@
 .t-consultancy {
   $root: &;
 
+  &_content {
+    position: relative;
+    z-index: 2;
+  }
+
   &-md {
     padding-bottom: rem(64);
     padding-top: rem(64);

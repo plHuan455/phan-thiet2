@@ -1,5 +1,5 @@
 .t-projectPositionSummary {
-  background: $antique-white url('~assets/images/projectPosition/summary/bg.png') no-repeat left bottom / 100% 45%;
+  background: transparent url('~assets/images/projectPosition/summary/bg.png') no-repeat left bottom / 100% 45%;
   padding-top: rem(80);
   position: relative;
 
@@ -30,9 +30,9 @@
     top: 0;
     width: 100%;
 
-    @include break-max (1366px) {
-      max-width: 19%;
-    }
+    // @include break-max (1366px) {
+    //   max-width: 19%;
+    // }
     @include mobile-down {
       max-width: rem(100);
     }
