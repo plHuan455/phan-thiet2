@@ -4,6 +4,7 @@
 
   &_arrow {
     $arrow: &;
+    background: $snow;
     border-radius: rem(100);
     height: rem(40);
     transition: $transition-long ease;
@@ -66,7 +67,7 @@
 
     &.slick-arrow {
       &.slick-disabled {
-        background: $snow;
+        background: rgba($snow, 0.5);
         border-color: transparent;
         cursor: no-drop;
       }

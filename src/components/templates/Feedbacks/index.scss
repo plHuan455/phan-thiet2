@@ -1,0 +1,44 @@
+.t-feedbacks {
+  &_title {
+    @include adjust-flex(space-between, center);
+  }
+
+  &_seeAll {
+    $seeAll: &;
+    @include adjust-flex();
+    cursor: pointer;
+
+    @include mobile-down {
+      display: none;
+    }
+
+    &-icon {
+      margin-left: rem(8);
+    }
+  }
+
+  &_carousel {
+    margin-top: rem(32);
+
+    @include tablet-down {
+      margin-top: rem(20);
+    }
+
+    @include mobile-down {
+      margin-top: rem(15);
+    }
+  }
+
+  &_seeAllMobile {
+    display: none;
+    @include mobile-down {
+      display: block;
+      margin-top: rem(24);
+      @include adjust-flex();
+
+      &-icon {
+        margin-left: rem(8);
+      }
+    }
+  }
+}

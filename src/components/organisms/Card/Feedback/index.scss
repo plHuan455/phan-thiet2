@@ -24,12 +24,16 @@
     background-color: $white;
     border-radius: rem(12);
     height: 100%;
-    margin-top: rem(76);
+    margin-top: rem(80);
     padding: rem(80) rem(32) rem(32);
     position: relative;
     @include mobile-down {
       padding: rem(60) rem(24) rem(24);
     }
+  }
+
+  &_comment {
+    @include text-overflow(6);
   }
 
   &:hover {
