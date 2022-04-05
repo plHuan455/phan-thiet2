@@ -11,7 +11,9 @@ type Ratio =
   | 'logo-footer'
   | '1369x372'
   | '1366x378'
-  | '1369x167';
+  | '1369x167'
+  | '258x334'
+  | '354x221';
 
 type FontWeightStyle =
   | '100'
