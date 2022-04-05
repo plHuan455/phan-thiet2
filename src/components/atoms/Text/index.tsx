@@ -8,7 +8,8 @@ export type Sizes =
   | '14x20'
   | '16x28'
   | '20x32'
-  | '24x36';
+  | '24x36'
+  | '16x24';
 
 export type TextStyle = (GeneralTextStyle | Sizes)[];
 interface TextProps extends React.HtmlHTMLAttributes<HTMLParagraphElement> {

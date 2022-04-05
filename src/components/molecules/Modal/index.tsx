@@ -10,23 +10,24 @@ interface Props {
     name: IconName;
     size?: IconSize;
   };
-  // modifiers?: 'default'; // add more modifiers
+  modifiers?: 'default' | 'notify'; // add more modifiers
   handleClose?: () => void;
+  isHasClose?: boolean;
 }
 
 const CustomModal: React.FC<Props> = ({
   isOpen,
   children,
   icon,
-  // modifiers,
+  modifiers,
   handleClose,
+  isHasClose = true,
 }) => (
   <Modal
     isOpen={isOpen}
     onRequestClose={handleClose}
     closeTimeoutMS={250}
-    // className={`${mapModifiers('o-modal', modifiers)}`}
-    className={`${mapModifiers('o-modal')}`}
+    className={`${mapModifiers('o-modal', modifiers)}`}
     appElement={document.getElementById('root') as HTMLElement}
     ariaHideApp={false}
     portalClassName={mapModifiers('o-modal_portal', isOpen && 'open')}
@@ -35,7 +36,7 @@ const CustomModal: React.FC<Props> = ({
   >
     <div className="o-modal_main">
       <div className="o-modal_wrapper">
-        {icon && (
+        {icon && isHasClose && (
           <button type="button" className="o-modal_close" onClick={handleClose}>
             <Icon iconName={icon.name || 'closeOrange'} size={icon.size} />
           </button>
@@ -48,11 +49,12 @@ const CustomModal: React.FC<Props> = ({
 
 CustomModal.defaultProps = {
   handleClose: undefined,
-  // modifiers: undefined,
+  modifiers: undefined,
   icon: {
     name: 'closeOrange',
     size: '24',
   },
+  isHasClose: true,
 };
 
 export default CustomModal;

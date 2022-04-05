@@ -37,6 +37,15 @@
     z-index: $z-1;
     @include reset-button();
   }
+
+  &-notify {
+    #{$root}_main {
+      max-width: rem(548);
+    }
+    #{$root}_wrapper {
+      border-radius: rem(12);
+    }
+  }
 }
 
 .ReactModal__Overlay {

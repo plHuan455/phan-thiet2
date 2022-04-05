@@ -40,6 +40,13 @@
     }
   }
 
+  &-16x24 {
+    @include font-base(16, 24);
+    @include mobile-down {
+      @include font-base(14, 22);
+    }
+  }
+
   &-fontOswald {
     font-family: $font-oswald;
   }
