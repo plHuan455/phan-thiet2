@@ -4,9 +4,9 @@ import { BrowserRouter } from 'react-router-dom';
 
 import Feedbacks from '.';
 
-import img from 'assets/images/customerExperience/img.png';
-import img1 from 'assets/images/customerExperience/img1.png';
-import img2 from 'assets/images/customerExperience/img2.png';
+import img from 'assets/images/feedbacks/img.png';
+import img1 from 'assets/images/feedbacks/img1.png';
+import img2 from 'assets/images/feedbacks/img2.png';
 
 export default {
   title: 'Components/templates/Feedbacks',
