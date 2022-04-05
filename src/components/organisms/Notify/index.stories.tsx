@@ -17,7 +17,7 @@ export const normal: Story = () => {
       <button type="button" onClick={() => setIsOpen(true)}>Open</button>
       <Notify
         isOpen={isOpen}
-        handleConfirm={() => setIsOpen(false)}
+        onClose={() => setIsOpen(false)}
         title="Đăng ký thành công"
         message="Cảm ơn Quý Khách đã nhận thông tin dự án NovaWorld Phan Thiet. Novaland sẽ liên hệ trong thời gian sớm nhất."
         btnText="Xác nhận"

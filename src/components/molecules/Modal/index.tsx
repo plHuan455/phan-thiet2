@@ -12,7 +12,6 @@ interface Props {
   };
   modifiers?: 'default' | 'notify'; // add more modifiers
   handleClose?: () => void;
-  isHasClose?: boolean;
 }
 
 const CustomModal: React.FC<Props> = ({
@@ -21,7 +20,6 @@ const CustomModal: React.FC<Props> = ({
   icon,
   modifiers,
   handleClose,
-  isHasClose = true,
 }) => (
   <Modal
     isOpen={isOpen}
@@ -36,7 +34,7 @@ const CustomModal: React.FC<Props> = ({
   >
     <div className="o-modal_main">
       <div className="o-modal_wrapper">
-        {icon && isHasClose && (
+        {icon && (
           <button type="button" className="o-modal_close" onClick={handleClose}>
             <Icon iconName={icon.name || 'closeOrange'} size={icon.size} />
           </button>
@@ -54,7 +52,6 @@ CustomModal.defaultProps = {
     name: 'closeOrange',
     size: '24',
   },
-  isHasClose: true,
 };
 
 export default CustomModal;

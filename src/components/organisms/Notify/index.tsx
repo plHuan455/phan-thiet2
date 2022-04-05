@@ -6,23 +6,24 @@ import Modal from 'components/molecules/Modal';
 
 interface NotifyProps {
   isOpen?: boolean;
-  handleConfirm?: () => void;
   title?: string;
   message?: string;
   btnText?: string;
+  onClose?: () => void;
 }
 
 const Notify: React.FC<NotifyProps> = ({
   isOpen,
-  handleConfirm,
   title,
   message,
   btnText,
+  onClose,
 }) => (
   <Modal
     isOpen={!!isOpen}
     modifiers="notify"
-    isHasClose={false}
+    icon={undefined}
+    handleClose={onClose}
   >
     <div className="o-notify">
       <div className="o-notify_content">
@@ -30,18 +31,18 @@ const Notify: React.FC<NotifyProps> = ({
           <div className="o-notify_title">
             <Text
               type="div"
-              modifiers={['20x32', 'black', '700', 'center']}
+              modifiers={['20x32', 'black', '700', 'center', 's015']}
               content={title}
             />
           </div>
         )}
         {message && (
           <div className="o-notify_message">
-            <Text type="div" modifiers={['16x24', 'black', '400', 'center']} content={message} />
+            <Text type="div" modifiers={['16x28', 'black', '400', 'center']} content={message} />
           </div>
         )}
         <div className="o-notify_btn">
-          <Button size="md" variant="primary-green" onClick={handleConfirm}>
+          <Button size="md" variant="primary-green" onClick={onClose}>
             {btnText}
           </Button>
         </div>
@@ -55,7 +56,7 @@ Notify.defaultProps = {
   title: undefined,
   message: undefined,
   btnText: undefined,
-  handleConfirm: undefined,
+  onClose: undefined,
 };
 
 export default Notify;
