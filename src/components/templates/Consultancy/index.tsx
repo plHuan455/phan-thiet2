@@ -11,7 +11,8 @@ import mapModifiers from 'utils/functions';
 export interface ConsultancyProps {
   title: {
     text: string;
-    modifiers?: TextStyle
+    modifiers?: TextStyle;
+    type?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
   };
   py?: 'md' | 'xl'
   layer?: React.ReactNode;
@@ -31,7 +32,7 @@ const Consultancy: React.FC<ConsultancyProps> = ({
       <Row>
         <Col xl={5}>
           <div className="t-consultancy_title">
-            <Heading content={title.text} type="h2" modifiers={title.modifiers} />
+            <Heading content={title.text} type={title.type} modifiers={title.modifiers} />
           </div>
         </Col>
         <Col xl={7} className="u-mt-xl-0 u-mt-32">

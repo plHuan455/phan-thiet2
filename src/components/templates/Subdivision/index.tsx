@@ -25,11 +25,11 @@ const Subdivision: React.FC<SubdivisionProps> = ({
       modifiers={['700', 's015', 'center', 'gradientGreen', 'uppercase']}
     />
     <Container>
-      <Row className="u-mt-8">
+      <Row className="u-mt-8 u-ml-negative-16 u-mr-negative-16">
         {list?.map((card, index) => (
           <Col
             key={`card-${index.toString()}`}
-            className="u-mt-16 u-mt-lg-32"
+            className="u-mt-16 u-mt-lg-32 u-pl-16 u-pr-16"
             md={6}
             lg={4}
           >
