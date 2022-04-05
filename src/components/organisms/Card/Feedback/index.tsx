@@ -22,12 +22,12 @@ const CardFeedback: React.FC<CardFeedbackProps> = ({
   job,
 }) => (
   <div className="m-feedbackCard">
-    <div className="m-feedbackCard_image">
-      <Link href={href} target={target}>
-        <Image src={imgSrc} alt={name} ratio="1x1" />
-      </Link>
-    </div>
     <div className="m-feedbackCard_content">
+      <div className="m-feedbackCard_image">
+        <Link href={href} target={target}>
+          <Image src={imgSrc} alt={name} ratio="1x1" />
+        </Link>
+      </div>
       <div className="m-customerCard_content-job">
         <Text modifiers={['14x20', '400', 'gambogeOrange', 'center']} content={job} />
       </div>
