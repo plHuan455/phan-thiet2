@@ -54,13 +54,13 @@
     width: rem(80);
 
     @include desktop-down {
-      width: rem(60);
       height: rem(60);
+      width: rem(60);
     }
 
     @include mobile-down {
-      width: rem(32);
       height: rem(32);
+      width: rem(32);
     }
   }
 
