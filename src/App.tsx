@@ -9,6 +9,8 @@ import {
   BrowserRouter as Router, Outlet, Route, Routes,
 } from 'react-router-dom';
 
+import Layout from 'common/Layout';
+import DivisionList from 'pages/DivisionList';
 import { store } from 'store';
 
 const App: React.FC = () => (
@@ -17,12 +19,14 @@ const App: React.FC = () => (
       <Route
         path="/"
         element={(
-          <Outlet />
+          <Layout>
+            <Outlet />
+          </Layout>
       )}
       >
         {/* TODO: Implement transplation later */}
         <Route path="">
-          <Route path="cac-phan-khu" element={<div>asd</div>} />
+          <Route path="cac-phan-khu" element={<DivisionList />} />
         </Route>
       </Route>
     </Routes>
