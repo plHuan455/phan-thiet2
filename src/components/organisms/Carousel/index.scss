@@ -51,6 +51,18 @@
       }
     }
 
+    &.default {
+      &:hover {
+        background: $gradient-green;
+      }
+    }
+
+    &.circleWhite {
+      &:hover {
+        background: $taupe-gray;
+      }
+    }
+
     &_prev {
       left: rem(-76);
 
@@ -127,7 +139,6 @@
       &.slick-disabled {
         cursor: no-drop;
       }
-
       &::before {
         opacity: 1;
       }

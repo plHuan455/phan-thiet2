@@ -32,6 +32,9 @@
 
   &_panel {
     min-height: rem(300);
+    .slick-dots {
+      bottom: rem(-42);
+    }
   }
 
   .o-tabs {
