@@ -8,7 +8,7 @@ import FlatList from '.';
 import Card from 'components/organisms/Card';
 
 export default {
-  title: 'Components/organisms/FlatList',
+  title: 'Components/common/FlatList',
   component: FlatList,
   argTypes: {},
 } as Meta;
@@ -37,7 +37,7 @@ const data = new Array(7).fill({
 
 export const normal: Story = () => (
   <BrowserRouter>
-    <div style={{ height: '1000px' }}>
+    <div style={{ height: '1000px', background: 'gray' }}>
       <Container>
         <FlatList
           data={data}
@@ -54,7 +54,7 @@ export const normal: Story = () => (
 
 export const customSettings: Story = () => (
   <BrowserRouter>
-    <div style={{ height: '1000px' }}>
+    <div style={{ height: '1000px', background: 'gray' }}>
       <Container>
         <FlatList
           settings={{

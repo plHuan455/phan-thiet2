@@ -54,7 +54,7 @@ const FlatList = <T, >({
   if (!data?.length) return null;
 
   return (
-    <div className="o-flatList">
+    <div className="c-flatList">
       <Carousel
         settings={{
           ...settingSelf,
