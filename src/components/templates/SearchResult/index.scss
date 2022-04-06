@@ -1,0 +1,136 @@
+.t-searchResult {
+  background: url('~assets/images/projectPosition/summary/bg.png') no-repeat left bottom / 100% 45%;
+  padding-bottom: rem(80);
+  padding-top: rem(120);
+  position: relative;
+
+  @include tablet-down {
+    padding-top: rem(80);
+    padding-bottom: rem(50);
+  }
+
+  &_searchInput {
+    margin: auto;
+    margin-top: rem(40);
+    max-width: rem(740);
+
+    @include mobile-down {
+      margin-top: rem(26);
+    }
+
+    &_wrapper {
+      @include adjust-flex(flex-start, center);
+  
+      input {
+        @include font-base(14, 20);
+        appearance: none;
+        background-color: $white;
+        border: rem(1) solid $gainsboro;
+        font-family: $font-svn-gotham;
+        font-weight: 400;
+        outline: 0;
+        padding: rem(5) rem(28) rem(5) rem(12);
+        width: 100%;
+        color: $arsenic;
+        border-right: none;
+      }
+  
+      button {
+        @include reset-button();
+        @include adjust-flex();
+        background: $white;
+        border: rem(1) solid $gainsboro;
+        flex-shrink: 0;
+        height: rem(32);
+        padding: 0;
+        width: rem(32);
+      }
+    }
+  }
+
+  &_wrapTabs {
+    @include adjust-flex(space-between, center);
+
+    @include mobile-down {
+      display: block;
+    }
+  }
+
+  &_tab {
+    .o-tabs {
+      &_labels {
+        overflow: auto hidden;
+        position: relative;
+        @include adjust-flex();
+      }
+
+      &_label {
+        color: $davy-grey;
+        cursor: pointer;
+        font-weight: 400;
+        white-space: nowrap;
+        @include font-base(14, 22);
+      }
+
+      &_tab {
+        background: transparent;
+        border: 0;
+        margin-right: rem(32);
+        padding: rem(12) 0;
+        position: relative;
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        &-active {
+          .o-tabs_label {
+            background: $gradient-green;
+            -webkit-background-clip: text;
+            font-weight: 500;
+            -webkit-text-fill-color: transparent;
+          }
+        }
+      
+        &::after {
+          bottom: 0;
+          content: '';
+          height: rem(2);
+          left: 50%;
+          opacity: 0;
+          position: absolute;
+          transform: translateX(-50%);
+          transition: all $transition linear;
+          visibility: hidden;
+          width: 0;
+        }
+
+        &:hover,
+        &-active {
+          &::after {
+            border-bottom: rem(2) solid;
+            border-image: $gradient-green 1;
+            opacity: 1;
+            visibility: visible;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  &_filter {
+    min-width: rem(200);
+    @include mobile-down {
+      margin-top: rem(10);
+      min-width: 100%;
+    }
+  }
+
+  &_showMore {
+    .a-button {
+      margin: rem(40) auto 0;
+      min-width: rem(217);
+    }
+  }
+}

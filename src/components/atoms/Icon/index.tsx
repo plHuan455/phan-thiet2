@@ -24,6 +24,7 @@ export const iconList = {
   playerOcean: 'playerOcean',
   playerPersian: 'playerPersian',
   playerSeaweed: 'playerSeaweed',
+  searchGray: 'searchGray',
 };
 
 export type IconName = keyof typeof iconList;

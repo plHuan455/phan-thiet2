@@ -1,0 +1,50 @@
+.p-search {
+  position: relative;
+  background-color: $isabelline;
+  padding-top: rem($height-header-main-desktop);
+  @include desktop-down {
+    padding-top: rem($height-header-main-desktop-down);
+  }
+
+  &_bgLeft {
+    max-width: rem(259);
+    pointer-events: none;
+    position: absolute;
+    top: rem(70);
+    transform: 0;
+    width: 100%;
+    @include break-max (1366px) {
+      max-width: 18.6%;
+    }
+    @include mobile-down {
+      max-width: rem(100);
+    }
+
+    .a-image {
+      padding-bottom: calc(178 / 259 * 100%);
+    }
+  }
+
+  &_bgRight {
+    max-width: rem(108);
+    pointer-events: none;
+    position: absolute;
+    right: rem(52);
+    top: rem(100);
+    width: 100%;
+
+    @include break-max (1366px) {
+      max-width: 8%;
+    }
+
+    @include mobile-down {
+      right: rem(10);
+      top: rem(70);
+      max-width: rem(50);
+    }
+
+    .a-image {
+      padding-bottom: calc(156 / 108 * 100%);
+    }
+  }
+}
