@@ -1,5 +1,4 @@
 .t-selection {
-
   .container {
     max-width: 100%;
     padding: 0;
@@ -20,20 +19,20 @@
   }
 
   &_flex {
-    display: flex;
     background-color: $floral-white;
     border-radius: rem(8);
-    padding-top: rem(81);
+    display: flex;
     padding-bottom: rem(81);
+    padding-top: rem(81);
     position: relative;
 
     @include desktop-down {
-      padding-top: rem(48);
       padding-bottom: rem(48);
+      padding-top: rem(48);
     }
     @include tablet-down {
-      padding-bottom: rem(24);
       display: block;
+      padding-bottom: rem(24);
     }
 
     @include mobile-down {
@@ -52,19 +51,22 @@
   }
 
   &_thumbnail {
-    position: absolute;
     bottom: rem(18);
+    max-width: rem(912);
+    position: absolute;
     right: 0;
     width: 100%;
-    max-width: rem(912);
+    @include break-max(1365px) {
+      max-width: rem(800);
+    }
     @include desktop-down {
       max-width: rem(620);
     }
     @include tablet-down {
-      position: relative;
       bottom: 0;
       margin-left: auto;
       margin-top: rem(24);
+      position: relative;
     }
 
     @include mobile-down {
@@ -77,15 +79,15 @@
   }
 
   &_layer {
-    position: absolute;
-    width: 100%;
-    max-width: rem(848);
-    right: 0;
-    bottom: rem(20);
-    height: rem(50);
     background-color: $seal-brown;
-    opacity: 0.1;
+    bottom: rem(20);
     filter: blur(40px);
+    height: rem(50);
+    max-width: rem(848);
+    opacity: 0.1;
+    position: absolute;
+    right: 0;
+    width: 100%;
 
     @include desktop-down {
       max-width: rem(640);

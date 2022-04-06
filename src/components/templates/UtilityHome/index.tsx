@@ -120,7 +120,7 @@ const UtilityHome: React.FC<UtilityHomeProps> = ({
                           <div className="t-utilityHome_itemMenu-wrapper">
                             <div className="t-utilityHome_itemMenu-border">
                               <div className="t-utilityHome_itemMenu-icon">
-                                <Image src={item.thumbnail} alt={item.title} ratio="1x1" />
+                                <Image src={item?.icon?.imgSrc} alt={item?.icon?.label} ratio="1x1" />
                               </div>
                             </div>
                           </div>

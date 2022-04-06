@@ -25,8 +25,8 @@
     }
 
     @include mobile-down {
-      min-width: rem(180);
       bottom: rem(55);
+      min-width: rem(180);
     }
 
     @include small-mobile {

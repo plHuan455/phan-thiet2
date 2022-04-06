@@ -1,7 +1,6 @@
 .t-utilityHome {
   $root: &;
-  background-color: rgba($gamboge-orange, 0.1);
-  padding: rem(68) 0 rem(60);
+  padding: rem(82) 0 rem(60);
   position: relative;
 
   @include tablet-down {
@@ -27,7 +26,7 @@
 
   &_content {
     position: relative;
-    z-index: 999;
+    z-index: 10;
   }
 
   &_wrapCarousel {
@@ -77,13 +76,17 @@
 
     @include desktop-down {
       margin: rem(20) auto 0;
+      max-width: 75%;
       padding: 0;
       position: initial;
     }
 
     @include mobile-down {
       margin-top: rem(20);
-      max-width: rem(250);
+    }
+
+    @include small-mobile {
+      max-width: 100%;
     }
 
     .o-carousel {
@@ -167,6 +170,18 @@
         }
       }
     }
+
+    .slick-active:not(.slick-current),
+    .slick-slide:not(.slick-active) {
+      @include mobile-down {
+        #{$root}_itemMenu-border {
+          &::before,
+          &::after {
+            content: none;
+          }
+        }
+      }
+    }
   }
 
   &_itemMenu {
@@ -190,14 +205,12 @@
 
     &-wrapper {
       max-width: rem(117);
+      position: relative;
       width: 100%;
+      z-index: 2;
 
       @include tablet-down {
         max-width: rem(80);
-      }
-
-      @include mobile-down {
-        max-width: rem(60);
       }
     }
 
@@ -214,6 +227,10 @@
         max-width: rem(60);
       }
 
+      @include small-mobile {
+        max-width: rem(48);
+      }
+
 
       &::before {
         background: rgba($chocolate, 0.05);
@@ -227,14 +244,11 @@
 
         @include desktop-down {
           height: rem(2);
-          left: rem(-15);
+          left: auto;
+          right: 100%;
           top: 50%;
           transform: translateY(-50%);
-          width: rem(20);
-        }
-
-        @include tablet-down {
-          width: rem(15);
+          width: 150%;
         }
       }
 
@@ -247,18 +261,14 @@
         position: absolute;
         transform: translateX(-50%);
         width: rem(2);
+
         @include desktop-down {
           bottom: 0;
           height: rem(2);
-          left: unset;
-          right: rem(-15);
+          left: 100%;
           top: 50%;
           transform: translateY(-50%);
-          width: rem(20);
-        }
-
-        @include tablet-down {
-          width: rem(15);
+          width: 150%;
         }
       }
     }
