@@ -1,0 +1,160 @@
+.t-detail {
+  background-color: $isabelline;
+  padding: rem(80) 0;
+  position: relative;
+
+  @include mobile-down {
+    padding: rem(50) 0;
+  }
+
+  &_balloonTop {
+    max-width: rem(110);
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    
+    @include break-max (1366px) {
+      max-width: 8%;
+    }
+
+    @include mobile-down {
+      max-width: rem(50);
+    }
+
+    .a-image {
+      padding-bottom: calc(113 / 110 * 100%);
+    }
+  }
+
+  &_balloonBottom {
+    max-width: rem(184);
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1;
+    transform: translateY(-25%);
+    
+    @include break-max (1366px) {
+      max-width: 13.4%;
+    }
+
+    @include mobile-down {
+      max-width: rem(100);
+      transform: none;
+  }
+
+    .a-image {
+      padding-bottom: calc(246 / 184 * 100%);
+    }
+  }
+
+  &_content {
+    position: relative;
+    z-index: 2;
+  }
+
+  &_related {
+    position: relative;
+  }
+
+  &_carousel {
+    position: relative;
+    z-index: 2;
+  }
+
+  &_sub {
+    ul {
+      display: flex;
+      align-items: center;
+      list-style: none;
+    }
+    li:not(:first-child) {
+      position: relative;
+      margin-left: rem(16);
+      &::before {
+        content: '';
+        background-color: $davy-grey;
+        width: 3px;
+        height: 3px;
+        top: 50%;
+        position: absolute;
+        border-radius: 50%;
+        transform: translateY(-50%);
+        left: rem(-10);
+      }
+    }
+  }
+
+  &_heading {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  &_share {
+    display: flex;
+    align-items: center;
+    ul {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      margin-left: rem(28);
+    }
+
+    li {
+      cursor: pointer;
+      display: flex;
+      margin-left: rem(16);
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  }
+
+  &_content {
+    * {
+      max-width: 100%;
+    }
+  }
+
+  &_tags {
+    display: flex;
+
+    &_text {
+      margin-right: rem(8);
+      flex-shrink: 0;
+    }
+
+    ul {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      margin: -4px rem(-6) 0;
+      flex-wrap: wrap;
+    }
+    
+    li {
+      padding: 0 rem(6);
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+
+    &_link {
+      @include font-base(12,18);
+      display: block;
+      color: $raisin-black;
+      padding: 1px rem(8);
+      background: $gradient-blue-3;
+      border-radius: 2px;
+      &:hover {
+        color: $raisin-black;
+        opacity: 0.8;
+      }
+    }
+  }
+}

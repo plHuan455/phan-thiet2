@@ -13,6 +13,8 @@ import Layout from 'common/Layout';
 import Contact from 'pages/Contact';
 import DivisionList from 'pages/DivisionList';
 import Error from 'pages/Error';
+import EventsDetail from 'pages/EventsDetail';
+import NewsDetail from 'pages/NewsDetail';
 import Policy from 'pages/Policy';
 import Search from 'pages/Search';
 import { store } from 'store';
@@ -35,6 +37,8 @@ const App: React.FC = () => (
           <Route path="lien-he" element={<Contact />} />
           <Route path="chinh-sach-dieu-khoan" element={<Policy />} />
           <Route path="tim-kiem" element={<Search />} />
+          <Route path="tin-tuc/:slug" element={<NewsDetail />} />
+          <Route path="su-kien/:slug" element={<EventsDetail />} />
         </Route>
       </Route>
     </Routes>
