@@ -12,6 +12,11 @@ export interface MarkerCardProps {
   title: string
   handleHover?: () => void;
   handleLeave?: () => void;
+  modifiers?: 'marker' | 'utilities';
+  utilitiesIcon?: {
+    number: string;
+    fillColor: string;
+  }
 }
 
 const MarkerCard: React.FC<MarkerCardProps> = ({
@@ -20,6 +25,8 @@ const MarkerCard: React.FC<MarkerCardProps> = ({
   title,
   handleHover,
   handleLeave,
+  modifiers,
+  utilitiesIcon,
 }) => (
   <div className={mapModifiers('m-markerCard', active && 'active')}>
     <div className="m-markerCard_content">
@@ -30,9 +37,21 @@ const MarkerCard: React.FC<MarkerCardProps> = ({
         <Text modifiers={['16x28', '400', 'davyGrey']} content={title} />
       </div>
     </div>
-    <div className="m-markerCard_marker" onMouseEnter={handleHover} onMouseLeave={handleLeave}>
-      <Image src={marker} ratio="24x34" alt="marker" />
-    </div>
+    {
+      modifiers === 'marker' && (
+        <div className="m-markerCard_marker" onMouseEnter={handleHover} onMouseLeave={handleLeave}>
+          <Image src={marker} ratio="24x34" alt="marker" />
+        </div>
+      )
+    }
+    {
+      modifiers === 'utilities' && (
+        <div className="m-markerCard_utilityMarker" style={{ backgroundColor: utilitiesIcon?.fillColor }} onMouseEnter={handleHover} onMouseLeave={handleLeave}>
+          <div className="m-markerCard_utilityMarker-circle" style={{ borderColor: utilitiesIcon?.fillColor, boxShadow: `0 0 10px ${utilitiesIcon?.fillColor}` }} />
+          <Text modifiers={['700', 'white', 'center', '14x20']} content={utilitiesIcon?.number} />
+        </div>
+      )
+    }
   </div>
 );
 

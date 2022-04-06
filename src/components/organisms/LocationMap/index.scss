@@ -91,7 +91,6 @@
 
     .a-image {
       transition: all $transition linear;
-
     }
 
     @include small-mobile {
@@ -122,6 +121,52 @@
     0% {transform: translate3d(0, 0, 0);}
     40% {transform: translate3d(0, -20%, 0);}
     100% {transform: translate3d(0, -40%, 0);}
+  }
+
+  &_utilityMarker {
+    align-items: center;
+    border: rem(1) solid $white;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    height: rem(28);
+    justify-content: center;
+    margin: auto;
+    position: relative;
+    width: rem(28);
+
+    &-circle {
+      animation: ripple 2s ease-in-out infinite;
+      border-radius: 50%;
+      border-style: solid;
+      border-width: rem(1);
+      left: 50%;
+      pointer-events: none;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  @keyframes  ripple {
+    0% {
+      height: rem(20);
+      opacity: 0;
+      width: rem(20);
+    }
+
+    50% {
+      height: rem(35);
+      opacity: 1;
+      width: rem(35);
+    }
+
+    100% {
+      height: rem(56);
+      opacity: 0;
+      width: rem(56);
+    }
   }
 }
 

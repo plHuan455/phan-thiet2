@@ -7,6 +7,10 @@ export const listDivisionDummy = [
     title: 'Phân khu Waikiki',
     y: 99.21,
     x: 144.28,
+    utilitiesIcon: {
+      number: '7',
+      fillColor: '#015581',
+    },
   },
   {
     id: 2,
@@ -14,6 +18,10 @@ export const listDivisionDummy = [
     title: 'Phân khu Waikiki',
     y: 156.13,
     x: 234.96,
+    utilitiesIcon: {
+      number: '7',
+      fillColor: '#015581',
+    },
   },
   {
     id: 3,
@@ -21,6 +29,10 @@ export const listDivisionDummy = [
     title: 'Phân khu Waikiki',
     y: 135.8,
     x: 319.88,
+    utilitiesIcon: {
+      number: '7',
+      fillColor: '#015581',
+    },
   },
   {
     id: 4,
