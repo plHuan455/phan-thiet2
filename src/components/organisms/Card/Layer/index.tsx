@@ -5,8 +5,6 @@ import Link from 'components/atoms/Link';
 import Text from 'components/atoms/Text';
 import mapModifiers from 'utils/functions';
 
-// type Radius = '15';
-
 export interface CardLayerProps {
   thumbnail: string;
   title?: string;
@@ -15,9 +13,6 @@ export interface CardLayerProps {
   target?: string;
   ratio?: Ratio;
   isBold?: boolean;
-  // isHover?: boolean;
-  // isFilter?: boolean;
-  // radius?: Radius;
   modifiers?: ('r15' | 'r12' | 'filter' | 'hover')[]
 }
 

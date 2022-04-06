@@ -27,9 +27,11 @@ const CardNews: React.FC<CardNewsProps> = ({
   <div className="o-cardNews">
     <Row className="u-mr-negative-16 u-ml-negative-16">
       <Col lg={6} className="u-pl-16 u-pr-16">
-        <div className="o-cardNews_thumbnail">
-          <Image src={thumbnail} alt={title} ratio="547x309" />
-        </div>
+        <Link href={button?.url} target={button?.target}>
+          <div className="o-cardNews_thumbnail">
+            <Image src={thumbnail} alt={title} ratio="547x309" />
+          </div>
+        </Link>
       </Col>
       <Col lg={6} className="align-self-center u-pl-16 u-pr-16">
         <div className="o-cardNews_content">
@@ -45,14 +47,16 @@ const CardNews: React.FC<CardNewsProps> = ({
             </>
             )}
           </div>
-          <div className="o-cardNews_title u-mt-8 t-mt-xl-16">
-            <Heading type="h6" modifiers={['700', 's015']} content={title} />
-          </div>
-          <div className="o-cardNews_desc u-mt-8 t-mt-xl-16">
+          <Link href={button?.url} target={button?.target}>
+            <div className="o-cardNews_title u-mt-8 u-mt-md-16">
+              <Heading type="h6" modifiers={['700', 's015', 'raisinBlack']} content={title} />
+            </div>
+          </Link>
+          <div className="o-cardNews_desc u-mt-8 u-mt-md-16">
             <Text modifiers={['400', '16x28', 'davyGrey']} content={description} />
           </div>
           <Link href={button?.url} target={button?.target}>
-            <div className="d-flex align-items-center u-mt-15 u-mt-xl-30 animate animate-arrowSlide">
+            <div className="d-flex align-items-center u-mt-15 u-mt-md-30 animate animate-arrowSlide">
               <Text modifiers={['copper', '14x20', '400']} content={button?.text} />
               <div className="o-cardNews_button-icon u-ml-8">
                 <Icon iconName="arrowRightCopper" size="16" />
