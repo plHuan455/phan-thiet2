@@ -10,7 +10,7 @@ interface Props {
     name: IconName;
     size?: IconSize;
   };
-  modifiers?: 'default' | 'notify' | 'image'; // add more modifiers
+  modifiers?: 'default' | 'notify' | 'image' | 'player'; // add more modifiers
   handleClose?: () => void;
 }
 
@@ -29,6 +29,7 @@ const CustomModal: React.FC<Props> = ({
     appElement={document.getElementById('root') as HTMLElement}
     ariaHideApp={false}
     portalClassName={mapModifiers('o-modal_portal', isOpen && 'open')}
+    overlayClassName={mapModifiers('o-modal_overlay', modifiers)}
     bodyOpenClassName="reactmodal-body-open"
     htmlOpenClassName="reactmodal-html-open"
   >

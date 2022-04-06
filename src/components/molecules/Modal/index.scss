@@ -38,6 +38,17 @@
     @include reset-button();
   }
 
+  &_overlay {
+    &-player {
+      &::after {
+        background: rgba($black, 0.5) !important;
+
+      }
+    }
+  }
+
+  // Add more modifiers below here
+
   &-notify {
     #{$root}_main {
       max-width: rem(548);
@@ -69,6 +80,17 @@
       }
     }
   }
+
+  &-player {
+    #{$root}_main {
+      position: relative;
+    }
+    #{$root}_wrapper {
+      margin: auto;
+      max-width: rem(934);
+      position: initial;
+    }
+  }
 }
 
 .ReactModal__Overlay {
@@ -81,7 +103,7 @@
   z-index: $z-modal;
 
   &::after {
-    background: rgba($black, 0.74) !important;
+    background: rgba($black, 0.5) !important;
     content: '';
     display: block;
     height: 100%;

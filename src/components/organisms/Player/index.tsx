@@ -6,7 +6,7 @@ import mapModifiers from 'utils/functions';
 
 // import mapModifiers from 'utils/functions';
 
-interface PlayerProps {
+export interface PlayerProps {
   id?: string;
   src: string;
   isLoop?: boolean;
