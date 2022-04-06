@@ -42,7 +42,7 @@ const ProjectPositionSummary: React.FC<ProjectPositionSummaryProps> = ({
   }, [valueDivision]);
 
   return (
-    <div className="t-projectPositionSummary">
+    <div className="t-projectPositionSummary u-pt-md-80 u-pt-48">
       {/** TODO: Add animation later */}
       <div className="t-projectPositionSummary_bgLeft">
         <Image src={bgLeft} ratio="1x1" size="contain" />

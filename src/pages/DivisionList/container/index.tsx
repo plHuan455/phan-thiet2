@@ -1,14 +1,16 @@
 import React from 'react';
 
 import Banner from './banner';
+import Consultancy from './consultancy';
+import Map from './map';
 import Divisions from './subdivion';
 
 const Screen: React.FC = () => (
   <>
     <Banner />
-    <section className="u-mt-md-88 u-mt-48">
-      <Divisions />
-    </section>
+    <Divisions />
+    <Map />
+    <Consultancy />
   </>
 );
 
