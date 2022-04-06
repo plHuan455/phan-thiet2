@@ -2,9 +2,7 @@ import React from 'react';
 
 import mapModifiers from 'utils/functions';
 
-type Size = 'lg' | '32x48';
-
-export type TextStyle = (GeneralTextStyle | Size)[];
+export type TextStyle = (GeneralTextStyle)[];
 
 export interface HeadingProps extends React.HtmlHTMLAttributes<HTMLHeadingElement> {
   type?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';

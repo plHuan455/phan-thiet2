@@ -17,7 +17,7 @@ export default {
     size: {
       control: {
         type: 'select',
-        options: ['default', '64x84', '48x64', '40x56', '32x48', '28x40'],
+        options: ['default', '64x84', '40x56', '28x40'],
       },
     },
     fontWeight: {

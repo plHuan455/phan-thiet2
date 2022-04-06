@@ -13,7 +13,7 @@ type Ratio =
   | '258x334'
   | '547x309'
   | '1365x1290'
-  | '985x425';
+  | '912x455';
 
 type FontWeightStyle =
   | '100'

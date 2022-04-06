@@ -1,6 +1,5 @@
 import React from 'react';
 
-import selectionImage from 'assets/images/selection/image.png';
 import Heading from 'components/atoms/Heading';
 import Image from 'components/atoms/Image';
 
@@ -9,22 +8,19 @@ interface SelectionProps {
   image: string
 }
 
-const titleData = `LỰA CHỌN HOÀN HẢO
-CHO ĐẦU TƯ, DU LỊCH
-VÀ NGHỈ DƯỠNG`;
-
-const Selection: React.FC<SelectionProps> = ({ title = titleData, image = selectionImage }) => (
+const Selection: React.FC<SelectionProps> = ({ title, image }) => (
   <div className="t-selection">
-    <div className="t-selection_wrapper">
-      <div className="t-selection_content">
-        <div className="t-selection_title">
-          <Heading type="h4" modifiers={['gradientGreen', '700', '32x48']}>
-            {title}
-          </Heading>
+    <div className="container">
+      <div className="t-selection_flex">
+        <div className="t-selection_content">
+          <div className="t-selection_title">
+            <Heading type="h4" modifiers={['gradientGreen', '700', 's015']} content={title} />
+          </div>
         </div>
-      </div>
-      <div className="t-selection_thumbnail">
-        <Image src={image} alt="thumbnail" ratio="985x425" size="contain" />
+        <div className="t-selection_thumbnail">
+          <Image src={image} alt="thumbnail" ratio="912x455" size="cover" />
+        </div>
+        <div className="t-selection_layer" />
       </div>
     </div>
   </div>
