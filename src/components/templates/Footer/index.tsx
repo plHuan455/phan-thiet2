@@ -113,7 +113,7 @@ const Footer: React.FC<FooterProps> = ({
             <div className="t-footer_social-list">
               {
                     socialList.list.map((item, index) => (
-                      <div className="t-footer_social-item">
+                      <div className="t-footer_social-item" key={`social-${index.toString()}`}>
                         <Link key={`t-footer_social-${index.toString()}`} href={item.url} target={item.target} className="a-link">
                           <Image src={item.icon} ratio="1x1" alt={item.text} />
                         </Link>
