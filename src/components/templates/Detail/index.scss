@@ -32,11 +32,11 @@
     max-width: rem(184);
     pointer-events: none;
     position: absolute;
-    top: 0;
     right: 0;
+    top: 0;
+    transform: translateY(-25%);
     width: 100%;
     z-index: 1;
-    transform: translateY(-25%);
     
     @include break-max (1366px) {
       max-width: 13.4%;
@@ -45,7 +45,7 @@
     @include mobile-down {
       max-width: rem(100);
       transform: none;
-  }
+    }
 
     .a-image {
       padding-bottom: calc(246 / 184 * 100%);
@@ -68,40 +68,43 @@
 
   &_sub {
     ul {
-      display: flex;
       align-items: center;
+      display: flex;
       list-style: none;
     }
+
     li:not(:first-child) {
-      position: relative;
       margin-left: rem(16);
+      position: relative;
+
       &::before {
-        content: '';
         background-color: $davy-grey;
-        width: 3px;
-        height: 3px;
-        top: 50%;
-        position: absolute;
         border-radius: 50%;
-        transform: translateY(-50%);
+        content: '';
+        height: 3px;
         left: rem(-10);
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 3px;
       }
     }
   }
 
   &_heading {
-    display: flex;
     align-items: center;
+    display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
   }
 
   &_share {
-    display: flex;
     align-items: center;
+    display: flex;
+
     ul {
-      display: flex;
       align-items: center;
+      display: flex;
       list-style: none;
       margin-left: rem(28);
     }
@@ -110,6 +113,7 @@
       cursor: pointer;
       display: flex;
       margin-left: rem(16);
+
       &:first-child {
         margin-left: 0;
       }
@@ -126,31 +130,32 @@
     display: flex;
 
     &_text {
-      margin-right: rem(8);
       flex-shrink: 0;
+      margin-right: rem(8);
     }
 
     ul {
-      list-style: none;
-      display: flex;
       align-items: center;
-      margin: -4px rem(-6) 0;
+      display: flex;
       flex-wrap: wrap;
+      list-style: none;
+      margin: -4px rem(-6) 0;
     }
     
     li {
-      padding: 0 rem(6);
       flex-shrink: 0;
       margin-top: 4px;
+      padding: 0 rem(6);
     }
 
     &_link {
       @include font-base(12,18);
-      display: block;
-      color: $raisin-black;
-      padding: 1px rem(8);
       background: $gradient-blue-3;
       border-radius: 2px;
+      color: $raisin-black;
+      display: block;
+      padding: 1px rem(8);
+
       &:hover {
         color: $raisin-black;
         opacity: 0.8;

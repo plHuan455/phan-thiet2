@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Selection from '.';
+import UtilityHome from '.';
 
-describe('<Selection />', () => {
+describe('<UtilityHome />', () => {
   test('renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<Selection title="" image="" />, div);
+    ReactDOM.render(<UtilityHome />, div);
     ReactDOM.unmountComponentAtNode(div);
   });
 });

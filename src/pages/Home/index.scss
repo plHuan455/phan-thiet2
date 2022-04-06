@@ -1,3 +1,28 @@
 .p-home {
   background-color: $isabelline;
+  position: relative;
+
+  &_sand {
+    position: relative;
+
+    &_layer {
+      mix-blend-mode: overlay;
+      position: absolute;
+      top: rem(-256);
+      transform: matrix(-1, 0, 0, 1, 0, 0);
+      width: 100%;
+
+      @include desktop-down {
+        top: rem(-114);
+      }
+
+      @include mobile-down {
+        top: rem(-56);
+      }
+
+      .a-image {
+        padding-bottom: (535 / 1366) * 100%;
+      }
+    }
+  }
 }

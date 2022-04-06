@@ -5,8 +5,8 @@
   position: relative;
 
   @include tablet-down {
-    padding-top: rem(80);
     padding-bottom: rem(50);
+    padding-top: rem(80);
   }
 
   &_searchInput {
@@ -26,13 +26,13 @@
         appearance: none;
         background-color: $white;
         border: rem(1) solid $gainsboro;
+        border-right: none;
+        color: $arsenic;
         font-family: $font-svn-gotham;
         font-weight: 400;
         outline: 0;
         padding: rem(5) rem(28) rem(5) rem(12);
         width: 100%;
-        color: $arsenic;
-        border-right: none;
       }
   
       button {

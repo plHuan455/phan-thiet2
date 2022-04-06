@@ -32,12 +32,15 @@ $deep-lemon: rgb(240, 184, 28); //#f0b81c
 $arsenic: rgb(67, 67, 67); //#434343
 $floral-white: rgb(251, 247, 243); //#fbf7f3
 $seal-brown: rgb(74, 46, 0); // #4a2e00
+$burlywood: rgb(221, 193, 134); //#ddc186
+$chocolate: rgb(115, 71, 0); //#734700
 
 $gradient-green: linear-gradient(180deg, $persian-green 0%, $skobeloff 100%);
 $gradient-blue: linear-gradient(180deg, $silver-lake-blue 25.24%, $pearl-aqua 100%);
 $gradient-blue-2: linear-gradient(270.29deg, $green-blue 43.68%, $picton-blue 105.59%);
 $gradient-blue-3: linear-gradient(180deg, #e9f7fc 0%, #6cd8ff 100%);
 $gradient-bittersweet: linear-gradient(180deg, $bittersweet 25.24%, $atomic-tangerine 100%);
+$gradient-gamboge-orange: linear-gradient(90deg, $gamboge-orange 0%, $gamboge-orange 100%, $gamboge-orange 0%);
 
 // Overlay
 $black085: rgba($black, 0.85);
