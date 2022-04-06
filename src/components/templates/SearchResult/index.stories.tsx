@@ -6,7 +6,7 @@ import SearchResult from '.';
 
 export default {
   title: 'Components/templates/SearchResult',
-  component: SearchResult.SearchResultWrap,
+  // component: SearchResult.Wrapper,
   argTypes: {},
 } as Meta;
 
@@ -49,24 +49,24 @@ const data = new Array(9).fill({
 
 export const Normal: Story = () => (
   <Router>
-    <SearchResult.SearchResultWrap
+    <SearchResult.Wrapper
       titleMain="Tìm kiếm"
     >
-      <SearchResult.SearchTop
+      <SearchResult.Summary
         value="Nova world Phan Thiết"
         placeholder="Tìm kiếm"
         searchText="Novaworld Phan Thiết"
         length={9}
       />
-      <SearchResult.SearchFilter
+      <SearchResult.Filter
         tabs={dataTabList}
         slugActive="tin-tuc"
         optionSort={optionSort}
       />
-      <SearchResult.SearchContent
-        data={data}
+      <SearchResult.Content
+        news={data}
         hashShowMore
       />
-    </SearchResult.SearchResultWrap>
+    </SearchResult.Wrapper>
   </Router>
 );

@@ -8,6 +8,7 @@ import Icon from 'components/atoms/Icon';
 import Text from 'components/atoms/Text';
 import PullDown, { OptionType } from 'components/molecules/PullDown';
 import Card from 'components/organisms/Card';
+import { CardDivisionProps } from 'components/organisms/Card/Division';
 import { CardNormalProps } from 'components/organisms/Card/Normal';
 import Tabs, { Tab } from 'components/organisms/Tabs';
 
@@ -45,6 +46,7 @@ const SearchTop = React.forwardRef<
     </div>
     {searchText && (
     <div className="t-searchResult_textResult u-mt-16">
+      {/* TODO: Translation later */}
       <Text
         modifiers={['14x20', '400', 'fontSvnGotham', 'black', 'center']}
       >
@@ -93,6 +95,7 @@ const SearchFilter:React.FC<SearchFilterProps> = ({
       </Tabs>
     </div>
     <div className="t-searchResult_filter">
+      {/* TODO: Translation later */}
       <PullDown
         options={optionSort || []}
         placeholder="Kết quả mới nhất"
@@ -104,29 +107,46 @@ const SearchFilter:React.FC<SearchFilterProps> = ({
 );
 
 export interface SearchContentProps {
-  data?: CardNormalProps[];
+  news?: CardNormalProps[];
+  divisions?: CardDivisionProps[];
   hashShowMore?: boolean;
   handleShowMore?: () => void;
 }
 
 const SearchContent:React.FC<SearchContentProps> = ({
-  data,
+  news,
+  divisions,
   hashShowMore,
   handleShowMore,
 }) => (
   <>
     <div className="t-searchResult_list">
-      {data && data.length > 0 && (
+      {news && news.length > 0 && (
         <Row className="u-ml-negative-md-16 u-mr-negative-md-16 u-ml-negative-10 u-mr-negative-10">
-          {data.map((item, index) => (
+          {news.map((item, index) => (
             <Col
               key={`searchResultItem-${index.toString()}`}
               className="u-mt-md-32 u-mt-20 u-pl-md-16 u-pr-md-16 u-pl-10 u-pr-10"
               xs={12}
-              md={6}
+              sm={6}
               lg={4}
             >
               <Card.Normal {...item} />
+            </Col>
+          ))}
+        </Row>
+      )}
+      {divisions && divisions.length > 0 && (
+        <Row className="u-ml-negative-md-16 u-mr-negative-md-16 u-ml-negative-10 u-mr-negative-10">
+          {divisions.map((item, index) => (
+            <Col
+              key={`searchResultItem-${index.toString()}`}
+              className="u-mt-md-32 u-mt-20 u-pl-md-16 u-pr-md-16 u-pl-10 u-pr-10"
+              xs={12}
+              sm={6}
+              lg={4}
+            >
+              <Card.Division {...item} />
             </Col>
           ))}
         </Row>
@@ -139,6 +159,7 @@ const SearchContent:React.FC<SearchContentProps> = ({
         size="lg"
         onClick={handleShowMore}
       >
+        {/* TODO: Translation later */}
         Xem thêm
       </Button>
     </div>
@@ -163,8 +184,8 @@ const SearchResultWrap: React.FC<SearchResultWrapProps> = ({
 );
 
 export default {
-  SearchResultWrap,
-  SearchTop,
-  SearchFilter,
-  SearchContent,
+  Wrapper: SearchResultWrap,
+  Summary: SearchTop,
+  Filter: SearchFilter,
+  Content: SearchContent,
 };
