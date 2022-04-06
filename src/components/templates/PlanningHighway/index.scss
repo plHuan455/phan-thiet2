@@ -1,0 +1,37 @@
+.t-planningHighway {
+  &_map {
+    padding-bottom: calc(767 / 1366 * 100%);
+    display: block;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
+
+  &_bg {
+    height: 100%;
+    left: 0;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+
+  &_svg {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.o-box {
+  border-radius: rem(12);
+  &-yellow {
+    background-color: $deer1;
+  }
+  &-blue {
+    background-color: $yale-blue1;
+  }
+}
