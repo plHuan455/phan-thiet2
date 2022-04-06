@@ -5,24 +5,24 @@ import { useForm } from 'react-hook-form';
 import bgConsultancy from 'assets/images/pages/divisionList/bgConsultancy.png';
 import Image from 'components/atoms/Image';
 import { FormConsultancy } from 'components/organisms/Consultancy';
-import Consultancy from 'components/templates/Consultancy';
+import ConsultancyTemplate from 'components/templates/Consultancy';
 import { schemasConsultancyForm } from 'utils/schemas';
 
-const ConsultancyContainer: React.FC = () => {
+const Consultancy: React.FC = () => {
   const method = useForm<FormConsultancy>({
     resolver: yupResolver(schemasConsultancyForm),
     mode: 'onSubmit',
   });
 
   return (
-    <div className="p-divisionList_consultancy">
-      <Consultancy
+    <div className="s-consultancy">
+      <ConsultancyTemplate
         title={{
           text: 'ĐĂNG KÝ NHẬN <br /> THÔNG TIN DỰ ÁN',
           modifiers: ['700', 'gradientGreen', 's015'],
         }}
         layer={(
-          <div className="p-divisionList_consultancy-bg">
+          <div className="s-consultancy-bg">
             <Image src={bgConsultancy} />
           </div>
         )}
@@ -63,4 +63,4 @@ const ConsultancyContainer: React.FC = () => {
     </div>
   );
 };
-export default ConsultancyContainer;
+export default Consultancy;

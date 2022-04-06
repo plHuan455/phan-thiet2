@@ -24,6 +24,11 @@
       padding: rem(10);
     }
 
+    @include mobile-down {
+      min-width: rem(180);
+      bottom: rem(55);
+    }
+
     @include small-mobile {
       bottom: rem(30);
       min-width: rem(150);
@@ -44,6 +49,11 @@
     &-title {
       margin-top: rem(16);
       @include text-overflow;
+
+      @include mobile-down {
+        margin-top: rem(8);
+      }
+
       @include small-mobile {
         margin-top: rem(5);
 

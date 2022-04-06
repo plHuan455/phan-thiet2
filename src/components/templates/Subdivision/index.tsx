@@ -30,8 +30,9 @@ const Subdivision: React.FC<SubdivisionProps> = ({
           <Col
             key={`card-${index.toString()}`}
             className="u-mt-16 u-mt-lg-32 u-pl-16 u-pr-16"
-            md={6}
             lg={4}
+            sm={6}
+            xs={12}
           >
             <Card.Division
               {...card}

@@ -8,7 +8,7 @@ const Map: React.FC = () => {
   const [selected, setSelected] = useState<OptionType>();
 
   return (
-    <>
+    <section className="u-mt-md-80 u-mt-24">
       <ProjectPositionSummary
         optionsDivision={optionDummy}
         title="BẢN ĐỒ VỊ TRÍ DỰ ÁN"
@@ -17,7 +17,7 @@ const Map: React.FC = () => {
         handleSelected={(option) => setSelected(option)}
         placeholderPulldown="Chọn phân khu"
       />
-    </>
+    </section>
   );
 };
 
