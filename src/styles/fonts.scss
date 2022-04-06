@@ -21,7 +21,7 @@
   font-display: swap;
   font-family: $font-svn-gotham;
   font-style: normal;
-  font-weight: 400;
+  font-weight: normal;
   src: url('#{$font-path}SVN-Gotham.woff2') format('woff2'),
     url('#{$font-path}SVN-Gotham.woff') format('woff');
 }

@@ -1,0 +1,26 @@
+.o-cardNews {
+  &_thumbnail {
+    @include thumbnail-scale-hover();
+  }
+
+  @include tablet-down {
+    border-radius: rem(16);
+    filter: drop-shadow(0 4px 16px $black01);
+    overflow: hidden;
+  }
+
+  &_desc {
+    @include tablet-up {
+      @include text-overflow(3);
+    }
+  }
+
+  &_content {
+    align-self: center;
+
+    @include tablet-down {
+      background: $white;
+      padding: rem(28) rem(24) rem(36);
+    }
+  }
+}
