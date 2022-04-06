@@ -7,6 +7,7 @@ export type FlatListProps<T> = {
   settings?: Settings;
   data?: T[];
   render: (item: T)=> any;
+  innerDots?: boolean;
 }
 
 const FlatList = <T, >({
@@ -14,6 +15,7 @@ const FlatList = <T, >({
   data,
   render,
   children,
+  innerDots,
 }:PropsWithChildren<FlatListProps<T>>) => {
   const settingSelf = useMemo((): Settings => ({
     dots: false,
@@ -67,6 +69,7 @@ const FlatList = <T, >({
       {children}
 
       <Carousel
+        innerDots={innerDots}
         settings={{
           ...settingSelf,
           ...(settings || {}),
