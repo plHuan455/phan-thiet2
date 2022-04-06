@@ -61,6 +61,9 @@
     img {
       max-width: 100%;
     }
+    @include tablet-down {
+      max-width: 33%;
+    }
   }
 
   &_layer {
@@ -93,6 +96,14 @@
     }
     @include break-min(1920px) {
       max-width: rem(1700);
+    }
+    @include tablet-down {
+      max-width: rem(600);
+    }
+    @include mobile-down {
+      @media (orientation: landscape) {
+        max-width: rem(375)
+      }
     }
   }
 
