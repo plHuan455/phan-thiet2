@@ -45,6 +45,7 @@ const LocationMap: React.FC<LocationMapProps> = ({
               handleHover={() => handleHover && handleHover(item.id || 0)}
               handleLeave={handleLeave}
               active={active === item.id}
+              modifiers="marker"
             />
           </div>
         ))
