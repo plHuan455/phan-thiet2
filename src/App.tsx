@@ -14,6 +14,7 @@ import Contact from 'pages/Contact';
 import DivisionList from 'pages/DivisionList';
 import Error from 'pages/Error';
 import EventsDetail from 'pages/EventsDetail';
+import Home from 'pages/Home';
 import NewsDetail from 'pages/NewsDetail';
 import Policy from 'pages/Policy';
 import Search from 'pages/Search';
@@ -32,6 +33,7 @@ const App: React.FC = () => (
       >
         {/* TODO: Implement translation later */}
         <Route path="">
+          <Route index element={<Home />} />
           <Route path="cac-phan-khu" element={<DivisionList />} />
           <Route path="404" element={<Error />} />
           <Route path="lien-he" element={<Contact />} />
