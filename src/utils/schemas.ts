@@ -12,7 +12,3 @@ export const schemasConsultancyForm = yup.object({
     .required('Yêu cầu nhập email')
     .email('Không hợp lệ'),
 });
-
-export const schemaSearchForm = yup.object({
-  search: yup.string(),
-});

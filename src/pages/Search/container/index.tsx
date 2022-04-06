@@ -1,14 +1,9 @@
-import { Story, Meta } from '@storybook/react';
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
 
-import SearchResult from '.';
-
-export default {
-  title: 'Components/templates/SearchResult',
-  component: SearchResult.SearchResultWrap,
-  argTypes: {},
-} as Meta;
+import bgLeft from 'assets/images/searchResult/bg_searchResult_left.png';
+import bgRight from 'assets/images/searchResult/bg_searchResult_right.png';
+import Image from 'components/atoms/Image';
+import SearchResult from 'components/templates/SearchResult';
 
 const dataTabList = [
   {
@@ -47,8 +42,14 @@ const data = new Array(9).fill({
   },
 });
 
-export const Normal: Story = () => (
-  <Router>
+const Screen: React.FC = () => (
+  <>
+    <div className="p-search_bgLeft">
+      <Image src={bgLeft} ratio="1x1" size="contain" />
+    </div>
+    <div className="p-search_bgRight">
+      <Image src={bgRight} ratio="1x1" />
+    </div>
     <SearchResult.SearchResultWrap
       titleMain="Tìm kiếm"
     >
@@ -68,5 +69,7 @@ export const Normal: Story = () => (
         hashShowMore
       />
     </SearchResult.SearchResultWrap>
-  </Router>
+  </>
 );
+
+export default Screen;
