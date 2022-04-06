@@ -67,6 +67,7 @@ const setting = {
     },
   ],
 };
+
 const DivisionCollection: React.FC<DivisionCollectionProps> = ({
   title,
   subTitle,

@@ -102,22 +102,9 @@
       display: none;
       @include adjust-flex();
       @include mobile-down {
-        width: rem(62);
-        height: rem(62);
         right: 8%;
       }
-      &-yaleBlue {
-        background: $yale-blue;
-      }
-      &-deepLemon {
-        background: $deep-lemon;
-      }
-      &-camel {
-        background: $camel;
-      }
-      &-cyan {
-        background: $cyan;
-      }
+      @include style-background-color;
     }
   }
 }
