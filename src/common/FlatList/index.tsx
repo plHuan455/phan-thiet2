@@ -1,10 +1,9 @@
-/* eslint-disable react/require-default-props */
 import React, { PropsWithChildren, useMemo } from 'react';
 import { Settings } from 'react-slick';
 
 import Carousel, { NextArrow, PrevArrow } from 'components/organisms/Carousel';
 
-type FlatListProps<T> = {
+export type FlatListProps<T> = {
   settings?: Settings;
   data?: T[];
   render: (item: T)=> any;
@@ -14,8 +13,9 @@ const FlatList = <T, >({
   settings,
   data,
   render,
+  children,
 }:PropsWithChildren<FlatListProps<T>>) => {
-  const settingSelf = useMemo(() => ({
+  const settingSelf = useMemo((): Settings => ({
     dots: false,
     slidesToShow: 3,
     slidesToScroll: 1,
@@ -30,6 +30,15 @@ const FlatList = <T, >({
       );
     },
     responsive: [
+      {
+        breakpoint: 1199,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          arrows: false,
+          dots: true,
+        },
+      },
       {
         breakpoint: 992,
         settings: {
@@ -61,6 +70,7 @@ const FlatList = <T, >({
           ...(settings || {}),
         }}
       >
+        {children}
         {data.map((x, i) => (
           <React.Fragment key={`item-${i.toString()}`}>
             {render(x)}

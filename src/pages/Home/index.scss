@@ -12,16 +12,19 @@
       transform: matrix(-1, 0, 0, 1, 0, 0);
       width: 100%;
 
+      .a-image {
+        padding-bottom: (535 / 1366) * 100%;
+      }
+
       @include desktop-down {
-        top: rem(-114);
+        top: rem(-300);
+        .a-image {
+          padding-bottom: 68%;
+        }
       }
 
       @include mobile-down {
         top: rem(-56);
-      }
-
-      .a-image {
-        padding-bottom: (535 / 1366) * 100%;
       }
     }
   }

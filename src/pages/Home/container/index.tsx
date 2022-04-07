@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Banner from './banner';
+import Division from './division';
 import Position from './position';
 import Selection from './selection';
 import Utilities from './utilities';
@@ -19,6 +20,7 @@ const Screen: React.FC = () => (
         <Image src={sand} alt="sand" />
       </div>
     </div>
+    <Division />
   </>
 );
 
