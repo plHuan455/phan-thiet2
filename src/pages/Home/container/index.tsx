@@ -2,6 +2,7 @@ import React from 'react';
 
 import Banner from './banner';
 import Division from './division';
+import News from './news';
 import Position from './position';
 import Selection from './selection';
 import Utilities from './utilities';
@@ -21,6 +22,7 @@ const Screen: React.FC = () => (
       </div>
     </div>
     <Division />
+    <News />
   </>
 );
 
