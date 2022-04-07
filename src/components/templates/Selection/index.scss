@@ -3,6 +3,10 @@
     max-width: 100%;
     padding: 0;
     padding-left: rem(220);
+    @include break-min(1920px) {
+      max-width: rem(2200);
+      margin-right: 0;
+    }
     @include break-max(1499px) {
       padding-left: rem(55);
     }

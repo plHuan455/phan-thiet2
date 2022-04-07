@@ -31,7 +31,7 @@
 
     @include small-mobile {
       bottom: rem(30);
-      min-width: rem(150);
+      min-width: rem(120);
       padding: rem(5);
 
       &::after {
