@@ -3,8 +3,7 @@
     max-width: 100%;
     padding: 0;
     padding-left: rem(220);
-
-    @include max-desktop-down {
+    @include break-max(1499px) {
       padding-left: rem(55);
     }
 
@@ -36,12 +35,27 @@
   }
 
   &_content {
-    margin-left: rem(280);
-    @include max-desktop-down {
-      margin-left: rem(67);
+    margin-left: 5.1%;
+    margin-right: rem(912);
+
+    @include break-max(1365px) {
+      margin-right: rem(800);
     }
+
     @include desktop-down {
-      margin-left: rem(32);
+      margin-right: rem(620);
+    }
+
+    @include tablet-down {
+      margin-right: initial;
+    }
+  }
+
+  &_title {
+    .a-heading {
+      @include desktop { 
+        @include font-base(28,42);
+      }
     }
   }
 
