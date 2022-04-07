@@ -25,7 +25,7 @@ const FlatMore = <T, >({
   children,
   data,
   ...props
-}:PropsWithChildren<FlatMoreProps<T>>) => (data && data?.length > 0 ? (
+}:PropsWithChildren<FlatMoreProps<T>>) => (
   <div className="c-flatMore">
     <div className={`u-mb-32 ${link ? 'd-flex justify-content-between align-items-center' : ''}`}>
       <Heading {...title} content={title.text} />
@@ -42,7 +42,9 @@ const FlatMore = <T, >({
       )}
     </div>
 
-    {data && data?.length > 0 && <FlatList data={data} {...props} />}
+    <FlatList data={data} {...props}>
+      {children}
+    </FlatList>
 
     <div className="d-flex justify-content-center d-lg-none u-mt-32">
       <Link href={link?.href} target={link?.target}>
@@ -54,6 +56,6 @@ const FlatMore = <T, >({
       </Link>
     </div>
   </div>
-  ) : null);
+  );
 
 export default FlatMore;

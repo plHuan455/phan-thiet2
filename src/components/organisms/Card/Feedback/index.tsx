@@ -7,7 +7,7 @@ export interface CardFeedbackProps {
   imgSrc: string;
   job:string
   name:string;
-  comment: string
+  comment: string;
 }
 
 const CardFeedback: React.FC<CardFeedbackProps> = ({
@@ -25,7 +25,7 @@ const CardFeedback: React.FC<CardFeedbackProps> = ({
       <div className="u-mt-8">
         <Text modifiers={['20x32', '700', 'black', 'center']} content={name} />
       </div>
-      <div className="u-mt-12">
+      <div className="o-cardFeedback_comment u-mt-12">
         <Text modifiers={['16x28', '400', 'davyGrey']} content={comment} />
       </div>
     </div>
