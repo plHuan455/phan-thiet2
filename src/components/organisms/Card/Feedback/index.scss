@@ -32,10 +32,6 @@
     }
   }
 
-  &_comment {
-    @include text-overflow(6);
-  }
-
   &:hover {
     #{$root}_image {
       transform: translate(-50%, rem(-76)) scale(1.05);

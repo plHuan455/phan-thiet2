@@ -48,11 +48,13 @@ const CardNormal: React.FC<CardNormalProps> = ({
         )}
       </div>
       <div className="u-mt-md-16 u-mt-12" />
-      <Link href={href} target={target}>
-        <Text modifiers={['raisinBlack', '700', '20x32', 's015']}>
-          {title}
-        </Text>
-      </Link>
+      <div className="o-cardNormal_title">
+        <Link href={href} target={target}>
+          <Text modifiers={['raisinBlack', '700', '20x32', 's015']}>
+            {title}
+          </Text>
+        </Link>
+      </div>
       <div className="u-mt-md-16 u-mt-12" />
       {url && (
         <Link target={target} href={href}>

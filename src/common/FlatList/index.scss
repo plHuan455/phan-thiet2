@@ -5,5 +5,16 @@
 
   .slick-slide {
     padding: 0 rem(16);
+    height: inherit;
+
+      > div,
+      .o-carousel_wrap,
+      .o-carousel_item {
+        height: 100%;
+      }
+  }
+
+  .slick-track {
+    display: flex;
   }
 }
