@@ -53,7 +53,7 @@ const CardNormal: React.FC<CardNormalProps> = ({
           {title}
         </Text>
       </Link>
-      <div className="u-mt-md-24 u-mt-16" />
+      <div className="u-mt-md-16 u-mt-12" />
       {url && (
         <Link target={target} href={href}>
           <div className={`animate animate-${url.animation === 'download' ? 'download' : 'arrowSlide'} d-flex align-items-center`}>

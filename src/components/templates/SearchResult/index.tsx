@@ -81,7 +81,7 @@ const SearchFilter:React.FC<SearchFilterProps> = ({
   valueSort,
   handleSort,
 }) => (
-  <div className="t-searchResult_wrapTabs u-mt-24 u-mt-md-40">
+  <div className="t-searchResult_wrapTabs u-mt-24 u-mt-md-32">
     <div className="t-searchResult_tab">
       <Tabs variableMutate={slugActive}>
         {tabs?.map((item, index) => (
