@@ -16,6 +16,7 @@ import DivisionDetail from 'pages/DivisionDetail';
 import DivisionList from 'pages/DivisionList';
 import Error from 'pages/Error';
 import EventsDetail from 'pages/EventsDetail';
+import News from 'pages/News';
 import NewsDetail from 'pages/NewsDetail';
 import Search from 'pages/Search';
 import { store } from 'store';
@@ -44,6 +45,7 @@ const App: React.FC = () => (
           <Route path="tin-tuc/:slug" element={<NewsDetail />} />
           <Route path="su-kien/:slug" element={<EventsDetail />} />
           <Route path="phan-khu/:slug" element={<DivisionDetail />} />
+          <Route path="tin-tuc" element={<News />} />
         </Route>
       </Route>
     </Routes>

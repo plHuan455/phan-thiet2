@@ -10,7 +10,7 @@ import Text from 'components/atoms/Text';
 import Card from 'components/organisms/Card';
 import { CardEventProps } from 'components/organisms/Card/Event';
 
-interface EventsProps {
+export interface EventsProps {
   title?: string
   button?: LinkTypes
   countDown?: {
@@ -28,10 +28,10 @@ interface EventsProps {
 }
 
 const Events: React.FC<EventsProps> = ({
-  title,
+  title = '',
   button,
   countDown,
-  listEvents,
+  listEvents = [],
 }) => (
   <div className="t-events">
     <Container>
@@ -93,10 +93,7 @@ const Events: React.FC<EventsProps> = ({
 );
 
 Events.defaultProps = {
-  countDown: undefined,
-  listEvents: [],
-  title: '',
-  button: undefined,
+
 };
 
 export default Events;
