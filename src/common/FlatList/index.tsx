@@ -64,13 +64,14 @@ const FlatList = <T, >({
 
   return (
     <div className="c-flatList">
+      {children}
+
       <Carousel
         settings={{
           ...settingSelf,
           ...(settings || {}),
         }}
       >
-        {children}
         {data.map((x, i) => (
           <React.Fragment key={`item-${i.toString()}`}>
             {render(x)}
