@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useLayoutEffect } from 'react';
 
 import bgLeft from 'assets/images/searchResult/bg_searchResult_left.png';
 import bgRight from 'assets/images/searchResult/bg_searchResult_right.png';
 import Image from 'components/atoms/Image';
 import SearchResult from 'components/templates/SearchResult';
+import useScrollAnimate from 'hooks/useScrollAnimation';
 
 const dataTabList = [
   {
@@ -50,12 +51,30 @@ const divisions = new Array(9).fill({
 
 const Screen: React.FC = () => {
   const [tabActive, setTabActive] = useState<string | undefined>(dataTabList[0].slug);
+  const bgLeftRef = useRef<HTMLDivElement>(null);
+  const bgRightRef = useRef<HTMLDivElement>(null);
+  const bgLeftAnimate = useScrollAnimate(bgLeftRef);
+  const bgRightAnimate = useScrollAnimate(bgRightRef);
+
+  useLayoutEffect(() => {
+    if (!bgLeftAnimate || !bgRightAnimate || !bgLeftRef.current || !bgRightRef.current) return;
+    bgLeftRef.current.style.animationPlayState = 'running';
+    bgRightRef.current.style.animationPlayState = 'running';
+    setTimeout(() => {
+      if (bgLeftRef.current && bgRightRef.current) {
+        bgLeftRef.current.style.animationPlayState = 'paused';
+        bgRightRef.current.style.animationPlayState = 'paused';
+      }
+    }, 8000);
+  }, [bgLeftAnimate, bgRightAnimate]);
+
   return (
     <>
-      <div className="p-search_bgLeft">
+      <div className="p-search_bgLeft" ref={bgLeftRef}>
         <Image src={bgLeft} ratio="1x1" size="contain" />
       </div>
-      <div className="p-search_bgRight">
+
+      <div className="p-search_bgRight" ref={bgRightRef}>
         <Image src={bgRight} ratio="1x1" />
       </div>
       <SearchResult.Wrapper
