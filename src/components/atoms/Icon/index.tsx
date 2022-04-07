@@ -10,7 +10,7 @@ export const iconList = {
   chevronRight: 'chevronRight',
   arrowRightCopper: 'arrowRightCopper',
   searchOrange: 'searchOrange',
-  closeWhite: 'searchWhite',
+  closeWhite: 'closeWhite',
   calendar: 'calendar',
   clock: 'clock',
   location: 'location',
@@ -33,7 +33,7 @@ export const iconList = {
 
 export type IconName = keyof typeof iconList;
 
-export type IconSize = '11' | '14' | '16' | '18' | '20' | '24' | '36' | '40' | '80';
+export type IconSize = '11' | '14' | '16' | '18' | '20' | '24' | '32' | '36' | '40' | '80';
 
 interface IconProps {
   iconName: IconName;
