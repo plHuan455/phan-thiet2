@@ -27,6 +27,8 @@ export const iconList = {
   searchGray: 'searchGray',
   zalo: 'zalo',
   facebook: 'facebook',
+  arrowRightWhite: 'arrowRightWhite',
+  arrowLeftWhite: 'arrowLeftWhite',
 };
 
 export type IconName = keyof typeof iconList;

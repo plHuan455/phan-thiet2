@@ -3,7 +3,7 @@ import React from 'react';
 import mapModifiers from 'utils/functions';
 
 interface ContainerProps {
-  modifiers?: ('fullScreen' | 'noPaddingRight' | 'noPaddingLeft' | 'fullScreenTabletUp')[];
+  modifiers?: ('fullScreen' | 'noPaddingRight' | 'noPaddingLeft' | 'fullScreenTabletUp' | 'journeys')[];
 }
 
 const Container: React.FC<ContainerProps> = ({

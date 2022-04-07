@@ -4,6 +4,7 @@ import Banner from './banner';
 import Division from './division';
 import Events from './events';
 import Feedbacks from './feedbacks';
+import Journeys from './journeys';
 import News from './news';
 import Position from './position';
 import Selection from './selection';
@@ -24,6 +25,7 @@ const Screen: React.FC = () => (
       </div>
     </div>
     <Division />
+    <Journeys />
     <News />
     <Events />
     <Feedbacks />

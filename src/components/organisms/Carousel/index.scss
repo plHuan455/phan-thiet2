@@ -4,7 +4,6 @@
 
   &_arrow {
     $arrow: &;
-    background: $snow;
     border-radius: rem(100);
     height: rem(40);
     transition: $transition-long ease;
@@ -21,8 +20,17 @@
       width: rem(32);
     }
 
-    &:hover {
-      background: $gradient-green;
+    &.default {
+      background: $snow;
+      &:hover {
+        background: $gradient-green;
+      }
+    }
+
+    &.circleWhite {
+      &:hover {
+        background: $taupe-gray;
+      }
     }
 
     &::before {
@@ -44,28 +52,44 @@
     &_prev {
       left: rem(-76);
 
-      &::before {
-        background-image: url('~assets/icons/ic_arrow_carousel_back.svg');
+      &.circleWhite {
+        &::before {
+          background-image: url('~assets/icons/ic_arrow_carousel_back_white.svg');
+        }
       }
 
-      &:not(.slick-disabled):hover::before {
-        background-image: url('~assets/icons/ic_arrow_carousel_back_white.svg');
+      &.default {
+        &::before {
+          background-image: url('~assets/icons/ic_arrow_carousel_back.svg');
+        }
+
+        &:not(.slick-disabled):hover::before {
+          background-image: url('~assets/icons/ic_arrow_carousel_back_white.svg');
+        }
       }
     }
 
     &_next {
       right: rem(-76);
 
-      &::before {
-        background-image: url('~assets/icons/ic_arrow_carousel_next.svg');
+      &.circleWhite {
+        &::before {
+          background-image: url('~assets/icons/ic_arrow_carousel_next_white.svg');
+        }
       }
 
-      &:not(.slick-disabled):hover::before {
-        background-image: url('~assets/icons/ic_arrow_carousel_next_white.svg');
+      &.default {
+        &::before {
+          background-image: url('~assets/icons/ic_arrow_carousel_next.svg');
+        }
+
+        &:not(.slick-disabled):hover::before {
+          background-image: url('~assets/icons/ic_arrow_carousel_next_white.svg');
+        }
       }
     }
 
-    &.slick-arrow {
+    &.default {
       &.slick-disabled {
         background: rgba($snow, 0.5);
         border-color: transparent;
@@ -76,6 +100,16 @@
         opacity: 1;
       }
     }
+
+    &.circleWhite {
+      &.slick-disabled {
+        cursor: no-drop;
+      }
+      &::before {
+        opacity: 1;
+      }
+    }
+    
   }
 
   .slick-slide {
