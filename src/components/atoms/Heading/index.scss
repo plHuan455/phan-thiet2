@@ -55,12 +55,6 @@
   &-fontSvnGotham {
     font-family: $font-svn-gotham;
   }
-  &-32x48 {
-    @include font-base(32, 48);
-    @include mobile-down {
-      @include font-base(20, 30);
-    }
-  }
 
   @include style-letter-spacing();
   @include style-color-gradient();

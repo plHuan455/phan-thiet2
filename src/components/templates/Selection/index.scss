@@ -9,13 +9,8 @@
     }
 
     @include tablet-down {
-      padding-left: rem(32);
-    }
-
-    @include small-mobile {
       padding-left: 0;
     }
-
   }
 
   &_flex {
