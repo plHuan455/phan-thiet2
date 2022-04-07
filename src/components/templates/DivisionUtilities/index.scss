@@ -24,37 +24,22 @@
     }
   }
 
-  &_listDivision {
-    &-item {
-      $item: &;
-      animation: dropdown 0.3s linear;
-      animation-fill-mode: both;
-      max-width: rem(28);
-      position: absolute;
-      width: 100%;
-      z-index: 1;
+  &_item {
+    $item: &;
+    animation-fill-mode: both;
+    max-width: rem(28);
+    position: absolute;
+    width: 100%;
+    z-index: 1;
 
-      &-active {
-        z-index: 3;
-      }
-
-      @for $i from 1 through 50 {
-        &:nth-child(#{$i + 1}) {
-          animation-delay: #{$i * 0.2}s;
-        }
-      }
-    }
-  }
-
-  @keyframes dropdown {
-    0% {
-      opacity: 0;
-      transform: translate3d(0, -200%, 0);
+    &-active {
+      z-index: 3;
     }
 
-    100% {
-      opacity: 1;
-      transform: translate3d(0, 0, 0);
+    @for $i from 1 through 50 {
+      &:nth-child(#{$i + 1}) {
+        animation-delay: #{$i * 0.2}s;
+      }
     }
   }
 }
