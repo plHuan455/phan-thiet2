@@ -82,7 +82,7 @@ const Error: React.FC<ErrorProps> = ({
                 </Button>
               </div>
               <div className="t-error_contact u-ml-12">
-                <Button size="md" variant="outline-transparent" href={contact?.url} target={contact?.target}>{contact?.text}</Button>
+                <Button size="md" variant="outline-green" href={contact?.url} target={contact?.target}>{contact?.text}</Button>
               </div>
             </div>
           </div>
