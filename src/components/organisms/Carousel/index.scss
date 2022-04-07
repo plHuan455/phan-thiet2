@@ -4,7 +4,6 @@
 
   &_arrow {
     $arrow: &;
-    background: $snow;
     border-radius: rem(100);
     height: rem(40);
     transition: $transition-long ease;
@@ -22,6 +21,7 @@
     }
 
     &.default {
+      background: $snow;
       &:hover {
         background: $gradient-green;
       }
