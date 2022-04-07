@@ -9,7 +9,15 @@ import Container from 'common/Container';
 export default {
   title: 'Components/organisms/Card',
   // component: Card,
-  argTypes: {},
+  argTypes: {
+    pd: {
+      control: {
+        type: 'select',
+        options: ['pd-6x20', 'pd-8x16', 'pd-24x16', 'pd-6x16'],
+      },
+      defaultValue: 'pd-6x20',
+    },
+  },
 } as Meta;
 
 export const player: Story = () => (
@@ -114,7 +122,9 @@ export const feeback: Story = () => (
   </BrowserRouter>
 );
 
-export const layer: Story = () => (
+export const layer: Story = ({
+  pd,
+}) => (
   <BrowserRouter>
     <div style={{ maxWidth: 394, background: 'white', padding: 20 }}>
       <Card.Layer
@@ -122,7 +132,7 @@ export const layer: Story = () => (
         title="OCEAN GOLF"
         ratio="354x221"
         isBold
-        modifiers={['filter', 'hover', 'r15']}
+        modifiers={['filter', 'hover', 'r15', pd]}
         description="Sân golf 89ha kề biển theo chuẩn PGA quốc tế tạo nên môi trường sống xanh trong lành, cho cả gia đình cùng trải nghiệm golf thư giãn ngay trước thềm nhà."
       />
     </div>

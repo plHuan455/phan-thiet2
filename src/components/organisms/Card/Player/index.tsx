@@ -43,7 +43,7 @@ const CardPlayer: React.FC<CardPlayerProps> = ({
             <div className="u-mr-8" />
             <Icon iconName="dot" size="16" />
             <Text
-              modifiers={['400', '14x20', 'gradientGreen']}
+              modifiers={['400', '12x20', 'gradientGreen']}
               content={tag}
             />
           </>

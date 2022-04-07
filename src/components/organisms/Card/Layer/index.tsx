@@ -13,7 +13,7 @@ export interface CardLayerProps {
   target?: string;
   ratio?: Ratio;
   isBold?: boolean;
-  modifiers?: ('r15' | 'r12' | 'filter' | 'hover')[]
+  modifiers?: ('r15' | 'r12' | 'filter' | 'hover' | 'pd-6x20' | 'pd-8x16' | 'pd-24x16' | 'pd-6x16')[]
 }
 
 const CardLayer: React.FC<CardLayerProps> = ({

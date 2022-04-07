@@ -41,7 +41,7 @@ const CardNormal: React.FC<CardNormalProps> = ({
           <>
             <Icon iconName="dot" size="16" />
             <Text
-              modifiers={['400', '14x20', 'gradientGreen']}
+              modifiers={['400', '12x20', 'gradientGreen']}
               content={tag}
             />
           </>
