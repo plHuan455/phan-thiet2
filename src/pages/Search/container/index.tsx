@@ -1,4 +1,5 @@
-import React, { useState, useRef, useLayoutEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { animated, easings, useSpring } from 'react-spring';
 
 import bgLeft from 'assets/images/searchResult/bg_searchResult_left.png';
 import bgRight from 'assets/images/searchResult/bg_searchResult_right.png';
@@ -46,40 +47,62 @@ const news = new Array(9).fill({
 const divisions = new Array(9).fill({
   imgSrc: 'https://source.unsplash.com/random',
   title: 'The Florida',
-  description: 'Ocean Residence kiến tạo nơi đáng  sống mới cho cư dân khi tận hưởng giá trị Ocean Residence kiến tạo nơi đáng  sống mới cho cư dân khi tận hưởng giá trị ..',
+  description:
+    'Ocean Residence kiến tạo nơi đáng  sống mới cho cư dân khi tận hưởng giá trị Ocean Residence kiến tạo nơi đáng  sống mới cho cư dân khi tận hưởng giá trị ..',
 });
 
 const Screen: React.FC = () => {
-  const [tabActive, setTabActive] = useState<string | undefined>(dataTabList[0].slug);
+  const [tabActive, setTabActive] = useState<string | undefined>(
+    dataTabList[0].slug,
+  );
   const bgLeftRef = useRef<HTMLDivElement>(null);
-  const bgRightRef = useRef<HTMLDivElement>(null);
-  const bgLeftAnimate = useScrollAnimate(bgLeftRef);
-  const bgRightAnimate = useScrollAnimate(bgRightRef);
+  const isScrollBooloons = useScrollAnimate(bgLeftRef);
 
-  useLayoutEffect(() => {
-    if (!bgLeftAnimate || !bgRightAnimate || !bgLeftRef.current || !bgRightRef.current) return;
-    bgLeftRef.current.style.animationPlayState = 'running';
-    bgRightRef.current.style.animationPlayState = 'running';
-    setTimeout(() => {
-      if (bgLeftRef.current && bgRightRef.current) {
-        bgLeftRef.current.style.animationPlayState = 'paused';
-        bgRightRef.current.style.animationPlayState = 'paused';
-      }
-    }, 8000);
-  }, [bgLeftAnimate, bgRightAnimate]);
+  const slideXAnimation = useSpring({
+    x: 0,
+  });
+  const slideYAnimation = useSpring({
+    y: -180,
+  });
+  const slideYReversAnimation = useSpring({
+    y: 340,
+  });
+
+  useEffect(() => {
+    if (isScrollBooloons) {
+      const { x } = slideXAnimation;
+      const { y: slideY } = slideYAnimation;
+      const { y: slideYReverse } = slideYReversAnimation;
+      x.start({
+        from: 0,
+        to: 50,
+        loop: { reverse: true },
+        config: { duration: 2000, easing: easings.easeInOutSine },
+      });
+      slideY.start({ from: -180, to: 0, config: { duration: 5500 } });
+      slideYReverse.start({ from: 340, to: 0, config: { duration: 5300 } });
+
+      setTimeout(() => {
+        x.start({ cancel: true });
+      }, 5800);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isScrollBooloons]);
 
   return (
     <>
-      <div className="p-search_bgLeft" ref={bgLeftRef}>
-        <Image src={bgLeft} ratio="1x1" size="contain" />
-      </div>
+      <animated.div className="m-title_trail" style={{ ...slideXAnimation, ...slideYAnimation }}>
+        <div className="p-search_bgLeft" ref={bgLeftRef}>
+          <Image src={bgLeft} ratio="1x1" size="contain" />
+        </div>
+      </animated.div>
+      <animated.div className="m-title_trail" style={{ ...slideXAnimation, ...slideYReversAnimation }}>
+        <div className="p-search_bgRight">
+          <Image src={bgRight} ratio="1x1" />
+        </div>
+      </animated.div>
 
-      <div className="p-search_bgRight" ref={bgRightRef}>
-        <Image src={bgRight} ratio="1x1" />
-      </div>
-      <SearchResult.Wrapper
-        titleMain="Tìm kiếm"
-      >
+      <SearchResult.Wrapper titleMain="Tìm kiếm">
         <SearchResult.Summary
           value="Nova world Phan Thiết"
           placeholder="Tìm kiếm"
@@ -93,16 +116,10 @@ const Screen: React.FC = () => {
           handleSelectTab={(tab) => setTabActive(tab)}
         />
         {tabActive === 'tin-tuc' && (
-          <SearchResult.Content
-            news={news}
-            hashShowMore
-          />
+          <SearchResult.Content news={news} hashShowMore />
         )}
         {tabActive === 'phan-khu' && (
-          <SearchResult.Content
-            divisions={divisions}
-            hashShowMore
-          />
+          <SearchResult.Content divisions={divisions} hashShowMore />
         )}
       </SearchResult.Wrapper>
     </>
