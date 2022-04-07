@@ -56,6 +56,8 @@
     @include mobile-down {
       flex-direction: column;
       margin-top: rem(12);
+      align-items: flex-start;
+      max-width: rem(250);
     }
 
     &-duration {
@@ -106,6 +108,7 @@
     }
 
     .a-icon {
+      flex-shrink: 0;
       margin-right: rem(16);
     }
   }
@@ -115,7 +118,7 @@
     max-width: fit-content;
 
     @include mobile-down {
-      margin-top: rem(12);
+      margin-top: rem(16);
     }
   }
 }
