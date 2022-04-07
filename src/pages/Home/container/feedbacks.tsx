@@ -47,7 +47,7 @@ const listDummy = [
 ];
 
 const Feedbacks: React.FC = () => (
-  <section className="u-pt-md-80 u-pb-48 u-pt-48 u-pb-md-88">
+  <section className="u-pt-md-80 u-pb-48 u-pt-48 u-pb-md-80">
     <Container>
       <FlatMore
         title={{
