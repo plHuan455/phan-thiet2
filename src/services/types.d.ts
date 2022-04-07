@@ -1,4 +1,6 @@
 /* eslint-disable camelcase */
+type ErrorResponse = { code: number; message: string };
+
 type Translation = {
   locale: string;
   title?: string;
