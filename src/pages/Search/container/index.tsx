@@ -1,11 +1,12 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { animated, easings, useSpring } from 'react-spring';
+import React, { useState, useRef } from 'react';
+import { animated } from 'react-spring';
+
+import useAnimation from '../animation';
 
 import bgLeft from 'assets/images/searchResult/bg_searchResult_left.png';
 import bgRight from 'assets/images/searchResult/bg_searchResult_right.png';
 import Image from 'components/atoms/Image';
 import SearchResult from 'components/templates/SearchResult';
-import useScrollAnimate from 'hooks/useScrollAnimation';
 
 const dataTabList = [
   {
@@ -56,47 +57,16 @@ const Screen: React.FC = () => {
     dataTabList[0].slug,
   );
   const bgLeftRef = useRef<HTMLDivElement>(null);
-  const isScrollBooloons = useScrollAnimate(bgLeftRef);
-
-  const slideXAnimation = useSpring({
-    x: 0,
-  });
-  const slideYAnimation = useSpring({
-    y: -180,
-  });
-  const slideYReversAnimation = useSpring({
-    y: 340,
-  });
-
-  useEffect(() => {
-    if (isScrollBooloons) {
-      const { x } = slideXAnimation;
-      const { y: slideY } = slideYAnimation;
-      const { y: slideYReverse } = slideYReversAnimation;
-      x.start({
-        from: 0,
-        to: 50,
-        loop: { reverse: true },
-        config: { duration: 2000, easing: easings.easeInOutSine },
-      });
-      slideY.start({ from: -180, to: 0, config: { duration: 5500 } });
-      slideYReverse.start({ from: 340, to: 0, config: { duration: 5300 } });
-
-      setTimeout(() => {
-        x.start({ cancel: true });
-      }, 5800);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isScrollBooloons]);
+  const { animate, animateReverse } = useAnimation({ ref: bgLeftRef });
 
   return (
     <>
-      <animated.div className="m-title_trail" style={{ ...slideXAnimation, ...slideYAnimation }}>
+      <animated.div style={animate}>
         <div className="p-search_bgLeft" ref={bgLeftRef}>
           <Image src={bgLeft} ratio="1x1" size="contain" />
         </div>
       </animated.div>
-      <animated.div className="m-title_trail" style={{ ...slideXAnimation, ...slideYReversAnimation }}>
+      <animated.div style={animateReverse}>
         <div className="p-search_bgRight">
           <Image src={bgRight} ratio="1x1" />
         </div>

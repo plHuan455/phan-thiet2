@@ -16,8 +16,12 @@
     @include break-max(1366px) {
       max-width: 18.6%;
     }
+    @include tablet-down {
+      top: rem(12);
+    }
     @include mobile-down {
       max-width: rem(100);
+      left: rem(-32);
     }
     .a-image {
       padding-bottom: calc(178 / 259 * 100%);
@@ -36,9 +40,13 @@
       max-width: 8%;
     }
 
+    @include tablet-down {
+      top: rem(64);
+    }
+
     @include mobile-down {
       max-width: rem(50);
-      right: rem(10);
+      right: rem(58);
       top: rem(70);
     }
 
