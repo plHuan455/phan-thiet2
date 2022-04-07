@@ -25,7 +25,6 @@
     right: 0;
     top: 0;
     z-index: 1;
-   
   }
 
   &::after {
@@ -93,11 +92,20 @@
     &::before {
       background: $gradient-green;
     }
-    
+
     &::after {
       background-color: $white;
     }
 
+    #{$root}_text {
+      background: $gradient-green;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+
+  &-outline-transparent {
+    border: 1px solid $persian-green;
     #{$root}_text {
       background: $gradient-green;
       -webkit-background-clip: text;

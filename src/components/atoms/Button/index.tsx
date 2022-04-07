@@ -9,6 +9,7 @@ import mapModifiers from 'utils/functions';
 type Gradients =
   | 'primary-blue'
   | 'primary-green'
+  | 'outline-transparent'
   | 'outline-green';
 
 export type Variants = ColorStyle | Gradients;
