@@ -10,9 +10,7 @@
   }
 
   &_desc {
-    @include tablet-up {
-      @include text-overflow(3);
-    }
+    @include text-overflow(3);
   }
 
   &_content {
