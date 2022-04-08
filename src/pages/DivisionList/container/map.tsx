@@ -8,7 +8,7 @@ const Map: React.FC = () => {
   const [selected, setSelected] = useState<OptionType>();
 
   return (
-    <section className="u-mt-md-80 u-mt-24">
+    <section className="u-mt-md-40 u-mt-16">
       <ProjectPositionSummary
         optionsDivision={optionDummy}
         title="BẢN ĐỒ VỊ TRÍ DỰ ÁN"
