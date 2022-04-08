@@ -188,6 +188,7 @@
 .t-journeys {
   padding: rem(80) 0 rem(40);
   position: relative;
+  z-index: 1;
 
   @include mobile-down {
     padding: rem(40) 0 rem(20);

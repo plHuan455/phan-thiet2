@@ -11,7 +11,8 @@ import Position from './position';
 import Selection from './selection';
 import Utilities from './utilities';
 
-import sand from 'assets/images/pages/home/sand.png';
+import sand1 from 'assets/images/pages/home/sand_1.png';
+import sand2 from 'assets/images/pages/home/sand_2.png';
 import Image from 'components/atoms/Image';
 
 const Screen: React.FC = () => (
@@ -20,13 +21,18 @@ const Screen: React.FC = () => (
     <Position />
     <Selection />
     <Utilities />
-    <div className="p-home_sand">
-      <div className="p-home_sand_layer">
-        <Image src={sand} alt="sand" />
+    <div className="p-home_sand1">
+      <div className="p-home_sand1_layer">
+        <Image src={sand1} alt="sand" />
       </div>
     </div>
     <Division />
     <Journeys />
+    <div className="p-home_sand2">
+      <div className="p-home_sand2_layer">
+        <Image src={sand2} alt="sand" />
+      </div>
+    </div>
     <News />
     <Events />
     <Feedbacks />

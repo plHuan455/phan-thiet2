@@ -3,8 +3,10 @@ import React from 'react';
 import img from 'assets/images/feedbacks/img.png';
 import img1 from 'assets/images/feedbacks/img1.png';
 import img2 from 'assets/images/feedbacks/img2.png';
+import leaf from 'assets/images/pages/home/feedbacks/leaf.png';
 import Container from 'common/Container';
 import FlatMore from 'common/FlatMore';
+import Image from 'components/atoms/Image';
 import Card from 'components/organisms/Card';
 
 const listDummy = [
@@ -47,7 +49,12 @@ const listDummy = [
 ];
 
 const Feedbacks: React.FC = () => (
-  <section className="u-pt-md-80 u-pb-48 u-pt-48 u-pb-md-80">
+  <section className="u-pt-md-80 u-pb-48 u-pt-48 u-pb-md-80 position-relative">
+    <div className="s-feedbacks_leaf">
+      <div className="s-feedbacks_leaf_layer">
+        <Image src={leaf} alt="leaf" />
+      </div>
+    </div>
     <Container>
       <FlatMore
         title={{

@@ -1,10 +1,11 @@
 .t-events {
+  position: relative;
   &_wrapCountDown {
     background-image: url('~assets/images/events/bg.png');
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: rem(20);
-    filter: drop-shadow(0 4px 36px $black025);
+    box-shadow: 0 4px 36px $black025;
     margin-left: auto;
     margin-right: auto;
     max-width: rem(1034);
