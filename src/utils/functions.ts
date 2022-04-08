@@ -117,10 +117,6 @@ export const handleScrollCenter = (ref: React.RefObject<HTMLDivElement | null>,
   });
 };
 
-export function countDownFn(day:string, hour:string, min:string, sec: string) {
-  return `${day ? `${day}:` : ''}${hour ? `${hour}:` : ''}${min ? `${min}:` : ''}${sec ? `${sec}` : ''}`;
-}
-
 export function getBlockData<T>(
   _code: string,
   listBlock?: any[],
@@ -154,3 +150,17 @@ export const baseString = (str?: string): string => {
 
   return str;
 };
+
+export const countDownFn = (day:string, hour:string, min:string, sec: string) => `${day ? `${day}:` : ''}${hour ? `${hour}:` : ''}${min ? `${min}:` : ''}${sec ? `${sec}` : ''}`;
+
+export const youtubeParser = (url: string) => {
+  // eslint-disable-next-line no-useless-escape
+  const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+  const match = url.match(regExp);
+  // eslint-disable-next-line eqeqeq
+  return match && match[7].length == 11 ? match[7] : false;
+};
+
+export const youtubeControlIframe = (url: string) => `<iframe src="https://www.youtube.com/embed/${youtubeParser(
+  url,
+)}?autoplay=1&disablekb=1&enable&controls=0&jsapi=1&loop=1&modestbranding=1&playsinline=1&color=white&mute=1" frameborder="0" allowfullscreen allow="autoplay" autoplay></iframe>`;

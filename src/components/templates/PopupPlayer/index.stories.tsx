@@ -17,7 +17,9 @@ export const Normal: Story = () => {
       <PopupPlayer
         isOpen={isOpen}
         handleClose={() => setIsOpen(false)}
+        videoType="2"
         src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+        // src="https://www.youtube.com/watch?v=NuWAl7-Vkwk&list=RDNuWAl7-Vkwk&start_radio=1"
       />
     </>
   );
