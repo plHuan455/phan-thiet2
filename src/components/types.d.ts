@@ -15,7 +15,10 @@ type Ratio =
   | '1365x1290'
   | '912x455'
   | '929x479'
-  | '142x229';
+  | '142x229'
+  | '182x70'
+  | '262x147'
+  | '166x110';
 
 type FontWeightStyle =
   | '100'
@@ -61,7 +64,8 @@ type ColorStyle =
   | 'gradientBlue'
   | 'deepLemon'
   | 'gradientBittersweet'
-  | 'arsenic';
+  | 'arsenic'
+  | 'bananaMania';
 
 type FontFamily = 'fontOswald' | 'fontSvnGotham';
 
