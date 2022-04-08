@@ -1,15 +1,14 @@
-import React, { useMemo, useRef } from 'react';
+import React, { useRef } from 'react';
 
 import useAnimation from '../animation';
 
-import Banner, { BannerBlocks } from './banner';
-import Ckeditor, { CkeditorBlocks } from './ckeditor';
+import Banner, { BannerProps } from './banner';
+import Ckeditor, { CkeditorProps } from './ckeditor';
 
 import imgBalloon from 'assets/images/pages/policy/balloon.png';
 import Image from 'components/atoms/Image';
-import { baseString, getBlockData } from 'utils/functions';
 
-export type PolicyBlock = BannerBlocks | CkeditorBlocks
+export type PolicyBlock = BannerProps | CkeditorProps
 
 const Screen: React.FC<BasePageDataTypes<PolicyBlock>> = ({
   blocks,
@@ -17,17 +16,6 @@ const Screen: React.FC<BasePageDataTypes<PolicyBlock>> = ({
 }) => {
   const balloonRef = useRef<HTMLDivElement>(null);
   const { animated, animate } = useAnimation({ ref: balloonRef });
-  // blocks
-  const introduceBlock = useMemo(() => {
-    const blockPageContent = getBlockData<CkeditorBlocks>(
-      'introduction',
-      blocks,
-    );
-    return {
-      content: baseString(blockPageContent?.content),
-    };
-  }, [blocks]);
-
   return (
     <>
       <Banner banners={banners} />
@@ -35,7 +23,7 @@ const Screen: React.FC<BasePageDataTypes<PolicyBlock>> = ({
         <animated.div className="s-policy_layer_balloon" ref={balloonRef} style={animate}>
           <Image src={imgBalloon} alt="balloon" />
         </animated.div>
-        <Ckeditor {...introduceBlock} />
+        <Ckeditor blocks={blocks} />
       </section>
     </>
   );
