@@ -1,5 +1,11 @@
-import React, { useCallback, useRef, useState } from 'react';
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable max-len */
+import React, {
+  useCallback, useLayoutEffect, useRef, useState,
+} from 'react';
 import { Col, Row } from 'react-bootstrap';
+import { animated, useSpring } from 'react-spring';
 
 import PopupInfo from './popupInfo';
 
@@ -116,6 +122,38 @@ const PlanningHighway: React.FC<PlanningHighwayProps> = ({
   const fnGetClassAnimate = useCallback((_class:string) => (animate ? _class : 'preanimate'), [animate]);
   const [info, setInfo] = useState<InfoItemType>();
 
+  const stylesLiveYellow = useSpring({
+    from: {
+      clipPath: 'polygon(0% 0%, 0% 100%, 0% 100%, 0% 0%)',
+    },
+    to: {
+      clipPath: 'polygon(0% 0%, 0% 100%, 100% 100%, 100% 0%)',
+    },
+    config: {
+      duration: 1500,
+    },
+  });
+
+  const stylesLiveBlue = useSpring({
+    from: {
+      clipPath: 'polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)',
+    },
+    to: {
+      clipPath: 'polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)',
+    },
+    config: {
+      duration: 500,
+    },
+    delay: 2000,
+  });
+
+  useLayoutEffect(() => {
+    if (animate) {
+      stylesLiveBlue.clipPath.start();
+      stylesLiveYellow.clipPath.start();
+    }
+  }, [animate, stylesLiveBlue, stylesLiveYellow]);
+
   return (
     <div className="t-planningHighway" ref={ref}>
       <div className="t-planningHighway_map">
@@ -156,9 +194,12 @@ const PlanningHighway: React.FC<PlanningHighwayProps> = ({
 
         <div className="t-planningHighway_svg">
           <svg width="100%" height="100%" viewBox="0 0 1366 767" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path className="vector vector-yellow-short" d="M244.779 443.535L216.033 383.238" stroke="#B29556" strokeWidth="5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="16 16" />
-            <path className="vector vector-blue" d="M818.26 191.708C818.26 191.708 758.728 241.022 752.529 316.431" stroke="#1A4988" strokeWidth="5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="16 16" />
-            <path className="vector vector-yellow-long" d="M0 461.319C314.803 327.653 578.407 230.757 645.008 217.786L747.825 325.084" stroke="#B29556" strokeWidth="5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="16 16" />
+            <animated.svg style={stylesLiveBlue} x="212" y="380" width="35" height="67" viewBox="0 0 35 67" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path className="vector vector-yellow-short" d="M31.779 63.5349L3.0332 3.23828" stroke="#B29556" strokeWidth="5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="16 16" />
+              <path d="M28.4661 27.9852L12.0143 22.3105L6.33691 38.7458L28.4661 27.9852Z" fill="#B29556" />
+            </animated.svg>
+            <animated.path style={stylesLiveBlue} className="vector vector-blue" d="M818.26 191.708C818.26 191.708 758.728 241.022 752.529 316.431" stroke="#1A4988" strokeWidth="5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="16 16" />
+            <animated.path style={stylesLiveYellow} className="vector vector-yellow-long" d="M0 461.319C314.803 327.653 578.407 230.757 645.008 217.786L747.825 325.084" stroke="#B29556" strokeWidth="5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="16 16" />
           </svg>
         </div>
 

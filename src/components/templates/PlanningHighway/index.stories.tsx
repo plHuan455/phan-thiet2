@@ -15,14 +15,14 @@ export default {
 const dataInfo = {
   san_bay_phan_thiet: {
     imgSrc: imageAirport2,
-    content: 'Tái khởi công: 2020</br>Dự kiến hoàn thành: 2022</br>Công suất dự kiến: 1 triệu khách/ năm',
+    content: '&bull; Tái khởi công: 2020</br>&bull; Dự kiến hoàn thành: 2022</br>&bull; Công suất dự kiến: 1 triệu khách/ năm',
   },
   san_bay_long_thanh: {
     imgSrc: imageAirport,
-    content: 'Khởi công: 05.01.2021</br>Dự kiến hoàn thành giai đoạn 1: 2025<br/>Công suất dự kiến: 25 triệu khách/ năm',
+    content: '&bull; Khởi công: 05.01.2021</br>&bull; Dự kiến hoàn thành giai đoạn 1: 2025<br/>&bull; Công suất dự kiến: 25 triệu khách/ năm',
   },
   cao_toc: {
-    content: 'Khởi công: 30/09/2020</br>Dự kiến hoàn thành: 2022</br>Quy mô: 6 làn xe',
+    content: '&bull; Khởi công: 30/09/2020</br>&bull; Dự kiến hoàn thành: 2022</br>&bull; Quy mô: 6 làn xe',
   },
 };
 

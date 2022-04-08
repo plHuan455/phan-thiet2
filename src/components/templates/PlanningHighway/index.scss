@@ -93,7 +93,7 @@
       stroke: $deer1;
       stroke-dasharray: 10;
       stroke-width: 5;
-      animation: StrokeLine 5s infinite linear;
+      animation: StrokeLine 10s infinite linear;
 
       &-blue {
         stroke: $yale-blue1;
@@ -125,6 +125,10 @@
     width: 100%;
     z-index: 2;
 
+    @include desktop-down {
+      max-width: rem(320);
+    }
+
     @include tablet-down {
       max-width: rem(250);
     }
@@ -139,6 +143,10 @@
       bottom: 120%;
       left: 0;
       width: 100%;
+
+      @include desktop-down {
+        max-width: rem(200);
+      }
 
       @include tablet-down {
         max-width: rem(140);
@@ -265,28 +273,28 @@
   }
 
   .customAnimate-scheduleBoxItem-0 {
-    @include customAnimation(0.2s, slideInLeftText, calc(0.4s + 0.3s + 0.3s + 0.5s + 0.6s + 1s + 0.5s + 1s + 0.5s));
+    @include customAnimation(0.75s, slideInLeftText, calc(0.4s + 0.3s + 0.3s + 0.5s + 0.6s + 1s + 0.5s + 1s + 0.5s));
     @include tablet-down {
-      animation-delay: 0.3s;
+      animation-delay: 0.4s;
     }
   }
 
   .customAnimate-scheduleBoxItem-1 {
-    @include customAnimation(0.2s, slideInLeftText, calc(0.4s + 0.3s + 0.3s + 0.5s + 0.6s + 1s + 0.5s + 1s + 0.5s + 0.2s));
+    @include customAnimation(0.75s, slideInLeftText, calc(0.4s + 0.3s + 0.3s + 0.5s + 0.6s + 1s + 0.5s + 1s + 0.5s + 0.2s));
     @include tablet-down {
-      animation-delay: 0.5s;
+      animation-delay: 0.6s;
     }
   }
 
   .customAnimate-scheduleBoxItem-2 {  
-    @include customAnimation(0.2s, slideInLeftText, calc(0.4s + 0.3s + 0.3s + 0.5s + 0.6s + 1s + 0.5s + 1s + 0.5s + 0.2s + 0.2s));
+    @include customAnimation(0.75s, slideInLeftText, calc(0.4s + 0.3s + 0.3s + 0.5s + 0.6s + 1s + 0.5s + 1s + 0.5s + 0.2s + 0.2s));
     @include tablet-down {
-      animation-delay: 0.7s;
+      animation-delay: 0.8s;
     }
   }
 
   .customAnimate-scheduleBoxItem-3 {
-    @include customAnimation(0.2s, slideInLeftText, calc(0.4s + 0.3s + 0.3s + 0.5s + 0.6s + 1s + 0.5s + 1s + 0.5s + 0.2s + 0.2s + 0.2s));
+    @include customAnimation(0.75s, slideInLeftText, calc(0.4s + 0.3s + 0.3s + 0.5s + 0.6s + 1s + 0.5s + 1s + 0.5s + 0.2s + 0.2s + 0.2s));
     @include tablet-down {
       animation-delay: 0.9s;
     }
@@ -387,6 +395,9 @@
       right: 0;
       bottom: -28%;
       pointer-events: none;
+      @include tablet-down {
+        bottom: -40%;
+      }
     }
   }
 
@@ -462,11 +473,14 @@
   from {
     -webkit-transform: translate3d(-200%, 0, 0);
     transform: translate3d(-200%, 0, 0);
-    visibility: visible;
+    visibility: hidden;
+    opacity: 0;
   }
-
+  
   to {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
+    visibility: visible;
+    opacity: 1;
   }
 }
