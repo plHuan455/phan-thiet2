@@ -73,9 +73,9 @@
         &::before {
           background-image: url('~assets/icons/ic_arrow_carousel_back_white.svg');
         }
-  
+
         &:not(.slick-disabled):hover {
-          background: $davy-grey;;
+          background: $davy-grey;
         }
       }
     }
@@ -103,9 +103,9 @@
         &::before {
           background-image: url('~assets/icons/ic_arrow_carousel_next_white.svg');
         }
-  
+
         &:not(.slick-disabled):hover {
-          background: $davy-grey;;
+          background: $davy-grey;
         }
       }
     }
@@ -131,7 +131,6 @@
         opacity: 1;
       }
     }
-    
   }
 
   .slick-slide {
@@ -179,7 +178,7 @@
       display: block;
       height: rem(10);
       width: rem(10);
-  
+
       &::before {
         background-color: $white;
         border-radius: 50%;

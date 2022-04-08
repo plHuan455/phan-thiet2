@@ -75,6 +75,10 @@ const PopupImage: React.FC<PopupImageProps> = ({
         isOpen={isOpen}
         handleClose={handleClose}
         modifiers="image"
+        icon={{
+          name: 'closeWhite',
+          size: '18',
+        }}
       >
         {dataImageList.length > 0 ? (
           <div className="t-popupImage_wrapper">
