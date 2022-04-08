@@ -1,0 +1,486 @@
+@mixin locationInMap ($width) {
+  object-fit: cover;
+  position: absolute;
+  width: $width;
+  z-index: 2;
+}
+
+@mixin customAnimation ($duration, $name, $delay) {
+  -webkit-animation-duration: $duration;
+  -webkit-animation-duration: var($duration);
+  animation-duration: $duration;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-name: $name;
+  animation-name: $name;
+  animation-delay: $delay;
+}
+
+.t-planningHighway {
+  $root: &;
+  position: relative;
+  &_map {
+    padding-bottom: calc(767 / 1366 * 100%);
+    display: block;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
+
+  &_bg {
+    height: 100%;
+    left: 0;
+    top: 0;
+    @include locationInMap(100%);
+  }
+
+  &_project {
+    left: 9%;
+    top: 27%;
+    @include locationInMap(31%);
+    z-index: 3;
+    @include mobile-up {
+      pointer-events: none;
+    }
+    @include mobile-down {
+      animation: fadeInBlur 1s ease infinite;
+    }
+  }
+
+  &_locationPoint {
+    left: 0.8%;
+    bottom: 60%;
+    @include locationInMap(3.3%);
+  }
+  
+  &_planeLarge {
+    left: 2%;
+    bottom: 10%;
+    @include locationInMap(6.6%);
+    z-index: 3;
+    @include mobile-up {
+      pointer-events: none;
+    }
+    @include mobile-down {
+      animation: animationPlane 1s ease infinite alternate;
+    }
+  }
+
+  &_planeSmall {
+    left: 59.8%;
+    bottom: 74%;
+    @include locationInMap(4%);
+    z-index: 3;
+    @include mobile-up {
+      pointer-events: none;
+    }
+    @include mobile-down {
+      animation: animationPlane 1s ease infinite alternate;
+    }
+  }
+
+  &_svg {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    .vector {
+      stroke-miterlimit: 10;
+      stroke-dashoffset: 0;
+      stroke: $deer1;
+      stroke-dasharray: 10;
+      stroke-width: 5;
+      animation: StrokeLine 10s infinite linear;
+
+      &-blue {
+        stroke: $yale-blue1;
+      }
+    }
+  }
+
+  &_expected {
+    position: absolute;
+    max-width: rem(278);
+    bottom: 74%;
+    right: 70%;
+    z-index: 2;
+
+    @include tablet-down {
+      max-width: rem(250);
+    }
+
+    @include mobile-down {
+      display: none;
+    }
+  }
+
+  &_airport {
+    position: absolute;
+    max-width: rem(387);
+    top: 80%;
+    left: 9.5%;
+    width: 100%;
+    z-index: 2;
+
+    @include desktop-down {
+      max-width: rem(320);
+    }
+
+    @include tablet-down {
+      max-width: rem(250);
+    }
+
+    @include mobile-down {
+      display: none;
+    }
+
+    &_thumbnail {
+      position: absolute;
+      max-width: rem(262);
+      bottom: 120%;
+      left: 0;
+      width: 100%;
+
+      @include desktop-down {
+        max-width: rem(200);
+      }
+
+      @include tablet-down {
+        max-width: rem(140);
+      }
+
+      @include mobile-down {
+        max-width: rem(60);
+      }
+    }
+  }
+
+  &_airportOther {
+    position: absolute;
+    max-width: rem(370);
+    bottom: 83%;
+    right: 39%;
+    width: 100%;
+    z-index: 2;
+
+    @include desktop-down {
+      max-width: rem(270);
+    }
+
+    @include tablet-down {
+      max-width: rem(200);
+    }
+
+    @include mobile-down {
+      display: none;
+    }
+
+    &_thumbnail {
+      position: absolute;
+      max-width: rem(166);
+      bottom: -8%;
+      left: 108%;
+      width: 100%;
+
+      @include tablet-down {
+        max-width: rem(100);
+      }
+
+      @include mobile-down {
+        max-width: rem(60);
+      }
+    }
+  }
+
+  &_scheduleBox {
+    position: absolute;
+    max-width: rem(451);
+    bottom: 6%;
+    right: 8%;
+    width: 100%;
+    z-index: 2;
+
+    @include desktop-down {
+      right: 2%;
+      max-width: rem(400);
+    }
+
+    @include tablet-down {
+      position: relative;
+      max-width: 100%;
+      bottom: 0;
+      right: 0;
+      margin-top: rem(10);
+    }
+  }
+
+  .customAnimate-zoomInLocationPoint {
+    @include customAnimation(0.3s, zoomIn, 0.4s);
+  }
+
+  .customAnimate-zoomInCasePlaneLarge {
+    @include mobile-up {
+      @include customAnimation(0.5s, zoomInCase2, calc(0.4s + 0.3s));
+    }
+  }
+
+  .customAnimate-zoomInProject {
+    @include mobile-up {
+      @include customAnimation(0.5s, zoomIn, calc(0.4s + 0.3s + 0.3s));
+    }
+  }
+
+  .customAnimate-airport {
+    @include customAnimation(1s, translateTopToBottom, calc(0.4s + 0.3s + 0.3s + 0.5s));
+  }
+
+  .customAnimate-airportThumbnail {
+    @include customAnimation(1s, translateBottomToTop, calc(0.4s + 0.3s + 0.3s + 0.5s));
+  }
+
+  .customAnimate-expected {
+    @include customAnimation(1s, zoomInCase2, calc(0.4s + 0.3s + 0.3s + 0.5s + 0.6s));
+    transform-origin: right bottom;
+  }
+
+  .customAnimate-zoomInCasePlaneSmall {
+    @include mobile-up {
+      @include customAnimation(0.5s, fadeInBlur, calc(0.4s + 0.3s + 0.3s + 0.5s + 0.6s + 0.2s));
+    }
+  }
+
+  .customAnimate-airportOther {
+    @include customAnimation(0.5s, translateRightToLeft, calc(0.4s + 0.3s + 0.3s + 0.5s + 0.6s + 1s));
+  }
+
+  .customAnimate-airportOtherThumbnail {
+    @include customAnimation(0.5s, translateLeftToRight, calc(0.4s + 0.3s + 0.3s + 0.5s + 0.6s + 1s));
+  }
+
+  .customAnimate-plane {
+    @include customAnimation(0.8s, zoomIn, calc(0.4s + 0.3s + 0.3s + 0.5s + 0.6s + 1s + 0.5s));
+    transform-origin: bottom left;
+  }
+
+  .customAnimate-scheduleBox {
+    @include customAnimation(0.6s, fadeInUp, calc(0.4s + 0.3s + 0.3s + 0.5s + 0.6s + 1s + 0.5s + 1s));
+    @include tablet-down {
+      animation-delay: 0.2s;
+    }
+  }
+
+  .customAnimate-scheduleBoxItem-0 {
+    @include customAnimation(0.75s, slideInLeftText, calc(0.4s + 0.3s + 0.3s + 0.5s + 0.6s + 1s + 0.5s + 1s + 0.5s));
+    @include tablet-down {
+      animation-delay: 0.4s;
+    }
+  }
+
+  .customAnimate-scheduleBoxItem-1 {
+    @include customAnimation(0.75s, slideInLeftText, calc(0.4s + 0.3s + 0.3s + 0.5s + 0.6s + 1s + 0.5s + 1s + 0.5s + 0.2s));
+    @include tablet-down {
+      animation-delay: 0.6s;
+    }
+  }
+
+  .customAnimate-scheduleBoxItem-2 {  
+    @include customAnimation(0.75s, slideInLeftText, calc(0.4s + 0.3s + 0.3s + 0.5s + 0.6s + 1s + 0.5s + 1s + 0.5s + 0.2s + 0.2s));
+    @include tablet-down {
+      animation-delay: 0.8s;
+    }
+  }
+
+  .customAnimate-scheduleBoxItem-3 {
+    @include customAnimation(0.75s, slideInLeftText, calc(0.4s + 0.3s + 0.3s + 0.5s + 0.6s + 1s + 0.5s + 1s + 0.5s + 0.2s + 0.2s + 0.2s));
+    @include tablet-down {
+      animation-delay: 0.9s;
+    }
+  }
+}
+
+.o-box {
+  border-radius: rem(12);
+  position: relative;
+  padding: rem(12) rem(16);
+
+  @include tablet-down {
+    padding: rem(12);
+  }
+
+  &_content {
+    overflow: auto;
+    @include scroll-bars(5,$copper,$gainsboro,8,0,5);
+
+    @include tablet-down {
+      max-height: rem(40);
+    }
+
+    @include mobile-down {
+      max-height: rem(26);
+    }
+
+    .a-text {
+      @include font-base(16, 28);
+
+      @include desktop-down {
+        @include font-base(12, 20);
+      }
+    }
+  }
+
+  &_plane {
+    position: absolute;
+    max-width: rem(182);
+    width: 100%;
+    top: 0;
+    right: 0;
+    transform: translate(40%, -74%);
+    pointer-events: none;
+
+    @include tablet-down {
+      max-width: rem(100);
+    }
+
+    @include mobile-down {
+      max-width: rem(65);
+    }
+  }
+
+  &-yellow {
+    background-color: $deer1;
+  }
+  &-blue {
+    background-color: $yale-blue1;
+  }
+
+  &-blue-top-left {
+    border-top-left-radius: 0;
+    &::before {
+      content: '';
+      background: url('~assets/images/planningHighway/blue_top_left.png') no-repeat;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: -12%;
+      pointer-events: none;
+    }
+  }
+
+  &-yellow-bottom-right {
+    border-bottom-right-radius: 0;
+    &::before {
+      content: '';
+      background: url('~assets/images/planningHighway/yellow_bottom_right.png') no-repeat;
+      position: absolute;
+      width: rem(14);
+      height: rem(32);
+      right: 0;
+      bottom: -28%;
+      pointer-events: none;
+    }
+  }
+
+  &-blue-bottom-right {
+    border-bottom-right-radius: 0;
+    &::before {
+      content: '';
+      background: url('~assets/images/planningHighway/blue_bottom_right.png') no-repeat;
+      position: absolute;
+      width: rem(14);
+      height: rem(32);
+      right: 0;
+      bottom: -28%;
+      pointer-events: none;
+      @include tablet-down {
+        bottom: -40%;
+      }
+    }
+  }
+
+  &_content {
+    .a-text {
+      @include tablet-down {
+        @include font-base(10,18);
+      }
+    }
+  }
+}
+
+.o-scheduleBox {
+  border-radius: rem(12);
+  overflow: hidden;
+
+  &_title {
+    background: $white035;
+
+    @include tablet-down {
+      background: $taupe-gray;
+    }
+  }
+
+  &_wrapper {
+    background: $white015;
+    padding: rem(28);
+
+    @include desktop-down {
+      padding: rem(20);
+    }
+
+    @include tablet-down {
+      background: rgba($taupe-gray, 0.4);
+    }
+    .row {
+      overflow: hidden;
+    }
+  }
+
+  &_item {
+    display: flex;
+
+    &_layer {
+      background: $banana-mania;
+      width: rem(2);
+      height: 100%;
+    }
+  }
+}
+
+.o-popupInfo {
+  background-color: $isabelline;
+  padding: rem(50) rem(20) rem(30);
+
+  &_image {
+    max-width: rem(300);
+    margin: 0 auto;
+  }
+}
+
+@keyframes animationPlane {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  100% {
+    transform: translate(-40%, 40%) scale(1.2);
+  }
+}
+
+@keyframes slideInLeftText {
+  from {
+    -webkit-transform: translate3d(-200%, 0, 0);
+    transform: translate3d(-200%, 0, 0);
+    visibility: hidden;
+    opacity: 0;
+  }
+  
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+    opacity: 1;
+  }
+}

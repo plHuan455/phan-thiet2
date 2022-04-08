@@ -5,6 +5,7 @@ import Consultancy from './consultancy';
 import Division from './division';
 import Events from './events';
 import Feedbacks from './feedbacks';
+import Highway from './highway';
 import Journeys from './journeys';
 import News from './news';
 import Position from './position';
@@ -20,6 +21,7 @@ const Screen: React.FC = () => (
     <Banner />
     <Position />
     <Selection />
+    <Highway />
     <Utilities />
     <div className="p-home_sand1">
       <div className="p-home_sand1_layer">
