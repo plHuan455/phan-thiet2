@@ -4,24 +4,18 @@ import { BrowserRouter } from 'react-router-dom';
 
 import Error from '.';
 
+import error404 from 'assets/images/error/404.png';
+
 export default {
   title: 'Components/templates/Error',
   component: Error,
-  argTypes: {
-    type: {
-      control: {
-        type: 'select',
-        options: [403, 404, 500, 503],
-      },
-      defaultValue: 403,
-    },
-  },
+  argTypes: { },
 } as Meta;
 
-export const normal: Story = ({ type }) => (
+export const normal: Story = () => (
   <BrowserRouter>
     <Error
-      type={type}
+      imgSrc={error404}
       title="Rất tiếc, chúng tôi không tìm thấy trang này"
       description="Vui lòng trở về trang chủ hoặc liên hệ với chúng tôi để được hỗ trợ."
       back={

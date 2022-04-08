@@ -1,3 +1,5 @@
+export const BASE_URL = process.env.REACT_APP_BASE_URL;
+
 function mapModifiers(
   baseClassName: string,
   ...modifiers: (string | string[] | false | undefined)[]
@@ -118,3 +120,37 @@ export const handleScrollCenter = (ref: React.RefObject<HTMLDivElement | null>,
 export function countDownFn(day:string, hour:string, min:string, sec: string) {
   return `${day ? `${day}:` : ''}${hour ? `${hour}:` : ''}${min ? `${min}:` : ''}${sec ? `${sec}` : ''}`;
 }
+
+export function getBlockData<T>(
+  _code: string,
+  listBlock?: any[],
+): T | undefined {
+  if (!listBlock) return undefined;
+  return listBlock?.find((item) => item.code === _code)?.blocks;
+}
+
+export function getBannerData(
+  _code: string,
+  listBlock: BannersDataTypes[],
+): BannersData | undefined {
+  if (!listBlock) return undefined;
+  const findIndex = listBlock.findIndex((item) => item.type === _code);
+  if (findIndex < 0) {
+    return undefined;
+  }
+  return listBlock[findIndex].data;
+}
+
+export const baseURL = (src?: string): string => `${BASE_URL || ''}${src || ''}`;
+
+export const linkURL = (src?: string): string => {
+  if (!BASE_URL || !src) return '';
+
+  return BASE_URL + src;
+};
+
+export const baseString = (str?: string): string => {
+  if (!str) return '';
+
+  return str;
+};
