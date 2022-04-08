@@ -17,12 +17,11 @@ interface InternalNavItemTypes {
 export interface NavItemProps extends MenuItem, InternalNavItemTypes { }
 
 const recursiveMenuActive = (item: MenuItem, pathname: string, cb: () => void) => {
-  if (item.reference) {
-    if (`/${item.reference.slug}` === pathname) {
-      cb();
-    } else if (item.reference.slug === '/' && pathname === '/') {
-      cb();
-    }
+  const link = item.reference?.slug || item?.link;
+  if (`/${link}` === pathname) {
+    cb();
+  } else if (link === '/' && pathname === '/') {
+    cb();
   }
   if (item.subMenu) {
     item.subMenu.forEach((x) => {

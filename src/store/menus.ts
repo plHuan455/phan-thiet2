@@ -1,29 +1,33 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import getMenusService from 'services/menus';
-import { MenuDataTypes, MenuItemData } from 'services/menus/types';
-import { MENU_CODE } from 'utils/constants';
+import { MenuDataTypes, MenuItem } from 'services/menus/types';
+import CONSTANTS from 'utils/constants';
+import groupMenus from 'utils/menu';
 
 interface MenusState {
-  header: MenuItemData[];
-  footer: MenuItemData[];
+  mainHeader: MenuItem[];
+  header2: MenuItem[];
+  mainFooter: MenuItem[];
+  footer2: MenuItem[];
 }
 
 const initialState: MenusState = {
-  header: [],
-  footer: [],
+  mainHeader: [],
+  header2: [],
+  mainFooter: [],
+  footer2: [],
 };
 
 export const getMenusAction = createAsyncThunk<
   MenuDataTypes[],
-  void,
-  { rejectValue: ErrorResponse }
+  undefined
 >('menusReducer/getMenusAction', async (_, { rejectWithValue }) => {
   try {
     const response = await getMenusService();
     return response;
   } catch (error) {
-    return rejectWithValue(error as ErrorResponse);
+    return rejectWithValue(error);
   }
 });
 
@@ -33,12 +37,25 @@ export const menusSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder.addCase(getMenusAction.fulfilled, ($state, action) => {
-      // Header
-      $state.header = action.payload.find((item) => item.code === MENU_CODE.MENU_HEADER)
-        ?.items || [];
-      // Footer
-      $state.footer = action.payload.find((item) => item.code === MENU_CODE.MENU_FOOTER)
-        ?.items || [];
+      const mainHeader = action.payload.find(
+        (e) => e.code === CONSTANTS.MENU_CODE.MAIN_HEADER,
+      )?.items || [];
+      $state.mainHeader = groupMenus(mainHeader) || [];
+
+      const header2 = action.payload.find(
+        (e) => e.code === CONSTANTS.MENU_CODE.HEADER_2,
+      )?.items || [];
+      $state.header2 = groupMenus(header2) || [];
+
+      const mainFooter = action.payload.find(
+        (e) => e.code === CONSTANTS.MENU_CODE.MAIN_FOOTER,
+      )?.items || [];
+      $state.mainFooter = groupMenus(mainFooter) || [];
+
+      const footer2 = action.payload.find(
+        (e) => e.code === CONSTANTS.MENU_CODE.FOOTER_2,
+      )?.items || [];
+      $state.footer2 = groupMenus(footer2) || [];
     });
   },
 });

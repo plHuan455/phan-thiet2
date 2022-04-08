@@ -8,25 +8,9 @@ describe('<Footer />', () => {
     const div = document.createElement('div');
     ReactDOM.render(<Footer
       logo=""
-      copyRight={{
-        title: '',
-        list: [],
-      }}
       addressList={[{
         title: '',
       }]}
-      menuList={{
-        title: '',
-        list: [],
-      }}
-      divisionList={{
-        title: '',
-        list: [],
-      }}
-      serviceList={{
-        title: '',
-        list: [],
-      }}
       socialList={{
         title: '',
         list: [],

@@ -5,15 +5,20 @@ import Icon from 'components/atoms/Icon';
 import Image from 'components/atoms/Image';
 import Link from 'components/atoms/Link';
 import Text from 'components/atoms/Text';
+import { MenuItem } from 'services/menus/types';
 
 interface ListTypes {
   list: LinkTypes[];
   title?: string
 }
-
-interface FooterProps {
+interface MenuItemFooter {
+  title?: MenuItem;
+  list?: MenuItem[];
+}
+export interface FooterProps {
   logo: string,
-  copyRight: ListTypes,
+  subMenu?: MenuItem[],
+  copyRightTitle?: string,
   addressList: {
     title: string,
     subTitle?: string,
@@ -23,43 +28,39 @@ interface FooterProps {
       value?: string,
     }
   }[],
-  menuList: ListTypes,
-  divisionList: {
-    title?: string,
-    list: LinkTypes[]
-  },
-  serviceList: ListTypes,
+  menuList?: MenuItemFooter,
+  divisionList?: MenuItemFooter,
+  serviceList?: MenuItemFooter,
   socialList: ListTypes
 }
 
-interface MenuFooterProps {
-  data: ListTypes
+export interface MenuFooterProps {
+  data?: MenuItemFooter;
 }
 
 export const MenuFooter: React.FC<MenuFooterProps> = ({ data }) => (
-  <div className="t-footer_menu">
-    <Text modifiers={['700', '12x20', 'davyGrey']} content={data?.title} />
+  <div className={`t-footer_menu ${data?.title?.cssClass === 'service' ? 'empty' : ''}`}>
+    <Text modifiers={['700', '12x20', 'davyGrey']} content={data?.title?.cssClass === 'service' ? '&nbsp;' : data?.title?.title} />
     <div className="t-footer_menu-list">
-      {
-      data?.list?.map((item, index) => (
+      {data?.list?.map((item, index) => (
         <div key={`t-footer_menu-${index.toString()}`} className="t-footer_menu-item">
-          <Link href={item.url} target={item.target} className="a-link">
+          <Link href={item.reference?.slug || item?.link} target={item.target} className="a-link">
             <div className="t-footer_menu-item-content">
               <div className="t-footer_menu-icon">
                 <Icon iconName="chevronRight" size="24" />
               </div>
-              <Text modifiers={['12x20', '400', 'davyGrey']} content={item.text} />
+              <Text modifiers={['12x20', '400', 'davyGrey']} content={item?.title} />
             </div>
           </Link>
         </div>
-      ))
-    }
+      ))}
     </div>
   </div>
 );
 
 const Footer: React.FC<FooterProps> = ({
-  copyRight,
+  subMenu,
+  copyRightTitle,
   logo,
   addressList,
   menuList,
@@ -130,19 +131,19 @@ const Footer: React.FC<FooterProps> = ({
         <div className="t-footer_copyRight-wrap">
           <div className="t-footer_copyRight-list">
             {
-            copyRight?.list.map((item, index) => (
+            subMenu?.map((item, index) => (
               <React.Fragment key={`t-footer_copyRight-${index.toString()}`}>
                 {index !== 0 ? <div className="t-footer_copyRight-divider">|</div> : ''}
                 <div className="t-footer_copyRight-item">
-                  <Link href={item.url} target={item.target} className="a-link">
-                    <Text content={item.text} />
+                  <Link href={item.reference?.slug || item.link} target={item.target} className="a-link">
+                    <Text content={item.title} />
                   </Link>
                 </div>
               </React.Fragment>
             ))
           }
           </div>
-          <Text modifiers={['12x20', 'davyGrey', '400']} content={copyRight.title} />
+          <Text modifiers={['12x20', 'davyGrey', '400']} content={copyRightTitle} />
         </div>
       </Container>
     </div>

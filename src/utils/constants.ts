@@ -1,6 +1,8 @@
 const MENU_CODE = {
-  MENU_HEADER: 'main-header',
-  MENU_FOOTER: 'main-footer',
+  MAIN_HEADER: 'main-header',
+  HEADER_2: 'header-2',
+  MAIN_FOOTER: 'main-footer',
+  FOOTER_2: 'footer-2',
 };
 
 const LOCAL_STORAGE = {
