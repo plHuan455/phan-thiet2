@@ -21,11 +21,11 @@ type PageDataTypes = {
   id: number;
   templateCode: string;
   code: string;
-  isHome: true,
-  groupCode: string;
+  isHome: boolean;
+  groupCode?: string;
   status: number;
-  parentId: string;
-  bannerId: number;
+  parentId?: string;
+  bannerId?: number;
   createdAt: string;
   updatedAt: string;
   locale: string;
@@ -33,10 +33,10 @@ type PageDataTypes = {
   slug: string;
   description: string;
   translations: Translation[]
-}
+} & OpenGraphDataTypes;
 
 type BannersData = {
-  link: string;
+  link?: string;
   title: string;
   subTitle: string;
   imageMobile: string;
@@ -50,9 +50,9 @@ type BannersDataTypes = {
 }
 
 type SEODataTypes = {
-  title: string;
-  description: string;
-  keywords: string;
+  title?: string;
+  description?: string;
+  keywords?: string;
 }
 
 type BreadcrumbsDataTypes = {
@@ -73,7 +73,6 @@ type BasePageDataTypes<T> = {
   banners: BannersDataTypes[];
   seoData: SEODataTypes;
   breadcrumbs: BreadcrumbsDataTypes[];
-  openGraph: OpenGraphDataTypes;
 };
 
 type MetaData = {
@@ -95,8 +94,9 @@ type DataStaticTypes = {
 }
 
 type DataStaticErrorBlockTypes = {
-  title: string;
-  description: string;
+  image?: string;
+  errorDescription?: string;
+  thanksDescription?: string;
   link1: LinkTypes;
   link2: LinkTypes;
 }
@@ -130,6 +130,14 @@ type UTMParams = {
   // utm_term?: string;
   utm_campaign?: string;
   utm_content?: string;
+}
+
+type ErrorsResponse = {
+  errors: {
+    code: string;
+    title: string;
+  }[];
+  message: string;
 }
 
 type LangPrefixTypes = 'EN' | 'VI';

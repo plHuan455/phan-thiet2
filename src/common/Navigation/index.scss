@@ -1,0 +1,38 @@
+.c-loading {
+  background-color: $black;
+  bottom: 0;
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  transition: all $transition ease-in-out;
+  width: 100vw;
+  z-index: 999;
+  @include adjust-flex(center, center);
+
+  @keyframes scale {
+    0% {
+      transform: scale(1);
+    }
+
+    50% {
+      transform: scale(1.5);
+    }
+
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  &_thumbnail {
+    animation: scale 3s linear infinite;
+    max-width: rem(184);
+    width: 100%;
+    
+    img {
+      height: auto;
+      width: 100%;
+    }
+  }
+}

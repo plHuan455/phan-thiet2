@@ -4,14 +4,14 @@
   }
 
   .slick-slide {
-    padding: 0 rem(16);
     height: inherit;
+    padding: 0 rem(16);
 
-      > div,
-      .o-carousel_wrap,
-      .o-carousel_item {
-        height: 100%;
-      }
+    > div,
+    .o-carousel_wrap,
+    .o-carousel_item {
+      height: 100%;
+    }
   }
 
   .slick-track {

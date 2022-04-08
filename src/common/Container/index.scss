@@ -39,9 +39,9 @@
     @include break-min(1440px) {
       max-width: rem(1440);
     }
-    @include break-max(1440px){
-      padding-right: 0;
+    @include break-max(1440px) {
       max-width: 100%;
+      padding-right: 0;
     }
   }
 }
