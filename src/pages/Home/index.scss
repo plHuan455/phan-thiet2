@@ -29,4 +29,89 @@
       }
     }
   }
+
+  .s-consultancy {
+    background-color: #f5efe9;
+    overflow: hidden;
+    position: relative;
+
+    &_bgTop {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: 2;
+
+      .a-image {
+        background-position: center;
+        padding-bottom: 372 / 1366 * 100%;
+      }
+    }
+
+    &_bgCenter {
+      pointer-events: none;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100%;
+      z-index: 1;
+
+      .a-image {
+        background-position: center;
+        padding-bottom: 167 / 1366 * 100%;
+      }
+    }
+
+    &_bgBottom {
+      bottom: 0;
+      pointer-events: none;
+      position: absolute;
+      width: 100%;
+      z-index: 0;
+
+      .a-image {
+        padding-bottom: 378 / 1366 * 100%;
+        @include break-min(1600px) {
+          padding-bottom: 24.67204%;
+        }
+
+        @include break-min(2000px) {
+          padding-bottom: 17.67204%;
+        }
+      }
+    }
+
+    &_leavesLeft {
+      bottom: 0;
+      left: 0;
+      max-width: rem(347);
+      pointer-events: none;
+      position: absolute;
+      width: 100%;
+
+      @include break-max (1366px) {
+        max-width: 15%;
+      }
+
+      .a-image {
+        padding-bottom: calc(405 / 347 * 100%);
+      }
+    }
+
+    &_leavesRight {
+      bottom: 0;
+      max-width: rem(298);
+      pointer-events: none;
+      position: absolute;
+      right: 0;
+      width: 100%;
+
+      @include break-max (1366px) {
+        max-width: 15%;
+      }
+
+      .a-image {
+        padding-bottom: calc(375 / 298 * 100%);
+      }
+    }
+  }
 }

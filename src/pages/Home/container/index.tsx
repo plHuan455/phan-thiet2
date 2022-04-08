@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Banner from './banner';
+import Consultancy from './consultancy';
 import Division from './division';
 import Events from './events';
 import Feedbacks from './feedbacks';
@@ -29,6 +30,7 @@ const Screen: React.FC = () => (
     <News />
     <Events />
     <Feedbacks />
+    <Consultancy />
   </>
 );
 
