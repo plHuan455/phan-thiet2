@@ -53,19 +53,8 @@
     }
 
     #{$root}_wrapper {
+      position: initial;
       background: transparent;
-    }
-
-    #{$root}_close {
-      right: rem(140);
-
-      @include tablet-down {
-        right: rem(80);
-      }
-
-      @include mobile-down {
-        right: rem(30);
-      }
     }
 
     #{$root}_body {
