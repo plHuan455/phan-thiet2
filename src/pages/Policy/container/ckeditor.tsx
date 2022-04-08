@@ -3,11 +3,10 @@ import React from 'react';
 import Container from 'common/Container';
 import CkEditorTemplate from 'components/organisms/CkEditor';
 
-interface CkEditorProps {
+export interface CkeditorBlocks {
   content: string
 }
-
-const Ckeditor: React.FC<CkEditorProps> = (props) => (
+const Ckeditor: React.FC<CkeditorBlocks> = (props) => (
   <Container>
     <CkEditorTemplate {...props} />
   </Container>

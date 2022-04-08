@@ -29,7 +29,7 @@ const useAnimation = ({ ref }: AnimationParams) => {
       slideY.start({ from: -500, to: 0, config: { duration: 10000 } });
       res = setTimeout(() => {
         rotateZ.start({ cancel: true });
-      }, 12000);
+      }, 10000);
     }
     return () => {
       clearTimeout(res);
