@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable max-len */
 import React, {
   useCallback, useLayoutEffect, useRef, useState,
 } from 'react';
@@ -91,6 +88,7 @@ export const ScheduleBox: React.FC<ScheduleBoxProps> = ({
             <Col
               className={`o-scheduleBox_item u-pl-8 u-pr-8 u-pt-10 u-pb-10 ${animationActive && `customAnimate-scheduleBoxItem-${index.toString()}`}`}
               xs={index % 2 === 0 ? 4 : 8}
+              key={`schedulebox-${index.toString()}`}
             >
               <div className="o-scheduleBox_item_layer u-mr-9" />
               <div className="o-scheduleBox_item_content">
@@ -124,33 +122,50 @@ const PlanningHighway: React.FC<PlanningHighwayProps> = ({
 
   const stylesLiveYellow = useSpring({
     from: {
-      clipPath: 'polygon(0% 0%, 0% 100%, 0% 100%, 0% 0%)',
+      clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
     },
     to: {
-      clipPath: 'polygon(0% 0%, 0% 100%, 100% 100%, 100% 0%)',
-    },
-    config: {
-      duration: 1500,
+      clipPath: 'polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)',
     },
   });
 
   const stylesLiveBlue = useSpring({
     from: {
-      clipPath: 'polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)',
+      clipPath: 'polygon(0% 0%, 0% 100%, 100% 100%, 100% 0%)',
     },
     to: {
-      clipPath: 'polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)',
+      clipPath: 'polygon(0% 0%, 0% 100%, 0% 100%, 0% 0%)',
     },
-    config: {
-      duration: 500,
-    },
-    delay: 2000,
   });
-
   useLayoutEffect(() => {
     if (animate) {
-      stylesLiveBlue.clipPath.start();
-      stylesLiveYellow.clipPath.start();
+      stylesLiveYellow.clipPath.start({
+        from: {
+          clipPath: 'polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)',
+          opacity: 0,
+        },
+        to: {
+          clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+          opacity: 1,
+        },
+        config: {
+          duration: 1500,
+        },
+      });
+      stylesLiveBlue.clipPath.start({
+        from: {
+          clipPath: 'polygon(0% 0%, 0% 100%, 0% 100%, 0% 0%)',
+          opacity: 0,
+        },
+        to: {
+          clipPath: 'polygon(0% 0%, 0% 100%, 100% 100%, 100% 0%)',
+          opacity: 1,
+        },
+        config: {
+          duration: 500,
+        },
+        delay: 2000,
+      });
     }
   }, [animate, stylesLiveBlue, stylesLiveYellow]);
 
