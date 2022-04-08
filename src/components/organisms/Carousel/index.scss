@@ -69,7 +69,7 @@
         }
       }
 
-      &-circleGray {
+      &.circleGray {
         &::before {
           background-image: url('~assets/icons/ic_arrow_carousel_back_white.svg');
         }
@@ -99,7 +99,7 @@
         }
       }
 
-      &-circleGray {
+      &.circleGray {
         &::before {
           background-image: url('~assets/icons/ic_arrow_carousel_next_white.svg');
         }

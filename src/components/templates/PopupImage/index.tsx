@@ -77,7 +77,7 @@ const PopupImage: React.FC<PopupImageProps> = ({
         modifiers="image"
         icon={{
           name: 'closeWhite',
-          size: '18',
+          size: '32',
         }}
       >
         {dataImageList.length > 0 ? (

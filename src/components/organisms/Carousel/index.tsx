@@ -22,7 +22,7 @@ export const PrevArrow: React.FC<ArrowProps> = ({
   className, onClick, extendClassname = '', customArrow = 'default',
 }) => (
   <div
-    className={`o-carousel_arrow ${mapModifiers('o-carousel_arrow_prev', customArrow)} ${className} ${extendClassname}`}
+    className={`o-carousel_arrow  o-carousel_arrow_prev ${customArrow} ${className} ${extendClassname}`}
     onClick={onClick}
   />
 );
@@ -31,7 +31,7 @@ export const NextArrow: React.FC<ArrowProps> = ({
   className, onClick, extendClassname = '', customArrow = 'default',
 }) => (
   <div
-    className={`o-carousel_arrow ${mapModifiers('o-carousel_arrow_next', customArrow)} ${className} ${extendClassname}`}
+    className={`o-carousel_arrow o-carousel_arrow_next ${customArrow} ${className} ${extendClassname}`}
     onClick={onClick}
   />
 );
