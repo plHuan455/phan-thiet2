@@ -17,7 +17,6 @@ import DivisionList from 'pages/DivisionList';
 import Error from 'pages/Error';
 import EventsDetail from 'pages/EventsDetail';
 import NewsDetail from 'pages/NewsDetail';
-import Policy from 'pages/Policy';
 import Search from 'pages/Search';
 import { store } from 'store';
 
@@ -41,7 +40,6 @@ const App: React.FC = () => (
           <Route path=":slug" element={<PageNavigation />} />
           <Route path="cac-phan-khu" element={<DivisionList />} />
           <Route path="404" element={<Error />} />
-          <Route path="chinh-sach-dieu-khoan" element={<Policy />} />
           <Route path="tim-kiem" element={<Search />} />
           <Route path="tin-tuc/:slug" element={<NewsDetail />} />
           <Route path="su-kien/:slug" element={<EventsDetail />} />

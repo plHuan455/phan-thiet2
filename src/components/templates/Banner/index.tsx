@@ -8,7 +8,7 @@ import Link from 'components/atoms/Link';
 import Text from 'components/atoms/Text';
 import mapModifiers from 'utils/functions';
 
-interface BannerProps {
+export interface BannerProps {
   image: ImageProps;
   isLayer?: boolean;
   title?: string;
@@ -127,10 +127,7 @@ const Banner: React.FC<BannerProps> = ({
 };
 
 Banner.defaultProps = {
-  isLayer: false,
-  title: undefined,
-  tag: undefined,
-  search: undefined,
+
 };
 
 export default React.memo(Banner);

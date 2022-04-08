@@ -5,7 +5,7 @@ import mapModifiers from 'utils/functions';
 
 export type SizeImageType = 'cover' | 'contain' | 'inherit' | 'initial';
 
-export interface ImageProps {
+export type ImageProps = {
   src?: string;
   srcTablet?: string;
   srcMobile?: string;

@@ -1,10 +1,10 @@
 import React from 'react';
 
-import Screen from './container';
+import Screen, { PolicyBlock } from './container';
 
-const Policy: React.FC = () => (
+const Policy: React.FC<BasePageDataTypes<PolicyBlock>> = (props) => (
   <div className="p-policy">
-    <Screen />
+    <Screen {...props} />
   </div>
 );
 

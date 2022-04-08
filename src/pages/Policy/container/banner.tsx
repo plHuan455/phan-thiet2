@@ -1,16 +1,12 @@
 import React from 'react';
 
-import bannerImage from 'assets/images/pages/contact/banner.png';
-import BannerTemplate from 'components/templates/Banner';
+import BannerTemplate, { BannerProps } from 'components/templates/Banner';
 
-const Banner: React.FC = () => (
-  <>
-    <BannerTemplate
-      image={{ src: bannerImage }}
-      title="CHÍNH SÁCH ĐIỀU KHOẢN"
-      isLayer
-    />
-  </>
+export interface BannerBlocks extends BannerProps{
+}
+
+const Banner: React.FC<BannerBlocks> = (props) => (
+  <BannerTemplate {...props} isLayer />
 );
 
 export default Banner;
