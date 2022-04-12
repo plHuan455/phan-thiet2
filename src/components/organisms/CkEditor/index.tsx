@@ -9,7 +9,7 @@ const CkEditor: React.FC<CkEditorProps> = ({
   content,
 }) => (
   <div className="o-ckeditor">
-    <Text modifiers={['20x32', '700', 's015']} content={content} />
+    <Text type="div" modifiers={['20x32', '700', 's015']} content={content} />
   </div>
 );
 
