@@ -8,7 +8,7 @@ export interface MyCustomCSS extends React.CSSProperties {
 
 const DivisionDetail: React.FC = () => {
   const styles = useMemo((): MyCustomCSS => ({
-    '--theme': '#005C8F',
+    '--theme': 'rgb(0, 92, 143)',
   }), []);
 
   return (
