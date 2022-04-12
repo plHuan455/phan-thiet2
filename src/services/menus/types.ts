@@ -22,7 +22,7 @@ export type Reference = {
 }
 
 export type MenuItem = {
-  subMenu?: MenuItemData[];
+  subMenu?: MenuItem[];
 } & MenuItemData;
 
 export type MenuDataTypes = {

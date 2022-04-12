@@ -50,84 +50,6 @@ const addressList = [
   },
 ];
 
-const menuList = {
-  title: 'NOVAWORLD PHAN THIET',
-  list: [
-    {
-      text: 'Tin Tức',
-      url: '/asdas',
-      target: '_self',
-    },
-    {
-      text: 'Liên hệ',
-      url: '/',
-      target: '_self',
-    },
-    {
-      text: 'Vận Chuyển Và Giao Nhận',
-      url: '/',
-      target: '_self',
-    },
-    {
-      text: 'Phương Thức Thanh Toán',
-      url: '/',
-      target: '_self',
-    },
-  ],
-};
-
-const divisionList = {
-  title: 'CÁC PHÂN KHU',
-  list: [
-    {
-      text: 'The Kingdom',
-      url: '/',
-      target: '_self',
-    },
-    {
-      text: 'Ocean Residence',
-      url: '/',
-      target: '_self',
-    },
-    {
-      text: 'The Florida',
-      url: '/',
-      target: '_self',
-    },
-    {
-      text: 'Festival Town',
-      url: '/',
-      target: '_self',
-    },
-  ],
-};
-
-const serviceList = {
-  title: '&nbsp;',
-  list: [
-    {
-      text: 'PGA Golf Villas',
-      url: '/',
-      target: '_self',
-    },
-    {
-      text: 'Waikiki',
-      url: '/',
-      target: '_self',
-    },
-    {
-      text: 'Santa Monica',
-      url: '/',
-      target: '_self',
-    },
-    {
-      text: 'Boutique Hotel',
-      url: '/',
-      target: '_self',
-    },
-  ],
-};
-
 const socialList = {
   title: 'THAM KHẢO THÊM TẠI',
   list: [
@@ -158,12 +80,185 @@ const socialList = {
   ],
 };
 
+const menuList = {
+  title: {
+    id: 2,
+    menuId: 1,
+    title: 'Phân khu',
+    link: '',
+    type: 'OneContent\\Page\\Models\\Page',
+    referenceId: 1,
+    cssClass: '',
+    icon: '',
+    target: '_self',
+    parentId: 1,
+    lft: 6,
+    rgt: 7,
+    depth: 1,
+    createdAt: '2022-01-12T07:14:30.000000Z',
+    updatedAt: '2022-01-12T07:14:30.000000Z',
+    reference: undefined,
+  },
+  list: [
+    {
+      id: 21,
+      menuId: 1,
+      title: 'Phân khu 1',
+      link: '',
+      type: 'OneContent\\Page\\Models\\Page',
+      referenceId: 1,
+      cssClass: '',
+      icon: '',
+      target: '_self',
+      parentId: 2,
+      lft: 6,
+      rgt: 7,
+      depth: 1,
+      createdAt: '2022-01-12T07:14:30.000000Z',
+      updatedAt: '2022-01-12T07:14:30.000000Z',
+      reference: {
+        slug: 'phan-khu-1',
+      },
+    },
+    {
+      id: 21,
+      menuId: 1,
+      title: 'Phân khu 2',
+      link: '',
+      type: 'OneContent\\Page\\Models\\Page',
+      referenceId: 1,
+      cssClass: '',
+      icon: '',
+      target: '_self',
+      parentId: 2,
+      lft: 6,
+      rgt: 7,
+      depth: 1,
+      createdAt: '2022-01-12T07:14:30.000000Z',
+      updatedAt: '2022-01-12T07:14:30.000000Z',
+      reference: {
+        slug: 'phan-khu-2',
+      },
+    },
+  ],
+};
+
+const subMenu = [
+  {
+    id: 21,
+    menuId: 1,
+    title: 'Chính sách bảo mật',
+    link: '',
+    type: 'OneContent\\Page\\Models\\Page',
+    referenceId: 1,
+    cssClass: '',
+    icon: '',
+    target: '_self',
+    parentId: 2,
+    lft: 6,
+    rgt: 7,
+    depth: 1,
+    createdAt: '2022-01-12T07:14:30.000000Z',
+    updatedAt: '2022-01-12T07:14:30.000000Z',
+    reference: {
+      slug: 'phan-khu-1',
+    },
+  },
+  {
+    id: 21,
+    menuId: 1,
+    title: 'Điều khoản khách hàng',
+    link: '',
+    type: 'OneContent\\Page\\Models\\Page',
+    referenceId: 1,
+    cssClass: '',
+    icon: '',
+    target: '_self',
+    parentId: 2,
+    lft: 6,
+    rgt: 7,
+    depth: 1,
+    createdAt: '2022-01-12T07:14:30.000000Z',
+    updatedAt: '2022-01-12T07:14:30.000000Z',
+    reference: {
+      slug: 'phan-khu-2',
+    },
+  },
+];
+
+const serviceList = {
+  title: {
+    id: 2,
+    menuId: 1,
+    title: 'Phân khu',
+    link: '',
+    type: 'OneContent\\Page\\Models\\Page',
+    referenceId: 1,
+    cssClass: 'service',
+    icon: '',
+    target: '_self',
+    parentId: 1,
+    lft: 6,
+    rgt: 7,
+    depth: 1,
+    createdAt: '2022-01-12T07:14:30.000000Z',
+    updatedAt: '2022-01-12T07:14:30.000000Z',
+    reference: undefined,
+  },
+  list: [
+    {
+      id: 21,
+      menuId: 1,
+      title: 'Phân khu 1',
+      link: '',
+      type: 'OneContent\\Page\\Models\\Page',
+      referenceId: 1,
+      cssClass: '',
+      icon: '',
+      target: '_self',
+      parentId: 2,
+      lft: 6,
+      rgt: 7,
+      depth: 1,
+      createdAt: '2022-01-12T07:14:30.000000Z',
+      updatedAt: '2022-01-12T07:14:30.000000Z',
+      reference: {
+        slug: 'phan-khu-1',
+      },
+    },
+    {
+      id: 21,
+      menuId: 1,
+      title: 'Phân khu 2',
+      link: '',
+      type: 'OneContent\\Page\\Models\\Page',
+      referenceId: 1,
+      cssClass: '',
+      icon: '',
+      target: '_self',
+      parentId: 2,
+      lft: 6,
+      rgt: 7,
+      depth: 1,
+      createdAt: '2022-01-12T07:14:30.000000Z',
+      updatedAt: '2022-01-12T07:14:30.000000Z',
+      reference: {
+        slug: 'phan-khu-2',
+      },
+    },
+  ],
+};
+
+const copyRightTitle = '@2021. Bản quyền thuộc về Tập đoàn Novaland (Việt Nam). Tất cả các quyền bảo hộ.';
+
 export default {
   logo,
   copyRight,
   addressList,
   menuList,
-  divisionList,
+  divisionList: menuList,
   serviceList,
   socialList,
+  subMenu,
+  copyRightTitle,
 };

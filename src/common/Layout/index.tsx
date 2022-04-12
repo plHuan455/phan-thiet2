@@ -1,18 +1,25 @@
 import React from 'react';
 
-import dataFooter from 'assets/dataDummy/footer';
-import dataHeader from 'assets/dataDummy/header';
+import useLayout from './functions';
+
 import Footer from 'components/templates/Footer';
 import Header from 'components/templates/Header';
 
-const Layout: React.FC = ({ children }) => (
-  <>
-    <Header {...dataHeader} />
-    <main>
-      {children}
-    </main>
-    <Footer {...dataFooter} />
-  </>
-);
+const Layout: React.FC = ({ children }) => {
+  const {
+    dataHeaderDefault,
+    dataFooter,
+  } = useLayout();
+
+  return (
+    <>
+      <Header {...dataHeaderDefault} />
+      <main>
+        {children}
+      </main>
+      <Footer {...dataFooter} />
+    </>
+  );
+};
 
 export default Layout;

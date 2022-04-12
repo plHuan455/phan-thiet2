@@ -33,7 +33,7 @@ const App: React.FC = () => (
           <Layout>
             <Outlet />
           </Layout>
-      )}
+          )}
       >
         {/* TODO: Implement translation later */}
         <Route path="">

@@ -1,5 +1,6 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 
+import menuReducer from './menus';
 import staticReducer from './static';
 import systemReducer from './systems';
 
@@ -8,6 +9,7 @@ export const store = configureStore({
   reducer: {
     system: systemReducer,
     static: staticReducer,
+    menus: menuReducer,
   },
 });
 
