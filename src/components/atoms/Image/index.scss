@@ -64,11 +64,11 @@
   &-24x34 {
     @include aspect-ratio(24, 34);
   }
-  
+
   &-354x199 {
     @include aspect-ratio(354, 199);
   }
-  
+
   &-1366x378 {
     @include aspect-ratio(1366, 378);
   }
@@ -123,5 +123,9 @@
   
   &-166x110 {
     @include aspect-ratio(166, 110);
+  }
+
+  &-1366x933 {
+    @include aspect-ratio(1366, 933);
   }
 }

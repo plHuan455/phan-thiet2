@@ -12,6 +12,7 @@ import {
 import LanguageProvider from 'common/Language';
 import Layout from 'common/Layout';
 import LoadingPage from 'common/Navigation/loading';
+import DivisionDetail from 'pages/DivisionDetail';
 import DivisionList from 'pages/DivisionList';
 import Error from 'pages/Error';
 import EventsDetail from 'pages/EventsDetail';
@@ -44,6 +45,7 @@ const App: React.FC = () => (
           <Route path="tim-kiem" element={<Search />} />
           <Route path="tin-tuc/:slug" element={<NewsDetail />} />
           <Route path="su-kien/:slug" element={<EventsDetail />} />
+          <Route path="phan-khu/:slug" element={<DivisionDetail />} />
         </Route>
       </Route>
     </Routes>
