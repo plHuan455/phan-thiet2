@@ -12,7 +12,6 @@ import {
 import LanguageProvider from 'common/Language';
 import Layout from 'common/Layout';
 import LoadingPage from 'common/Navigation/loading';
-import useAppInitialize from 'hooks/useAppInitialize';
 import DivisionDetail from 'pages/DivisionDetail';
 import DivisionList from 'pages/DivisionList';
 import Error from 'pages/Error';
@@ -25,36 +24,33 @@ import { store } from 'store';
 const HomeNavigation = React.lazy(() => import('common/Navigation/home'));
 const PageNavigation = React.lazy(() => import('common/Navigation/page'));
 
-const App: React.FC = () => {
-  useAppInitialize();
-  return (
-    <Suspense fallback={<LoadingPage />}>
-      <Routes>
-        <Route
-          path="/"
-          element={(
-            <Layout>
-              <Outlet />
-            </Layout>
+const App: React.FC = () => (
+  <Suspense fallback={<LoadingPage />}>
+    <Routes>
+      <Route
+        path="/"
+        element={(
+          <Layout>
+            <Outlet />
+          </Layout>
           )}
-        >
-          {/* TODO: Implement translation later */}
-          <Route path="">
-            <Route index element={<HomeNavigation />} />
-            <Route path=":slug" element={<PageNavigation />} />
-            <Route path="cac-phan-khu" element={<DivisionList />} />
-            <Route path="404" element={<Error />} />
-            <Route path="chinh-sach-dieu-khoan" element={<Policy />} />
-            <Route path="tim-kiem" element={<Search />} />
-            <Route path="tin-tuc/:slug" element={<NewsDetail />} />
-            <Route path="su-kien/:slug" element={<EventsDetail />} />
-            <Route path="phan-khu/:slug" element={<DivisionDetail />} />
-          </Route>
+      >
+        {/* TODO: Implement translation later */}
+        <Route path="">
+          <Route index element={<HomeNavigation />} />
+          <Route path=":slug" element={<PageNavigation />} />
+          <Route path="cac-phan-khu" element={<DivisionList />} />
+          <Route path="404" element={<Error />} />
+          <Route path="chinh-sach-dieu-khoan" element={<Policy />} />
+          <Route path="tim-kiem" element={<Search />} />
+          <Route path="tin-tuc/:slug" element={<NewsDetail />} />
+          <Route path="su-kien/:slug" element={<EventsDetail />} />
+          <Route path="phan-khu/:slug" element={<DivisionDetail />} />
         </Route>
-      </Routes>
-    </Suspense>
-  );
-};
+      </Route>
+    </Routes>
+  </Suspense>
+);
 
 const GoogleReCaptchaWrapper: React.FC = ({ children }) => (
   <GoogleReCaptchaProvider

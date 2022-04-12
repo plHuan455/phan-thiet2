@@ -1,30 +1,30 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import getMenusService from 'services/menus';
+import menusService from 'services/menus';
 import { MenuDataTypes, MenuItem } from 'services/menus/types';
 import CONSTANTS from 'utils/constants';
 import groupMenus from 'utils/menu';
 
-interface MenusState {
+interface State {
   mainHeader: MenuItem[];
   header2: MenuItem[];
   mainFooter: MenuItem[];
   footer2: MenuItem[];
 }
 
-const initialState: MenusState = {
+const initialState: State = {
   mainHeader: [],
   header2: [],
   mainFooter: [],
   footer2: [],
 };
 
-export const getMenusAction = createAsyncThunk<
+export const menusAsync = createAsyncThunk<
   MenuDataTypes[],
   undefined
->('menusReducer/getMenusAction', async (_, { rejectWithValue }) => {
+>('menus/list', async (_, { rejectWithValue }) => {
   try {
-    const response = await getMenusService();
+    const response = await menusService();
     return response;
   } catch (error) {
     return rejectWithValue(error);
@@ -32,11 +32,11 @@ export const getMenusAction = createAsyncThunk<
 });
 
 export const menusSlice = createSlice({
-  name: 'menusReducer',
+  name: 'menus',
   initialState,
   reducers: {},
   extraReducers(builder) {
-    builder.addCase(getMenusAction.fulfilled, ($state, action) => {
+    builder.addCase(menusAsync.fulfilled, ($state, action) => {
       const mainHeader = action.payload.find(
         (e) => e.code === CONSTANTS.MENU_CODE.MAIN_HEADER,
       )?.items || [];
