@@ -5,7 +5,6 @@ import Carousel, { NextArrow, PrevArrow } from 'components/organisms/Carousel';
 
 export type FlatListProps<T> = {
   settings?: Settings;
-  innerDots?: boolean;
   data?: T[];
   render: (item: T)=> any;
   innerDots?: boolean;
@@ -13,7 +12,6 @@ export type FlatListProps<T> = {
 
 const FlatList = <T, >({
   settings,
-  innerDots,
   data,
   render,
   children,

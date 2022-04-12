@@ -3,7 +3,7 @@
   padding: rem(80) 0;
 
   @include mobile-down {
-    padding: rem(50) 0;
+    padding: rem(48) 0;
   }
 
   &::before {
@@ -31,9 +31,26 @@
   }
 
   &_panel {
-    min-height: rem(300);
+    min-height: rem(288);
+    
+    @include desktop-down {
+      min-height: rem(230);
+    }
+
+    @include tablet-down {
+      min-height: rem(256);
+    }
+
+    @include mobile-down {
+      min-height: rem(200);
+    }
+
+    @include small-mobile {
+      min-height: rem(288);
+    }
+
     .slick-dots {
-      bottom: rem(-42);
+      bottom: rem(-32);
     }
   }
 

@@ -82,7 +82,7 @@ const DivisionJourneys: React.FC<DivisionJourneysProps> = ({
               <Card.Layer
                 {...item}
                 isBold
-                modifiers={['filter', 'hover', 'r15']}
+                modifiers={['filter', 'hover', 'r15', 'pd-24x16']}
               />
             )}
           />
