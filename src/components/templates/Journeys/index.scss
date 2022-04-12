@@ -44,6 +44,11 @@
     max-height: rem(508);
     min-height: rem(470);
     overflow: hidden;
+    padding-top: rem(24);
+
+    @include desktop-down {
+      padding-top: 0;
+    }
 
     &::-webkit-scrollbar {
       display: none;
@@ -56,11 +61,16 @@
   }
 
   &_timelineItem {
-    margin-bottom: rem(20);
+    margin-bottom: rem(14);
     transition: $transition-long linear;
   
     &.active {
       margin-bottom: rem(80);
+
+      @include desktop-down {
+        margin-bottom: rem(60);
+      }
+
       @include mobile-down {
         margin-bottom: rem(40);
       }
@@ -82,9 +92,13 @@
 
 .t-timelineCard {
   $root: &;
-  max-width: rem(330);
-  padding-left: rem(60);
+  max-width: 100%;
+  padding-left: rem(64);
   position: relative;
+
+  @include desktop-down {
+    padding-left: rem(48);
+  }
 
   @include small-mobile {
     padding: 0;
@@ -117,9 +131,9 @@
   &.active {
     #{$root}_title .a-text {
       letter-spacing: 0.0015em;
-      @include font-base(28,32);
+      @include font-base(36, 48);
       @include mobile-down {
-        @include font-base(20, 28);
+        @include font-base(20, 32);
       }
     }
   }
@@ -225,8 +239,14 @@
   }
 
   &_left {
-    flex: 0 0 rem(330);
-    max-width: rem(330);
+    flex: 0 0 rem(420);
+    max-width: rem(420);
+
+    @include desktop-down {
+      flex: 0 0 rem(320);
+      max-width: rem(320);
+    }
+
     @include small-mobile {
       flex: 0 0 100%;
       max-width: 100%;
@@ -236,9 +256,14 @@
   &_right {
     align-items: flex-end;
     display: flex;
-    flex: 0 0 calc(85% - 330px);
-    margin-left: 15%;
-    max-width: calc(85% - 330px);
+    flex: 0 0 calc(89% - 420px);
+    margin-left: 11%;
+    max-width: calc(89% - 420px);
+
+    @include desktop-down {
+      flex: 0 0 calc(89% - 320px);
+      max-width: calc(89% - 320px);
+    }
     @include small-mobile {
       flex: 0 0 100%;
       margin: rem(20) 0 0;

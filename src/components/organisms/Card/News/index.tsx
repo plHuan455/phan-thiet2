@@ -49,7 +49,7 @@ const CardNews: React.FC<CardNewsProps> = ({
           </div>
           <Link href={button?.url} target={button?.target}>
             <div className="o-cardNews_title u-mt-8 u-mt-md-16">
-              <Heading type="h6" modifiers={['700', 's015', 'raisinBlack']} content={title} />
+              <Heading type="h5" modifiers={['700', 's015', 'raisinBlack']} content={title} />
             </div>
           </Link>
           <div className="o-cardNews_desc u-mt-8 u-mt-md-16">
