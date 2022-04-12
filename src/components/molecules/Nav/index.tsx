@@ -117,15 +117,17 @@ export interface NavProps extends InternalNavItemTypes {
   menu?: MenuItem[];
   pageSlug?: string;
   pathname: string;
+  variant?: 'default' | 'subdivisions';
 }
 
 const Nav: React.FC<NavProps> = ({
   menu,
   pageSlug,
   pathname,
+  variant,
   ...props
 }) => (
-  <ul className="menu">
+  <ul className={mapModifiers('menu', variant)}>
     {menu?.map((item, index) => (
       <NavItem
         pageSlug={pageSlug}

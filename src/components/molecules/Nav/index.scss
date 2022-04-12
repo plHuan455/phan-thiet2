@@ -1,5 +1,6 @@
 
 .menu {
+  $root: &;
   @include adjust-flex(flex-start);
   flex-grow: 1;
   list-style: none;
@@ -7,6 +8,14 @@
   @include tablet-down {
     display: block;
     margin: 0;
+  }
+
+  &-item_link {
+    #{$root}-subdivisions & {
+      @include tablet-up {
+        font-weight: 700;
+      }
+    }
   }
 }
 

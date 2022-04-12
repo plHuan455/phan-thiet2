@@ -1,0 +1,194 @@
+import React, {
+  useCallback, useMemo, useState,
+} from 'react';
+import { useLocation } from 'react-router-dom';
+
+import HeaderSub, { HeaderSubProps } from './HeaderSub';
+
+import Container from 'common/Container';
+import Heading from 'components/atoms/Heading';
+import Icon, { IconName } from 'components/atoms/Icon';
+import Image from 'components/atoms/Image';
+import Link from 'components/atoms/Link';
+import Nav from 'components/molecules/Nav';
+import Pulldown, { OptionType } from 'components/molecules/PullDown';
+import { Search } from 'components/templates/Banner';
+import useDetectHeader from 'hooks/useDetectHeader';
+import useWindowScroll from 'hooks/useWindowScroll';
+import { MenuItem } from 'services/menus/types';
+import mapModifiers from 'utils/functions';
+
+export interface HeaderDivisionProps extends Pick<HeaderSubProps, 'subMenu'|'backUrl'>{
+  logoUrl?: LinkTypes;
+  logo?: string;
+  menu?: MenuItem[];
+  language?: {
+    langList: OptionType[];
+    value: OptionType;
+    handleChangeLang?: (item?: OptionType) => void;
+  };
+  logoDivision?: string;
+  logoDivisionUrl?: LinkTypes;
+}
+
+const HeaderDivision: React.FC<HeaderDivisionProps> = ({
+  logoUrl,
+  logo,
+  menu,
+  language,
+  logoDivision,
+  logoDivisionUrl,
+  backUrl,
+  subMenu,
+}) => {
+  const { pathname } = useLocation();
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenSearch, setIsOpenSearch] = useState(false);
+  const [isScroll, setIsScroll] = useState(false);
+  const [idExpand, setIdExpand] = useState<Record<'parent' | 'child', number | undefined>>();
+
+  const handleCloseMenu = useCallback(() => {
+    setIsOpen(false);
+  }, []);
+
+  const handleClickExpand = useCallback(
+    (item: MenuItem) => {
+      if (window.innerWidth > 991) return;
+      if (item.id === idExpand?.child) {
+        setIdExpand({ child: undefined, parent: idExpand?.parent });
+        return;
+      }
+      if (item.id === idExpand?.parent) {
+        setIdExpand(undefined);
+        return;
+      }
+      setIdExpand({ child: item.id, parent: item.parentId });
+    },
+    [idExpand?.child, idExpand?.parent],
+  );
+
+  useDetectHeader(isOpen, handleCloseMenu);
+
+  const renderLang = useMemo(() => (
+    <Pulldown
+      variant="normal"
+      value={language?.value}
+      options={language?.langList || []}
+      handleSelect={language?.handleChangeLang}
+    />
+  ), [language]);
+
+  const renderButtonSearch = useCallback((iconName:IconName) => (
+    <button type="button" className="t-headerDivision_btn-search" onClick={() => setIsOpenSearch(true)}>
+      <Icon iconName={iconName} size="20" />
+    </button>
+  ), []);
+
+  useWindowScroll(() => {
+    if (window.pageYOffset > 41) {
+      setIsScroll(true);
+    } else {
+      setIsScroll(false);
+    }
+  });
+
+  return (
+    <header className="t-headerDivision">
+      <div className="t-headerDivision_subHeader">
+        <HeaderSub
+          backUrl={backUrl}
+          logoUrl={logoUrl}
+          logo={logo}
+          subMenu={subMenu}
+          isScroll={isScroll}
+          pathname={pathname}
+        />
+      </div>
+      <div className={mapModifiers('t-headerDivision_main', isScroll && 'isScroll')}>
+        <Container>
+          <div className={mapModifiers('t-headerDivision_layer-search', isOpenSearch && 'open')}>
+            <button className="button-close" type="button" onClick={() => setIsOpenSearch(false)}>
+              <Icon iconName="closeWhite" size="36" />
+            </button>
+            <div className="t-headerDivision_layer-search_content">
+              <Heading type="h2" modifiers={['700', 'uppercase', 'center', 'white']}>
+                Tìm kiếm
+              </Heading>
+              <Search search={{ placeholder: 'Tìm kiếm nội dung' }} />
+            </div>
+          </div>
+          <div className="t-headerDivision_wrap">
+            <div
+              className="t-headerDivision_hamburger"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              <div className={`hamburger ${isOpen ? 'active' : ''}`}>
+                <span />
+                <span />
+                <span />
+              </div>
+            </div>
+            <div className="t-headerDivision_left">
+              <div className="t-headerDivision_left_logoMain">
+                <Link href={logoUrl?.url} target={logoUrl?.target}>
+                  <Image src={logo} ratio="184x59" />
+                </Link>
+              </div>
+              <div className="t-headerDivision_left_logoSub">
+                <Link href={logoDivisionUrl?.url} target={logoDivisionUrl?.target}>
+                  <img src={logoDivision} alt="logo-division" />
+                </Link>
+              </div>
+            </div>
+            <div className={mapModifiers('t-headerDivision_right', isOpen && 'open')}>
+              <div className="t-headerDivision_search-mobile">
+                {renderButtonSearch('searchOrange')}
+              </div>
+              <div className="t-headerDivision_nav">
+                <div className="t-headerDivision_nav_logoSub">
+                  <Link href={logoDivisionUrl?.url} target={logoDivisionUrl?.target}>
+                    <img src={logoDivision} alt="logo-division" />
+                  </Link>
+                </div>
+                <Nav
+                  menu={menu}
+                  idExpand={[idExpand?.child, idExpand?.parent]}
+                  pathname={pathname}
+                  handleCloseMenu={handleCloseMenu}
+                  handleClickExpand={handleClickExpand}
+                  variant="subdivisions"
+                />
+                <div className="t-headerDivision_nav_separate" />
+                <div className="t-headerDivision_nav_menu">
+                  <Nav
+                    menu={subMenu}
+                    pathname={pathname}
+                    handleCloseMenu={handleCloseMenu}
+                  />
+                </div>
+              </div>
+              <div className="t-headerDivision_utility">
+                <div className="t-headerDivision_language-desktop">
+                  <div className="pulldown-lang">
+                    {renderLang}
+                  </div>
+                </div>
+                <div className="t-headerDivision_search">
+                  {renderButtonSearch('searchWhite')}
+                </div>
+              </div>
+            </div>
+            <div className="t-headerDivision_language-mobile">
+              <div className="pulldown-lang">
+                {renderLang}
+              </div>
+            </div>
+          </div>
+        </Container>
+      </div>
+    </header>
+  );
+};
+
+export default HeaderDivision;

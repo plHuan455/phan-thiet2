@@ -1,0 +1,238 @@
+@import './HeaderSub/index.scss';
+
+.t-headerDivision {
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: $z-header;
+
+  &_subHeader {
+    @include tablet-down {
+      display: none;
+    }
+  }
+
+  &_layer-search {
+    align-items: center;
+    background-color: rgba($black, 0.9);
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    transform: translateX(100%);
+    transition: $transition-long linear;
+    z-index: 4;
+
+    &-open {
+      transform: translateX(0);
+    }
+
+    &_content {
+      width: 100%;
+
+      .a-heading {
+        margin-bottom: rem(20);
+      }
+    }
+
+    .t-banner_search {
+      @include mobile-down {
+        min-width: 80%;
+      }
+    }
+
+    .button-close {
+      @include reset-button();
+      background-color: transparent;
+      padding: rem(5);
+      position: absolute;
+      right: rem(16);
+      top: rem(16);
+    }
+  }
+
+  &_main {
+    background-color: transparent;
+    height: rem($height-header-main-desktop);
+    transition: $transition-long ease-in-out;
+    @include desktop-down {
+      height: rem($height-header-main-desktop-down);
+    }
+
+    @include tablet-down {
+      background-color: $black06;
+    }
+
+    &-isScroll {
+      background-color: $black06;
+      @include tablet-down {
+        height: 0;
+        overflow: hidden;
+      }
+    }
+  }
+
+  &_wrap {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    @include tablet-down {
+      justify-content: space-between;
+    }
+  }
+
+  &_left {
+    flex-shrink: 0;
+
+    &_logoMain {
+      width: rem(140);
+      @include tablet-up {
+        display: none;
+      }
+    }
+
+    &_logoSub {
+      @include tablet-down {
+        display: none;
+      }
+
+      img {
+        max-height: rem(56);
+        max-width: rem(200);
+        object-fit: contain;
+      }
+    }
+  }
+  
+  &_right {
+    align-items: center;
+    display: flex;
+    flex-grow: 1;
+    justify-content: flex-end;
+    transition: $transition-long linear;
+
+    @include tablet-down {
+      background-color: $white;
+      display: block;
+      height: 100vh;
+      margin-top: 0;
+      overflow: auto;
+      padding: rem(25) rem(104) rem(50) rem(104);
+      position: fixed;
+      right: 0;
+      top: 0;
+      transform: translateX(100%);
+      transition: $transition-long linear;
+      width: 100%;
+      z-index: 2;
+    }
+
+    @include small-mobile {
+      padding: rem(25) rem(16) rem(50) rem(16);
+    }
+
+    &-open {
+      transform: translateX(0);
+    }
+  }
+
+  &_utility {
+    align-items: center;
+    display: flex;
+  }
+
+  &_btn-search {
+    @include reset-button();
+    background: transparent;
+    padding: rem(5);
+  }
+
+  &_hamburger {
+    width: rem(46);
+    z-index: 3;
+    @include tablet-up {
+      display: none;
+    }
+  }
+
+  &_utility {
+    @include tablet-down {
+      display: none;
+    }
+  }
+
+  &_language {
+    &-desktop {
+      margin: 0 rem(16);
+      @include tablet-down {
+        display: none;
+      }
+    }
+
+    &-mobile {
+      @include tablet-up {
+        display: none;
+      }
+    }
+  }
+
+  &_search-mobile {
+    display: flex;
+    justify-content: flex-end;
+    @include tablet-up {
+      display: none;
+    }
+  }
+
+  &_nav {
+    &_logoSub {
+      @include tablet-up {
+        display: none;
+      }
+      text-align: center;
+
+      img {
+        max-height: rem(56);
+        max-width: rem(200);
+        object-fit: contain;
+      }
+    }
+
+    &_separate {
+      background-color: $gamboge-orange;
+      height: 1px;
+      margin: rem(16) 0;
+      width: 100%;
+      @include tablet-up {
+        display: none;
+      }
+    }
+
+    &_menu {
+      @include tablet-up {
+        display: none;
+      }
+
+      .menu-item:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+
+  .m-pulldown {
+    &_header {
+      &_content {
+        @include tablet-up {
+          font-weight: 700;
+        }
+      }
+    }
+  }
+  
+}
