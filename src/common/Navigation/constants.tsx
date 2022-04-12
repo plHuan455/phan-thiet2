@@ -2,6 +2,7 @@ import React from 'react';
 
 const Home = React.lazy(() => import('pages/Home'));
 const Contact = React.lazy(() => import('pages/Contact'));
+const Policy = React.lazy(() => import('pages/Policy'));
 
 export type TemplateCodeTypes = {
   code: string;
@@ -33,4 +34,9 @@ export const TemplateCode: TemplateCodeTypes[] = [
     code: 'CONTACT',
     component: Contact,
   },
+  {
+    code: 'policy',
+    component: Policy,
+  },
+
 ];

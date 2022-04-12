@@ -1,2 +1,10 @@
 .o-ckeditor {
+  * {
+    font-family: inherit;
+    font-size: inherit;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+  }
 }
