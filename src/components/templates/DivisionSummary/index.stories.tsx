@@ -13,18 +13,22 @@ const dataDummy = [
   {
     thumbnail: 'https://source.unsplash.com/random',
     title: 'OCEAN GOLF',
+    description: 'Sân golf 89ha kề biển theo chuẩn PGA quốc tế tạo nên môi trường sống xanh trong lành, cho cả gia đình cùng trải nghiệm golf thư giãn ngay trước thềm nhà.',
   },
   {
     thumbnail: 'https://source.unsplash.com/random',
     title: 'OCEAN GOLF',
+    description: 'Sân golf 89ha kề biển theo chuẩn PGA quốc tế tạo nên môi trường sống xanh trong lành, cho cả gia đình cùng trải nghiệm golf thư giãn ngay trước thềm nhà.',
   },
   {
     thumbnail: 'https://source.unsplash.com/random',
     title: 'OCEAN GOLF',
+    description: 'Sân golf 89ha kề biển theo chuẩn PGA quốc tế tạo nên môi trường sống xanh trong lành, cho cả gia đình cùng trải nghiệm golf thư giãn ngay trước thềm nhà.',
   },
   {
     thumbnail: 'https://source.unsplash.com/random',
     title: 'OCEAN GOLF',
+    description: 'Sân golf 89ha kề biển theo chuẩn PGA quốc tế tạo nên môi trường sống xanh trong lành, cho cả gia đình cùng trải nghiệm golf thư giãn ngay trước thềm nhà.',
   },
 ];
 

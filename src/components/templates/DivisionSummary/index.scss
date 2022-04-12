@@ -3,10 +3,6 @@
     justify-content: space-between;
   }
 
-  &_left {
-    align-self: center;
-  }
-
   &_wrap {
     @include tablet-down {
       margin-top: rem(20);
@@ -15,15 +11,21 @@
     .slick-list {
       padding: rem(16) 0;
     }
-  }
 
-  &_content {
-    &-desc {
-      margin-top: rem(32);
+    &.carousel {
+      margin-left: rem(-16);
+      margin-right: rem(-16);
 
       @include mobile-down {
-        margin-top: rem(16);
+        margin-left: rem(-8);
+        margin-right: rem(-8);
       }
+    }
+  }
+
+  &_desc {
+    @include tablet-up {
+      max-width: rem(423);
     }
   }
 
