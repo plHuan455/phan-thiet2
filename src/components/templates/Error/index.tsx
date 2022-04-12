@@ -25,39 +25,53 @@ const Error: React.FC<ErrorProps> = ({
   back,
   contact,
 }) => {
-  const { animated, ballonAnimate, errorAnimate } = useAnimation();
+  const {
+    animated,
+    ballonLeftAnimate,
+    ballonRightAnimate,
+    errorImageAnimate,
+    errorTitleAnimate,
+    errorActionAnimate,
+  } = useAnimation();
   return (
     <div className="t-error">
       <Container>
         {/* TODO: Add animation later */}
         <div className="t-error_content d-flex flex-column align-items-center justify-content-center u-pt-md-147 u-pb-md-80 u-pt-80 u-pb-64">
-          <animated.div className="t-error_layerLeft" style={ballonAnimate}>
+          <animated.div className="t-error_layerLeft" style={ballonLeftAnimate}>
             <Image src={ballonLeft} alt="ballon_left" />
           </animated.div>
-          <animated.div className="t-error_layerRight">
+          <animated.div
+            className="t-error_layerRight"
+            style={ballonRightAnimate}
+          >
             {/* TODO: Add animation later */}
             <Image src={ballonRight} alt="ballon_right" />
           </animated.div>
           <div className="t-error_thumbnail">
-            <animated.div style={errorAnimate}>
+            <animated.div style={errorImageAnimate}>
               <Image ratio="1x1" src={imgSrc} size="cover" alt="" />
             </animated.div>
           </div>
           <div className="t-error_wapper u-pt-19">
-
-            <Heading
-              type="h4"
-              modifiers={['raisinBlack', '700', 'center']}
-              content={title}
-            />
-
-            <div className="u-mt-20">
-              <Text
-                modifiers={['davyGrey', '16x28', '400', 'center']}
-                content={description}
+            <animated.div style={errorTitleAnimate}>
+              <Heading
+                type="h4"
+                modifiers={['raisinBlack', '700', 'center']}
+                content={title}
               />
-            </div>
-            <div className="t-error_group d-flex align-items-center justify-content-center u-mt-40">
+              <div className="u-mt-20">
+                <Text
+                  modifiers={['davyGrey', '16x28', '400', 'center']}
+                  content={description}
+                />
+              </div>
+            </animated.div>
+
+            <animated.div
+              className="t-error_group d-flex align-items-center justify-content-center u-mt-40"
+              style={errorActionAnimate}
+            >
               <div className="t-error_back">
                 <Button
                   size="md"
@@ -78,7 +92,7 @@ const Error: React.FC<ErrorProps> = ({
                   {contact?.text}
                 </Button>
               </div>
-            </div>
+            </animated.div>
           </div>
         </div>
       </Container>
