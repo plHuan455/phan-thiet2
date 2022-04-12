@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 /* eslint-disable jsx-a11y/media-has-caption */
 import React, { forwardRef } from 'react';
 

@@ -38,15 +38,6 @@
     @include reset-button();
   }
 
-  &_overlay {
-    &-player {
-      &::after {
-        background: rgba($black, 0.5) !important;
-
-      }
-    }
-  }
-
   // Add more modifiers below here
 
   &-notify {

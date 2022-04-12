@@ -163,4 +163,4 @@ export const youtubeParser = (url: string) => {
 
 export const youtubeControlIframe = (url: string) => `<iframe src="https://www.youtube.com/embed/${youtubeParser(
   url,
-)}?autoplay=1&disablekb=1&enable&controls=0&jsapi=1&loop=1&modestbranding=1&playsinline=1&color=white&mute=1" frameborder="0" allowfullscreen allow="autoplay" autoplay></iframe>`;
+)}?autoplay=1&disablekb=1&enable&controls=1&jsapi=1&loop=1&modestbranding=1&playsinline=1&color=white&mute=0" frameborder="0" allowfullscreen allow="autoplay" autoplay></iframe>`;
