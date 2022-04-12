@@ -14,13 +14,18 @@
       padding-bottom: (114 / 79) * 100%;
     }
 
+    @include desktop-down {
+      left: rem(24);
+    }
+
     @include tablet-down {
       max-width: rem(70);
     }
 
     @include mobile-down {
-      max-width: rem(32);
+      max-width: rem(48);
       top: rem(160);
+      left: rem(48);
     }
   }
 
@@ -35,13 +40,18 @@
       padding-bottom: (148 / 215) * 100%;
     }
 
+
+    @include desktop-down {
+      right: rem(24);
+    }
+
     @include tablet-down {
       max-width: rem(170);
-      right: 0;
+      right: rem(36);
     }
 
     @include mobile-down {
-      max-width: rem(88);
+      max-width: rem(120);
       top: rem(80);
     }
   }

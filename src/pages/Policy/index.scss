@@ -26,6 +26,7 @@
 
       @include mobile-down {
         max-width: rem(80);
+        top: rem(-32);
       }
     }
   }
