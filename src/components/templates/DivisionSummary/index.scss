@@ -1,0 +1,47 @@
+.t-divisionSummary {
+  &_row {
+    justify-content: space-between;
+  }
+
+  &_wrap {
+    @include tablet-down {
+      margin-top: rem(20);
+    }
+
+    .slick-list {
+      padding: rem(16) 0;
+    }
+
+    &.carousel {
+      margin-left: rem(-16);
+      margin-right: rem(-16);
+
+      @include mobile-down {
+        margin-left: rem(-8);
+        margin-right: rem(-8);
+      }
+    }
+  }
+
+  &_desc {
+    @include tablet-up {
+      max-width: rem(423);
+    }
+  }
+
+  &_listData {
+    @include adjust-flex();
+
+    @include mobile-down {
+      margin: 0 rem(-8);
+    }
+
+    &-item {
+      width: 100%;
+
+      @include mobile-down {
+        padding: 0 rem(8);
+      }
+    }
+  }
+}

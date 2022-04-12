@@ -26,7 +26,7 @@
   }
 
   &-filter {
-    filter: drop-shadow(0 rem(4) rem(36) $black025);
+    box-shadow: 0 rem(4) rem(16) $black025;
   }
 
   &_content {

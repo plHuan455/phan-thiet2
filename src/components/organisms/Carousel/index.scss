@@ -1,5 +1,6 @@
 .o-carousel {
   $root: &;
+  $bgTheme: var(--theme);
   position: relative;
 
   &_arrow {
@@ -201,6 +202,10 @@
       transition: $transition-long ease;
       width: rem(16);
     }
+
+    &.inherit {
+      opacity: 0.5;
+    }
   }
 
   .slick-active {
@@ -214,6 +219,10 @@
         background-color: $gamboge-orange;
         border-radius: 4px;
         width: rem(32);
+      }
+
+      &.inherit {
+        opacity: 1;
       }
     }
   }
