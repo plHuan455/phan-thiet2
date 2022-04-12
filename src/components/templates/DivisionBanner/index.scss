@@ -1,0 +1,14 @@
+.t-divisionBanner {
+
+  &_thumbnail {
+    .a-image {
+      @include tablet-down {
+        padding-bottom: (1024 / 768) * 100%; 
+      }
+      
+      @include mobile-down {
+        padding-bottom: (812 / 375) * 100%; 
+      }
+    }
+  }
+}
