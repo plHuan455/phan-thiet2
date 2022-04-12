@@ -9,10 +9,10 @@ import Carousel, { NextArrow, PrevArrow } from 'components/organisms/Carousel';
 import useDeviceQueries from 'hooks/useDeviceQueries';
 
 export interface CarouselItemTypes {
-  title: string
-  description: string
-  thumbnail: string
-  icon: {
+  title?: string
+  description?: string
+  thumbnail?: string
+  icon?: {
     label: string
     imgSrc: string
   }

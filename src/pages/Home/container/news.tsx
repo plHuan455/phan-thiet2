@@ -3,6 +3,7 @@ import React from 'react';
 import Container from 'common/Container';
 import FlatMore from 'common/FlatMore';
 import Card from 'components/organisms/Card';
+import { baseString, getBlockData } from 'utils/functions';
 
 const data = new Array(7).fill({
   thumbnail: 'https://source.unsplash.com/random',
@@ -16,29 +17,36 @@ const data = new Array(7).fill({
     animation: 'arrow',
   },
 });
-
-const News: React.FC = () => (
-  <section className="u-pt-md-80 u-pb-48 u-pt-48 u-pb-md-88 position-relative">
-    <Container>
-      <FlatMore
-        title={{
-          text: 'TIN TỨC CHUNG',
-          type: 'h4',
-          modifiers: ['gradientGreen', '700', 's015'],
-        }}
-        link={{
-          text: 'Xem tất cả',
-          href: '/',
-        }}
-        data={data}
-        render={(item) => (
-          <Card.Normal
-            {...item}
-          />
-        )}
-      />
-    </Container>
-  </section>
-);
+interface NewsProps{
+  titleSection: string,
+  link?: {url?: string, text?: string, target?: string}
+}
+const News: React.FC<SectionBlocks> = ({ blocks }) => {
+  const newsBlock = getBlockData<NewsProps>('general_news', blocks);
+  return (
+    <section className="u-pt-md-80 u-pb-48 u-pt-48 u-pb-md-88 position-relative">
+      <Container>
+        <FlatMore
+          title={{
+            text: baseString(newsBlock?.titleSection),
+            type: 'h4',
+            modifiers: ['gradientGreen', '700', 's015'],
+          }}
+          link={{
+            text: newsBlock?.link?.text,
+            href: newsBlock?.link?.url,
+            target: newsBlock?.link?.target,
+          }}
+          data={data}
+          render={(item) => (
+            <Card.Normal
+              {...item}
+            />
+          )}
+        />
+      </Container>
+    </section>
+  );
+};
 
 export default News;

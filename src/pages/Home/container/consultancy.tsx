@@ -10,18 +10,25 @@ import leavesRight from 'assets/images/pages/home/consultancy/leavesRight.png';
 import Image from 'components/atoms/Image';
 import { FormConsultancy } from 'components/organisms/Consultancy';
 import ConsultancyTemplate from 'components/templates/Consultancy';
+import { getBlockData } from 'utils/functions';
 import { schemasConsultancyForm } from 'utils/schemas';
 
-const Consultancy: React.FC = () => {
+interface ConsultancyProps{
+  titleSection: string,
+}
+
+const Consultancy: React.FC<SectionBlocks> = ({ blocks }) => {
   const method = useForm<FormConsultancy>({
     resolver: yupResolver(schemasConsultancyForm),
     mode: 'onSubmit',
   });
+  const consultancyBlocks = getBlockData<ConsultancyProps>('project_information', blocks);
+
   return (
     <section className="s-consultancy position-relative">
       <ConsultancyTemplate
         title={{
-          text: 'ĐĂNG KÝ NHẬN <br /> THÔNG TIN DỰ ÁN',
+          text: consultancyBlocks?.titleSection || '',
           modifiers: ['700', 'gradientGreen', 's015'],
         }}
         layer={(
