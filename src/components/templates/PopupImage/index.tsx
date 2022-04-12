@@ -46,7 +46,7 @@ const PopupImage: React.FC<PopupImageProps> = ({
           cssEase: 'ease-in-out',
           customPaging() {
             return (
-              <span className="o-carousel_dot rect" />
+              <span className="o-carousel_dot circle" />
             );
           },
         },
@@ -61,7 +61,7 @@ const PopupImage: React.FC<PopupImageProps> = ({
           cssEase: 'ease-in-out',
           customPaging() {
             return (
-              <span className="o-carousel_dot rect" />
+              <span className="o-carousel_dot circle" />
             );
           },
         },
