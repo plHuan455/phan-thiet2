@@ -22,7 +22,7 @@ export const PrevArrow: React.FC<ArrowProps> = ({
   className, onClick, extendClassname = '', customArrow = 'default',
 }) => (
   <div
-    className={`o-carousel_arrow  o-carousel_arrow_prev ${customArrow} ${className} ${extendClassname}`}
+    className={`o-carousel_arrow o-carousel_arrow_prev ${customArrow} ${className} ${extendClassname}`}
     onClick={onClick}
   />
 );
