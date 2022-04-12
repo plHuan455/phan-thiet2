@@ -1,47 +1,43 @@
+import { useMemo } from 'react';
+
 import dummyFooter from 'assets/dataDummy/footer';
 import dummyHeader from 'assets/dataDummy/header';
-import { store } from 'store';
+import { useAppSelector } from 'store/hooks';
 
-const getDataHeaderDefault = () => {
-  const state = store.getState();
-
+const useLayout = () => {
   const {
     mainHeader: menuHeaderDefault,
-  } = state.menus;
-
-  return {
-    ...dummyHeader,
-    menu: menuHeaderDefault,
-  };
-};
-
-const getDataFooter = () => {
-  const state = store.getState();
-
-  const {
     mainFooter,
     footer2: menuTermFooter,
-  } = state.menus;
+  } = useAppSelector((state) => state.menus);
 
-  return {
-    ...dummyFooter,
-    menuList: {
-      title: mainFooter[0],
-      list: mainFooter[0]?.subMenu || [],
-    },
-    divisionList: {
-      title: mainFooter[1],
-      list: mainFooter[1]?.subMenu || [],
-    },
-    serviceList: {
-      title: mainFooter[2],
-      list: mainFooter[2]?.subMenu || [],
-    },
-    subMenu: menuTermFooter,
-  };
+  const data = useMemo(
+    () => ({
+      dataHeaderDefault: {
+        ...dummyHeader,
+        menu: menuHeaderDefault,
+      },
+      dataFooter: {
+        ...dummyFooter,
+        menuList: {
+          title: mainFooter[0],
+          list: mainFooter[0]?.subMenu || [],
+        },
+        divisionList: {
+          title: mainFooter[1],
+          list: mainFooter[1]?.subMenu || [],
+        },
+        serviceList: {
+          title: mainFooter[2],
+          list: mainFooter[2]?.subMenu || [],
+        },
+        subMenu: menuTermFooter,
+      },
+    }),
+    [menuHeaderDefault, menuTermFooter, mainFooter],
+  );
+
+  return data;
 };
 
-export default {
-  getDataHeaderDefault,
-  getDataFooter,
-};
+export default useLayout;
