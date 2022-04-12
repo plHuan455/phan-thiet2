@@ -1,13 +1,6 @@
-import { Story, Meta } from '@storybook/react';
 import React from 'react';
 
-import DivisionSummary from '.';
-
-export default {
-  title: 'Components/templates/DivisionSummary',
-  component: DivisionSummary,
-  argTypes: {},
-} as Meta;
+import DivisionSummary from 'components/templates/DivisionSummary';
 
 const dataDummy = [
   {
@@ -32,15 +25,17 @@ const dataDummy = [
   },
 ];
 
-export const normal: Story = () => (
-  <div style={{ color: '#005C8F' }}>
+const Summary: React.FC = () => (
+  <section className="u-mt-md-96 u-mt-48 u-mb-md-157 u-mb-80" style={{ color: 'var(--theme)' }}>
     <DivisionSummary
       title="NƠI ÔM TRỌN</br>
-        CẢ THẾ GIỚI"
+       CẢ THẾ GIỚI"
       description="Nơi tinh hoa năm Châu hôi tụ với những tiện ích hàng đầu,
-        nơi các dãy biệt thự ôm trọn “thế giới”, The Kingdom là
-        điểm giao huyết mạch, là trái tim của NovaWorld Phan Thiet."
+       nơi các dãy biệt thự ôm trọn “thế giới”, The Kingdom là
+       điểm giao huyết mạch, là trái tim của NovaWorld Phan Thiet."
       data={dataDummy}
     />
-  </div>
+  </section>
 );
+
+export default Summary;

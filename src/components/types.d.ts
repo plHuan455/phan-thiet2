@@ -69,7 +69,8 @@ type ColorStyle =
   | 'deepLemon'
   | 'gradientBittersweet'
   | 'arsenic'
-  | 'bananaMania';
+  | 'bananaMania'
+  | 'inherit';
 
 type FontFamily = 'fontOswald' | 'fontSvnGotham';
 

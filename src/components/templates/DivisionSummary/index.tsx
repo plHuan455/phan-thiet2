@@ -37,7 +37,7 @@ const DivisionSummary: React.FC<DivisionSummaryProps> = ({
         <Col className="align-self-center" lg={6}>
           <Heading
             type="h2"
-            modifiers={['seaBlue', 's015', '400']}
+            modifiers={['s015', '400']}
             content={title}
           />
           <div className="u-mt-md-32 u-mt-16 t-divisionSummary_desc">
