@@ -5,11 +5,58 @@ import FlatMore from 'common/FlatMore';
 import Card from 'components/organisms/Card';
 import { CardNormalProps } from 'components/organisms/Card/Normal';
 
-interface DocumentsProps {
-  dataList: CardNormalProps[]
-}
+const dataDummy: CardNormalProps[] = [
+  {
+    thumbnail: 'https://source.unsplash.com/random',
+    title: 'Nova World phan thiết và chuỗi cung cấp tiện ích',
+    href: '/',
+    tag: 'The Kingdom',
+    dateTime: '2 giờ trước',
+    url: {
+      text: 'Tải xuống',
+      iconName: 'downloadOrange',
+      animation: 'download',
+    },
+  },
+  {
+    thumbnail: 'https://source.unsplash.com/random',
+    title: 'Nova World phan thiết và chuỗi cung cấp tiện ích',
+    href: '/',
+    tag: 'The Kingdom',
+    dateTime: '2 giờ trước',
+    url: {
+      text: 'Tải xuống',
+      iconName: 'downloadOrange',
+      animation: 'download',
+    },
+  },
+  {
+    thumbnail: 'https://source.unsplash.com/random',
+    title: 'Nova World phan thiết và chuỗi cung cấp tiện ích',
+    href: '/',
+    tag: 'The Kingdom',
+    dateTime: '2 giờ trước',
+    url: {
+      text: 'Tải xuống',
+      iconName: 'downloadOrange',
+      animation: 'download',
+    },
+  },
+  {
+    thumbnail: 'https://source.unsplash.com/random',
+    title: 'Nova World phan thiết và chuỗi cung cấp tiện ích',
+    href: '/',
+    tag: 'The Kingdom',
+    dateTime: '2 giờ trước',
+    url: {
+      text: 'Tải xuống',
+      iconName: 'downloadOrange',
+      animation: 'download',
+    },
+  },
+];
 
-const Documents: React.FC<DocumentsProps> = ({ dataList }) => (
+const Documents: React.FC = () => (
   <div className="s-documents">
     <Container>
       <FlatMore
@@ -18,7 +65,7 @@ const Documents: React.FC<DocumentsProps> = ({ dataList }) => (
           type: 'h4',
           modifiers: ['gradientGreen', '700', 's015', 'uppercase'],
         }}
-        data={dataList}
+        data={dataDummy}
         render={(item) => (
           <Card.Normal
             {...item}

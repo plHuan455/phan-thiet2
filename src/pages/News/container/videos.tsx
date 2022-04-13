@@ -3,13 +3,35 @@ import React from 'react';
 import Container from 'common/Container';
 import FlatMore from 'common/FlatMore';
 import Card from 'components/organisms/Card';
-import { CardPlayerProps } from 'components/organisms/Card/Player';
 
-interface NewsPlayerProps {
-  dataList: CardPlayerProps[]
-}
+const dataCardPlayers = [
+  {
+    thumbnail: 'https://source.unsplash.com/random',
+    tag: 'The Kingdom',
+    title: 'OCEAN RESIDENCE - MẢNH GHÉP ĐẶC SẮC MỚI TẠI NOVAWORLD PHAN THIET',
+    dateTime: '2 giờ trước',
+  },
+  {
+    thumbnail: 'https://source.unsplash.com/random',
+    tag: 'The Kingdom',
+    title: 'OCEAN RESIDENCE - MẢNH GHÉP ĐẶC SẮC MỚI TẠI NOVAWORLD PHAN THIET',
+    dateTime: '2 giờ trước',
+  },
+  {
+    thumbnail: 'https://source.unsplash.com/random',
+    tag: 'The Kingdom',
+    title: 'OCEAN RESIDENCE - MẢNH GHÉP ĐẶC SẮC MỚI TẠI NOVAWORLD PHAN THIET',
+    dateTime: '2 giờ trước',
+  },
+  {
+    thumbnail: 'https://source.unsplash.com/random',
+    tag: 'The Kingdom',
+    title: 'OCEAN RESIDENCE - MẢNH GHÉP ĐẶC SẮC MỚI TẠI NOVAWORLD PHAN THIET',
+    dateTime: '2 giờ trước',
+  },
+];
 
-const Videos: React.FC<NewsPlayerProps> = ({ dataList }) => (
+const Videos: React.FC = () => (
   <div className="s-videos">
     <Container>
       <FlatMore
@@ -18,7 +40,7 @@ const Videos: React.FC<NewsPlayerProps> = ({ dataList }) => (
           type: 'h4',
           modifiers: ['gradientGreen', '700', 's015', 'uppercase'],
         }}
-        data={dataList}
+        data={dataCardPlayers}
         render={(item) => (
           <Card.Player
             {...item}

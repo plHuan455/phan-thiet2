@@ -3,16 +3,27 @@ import React from 'react';
 import Container from 'common/Container';
 import FlatMore from 'common/FlatMore';
 import Image from 'components/atoms/Image';
-import { CardPlayerProps } from 'components/organisms/Card/Player';
+
+const dataCardImage = [
+  {
+    thumbnail: 'https://source.unsplash.com/random',
+  },
+  {
+    thumbnail: 'https://source.unsplash.com/random',
+  },
+  {
+    thumbnail: 'https://source.unsplash.com/random',
+  },
+  {
+    thumbnail: 'https://source.unsplash.com/random',
+  },
+];
 
 export interface CardImageProps {
   thumbnail: string,
   alt?: string,
   href?: string,
   handleClick?: () => void
-}
-interface ImagesProps {
-  dataList: CardPlayerProps[]
 }
 
 const CardImage: React.FC<CardImageProps> = ({ thumbnail, alt, handleClick }) => (
@@ -28,7 +39,7 @@ const CardImage: React.FC<CardImageProps> = ({ thumbnail, alt, handleClick }) =>
   </div>
 );
 
-const Images: React.FC<ImagesProps> = ({ dataList }) => (
+const Images: React.FC = () => (
   <div className="s-images">
     <Container>
       <FlatMore
@@ -37,7 +48,7 @@ const Images: React.FC<ImagesProps> = ({ dataList }) => (
           type: 'h4',
           modifiers: ['gradientGreen', '700', 's015', 'uppercase'],
         }}
-        data={dataList}
+        data={dataCardImage}
         render={(item) => (
           <CardImage
             {...item}
