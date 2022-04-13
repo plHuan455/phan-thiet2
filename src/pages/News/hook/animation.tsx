@@ -28,7 +28,6 @@ const useAnimation = () => {
   useEffect(() => {
     let res: NodeJS.Timeout;
     let resBuzz: NodeJS.Timeout;
-
     {
       const {
         opacity, x: xLeftFly, y: yLeftFly, rotateZ,
@@ -44,7 +43,7 @@ const useAnimation = () => {
         opacity: opacityToplide,
       } = slideToTopAnimation;
 
-      // ballons
+      // -------------------- ballons ------------------
       opacity.start({
         from: 0,
         to: 1,
@@ -87,6 +86,7 @@ const useAnimation = () => {
         rotateZ.start({ cancel: true });
         xLeftFly.start({ cancel: true });
       }, 6500);
+
       resBuzz = setTimeout(() => {
         rotateZTopSlide.start({ cancel: true });
       }, 1350);

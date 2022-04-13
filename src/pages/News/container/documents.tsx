@@ -70,6 +70,7 @@ const Documents: React.FC = () => {
 
   const isScrollLeaf = useScrollAnimate(leafRef);
   const isScrollBallon = useScrollAnimate(ballonRef);
+
   return (
     <div className="s-documents">
       <animated.div style={isScrollLeaf ? slideReverseAnimate : {}} className="s-documents_leaf" ref={leafRef}>

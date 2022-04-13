@@ -81,34 +81,36 @@
   position: relative;
 }
 
+@mixin position-section {
+  position: absolute;
+  width: 100%;
+  opacity: 0;
+}
+
 .s-news {
   position: relative;
   &_ballon {
-    position: absolute;
     top: rem(-90);
     right: 0;
-    width: 100%;
     max-width: rem(359);
-    opacity: 0;
+    @include position-section;
     @include mobile-down {
       max-width: rem(180);
+      top: rem(-50);
     }
   }
   &_leaf1 {
-    position: absolute;
     top: 55%;
     left: 0;
-    width: 100%;
     max-width: rem(129);
-    opacity: 0;
+    @include position-section;
   }
   &_leaf2 {
-    position: absolute;
     bottom: -20%;
     right: 0;
-    width: 100%;
     max-width: rem(462);
-    opacity: 0;
+    @include position-section;
+
     @include tablet-down {
       max-width: rem(308);
     }
@@ -121,25 +123,22 @@
 .s-documents {
   position: relative;
   &_ballon {
-    position: absolute;
     top: -40%;
     right: 0;
-    width: 100%;
     max-width: rem(274);
-    opacity: 0;
+    @include position-section;
     @include mobile-down {
       max-width: rem(182);
     }
   }
   &_leaf {
-    position: absolute;
     top: -40%;
     left: 0;
-    width: 100%;
     max-width: rem(270);
-    opacity: 0;
+    @include position-section;
     @include mobile-down {
-      max-width: rem(180);
+      max-width: rem(140);
+      top: -35%;
     }
   }
 }
@@ -147,12 +146,10 @@
 .s-consultancy {
   position: relative;
   &_layer {
-    position: absolute;
     bottom: 0;
     left: 0;
-    width: 100%;
     max-width: rem(326);
-    opacity: 0;
+    @include position-section;
     @include mobile-down {
       max-width: rem(163);
     }
