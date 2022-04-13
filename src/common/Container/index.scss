@@ -33,15 +33,15 @@
   }
 
   &-journeys {
-    @include break-min(1640px) {
-      max-width: rem(1640);
-    }
     @include break-min(1440px) {
       max-width: rem(1440);
     }
     @include break-max(1440px) {
       max-width: 100%;
       padding-right: 0;
+    }
+    @include break-min(1640px) {
+      max-width: rem(1640);
     }
   }
 }
