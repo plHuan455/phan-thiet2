@@ -1,7 +1,6 @@
 .o-cardFeedback {
   $root: &;
   display: flex;
-  filter: drop-shadow(0 rem(4) rem(16) rgba($black, 0.1));
   flex-direction: column;
   height: 100%;
   position: relative;

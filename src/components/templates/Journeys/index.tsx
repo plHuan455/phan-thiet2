@@ -237,7 +237,7 @@ export const JourneysList:React.FC<JourneysListProps> = ({
             <Card.Layer
               {...item}
               ratio="258x334"
-              modifiers={['hover', 'r15', 'pd-6x20']}
+              modifiers={['r15', 'pd-6x20']}
             />
           )}
         />

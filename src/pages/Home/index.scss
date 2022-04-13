@@ -44,6 +44,12 @@
         padding-bottom: (2606 / 1366) * 100%;
       }
 
+      @include break-min(1600px) {
+        .a-image {
+          padding-bottom: 100%;
+        }
+      }
+
       @include tablet-down {
         .a-image {
           padding-bottom: 250%;

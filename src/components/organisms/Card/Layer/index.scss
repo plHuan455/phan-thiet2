@@ -44,10 +44,6 @@
       padding: rem(6) rem(20);
       top: calc(100% - 40px);
     }
-    
-    #{$root}-pd-6x20:hover & {
-      padding: rem(20);
-    }
 
     #{$root}-pd-8x16 & {
       padding: rem(8) rem(16);
