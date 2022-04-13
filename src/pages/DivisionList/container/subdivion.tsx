@@ -16,6 +16,7 @@ const Divisions: React.FC = () => (
         imgSrc: 'https://source.unsplash.com/random',
         title: 'The Florida',
         description: 'Ocean Residence kiến tạo nơi đáng  sống mới cho cư dân khi tận hưởng giá trị Ocean Residence kiến tạo nơi đáng  sống mới cho cư dân khi tận hưởng giá trị ..',
+        href: '/',
       })}
       btn={{
         text: 'XEM THÊM',
