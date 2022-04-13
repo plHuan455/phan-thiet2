@@ -4,60 +4,49 @@ import { Col, Row } from 'react-bootstrap';
 import Collection, { CollectionProps } from './components/Collection';
 
 import Container from 'common/Container';
-import Heading, { TextStyle } from 'components/atoms/Heading';
+import FlatList from 'common/FlatList';
+import Arrow from 'components/atoms/Arrow';
+import Heading from 'components/atoms/Heading';
 import Text from 'components/atoms/Text';
-import Carousel, { NextArrow, PrevArrow } from 'components/organisms/Carousel';
 
 interface DivisionCollectionProps {
-  title: {
-    text: string;
-    modifiers?: TextStyle;
-  };
-  subTitle: string;
+  title: string;
+  description?: string;
   dataList: CollectionProps[];
 }
-const setting = {
+const settings = {
   dots: false,
   slidesToShow: 4,
-  slidesToScroll: 4,
+  slidesToScroll: 1,
   arrows: true,
-  prevArrow: <PrevArrow />,
-  nextArrow: <NextArrow />,
+  prevArrow: <Arrow.Prev />,
+  nextArrow: <Arrow.Next />,
   infinite: false,
   cssEase: 'ease-in-out',
   customPaging() {
-    return <span className="o-carousel_dot circle" />;
+    return <span className="o-carousel_dot rect inherit" style={{ backgroundColor: 'var(--theme)' }} />;
   },
   responsive: [
     {
-      breakpoint: 1920,
+      breakpoint: 1199,
       settings: {
         slidesToShow: 4,
-        slidesToScroll: 4,
-        arrows: true,
-        dots: false,
-      },
-    },
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 3,
-        slidesToScroll: 3,
-        arrows: true,
-        dots: false,
+        slidesToScroll: 1,
+        arrows: false,
+        dots: true,
       },
     },
     {
       breakpoint: 767,
       settings: {
         slidesToShow: 2,
-        slidesToScroll: 2,
+        slidesToScroll: 1,
         arrows: false,
         dots: true,
       },
     },
     {
-      breakpoint: 425,
+      breakpoint: 575,
       settings: {
         slidesToShow: 1,
         slidesToScroll: 1,
@@ -70,32 +59,36 @@ const setting = {
 
 const DivisionCollection: React.FC<DivisionCollectionProps> = ({
   title,
-  subTitle,
+  description,
   dataList,
 }) => (
-  <div className="t-divisionCollection">
+  <div className="t-divisionCollection" style={{ color: 'var(--theme)' }}>
     <Container>
       <div className="t-divisionCollection_wrapper">
-        <Row className="align-items-center u-mb-32 u-mb-md-64">
+        <Row className="d-xl-flex align-items-xl-center">
           <Col xl={3}>
-            <Heading modifiers={title.modifiers} content={title.text} />
+            <Heading type="h2" modifiers={['400', 'inherit', 's015', 'uppercase']} content={title} />
           </Col>
-          <Col xl={9}>
-            <Text modifiers={['400', '14x20', 'davyGrey']} content={subTitle} />
+          <Col xl={9} className="u-mt-16 u-mt-md-24 u-mt-xl-0">
+            <Text modifiers={['400', '14x20', 'davyGrey']} content={description} />
           </Col>
         </Row>
-        <div className="t-divisionCollection_content">
-          <Carousel settings={setting} innerDots>
-            {dataList?.map((item, idx) => (
-              <Collection key={idx.toString()} {...item} />
-            ))}
-          </Carousel>
+        <div className="u-mt-md-64 u-mt-32">
+          <FlatList
+            settings={settings}
+            data={dataList}
+            render={(item) => (
+              <Collection {...item} />
+            )}
+          />
         </div>
       </div>
     </Container>
   </div>
 );
 
-DivisionCollection.defaultProps = {};
+DivisionCollection.defaultProps = {
+  description: undefined,
+};
 
 export default DivisionCollection;

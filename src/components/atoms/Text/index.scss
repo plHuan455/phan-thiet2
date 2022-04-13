@@ -6,9 +6,7 @@
   &-inline {
     display: inline-block;
   }
-  &-12x18 {
-    @include font-base(12, 18);
-  }
+  
   &-11x18 {
     @include font-base(11, 18);
   }

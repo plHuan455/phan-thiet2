@@ -15,73 +15,72 @@ export default {
   argTypes: {},
 } as Meta;
 
-export const normal: Story = () => (
-  <BrowserRouter>
-    <div style={{ height: '100vh' }}>
-      <DivisionCollection
-        dataList={[
-          {
-            title: {
-              text: 'BERMUDA',
-              modifiers: ['400', '24x36', 'deepLemon'],
+export const normal: Story = () => {
+  const styles = {
+    minHeight: '100vh',
+    paddingBottom: 100,
+    '--theme': 'rgb(0, 92, 143)',
+  };
+  return (
+    <BrowserRouter>
+      <div style={styles}>
+        <DivisionCollection
+          dataList={[
+            {
+              title: 'BERMUDA',
+              color: 'rgba(0, 92, 143, 1)',
+              button: {
+                url: '/',
+                text: 'Xem thêm',
+                target: '_self',
+              },
+              thumbnail: layer1,
             },
-            btnMore: {
-              href: '/',
-              text: 'Xem <br /> thêm',
-              target: '_self',
-              backgroundColor: 'taupeGray',
+            {
+              title: 'SANTORINI',
+              color: 'rgba(10, 182, 244, 1)',
+              button: {
+                url: '/',
+                text: 'Xem thêm',
+                target: '_self',
+              },
+              thumbnail: layer2,
             },
-            thumbnail: layer1,
-          },
-          {
-            title: {
-              text: 'SANTORINI',
-              modifiers: ['400', '24x36', 'cyan'],
+            {
+              title: 'JAPAN',
+              color: 'rgba(231, 73, 77, 1)',
+              button: {
+                url: '/',
+                text: 'Xem thêm',
+                target: '_self',
+              },
+              thumbnail: layer3,
             },
-            btnMore: {
-              href: '/',
-              text: 'Xem <br /> thêm',
-              target: '_self',
-              backgroundColor: 'deepLemon',
+            {
+              title: 'EDWARDIAN',
+              color: 'rgba(187, 109, 63, 1)',
+              button: {
+                url: '/',
+                text: 'Xem thêm',
+                target: '_self',
+              },
+              thumbnail: layer4,
             },
-            thumbnail: layer2,
-          },
-          {
-            title: {
-              text: 'JAPAN',
-              modifiers: ['400', '24x36', 'carminePink'],
+            {
+              title: 'BERMUDA',
+              color: 'rgba(0, 92, 143, 1)',
+              button: {
+                url: '/',
+                text: 'Xem thêm',
+                target: '_self',
+              },
+              thumbnail: layer1,
             },
-            btnMore: {
-              href: '/',
-              text: 'Xem <br /> thêm',
-              target: '_self',
-              backgroundColor: 'carminePink',
-            },
-            thumbnail: layer3,
-          },
-          {
-            title: {
-              text: 'EDWARDIAN',
-              modifiers: ['400', '24x36', 'copper'],
-            },
-            btnMore: {
-              href: '/',
-              text: 'Xem <br /> thêm',
-              target: '_self',
-              backgroundColor: 'deer',
-            },
-            thumbnail: layer4,
-          },
-        ]}
-        title={
-     {
-       text: 'BỘ SƯU TẬP',
-       modifiers: ['400', '48x64', 'camel'],
-     }
-    }
-        subTitle={`Chắt lọc tinh hoa kiến trúc của mỗi châu lục, tạo nên một bức tranh <br />
-  đa sắc màu, nơi hội tụ tinh hoa của nền văn hóa thế giới`}
-      />
-    </div>
-  </BrowserRouter>
-);
+          ]}
+          title="BỘ SƯU TẬP"
+          description="Chắt lọc tinh hoa kiến trúc của mỗi châu lục, tạo nên một bức tranh đa sắc màu, nơi hội tụ tinh hoa của nền văn hóa thế giới."
+        />
+      </div>
+    </BrowserRouter>
+  );
+};

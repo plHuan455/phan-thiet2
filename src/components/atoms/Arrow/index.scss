@@ -1,0 +1,59 @@
+.a-arrow {
+  width: rem(40);
+  height: rem(40);
+  border-radius: 50%;
+  transition: $transition-long ease;
+  z-index: 1;
+  background-color: $anti-flash-white2;
+  cursor: pointer;
+  display: flex;
+  &::before {
+    content: none;
+  }
+  // position: absolute;
+  // top: 50%;
+  // transform: translateY(-50%);
+
+  @include desktop-down {
+    height: rem(37);
+    width: rem(37);
+  }
+
+  @include tablet-down {
+    height: rem(32);
+    width: rem(32);
+  }
+
+  &_prev {
+    left: rem(-76);
+  }
+
+  &_next {
+    right: rem(-76);
+  }
+
+  &_wrapper {
+    width: 100%;
+    height: 100%;
+    @include adjust-flex();
+  }
+
+  path {
+    fill: var(--theme);
+    stroke: var(--theme);
+  }
+
+  &.slick-disabled {
+    cursor: no-drop;
+  }
+
+  &:not(.slick-disabled) {
+    &:hover {
+      background-color: var(--theme);
+      path {
+        fill: $white;
+        stroke: $white;
+      }
+    }
+  }
+}
