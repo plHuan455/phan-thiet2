@@ -5,7 +5,7 @@ import { OptionType } from 'components/molecules/PullDown';
 import ProjectPositionSummary from 'components/templates/ProjectPositionSummary';
 
 const Map: React.FC = () => {
-  const [selected, setSelected] = useState<OptionType>();
+  const [selected, setSelected] = useState<OptionType | undefined>(optionDummy[0]);
 
   return (
     <section className="u-mt-md-40 u-mt-16">
