@@ -20,6 +20,8 @@ const useNews = (): UseNewsResponse => {
   const videosRef = useRef<HTMLDivElement>(null);
   const documentsRef = useRef<HTMLDivElement>(null);
 
+  // scroll to animte
+
   useEffect(() => {
     switch (refIdxActive) {
       case 0:
