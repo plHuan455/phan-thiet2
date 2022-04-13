@@ -1,18 +1,15 @@
 import React from 'react';
 
-export interface SectionProps extends React.InputHTMLAttributes<HTMLDivElement> {
-  className?: string;
-  children: React.ReactNode;
-}
-const Section = React.forwardRef<HTMLDivElement, SectionProps>(
-  ({ className, children }, ref) => (
-    <div
-      className={`${className || ''} u-pt-40 u-pb-40 u-pt-md-80 u-pb-md-80`}
-      ref={ref}
-    >
-      {children}
-    </div>
-  ),
-);
+const Section = React.forwardRef<
+  HTMLDivElement,
+  React.InputHTMLAttributes<HTMLDivElement>
+>(({ className, children }, ref) => (
+  <section
+    className={`${className || ''} u-pt-40 u-pb-40 u-pt-md-80 u-pb-md-80`}
+    ref={ref}
+  >
+    {children}
+  </section>
+));
 
 export default Section;

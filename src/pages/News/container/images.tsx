@@ -11,7 +11,7 @@ export interface CardImageProps {
   href?: string,
   handleClick?: () => void
 }
-interface NewsImageProps {
+interface ImagesProps {
   dataList: CardPlayerProps[]
 }
 
@@ -28,18 +28,14 @@ const CardImage: React.FC<CardImageProps> = ({ thumbnail, alt, handleClick }) =>
   </div>
 );
 
-const NewsImage: React.FC<NewsImageProps> = ({ dataList }) => (
-  <div className="s-newsImage">
+const Images: React.FC<ImagesProps> = ({ dataList }) => (
+  <div className="s-images">
     <Container>
       <FlatMore
         title={{
           text: 'HÌNH ẢNH',
           type: 'h4',
-          modifiers: ['gradientGreen', '700', 's015'],
-        }}
-        link={{
-          text: 'Xem tất cả',
-          href: '/',
+          modifiers: ['gradientGreen', '700', 's015', 'uppercase'],
         }}
         data={dataList}
         render={(item) => (
@@ -52,4 +48,4 @@ const NewsImage: React.FC<NewsImageProps> = ({ dataList }) => (
   </div>
 );
 
-export default NewsImage;
+export default Images;

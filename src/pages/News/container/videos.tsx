@@ -9,18 +9,14 @@ interface NewsPlayerProps {
   dataList: CardPlayerProps[]
 }
 
-const NewsPlayer: React.FC<NewsPlayerProps> = ({ dataList }) => (
-  <div className="s-newsPlayer">
+const Videos: React.FC<NewsPlayerProps> = ({ dataList }) => (
+  <div className="s-videos">
     <Container>
       <FlatMore
         title={{
           text: 'VIDEO',
           type: 'h4',
-          modifiers: ['gradientGreen', '700', 's015'],
-        }}
-        link={{
-          text: 'Xem tất cả',
-          href: '/',
+          modifiers: ['gradientGreen', '700', 's015', 'uppercase'],
         }}
         data={dataList}
         render={(item) => (
@@ -33,4 +29,4 @@ const NewsPlayer: React.FC<NewsPlayerProps> = ({ dataList }) => (
   </div>
 );
 
-export default NewsPlayer;
+export default Videos;

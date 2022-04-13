@@ -1,10 +1,15 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
 import ContactForm, { ContactFormType } from 'components/templates/ContactForm';
+import { schemasConsultancyForm } from 'utils/schemas';
 
 const Form: React.FC = () => {
-  const method = useForm<ContactFormType>();
+  const method = useForm<ContactFormType>({
+    resolver: yupResolver(schemasConsultancyForm),
+    mode: 'onSubmit',
+  });
   return (
     <ContactForm
       method={method}

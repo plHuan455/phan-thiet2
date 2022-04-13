@@ -5,22 +5,18 @@ import FlatMore from 'common/FlatMore';
 import Card from 'components/organisms/Card';
 import { CardNormalProps } from 'components/organisms/Card/Normal';
 
-interface NewsDocumentProps {
+interface DocumentsProps {
   dataList: CardNormalProps[]
 }
 
-const NewsDocument: React.FC<NewsDocumentProps> = ({ dataList }) => (
-  <div className="s-newsDocument">
+const Documents: React.FC<DocumentsProps> = ({ dataList }) => (
+  <div className="s-documents">
     <Container>
       <FlatMore
         title={{
           text: 'Tài liệu khác',
           type: 'h4',
-          modifiers: ['gradientGreen', '700', 's015'],
-        }}
-        link={{
-          text: 'Xem tất cả',
-          href: '/',
+          modifiers: ['gradientGreen', '700', 's015', 'uppercase'],
         }}
         data={dataList}
         render={(item) => (
@@ -33,4 +29,4 @@ const NewsDocument: React.FC<NewsDocumentProps> = ({ dataList }) => (
   </div>
 );
 
-export default NewsDocument;
+export default Documents;

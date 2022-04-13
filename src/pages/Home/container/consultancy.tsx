@@ -1,3 +1,4 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -9,9 +10,13 @@ import leavesRight from 'assets/images/pages/home/consultancy/leavesRight.png';
 import Image from 'components/atoms/Image';
 import { FormConsultancy } from 'components/organisms/Consultancy';
 import ConsultancyTemplate from 'components/templates/Consultancy';
+import { schemasConsultancyForm } from 'utils/schemas';
 
 const Consultancy: React.FC = () => {
-  const method = useForm<FormConsultancy>();
+  const method = useForm<FormConsultancy>({
+    resolver: yupResolver(schemasConsultancyForm),
+    mode: 'onSubmit',
+  });
   return (
     <section className="s-consultancy position-relative">
       <ConsultancyTemplate

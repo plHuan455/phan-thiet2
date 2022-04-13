@@ -11,7 +11,7 @@ import { CardNewsProps } from 'components/organisms/Card/News';
 interface NewsListProps {
   title?: string
   listNews?: CardNewsProps[]
-  button?: LinkTypes
+  button?: LinkTypes;
 }
 
 const NewsList: React.FC<NewsListProps> = ({

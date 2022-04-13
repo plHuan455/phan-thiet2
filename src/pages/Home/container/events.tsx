@@ -30,7 +30,7 @@ const Events: React.FC = () => {
     days, hours, mins, secs,
   } = useCountDown({ endTime: '2022-04-20T07:47:00.595' });
   return (
-    <section className="u-pt-md-80 u-pb-48 u-pt-48 u-pb-md-80">
+    <section className="u-pt-md-80 u-pb-48 u-pt-48 u-pb-md-80 position-relative">
       <EventsTemplate
         title="SỰ KIỆN"
         button={{

@@ -1,17 +1,22 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 
-import BannerSearchContainer from './bannerSearch';
+import useNews from '../hook';
+
+import Banner from './banner';
 import Consultancy from './consultancy';
+import Documents from './documents';
 import Events from './events';
-import MenuTag from './menuTag';
-import NewsDocument from './newsDocument';
-import NewsImage from './newsImage';
-import NewsPlayer from './newsPlayer';
+import Images from './images';
+import MenuTag from './menus';
 import Section from './section';
+import Videos from './videos';
 
 import { FormConsultancy } from 'components/organisms/Consultancy';
+import NewsList from 'components/templates/NewsList';
 import useCountDown from 'hooks/useCountDown';
+import { schemasConsultancyForm } from 'utils/schemas';
 
 const menuDummy = [
   {
@@ -99,69 +104,33 @@ const dataEvent = new Array(7).fill({
     },
   ],
 });
+
+const dataNews = new Array(3).fill({
+  thumbnail: 'https://source.unsplash.com/random',
+  dateTime: '1 phút trước',
+  tag: 'The Kingdom',
+  button: {
+    text: 'Xem thêm',
+    url: '/',
+  },
+  title: 'Nova World phan thiết và chuỗi cung cấp tiện ích chăm sóc sức khỏe',
+  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consequat egestas eu egestas sed viverra urna. Purus accumsan feugiat feugiat nisl pulvinar faucibus eu. ',
+});
+
 const Screen: React.FC = () => {
-  const [active, setActive] = useState<number>(0);
-  const handleChangeTag = (value: number) => setActive(value);
+  const method = useForm<FormConsultancy>({
+    resolver: yupResolver(schemasConsultancyForm),
+    mode: 'onSubmit',
+  });
   const {
     days, hours, mins, secs,
-  } = useCountDown({ endTime: '2022-04-10T07:47:00.595' || new Date().toISOString() });
+  } = useCountDown({ endTime: '2022-05-10T07:47:00.595' });
 
-  const newsRef = useRef<HTMLDivElement>(null);
-  const eventRef = useRef<HTMLDivElement>(null);
-  const newsImageRef = useRef<HTMLDivElement>(null);
-  const newsVideoRef = useRef<HTMLDivElement>(null);
-  const newsDocumentRef = useRef<HTMLDivElement>(null);
-  const consultancyRef = useRef<HTMLDivElement>(null);
-
-  const method = useForm<FormConsultancy>();
-
-  useEffect(() => {
-    switch (active) {
-      case 0:
-        window.scrollTo({
-          top: newsRef?.current?.offsetTop,
-          behavior: 'smooth',
-        });
-        break;
-      case 1:
-        window.scrollTo({
-          top: eventRef?.current?.offsetTop,
-          behavior: 'smooth',
-        });
-        break;
-      case 2:
-        window.scrollTo({
-          top: newsImageRef?.current?.offsetTop,
-          behavior: 'smooth',
-        });
-        break;
-      case 3:
-        window.scrollTo({
-          top: newsVideoRef?.current?.offsetTop,
-          behavior: 'smooth',
-        });
-        break;
-      case 4:
-        window.scrollTo({
-          top: newsDocumentRef?.current?.offsetTop,
-          behavior: 'smooth',
-        });
-        break;
-      case 5:
-        window.scrollTo({
-          top: consultancyRef?.current?.offsetTop,
-          behavior: 'smooth',
-        });
-
-        break;
-      // eslint-disable-next-line no-console
-      default: console.log('null');
-    }
-  }, [active]);
+  const { ref, refIdx, setRef } = useNews();
 
   return (
     <>
-      <BannerSearchContainer
+      <Banner
         image={{
           src: 'https://source.unsplash.com/random',
         }}
@@ -191,26 +160,27 @@ const Screen: React.FC = () => {
       />
       <MenuTag
         dataList={menuDummy}
-        handleChangeTag={handleChangeTag}
-        active={active}
+        handleChangeTag={setRef}
+        active={refIdx}
       />
-      <div style={{ height: '50vh', width: '100%', background: 'rgba(0,0,0,0.2)' }}>
-        <Section
-          ref={newsRef}
-        >
-          tin tuc
-        </Section>
-      </div>
 
       <Section
-        ref={eventRef}
+        ref={ref.news}
+      >
+        <NewsList
+          title="TIN TỨC"
+          listNews={dataNews}
+          button={{
+            text: 'Xem thêm',
+          }}
+        />
+      </Section>
+
+      <Section
+        ref={ref.events}
       >
         <Events
           title="SỰ KIỆN"
-          button={{
-            text: 'Xem tất cả',
-            url: '/',
-          }}
           countDown={{
             title: 'Một vòng trải nghiệm siêu thành phố biển',
             button: {
@@ -241,14 +211,14 @@ const Screen: React.FC = () => {
           listEvents={dataEvent}
         />
       </Section>
-      <Section ref={newsImageRef}>
-        <NewsImage dataList={dataCardImage} />
+      <Section ref={ref.images}>
+        <Images dataList={dataCardImage} />
       </Section>
-      <Section ref={newsVideoRef}>
-        <NewsPlayer dataList={dataCardPlayers} />
+      <Section ref={ref.videos}>
+        <Videos dataList={dataCardPlayers} />
       </Section>
-      <Section ref={newsDocumentRef}>
-        <NewsDocument dataList={[
+      <Section ref={ref.documents}>
+        <Documents dataList={[
           {
             thumbnail: 'https://source.unsplash.com/random',
             title: 'Nova World phan thiết và chuỗi cung cấp tiện ích',
@@ -303,7 +273,7 @@ const Screen: React.FC = () => {
         ]}
         />
       </Section>
-      <div ref={consultancyRef}>
+      <section>
         <Consultancy
           title={{
             text: 'ĐĂNG KÝ NHẬN <br /> THÔNG TIN DỰ ÁN',
@@ -342,7 +312,7 @@ const Screen: React.FC = () => {
             },
           }}
         />
-      </div>
+      </section>
 
     </>
   );

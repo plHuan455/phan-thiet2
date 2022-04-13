@@ -1,11 +1,11 @@
 import React from 'react';
 
-import Consultancy, { ConsultancyProps } from 'components/templates/Consultancy';
+import ConsultancyTemplate, { ConsultancyProps } from 'components/templates/Consultancy';
 
-const ConsultancyContainer: React.FC<ConsultancyProps> = (props) => (
+const Consultancy: React.FC<ConsultancyProps> = (props) => (
   <div className="s-consultancy">
-    <Consultancy {...props} />
+    <ConsultancyTemplate {...props} />
   </div>
 );
 
-export default ConsultancyContainer;
+export default Consultancy;
