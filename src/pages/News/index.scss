@@ -1,0 +1,82 @@
+.s-menus {
+  $root: &;
+  &_wrapper {
+    border-bottom: 1px solid rgba($black, 0.07);
+  }
+  &_content {
+    display: flex;
+    @include list-style-none();
+  }
+  &_item {
+    padding: rem(12);
+    position: relative;
+    cursor: pointer;
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 100%;
+      height: rem(2);
+      transition: all $transition-long ease-in-out;
+      background: $gradient-green;
+      transform: translateX(-50%) scale(0);
+    }
+
+    &:hover,
+    &-active {
+      &::before {
+        transform: translateX(-50%) scale(1);
+    }
+      .a-text {
+        background: $gradient-green;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+
+    &-active {
+      .a-text {
+        font-weight: 700;
+      }
+    }
+  }
+  @include mobile-down {
+    #{$root}_content {
+      overflow-x: auto;
+    }
+    #{$root}_item {
+      white-space: nowrap;
+    }
+  }
+}
+
+.o-cardImage {
+  &_wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: rem(12);
+    cursor: pointer;
+    &::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      left: 0;
+      width: 50%;
+      height: 200%;
+      background-color: rgba($white, 0.3);
+      pointer-events: none;
+      transform: translateX(-100%);
+      transition: 0.4s ease;
+      z-index: 1;
+    }
+    &:hover:before {
+      transform: translateX(300%) rotate(45deg);
+    }
+  }
+}
+
+.p-news {
+  background-color: $isabelline;
+  position: relative;
+}
