@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 
 import imgMap from 'assets/images/divisionUtilities/bg.png';
 import Container from 'common/Container';
-import Title from 'components/molecules/Title';
+import Heading from 'components/atoms/Heading';
 import MarkerCard, { MarkerCardProps } from 'components/organisms/LocationMap/component';
 import useScrollAnimate from 'hooks/useScrollAnimation';
 
@@ -31,7 +31,7 @@ const DivisionUtilities: React.FC<DivisionUtilitiesProps> = ({
     <div className="t-divisionUtilities">
       <Container>
         <div ref={ref} className="t-divisionUtilities_title">
-          <Title type="h2" modifiers={['seaBlue', 's015', '400']} content={title} />
+          <Heading type="h2" modifiers={['inherit', 's015', '400']} content={title} />
         </div>
         <div className="t-divisionUtilities_map u-mt-41">
           <div className="t-divisionUtilities_image" style={{ paddingBottom: `calc(${HEIGHT_IMAGE} / ${WIDTH_IMAGE}  * 100%)` }}>
