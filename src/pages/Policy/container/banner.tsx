@@ -3,19 +3,19 @@ import React, { useMemo } from 'react';
 import BannerTemplate from 'components/templates/Banner';
 import { baseURL, getBannerData } from 'utils/functions';
 
-export interface BannerProps{
-  banners: BannersDataTypes[]
-}
-
-const Banner: React.FC<BannerProps> = ({ banners }) => {
-  const bannerData = useMemo(() => ({
-    image: banners.map((item) => ({
-      src: baseURL(item.data.imageDesktop),
-      srcTablet: baseURL(item.data.imageTablet),
-      srcMobile: baseURL(item.data.imageMobile),
-    }))[0],
-    title: getBannerData(banners[0].type, banners)?.title,
-  }), [banners]);
+const Banner: React.FC<SectionBanners> = ({ banners }) => {
+  const bannerData = useMemo(() => {
+    const banner = getBannerData('basic', banners);
+    return ({
+      image: {
+        src: baseURL(banner?.imageDesktop),
+        srcTablet: baseURL(banner?.imageTablet),
+        srcMobile: baseURL(banner?.imageMobile),
+        alt: banner?.title,
+      },
+      title: banner?.title,
+    });
+  }, [banners]);
 
   return (
     <BannerTemplate {...bannerData} isLayer />
