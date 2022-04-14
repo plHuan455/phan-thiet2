@@ -7,11 +7,8 @@ import { baseString, getBlockData } from 'utils/functions';
 export interface CkeditorProps {
   content: string;
 }
-export interface CkeditorBlocks {
-  blocks: any;
-}
 
-const Ckeditor: React.FC<CkeditorBlocks> = ({ blocks }) => {
+const Ckeditor: React.FC<SectionBlocks> = ({ blocks }) => {
   const introduceBlock = useMemo(() => {
     const blockPageContent = getBlockData<CkeditorProps>(
       'introduction',
