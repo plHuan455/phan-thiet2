@@ -1,9 +1,7 @@
-import { ContactFormType } from './types';
-
 import axiosInstance from 'services/common/instance';
 
-const contactFormService = async (): Promise<ContactFormType> => {
-  const response = await axiosInstance.get('menus');
+export const contactFormService = async (data: unknown): Promise<unknown> => {
+  const response = await axiosInstance.post('contact', data);
   return response.data.data;
 };
 
