@@ -1,5 +1,6 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 
+import contactReducer from './contact';
 import menuReducer from './menus';
 import notifyReducer from './notify';
 import staticReducer from './static';
@@ -12,6 +13,7 @@ export const store = configureStore({
     static: staticReducer,
     menus: menuReducer,
     notify: notifyReducer,
+    contact: contactReducer,
   },
 });
 

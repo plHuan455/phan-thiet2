@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { createContext, useEffect, useState } from 'react';
 
+import { getTopicsListAsync } from 'store/contact';
 import { useAppDispatch } from 'store/hooks';
 import { menusAsync } from 'store/menus';
 import { staticAllAsync, staticErrorsAsync } from 'store/static';
@@ -30,6 +31,7 @@ const LanguageProvider: React.FC = ({ children }) => {
     dispatch(staticErrorsAsync());
     dispatch(menusAsync());
     dispatch(getSystemsAsync());
+    dispatch(getTopicsListAsync());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isChangeLanguage]);
 
