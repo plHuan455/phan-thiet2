@@ -1,15 +1,16 @@
 .m-subDivisionCard {
   display: flex;
-  box-shadow: 0 rem(4) rem(16) rgba($black, 0.1);
   flex-direction: column;
   height: 100%;
 
   &_image {
     border-radius: rem(12);
     overflow: hidden;
+    box-shadow: 0 rem(4) rem(16) rgba($black, 0.1);
   }
 
   &_content {
+    box-shadow: 0 rem(4) rem(16) rgba($black, 0.1);
     background-color: $white;
     border-radius: rem(12);
     display: flex;

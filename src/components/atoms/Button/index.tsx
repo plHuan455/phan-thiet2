@@ -11,7 +11,7 @@ type Gradients =
   | 'primary-green'
   | 'outline-green';
 
-export type Variants = ColorStyle | Gradients;
+export type Variants = ColorStyle | Gradients | 'inherit';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: Variants;

@@ -14,7 +14,7 @@ export interface ConsultancyProps {
     modifiers?: TextStyle;
     type?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
   };
-  py?: 'md' | 'xl'
+  py?: 'md' | 'lg'
   layer?: React.ReactNode;
   form: ConsultancyFormProps;
 }

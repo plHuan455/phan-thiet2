@@ -141,6 +141,11 @@
     width: rem(28);
     z-index: 0;
 
+    @include small-mobile {
+      width: rem(17);
+      height: rem(17);
+    }
+
     &-circle {
       animation: ripple 2s ease-in-out infinite;
       border-radius: 50%;

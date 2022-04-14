@@ -1,0 +1,28 @@
+.s-consultancy {
+  &_layer1 {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: rem(326);
+    @include tablet-down {
+      max-width: rem(218);
+    }
+    @include mobile-down {
+      max-width: rem(163);
+    }
+  }
+  &_layer2 {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: rem(238);
+    @include tablet-down {
+      max-width: rem(158);
+    }
+    @include mobile-down {
+      max-width: rem(119);
+    }
+  }
+}

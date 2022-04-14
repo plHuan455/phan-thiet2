@@ -18,6 +18,7 @@ const Consultancy: React.FC<ConsultancyProps> = ({ method }) => (
       form={{
         title: 'Quý khách đăng ký nhận email thông tin dự án, các chương trình ưu đãi, khuyến mại</br>và tin tức mới nhất từ NovaWorld Phan Thiet',
         method,
+        // eslint-disable-next-line no-console
         handleSubmit: (data) => console.log(data),
         variantButton: 'primary-green',
         consultancyInfo: {
