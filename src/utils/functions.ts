@@ -197,3 +197,16 @@ export const getOgDataPage = (pageData?: PageDataTypes) => ({
   ogTitle: pageData?.ogTitle,
   ogType: pageData?.ogType,
 });
+export const formatDateDDMMYYYY = (date?: string) => {
+  if (!date) return '';
+  const dateFormat = new Date(date);
+  let day: string | number = dateFormat.getDate();
+  let month: string | number = dateFormat.getMonth() + 1;
+  if (day < 10) {
+    day = `0${day}`;
+  }
+  if (month < 10) {
+    month = `0${month}`;
+  }
+  return `${day}/${month}/${dateFormat.getFullYear()}`;
+};

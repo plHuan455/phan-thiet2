@@ -28,7 +28,7 @@ const CardEvent: React.FC<CardEventProps> = ({
   href,
   target,
 }) => {
-  const { hours, mins, secs } = useCountDown({ endTime: endTime || new Date().toISOString() });
+  const { totalHours, mins, secs } = useCountDown({ endTime: endTime || new Date().toISOString() });
   return (
     <div className="o-cardEvent">
       <Link href={href} target={target}>
@@ -39,7 +39,7 @@ const CardEvent: React.FC<CardEventProps> = ({
             <Text modifiers={['400', '14x20', 'white']}>
               Còn
               {' '}
-              {hours}
+              {totalHours}
               :
               {mins}
               :
@@ -69,7 +69,7 @@ const CardEvent: React.FC<CardEventProps> = ({
             </Text>
           </div>
         ))}
-        <div className="u-mt-md-24 u-mt-16" />
+        <div className="o-cardEvent_content-button u-mt-md-24 u-mt-16" />
         <Link target={target} href={href}>
           <div className="animate animate-arrowSlide d-flex align-items-center">
             {/* TODO: Translation later */}

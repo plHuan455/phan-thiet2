@@ -1,30 +1,12 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import { useQuery } from 'react-query';
 
+import { IconName } from 'components/atoms/Icon';
 import EventsTemplate from 'components/templates/Events';
 import useCountDown from 'hooks/useCountDown';
-import { getBlockData } from 'utils/functions';
+import getEventListService from 'services/event';
+import { baseURL, formatDateDDMMYYYY, getBlockData } from 'utils/functions';
 
-const data = new Array(7).fill({
-  thumbnail: 'https://source.unsplash.com/random',
-  tag: 'The Kingdom',
-  title: 'Nova World phan thiết và chuỗi cung cấp tiện ích',
-  endTime: '2022-04-10T07:47:00.595',
-  href: 'su-kien/slug',
-  summary: [
-    {
-      iconName: 'clock',
-      text: '13:30 - 17:00',
-    },
-    {
-      iconName: 'calendar',
-      text: '30/04/2022',
-    },
-    {
-      iconName: 'location',
-      text: '2Bis Nguyễn Thị Minh Khai, Phường Đa Kao, Quận 1',
-    },
-  ],
-});
 interface EventProps{
   titleSection: string;
   link?: LinkTypes;
@@ -32,27 +14,50 @@ interface EventProps{
 }
 const Events: React.FC<SectionBlocks> = ({ blocks }) => {
   const eventsBlock = getBlockData<EventProps>('event', blocks);
+  const { data: eventList } = useQuery(
+    'getEventListHome', () => getEventListService(),
+  );
 
   const {
     days, hours, mins, secs,
-  } = useCountDown({ endTime: '2022-04-20T07:47:00.595' });
+  } = useCountDown({ endTime: eventList?.data[0].startDate || '' });
+
+  const eventsData = useMemo(() => eventList?.data?.slice(1).map((item) => ({
+    thumbnail: baseURL(item.thumbnail),
+    tag: 'The Kingdom',
+    title: item.title,
+    endTime: item.startDate,
+    href: `su-kien/${item.slug}`,
+    summary: [
+      {
+        iconName: 'clock' as IconName,
+        text: `${item.startTime} - ${item.endTime}`,
+      },
+      {
+        iconName: 'calendar' as IconName,
+        text: formatDateDDMMYYYY(item.startDate),
+      },
+      {
+        iconName: 'location' as IconName,
+        text: item.address,
+      },
+    ],
+  })), [eventList]);
   return (
     <section className="u-pt-md-80 u-pb-48 u-pt-48 u-pb-md-80 position-relative">
       <EventsTemplate
         title={eventsBlock?.titleSection}
         button={{ ...eventsBlock?.link }}
         countDown={{
-          title: 'Một vòng trải nghiệm siêu thành phố biển',
+          title: eventList?.data[0].title || '',
           button: {
-            // text: eventsBlock?.link?.text || 'Xem tất cả',
-            // url: eventsBlock?.link?.url,
-            // target: eventsBlock?.link?.target,
+            // TODO: ADD Translations later
             text: 'Xem chi tiết',
             url: 'su-kien/slug',
           },
-          address: '2Bis Nguyễn Thị Minh Khai, Phường Đa Kao, Quận 1',
-          duration: '13:30 - 17:00',
-          date: '30/04/2022',
+          address: eventList?.data[0].address || '',
+          duration: `${eventList?.data[0].startTime} - ${eventList?.data[0].endTime}`,
+          date: formatDateDDMMYYYY(eventList?.data[0].startDate),
           list: [
             {
               label: 'ngày',
@@ -72,7 +77,7 @@ const Events: React.FC<SectionBlocks> = ({ blocks }) => {
             },
           ],
         }}
-        listEvents={data}
+        listEvents={eventsData}
       />
     </section>
   );
