@@ -7,7 +7,6 @@ import dummyContact from 'assets/dataDummy/contact';
 import ContactMap from 'components/templates/ContactMap';
 import { AddressItemProps } from 'components/templates/ContactMap/component';
 import { headquartersService } from 'services/headquarters';
-// import { DEFAULT_QUERY_OPTION } from 'utils/constants';
 import { getBlockData } from 'utils/functions';
 
 interface MapProps {
@@ -36,7 +35,8 @@ const Map: React.FC<SectionBlocks> = ({ blocks }) => {
 
   const {
     data: headquartersData,
-    hasNextPage: hasNextHeaquarter,
+    hasNextPage: hasNextHeadquarter,
+    isFetchingNextPage,
     fetchNextPage: fetchNextHeadquarter,
   } = useInfiniteQuery(
     ['getHeadquartersData'],
@@ -59,6 +59,7 @@ const Map: React.FC<SectionBlocks> = ({ blocks }) => {
           label: item.name,
           address: item.addressText,
           phone: item.phone,
+          // TODO: translate later
           textContact: 'Liên hệ',
           position: {
             lat: (item.addressLat && parseFloat(item.addressLat)) || 0,
@@ -76,7 +77,7 @@ const Map: React.FC<SectionBlocks> = ({ blocks }) => {
     setActiveHeadquarter({ ...headquartersList[0], idx: 0 });
   }, [activeHeadquarter, headquartersList]);
 
-  const handleChangeHeaquarter = useCallback(
+  const onClickHeadquarter = useCallback(
     (item: AddressItemProps, idx: number) => {
       setActiveHeadquarter({ ...item, idx });
     },
@@ -86,12 +87,14 @@ const Map: React.FC<SectionBlocks> = ({ blocks }) => {
   return (
     <ContactMap
       list={headquartersList}
+      title={mapBlock.title}
+      loading={isFetchingNextPage}
+      // TODO: add form general later
       mapApiKey={dummyContact.mapApiKey}
       defaultPosition={activeHeadquarter?.position}
       headQuarterIdx={activeHeadquarter?.idx}
-      handleLoadMore={() => hasNextHeaquarter && fetchNextHeadquarter()}
-      title={mapBlock.title}
-      handleChangeHeaquarter={handleChangeHeaquarter}
+      onLoadMore={() => hasNextHeadquarter && fetchNextHeadquarter()}
+      onClick={onClickHeadquarter}
     />
   );
 };

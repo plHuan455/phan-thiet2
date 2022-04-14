@@ -15,8 +15,9 @@ export interface ContactMapProps extends GoogleMapProps {
   title?: string;
   headQuarterIdx?: number;
   defaultPosition?: PositionMarker;
-  handleChangeHeaquarter?: (item: AddressItemProps, idx: number) => void;
-  handleLoadMore?: () => void
+  loading?: boolean;
+  onClick?: (item: AddressItemProps, idx: number) => void;
+  onLoadMore?: () => void
 }
 
 const ContactMap: React.FC<ContactMapProps> = ({
@@ -24,8 +25,9 @@ const ContactMap: React.FC<ContactMapProps> = ({
   title,
   headQuarterIdx,
   defaultPosition,
-  handleChangeHeaquarter,
-  handleLoadMore,
+  loading,
+  onClick,
+  onLoadMore,
   ...props
 }) => {
   const [zoomPosition, setZoomPosition] = useState<PositionMarker>();
@@ -38,13 +40,14 @@ const ContactMap: React.FC<ContactMapProps> = ({
               title={title}
               list={list}
               headQuarterIdx={headQuarterIdx}
+              loading={loading}
               onClick={(item, idx) => {
-                if (handleChangeHeaquarter) {
-                  handleChangeHeaquarter(item, idx);
+                if (onClick) {
+                  onClick(item, idx);
                 }
                 setZoomPosition(item?.position);
               }}
-              handleLoadMore={handleLoadMore}
+              onLoadMore={onLoadMore}
             />
           </Col>
           <Col lg={6} className="t-contactMap_right u-pl-16 u-pr-16">

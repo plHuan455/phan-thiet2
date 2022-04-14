@@ -50,18 +50,20 @@ export interface InfoAddressProps {
   list?: AddressItemProps[];
   title?: string;
   headQuarterIdx?: number;
+  loading?: boolean;
   onClick?: (item: AddressItemProps, idx: number) => void;
-  handleLoadMore?: () => void
+  onLoadMore?: () => void
 }
 
 export const InfoAddress: React.FC<InfoAddressProps> = ({
   list,
   title,
   headQuarterIdx,
+  loading,
   onClick,
-  handleLoadMore,
+  onLoadMore,
 }) => {
-  const { setNode } = useScrollInfinite(handleLoadMore);
+  const { setNode } = useScrollInfinite(onLoadMore);
   return (
     <div className="o-infoAddress">
       <div className="o-infoAddress_heading">
@@ -86,6 +88,13 @@ export const InfoAddress: React.FC<InfoAddressProps> = ({
                 <AddressItem onClick={() => onClick && onClick(x, i)} {...x} />
               </div>
             ))}
+            {loading && (
+              <div className="u-mt-16 u-pt-16 u-pb-16">
+                <div className="d-flex justify-content-center">
+                  <Icon iconName="loadingWhite" size="36" />
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
