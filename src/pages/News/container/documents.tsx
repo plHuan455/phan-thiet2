@@ -63,20 +63,27 @@ const dataDummy: CardNormalProps[] = [
 ];
 
 const Documents: React.FC = () => {
-  const { animated, ballonAnimate, slideReverseAnimate } = useAnimation();
-
   const leafRef = useRef<HTMLDivElement>(null);
   const ballonRef = useRef<HTMLDivElement>(null);
 
   const isScrollLeaf = useScrollAnimate(leafRef);
   const isScrollBallon = useScrollAnimate(ballonRef);
+  const { animated, ballonAnimate, slideReverseAnimate } = useAnimation();
 
   return (
     <div className="s-documents">
-      <animated.div style={isScrollLeaf ? slideReverseAnimate : {}} className="s-documents_leaf" ref={leafRef}>
+      <animated.div
+        style={isScrollLeaf ? slideReverseAnimate : {}}
+        className="s-documents_leaf"
+        ref={leafRef}
+      >
         <Image src={leaf3} alt="ballon" ratio="1x1" />
       </animated.div>
-      <animated.div style={isScrollBallon ? ballonAnimate : {}} className="s-documents_ballon" ref={ballonRef}>
+      <animated.div
+        style={isScrollBallon ? ballonAnimate : {}}
+        className="s-documents_ballon"
+        ref={ballonRef}
+      >
         <Image src={ballon2} alt="ballon" ratio="359x247" />
       </animated.div>
       <Container>
@@ -87,11 +94,7 @@ const Documents: React.FC = () => {
             modifiers: ['gradientGreen', '700', 's015', 'uppercase'],
           }}
           data={dataDummy}
-          render={(item) => (
-            <Card.Normal
-              {...item}
-            />
-          )}
+          render={(item) => <Card.Normal {...item} />}
         />
       </Container>
     </div>

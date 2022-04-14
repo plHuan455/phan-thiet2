@@ -21,13 +21,11 @@ const useAnimation = () => {
 
   const slideToTopAnimation = useSpring({
     y: 0,
-    rotateZ: 0,
     opacity: 0,
   });
 
   useEffect(() => {
     let res: NodeJS.Timeout;
-    let resBuzz: NodeJS.Timeout;
     {
       const {
         opacity, x: xLeftFly, y: yLeftFly, rotateZ,
@@ -39,7 +37,6 @@ const useAnimation = () => {
       } = slideReverseAnimation;
       const {
         y: yTopSlide,
-        rotateZ: rotateZTopSlide,
         opacity: opacityToplide,
       } = slideToTopAnimation;
 
@@ -69,33 +66,20 @@ const useAnimation = () => {
       opacitySlide.start({ from: 0, to: 1 });
 
       // ----------------- slide reverse ---------------- //
-      xReverseSlide.start({ from: -500, to: 0, config: { duration: 1000 } });
+      xReverseSlide.start({ from: -300, to: 0, config: { duration: 500 } });
       opacityReverseSlide.start({ from: 0, to: 1 });
 
       // ----------------- slide to top ---------------- //
       yTopSlide.start({ from: 100, to: 0 });
       opacityToplide.start({ from: 0, to: 1 });
-      rotateZTopSlide.start({
-        from: 0,
-        to: -15,
-        config: { duration: 100, easing: easings.easeInOutSine },
-        loop: { reverse: true },
-      });
 
       res = setTimeout(() => {
         rotateZ.start({ cancel: true });
         xLeftFly.start({ cancel: true });
       }, 6500);
-
-      resBuzz = setTimeout(() => {
-        rotateZTopSlide.start({ cancel: true });
-      }, 1350);
     }
 
-    return () => {
-      clearTimeout(res);
-      clearTimeout(resBuzz);
-    };
+    return () => clearTimeout(res);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   });
 

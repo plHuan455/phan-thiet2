@@ -94,28 +94,30 @@
     right: 0;
     max-width: rem(359);
     @include position-section;
-    @include mobile-down {
+    @include break-max(1365px) {
       max-width: rem(180);
       top: rem(-50);
     }
   }
   &_leaf1 {
-    top: 55%;
+    top: 35%;
     left: 0;
     max-width: rem(129);
     @include position-section;
   }
   &_leaf2 {
-    bottom: -20%;
+    bottom: -25%;
     right: 0;
     max-width: rem(462);
     @include position-section;
 
-    @include tablet-down {
+    @include break-max(1365px) {
       max-width: rem(308);
     }
-    @include mobile-down {
+
+    @include tablet-down {
       max-width: rem(231);
+      bottom: -10%;
     }
   }
 }
@@ -127,8 +129,11 @@
     right: 0;
     max-width: rem(274);
     @include position-section;
-    @include mobile-down {
+    @include desktop-down {
       max-width: rem(182);
+    }
+    @include mobile-down {
+      top: -35%;
     }
   }
   &_leaf {
@@ -136,9 +141,11 @@
     left: 0;
     max-width: rem(270);
     @include position-section;
-    @include mobile-down {
+    @include desktop-down {
       max-width: rem(140);
-      top: -35%;
+    }
+    @include mobile-down {
+      top: -25%;
     }
   }
 }
@@ -150,7 +157,7 @@
     left: 0;
     max-width: rem(326);
     @include position-section;
-    @include mobile-down {
+    @include desktop-down {
       max-width: rem(163);
     }
   }

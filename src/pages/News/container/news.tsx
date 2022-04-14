@@ -22,7 +22,6 @@ const dataNews = new Array(3).fill({
 });
 
 const News: React.FC = () => {
-  const { animated, ballonAnimate, slideAnimate } = useAnimation();
   const leaf1Ref = useRef<HTMLDivElement>(null);
   const leaf2Ref = useRef<HTMLDivElement>(null);
   const ballonRef = useRef<HTMLDivElement>(null);
@@ -31,12 +30,15 @@ const News: React.FC = () => {
   const isScrollLeaf2 = useScrollAnimate(leaf2Ref);
   const isScrollBallon = useScrollAnimate(ballonRef);
 
+  const {
+    animated, ballonAnimate, slideAnimate, slideReverseAnimate,
+  } = useAnimation();
   return (
     <div className="s-news">
       <animated.div style={isScrollBallon ? ballonAnimate : {}} className="s-news_ballon" ref={ballonRef}>
         <Image src={ballon1} alt="ballon" ratio="359x247" />
       </animated.div>
-      <animated.div className="s-news_leaf1" style={isScrollLeaf1 ? ballonAnimate : {}} ref={leaf1Ref}>
+      <animated.div className="s-news_leaf1" style={isScrollLeaf1 ? slideReverseAnimate : {}} ref={leaf1Ref}>
         <Image src={leaf1} alt="leaf1" ratio="113x182" />
       </animated.div>
       <animated.div className="s-news_leaf2" style={isScrollLeaf2 ? slideAnimate : {}} ref={leaf2Ref}>

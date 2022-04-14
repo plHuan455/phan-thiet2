@@ -8,9 +8,9 @@ import Image from 'components/atoms/Image';
 import useScrollAnimate from 'hooks/useScrollAnimation';
 
 const Consultancy: React.FC = () => {
-  const { animated, slideToTopAnimate } = useAnimation();
   const layerRef = useRef<HTMLDivElement>(null);
   const isScrollLayer = useScrollAnimate(layerRef);
+  const { animated, slideToTopAnimate } = useAnimation();
 
   return (
     <div className="s-consultancy">
