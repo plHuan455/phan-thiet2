@@ -1,13 +1,9 @@
-import { yupResolver } from '@hookform/resolvers/yup';
 import React, { useMemo } from 'react';
-import { useForm } from 'react-hook-form';
 
 import bgConsultancy from 'assets/images/pages/divisionList/bgConsultancy.png';
+import ConsultancyCommon from 'common/Consultancy';
 import Image from 'components/atoms/Image';
-import { FormConsultancy } from 'components/organisms/Consultancy';
-import ConsultancyTemplate from 'components/templates/Consultancy';
-import { baseURL, getBlockData } from 'utils/functions';
-import { schemasConsultancyForm } from 'utils/schemas';
+import { baseString, getBlockData } from 'utils/functions';
 
 interface ConsultancyProps {
   title: string
@@ -20,18 +16,12 @@ const Consultancy: React.FC<SectionBlocks> = ({ blocks }) => {
       blocks,
     );
     return {
-      title: baseURL(blockPageContent?.title),
+      title: baseString(blockPageContent?.title),
     };
   }, [blocks]);
-
-  const method = useForm<FormConsultancy>({
-    resolver: yupResolver(schemasConsultancyForm),
-    mode: 'onSubmit',
-  });
-
   return (
     <div className="s-consultancy">
-      <ConsultancyTemplate
+      <ConsultancyCommon
         title={{
           text: blockContent?.title,
           modifiers: ['700', 'gradientGreen', 's015'],
@@ -43,9 +33,6 @@ const Consultancy: React.FC<SectionBlocks> = ({ blocks }) => {
         )}
         form={{
           title: 'Quý khách đăng ký nhận email thông tin dự án, các chương trình ưu đãi, khuyến mại</br>và tin tức mới nhất từ NovaWorld Phan Thiet',
-          method,
-          // eslint-disable-next-line no-console
-          handleSubmit: (data: FormConsultancy) => console.log(data),
           variantButton: 'primary-green',
           consultancyInfo: {
             placeholderName: 'Họ và tên',

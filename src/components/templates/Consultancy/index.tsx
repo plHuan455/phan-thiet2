@@ -5,18 +5,28 @@ import Container from 'common/Container';
 import Heading, { TextStyle } from 'components/atoms/Heading';
 import ConsultancyForm, {
   ConsultancyProps as ConsultancyFormProps,
+  ConsultancyPropsInput as ConsultancyFormPropsInput,
 } from 'components/organisms/Consultancy';
 import mapModifiers from 'utils/functions';
 
+export interface ConsultancyTitle {
+  text: string;
+  modifiers?: TextStyle;
+  type?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+}
+
 export interface ConsultancyProps {
-  title: {
-    text: string;
-    modifiers?: TextStyle;
-    type?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
-  };
+  title: ConsultancyTitle;
   py?: 'md' | 'lg'
   layer?: React.ReactNode;
   form: ConsultancyFormProps;
+}
+
+export interface ConsultancyPropsInput {
+  title: ConsultancyTitle;
+  py?: 'md' | 'lg'
+  layer?: React.ReactNode;
+  form: ConsultancyFormPropsInput;
 }
 
 const Consultancy: React.FC<ConsultancyProps> = ({

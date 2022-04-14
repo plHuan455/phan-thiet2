@@ -1,25 +1,16 @@
 import React from 'react';
-import { UseFormReturn } from 'react-hook-form';
 
-import { FormConsultancy } from 'components/organisms/Consultancy';
-import ConsultancyTemplate from 'components/templates/Consultancy';
+import ConsultancyCommon from 'common/Consultancy';
 
-interface ConsultancyProps {
-  method: UseFormReturn<FormConsultancy>;
-}
-
-const Consultancy: React.FC<ConsultancyProps> = ({ method }) => (
+const Consultancy: React.FC = () => (
   <div className="s-consultancy">
-    <ConsultancyTemplate
+    <ConsultancyCommon
       title={{
         text: 'ĐĂNG KÝ NHẬN <br /> THÔNG TIN DỰ ÁN',
         modifiers: ['700', 'gradientGreen', 's015'],
       }}
       form={{
         title: 'Quý khách đăng ký nhận email thông tin dự án, các chương trình ưu đãi, khuyến mại</br>và tin tức mới nhất từ NovaWorld Phan Thiet',
-        method,
-        // eslint-disable-next-line no-console
-        handleSubmit: (data) => console.log(data),
         variantButton: 'primary-green',
         consultancyInfo: {
           placeholderName: 'Họ và tên',

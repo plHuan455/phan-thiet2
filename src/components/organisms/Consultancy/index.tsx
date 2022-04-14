@@ -36,8 +36,29 @@ export interface ConsultancyProps {
     },
     btnText: string
   }
-  handleSubmit: (data: FormConsultancy) => void;
+  handleSubmit?: (data: FormConsultancy) => void;
   method: UseFormReturn<FormConsultancy>;
+  loading?: boolean,
+  variantButton?: Variants;
+}
+
+export interface ConsultancyPropsInput {
+  title: string;
+  consultancyInfo: {
+    placeholderName: string,
+    placeholderPhone: string,
+    placeholderEmail: string,
+    placeholderAddress: string,
+    placeholderContent: string,
+    checkbox?: {
+      label: string,
+      subLabel: string,
+      list: CheckboxTypes[],
+    },
+    btnText: string
+  }
+  handleSubmit?: (data: FormConsultancy) => void;
+  method?: UseFormReturn<FormConsultancy>;
   loading?: boolean,
   variantButton?: Variants;
 }
@@ -63,10 +84,12 @@ const Consultancy: React.FC<ConsultancyProps> = ({
   };
 
   const onSubmit = (data: FormConsultancy) => {
-    handleSubmit({
-      ...data,
-      products: listCheckbox,
-    });
+    if (handleSubmit) {
+      handleSubmit({
+        ...data,
+        products: listCheckbox,
+      });
+    }
   };
 
   return (
@@ -139,19 +162,19 @@ const Consultancy: React.FC<ConsultancyProps> = ({
                 </div>
                 <div className="o-consultancy_checkbox-list">
                   {
-                  consultancyInfo?.checkbox?.list.map((item, index) => (
-                    <div
-                      key={`o-consultancy_checkbox-${index.toString()}`}
-                      className="o-consultancy_checkbox-list-item"
-                    >
-                      <Checkbox
-                        onChange={handleChangeProduct}
-                        value={item.value}
-                        label={item?.label}
-                      />
-                    </div>
-                  ))
-                }
+                    consultancyInfo?.checkbox?.list.map((item, index) => (
+                      <div
+                        key={`o-consultancy_checkbox-${index.toString()}`}
+                        className="o-consultancy_checkbox-list-item"
+                      >
+                        <Checkbox
+                          onChange={handleChangeProduct}
+                          value={item.value}
+                          label={item?.label}
+                        />
+                      </div>
+                    ))
+                  }
                 </div>
               </div>
             )

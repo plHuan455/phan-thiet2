@@ -1,32 +1,23 @@
-import { yupResolver } from '@hookform/resolvers/yup';
 import React from 'react';
-import { useForm } from 'react-hook-form';
 
 import bgBottom from 'assets/images/pages/home/consultancy/bgBottom.png';
 import bgCenter from 'assets/images/pages/home/consultancy/bgCenter.png';
 import bgWhite from 'assets/images/pages/home/consultancy/bgWhite.png';
 import leavesLeft from 'assets/images/pages/home/consultancy/leavesLeft.png';
 import leavesRight from 'assets/images/pages/home/consultancy/leavesRight.png';
+import ConsultancyCommon from 'common/Consultancy';
 import Image from 'components/atoms/Image';
-import { FormConsultancy } from 'components/organisms/Consultancy';
-import ConsultancyTemplate from 'components/templates/Consultancy';
 import { baseString, getBlockData } from 'utils/functions';
-import { schemasConsultancyForm } from 'utils/schemas';
 
 interface ConsultancyProps{
-  titleSection: string,
+  titleSection: string;
 }
 
 const Consultancy: React.FC<SectionBlocks> = ({ blocks }) => {
-  const method = useForm<FormConsultancy>({
-    resolver: yupResolver(schemasConsultancyForm),
-    mode: 'onSubmit',
-  });
   const consultancyBlocks = getBlockData<ConsultancyProps>('project_information', blocks);
-
   return (
     <section className="s-consultancy position-relative">
-      <ConsultancyTemplate
+      <ConsultancyCommon
         title={{
           text: baseString(consultancyBlocks?.titleSection),
           modifiers: ['700', 'gradientGreen', 's015'],
@@ -49,12 +40,9 @@ const Consultancy: React.FC<SectionBlocks> = ({ blocks }) => {
               <Image src={leavesRight} />
             </div>
           </>
-        )}
+          )}
         form={{
           title: 'Quý khách đăng ký nhận email thông tin dự án, các chương trình ưu đãi, khuyến mại</br>và tin tức mới nhất từ NovaWorld Phan Thiet',
-          method,
-          // eslint-disable-next-line no-console
-          handleSubmit: (data) => console.log(data),
           variantButton: 'primary-green',
           consultancyInfo: {
             placeholderName: 'Họ và tên',
