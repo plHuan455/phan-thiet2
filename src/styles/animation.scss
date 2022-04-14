@@ -249,6 +249,18 @@
   }
 }
 
+@keyframes dropdown {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -200%, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
 :root {
   --animate-duration: 1s;
   --animate-delay: 1s;
@@ -337,5 +349,9 @@
         animation: download 0.75s ease infinite alternate;
       }
     }
+  }
+
+  &-dropdown {
+    animation: dropdown 0.3s linear;
   }
 }

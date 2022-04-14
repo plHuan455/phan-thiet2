@@ -6,6 +6,7 @@
     background-color: $white;
     border-radius: rem(16);
     bottom: rem(70);
+    box-shadow: 0 4px 36px $black025;
     left: 50%;
     min-width: rem(399);
     opacity: 0;
@@ -13,6 +14,7 @@
     position: absolute;
     transform: translate(-50%, -30%);
     transition: all $transition ease-in-out;
+    visibility: hidden;
     z-index: -1;
 
     @include desktop-down {
@@ -100,19 +102,21 @@
 
   &-active {
     #{$root} {
+      z-index: 999;
+
       &_marker {
         animation: 0;
 
         .a-image {
           transform: scale(1.5);
-
         }
       }
 
       &_content {
         opacity: 1;
         transform: translate(-50%, 0);
-        z-index: 1;
+        visibility: visible;
+        z-index: 999;
       }
     }
   }
@@ -135,6 +139,7 @@
     margin: auto;
     position: relative;
     width: rem(28);
+    z-index: 0;
 
     &-circle {
       animation: ripple 2s ease-in-out infinite;

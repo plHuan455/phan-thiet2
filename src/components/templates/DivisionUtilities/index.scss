@@ -1,0 +1,45 @@
+.t-divisionUtilities {
+  &_image {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+
+    img {
+      height: 100%;
+      left: 0;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+  }
+
+  &_map {
+    margin: rem(41) rem(100) 0;
+    position: relative;
+    z-index: 999;
+
+    @include tablet-down {
+      margin: rem(20) 0 0;
+    }
+  }
+
+  &_item {
+    $item: &;
+    animation-fill-mode: both;
+    max-width: rem(28);
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+
+    &-active {
+      z-index: 3;
+    }
+
+    @for $i from 1 through 50 {
+      &:nth-child(#{$i + 1}) {
+        animation-delay: #{$i * 0.2}s;
+      }
+    }
+  }
+}
