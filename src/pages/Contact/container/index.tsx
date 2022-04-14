@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
-import Banner from './banner';
+import useAnimation from '../animation';
+
+import Banner, { BannerProps } from './banner';
 import Form from './form';
 import Map from './map';
 
@@ -8,20 +10,31 @@ import imgBalloon from 'assets/images/pages/contact/balloon.png';
 import imgLeaf from 'assets/images/pages/contact/leaf.png';
 import Image from 'components/atoms/Image';
 
-const Screen: React.FC = () => (
-  <>
-    <Banner />
-    <Map />
-    <section className="s-contact_layer">
-      <div className="s-contact_layer_balloon">
-        <Image src={imgBalloon} alt="balloon" />
-      </div>
-      <div className="s-contact_layer_leaf">
-        <Image src={imgLeaf} alt="leaf" />
-      </div>
-      <Form />
-    </section>
-  </>
-);
+export type ContactBlocks = BannerProps
 
+const Screen: React.FC<BasePageDataTypes<ContactBlocks>> = ({
+  banners,
+  blocks,
+}) => {
+  const ballonRef = useRef<HTMLDivElement>(null);
+  const leafRef = useRef<HTMLDivElement>(null);
+
+  const { animated, ballonAnimate, leafAnimate } = useAnimation({ ballonRef, leafRef });
+
+  return (
+    <>
+      <Banner banners={banners} />
+      <Map blocks={blocks} />
+      <section className="s-contact_layer">
+        <animated.div className="s-contact_layer_balloon" ref={ballonRef} style={ballonAnimate}>
+          <Image src={imgBalloon} alt="balloon" />
+        </animated.div>
+        <animated.div className="s-contact_layer_leaf" ref={leafRef} style={leafAnimate}>
+          <Image src={imgLeaf} alt="leaf" />
+        </animated.div>
+        <Form blocks={blocks} />
+      </section>
+    </>
+  );
+};
 export default Screen;
