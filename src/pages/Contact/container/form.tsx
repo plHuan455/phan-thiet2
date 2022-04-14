@@ -1,31 +1,40 @@
-import { yupResolver } from '@hookform/resolvers/yup';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 
 import ContactForm, { ContactFormType } from 'components/templates/ContactForm';
-import { schemasConsultancyForm } from 'utils/schemas';
+import { getBlockData } from 'utils/functions';
 
-const Form: React.FC = () => {
-  const method = useForm<ContactFormType>({
-    resolver: yupResolver(schemasConsultancyForm),
-    mode: 'onSubmit',
-  });
-  return (
-    <ContactForm
-      method={method}
-      handleSubmit={() => ''}
-      form={{
-        namePlaceholder: 'HỌ VÀ TÊN',
-        addressPlaceholder: 'ĐỊA CHỈ',
-        phonePlaceholder: 'ĐIỆN THOẠI *',
-        emailPlaceholder: 'EMAIL *',
-        contentPlaceholder: 'NỘI DUNG',
-        btnText: 'Đăng ký nhận thông tin',
-      }}
-      titleForm="THÔNG TIN LIÊN HỆ"
-      descriptionForm="Quý khách đăng ký nhận email thông tin dự án, các chương trình ưu đãi, khuyến mại và tin tức mới nhất từ NovaWorld Phan Thiet"
-    />
-  );
+export interface FormProps {
+  form?: {
+    placeholderName?: string;
+    placeholderAddress?: string;
+    placeholderPhone?: string;
+    placeholderEmail?: string;
+    placeholderContent?: string;
+    button?: string;
+  };
+  title: string;
+  description?: string;
+}
+
+const Form: React.FC<SectionBlocks> = ({ blocks }) => {
+  const method = useForm<ContactFormType>();
+  const formBlock = useMemo(() => {
+    const blockPageContent = getBlockData<FormProps>('form_contact', blocks);
+    return {
+      form: {
+        addressPlaceholder: blockPageContent?.form?.placeholderAddress,
+        contentPlaceholder: blockPageContent?.form?.placeholderContent,
+        emailPlaceholder: blockPageContent?.form?.placeholderEmail,
+        namePlaceholder: blockPageContent?.form?.placeholderName,
+        phonePlaceholder: blockPageContent?.form?.placeholderPhone,
+        btnText: blockPageContent?.form?.button,
+      },
+      titleForm: blockPageContent?.title,
+      descriptionForm: blockPageContent?.description,
+    };
+  }, [blocks]);
+  return <ContactForm method={method} handleSubmit={() => ''} {...formBlock} />;
 };
 
 export default Form;

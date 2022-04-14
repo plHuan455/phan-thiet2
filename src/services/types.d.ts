@@ -141,3 +141,11 @@ type ErrorsResponse = {
 }
 
 type LangPrefixTypes = 'EN' | 'VI';
+
+type SectionBlocks = {
+  blocks: BlockDataTypes<T>[];
+}
+
+type SectionBanners = {
+  banners: BannersDataTypes[];
+}
