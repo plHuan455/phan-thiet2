@@ -39,7 +39,7 @@ const settings = {
     {
       breakpoint: 767,
       settings: {
-        slidesToShow: 2,
+        slidesToShow: 3,
         slidesToScroll: 1,
         arrows: false,
         dots: true,
@@ -48,7 +48,7 @@ const settings = {
     {
       breakpoint: 575,
       settings: {
-        slidesToShow: 1,
+        slidesToShow: 2,
         slidesToScroll: 1,
         arrows: false,
         dots: true,
