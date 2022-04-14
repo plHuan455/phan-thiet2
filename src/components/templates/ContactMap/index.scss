@@ -14,27 +14,35 @@
       padding: rem(16);
     }
   }
-
-  &_content {
+  &_wrapper {
     background-color: $antique-white;
-    padding: rem(64) rem(32) rem(64) rem(40);
-    @include tablet-down {
-      padding: rem(16);
-    }
+    padding: rem(24);
+  }
+  &_content {
+    margin: 0 rem(-24);
+    padding-right: rem(24);
   }
 
   &_item {
     margin-top: rem(16);
-
+    transition: all $transition ease-in-out;
+    padding: rem(16) rem(8);
     &:first-child {
-      margin-top: 0;
+      margin-top: rem(-16);
+    }
+    &-active,
+    &:hover {
+      box-shadow: 10px 10px 24px rgba($black, 0.15);
+      background: rgba($copper, 0.1);
     }
   }
 
   &_list {
     height: rem(338);
     overflow: auto;
-    @include scroll-bars(8,$copper,$gainsboro,8,0,5);
+    padding: rem(24) rem(32) rem(24) rem(24);
+
+    @include scroll-bars(8, $copper, $gainsboro, 8, 0, 5);
     @include tablet-down {
       height: auto;
       max-height: rem(250);
@@ -54,7 +62,7 @@
   @include mobile-down {
     padding-bottom: 100%;
   }
-  
+
   &_map {
     bottom: 0;
     left: 0;

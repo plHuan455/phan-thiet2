@@ -5,6 +5,8 @@ import React from 'react';
 import Heading from 'components/atoms/Heading';
 import Icon from 'components/atoms/Icon';
 import Text from 'components/atoms/Text';
+import useScrollInfinite from 'hooks/useScrollInfinite';
+import mapModifiers from 'utils/functions';
 
 export interface PositionMarker {
   lat: number;
@@ -17,21 +19,23 @@ export interface AddressItemProps {
   phone?: string;
   textContact?: string;
   position: PositionMarker;
-
 }
 
-export const AddressItem:React.FC<AddressItemProps & {
-  onClick?: (position: PositionMarker) => void;
-}> = ({
-  label,
-  address,
-  phone,
-  textContact,
-  position,
-  onClick,
+export const AddressItem: React.FC<
+  AddressItemProps & {
+    onClick?: () => void;
+  }
+> = ({
+  label, address, phone, textContact, onClick,
 }) => (
-  <div className="m-addressItem" onClick={() => onClick && onClick(position)}>
-    <Text modifiers={['gambogeOrange', '16x28', '700', 'uppercase']} content={label} />
+  <div
+    className="m-addressItem"
+    onClick={onClick}
+  >
+    <Text
+      modifiers={['gambogeOrange', '16x28', '700', 'uppercase']}
+      content={label}
+    />
     <div className="u-mt-4">
       <Text modifiers={['davyGrey', '12x18']} content={address} />
       <Text modifiers={['davyGrey', '12x18']}>
@@ -45,35 +49,49 @@ export const AddressItem:React.FC<AddressItemProps & {
 export interface InfoAddressProps {
   list?: AddressItemProps[];
   title?: string;
-  onClick?: (position: PositionMarker) => void;
+  headQuarterIdx?: number;
+  onClick?: (item: AddressItemProps, idx: number) => void;
+  handleLoadMore?: () => void
 }
 
-export const InfoAddress:React.FC<InfoAddressProps> = ({
+export const InfoAddress: React.FC<InfoAddressProps> = ({
   list,
   title,
+  headQuarterIdx,
   onClick,
-}) => (
-  <div className="o-infoAddress">
-    <div className="o-infoAddress_heading">
-      <Heading type="h4" modifiers={['s015', 'white', 'uppercase']} content={title} />
-    </div>
-    <div className="o-infoAddress_content">
-      <div className="o-infoAddress_list">
-        {list?.map((x, i) => (
-          <div
-            key={`item-${i.toString()}`}
-            className="o-infoAddress_item"
-          >
-            <AddressItem
-              onClick={onClick}
-              {...x}
-            />
+  handleLoadMore,
+}) => {
+  const { setNode } = useScrollInfinite(handleLoadMore);
+  return (
+    <div className="o-infoAddress">
+      <div className="o-infoAddress_heading">
+        <Heading
+          type="h4"
+          modifiers={['s015', 'white', 'uppercase']}
+          content={title}
+        />
+      </div>
+      <div className="o-infoAddress_wrapper">
+        <div className="o-infoAddress_content">
+          <div className="o-infoAddress_list">
+            {list?.map((x, i) => (
+              <div
+                ref={i + 1 === list.length ? (node) => setNode(node) : undefined}
+                key={`item-${i.toString()}`}
+                className={mapModifiers(
+                  'o-infoAddress_item',
+                  headQuarterIdx === i && 'active',
+                )}
+              >
+                <AddressItem onClick={() => onClick && onClick(x, i)} {...x} />
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 export interface GoogleMapProps {
   list?: AddressItemProps[];
@@ -88,7 +106,7 @@ export const MapContact: React.FC<PositionMarker> = () => (
   </div>
 );
 
-export const GoogleMap:React.FC<GoogleMapProps> = ({
+export const GoogleMap: React.FC<GoogleMapProps> = ({
   mapApiKey,
   zoomPosition,
   zoomView,

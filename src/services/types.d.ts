@@ -75,6 +75,14 @@ type BasePageDataTypes<T> = {
   breadcrumbs: BreadcrumbsDataTypes[];
 };
 
+type LinkData = {
+  self: string;
+  first: string;
+  prev: string;
+  next: string;
+  last: string;
+}
+
 type MetaData = {
   totalPages: number;
   limit: number;
@@ -85,6 +93,7 @@ type MetaData = {
 type APIPaginationResponse<T> = {
   data: T;
   meta: MetaData;
+  links: LinkData;
 };
 
 type DataStaticTypes = {
