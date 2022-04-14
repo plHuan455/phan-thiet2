@@ -8,7 +8,14 @@ import Heading from 'components/atoms/Heading';
 import Input from 'components/atoms/Input';
 import Text from 'components/atoms/Text';
 import TextArea from 'components/atoms/TextArea';
-import { ContactFormType } from 'services/forms/types';
+
+export type ContactFormType = {
+  name?: string;
+  address?: string;
+  phone?: string;
+  email?: string;
+  content?: string;
+}
 
 interface ContactFormProps {
   form?: {
