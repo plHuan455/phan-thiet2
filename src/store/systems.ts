@@ -1,4 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+import getSystemsService from 'services/systems';
+import { SystemsData } from 'services/systems/types';
 
 type MessageNotify = {
   message?: string;
@@ -10,6 +13,7 @@ type PageType = 'default' | 'subdivisions';
 type InitialState = {
   messageNotify?: MessageNotify;
   pageType?: PageType;
+  data?: SystemsData
 };
 
 const initialState: InitialState = {
@@ -20,6 +24,21 @@ const initialState: InitialState = {
   pageType: 'default',
 };
 
+export const getSystemsAsync = createAsyncThunk<
+SystemsData,
+void,
+{ rejectValue: unknown }
+>(
+  'systems/getSystems',
+  async (_, { rejectWithValue }) => {
+    try {
+      return await getSystemsService();
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  },
+);
+
 const systemsSlice = createSlice({
   name: 'systems',
   initialState,
@@ -28,7 +47,11 @@ const systemsSlice = createSlice({
       $state.pageType = action.payload;
     },
   },
-  extraReducers() {},
+  extraReducers(builder) {
+    builder.addCase(getSystemsAsync.fulfilled, ($state, action) => {
+      $state.data = action.payload;
+    });
+  },
 });
 
 export const {

@@ -20,6 +20,7 @@ import News from 'pages/News';
 import NewsDetail from 'pages/NewsDetail';
 import Search from 'pages/Search';
 import { store } from 'store';
+import { useAppSelector } from 'store/hooks';
 
 const HomeNavigation = React.lazy(() => import('common/Navigation/home'));
 const PageNavigation = React.lazy(() => import('common/Navigation/page'));
@@ -33,7 +34,7 @@ const App: React.FC = () => (
           <Layout>
             <Outlet />
           </Layout>
-          )}
+            )}
       >
         {/* TODO: Implement translation later */}
         <Route path="">
@@ -52,19 +53,22 @@ const App: React.FC = () => (
   </Suspense>
 );
 
-const GoogleReCaptchaWrapper: React.FC = ({ children }) => (
-  <GoogleReCaptchaProvider
-      // reCaptchaKey={dataSystems?.googleRecaptchaSiteKey}
-    reCaptchaKey="6LcwgsIZAAAAAHZFFWu3icOSaGK2_SVjZwY-kEjQ"
-    scriptProps={{
-      appendTo: 'head',
-      async: true,
-      defer: true,
-    }}
-  >
-    {children}
-  </GoogleReCaptchaProvider>
-);
+const GoogleReCaptchaWrapper: React.FC = ({ children }) => {
+  const { data: dataSystems } = useAppSelector((state) => state.system);
+  return (
+    <GoogleReCaptchaProvider
+        // reCaptchaKey={dataSystems?.googleRecaptchaSiteKey}
+      reCaptchaKey={dataSystems?.googleRecaptchaSiteKey}
+      scriptProps={{
+        appendTo: 'head',
+        async: true,
+        defer: true,
+      }}
+    >
+      {children}
+    </GoogleReCaptchaProvider>
+  );
+};
 
 const AppWrapper: React.FC = () => {
   const queryClient = new QueryClient({
