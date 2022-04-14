@@ -40,6 +40,7 @@ const MarkerCard: React.FC<MarkerCardProps> = ({
     {
       modifiers === 'marker' && (
         <div className="m-markerCard_marker" onMouseEnter={handleHover} onMouseLeave={handleLeave}>
+          <div className="m-markerCard_marker-circle" />
           <Image src={marker} ratio="24x34" alt="marker" />
         </div>
       )
