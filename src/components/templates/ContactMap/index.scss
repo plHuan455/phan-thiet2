@@ -7,6 +7,7 @@
 }
 
 .o-infoAddress {
+  $info: &;
   &_heading {
     background-color: $gamboge-orange;
     padding: rem(16) rem(40);
@@ -14,6 +15,21 @@
       padding: rem(16);
     }
   }
+  @include mobile-down {
+    #{$info}_wrapper {
+      padding: rem(16);
+    }
+    #{$info}_content {
+      padding-right: rem(16);
+    }
+    #{$info}_item:first-child {
+      margin-top: rem(-12);
+    }
+    #{$info}_list {
+      padding: rem(16) rem(24) rem(16) rem(16);
+    }
+  }
+
   &_wrapper {
     background-color: $antique-white;
     padding: rem(24);
@@ -41,7 +57,6 @@
     height: rem(338);
     overflow: auto;
     padding: rem(24) rem(32) rem(24) rem(24);
-
     @include scroll-bars(8, $copper, $gainsboro, 8, 0, 5);
     @include tablet-down {
       height: auto;
