@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import HeaderSub, { HeaderSubProps } from './HeaderSub';
+import HeaderSub from './HeaderSub';
 
 import Container from 'common/Container';
 import Heading from 'components/atoms/Heading';
@@ -18,28 +18,24 @@ import useWindowScroll from 'hooks/useWindowScroll';
 import { MenuItem } from 'services/menus/types';
 import mapModifiers from 'utils/functions';
 
-export interface HeaderDivisionProps extends Pick<HeaderSubProps, 'subMenu'|'backUrl'>{
-  logoUrl?: LinkTypes;
-  logo?: string;
+export interface HeaderDivisionProps {
+  mainLogo?: LinkTypes;
+  menuDivision?: MenuItem[];
+  logoDivision?: LinkTypes;
   menu?: MenuItem[];
   language?: {
     langList: OptionType[];
     value: OptionType;
     handleChangeLang?: (item?: OptionType) => void;
   };
-  logoDivision?: string;
-  logoDivisionUrl?: LinkTypes;
 }
 
 const HeaderDivision: React.FC<HeaderDivisionProps> = ({
-  logoUrl,
-  logo,
+  mainLogo,
+  menuDivision,
   menu,
   language,
   logoDivision,
-  logoDivisionUrl,
-  backUrl,
-  subMenu,
 }) => {
   const { pathname } = useLocation();
 
@@ -97,12 +93,13 @@ const HeaderDivision: React.FC<HeaderDivisionProps> = ({
     <header className="t-headerDivision">
       <div className="t-headerDivision_subHeader">
         <HeaderSub
-          backUrl={backUrl}
-          logoUrl={logoUrl}
-          logo={logo}
-          subMenu={subMenu}
+          logo={mainLogo}
+          menu={menuDivision}
+          // logoUrl={logoUrl}
+          // logo={logo}
+          // subMenu={subMenu}
           isScroll={isScroll}
-          pathname={pathname}
+          // pathname={pathname}
         />
       </div>
       <div className={mapModifiers('t-headerDivision_main', isScroll && 'isScroll')}>
@@ -130,27 +127,33 @@ const HeaderDivision: React.FC<HeaderDivisionProps> = ({
               </div>
             </div>
             <div className="t-headerDivision_left">
-              <div className="t-headerDivision_left_logoMain">
-                <Link href={logoUrl?.url} target={logoUrl?.target}>
-                  <Image src={logo} ratio="184x59" />
-                </Link>
-              </div>
-              <div className="t-headerDivision_left_logoSub">
-                <Link href={logoDivisionUrl?.url} target={logoDivisionUrl?.target}>
-                  <img src={logoDivision} alt="logo-division" />
-                </Link>
-              </div>
+              {mainLogo && (
+                <div className="t-headerDivision_left_logoMain">
+                  <Link href={mainLogo?.url} target={mainLogo?.target}>
+                    <Image src={mainLogo?.icon} ratio="184x59" />
+                  </Link>
+                </div>
+              )}
+              {logoDivision && (
+                <div className="t-headerDivision_left_logoSub">
+                  <Link href={logoDivision?.url} target={logoDivision?.target}>
+                    <img src={logoDivision?.icon} alt="logo-division" />
+                  </Link>
+                </div>
+              )}
             </div>
             <div className={mapModifiers('t-headerDivision_right', isOpen && 'open')}>
               <div className="t-headerDivision_search-mobile">
                 {renderButtonSearch('searchOrange')}
               </div>
               <div className="t-headerDivision_nav">
-                <div className="t-headerDivision_nav_logoSub">
-                  <Link href={logoDivisionUrl?.url} target={logoDivisionUrl?.target}>
-                    <img src={logoDivision} alt="logo-division" />
-                  </Link>
-                </div>
+                {logoDivision && (
+                  <div className="t-headerDivision_nav_logoSub">
+                    <Link href={logoDivision?.url} target={logoDivision?.target}>
+                      <img src={logoDivision?.icon} alt="logo-division" />
+                    </Link>
+                  </div>
+                )}
                 <Nav
                   menu={menu}
                   idExpand={[idExpand?.child, idExpand?.parent]}
@@ -162,7 +165,7 @@ const HeaderDivision: React.FC<HeaderDivisionProps> = ({
                 <div className="t-headerDivision_nav_separate" />
                 <div className="t-headerDivision_nav_menu">
                   <Nav
-                    menu={subMenu}
+                    menu={menuDivision}
                     pathname={pathname}
                     handleCloseMenu={handleCloseMenu}
                   />

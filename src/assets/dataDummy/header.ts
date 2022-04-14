@@ -152,7 +152,7 @@ const language = {
   value: { value: 'vi', label: 'VI' },
 };
 
-const subMenu = [
+const menuDivision = [
   {
     id: 1123,
     menuId: 1,
@@ -236,13 +236,15 @@ const subMenu = [
 ];
 
 export default {
-  menu,
-  logo,
-  logoUrl: {
+  mainLogo: {
+    icon: logo,
     url: '/',
-    target: '',
+    target: '_self',
+  },
+  menuDivision,
+  menu,
+  logoDivision: {
+    icon: logoKingdom,
   },
   language,
-  logoDivision: logoKingdom,
-  subMenu,
 };

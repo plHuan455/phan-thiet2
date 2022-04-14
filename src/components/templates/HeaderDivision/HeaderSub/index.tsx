@@ -1,4 +1,5 @@
 import React, { useRef, useState, useMemo } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import Container from 'common/Container';
 import Icon from 'components/atoms/Icon';
@@ -9,44 +10,42 @@ import { MenuItem } from 'services/menus/types';
 import mapModifiers from 'utils/functions';
 
 export interface HeaderSubProps {
-  backUrl?: LinkTypes;
-  logoUrl?: LinkTypes;
-  logo?: string;
-  subMenu?: MenuItem[];
+  logo?: LinkTypes;
+  menu?: MenuItem[];
   isScroll?: boolean;
-  pathname?: string;
 }
 
 const HeaderSub:React.FC<HeaderSubProps> = ({
-  backUrl,
   logo,
-  subMenu,
-  logoUrl,
+  menu,
   isScroll,
-  pathname,
 }) => {
   const [active, setActive] = useState(false);
   const menuRef = useRef<HTMLDivElement|null>(null);
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   useClickOutside(menuRef, () => {
     if (active) setActive(false);
   });
 
   const findActive = useMemo(() => (
-    subMenu?.find((x) => `/${x.reference?.slug || x.link}` === pathname)
-  ), [pathname, subMenu]);
+    menu?.find((x) => `/${x.reference?.slug || x.link}` === pathname)
+  ), [pathname, menu]);
 
   return (
     <div className={mapModifiers('t-headerSub', isScroll && 'isScroll')}>
       <Container>
         <div className="t-headerSub_wrap">
           <div className="t-headerSub_left">
-            <Link className="t-headerSub_btnGoBack" href={backUrl?.url} target={backUrl?.target}>
+            <div className="t-headerSub_btnGoBack" onClick={() => navigate(-1)}>
               <Icon iconName="arrowLeftWhite" size="16" />
-            </Link>
-            <Link className="t-headerSub_imageLogo" href={logoUrl?.url} target={logoUrl?.target}>
-              <Image src={logo} ratio="184x59" />
-            </Link>
+            </div>
+            {logo && (
+              <Link className="t-headerSub_imageLogo" href={logo?.url} target={logo?.target}>
+                <Image src={logo?.icon} ratio="78x25" />
+              </Link>
+            )}
           </div>
           <div className="t-headerSub_right">
             <div ref={menuRef} className="t-headerSub_menu">
@@ -62,12 +61,13 @@ const HeaderSub:React.FC<HeaderSubProps> = ({
               <ul
                 className={`t-headerSub_menu_list ${active ? 'active' : ''}`}
               >
-                {subMenu?.map((item, index) => (
+                {menu?.map((item, index) => (
                   <li className="t-headerSub_menu_item">
                     <Link
                       key={`index-${index.toString()}`}
                       href={item.reference?.slug || item.link}
                       target={item.target}
+                      onClick={() => setActive(false)}
                       className="t-headerSub_menu_itemLink"
                     >
                       {item.title}

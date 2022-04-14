@@ -30,6 +30,7 @@
   &_btnGoBack {
     margin-right: rem(8);
     width: rem(16);
+    cursor: pointer;
   }
 
   &_imageLogo {
@@ -70,7 +71,7 @@
       position: absolute;
       right: 0;
       top: calc(100% + 50px);
-      transition: $transition-long linear;
+      transition: all $transition-long linear;
       visibility: hidden;
 
       &.active {
