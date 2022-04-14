@@ -1,5 +1,5 @@
 import React, {
-  useCallback, useMemo, useState,
+  useCallback, useMemo, useRef, useState,
 } from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -20,9 +20,9 @@ import mapModifiers from 'utils/functions';
 
 export interface HeaderDivisionProps {
   mainLogo?: LinkTypes;
-  menuDivision?: MenuItem[];
+  menuSubDivision?: MenuItem[];
   logoDivision?: LinkTypes;
-  menu?: MenuItem[];
+  menuMainDivision?: MenuItem[];
   language?: {
     langList: OptionType[];
     value: OptionType;
@@ -32,8 +32,8 @@ export interface HeaderDivisionProps {
 
 const HeaderDivision: React.FC<HeaderDivisionProps> = ({
   mainLogo,
-  menuDivision,
-  menu,
+  menuSubDivision,
+  menuMainDivision,
   language,
   logoDivision,
 }) => {
@@ -43,6 +43,8 @@ const HeaderDivision: React.FC<HeaderDivisionProps> = ({
   const [isOpenSearch, setIsOpenSearch] = useState(false);
   const [isScroll, setIsScroll] = useState(false);
   const [idExpand, setIdExpand] = useState<Record<'parent' | 'child', number | undefined>>();
+
+  const refPageYOffset = useRef<number>();
 
   const handleCloseMenu = useCallback(() => {
     setIsOpen(false);
@@ -82,10 +84,21 @@ const HeaderDivision: React.FC<HeaderDivisionProps> = ({
   ), []);
 
   useWindowScroll(() => {
-    if (window.pageYOffset > 41) {
-      setIsScroll(true);
-    } else {
-      setIsScroll(false);
+    if (window.innerWidth <= 992) {
+      if (window.pageYOffset > 70 && Number(refPageYOffset.current || 0) < window.pageYOffset) {
+        setIsScroll(true);
+      } else {
+        setIsScroll(false);
+      }
+      refPageYOffset.current = window.pageYOffset;
+    }
+
+    if (window.innerWidth > 992) {
+      if (window.pageYOffset > 41) {
+        setIsScroll(true);
+      } else {
+        setIsScroll(false);
+      }
     }
   });
 
@@ -94,12 +107,8 @@ const HeaderDivision: React.FC<HeaderDivisionProps> = ({
       <div className="t-headerDivision_subHeader">
         <HeaderSub
           logo={mainLogo}
-          menu={menuDivision}
-          // logoUrl={logoUrl}
-          // logo={logo}
-          // subMenu={subMenu}
+          menu={menuSubDivision && menuSubDivision[0]?.subMenu}
           isScroll={isScroll}
-          // pathname={pathname}
         />
       </div>
       <div className={mapModifiers('t-headerDivision_main', isScroll && 'isScroll')}>
@@ -118,9 +127,9 @@ const HeaderDivision: React.FC<HeaderDivisionProps> = ({
           <div className="t-headerDivision_wrap">
             <div
               className="t-headerDivision_hamburger"
-              onClick={() => setIsOpen(!isOpen)}
+              onClick={() => setIsOpen(true)}
             >
-              <div className={`hamburger ${isOpen ? 'active' : ''}`}>
+              <div className="hamburger">
                 <span />
                 <span />
                 <span />
@@ -143,8 +152,20 @@ const HeaderDivision: React.FC<HeaderDivisionProps> = ({
               )}
             </div>
             <div className={mapModifiers('t-headerDivision_right', isOpen && 'open')}>
-              <div className="t-headerDivision_search-mobile">
-                {renderButtonSearch('searchOrange')}
+              <div className="t-headerDivision_right_header-mobile">
+                <div className="t-headerDivision_close-mobile">
+                  <div
+                    onClick={() => setIsOpen(false)}
+                    className="hamburger active"
+                  >
+                    <span />
+                    <span />
+                    <span />
+                  </div>
+                </div>
+                <div className="t-headerDivision_search-mobile">
+                  {renderButtonSearch('searchOrange')}
+                </div>
               </div>
               <div className="t-headerDivision_nav">
                 {logoDivision && (
@@ -155,19 +176,20 @@ const HeaderDivision: React.FC<HeaderDivisionProps> = ({
                   </div>
                 )}
                 <Nav
-                  menu={menu}
+                  menu={menuMainDivision}
                   idExpand={[idExpand?.child, idExpand?.parent]}
                   pathname={pathname}
                   handleCloseMenu={handleCloseMenu}
                   handleClickExpand={handleClickExpand}
                   variant="subdivisions"
                 />
-                <div className="t-headerDivision_nav_separate" />
                 <div className="t-headerDivision_nav_menu">
                   <Nav
-                    menu={menuDivision}
+                    menu={menuSubDivision}
                     pathname={pathname}
                     handleCloseMenu={handleCloseMenu}
+                    handleClickExpand={handleClickExpand}
+                    idExpand={[idExpand?.child, idExpand?.parent]}
                   />
                 </div>
               </div>

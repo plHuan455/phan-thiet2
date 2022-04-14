@@ -6,12 +6,14 @@ import useLayout from './functions';
 import NotifyWrapper from 'common/NotifyWrapper';
 import Footer from 'components/templates/Footer';
 import Header from 'components/templates/Header';
+import HeaderDivision from 'components/templates/HeaderDivision';
 
 const Layout: React.FC = ({ children }) => {
   const location = useLocation();
   const {
     dataHeaderDefault,
     dataFooter,
+    pageType,
   } = useLayout();
 
   useLayoutEffect(() => {
@@ -23,7 +25,7 @@ const Layout: React.FC = ({ children }) => {
 
   return (
     <>
-      <Header {...dataHeaderDefault} />
+      {pageType === 'subdivisions' ? <HeaderDivision {...dataHeaderDefault} /> : <Header {...dataHeaderDefault} /> }
       <main>
         {children}
       </main>

@@ -29,7 +29,7 @@ export const headerSub: Story = () => (
     <div style={{ height: '200vh' }}>
       <HeaderSub
         logo={dataHeader.logoDivision}
-        menu={dataHeader.menuDivision}
+        menu={dataHeader.menuSubDivision}
       />
     </div>
   </BrowserRouter>

@@ -17,8 +17,7 @@ import { MenuItem } from 'services/menus/types';
 import mapModifiers from 'utils/functions';
 
 export interface HeaderProps {
-  logoUrl?: LinkTypes;
-  logo?: string;
+  mainLogo?: LinkTypes;
   menu?: MenuItem[];
   language?: {
     langList: OptionType[];
@@ -28,8 +27,7 @@ export interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({
-  logoUrl,
-  logo,
+  mainLogo,
   menu,
   language,
 }) => {
@@ -107,22 +105,34 @@ const Header: React.FC<HeaderProps> = ({
           <div className="t-header_wrap">
             <div
               className="t-header_hamburger"
-              onClick={() => setIsOpen(!isOpen)}
+              onClick={() => setIsOpen(true)}
             >
-              <div className={`hamburger ${isOpen ? 'active' : ''}`}>
+              <div className="hamburger">
                 <span />
                 <span />
                 <span />
               </div>
             </div>
             <div className="t-header_left">
-              <Link href={logoUrl?.url} target={logoUrl?.target}>
-                <Image src={logo} ratio="184x59" />
+              <Link href={mainLogo?.url} target={mainLogo?.target}>
+                <Image src={mainLogo?.icon} ratio="184x59" alt="logo" />
               </Link>
             </div>
             <div className={mapModifiers('t-header_right', isOpen && 'open')}>
-              <div className="t-header_search-mobile">
-                {renderButtonSearch('searchOrange')}
+              <div className="t-header_right_header-mobile">
+                <div className="t-header_close-mobile">
+                  <div
+                    onClick={() => setIsOpen(false)}
+                    className="hamburger active"
+                  >
+                    <span />
+                    <span />
+                    <span />
+                  </div>
+                </div>
+                <div className="t-header_search-mobile">
+                  {renderButtonSearch('searchOrange')}
+                </div>
               </div>
               <div className="t-header_nav">
                 <Nav

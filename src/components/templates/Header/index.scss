@@ -93,7 +93,7 @@
       height: 100vh;
       margin-top: 0;
       overflow: auto;
-      padding: rem(25) rem(104) rem(50) rem(104);
+      padding: rem(13) rem(62) rem(50) rem(62);
       position: fixed;
       right: 0;
       top: 0;
@@ -104,11 +104,21 @@
     }
 
     @include small-mobile {
-      padding: rem(25) rem(16) rem(50) rem(16);
+      padding: rem(13) rem(16) rem(50) rem(16);
     }
 
     &-open {
       transform: translateX(0);
+    }
+
+    &_header-mobile {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: rem(10);
+      align-items: center;
+      @include tablet-up {
+        display: none;
+      }
     }
   }
 
@@ -125,7 +135,6 @@
 
   &_hamburger {
     width: rem(46);
-    z-index: 3;
     @include tablet-up {
       display: none;
     }
@@ -155,9 +164,6 @@
   &_search-mobile {
     display: flex;
     justify-content: flex-end;
-    @include tablet-up {
-      display: none;
-    }
   }
 }
 
