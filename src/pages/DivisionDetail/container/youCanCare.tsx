@@ -1,6 +1,8 @@
 import React from 'react';
 
-import YouCanCareTemplate from 'components/templates/YouCanCare';
+import Container from 'common/Container';
+import FlatMore from 'common/FlatMore';
+import Card from 'components/organisms/Card';
 
 const dataDummy = new Array(10).fill({
   imgSrc: 'https://source.unsplash.com/random',
@@ -8,16 +10,27 @@ const dataDummy = new Array(10).fill({
   description: 'Ocean Residence kiến tạo nơi đáng  sống mới cho cư dân khi tận hưởng giá trị Ocean Residence kiến tạo nơi đáng  sống mới cho cư dân khi tận hưởng giá trị ..',
 });
 
-const YouCanCare: React.FC = () => (
+interface YouCanCareProps {
+
+}
+
+const YouCanCare: React.FC<YouCanCareProps> = () => (
   <section className="u-mt-md-96 u-mt-48 u-mb-md-157 u-mb-80" style={{ color: 'var(--theme)' }}>
-    <YouCanCareTemplate
-      title="CÓ THỂ BẠN QUAN TÂM"
-      link={{
-        text: 'Xem tất cả',
-        href: '/',
-      }}
-      dataList={dataDummy}
-    />
+    <Container>
+      <FlatMore
+        title={{
+          text: 'CÓ THỂ BẠN QUAN TÂM',
+          type: 'h2',
+          modifiers: ['s015', '400', 'inherit'],
+        }}
+        link={{
+          text: 'Xem tất cả',
+          href: '/',
+        }}
+        data={dataDummy}
+        render={(item) => <Card.Division {...item} />}
+      />
+    </Container>
   </section>
 );
 
