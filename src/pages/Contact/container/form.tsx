@@ -1,8 +1,11 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import React, { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 
-import ContactForm, { ContactFormType } from 'components/templates/ContactForm';
+import ContactForm from 'components/templates/ContactForm';
+import { ContactFormType } from 'services/forms/types';
 import { getBlockData } from 'utils/functions';
+import { schemasConsultancyForm } from 'utils/schemas';
 
 export interface FormProps {
   form?: {
@@ -18,7 +21,10 @@ export interface FormProps {
 }
 
 const Form: React.FC<SectionBlocks> = ({ blocks }) => {
-  const method = useForm<ContactFormType>();
+  const method = useForm<ContactFormType>({
+    resolver: yupResolver(schemasConsultancyForm),
+    mode: 'onSubmit',
+  });
   const formBlock = useMemo(() => {
     const blockPageContent = getBlockData<FormProps>('form_contact', blocks);
     return {
