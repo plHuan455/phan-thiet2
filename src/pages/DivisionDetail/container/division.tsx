@@ -2,6 +2,7 @@ import React from 'react';
 
 import Container from 'common/Container';
 import FlatMore from 'common/FlatMore';
+import Arrow from 'components/atoms/Arrow';
 import Card from 'components/organisms/Card';
 
 const dataDummy = new Array(10).fill({
@@ -10,12 +11,11 @@ const dataDummy = new Array(10).fill({
   description: 'Ocean Residence kiến tạo nơi đáng  sống mới cho cư dân khi tận hưởng giá trị Ocean Residence kiến tạo nơi đáng  sống mới cho cư dân khi tận hưởng giá trị ..',
 });
 
-interface YouCanCareProps {
-
+interface DivisionProps {
 }
 
-const YouCanCare: React.FC<YouCanCareProps> = () => (
-  <section className="u-mt-md-96 u-mt-48 u-mb-md-157 u-mb-80" style={{ color: 'var(--theme)' }}>
+const Division: React.FC<DivisionProps> = () => (
+  <section className="u-mt-md-80 u-mt-48 u-mb-md-80 u-mb-48" style={{ color: 'var(--theme)' }}>
     <Container>
       <FlatMore
         title={{
@@ -28,10 +28,14 @@ const YouCanCare: React.FC<YouCanCareProps> = () => (
           href: '/',
         }}
         data={dataDummy}
+        settings={{
+          prevArrow: <Arrow.Prev />,
+          nextArrow: <Arrow.Next />,
+        }}
         render={(item) => <Card.Division {...item} />}
       />
     </Container>
   </section>
 );
 
-export default YouCanCare;
+export default Division;

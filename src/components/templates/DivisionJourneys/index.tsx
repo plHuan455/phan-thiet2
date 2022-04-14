@@ -40,7 +40,7 @@ const DivisionJourneys: React.FC<DivisionJourneysProps> = ({
     <img className="t-divisionJourneys_bg" src={srcBg} alt="background" />
     <Container>
       <div className="t-divisionJourneys_content">
-        <Heading type="h2" modifiers={['700', 'white', 's015']} content={title} />
+        <Heading type="h2" modifiers={['400', 'white', 's015']} content={title} />
         <div className="t-divisionJourneys_tabs u-mt-30 u-mt-md-56">
           <Tabs variableMutate={slugActive}>
             {tabs?.map((item, index) => (

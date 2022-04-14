@@ -31,6 +31,7 @@ const Consultancy: React.FC<ConsultancyProps> = () => {
     >
       <ConsultancyTemplate
         layer={<LayerSection />}
+        py="lg"
         title={{
           text: 'ĐĂNG KÝ NHẬN <br /> THÔNG TIN DỰ ÁN',
           modifiers: ['400', 'inherit', 's015'],
@@ -40,7 +41,7 @@ const Consultancy: React.FC<ConsultancyProps> = () => {
             'Quý khách đăng ký nhận email thông tin dự án, các chương trình ưu đãi, khuyến mại</br>và tin tức mới nhất từ NovaWorld Phan Thiet',
           method,
           handleSubmit: (data) => console.log(data),
-          variantButton: 'primary-green',
+          variantButton: 'inherit',
           consultancyInfo: {
             placeholderName: 'Họ và tên',
             placeholderPhone: 'Số điện thoại *',

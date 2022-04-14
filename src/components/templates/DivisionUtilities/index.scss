@@ -17,7 +17,7 @@
   &_map {
     margin: rem(41) rem(100) 0;
     position: relative;
-    z-index: 999;
+    z-index: 1;
 
     @include tablet-down {
       margin: rem(20) 0 0;
