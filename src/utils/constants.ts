@@ -5,6 +5,13 @@ const MENU_CODE = {
   FOOTER_2: 'footer-2',
 };
 
+export const DEFAULT_QUERY_OPTION = {
+  retry: 0,
+  refetchOnMount: false,
+  refetchOnWindowFocus: false,
+  refetchOnReconnect: false,
+};
+
 const LOCAL_STORAGE = {
   LANGUAGE: 'NOVAWORLD_PHANTHIET_Language',
 };
