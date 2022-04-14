@@ -37,7 +37,7 @@ const News: React.FC = () => {
         <Image src={ballon1} alt="ballon" ratio="359x247" />
       </animated.div>
       <animated.div className="s-news_leaf1" style={isScrollLeaf1 ? ballonAnimate : {}} ref={leaf1Ref}>
-        <Image src={leaf1} alt="leaf1" ratio="184x178" />
+        <Image src={leaf1} alt="leaf1" ratio="113x182" />
       </animated.div>
       <animated.div className="s-news_leaf2" style={isScrollLeaf2 ? slideAnimate : {}} ref={leaf2Ref}>
         <Image src={leaf2} alt="leaf2" ratio="548x612" />
