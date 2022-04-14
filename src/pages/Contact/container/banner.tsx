@@ -3,11 +3,7 @@ import React, { useMemo } from 'react';
 import BannerTemplate from 'components/templates/Banner';
 import { baseURL, getBannerData } from 'utils/functions';
 
-export interface BannerProps{
-  banners: BannersDataTypes[]
-}
-
-const Banner: React.FC<BannerProps> = ({ banners }) => {
+const Banner: React.FC<SectionBanners> = ({ banners }) => {
   const bannerData = useMemo(() => ({
     image: banners.map((item) => ({
       src: baseURL(item.data.imageDesktop),

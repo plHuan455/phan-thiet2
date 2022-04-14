@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 
 import useAnimation from '../animation';
 
-import Banner, { BannerProps } from './banner';
+import Banner from './banner';
 import Form from './form';
 import Map from './map';
 
@@ -10,9 +10,7 @@ import imgBalloon from 'assets/images/pages/contact/balloon.png';
 import imgLeaf from 'assets/images/pages/contact/leaf.png';
 import Image from 'components/atoms/Image';
 
-export type ContactBlocks = BannerProps
-
-const Screen: React.FC<BasePageDataTypes<ContactBlocks>> = ({
+const Screen: React.FC<BasePageDataTypes<any>> = ({
   banners,
   blocks,
 }) => {

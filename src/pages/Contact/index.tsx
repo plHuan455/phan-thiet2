@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Screen, { ContactBlocks } from './container';
+import Screen from './container';
 
-const Contact: React.FC<BasePageDataTypes<ContactBlocks>> = (props) => (
+const Contact: React.FC<BasePageDataTypes<any>> = (props) => (
   <div className="p-contact">
     <Screen {...props} />
   </div>
