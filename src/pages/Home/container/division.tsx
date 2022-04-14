@@ -1,16 +1,11 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import { useQuery } from 'react-query';
 
 import Container from 'common/Container';
 import FlatMore from 'common/FlatMore';
 import Card from 'components/organisms/Card';
-import { baseString, getBlockData } from 'utils/functions';
-
-const data = new Array(7).fill({
-  imgSrc: 'https://source.unsplash.com/random',
-  title: 'Nova World phan thiết và chuỗi cung cấp tiện ích',
-  href: '/',
-  description: 'Ocean Residence kiến tạo nơi đáng  sống mới cho cư dân khi tận hưởng giá trị Ocean Residence kiến tạo nơi đáng  sống mới cho cư dân khi tận hưởng giá trị ..',
-});
+import getSubDivisionListService from 'services/subdivision';
+import { baseString, getBlockData, baseURL } from 'utils/functions';
 
 interface DivisionProps{
   titleSection: string;
@@ -19,6 +14,15 @@ interface DivisionProps{
 
 const Division: React.FC<SectionBlocks> = ({ blocks }) => {
   const divisionBlocks = getBlockData<DivisionProps>('subdivision_novaworld', blocks);
+
+  const { data: subDivisionList } = useQuery('getSubDivisionListHome', () => getSubDivisionListService());
+
+  const subDivisionData = useMemo(() => subDivisionList?.data?.map((item) => ({
+    imgSrc: baseURL(item.thumbnail),
+    title: item.name,
+    href: `phan-khu/${item.slug}`,
+    description: item.content.description,
+  })), [subDivisionList]);
 
   return (
     <section className="u-pt-md-83 u-pb-80 u-pt-48 u-pb-48 position-relative">
@@ -34,7 +38,7 @@ const Division: React.FC<SectionBlocks> = ({ blocks }) => {
             href: divisionBlocks?.link?.url,
             target: divisionBlocks?.link?.target,
           }}
-          data={data}
+          data={subDivisionData}
           render={(item) => (
             <Card.Division
               {...item}
