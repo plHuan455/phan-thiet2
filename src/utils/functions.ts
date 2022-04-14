@@ -164,3 +164,14 @@ export const youtubeParser = (url: string) => {
 export const youtubeControlIframe = (url: string) => `<iframe src="https://www.youtube.com/embed/${youtubeParser(
   url,
 )}?autoplay=1&disablekb=1&enable&controls=1&jsapi=1&loop=1&modestbranding=1&playsinline=1&color=white&mute=0" frameborder="0" allowfullscreen allow="autoplay" autoplay></iframe>`;
+
+export const getTimePastToCurrent = (date?: string) => {
+  if (!date) return '';
+  const dateFormat = new Date(date).getTime();
+  const toDay = new Date().getTime();
+  const distance = toDay - dateFormat;
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  if (days > 0) return `${days} ngày trước`;
+  return `${hours} giờ trước`;
+};
