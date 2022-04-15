@@ -68,3 +68,26 @@ export interface SubDivisionDetailTypes {
   openGraph: OpenGraphDataTypes;
   seoData: SEODataTypes;
 }
+
+export interface SubDivisionMapListTypes {
+  image: string;
+  items: Item[];
+}
+
+export interface Item {
+  point: Point;
+  subdivisionId: string;
+  subdivision: Subdivision;
+}
+
+export interface Point {
+  x: string;
+  y: string;
+}
+
+export interface Subdivision {
+  name: string;
+  thumbnail: string;
+  slug: string;
+  pinned: boolean;
+}

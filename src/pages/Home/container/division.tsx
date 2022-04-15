@@ -6,7 +6,7 @@ import Container from 'common/Container';
 import FlatMore from 'common/FlatMore';
 import Card from 'components/organisms/Card';
 import JourneysTemplate from 'components/templates/Journeys';
-import getSubDivisionListService from 'services/subdivision';
+import { getSubDivisionListService } from 'services/subdivision';
 import CONSTANTS from 'utils/constants';
 import {
   baseString, getBlockData, baseURL,

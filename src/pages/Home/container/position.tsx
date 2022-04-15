@@ -1,8 +1,9 @@
 import React, { useMemo } from 'react';
+import { useQuery } from 'react-query';
 
-import { listDivisionDummy } from 'assets/dataDummy/projectMap';
 import ProjectPositionHome from 'components/templates/ProjectPositionHome';
-import { baseString, getBlockData } from 'utils/functions';
+import { getSubDivisionMapListService } from 'services/subdivision';
+import { baseString, baseURL, getBlockData } from 'utils/functions';
 
 interface PositionItemProps {
   number: string;
@@ -29,12 +30,25 @@ const Position: React.FC<SectionBlocks> = ({ blocks }) => {
     }));
   }, [blocks]);
 
+  const { data: mapData } = useQuery(
+    'getSubDivisionMapHome', getSubDivisionMapListService,
+  );
+
+  const listLocation = useMemo(() => mapData?.items.map((item) => ({
+    id: Number(item.subdivisionId),
+    imgSrc: baseURL(item.subdivision.thumbnail),
+    title: item.subdivision.name,
+    y: Number(item.point.y),
+    x: Number(item.point.x),
+  })), [mapData]);
+
   return (
     <ProjectPositionHome
-      listDivision={listDivisionDummy}
+      listDivision={listLocation}
       scale={positionBlockContent[0]}
       investment={positionBlockContent[1]}
       utility={positionBlockContent[2]}
+      thumbnail={baseURL(mapData?.image)}
     />
   );
 };
