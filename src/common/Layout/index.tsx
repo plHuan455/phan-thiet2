@@ -2,6 +2,7 @@ import React from 'react';
 
 import useLayout from './functions';
 
+import NotifyWrapper from 'common/NotifyWrapper';
 import Footer from 'components/templates/Footer';
 import Header from 'components/templates/Header';
 
@@ -18,6 +19,7 @@ const Layout: React.FC = ({ children }) => {
         {children}
       </main>
       <Footer {...dataFooter} />
+      <NotifyWrapper />
     </>
   );
 };

@@ -1,10 +1,11 @@
+/* eslint-disable react/default-props-match-prop-types */
 import React from 'react';
 
 import Button from 'components/atoms/Button';
 import Text from 'components/atoms/Text';
 import Modal from 'components/molecules/Modal';
 
-interface NotifyProps {
+export interface NotifyProps {
   isOpen?: boolean;
   title?: string;
   message?: string;
