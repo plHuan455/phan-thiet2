@@ -1,8 +1,9 @@
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 import { animated, useSpring } from 'react-spring';
 
+import Search, { OptionSuggestTypes } from './component';
+
 import Heading from 'components/atoms/Heading';
-import Icon from 'components/atoms/Icon';
 import Image, { ImageProps } from 'components/atoms/Image';
 import Link from 'components/atoms/Link';
 import Text from 'components/atoms/Text';
@@ -24,40 +25,9 @@ export interface BannerProps {
     placeholder?: string;
     onSearch?: (val?: string) => void;
   };
+  isSuggest?: boolean;
+  optionSuggest?: OptionSuggestTypes[];
 }
-
-export const Search: React.FC<Pick<BannerProps, 'search'>> = ({ search }) => {
-  const [val, setVal] = useState('');
-
-  const onKeyDown = useCallback(
-    ({ key }: React.KeyboardEvent<HTMLInputElement>) => {
-      if (key === 'Enter' && search?.onSearch) {
-        search.onSearch(val);
-      }
-    },
-    [search, val],
-  );
-
-  return (
-    <div className="t-banner_search">
-      <input
-        type="text"
-        value={val}
-        placeholder={search?.placeholder}
-        onChange={({ target: { value } }) => {
-          setVal(value);
-        }}
-        onKeyDown={onKeyDown}
-      />
-      <button
-        type="button"
-        onClick={() => search?.onSearch && search?.onSearch(val)}
-      >
-        <Icon iconName="searchWhite" size="14" />
-      </button>
-    </div>
-  );
-};
 
 const Tag: React.FC<Pick<BannerProps, 'tag'>> = ({ tag }) => (
   <div className="t-banner_tag">
@@ -88,6 +58,8 @@ const Banner: React.FC<BannerProps> = ({
   title,
   tag,
   search,
+  isSuggest,
+  optionSuggest,
 }) => {
   const styles = useSpring({
     from: {
@@ -118,7 +90,13 @@ const Banner: React.FC<BannerProps> = ({
               </Heading>
             </div>
           )}
-          {search && <Search search={search} />}
+          {search && (
+          <Search
+            isSuggest={isSuggest}
+            optionSuggests={optionSuggest}
+            search={search}
+          />
+          )}
           {tag && <Tag tag={tag} />}
         </div>
       </animated.div>

@@ -30,9 +30,7 @@ export const title: Story = () => (
   />
 );
 
-export const search: Story = ({
-  onSearch,
-}) => (
+export const search: Story = () => (
   <BrowserRouter>
     <Banner
       image={{
@@ -41,7 +39,7 @@ export const search: Story = ({
       isLayer
       search={{
         placeholder: 'Tìm kiếm tin tức',
-        onSearch,
+        onSearch: (val) => console.log(val),
       }}
       tag={{
         keyword: 'Từ khóa nổi bật:',
@@ -60,6 +58,45 @@ export const search: Story = ({
           },
         ],
       }}
+      isSuggest
+      optionSuggest={[
+        {
+          keyword: 'Travel',
+          id: 'Travel',
+        },
+        {
+          keyword: 'Du lịch',
+          id: 'Du lịch',
+        },
+        {
+          keyword: 'Travel',
+          id: 'Travel',
+        },
+        {
+          keyword: 'Du lịch',
+          id: 'Du lịch',
+        },
+        {
+          keyword: 'Travel',
+          id: 'Travel',
+        },
+        {
+          keyword: 'Du lịch',
+          id: 'Du lịch',
+        },
+        {
+          keyword: 'Travel',
+          id: 'Travel',
+        },
+        {
+          keyword: 'Du lịch',
+          id: 'Du lịch',
+        },
+        {
+          keyword: 'Travel',
+          id: 'Travel',
+        },
+      ]}
     />
   </BrowserRouter>
 );

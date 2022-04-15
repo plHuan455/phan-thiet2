@@ -49,40 +49,88 @@
   }
 
   &_search {
-    @include adjust-flex(flex-start, center);
-    @include flex-search();
+    position: relative;
 
-    input {
-      @include font-base(14, 20);
-      appearance: none;
-      background-color: $white;
-      border: 1px solid $anti-flash-white;
-      font-family: $font-svn-gotham;
-      font-weight: 400;
-      outline: 0;
-      padding: rem(16) rem(10);
-      width: 100%;
-      @include tablet-down {
-        padding: rem(10) rem(8);
-        @include font-base(12, 20);
+    &-input {
+      @include adjust-flex(flex-start, center);
+      @include flex-search();
+  
+      input {
+        @include font-base(14, 20);
+        appearance: none;
+        background-color: $white;
+        border: 1px solid $anti-flash-white;
+        font-family: $font-svn-gotham;
+        font-weight: 400;
+        outline: 0;
+        padding: rem(16) rem(10);
+        width: 100%;
+        @include tablet-down {
+          padding: rem(10) rem(8);
+          @include font-base(12, 20);
+        }
+  
+        &::placeholder {
+          color: $taupe-gray;
+        }
       }
-
-      &::placeholder {
-        color: $taupe-gray;
+  
+      button {
+        @include reset-button();
+        @include adjust-flex();
+        background: $gradient-green;
+        flex-shrink: 0;
+        height: rem(54);
+        padding: 0;
+        width: rem(54);
+        @include tablet-down {
+          height: rem(42);
+          width: rem(42);
+        }
       }
     }
 
-    button {
-      @include reset-button();
-      @include adjust-flex();
-      background: $gradient-green;
-      flex-shrink: 0;
-      height: rem(54);
-      padding: 0;
-      width: rem(54);
-      @include tablet-down {
-        height: rem(42);
-        width: rem(42);
+    &-suggest {
+      @include flex-search();
+      background: $white;
+      border-radius: rem(4);
+      left: 50%;
+      margin-top: rem(4);
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      position: absolute;
+      transform: translateX(-50%);
+      transition: all $transition ease-in;
+      visibility: hidden;
+
+      &-open {
+        max-height: rem(300);
+        opacity: 1;
+        visibility: visible;
+      }
+
+      ul {
+        max-height: calc(36px * 4);
+        overflow-y: auto;
+        @include scroll-bars(4, $gradient-green,$antique-white, 0, 0);
+
+        @include mobile-down {
+          max-height: calc(36px * 2);
+        }
+
+        li {
+          cursor: pointer;
+          padding: rem(4) rem(4);
+
+          &:hover {
+            background: $gradient-green;
+
+            .a-text {
+              color: $white;
+            }
+          }
+        }
       }
     }
   }
