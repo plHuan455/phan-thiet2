@@ -12,25 +12,7 @@ interface DivisionProps {
   title: string;
   button: string;
 }
-// const handleShowMore = async () => {
-//   setLoadingShowMore(true);
-//   try {
-//     if (hotelsData?.meta.totalPages && hotelsData.meta.totalPages === currentPage) {
-//       setCurrentPage(1);
-//       setHotelsListData(hotelsListData.slice(0, Limit));
-//     } else {
-//       const moreData = await getListHotelService({
-//         page: currentPage + 1,
-//         limit: Limit,
-//         city_id: valueFilter && Number(valueFilter.id),
-//       });
-//       setCurrentPage(currentPage + 1);
-//       setHotelsListData([...hotelsListData, ...genObjHotels(moreData.data)]);
-//     }
-//   } finally {
-//     setLoadingShowMore(false);
-//   }
-// };
+
 const Divisions: React.FC<SectionBlocks> = ({ blocks }) => {
   const blockContent = useMemo(() => {
     const blockPageContent = getBlockData<DivisionProps>(
