@@ -5,11 +5,15 @@
     max-width: rem(326);
     position: absolute;
     width: 100%;
+    z-index: 3;
+    @include desktop-down {
+      max-width: rem(220);
+    }
     @include tablet-down {
-      max-width: rem(218);
+      max-width: rem(180);
     }
     @include mobile-down {
-      max-width: rem(163);
+      max-width: rem(120);
     }
   }
 
@@ -19,12 +23,30 @@
     position: absolute;
     right: 0;
     width: 100%;
+    z-index: 3;
+    @include desktop-down {
+      max-width: rem(180);
+    }
     @include tablet-down {
-      max-width: rem(158);
+      max-width: rem(148);
     }
     @include mobile-down {
       max-width: rem(119);
     }
+  }
+  &_layer3 {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 30%;
+    width: 100%;
+  }
+  &_layer4 {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
   }
 }
 
