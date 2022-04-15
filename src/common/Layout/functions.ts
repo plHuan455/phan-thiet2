@@ -10,6 +10,7 @@ const useLayout = () => {
     header2: menuMainDivision,
     mainFooter,
     footer2: menuTermFooter,
+    division: menuSubDivision,
   } = useAppSelector((state) => state.menus);
 
   const {
@@ -21,6 +22,7 @@ const useLayout = () => {
       dataHeaderDefault: {
         ...dummyHeader,
         menuMainDivision,
+        menuSubDivision,
         menu: menuHeaderDefault,
       },
       dataFooter: {
@@ -41,7 +43,12 @@ const useLayout = () => {
       },
       pageType,
     }),
-    [menuMainDivision, menuHeaderDefault, mainFooter, menuTermFooter, pageType],
+    [menuMainDivision,
+      menuSubDivision,
+      menuHeaderDefault,
+      mainFooter,
+      menuTermFooter,
+      pageType],
   );
 
   return data;

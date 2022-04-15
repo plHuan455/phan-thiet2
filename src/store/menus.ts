@@ -3,13 +3,14 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import menusService from 'services/menus';
 import { MenuDataTypes, MenuItem } from 'services/menus/types';
 import CONSTANTS from 'utils/constants';
-import groupMenus from 'utils/menu';
+import { groupMenusCustomLink } from 'utils/menu';
 
 interface State {
   mainHeader: MenuItem[];
   header2: MenuItem[];
   mainFooter: MenuItem[];
   footer2: MenuItem[];
+  division: MenuItem[];
 }
 
 const initialState: State = {
@@ -17,6 +18,7 @@ const initialState: State = {
   header2: [],
   mainFooter: [],
   footer2: [],
+  division: [],
 };
 
 export const menusAsync = createAsyncThunk<
@@ -40,22 +42,27 @@ export const menusSlice = createSlice({
       const mainHeader = action.payload.find(
         (e) => e.code === CONSTANTS.MENU_CODE.MAIN_HEADER,
       )?.items || [];
-      $state.mainHeader = groupMenus(mainHeader) || [];
+      $state.mainHeader = groupMenusCustomLink(mainHeader) || [];
 
       const header2 = action.payload.find(
         (e) => e.code === CONSTANTS.MENU_CODE.HEADER_2,
       )?.items || [];
-      $state.header2 = groupMenus(header2) || [];
+      $state.header2 = groupMenusCustomLink(header2) || [];
+
+      const division = action.payload.find(
+        (e) => e.code === CONSTANTS.MENU_CODE.PHAN_KHU,
+      )?.items || [];
+      $state.division = groupMenusCustomLink(division) || [];
 
       const mainFooter = action.payload.find(
         (e) => e.code === CONSTANTS.MENU_CODE.MAIN_FOOTER,
       )?.items || [];
-      $state.mainFooter = groupMenus(mainFooter) || [];
+      $state.mainFooter = groupMenusCustomLink(mainFooter) || [];
 
       const footer2 = action.payload.find(
         (e) => e.code === CONSTANTS.MENU_CODE.FOOTER_2,
       )?.items || [];
-      $state.footer2 = groupMenus(footer2) || [];
+      $state.footer2 = groupMenusCustomLink(footer2) || [];
     });
   },
 });
