@@ -5,6 +5,7 @@ import Collection from './collection';
 import Consultancy from './consultancy';
 import Division from './division';
 import Journeys from './journeys';
+import Library from './library';
 import Location from './location';
 import Summary from './summary';
 import Utilities from './utilities';
@@ -16,6 +17,7 @@ const Screen: React.FC = () => (
     <Location />
     <Utilities />
     <Collection />
+    <Library />
     <Journeys />
     <Division />
     <Consultancy />

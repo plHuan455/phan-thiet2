@@ -13,7 +13,8 @@ export interface CardLayerProps {
   target?: string;
   ratio?: Ratio;
   isBold?: boolean;
-  modifiers?: ('r15' | 'r12' | 'filter' | 'hover' | 'pd-6x20' | 'pd-8x16' | 'pd-24x16' | 'pd-6x16')[]
+  modifiers?: ('r15' | 'r12' | 'filter' | 'hover' | 'pd-6x20' | 'pd-8x16' | 'pd-24x16' | 'pd-6x16')[];
+  noContent?: boolean;
 }
 
 const CardLayer: React.FC<CardLayerProps> = ({
@@ -25,6 +26,7 @@ const CardLayer: React.FC<CardLayerProps> = ({
   ratio,
   isBold,
   modifiers,
+  noContent,
 }) => (
   <div className={mapModifiers('o-cardLayer', modifiers)}>
     <Link href={href} target={target}>
@@ -32,20 +34,24 @@ const CardLayer: React.FC<CardLayerProps> = ({
         <Image src={thumbnail} alt={title} ratio={ratio || '258x334'} />
       </div>
     </Link>
-    <div className="o-cardLayer_content">
-      <Link href={href} target={target}>
-        <div className="o-cardLayer_content-title">
-          <Text modifiers={['16x28', 'white', isBold ? '700' : '400']} content={title} />
+    {
+      !noContent && (
+        <div className="o-cardLayer_content">
+          <Link href={href} target={target}>
+            <div className="o-cardLayer_content-title">
+              <Text modifiers={['16x28', 'white', isBold ? '700' : '400']} content={title} />
+            </div>
+          </Link>
+          {
+          modifiers?.includes('hover') && (
+            <div className="o-cardLayer_content-desc">
+              <Text modifiers={['16x28', 'white', '400']} content={description} />
+            </div>
+          )
+        }
         </div>
-      </Link>
-      {
-        modifiers?.includes('hover') && (
-          <div className="o-cardLayer_content-desc">
-            <Text modifiers={['16x28', 'white', '400']} content={description} />
-          </div>
-        )
-      }
-    </div>
+      )
+    }
   </div>
 );
 
