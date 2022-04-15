@@ -3,6 +3,7 @@ import React from 'react';
 const Home = React.lazy(() => import('pages/Home'));
 const Contact = React.lazy(() => import('pages/Contact'));
 const Policy = React.lazy(() => import('pages/Policy'));
+const DivisionList = React.lazy(() => import('pages/DivisionList'));
 
 export type TemplateCodeTypes = {
   code: string;
@@ -38,5 +39,8 @@ export const TemplateCode: TemplateCodeTypes[] = [
     code: 'policy',
     component: Policy,
   },
-
+  {
+    code: 'list_subdivision',
+    component: DivisionList,
+  },
 ];

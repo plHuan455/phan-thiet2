@@ -5,12 +5,12 @@ import Consultancy from './consultancy';
 import Map from './map';
 import Divisions from './subdivion';
 
-const Screen: React.FC = () => (
+const Screen: React.FC<BasePageDataTypes<any>> = ({ banners, blocks }) => (
   <>
-    <Banner />
-    <Divisions />
-    <Map />
-    <Consultancy />
+    <Banner banners={banners} />
+    <Divisions blocks={blocks} />
+    <Map blocks={blocks} />
+    <Consultancy blocks={blocks} />
   </>
 );
 

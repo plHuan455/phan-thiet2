@@ -1,14 +1,29 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 
 import bgConsultancy from 'assets/images/pages/divisionList/bgConsultancy.png';
 import Image from 'components/atoms/Image';
 import { FormConsultancy } from 'components/organisms/Consultancy';
 import ConsultancyTemplate from 'components/templates/Consultancy';
+import { baseURL, getBlockData } from 'utils/functions';
 import { schemasConsultancyForm } from 'utils/schemas';
 
-const Consultancy: React.FC = () => {
+interface ConsultancyProps {
+  title: string
+}
+
+const Consultancy: React.FC<SectionBlocks> = ({ blocks }) => {
+  const blockContent = useMemo(() => {
+    const blockPageContent = getBlockData<ConsultancyProps>(
+      'form_register',
+      blocks,
+    );
+    return {
+      title: baseURL(blockPageContent?.title),
+    };
+  }, [blocks]);
+
   const method = useForm<FormConsultancy>({
     resolver: yupResolver(schemasConsultancyForm),
     mode: 'onSubmit',
@@ -18,7 +33,7 @@ const Consultancy: React.FC = () => {
     <div className="s-consultancy">
       <ConsultancyTemplate
         title={{
-          text: 'ĐĂNG KÝ NHẬN <br /> THÔNG TIN DỰ ÁN',
+          text: blockContent?.title,
           modifiers: ['700', 'gradientGreen', 's015'],
         }}
         layer={(
