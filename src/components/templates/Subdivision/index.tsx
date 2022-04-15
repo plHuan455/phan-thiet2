@@ -3,7 +3,7 @@ import { Col, Row } from 'react-bootstrap';
 
 import Container from 'common/Container';
 import Button from 'components/atoms/Button';
-import Title from 'components/molecules/Title';
+import Heading from 'components/atoms/Heading';
 import Card from 'components/organisms/Card';
 import { CardDivisionProps } from 'components/organisms/Card/Division';
 
@@ -19,7 +19,7 @@ const Subdivision: React.FC<SubdivisionProps> = ({
   btn,
 }) => (
   <div className="t-subdivision">
-    <Title
+    <Heading
       content={title}
       type="h4"
       modifiers={['700', 's015', 'center', 'gradientGreen', 'uppercase']}

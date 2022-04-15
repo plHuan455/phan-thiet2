@@ -3,9 +3,9 @@ import React, { useCallback, useEffect, useState } from 'react';
 import bgLeft from 'assets/images/projectPosition/summary/bg_left.png';
 import bgRight from 'assets/images/projectPosition/summary/bg_right.png';
 import Container from 'common/Container';
+import Heading from 'components/atoms/Heading';
 import Image from 'components/atoms/Image';
 import PullDown, { OptionType } from 'components/molecules/PullDown';
-import Title from 'components/molecules/Title';
 import LocationMap, { DivisionTypes } from 'components/organisms/LocationMap';
 
 interface ProjectPositionSummaryProps {
@@ -53,7 +53,7 @@ const ProjectPositionSummary: React.FC<ProjectPositionSummaryProps> = ({
       </div>
       <Container>
         <div className="t-projectPositionSummary_title">
-          <Title type="h4" modifiers={['700', 'gradientGreen', 'center']} content={title} />
+          <Heading type="h4" modifiers={['700', 'gradientGreen', 'center']} content={title} />
         </div>
         <div className="t-projectPositionSummary_pulldown">
           <PullDown

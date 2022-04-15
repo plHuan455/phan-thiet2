@@ -133,27 +133,27 @@
     mix-blend-mode: screen;
     opacity: 0;
 
-    &.floridaSecond {
+    &.florida-2 {
       @include imageShine(418,193,287,940)
     }
 
-    &.festivalStreet {
+    &.festival-street {
       @include imageShine(211,171,497,829)
     }
 
-    &.festivalTown {
+    &.festival-town {
       @include imageShine(421,280,205,940)
     }
     
-    &.pgaGolf {
+    &.pga-golf-villas {
       @include imageShine(384,167,187,604)
     }
 
-    &.floridaFirst {
+    &.florida-1 {
       @include imageShine(461,359,311,904)
     }
 
-    &.santa {
+    &.santa-monica {
       @include imageShine(122,115,331,518)
     }
 
@@ -161,15 +161,15 @@
       @include imageShine(241,176,290,762)
     }
 
-    &.boutique {
+    &.boutique-hotel {
       @include imageShine(132,113,450,1180)
     }
 
-    &.oceanResidence {
+    &.ocean-residence {
       @include imageShine(225,140,69,10)
     }
 
-    &.kingDom {
+    &.the-kingdom {
       @include imageShine(243,195,222,511)
     }
   }

@@ -9,14 +9,28 @@ import Heading from 'components/atoms/Heading';
 import Image from 'components/atoms/Image';
 import useScrollAnimate from 'hooks/useScrollAnimation';
 
+type TypeDivision =
+  | 'boutique-hotel'
+  | 'festival-street'
+  | 'festival-town'
+  | 'florida-1'
+  | 'florida-2'
+  | 'the-kingdom'
+  | 'ocean-residence'
+  | 'pga-golf-villas'
+  | 'santa-monica'
+  | 'waikiki';
+
 interface DivisionLocationProps extends BoxDivisionProps {
   title?: string;
+  type?: TypeDivision;
 }
 
 const DivisionLocation: React.FC<DivisionLocationProps> = ({
   titleBox,
   contentBox,
   title,
+  type,
 }) => {
   const ref = useRef<HTMLDivElement|null>(null);
   const isScroll = useScrollAnimate(ref, 3);
@@ -35,7 +49,7 @@ const DivisionLocation: React.FC<DivisionLocationProps> = ({
           {mapData.map((item, index) => (
             <div
               key={`image-${index.toString()}`}
-              className={`division-image ${item.className} ${isScroll ? 'active' : ''}`}
+              className={`division-image ${item.className} ${isScroll && type === item.className ? 'active' : ''}`}
             >
               <Image src={item.img} alt={item.className} />
             </div>
@@ -45,7 +59,7 @@ const DivisionLocation: React.FC<DivisionLocationProps> = ({
               {mapData.map((item, index) => (
                 <path
                   key={`line-${index.toString()}`}
-                  className={`division-line ${isScroll ? 'active' : ''}`}
+                  className={`division-line ${isScroll && type === item.className ? 'active' : ''}`}
                   d={item.line}
                   stroke="#FFFEF8"
                   strokeWidth="6"
@@ -67,6 +81,7 @@ const DivisionLocation: React.FC<DivisionLocationProps> = ({
 
 DivisionLocation.defaultProps = {
   title: undefined,
+  type: undefined,
 };
 
 export default DivisionLocation;

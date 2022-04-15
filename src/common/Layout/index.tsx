@@ -19,7 +19,7 @@ const Layout: React.FC = ({ children }) => {
       top: 0,
       behavior: 'smooth',
     });
-  }, [location]);
+  }, [location.pathname]);
 
   return (
     <>
