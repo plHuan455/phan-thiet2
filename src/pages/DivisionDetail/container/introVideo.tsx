@@ -5,11 +5,33 @@ import useAnimation from '../hooks/animation';
 import ballon from 'assets/images/introVideo/balloon.png';
 import Container from 'common/Container';
 import Image from 'components/atoms/Image';
-import Player from 'components/organisms/Player';
+import Player, { PlayerProps } from 'components/organisms/Player';
 
-const IntroVideo: React.FC = () => {
+interface IntroPlayerProps extends PlayerProps{}
+
+const IntroPlayer: React.FC<IntroPlayerProps> = (props) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlay, setPlay] = useState(false);
+  return (
+    <Player
+      ref={videoRef}
+      modifiers={['r10', 'shadow']}
+      iconPlayer="playerPersian"
+      onClick={() => {
+        if (videoRef?.current) {
+          videoRef.current.play();
+        }
+        setPlay(true);
+      }}
+      onPause={() => setPlay(false)}
+      onPlaying={() => setPlay(true)}
+      isPlaying={isPlay}
+      {...props}
+    />
+  );
+};
+
+const IntroVideo: React.FC = () => {
   const ballonRef = useRef<HTMLDivElement>(null);
   const { animated, ballonAnimate } = useAnimation({ ballonRef });
 
@@ -20,20 +42,7 @@ const IntroVideo: React.FC = () => {
       </animated.div>
       <Container>
         <div className="t-introVideo_content">
-          <Player
-            ref={videoRef}
-            src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-            modifiers={['r10', 'shadow']}
-            iconPlayer="playerPersian"
-            onClick={() => {
-              if (videoRef?.current) {
-                videoRef.current.play();
-              }
-              setPlay(true);
-            }}
-            onPause={() => setPlay(false)}
-            isPlaying={isPlay}
-          />
+          <IntroPlayer src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" />
         </div>
       </Container>
     </section>

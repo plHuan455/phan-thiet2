@@ -116,12 +116,18 @@
     left: rem(40);
     width: 100%;
     max-width: rem(132);
+    opacity: 0;
     @include desktop-down {
       top: rem(-170);
       left: rem(20);
     }
     @include tablet-down {
       max-width: rem(110);
+    }
+    @include mobile-down {
+      max-width: rem(90);
+      top: rem(-120);
+      left: rem(-20);
     }
   }
 }

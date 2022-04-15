@@ -19,11 +19,12 @@ const useAnimation = ({ ballonRef }: AnimationParams) => {
 
   useEffect(() => {
     let res: NodeJS.Timeout;
+
     if (isScrollToBallon) {
       const {
         rotateZ, y, x, opacity,
       } = flyAnimation;
-      opacity.start({ to: 1 });
+      opacity.start({ from: 0, to: 1 });
       rotateZ.start({
         from: 0,
         to: -15,
@@ -42,9 +43,7 @@ const useAnimation = ({ ballonRef }: AnimationParams) => {
         x.start({ cancel: true });
       }, 10000);
     }
-    return () => {
-      clearTimeout(res);
-    };
+    return () => clearTimeout(res);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isScrollToBallon]);
 
