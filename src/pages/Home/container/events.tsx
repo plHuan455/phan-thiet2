@@ -2,6 +2,7 @@ import React from 'react';
 
 import EventsTemplate from 'components/templates/Events';
 import useCountDown from 'hooks/useCountDown';
+import { getBlockData } from 'utils/functions';
 
 const data = new Array(7).fill({
   thumbnail: 'https://source.unsplash.com/random',
@@ -24,23 +25,26 @@ const data = new Array(7).fill({
     },
   ],
 });
+interface EventProps{
+  titleSection: string;
+  link?: LinkTypes;
+  button: string;
+}
+const Events: React.FC<SectionBlocks> = ({ blocks }) => {
+  const eventsBlock = getBlockData<EventProps>('event', blocks);
 
-const Events: React.FC = () => {
   const {
     days, hours, mins, secs,
   } = useCountDown({ endTime: '2022-04-20T07:47:00.595' });
   return (
     <section className="u-pt-md-80 u-pb-48 u-pt-48 u-pb-md-80 position-relative">
       <EventsTemplate
-        title="SỰ KIỆN"
-        button={{
-          text: 'Xem tất cả',
-          url: '/',
-        }}
+        title={eventsBlock?.titleSection}
+        button={{ ...eventsBlock?.link }}
         countDown={{
           title: 'Một vòng trải nghiệm siêu thành phố biển',
           button: {
-            text: 'Xem chi tiết',
+            text: eventsBlock?.button,
           },
           address: '2Bis Nguyễn Thị Minh Khai, Phường Đa Kao, Quận 1',
           duration: '13:30 - 17:00',

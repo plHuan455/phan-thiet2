@@ -16,29 +16,32 @@ import sand1 from 'assets/images/pages/home/sand_1.png';
 import sand2 from 'assets/images/pages/home/sand_2.png';
 import Image from 'components/atoms/Image';
 
-const Screen: React.FC = () => (
+const Screen: React.FC<BasePageDataTypes<any>> = ({
+  blocks, banners,
+}) => (
   <>
-    <Banner />
-    <Position />
-    <Selection />
+    {/* TODO: Add banner later */}
+    <Banner banners={banners} blocks={blocks} />
+    <Position blocks={blocks} />
+    <Selection blocks={blocks} />
     <Highway />
-    <Utilities />
+    <Utilities blocks={blocks} />
     <div className="p-home_sand1">
       <div className="p-home_sand1_layer">
         <Image src={sand1} alt="sand" />
       </div>
     </div>
-    <Division />
-    <Journeys />
+    <Division blocks={blocks} />
+    <Journeys blocks={blocks} />
     <div className="p-home_sand2">
       <div className="p-home_sand2_layer">
         <Image src={sand2} alt="sand" />
       </div>
     </div>
-    <News />
-    <Events />
-    <Feedbacks />
-    <Consultancy />
+    <News blocks={blocks} />
+    <Events blocks={blocks} />
+    <Feedbacks blocks={blocks} />
+    <Consultancy blocks={blocks} />
   </>
 );
 

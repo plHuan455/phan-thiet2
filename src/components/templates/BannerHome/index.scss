@@ -21,22 +21,22 @@
     display: flex;
     margin-top: rem(-30);
     min-height: rem(112);
-    padding: rem(8) rem(0) rem(8) rem(36);
+    padding: rem(8) rem(36);
     position: relative;
     z-index: 2;
 
     @include break-min(1600px) {
-      padding: rem(8) rem(0) rem(8) rem(60);
+      padding: rem(8) rem(60);
     }
 
     @include desktop-down {
-      padding: rem(8) rem(0) rem(8) rem(25);
+      padding: rem(8) rem(25);
     }
 
     @include mobile-down {
       margin-top: rem(-20);
       min-height: rem(67);
-      padding: rem(4) rem(0) rem(4) rem(16);
+      padding: rem(4) rem(16);
     }
 
     .a-text {

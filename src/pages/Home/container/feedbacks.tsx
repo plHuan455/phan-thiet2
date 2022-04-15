@@ -1,80 +1,63 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
-import img from 'assets/images/feedbacks/img.png';
-import img1 from 'assets/images/feedbacks/img1.png';
-import img2 from 'assets/images/feedbacks/img2.png';
 import leaf from 'assets/images/pages/home/feedbacks/leaf.png';
 import Container from 'common/Container';
 import FlatMore from 'common/FlatMore';
 import Image from 'components/atoms/Image';
 import Card from 'components/organisms/Card';
+import { baseString, baseURL, getBlockData } from 'utils/functions';
 
-const listDummy = [
-  {
-    imgSrc: img,
-    job: 'DOANH NHÂN',
-    name: 'Nguyễn Thanh Bình',
-    comment: '“Điều mà tôi cảm thấy thích và ấn tượng là Novaland luôn lắng nghe khách hàng. Họ lấy những lời góp ý để cải thiện dịch vụ củ họ để ngày càng tốt hơn chứ không phải nghe qua chuyện”',
-  },
-  {
-    imgSrc: img1,
-    job: 'DOANH NHÂN',
-    name: 'Nguyễn Thanh Bình',
-    comment: '“Điều mà tôi cảm thấy thích và ấn tượng là Novaland luôn lắng nghe khách hàng. Họ lấy những lời góp ý để cải thiện dịch vụ củ họ để ngày càng tốt hơn chứ không phải nghe qua chuyện”',
-  },
-  {
-    imgSrc: img2,
-    job: 'DOANH NHÂN',
-    name: 'Nguyễn Thanh Bình',
-    comment: '“Điều mà tôi cảm thấy thích và ấn tượng là Novaland luôn lắng nghe khách hàng. Họ lấy những lời góp ý để cải thiện dịch vụ củ họ để ngày càng tốt hơn chứ không phải nghe qua chuyện” Điều mà tôi cảm thấy thích và ấn tượng là Novaland luôn lắng nghe khách hàng. Họ lấy những lời góp ý để cải thiện dịch vụ củ họ để ngày càng tốt hơn chứ không phải nghe qua chuyện”',
-  },
-  {
-    imgSrc: img,
-    job: 'DOANH NHÂN',
-    name: 'Nguyễn Thanh Bình',
-    comment: '“Điều mà tôi cảm thấy thích và ấn tượng là Novaland luôn lắng nghe khách hàng. Họ lấy những lời góp ý để cải thiện dịch vụ củ họ để ngày càng tốt hơn chứ không phải nghe qua chuyện”',
-  },
-  {
-    imgSrc: img1,
-    job: 'DOANH NHÂN',
-    name: 'Nguyễn Thanh Bình',
-    comment: '“Điều mà tôi cảm thấy thích và ấn tượng là Novaland luôn lắng nghe khách hàng. Họ lấy những lời góp ý để cải thiện dịch vụ củ họ để ngày càng tốt hơn chứ không phải nghe qua chuyện”',
-  },
-  {
-    imgSrc: img2,
-    job: 'DOANH NHÂN',
-    name: 'Nguyễn Thanh Bình',
-    comment: '“Điều mà tôi cảm thấy thích và ấn tượng là Novaland luôn lắng nghe khách hàng. Họ lấy những lời góp ý để cải thiện dịch vụ củ họ để ngày càng tốt hơn chứ không phải nghe qua chuyện” Điều mà tôi cảm thấy thích và ấn tượng là Novaland luôn lắng nghe khách hàng. Họ lấy những lời góp ý để cải thiện dịch vụ củ họ để ngày càng tốt hơn chứ không phải nghe qua chuyện”',
-  },
-];
+interface FeedbackItemProps {
+  description?: string;
+  image?: string;
+  name?: string;
+  position?: string;
+}
+interface FeedbackProps {
+  titleSection: string;
+  link?: LinkTypes;
+  items?: FeedbackItemProps[];
+}
+const Feedbacks: React.FC<SectionBlocks> = ({ blocks }) => {
+  const feedbackBlock = getBlockData<FeedbackProps>(
+    'customer_experience',
+    blocks,
+  );
 
-const Feedbacks: React.FC = () => (
-  <section className="u-pt-md-80 u-pb-48 u-pt-48 u-pb-md-80 position-relative">
-    <div className="s-feedbacks_leaf">
-      <div className="s-feedbacks_leaf_layer">
-        <Image src={leaf} alt="leaf" />
+  const feedbackData = useMemo(
+    () => feedbackBlock?.items?.map((val) => ({
+      comment: baseString(val.description),
+      imgSrc: baseURL(val.image),
+      job: baseString(val?.position),
+      name: baseString(val.name),
+    })),
+    [feedbackBlock],
+  );
+  return (
+    <section className="u-pt-md-80 u-pb-48 u-pt-48 u-pb-md-80 position-relative">
+      <div className="s-feedbacks_leaf">
+        <div className="s-feedbacks_leaf_layer">
+          <Image src={leaf} alt="leaf" />
+        </div>
       </div>
-    </div>
-    <Container>
-      <FlatMore
-        title={{
-          text: 'TRẢI NGHIỆM KHÁCH HÀNG',
-          type: 'h4',
-          modifiers: ['gradientGreen', '700', 's015'],
-        }}
-        link={{
-          text: 'Xem tất cả',
-          href: '/',
-        }}
-        data={listDummy}
-        render={(item) => (
-          <Card.Feedback
-            {...item}
-          />
-        )}
-      />
-    </Container>
-  </section>
-);
+      <Container>
+        <FlatMore
+          title={{
+            text: baseString(feedbackBlock?.titleSection),
+            type: 'h4',
+            modifiers: ['gradientGreen', '700', 's015'],
+          }}
+          link={{
+            text: feedbackBlock?.link?.text,
+            href: feedbackBlock?.link?.url,
+            target: feedbackBlock?.link?.target,
+          }}
+          data={feedbackData}
+          render={(item) => <Card.Feedback {...item} />}
+        />
+      </Container>
+    </section>
+  );
+};
 
 export default Feedbacks;

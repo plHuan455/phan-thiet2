@@ -1,68 +1,36 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
-import img from 'assets/images/utilityHome/image.png';
-import icon from 'assets/images/utilityHome/image1.png';
 import UtilitiesTemplate from 'components/templates/UtilityHome';
+import { baseString, baseURL, getBlockData } from 'utils/functions';
 
-const dataDummy = [
-  {
-    title: 'Lâu đài lửa băng',
-    description: 'Hai khu lửa - băng kết hợp quy tụ nhiều trò chơi hấp dẫn như: khu VR game hiện đại, rạp chiếu phim, khu mua sắm, khu dành cho trẻ em và gia đình,cụm nhà hàng F&B...',
-    thumbnail: img,
-    icon: {
-      label: 'Circus Land',
-      imgSrc: icon,
-    },
-  },
-  {
-    title: 'Lâu đài lửa nóng',
-    description: 'Hai khu lửa - băng kết hợp quy tụ nhiều trò chơi hấp dẫn như: khu VR game hiện đại, rạp chiếu phim, khu mua sắm, khu dành cho trẻ em và gia đình, cụm nhà hàng F&B...',
-    thumbnail: 'https://source.unsplash.com/random',
-    icon: {
-      label: 'Circus Land',
-      imgSrc: icon,
-    },
-  },
-  {
-    title: 'Lâu đài lửa lạnh',
-    description: 'Hai khu lửa - băng kết hợp quy tụ nhiều trò chơi hấp dẫn như: khu VR game hiện đại, rạp chiếu phim, khu mua sắm, khu dành cho trẻ em và gia đình, cụm nhà hàng F&B...',
-    thumbnail: img,
-    icon: {
-      label: 'Circus Land',
-      imgSrc: icon,
-    },
-  },
-  {
-    title: 'Lâu đài lửa xanh',
-    description: 'Hai khu lửa - băng kết hợp quy tụ nhiều trò chơi hấp dẫn như: khu VR game hiện đại, rạp chiếu phim, khu mua sắm, khu dành cho trẻ em và gia đình, cụm nhà hàng F&B...',
-    thumbnail: 'https://source.unsplash.com/random',
-    icon: {
-      label: 'Circus Land',
-      imgSrc: icon,
-    },
-  },
-  {
-    title: 'Lâu đài lửa xanh',
-    description: 'Hai khu lửa - băng kết hợp quy tụ nhiều trò chơi hấp dẫn như: khu VR game hiện đại, rạp chiếu phim, khu mua sắm, khu dành cho trẻ em và gia đình, cụm nhà hàng F&B...',
-    thumbnail: 'https://source.unsplash.com/random',
-    icon: {
-      label: 'Circus Land',
-      imgSrc: icon,
-    },
-  },
-  {
-    title: 'Lâu đài lửa xanh',
-    description: 'Hai khu lửa - băng kết hợp quy tụ nhiều trò chơi hấp dẫn như: khu VR game hiện đại, rạp chiếu phim, khu mua sắm, khu dành cho trẻ em và gia đình, cụm nhà hàng F&B...',
-    thumbnail: 'https://source.unsplash.com/random',
-    icon: {
-      label: 'Circus Land',
-      imgSrc: icon,
-    },
-  },
-];
+interface UtilitiesItemProps {
+  description?: string;
+  image?: string;
+  title?: string;
+}
+interface UtilitiesProps {
+  titleSection: string;
+  items?: UtilitiesItemProps[];
+}
 
-const Utilities: React.FC = () => (
-  <UtilitiesTemplate title="ĐẠI TIỆN ÍCH & HỆ SINH THÁI" listUtilities={dataDummy} />
-);
+const Utilities: React.FC<SectionBlocks> = ({ blocks }) => {
+  const utilitiesBlockData = getBlockData<UtilitiesProps>('great_utility', blocks);
 
+  const utilitiesBlockContent = useMemo(() => utilitiesBlockData?.items?.map((val) => ({
+    description: val.description,
+    thumbnail: baseURL(val.image),
+    title: val.title,
+    icon: {
+      imgSrc: baseURL(val?.image),
+      label: baseString(val?.title),
+    },
+  })), [utilitiesBlockData]);
+
+  return (
+    <UtilitiesTemplate
+      title={utilitiesBlockData?.titleSection}
+      listUtilities={utilitiesBlockContent}
+    />
+  );
+};
 export default Utilities;

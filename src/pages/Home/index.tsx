@@ -5,13 +5,13 @@ import Screen from './container';
 
 import { LanguageContext } from 'common/Language';
 
-const Home: React.FC = () => {
+const Home: React.FC<BasePageDataTypes<any>> = (props) => {
   const languageContext = useContext(LanguageContext);
 
   console.log(languageContext);
   return (
     <div className="p-home">
-      <Screen />
+      <Screen {...props} />
     </div>
   );
 };

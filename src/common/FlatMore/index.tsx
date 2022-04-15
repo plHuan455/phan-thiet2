@@ -29,7 +29,7 @@ const FlatMore = <T, >({
   <div className="c-flatMore">
     <div className={`u-mb-32 ${link ? 'd-flex justify-content-between align-items-center' : ''}`}>
       <Heading {...title} content={title.text} />
-      {link && (
+      {link?.href && link?.text && (
         <div className="d-lg-block d-none">
           <Link href={link.href} target={link.target}>
             <div className="animate animate-arrowSlide d-flex align-items-center">
@@ -46,7 +46,7 @@ const FlatMore = <T, >({
       {children}
     </FlatList>
 
-    {link && (
+    {link?.href && link?.text && (
       <div className="d-flex justify-content-center d-lg-none u-mt-32">
         <Link href={link?.href} target={link?.target}>
           <div className="animate animate-arrowSlide d-flex align-items-center">

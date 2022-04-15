@@ -3,6 +3,7 @@ import React from 'react';
 import Container from 'common/Container';
 import FlatMore from 'common/FlatMore';
 import Card from 'components/organisms/Card';
+import { baseString, getBlockData } from 'utils/functions';
 
 const data = new Array(7).fill({
   imgSrc: 'https://source.unsplash.com/random',
@@ -11,28 +12,38 @@ const data = new Array(7).fill({
   description: 'Ocean Residence kiến tạo nơi đáng  sống mới cho cư dân khi tận hưởng giá trị Ocean Residence kiến tạo nơi đáng  sống mới cho cư dân khi tận hưởng giá trị ..',
 });
 
-const Division: React.FC = () => (
-  <section className="u-pt-md-83 u-pb-80 u-pt-48 u-pb-48 position-relative">
-    <Container>
-      <FlatMore
-        title={{
-          text: 'PHÂN KHU NOVAWORLD PHAN THIET',
-          type: 'h4',
-          modifiers: ['gradientGreen', '700', 's015'],
-        }}
-        link={{
-          text: 'Xem tất cả',
-          href: '/',
-        }}
-        data={data}
-        render={(item) => (
-          <Card.Division
-            {...item}
-          />
-        )}
-      />
-    </Container>
-  </section>
-);
+interface DivisionProps{
+  titleSection: string;
+  link?: LinkTypes;
+}
+
+const Division: React.FC<SectionBlocks> = ({ blocks }) => {
+  const divisionBlocks = getBlockData<DivisionProps>('subdivision_novaworld', blocks);
+
+  return (
+    <section className="u-pt-md-83 u-pb-80 u-pt-48 u-pb-48 position-relative">
+      <Container>
+        <FlatMore
+          title={{
+            text: baseString(divisionBlocks?.titleSection),
+            type: 'h4',
+            modifiers: ['gradientGreen', '700', 's015'],
+          }}
+          link={{
+            text: divisionBlocks?.link?.text,
+            href: divisionBlocks?.link?.url,
+            target: divisionBlocks?.link?.target,
+          }}
+          data={data}
+          render={(item) => (
+            <Card.Division
+              {...item}
+            />
+          )}
+        />
+      </Container>
+    </section>
+  );
+};
 
 export default Division;

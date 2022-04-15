@@ -1,15 +1,30 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
-import selectionImage from 'assets/images/selection/image.png';
 import SelectionTemplate from 'components/templates/Selection';
+import { getBlockData, baseURL, baseString } from 'utils/functions';
 
-const Selection: React.FC = () => (
-  <section className="u-mt-xl-206 u-mt-lg-160 u-mt-0">
-    <SelectionTemplate
-      title="LỰA CHỌN HOÀN HẢO <br />CHO ĐẦU TƯ, DU LỊCH <br />VÀ NGHỈ DƯỠNG"
-      image={selectionImage}
-    />
-  </section>
-);
+interface SelectionProps{
+  image: string,
+  title: string
+ }
+
+const Selection: React.FC<SectionBlocks> = ({ blocks }) => {
+  const positionBlockContent = useMemo(() => {
+    const content = getBlockData<SelectionProps>('perfect_choice', blocks);
+    return {
+      title: baseString(content?.title),
+      image: baseURL(content?.image),
+    };
+  }, [blocks]);
+
+  return (
+    <section className="u-mt-xl-206 u-mt-lg-160 u-mt-0">
+      <SelectionTemplate
+        title={positionBlockContent.title}
+        image={positionBlockContent.image}
+      />
+    </section>
+  );
+};
 
 export default Selection;
