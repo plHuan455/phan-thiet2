@@ -36,7 +36,7 @@ const CardNews: React.FC<CardNewsProps> = ({
       <Col lg={6} className="align-self-center u-pl-16 u-pr-16">
         <div className="o-cardNews_content">
           <div className="d-flex align-items-center">
-            <Text modifiers={['400', '12x20', 'davyGrey']} content={dateTime} />
+            <Text modifiers={['400', '14x20', 'davyGrey']} content={dateTime} />
             {tag && (
             <>
               <Icon iconName="dot" size="16" />

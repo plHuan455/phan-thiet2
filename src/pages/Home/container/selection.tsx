@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
 import SelectionTemplate from 'components/templates/Selection';
-import { getBlockData, baseURL } from 'utils/functions';
+import { getBlockData, baseURL, baseString } from 'utils/functions';
 
 interface SelectionProps{
   image: string,
@@ -12,8 +12,8 @@ const Selection: React.FC<SectionBlocks> = ({ blocks }) => {
   const positionBlockContent = useMemo(() => {
     const content = getBlockData<SelectionProps>('perfect_choice', blocks);
     return {
-      title: content?.title || '',
-      image: baseURL(content?.image) || '',
+      title: baseString(content?.title),
+      image: baseURL(content?.image),
     };
   }, [blocks]);
 

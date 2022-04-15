@@ -5,7 +5,7 @@ import Container from 'common/Container';
 import FlatMore from 'common/FlatMore';
 import Image from 'components/atoms/Image';
 import Card from 'components/organisms/Card';
-import { baseURL, getBlockData } from 'utils/functions';
+import { baseString, baseURL, getBlockData } from 'utils/functions';
 
 interface FeedbackItemProps {
   description?: string;
@@ -15,7 +15,7 @@ interface FeedbackItemProps {
 }
 interface FeedbackProps {
   titleSection: string;
-  link?: { url?: string; text?: string; target?: string };
+  link?: LinkTypes;
   items?: FeedbackItemProps[];
 }
 const Feedbacks: React.FC<SectionBlocks> = ({ blocks }) => {
@@ -26,10 +26,10 @@ const Feedbacks: React.FC<SectionBlocks> = ({ blocks }) => {
 
   const feedbackData = useMemo(
     () => feedbackBlock?.items?.map((val) => ({
-      comment: val.description || '',
-      imgSrc: baseURL(val.image) || '',
-      job: val?.position || '',
-      name: val.name || '',
+      comment: baseString(val.description),
+      imgSrc: baseURL(val.image),
+      job: baseString(val?.position),
+      name: baseString(val.name),
     })),
     [feedbackBlock],
   );
@@ -43,12 +43,12 @@ const Feedbacks: React.FC<SectionBlocks> = ({ blocks }) => {
       <Container>
         <FlatMore
           title={{
-            text: feedbackBlock?.titleSection || '',
+            text: baseString(feedbackBlock?.titleSection),
             type: 'h4',
             modifiers: ['gradientGreen', '700', 's015'],
           }}
           link={{
-            text: feedbackBlock?.link?.text || 'Xem tất cả',
+            text: feedbackBlock?.link?.text,
             href: feedbackBlock?.link?.url,
             target: feedbackBlock?.link?.target,
           }}

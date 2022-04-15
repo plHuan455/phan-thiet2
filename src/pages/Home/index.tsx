@@ -1,11 +1,11 @@
 /* eslint-disable no-console */
 import React, { useContext } from 'react';
 
-import Screen, { HomeBlocks } from './container';
+import Screen from './container';
 
 import { LanguageContext } from 'common/Language';
 
-const Home: React.FC<BasePageDataTypes<HomeBlocks>> = (props) => {
+const Home: React.FC<BasePageDataTypes<any>> = (props) => {
   const languageContext = useContext(LanguageContext);
 
   console.log(languageContext);

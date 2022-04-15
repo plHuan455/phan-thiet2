@@ -16,13 +16,11 @@ import sand1 from 'assets/images/pages/home/sand_1.png';
 import sand2 from 'assets/images/pages/home/sand_2.png';
 import Image from 'components/atoms/Image';
 
-export interface HomeBlocks{
-
-}
-const Screen: React.FC<BasePageDataTypes<HomeBlocks>> = ({
+const Screen: React.FC<BasePageDataTypes<any>> = ({
   blocks, banners,
 }) => (
   <>
+    {/* TODO: Add banner later */}
     <Banner banners={banners} blocks={blocks} />
     <Position blocks={blocks} />
     <Selection blocks={blocks} />

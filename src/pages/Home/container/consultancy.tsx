@@ -10,7 +10,7 @@ import leavesRight from 'assets/images/pages/home/consultancy/leavesRight.png';
 import Image from 'components/atoms/Image';
 import { FormConsultancy } from 'components/organisms/Consultancy';
 import ConsultancyTemplate from 'components/templates/Consultancy';
-import { getBlockData } from 'utils/functions';
+import { baseString, getBlockData } from 'utils/functions';
 import { schemasConsultancyForm } from 'utils/schemas';
 
 interface ConsultancyProps{
@@ -28,7 +28,7 @@ const Consultancy: React.FC<SectionBlocks> = ({ blocks }) => {
     <section className="s-consultancy position-relative">
       <ConsultancyTemplate
         title={{
-          text: consultancyBlocks?.titleSection || '',
+          text: baseString(consultancyBlocks?.titleSection),
           modifiers: ['700', 'gradientGreen', 's015'],
         }}
         layer={(

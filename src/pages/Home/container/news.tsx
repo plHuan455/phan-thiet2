@@ -18,8 +18,8 @@ const data = new Array(7).fill({
   },
 });
 interface NewsProps{
-  titleSection: string,
-  link?: {url?: string, text?: string, target?: string}
+  titleSection: string;
+  link?: LinkTypes;
 }
 const News: React.FC<SectionBlocks> = ({ blocks }) => {
   const newsBlock = getBlockData<NewsProps>('general_news', blocks);

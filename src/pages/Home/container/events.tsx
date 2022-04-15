@@ -26,12 +26,12 @@ const data = new Array(7).fill({
   ],
 });
 interface EventProps{
-  titleSection: string,
-  link?: {url?: string, text?: string, target?: string}
-  button: string
+  titleSection: string;
+  link?: LinkTypes;
+  button: string;
 }
 const Events: React.FC<SectionBlocks> = ({ blocks }) => {
-  const eventsBlock = getBlockData<EventProps>('envent', blocks);
+  const eventsBlock = getBlockData<EventProps>('event', blocks);
 
   const {
     days, hours, mins, secs,
@@ -40,11 +40,7 @@ const Events: React.FC<SectionBlocks> = ({ blocks }) => {
     <section className="u-pt-md-80 u-pb-48 u-pt-48 u-pb-md-80 position-relative">
       <EventsTemplate
         title={eventsBlock?.titleSection}
-        button={{
-          text: eventsBlock?.link?.text || 'Xem tất cả',
-          url: eventsBlock?.link?.url,
-          target: eventsBlock?.link?.target,
-        }}
+        button={{ ...eventsBlock?.link }}
         countDown={{
           title: 'Một vòng trải nghiệm siêu thành phố biển',
           button: {

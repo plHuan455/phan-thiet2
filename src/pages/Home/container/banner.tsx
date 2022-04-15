@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 
 import srcBanner from 'assets/images/bannerHome/banner_home.jpg';
+import fly from 'assets/images/bannerHome/fly.png';
 import BannerHome from 'components/templates/BannerHome';
 import { baseURL, getBlockData } from 'utils/functions';
 
@@ -27,20 +28,18 @@ const Banner: React.FC<BannerBlocks> = ({
 }) => {
   const bannerBlocks = getBlockData<BannerProps>('utilities', blocks);
   const utilitiesBlockContent = useMemo(() => {
-    const data = [
-      bannerBlocks?.item1,
-      bannerBlocks?.item2,
-      bannerBlocks?.item3,
-      bannerBlocks?.item4,
+    const data: (BannerItemProps & {srcLayer?: string})[] = [
+      { ...bannerBlocks?.item1 },
+      { ...bannerBlocks?.item2 },
+      { ...bannerBlocks?.item3, srcLayer: fly },
+      { ...bannerBlocks?.item4 },
     ];
-    return (
-      data
-      && data.map((val) => ({
-        srcImgMain: baseURL(val?.image),
-        srcImgSub: baseURL(val?.icon),
-        title: val?.text,
-      }))
-    );
+    return data?.map((val) => ({
+      srcImgMain: baseURL(val?.image),
+      srcImgSub: baseURL(val?.icon),
+      title: val?.text,
+      srcLayer: val.srcLayer || undefined,
+    }));
   }, [bannerBlocks]);
 
   return (

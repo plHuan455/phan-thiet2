@@ -6,7 +6,6 @@ import { getBlockData } from 'utils/functions';
 
 interface JourneysProps{
   titleSection: string,
-  // link?: {url?: string, text?: string, target?: string}
 }
 
 const Journeys: React.FC<SectionBlocks> = ({ blocks }) => {

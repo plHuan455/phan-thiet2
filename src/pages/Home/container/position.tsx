@@ -2,11 +2,11 @@ import React, { useMemo } from 'react';
 
 import { listDivisionDummy } from 'assets/dataDummy/projectMap';
 import ProjectPositionHome from 'components/templates/ProjectPositionHome';
-import { getBlockData } from 'utils/functions';
+import { baseString, getBlockData } from 'utils/functions';
 
 interface PositionItemProps {
-titleMain: string
-titleSub: string
+  titleMain: string
+  titleSub: string
 }
 interface PositionProps{
   item1: PositionItemProps,
@@ -23,8 +23,8 @@ const Position: React.FC<SectionBlocks> = ({ blocks }) => {
       utilitiesContent?.item3,
     ];
     return data && data.map((val) => ({
-      label: val?.titleSub || '',
-      value: val?.titleMain || '',
+      label: baseString(val?.titleSub),
+      value: baseString(val?.titleMain),
     }));
   }, [blocks]);
 

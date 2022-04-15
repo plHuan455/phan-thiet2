@@ -3,7 +3,7 @@ import React from 'react';
 import Container from 'common/Container';
 import FlatMore from 'common/FlatMore';
 import Card from 'components/organisms/Card';
-import { getBlockData } from 'utils/functions';
+import { baseString, getBlockData } from 'utils/functions';
 
 const data = new Array(7).fill({
   imgSrc: 'https://source.unsplash.com/random',
@@ -13,8 +13,8 @@ const data = new Array(7).fill({
 });
 
 interface DivisionProps{
-  titleSection: string,
-  link?: {url?: string, text?: string, target?: string}
+  titleSection: string;
+  link?: LinkTypes;
 }
 
 const Division: React.FC<SectionBlocks> = ({ blocks }) => {
@@ -25,12 +25,12 @@ const Division: React.FC<SectionBlocks> = ({ blocks }) => {
       <Container>
         <FlatMore
           title={{
-            text: divisionBlocks?.titleSection || '',
+            text: baseString(divisionBlocks?.titleSection),
             type: 'h4',
             modifiers: ['gradientGreen', '700', 's015'],
           }}
           link={{
-            text: divisionBlocks?.link?.text || 'Xem tất cả',
+            text: divisionBlocks?.link?.text,
             href: divisionBlocks?.link?.url,
             target: divisionBlocks?.link?.target,
           }}

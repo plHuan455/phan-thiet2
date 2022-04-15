@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
 import UtilitiesTemplate from 'components/templates/UtilityHome';
-import { baseURL, getBlockData } from 'utils/functions';
+import { baseString, baseURL, getBlockData } from 'utils/functions';
 
 interface UtilitiesItemProps {
   description?: string;
@@ -14,19 +14,21 @@ interface UtilitiesProps {
 }
 
 const Utilities: React.FC<SectionBlocks> = ({ blocks }) => {
-  const UtilitiesBlockData = getBlockData<UtilitiesProps>('great_utility', blocks);
+  const utilitiesBlockData = getBlockData<UtilitiesProps>('great_utility', blocks);
 
-  const utilitiesBlockContent = useMemo(() => (
-    UtilitiesBlockData?.items?.map((val) => ({
-      description: val.description,
-      thumbnail: baseURL(val.image),
-      title: val.title,
-    }))
-  ), [UtilitiesBlockData]);
+  const utilitiesBlockContent = useMemo(() => utilitiesBlockData?.items?.map((val) => ({
+    description: val.description,
+    thumbnail: baseURL(val.image),
+    title: val.title,
+    icon: {
+      imgSrc: baseURL(val?.image),
+      label: baseString(val?.title),
+    },
+  })), [utilitiesBlockData]);
 
   return (
     <UtilitiesTemplate
-      title={UtilitiesBlockData?.titleSection}
+      title={utilitiesBlockData?.titleSection}
       listUtilities={utilitiesBlockContent}
     />
   );

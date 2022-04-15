@@ -11,18 +11,18 @@ import Card from 'components/organisms/Card';
 import { CardEventProps } from 'components/organisms/Card/Event';
 
 export interface EventsProps {
-  title?: string
-  button?: LinkTypes
+  title?: string;
+  button?: LinkTypes;
   countDown?: {
-    title: string
+    title: string;
     list: {
-      label: string
-      value: string
+      label: string;
+      value: string;
     }[]
-    address: string
-    duration: string
-    date: string
-    button: LinkTypes
+    address: string;
+    duration: string;
+    date: string;
+    button: LinkTypes;
   }
   listEvents?: CardEventProps[];
 }
@@ -41,7 +41,10 @@ const Events: React.FC<EventsProps> = ({
           type: 'h4',
           modifiers: ['gradientGreen', '700', 's015'],
         }}
-        link={button}
+        link={{
+          ...button,
+          href: button?.url,
+        }}
         data={listEvents}
         render={(item) => (
           <Card.Event
