@@ -34,7 +34,7 @@ const Divisions: React.FC<SectionBlocks> = ({ blocks }) => {
     ['getSubDivisionList'],
     ({ pageParam = 1 }) => getSubDivisionListService({
       page: pageParam,
-      // TODO LIMIT: 9
+      // TODO edit limit
       limit: 3,
     }),
     {
@@ -68,16 +68,8 @@ const Divisions: React.FC<SectionBlocks> = ({ blocks }) => {
       </div>
       <Subdivision
         loading={isFetchingNextPage}
-        onMore={() => hasNextSubdivision && fetchNextSubdivision()}
+        onMore={fetchNextSubdivision}
         title={blockContent?.title}
-        // list={new Array(9).fill({
-        //   imgSrc: 'https://source.unsplash.com/random',
-        //   title: 'The Florida',
-        //   description:
-        //     'Ocean Residence kiến tạo nơi đáng  sống mới cho cư dân khi tận hưởng giá
-        // trị Ocean Residence kiến tạo nơi đáng  sống mới cho cư dân khi tận hưởng giá trị ..',
-        //   href: '/',
-        // })}
         list={subdivisionList}
         btn={{
           text: blockContent?.button,
