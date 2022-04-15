@@ -1,22 +1,22 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import getTopicsListService from 'services/contact';
+import topicsListService from 'services/contact';
 import { TopicParams, TopicTypes } from 'services/contact/types';
 
 interface contactState {
-  topics: TopicTypes[];
+  data: TopicTypes[];
 }
 
 const initialState: contactState = {
-  topics: [],
+  data: [],
 };
 
-export const getTopicsListAsync = createAsyncThunk<
+export const topicsListAsync = createAsyncThunk<
   TopicTypes[],
   TopicParams | undefined
 >('topics/list', async (params, { rejectWithValue }) => {
   try {
-    const response = await getTopicsListService(params);
+    const response = await topicsListService(params);
     return response;
   } catch (error) {
     return rejectWithValue(error);
@@ -24,12 +24,12 @@ export const getTopicsListAsync = createAsyncThunk<
 });
 
 export const contactSlice = createSlice({
-  name: 'contactReducer',
+  name: 'topics',
   initialState,
   reducers: {},
   extraReducers(builder) {
-    builder.addCase(getTopicsListAsync.fulfilled, ($state, action) => {
-      $state.topics = action.payload;
+    builder.addCase(topicsListAsync.fulfilled, ($state, action) => {
+      $state.data = action.payload;
     });
   },
 });
