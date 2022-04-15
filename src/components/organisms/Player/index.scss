@@ -50,4 +50,40 @@
       visibility: hidden;
     }
   }
+  @include mobile-down {
+    #{$root}_play {
+      width: rem(60);
+      height: rem(60);
+    }
+    #{$root}_icon {
+      width: rem(40);
+      transform: translateY(-6px);
+      &::before {
+        padding-top: 100%;
+      }
+    }
+  }
+  &_play {
+    background: $white;
+    width: rem(80);
+    height: rem(80);
+    border-radius: 50%;
+    transform: rotate(90deg);
+    @include adjust-flex(center, center);
+  }
+  &_icon {
+    display: inline-block;
+    width: rem(60);
+    color: var(--theme);
+    filter: url('#goo');
+    transform: translateY(-8px);
+
+    &::before {
+      content: '';
+      display: block;
+      padding-top: 86%;
+      background: currentColor;
+      clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    }
+  }
 }
