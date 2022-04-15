@@ -106,6 +106,7 @@ const Consultancy: React.FC<ConsultancyProps> = ({
                 render={({ field, fieldState: { error } }) => (
                   <Input
                     {...field}
+                    value={field.value || ''}
                     placeholder={consultancyInfo?.placeholderName}
                     error={error?.message}
                   />
@@ -118,6 +119,7 @@ const Consultancy: React.FC<ConsultancyProps> = ({
                 render={({ field, fieldState: { error } }) => (
                   <Input
                     {...field}
+                    value={field.value || ''}
                     placeholder={consultancyInfo?.placeholderPhone}
                     error={error?.message}
                   />
@@ -132,6 +134,7 @@ const Consultancy: React.FC<ConsultancyProps> = ({
                 render={({ field, fieldState: { error } }) => (
                   <Input
                     {...field}
+                    value={field.value || ''}
                     placeholder={consultancyInfo?.placeholderEmail}
                     error={error?.message}
                   />
@@ -146,6 +149,7 @@ const Consultancy: React.FC<ConsultancyProps> = ({
                 render={({ field, fieldState: { error } }) => (
                   <Input
                     {...field}
+                    value={field.value || ''}
                     placeholder={consultancyInfo?.placeholderAddress}
                     error={error?.message}
                   />
@@ -186,6 +190,7 @@ const Consultancy: React.FC<ConsultancyProps> = ({
                 render={({ field, fieldState: { error } }) => (
                   <TextArea
                     {...field}
+                    value={field.value || ''}
                     placeholder={consultancyInfo?.placeholderContent}
                     error={error?.message}
                     rows={4}
