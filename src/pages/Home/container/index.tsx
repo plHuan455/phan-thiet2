@@ -6,7 +6,6 @@ import Division from './division';
 import Events from './events';
 import Feedbacks from './feedbacks';
 import Highway from './highway';
-import Journeys from './journeys';
 import News from './news';
 import Position from './position';
 import Selection from './selection';
@@ -32,7 +31,6 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
       </div>
     </div>
     <Division blocks={blocks} />
-    <Journeys blocks={blocks} />
     <div className="p-home_sand2">
       <div className="p-home_sand2_layer">
         <Image src={sand2} alt="sand" />
