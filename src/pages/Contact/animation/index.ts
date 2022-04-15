@@ -1,70 +1,56 @@
-import React, { useEffect } from 'react';
-import { easings, useSpring, animated } from 'react-spring';
+import { useEffect } from 'react';
+import {
+  easings, useSpring, animated,
+} from 'react-spring';
 
-import useScrollAnimate from 'hooks/useScrollAnimation';
-
-type AnimationParams = {
-  ballonRef: React.RefObject<HTMLDivElement>;
-  leafRef: React.RefObject<HTMLDivElement>;
-}
-
-const useAnimation = ({ ballonRef, leafRef }: AnimationParams) => {
-  const isScrollToBallon = useScrollAnimate(ballonRef);
-  const isScrollToLeaf = useScrollAnimate(leafRef);
-
+const useAnimation = () => {
   const flyAnimation = useSpring({
     rotateZ: 0,
-    y: -300,
+    y: -100,
+    opacity: 0,
   });
-  const buzzAnimation = useSpring({
-    rotateZ: 0,
-    x: 40,
+
+  const slideToLeftAnimate = useSpring({
+    x: 200,
+    opacity: 0,
+
   });
 
   useEffect(() => {
     let res: NodeJS.Timeout;
-    if (isScrollToBallon) {
-      const { rotateZ, y } = flyAnimation;
+    if (flyAnimation && slideToLeftAnimate) {
+      const { rotateZ, y, opacity: oFly } = flyAnimation;
       rotateZ.start({
         from: 0,
         to: -15,
         loop: { reverse: true },
         config: { duration: 2000, easing: easings.easeInOutSine },
       });
-      y.start({ from: -300, to: 0, config: { duration: 10000 } });
+      y.start({ from: -100, to: 0, config: { duration: 4000 } });
+      oFly.start({ from: 0, to: 1 });
+
+      // ----------- slide--------------------
+      const { x: xSlide, opacity: oSlide } = slideToLeftAnimate;
+      xSlide.start({
+        from: 200,
+        to: 10,
+        config: { duration: 500 },
+      });
+      oSlide.start({ from: 0, to: 1 });
       res = setTimeout(() => {
         rotateZ.start({ cancel: true });
-      }, 10000);
+      }, 4000);
     }
     return () => {
       clearTimeout(res);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isScrollToBallon]);
-
-  useEffect(() => {
-    if (isScrollToLeaf) {
-      const { rotateZ, x } = buzzAnimation;
-      rotateZ.start({
-        from: 0,
-        to: -20,
-        loop: { reverse: true },
-        config: { duration: 400, easing: easings.easeInOutSine },
-      });
-      x.start({
-        from: 40,
-        to: 20,
-        loop: { reverse: true },
-        config: { duration: 2000, easing: easings.easeInOutSine },
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isScrollToLeaf]);
+  }, [flyAnimation, slideToLeftAnimate]);
 
   return {
     animated,
     ballonAnimate: flyAnimation,
-    leafAnimate: buzzAnimation,
+    leafAnimate: slideToLeftAnimate,
   };
 };
 
