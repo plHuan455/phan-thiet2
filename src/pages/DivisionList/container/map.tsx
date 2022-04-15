@@ -3,7 +3,7 @@ import React, { useMemo, useState } from 'react';
 import { listDivisionDummy, optionDummy } from 'assets/dataDummy/projectMap';
 import { OptionType } from 'components/molecules/PullDown';
 import ProjectPositionSummary from 'components/templates/ProjectPositionSummary';
-import { getBlockData } from 'utils/functions';
+import { baseURL, getBlockData } from 'utils/functions';
 
 interface MapProps {
   title: string;
@@ -17,8 +17,8 @@ const Map: React.FC<SectionBlocks> = ({ blocks }) => {
       blocks,
     );
     return {
-      title: blockPageContent?.title,
-      placeholder: blockPageContent?.placeholder,
+      title: baseURL(blockPageContent?.title),
+      placeholder: baseURL(blockPageContent?.placeholder),
     };
   }, [blocks]);
 

@@ -6,7 +6,7 @@ import bgConsultancy from 'assets/images/pages/divisionList/bgConsultancy.png';
 import Image from 'components/atoms/Image';
 import { FormConsultancy } from 'components/organisms/Consultancy';
 import ConsultancyTemplate from 'components/templates/Consultancy';
-import { getBlockData } from 'utils/functions';
+import { baseURL, getBlockData } from 'utils/functions';
 import { schemasConsultancyForm } from 'utils/schemas';
 
 interface ConsultancyProps {
@@ -20,7 +20,7 @@ const Consultancy: React.FC<SectionBlocks> = ({ blocks }) => {
       blocks,
     );
     return {
-      title: blockPageContent?.title,
+      title: baseURL(blockPageContent?.title),
     };
   }, [blocks]);
 
@@ -33,7 +33,7 @@ const Consultancy: React.FC<SectionBlocks> = ({ blocks }) => {
     <div className="s-consultancy">
       <ConsultancyTemplate
         title={{
-          text: blockContent?.title || '',
+          text: blockContent?.title,
           modifiers: ['700', 'gradientGreen', 's015'],
         }}
         layer={(
