@@ -13,7 +13,6 @@ import LanguageProvider from 'common/Language';
 import Layout from 'common/Layout';
 import LoadingPage from 'common/Navigation/loading';
 import DivisionDetail from 'pages/DivisionDetail';
-import DivisionList from 'pages/DivisionList';
 import Error from 'pages/Error';
 import EventsDetail from 'pages/EventsDetail';
 import News from 'pages/News';
@@ -40,7 +39,6 @@ const App: React.FC = () => (
         <Route path="">
           <Route index element={<HomeNavigation />} />
           <Route path=":slug" element={<PageNavigation />} />
-          <Route path="cac-phan-khu" element={<DivisionList />} />
           <Route path="404" element={<Error />} />
           <Route path="tim-kiem" element={<Search />} />
           <Route path="tin-tuc/:slug" element={<NewsDetail />} />
