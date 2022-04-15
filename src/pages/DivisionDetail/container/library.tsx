@@ -3,55 +3,28 @@ import React, { useState } from 'react';
 import Container from 'common/Container';
 import FlatList from 'common/FlatList';
 import Arrow from 'components/atoms/Arrow';
+import Heading from 'components/atoms/Heading';
 import Icon from 'components/atoms/Icon';
 import Link from 'components/atoms/Link';
 import Text from 'components/atoms/Text';
-import Title from 'components/molecules/Title';
 import Card from 'components/organisms/Card';
 import Tabs, { Tab } from 'components/organisms/Tabs';
+import { CardImage } from 'pages/News/container/images';
 
 const dummyData = [
   {
     label: 'Tin tức',
-    content: 'Content 1',
-    slug: '',
   },
   {
     label: 'Hình ảnh',
-    content: 'Content 2',
   },
   {
     label: 'Video',
-    content: 'Content 3',
   },
   {
     label: 'Tài liệu khác',
-    content: 'Content 3',
   },
 ];
-
-const data = new Array(7).fill({
-  thumbnail: 'https://source.unsplash.com/random',
-  tag: 'The Kingdom',
-  title: 'Nova World phan thiết và chuỗi cung cấp tiện ích',
-  endTime: '2022-04-10T07:47:00.595',
-  dateTime: '2 giờ trước',
-  href: '/',
-  summary: [
-    {
-      iconName: 'clock',
-      text: '13:30 - 17:00',
-    },
-    {
-      iconName: 'calendar',
-      text: '30/04/2022',
-    },
-    {
-      iconName: 'location',
-      text: '2Bis Nguyễn Thị Minh Khai, Phường Đa Kao, Quận 1',
-    },
-  ],
-});
 
 const Library: React.FC = () => {
   const [indexActive, setIndexActive] = useState(0);
@@ -61,25 +34,59 @@ const Library: React.FC = () => {
       className="s-library u-mt-md-80 u-mt-48 u-mb-md-80 u-mb-48"
     >
       <Container>
-        <Title
+        <Heading
           type="h2"
           modifiers={['s015', '400', 'seaBlue']}
           content="THƯ VIỆN THE KINGDOM"
         />
         <FlatList
-          data={data}
+          data={new Array(7).fill('')}
           settings={{
             prevArrow: <Arrow.Prev />,
             nextArrow: <Arrow.Next />,
+            customPaging() {
+              return <span className="o-carousel_dot rect inherit" style={{ backgroundColor: 'var(--theme)' }} />;
+            },
           }}
-          render={(item) => {
+          render={() => {
             switch (indexActive) {
-              case 0: return <Card.Event {...item} />;
-              case 1: return <Card.Layer noContent ratio="354x221" modifiers={['r12']} {...item} />;
-              case 2: return <Card.Player isReverse {...item} />;
+              case 0:
+                return (
+                  <Card.Normal
+                    thumbnail="https://source.unsplash.com/random"
+                    title="Nova World phan thiết và chuỗi cung cấp tiện ích"
+                    href="/"
+                    tag="The Kingdom"
+                    dateTime="2 giờ trước"
+                    url={{
+                      text: 'Xem thêm',
+                      iconName: 'arrowRightCopper',
+                      animation: 'arrow',
+                    }}
+                  />
+                );
+              case 1: return (
+                <CardImage
+                  thumbnail="https://source.unsplash.com/random"
+                  handleClick={() => ''}
+                />
+              );
+              case 2: return (
+                <Card.Player
+                  thumbnail="https://source.unsplash.com/random"
+                  tag="The Kingdom"
+                  title="OCEAN RESIDENCE - MẢNH GHÉP ĐẶC SẮC MỚI TẠI NOVAWORLD PHAN THIET"
+                  dateTime="2 giờ trước"
+                  modifiers={['reverse', 'shadow']}
+                />
+              );
               default: return (
                 <Card.Normal
-                  {...item}
+                  thumbnail="https://source.unsplash.com/random"
+                  title="ƯU ĐÃI QUÝ I/2022"
+                  href="/"
+                  tag="The Kingdom"
+                  dateTime="2 giờ trước"
                   url={{
                     text: 'Tải xuống',
                     iconName: 'downloadOrange',

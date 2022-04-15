@@ -26,7 +26,7 @@ export interface CardImageProps {
   handleClick?: () => void
 }
 
-const CardImage: React.FC<CardImageProps> = ({ thumbnail, alt, handleClick }) => (
+export const CardImage: React.FC<CardImageProps> = ({ thumbnail, alt, handleClick }) => (
   <div className="o-cardImage">
     <div
       className="o-cardImage_wrapper"
