@@ -25,6 +25,7 @@ const News: React.FC<SectionBlocks> = ({ blocks }) => {
     href: `tin-tuc/${item.slug}`,
     // TODO: API News missing key Tag
     tag: 'The Kingdom',
+    // TODO: Update time later
     dateTime: getTimePastToCurrent(item.publishedAt),
     url: {
       // TODO: ADD Translation Later
