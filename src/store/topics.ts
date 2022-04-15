@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import topicsListService from 'services/contact';
-import { TopicParams, TopicTypes } from 'services/contact/types';
+import topicsListService from 'services/topics';
+import { TopicParams, TopicTypes } from 'services/topics/types';
 
 interface contactState {
   data: TopicTypes[];
