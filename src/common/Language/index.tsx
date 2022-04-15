@@ -5,7 +5,8 @@ import React, { createContext, useEffect, useState } from 'react';
 import { useAppDispatch } from 'store/hooks';
 import { menusAsync } from 'store/menus';
 import { staticAllAsync, staticErrorsAsync } from 'store/static';
-import { getSystemsAsync } from 'store/systems';
+import { systemsGeneralAsync } from 'store/systems';
+import { topicsListAsync } from 'store/topics';
 
 type LanguageContextResponse = {
   language: {
@@ -29,7 +30,8 @@ const LanguageProvider: React.FC = ({ children }) => {
     dispatch(staticAllAsync());
     dispatch(staticErrorsAsync());
     dispatch(menusAsync());
-    dispatch(getSystemsAsync());
+    dispatch(systemsGeneralAsync());
+    dispatch(topicsListAsync());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isChangeLanguage]);
 

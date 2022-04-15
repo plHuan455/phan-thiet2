@@ -4,6 +4,7 @@ import menuReducer from './menus';
 import notifyReducer from './notify';
 import staticReducer from './static';
 import systemReducer from './systems';
+import topics from './topics';
 
 export const store = configureStore({
   devTools: process.env.NODE_ENV === 'development',
@@ -12,6 +13,7 @@ export const store = configureStore({
     static: staticReducer,
     menus: menuReducer,
     notify: notifyReducer,
+    topic: topics,
   },
 });
 
