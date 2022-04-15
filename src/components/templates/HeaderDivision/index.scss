@@ -1,9 +1,17 @@
-.t-header {
+@import './HeaderSub/index.scss';
+
+.t-headerDivision {
   left: 0;
   position: fixed;
   top: 0;
   width: 100%;
   z-index: $z-header;
+
+  &_subHeader {
+    @include tablet-down {
+      display: none;
+    }
+  }
 
   &_layer-search {
     align-items: center;
@@ -49,16 +57,23 @@
   }
 
   &_main {
-    background: $black06;
+    background-color: transparent;
     height: rem($height-header-main-desktop);
     transition: $transition-long ease-in-out;
     @include desktop-down {
       height: rem($height-header-main-desktop-down);
     }
-  
+
+    @include tablet-down {
+      background-color: $black06;
+    }
+
     &-isScroll {
-      height: 0;
-      overflow: hidden;
+      background-color: $black06;
+      @include tablet-down {
+        height: 0;
+        overflow: hidden;
+      }
     }
   }
 
@@ -74,9 +89,24 @@
 
   &_left {
     flex-shrink: 0;
-    width: rem(184);
-    @include desktop-down {
+
+    &_logoMain {
       width: rem(140);
+      @include tablet-up {
+        display: none;
+      }
+    }
+
+    &_logoSub {
+      @include tablet-down {
+        display: none;
+      }
+
+      img {
+        max-height: rem(56);
+        max-width: rem(200);
+        object-fit: contain;
+      }
     }
   }
   
@@ -165,71 +195,36 @@
     display: flex;
     justify-content: flex-end;
   }
-}
 
-.hamburger {
-  cursor: pointer;
-  display: inline-block;
-
-  span {
-    background: $white;
-    display: block;
-    height: 2px;
-    margin: 6px 0;
-    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
-      background 0.2s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.55s ease;
-    width: rem(26);
-  }
-
-  &.active {
-    span {
-      &:nth-child(1) {
-        background: $gamboge-orange;
-        transform: rotate(45deg) translate(5px, 6px);
-        transition-delay: 0s , 0.3s , 0s;
+  &_nav {
+    &_logoSub {
+      @include tablet-up {
+        display: none;
       }
+      text-align: center;
 
-      &:nth-child(2) {
-        opacity: 0;
+      img {
+        max-height: rem(56);
+        max-width: rem(200);
+        object-fit: contain;
       }
+    }
 
-      &:nth-child(3) {
-        background: $gamboge-orange;
-        transform: rotate(-45deg) translate(5px, -6px);
-        transition-delay: 0s , 0.3s , 0s;
+    &_menu {
+      @include tablet-up {
+        display: none;
       }
     }
   }
-}
 
-.pulldown-lang {
   .m-pulldown {
     &_header {
-      background-color: transparent;
-      border: 0;
-
       &_content {
-        color: $white;
-        font-weight: 400;
-        justify-content: center;
-        padding: 0;
-        width: rem(30);
-        @include font-base(16,28);
+        @include tablet-up {
+          font-weight: 700;
+        }
       }
     }
-
-    &_fn {
-      margin: 0;
-    }
-
-    &_arrow::after {
-      background: url('~assets/icons/ic_chevron_down_white.svg') no-repeat center;
-    }
-
-    &_item {
-      color: $davy-grey;
-      padding: rem(5) 0;
-      text-align: center;
-    }
   }
+  
 }

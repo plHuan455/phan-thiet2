@@ -7,14 +7,22 @@ import { useAppSelector } from 'store/hooks';
 const useLayout = () => {
   const {
     mainHeader: menuHeaderDefault,
+    header2: menuMainDivision,
     mainFooter,
     footer2: menuTermFooter,
+    division: menuSubDivision,
   } = useAppSelector((state) => state.menus);
+
+  const {
+    pageType,
+  } = useAppSelector((state) => state.system);
 
   const data = useMemo(
     () => ({
       dataHeaderDefault: {
         ...dummyHeader,
+        menuMainDivision,
+        menuSubDivision,
         menu: menuHeaderDefault,
       },
       dataFooter: {
@@ -33,8 +41,14 @@ const useLayout = () => {
         },
         subMenu: menuTermFooter,
       },
+      pageType,
     }),
-    [menuHeaderDefault, menuTermFooter, mainFooter],
+    [menuMainDivision,
+      menuSubDivision,
+      menuHeaderDefault,
+      mainFooter,
+      menuTermFooter,
+      pageType],
   );
 
   return data;

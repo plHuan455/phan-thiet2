@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 import Container from 'common/Container';
 import FlatMore from 'common/FlatMore';
 import Card from 'components/organisms/Card';
-import getSubDivisionListService from 'services/subdivision';
+import getSubDivisionListService from 'services/division';
 import { baseString, getBlockData, baseURL } from 'utils/functions';
 
 interface DivisionProps{

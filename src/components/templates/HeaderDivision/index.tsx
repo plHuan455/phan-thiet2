@@ -3,6 +3,8 @@ import React, {
 } from 'react';
 import { useLocation } from 'react-router-dom';
 
+import HeaderSub from './HeaderSub';
+
 import Container from 'common/Container';
 import Heading from 'components/atoms/Heading';
 import Icon, { IconName } from 'components/atoms/Icon';
@@ -16,20 +18,24 @@ import useWindowScroll from 'hooks/useWindowScroll';
 import { MenuItem } from 'services/menus/types';
 import mapModifiers from 'utils/functions';
 
-export interface HeaderProps {
+export interface HeaderDivisionProps {
   mainLogo?: LinkTypes;
-  menu?: MenuItem[];
+  menuSubDivision?: MenuItem[];
+  logoDivision?: LinkTypes;
+  menuMainDivision?: MenuItem[];
   language?: {
     langList: OptionType[];
     value: OptionType;
     handleChangeLang?: (item?: OptionType) => void;
-  }
+  };
 }
 
-const Header: React.FC<HeaderProps> = ({
+const HeaderDivision: React.FC<HeaderDivisionProps> = ({
   mainLogo,
-  menu,
+  menuSubDivision,
+  menuMainDivision,
   language,
+  logoDivision,
 }) => {
   const { pathname } = useLocation();
 
@@ -72,39 +78,55 @@ const Header: React.FC<HeaderProps> = ({
   ), [language]);
 
   const renderButtonSearch = useCallback((iconName:IconName) => (
-    <button type="button" className="t-header_btn-search" onClick={() => setIsOpenSearch(true)}>
+    <button type="button" className="t-headerDivision_btn-search" onClick={() => setIsOpenSearch(true)}>
       <Icon iconName={iconName} size="20" />
     </button>
   ), []);
 
   useWindowScroll(() => {
-    if (window.pageYOffset > 70 && Number(refPageYOffset.current || 0) < window.pageYOffset) {
-      setIsScroll(true);
-    } else {
-      setIsScroll(false);
+    if (window.innerWidth <= 992) {
+      if (window.pageYOffset > 70 && Number(refPageYOffset.current || 0) < window.pageYOffset) {
+        setIsScroll(true);
+      } else {
+        setIsScroll(false);
+      }
+      refPageYOffset.current = window.pageYOffset;
     }
 
-    refPageYOffset.current = window.pageYOffset;
+    if (window.innerWidth > 992) {
+      if (window.pageYOffset > 41) {
+        setIsScroll(true);
+      } else {
+        setIsScroll(false);
+      }
+    }
   });
 
   return (
-    <header className="t-header">
-      <div className={mapModifiers('t-header_main', isScroll && 'isScroll')}>
+    <header className="t-headerDivision">
+      <div className="t-headerDivision_subHeader">
+        <HeaderSub
+          logo={mainLogo}
+          menu={menuSubDivision && menuSubDivision[0]?.subMenu}
+          isScroll={isScroll}
+        />
+      </div>
+      <div className={mapModifiers('t-headerDivision_main', isScroll && 'isScroll')}>
         <Container>
-          <div className={mapModifiers('t-header_layer-search', isOpenSearch && 'open')}>
+          <div className={mapModifiers('t-headerDivision_layer-search', isOpenSearch && 'open')}>
             <button className="button-close" type="button" onClick={() => setIsOpenSearch(false)}>
               <Icon iconName="closeWhite" size="36" />
             </button>
-            <div className="t-header_layer-search_content">
+            <div className="t-headerDivision_layer-search_content">
               <Heading type="h2" modifiers={['700', 'uppercase', 'center', 'white']}>
                 Tìm kiếm
               </Heading>
               <Search search={{ placeholder: 'Tìm kiếm nội dung' }} />
             </div>
           </div>
-          <div className="t-header_wrap">
+          <div className="t-headerDivision_wrap">
             <div
-              className="t-header_hamburger"
+              className="t-headerDivision_hamburger"
               onClick={() => setIsOpen(true)}
             >
               <div className="hamburger">
@@ -113,14 +135,25 @@ const Header: React.FC<HeaderProps> = ({
                 <span />
               </div>
             </div>
-            <div className="t-header_left">
-              <Link href={mainLogo?.url} target={mainLogo?.target}>
-                <Image src={mainLogo?.icon} ratio="184x59" alt="logo" />
-              </Link>
+            <div className="t-headerDivision_left">
+              {mainLogo && (
+                <div className="t-headerDivision_left_logoMain">
+                  <Link href={mainLogo?.url} target={mainLogo?.target}>
+                    <Image src={mainLogo?.icon} ratio="184x59" />
+                  </Link>
+                </div>
+              )}
+              {logoDivision && (
+                <div className="t-headerDivision_left_logoSub">
+                  <Link href={logoDivision?.url} target={logoDivision?.target}>
+                    <img src={logoDivision?.icon} alt="logo-division" />
+                  </Link>
+                </div>
+              )}
             </div>
-            <div className={mapModifiers('t-header_right', isOpen && 'open')}>
-              <div className="t-header_right_header-mobile">
-                <div className="t-header_close-mobile">
+            <div className={mapModifiers('t-headerDivision_right', isOpen && 'open')}>
+              <div className="t-headerDivision_right_header-mobile">
+                <div className="t-headerDivision_close-mobile">
                   <div
                     onClick={() => setIsOpen(false)}
                     className="hamburger active"
@@ -130,31 +163,48 @@ const Header: React.FC<HeaderProps> = ({
                     <span />
                   </div>
                 </div>
-                <div className="t-header_search-mobile">
+                <div className="t-headerDivision_search-mobile">
                   {renderButtonSearch('searchOrange')}
                 </div>
               </div>
-              <div className="t-header_nav">
+              <div className="t-headerDivision_nav">
+                {logoDivision && (
+                  <div className="t-headerDivision_nav_logoSub">
+                    <Link href={logoDivision?.url} target={logoDivision?.target}>
+                      <img src={logoDivision?.icon} alt="logo-division" />
+                    </Link>
+                  </div>
+                )}
                 <Nav
-                  menu={menu}
+                  menu={menuMainDivision}
                   idExpand={[idExpand?.child, idExpand?.parent]}
                   pathname={pathname}
                   handleCloseMenu={handleCloseMenu}
                   handleClickExpand={handleClickExpand}
+                  variant="subdivisions"
                 />
+                <div className="t-headerDivision_nav_menu">
+                  <Nav
+                    menu={menuSubDivision}
+                    pathname={pathname}
+                    handleCloseMenu={handleCloseMenu}
+                    handleClickExpand={handleClickExpand}
+                    idExpand={[idExpand?.child, idExpand?.parent]}
+                  />
+                </div>
               </div>
-              <div className="t-header_utility">
-                <div className="t-header_language-desktop">
+              <div className="t-headerDivision_utility">
+                <div className="t-headerDivision_language-desktop">
                   <div className="pulldown-lang">
                     {renderLang}
                   </div>
                 </div>
-                <div className="t-header_search">
+                <div className="t-headerDivision_search">
                   {renderButtonSearch('searchWhite')}
                 </div>
               </div>
             </div>
-            <div className="t-header_language-mobile">
+            <div className="t-headerDivision_language-mobile">
               <div className="pulldown-lang">
                 {renderLang}
               </div>
@@ -166,4 +216,4 @@ const Header: React.FC<HeaderProps> = ({
   );
 };
 
-export default Header;
+export default HeaderDivision;

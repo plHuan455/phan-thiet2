@@ -29,6 +29,7 @@ export const iconList = {
   facebook: 'facebook',
   arrowRightWhite: 'arrowRightWhite',
   arrowLeftWhite: 'arrowLeftWhite',
+  chevronDownWhite: 'chevronDownWhite',
 };
 
 export type IconName = keyof typeof iconList;

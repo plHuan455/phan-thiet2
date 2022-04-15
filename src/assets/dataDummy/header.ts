@@ -1,3 +1,4 @@
+import logoKingdom from 'assets/images/header/logo_king_dom.svg';
 import logo from 'assets/images/logo.svg';
 
 const menu = [
@@ -151,12 +152,119 @@ const language = {
   value: { value: 'vi', label: 'VI' },
 };
 
+const menuSubDivision = [
+  {
+    id: 22,
+    menuId: 1,
+    title: 'Phân khu',
+    link: '',
+    type: 'OneContent\\Page\\Models\\Page',
+    referenceId: 1,
+    cssClass: '',
+    icon: '',
+    target: '_self',
+    parentId: 1,
+    lft: 6,
+    rgt: 7,
+    depth: 1,
+    createdAt: '2022-01-12T07:14:30.000000Z',
+    updatedAt: '2022-01-12T07:14:30.000000Z',
+    subMenu: [
+      {
+        id: 1123,
+        menuId: 1,
+        title: 'The King Dom',
+        link: '',
+        type: 'OneContent\\Page\\Models\\Page',
+        referenceId: 1,
+        cssClass: '',
+        icon: '',
+        target: '_self',
+        parentId: 22,
+        lft: 6,
+        rgt: 7,
+        depth: 1,
+        createdAt: '2022-01-12T07:14:30.000000Z',
+        updatedAt: '2022-01-12T07:14:30.000000Z',
+        reference: {
+          slug: 'the-king-dom',
+        },
+      },
+      {
+        id: 1111,
+        menuId: 1,
+        title: 'Ocean Residence',
+        link: '',
+        type: 'OneContent\\Page\\Models\\Page',
+        referenceId: 1,
+        cssClass: '',
+        icon: '',
+        target: '_self',
+        parentId: 22,
+        lft: 6,
+        rgt: 7,
+        depth: 1,
+        createdAt: '2022-01-12T07:14:30.000000Z',
+        updatedAt: '2022-01-12T07:14:30.000000Z',
+        reference: {
+          slug: 'ocean-residence',
+        },
+      },
+      {
+        id: 1111,
+        menuId: 1,
+        title: 'waikiki',
+        link: '',
+        type: 'OneContent\\Page\\Models\\Page',
+        referenceId: 1,
+        cssClass: '',
+        icon: '',
+        target: '_self',
+        parentId: 22,
+        lft: 6,
+        rgt: 7,
+        depth: 1,
+        createdAt: '2022-01-12T07:14:30.000000Z',
+        updatedAt: '2022-01-12T07:14:30.000000Z',
+        reference: {
+          slug: 'waikiki',
+        },
+      },
+      {
+        id: 1111,
+        menuId: 1,
+        title: 'Santa',
+        link: '',
+        type: 'OneContent\\Page\\Models\\Page',
+        referenceId: 1,
+        cssClass: '',
+        icon: '',
+        target: '_self',
+        parentId: 22,
+        lft: 6,
+        rgt: 7,
+        depth: 1,
+        createdAt: '2022-01-12T07:14:30.000000Z',
+        updatedAt: '2022-01-12T07:14:30.000000Z',
+        reference: {
+          slug: 'santa',
+        },
+      },
+    ],
+  },
+];
+
 export default {
-  menu,
-  logo,
-  logoUrl: {
+  mainLogo: {
+    icon: logo,
     url: '/',
-    target: '',
+    target: '_self',
+  },
+  menuSubDivision,
+  menuMainDivision: menu,
+  menu,
+  logoDivision: {
+    icon: logoKingdom,
   },
   language,
 };

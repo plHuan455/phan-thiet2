@@ -9,7 +9,7 @@ const data = new Array(7).fill({
   tag: 'The Kingdom',
   title: 'Nova World phan thiết và chuỗi cung cấp tiện ích',
   endTime: '2022-04-10T07:47:00.595',
-  href: '/',
+  href: 'su-kien/slug',
   summary: [
     {
       iconName: 'clock',
@@ -31,7 +31,7 @@ interface EventProps{
   button: string;
 }
 const Events: React.FC<SectionBlocks> = ({ blocks }) => {
-  const eventsBlock = getBlockData<EventProps>('event', blocks);
+  const eventsBlock = getBlockData<EventProps>('envent', blocks);
 
   const {
     days, hours, mins, secs,
@@ -43,8 +43,15 @@ const Events: React.FC<SectionBlocks> = ({ blocks }) => {
         button={{ ...eventsBlock?.link }}
         countDown={{
           title: 'Một vòng trải nghiệm siêu thành phố biển',
+          // button: {
+          //   text: eventsBlock?.button,
+          // },
           button: {
-            text: eventsBlock?.button,
+            // text: eventsBlock?.link?.text || 'Xem tất cả',
+            // url: eventsBlock?.link?.url,
+            // target: eventsBlock?.link?.target,
+            text: 'Xem chi tiết',
+            url: 'su-kien/slug',
           },
           address: '2Bis Nguyễn Thị Minh Khai, Phường Đa Kao, Quận 1',
           duration: '13:30 - 17:00',

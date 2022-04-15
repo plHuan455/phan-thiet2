@@ -3,6 +3,7 @@ const MENU_CODE = {
   HEADER_2: 'header-2',
   MAIN_FOOTER: 'main-footer',
   FOOTER_2: 'footer-2',
+  PHAN_KHU: 'phan-khu',
 };
 
 const LOCAL_STORAGE = {
@@ -16,6 +17,20 @@ const PREFIX = {
     JA: 'subdivision',
     KO: 'subdivision',
     ZH: 'subdivision',
+  },
+  NEWS: {
+    VI: 'tin-tuc',
+    EN: 'news',
+    JA: 'news',
+    KO: 'news',
+    ZH: 'news',
+  },
+  EVENT: {
+    VI: 'su-kien',
+    EN: 'event',
+    JA: 'event',
+    KO: 'event',
+    ZH: 'event',
   },
 };
 

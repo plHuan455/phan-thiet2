@@ -1,0 +1,105 @@
+.t-headerSub {
+  align-items: center;
+  background: $black06;
+  display: flex;
+  height: rem(41);
+  position: relative;
+  transition: $transition-long ease-in-out;
+  z-index: 3;
+
+  &-isScroll {
+    height: 0;
+    overflow: hidden;
+  }
+
+  .container {
+    flex: 1;
+    height: auto;
+  }
+  
+  &_wrap {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &_left {
+    align-items: center;
+    display: flex;
+  }
+
+  &_btnGoBack {
+    margin-right: rem(8);
+    width: rem(16);
+    cursor: pointer;
+  }
+
+  &_imageLogo {
+    width: rem(78);
+  }
+
+  &_active {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+
+    .a-icon {
+      transition: $transition-long linear;
+    }
+
+    &.active {
+      .a-icon {
+        transform: rotate(180deg);
+      }
+    }
+
+    span {
+      color: $white;
+      margin-right: rem(4);
+      @include font-base(12,18);
+    }
+  }
+
+  &_menu {
+    position: relative;
+
+    &_list {
+      background: $black;
+      list-style: none;
+      max-height: 0;
+      top: calc(100% + 20px);
+      overflow: hidden;
+      min-width: rem(200);
+      padding: rem(5) rem(16);
+      position: absolute;
+      right: 0;
+      transition: $transition ease-in-out;
+      visibility: hidden;
+
+      &.active {
+        max-height: rem(1000);
+        overflow: initial;
+        visibility: visible;
+      }
+    }
+
+    &_item {
+      margin-top: rem(5);
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+
+    &_itemLink {
+      color: $white;
+      display: block;
+      padding: rem(5) 0;
+      @include font-base(12,18);
+
+      &:hover {
+        color: $white;
+      }
+    }
+  }
+
+}
