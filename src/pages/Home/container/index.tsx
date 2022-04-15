@@ -41,7 +41,7 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
     <News blocks={blocks} />
     <Events blocks={blocks} />
     <Feedbacks blocks={blocks} />
-    <Consultancy blocks={blocks} />
+    <Consultancy />
   </>
 );
 

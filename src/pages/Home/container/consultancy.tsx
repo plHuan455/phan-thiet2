@@ -73,7 +73,6 @@ const Consultancy: React.FC<SectionBlocks> = ({ blocks }) => {
         }}
       />
     </section>
-
   );
 };
 

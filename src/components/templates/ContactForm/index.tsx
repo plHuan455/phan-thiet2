@@ -56,6 +56,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
                 render={({ field, fieldState: { error } }) => (
                   <Input
                     {...field}
+                    value={field.value || ''}
                     placeholder={form?.namePlaceholder}
                     error={error?.message}
                   />
@@ -68,6 +69,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
                 render={({ field, fieldState: { error } }) => (
                   <Input
                     {...field}
+                    value={field.value || ''}
                     placeholder={form?.addressPlaceholder}
                     error={error?.message}
                   />
@@ -80,6 +82,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
                 render={({ field, fieldState: { error } }) => (
                   <Input
                     {...field}
+                    value={field.value || ''}
                     placeholder={form?.phonePlaceholder}
                     error={error?.message}
                   />
@@ -92,6 +95,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
                 render={({ field, fieldState: { error } }) => (
                   <Input
                     {...field}
+                    value={field.value || ''}
                     placeholder={form?.emailPlaceholder}
                     error={error?.message}
                   />
@@ -104,6 +108,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
                 render={({ field, fieldState: { error } }) => (
                   <TextArea
                     {...field}
+                    value={field.value || ''}
                     rows={4}
                     placeholder={form?.contentPlaceholder}
                     error={error?.message}

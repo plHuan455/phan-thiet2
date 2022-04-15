@@ -21,42 +21,32 @@ export interface CheckboxTypes {
   value: string,
 }
 
+export interface ConsultancyInfoTypes {
+  placeholderName: string;
+  placeholderPhone: string;
+  placeholderEmail: string;
+  placeholderAddress: string;
+  placeholderContent: string;
+  btnText: string;
+  checkbox?: {
+    label: string;
+    subLabel: string;
+    list?: CheckboxTypes[];
+  };
+}
+
 export interface ConsultancyProps {
   title: string;
-  consultancyInfo?: {
-    placeholderName: string,
-    placeholderPhone: string,
-    placeholderEmail: string,
-    placeholderAddress: string,
-    placeholderContent: string,
-    checkbox?: {
-      label: string,
-      subLabel: string,
-      list?: CheckboxTypes[],
-    },
-    btnText: string
-  }
+  consultancyInfo?: ConsultancyInfoTypes;
   handleSubmit?: (data: FormConsultancy) => void;
   method: UseFormReturn<FormConsultancy>;
-  loading?: boolean,
+  loading?: boolean;
   variantButton?: Variants;
 }
 
 export interface ConsultancyPropsInput {
   title: string;
-  consultancyInfo: {
-    placeholderName: string,
-    placeholderPhone: string,
-    placeholderEmail: string,
-    placeholderAddress: string,
-    placeholderContent: string,
-    checkbox?: {
-      label: string,
-      subLabel: string,
-      list?: CheckboxTypes[],
-    },
-    btnText: string
-  }
+  consultancyInfo: ConsultancyInfoTypes;
   handleSubmit?: (data: FormConsultancy) => void;
   method?: UseFormReturn<FormConsultancy>;
   loading?: boolean,

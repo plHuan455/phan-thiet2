@@ -1,18 +1,18 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useMemo } from 'react';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { useForm } from 'react-hook-form';
 
-import { FormConsultancy, CheckboxTypes } from 'components/organisms/Consultancy';
+import { FormConsultancy, CheckboxTypes, ConsultancyInfoTypes } from 'components/organisms/Consultancy';
 import { NotifyProps } from 'components/organisms/Notify';
 import ConsultancyTemplate, { ConsultancyPropsInput } from 'components/templates/Consultancy';
 import { useAsync } from 'hooks/useAsync';
-import useDidMount from 'hooks/useDidMount';
-import { consultancyFormService, getTopicList } from 'services/contact';
-import { ConsultancyFormInput, Topic } from 'services/contact/types';
-import { useAppDispatch } from 'store/hooks';
+import { consultancyFormService } from 'services/contact';
+import { ConsultancyFormInput } from 'services/contact/types';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { updateNotifyProps } from 'store/notify';
+import { ContactState } from 'store/topics';
 import { schemasConsultancyForm } from 'utils/schemas';
 
 const Consultancy: React.FC<ConsultancyPropsInput> = ({
@@ -21,25 +21,16 @@ const Consultancy: React.FC<ConsultancyPropsInput> = ({
   form,
 }) => {
   const { executeRecaptcha } = useGoogleReCaptcha();
+  const topicSelector: ContactState = useAppSelector((state) => state.topic as ContactState);
   const dispatch = useAppDispatch();
   const method = useForm<FormConsultancy>({
     resolver: yupResolver(schemasConsultancyForm),
     mode: 'onSubmit',
   });
-  const [topics, setTopics] = useState<CheckboxTypes[]>();
-
-  useDidMount(async () => {
-    const topicTemps: Topic[] = await getTopicList();
-    setTopics(topicTemps.map((item) => ({
-      label: item.name,
-      value: item.id,
-    })));
-  });
 
   const [consultancyExecute, consultancyState] = useAsync(async (params: FormConsultancy) => {
     if (!executeRecaptcha) return;
     const grecaptchaToken = await executeRecaptcha('submit');
-    // const topics = await getTopicList();
     const topicIds: string = params.products?.reduce((prev, curr) => `${prev === '' ? '' : `${prev},`}${curr}`, '');
     const newData: ConsultancyFormInput = {
       name: params.name,
@@ -75,17 +66,28 @@ const Consultancy: React.FC<ConsultancyPropsInput> = ({
       dispatch(updateNotifyProps(notifyProps));
     },
   });
+
+  const consultancyInfoTemp = useMemo<ConsultancyInfoTypes | undefined>(() => {
+    const { data } = topicSelector;
+    const checkboxList: CheckboxTypes[] = data.map(
+      (item) => ({ label: item.name, value: item.id.toString() }),
+    );
+    const checkboxTemp = form.consultancyInfo && form.consultancyInfo.checkbox ? {
+      ...form.consultancyInfo.checkbox,
+      list: checkboxList || undefined,
+    } : undefined;
+    const result = form.consultancyInfo ? {
+      ...form.consultancyInfo,
+      checkbox: checkboxTemp,
+    } : undefined;
+    return result;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [topicSelector]);
+
   const handleSubmit = async (data: FormConsultancy) => {
     consultancyExecute(data);
   };
-  const checkboxTemp = form.consultancyInfo && form.consultancyInfo.checkbox ? {
-    ...form.consultancyInfo.checkbox,
-    list: topics,
-  } : undefined;
-  const consultancyInfoTemp = form.consultancyInfo ? {
-    ...form.consultancyInfo,
-    checkbox: checkboxTemp,
-  } : undefined;
+
   return (
     <ConsultancyTemplate
       title={title}

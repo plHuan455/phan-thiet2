@@ -3,11 +3,11 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import topicsListService from 'services/topics';
 import { TopicParams, TopicTypes } from 'services/topics/types';
 
-interface State {
+export interface ContactState {
   data: TopicTypes[];
 }
 
-const initialState: State = {
+const initialState: ContactState = {
   data: [],
 };
 
