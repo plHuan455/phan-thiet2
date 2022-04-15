@@ -18,15 +18,6 @@
       .a-image {
         padding-bottom: (153 / 213) * 100%;
       }
-      @include break-min(1366px) {
-        left: 10%;
-      }
-      @include break-min(1920px) {
-        left: 20%;
-      }
-      @include desktop-down {
-        left: rem(100);
-      }
       @include mobile-down {
         max-width: rem(120);
         top: rem(-22);
@@ -48,6 +39,11 @@
       @include tablet-down {
         bottom: rem(-144);
         max-width: rem(168);
+      }
+
+      @include mobile-down {
+        max-width: rem(120);
+        bottom: rem(-80);
       }
     }
   }

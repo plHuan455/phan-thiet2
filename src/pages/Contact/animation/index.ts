@@ -18,7 +18,7 @@ const useAnimation = () => {
 
   useEffect(() => {
     let res: NodeJS.Timeout;
-    if (flyAnimation && slideToLeftAnimate) {
+    if (flyAnimation) {
       const { rotateZ, y, opacity: oFly } = flyAnimation;
       rotateZ.start({
         from: 0,
@@ -28,7 +28,15 @@ const useAnimation = () => {
       });
       y.start({ from: -100, to: 0, config: { duration: 4000 } });
       oFly.start({ from: 0, to: 1 });
+    }
+    return () => {
+      clearTimeout(res);
+    };
+  }, [flyAnimation]);
 
+  useEffect(() => {
+    let res: NodeJS.Timeout;
+    if (slideToLeftAnimate) {
       // ----------- slide--------------------
       const { x: xSlide, opacity: oSlide } = slideToLeftAnimate;
       xSlide.start({
@@ -37,15 +45,11 @@ const useAnimation = () => {
         config: { duration: 500 },
       });
       oSlide.start({ from: 0, to: 1 });
-      res = setTimeout(() => {
-        rotateZ.start({ cancel: true });
-      }, 4000);
     }
     return () => {
       clearTimeout(res);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [flyAnimation, slideToLeftAnimate]);
+  }, [slideToLeftAnimate]);
 
   return {
     animated,
