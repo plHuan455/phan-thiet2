@@ -120,5 +120,8 @@
       top: rem(-170);
       left: rem(20);
     }
+    @include tablet-down {
+      max-width: rem(110);
+    }
   }
 }

@@ -1,5 +1,7 @@
 import React, { useRef, useState } from 'react';
 
+import useAnimation from '../hooks/animation';
+
 import ballon from 'assets/images/introVideo/balloon.png';
 import Container from 'common/Container';
 import Image from 'components/atoms/Image';
@@ -8,12 +10,14 @@ import Player from 'components/organisms/Player';
 const IntroVideo: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlay, setPlay] = useState(false);
+  const ballonRef = useRef<HTMLDivElement>(null);
+  const { animated, ballonAnimate } = useAnimation({ ballonRef });
 
   return (
     <section className="u-mt-md-80 u-mt-48 u-mb-md-80 u-mb-48 t-introVideo">
-      <div className="t-introVideo_ballon">
+      <animated.div className="t-introVideo_ballon" style={ballonAnimate} ref={ballonRef}>
         <Image src={ballon} alt="ballon" ratio="132x202" />
-      </div>
+      </animated.div>
       <Container>
         <div className="t-introVideo_content">
           <Player
