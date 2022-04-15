@@ -1,5 +1,4 @@
-import React, { useMemo } from 'react';
-import { useQuery } from 'react-query';
+import React from 'react';
 
 import Container from 'common/Container';
 import FlatMore from 'common/FlatMore';
