@@ -1,4 +1,6 @@
 import React from 'react';
+import { useForm } from 'react-hook-form';
+import { useQuery } from 'react-query';
 
 import useNews from '../hook';
 
@@ -13,6 +15,7 @@ import Section from './section';
 import Videos from './videos';
 
 import HelmetContainer from 'common/Helmet';
+import { getOverviewListService } from 'services/overviews';
 import { getOgDataPage } from 'utils/functions';
 
 const Screen: React.FC<BasePageDataTypes<any>> = ({
@@ -22,6 +25,9 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
   seoData,
 }) => {
   const { ref } = useNews();
+
+  const { data } = useQuery('getOverviewList', () => getOverviewListService());
+  console.log(data);
 
   return (
     <>
