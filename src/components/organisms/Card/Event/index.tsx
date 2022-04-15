@@ -73,7 +73,7 @@ const CardEvent: React.FC<CardEventProps> = ({
         <Link target={target} href={href}>
           <div className="animate animate-arrowSlide d-flex align-items-center">
             {/* TODO: Translation later */}
-            <Text modifiers={['14x20', '400', 'copper']} content="Xem thêm" />
+            <Text modifiers={['14x20', '400', 'copper']} content="Xem Chi Tiết" />
             <div className="u-ml-8" />
             <Icon iconName="arrowRightCopper" size="16" />
           </div>
