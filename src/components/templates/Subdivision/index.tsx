@@ -4,19 +4,24 @@ import { Col, Row } from 'react-bootstrap';
 import Container from 'common/Container';
 import Button from 'components/atoms/Button';
 import Heading from 'components/atoms/Heading';
+import Icon from 'components/atoms/Icon';
 import Card from 'components/organisms/Card';
 import { CardDivisionProps } from 'components/organisms/Card/Division';
 
 interface SubdivisionProps {
   list?: CardDivisionProps[];
   title?: string;
-  btn?: LinkTypes;
+  btn?: LinkTypes & {disabled?: boolean};
+  onMore?: () => void
+  loading?: boolean;
 }
 
 const Subdivision: React.FC<SubdivisionProps> = ({
   list,
   title,
   btn,
+  loading,
+  onMore,
 }) => (
   <div className="t-subdivision">
     <Heading
@@ -40,9 +45,24 @@ const Subdivision: React.FC<SubdivisionProps> = ({
           </Col>
         ))}
       </Row>
-      {btn && (
+      {loading && (
+      <div className="u-mt-16 u-pt-16 u-pb-16">
+        <div className="d-flex justify-content-center">
+          {/* TODO: edit iconName */}
+          loading
+          <Icon iconName="loadingWhite" size="36" />
+        </div>
+      </div>
+      )}
+      {btn && !btn?.disabled && (
       <div className="u-mt-16 u-mt-lg-32 d-flex justify-content-center">
-        <Button {...btn} variant="primary-green">
+        <Button
+          {...btn}
+          variant="primary-green"
+          onClick={() => {
+            if (onMore) onMore();
+          }}
+        >
           {btn?.text}
         </Button>
       </div>
@@ -55,6 +75,8 @@ Subdivision.defaultProps = {
   list: undefined,
   title: undefined,
   btn: undefined,
+  onMore: undefined,
+  loading: undefined,
 };
 
 export default Subdivision;
