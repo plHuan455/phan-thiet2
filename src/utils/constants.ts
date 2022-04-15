@@ -9,7 +9,18 @@ const LOCAL_STORAGE = {
   LANGUAGE: 'NOVAWORLD_PHANTHIET_Language',
 };
 
+const PREFIX = {
+  DIVISION: {
+    VI: 'phan-khu',
+    EN: 'subdivision',
+    JA: 'subdivision',
+    KO: 'subdivision',
+    ZH: 'subdivision',
+  },
+};
+
 export default {
   MENU_CODE,
   LOCAL_STORAGE,
+  PREFIX,
 };

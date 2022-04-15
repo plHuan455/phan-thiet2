@@ -20,6 +20,7 @@ const Division: React.FC<SectionBlocks> = ({ blocks }) => {
   const subDivisionData = useMemo(() => subDivisionList?.data?.map((item) => ({
     imgSrc: baseURL(item.thumbnail),
     title: item.name,
+    // TODO: Update prefix later
     href: `phan-khu/${item.slug}`,
     description: item.content.description,
   })), [subDivisionList]);
