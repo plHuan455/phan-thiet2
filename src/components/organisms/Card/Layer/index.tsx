@@ -13,7 +13,7 @@ export interface CardLayerProps {
   target?: string;
   ratio?: Ratio;
   isBold?: boolean;
-  modifiers?: ('r15' | 'r12' | 'filter' | 'hover' | 'pd-6x20' | 'pd-8x16' | 'pd-24x16' | 'pd-6x16')[]
+  modifiers?: ('r15' | 'r12' | 'filter' | 'hover' | 'pd-6x20' | 'pd-8x16' | 'pd-24x16' | 'pd-6x16')[];
 }
 
 const CardLayer: React.FC<CardLayerProps> = ({
@@ -39,12 +39,12 @@ const CardLayer: React.FC<CardLayerProps> = ({
         </div>
       </Link>
       {
-        modifiers?.includes('hover') && (
-          <div className="o-cardLayer_content-desc">
-            <Text modifiers={['16x28', 'white', '400']} content={description} />
-          </div>
-        )
-      }
+          modifiers?.includes('hover') && (
+            <div className="o-cardLayer_content-desc">
+              <Text modifiers={['16x28', 'white', '400']} content={description} />
+            </div>
+          )
+        }
     </div>
   </div>
 );

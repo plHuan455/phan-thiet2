@@ -10,7 +10,7 @@ export interface CardPlayerProps {
   title?: string;
   dateTime?: string;
   tag?: string;
-  isReverse?: boolean;
+  modifiers?: ('reverse' | 'shadow')[];
   onClick?: () => void;
 }
 
@@ -19,10 +19,10 @@ const CardPlayer: React.FC<CardPlayerProps> = ({
   dateTime,
   tag,
   title,
-  isReverse,
+  modifiers,
   onClick,
 }) => (
-  <div className={mapModifiers('o-cardPlayer', isReverse && 'reverse')}>
+  <div className={mapModifiers('o-cardPlayer', modifiers)}>
     <button type="button" className="o-cardPlayer_thumbnail" onClick={onClick}>
       <Image src={thumbnail} alt="card-thumbnail" ratio="354x221" />
 
