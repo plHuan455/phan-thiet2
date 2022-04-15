@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react';
 
-import imgMap from 'assets/images/divisionUtilities/bg.png';
 import Container from 'common/Container';
 import Heading from 'components/atoms/Heading';
 import MarkerCard, { MarkerCardProps } from 'components/organisms/LocationMap/component';
@@ -12,8 +11,9 @@ interface LocationsItemTypes extends MarkerCardProps{
 }
 
 interface DivisionUtilitiesProps {
-  title?: string
-  listLocations?: LocationsItemTypes[]
+  title?: string;
+  listLocations?: LocationsItemTypes[];
+  background: string;
 }
 
 const WIDTH_IMAGE = 931;
@@ -22,6 +22,7 @@ const HEIGHT_IMAGE = 752;
 const DivisionUtilities: React.FC<DivisionUtilitiesProps> = ({
   title,
   listLocations,
+  background,
 }) => {
   const [active, setActive] = useState<number | undefined>(undefined);
   const ref = useRef<HTMLDivElement>(null);
@@ -35,7 +36,7 @@ const DivisionUtilities: React.FC<DivisionUtilitiesProps> = ({
         </div>
         <div className="t-divisionUtilities_map u-mt-41">
           <div className="t-divisionUtilities_image" style={{ paddingBottom: `calc(${HEIGHT_IMAGE} / ${WIDTH_IMAGE}  * 100%)` }}>
-            <img src={imgMap} alt="location-map" loading="lazy" />
+            <img src={background} alt="location-map" loading="lazy" />
           </div>
           {
             listLocations?.map((item, index) => (

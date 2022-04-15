@@ -15,7 +15,7 @@ interface DivisionProps {
 }
 
 const Division: React.FC<DivisionProps> = () => (
-  <section className="u-mt-md-80 u-mt-48 u-mb-md-80 u-mb-48" style={{ color: 'var(--theme)' }}>
+  <section className="u-pt-md-80 u-pt-48 u-pb-md-80 u-pb-48" style={{ color: 'var(--theme)' }}>
     <Container>
       <FlatMore
         title={{
@@ -31,6 +31,11 @@ const Division: React.FC<DivisionProps> = () => (
         settings={{
           prevArrow: <Arrow.Prev />,
           nextArrow: <Arrow.Next />,
+          customPaging() {
+            return (
+              <span className="o-carousel_dot rect inherit" style={{ backgroundColor: 'var(--theme)' }} />
+            );
+          },
         }}
         render={(item) => <Card.Division {...item} />}
       />

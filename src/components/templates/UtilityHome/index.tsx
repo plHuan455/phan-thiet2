@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Container } from 'react-bootstrap';
 import Slider from 'react-slick';
 
+import Heading from 'components/atoms/Heading';
 import Image from 'components/atoms/Image';
 import Text from 'components/atoms/Text';
-import Title from 'components/molecules/Title';
 import Carousel, { NextArrow, PrevArrow } from 'components/organisms/Carousel';
 import useDeviceQueries from 'hooks/useDeviceQueries';
 
@@ -72,7 +72,7 @@ const UtilityHome: React.FC<UtilityHomeProps> = ({
         <div className="t-utilityHome_content">
           <div className="t-utilityHome_overlay" />
           <div className="t-utilityHome_title">
-            <Title type="h4" modifiers={['700', 'gradientGreen']} content={title} />
+            <Heading type="h4" modifiers={['700', 'gradientGreen']} content={title} />
           </div>
           {
             listUtilities && listUtilities?.length > 0 && (

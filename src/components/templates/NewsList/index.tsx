@@ -3,8 +3,8 @@ import { Col, Row } from 'react-bootstrap';
 
 import Container from 'common/Container';
 import Button from 'components/atoms/Button';
+import Heading from 'components/atoms/Heading';
 import Text from 'components/atoms/Text';
-import Title from 'components/molecules/Title';
 import Card from 'components/organisms/Card';
 import { CardNewsProps } from 'components/organisms/Card/News';
 
@@ -22,7 +22,7 @@ const NewsList: React.FC<NewsListProps> = ({
   <div className="t-newsList">
     <Container>
       <div className="t-newsList_title">
-        <Title type="h4" modifiers={['s015', 'gradientGreen', '700']} content={title} />
+        <Heading type="h4" modifiers={['s015', 'gradientGreen', '700']} content={title} />
       </div>
       {listNews?.length ? (
         <>

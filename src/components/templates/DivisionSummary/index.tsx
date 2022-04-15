@@ -59,7 +59,7 @@ const DivisionSummary: React.FC<DivisionSummaryProps> = ({
                     <Card.Layer
                       {...item}
                       ratio="258x334"
-                      modifiers={['filter', 'r12', 'pd-8x16', 'hover']}
+                      modifiers={['filter', 'r12', 'pd-8x16']}
                     />
                   </div>
                 ))}
@@ -74,7 +74,7 @@ const DivisionSummary: React.FC<DivisionSummaryProps> = ({
                     <Card.Layer
                       {...item}
                       ratio="258x334"
-                      modifiers={['filter', 'r12', 'pd-8x16', 'hover']}
+                      modifiers={['filter', 'r12', 'pd-8x16']}
                     />
                   </div>
                 ))}
