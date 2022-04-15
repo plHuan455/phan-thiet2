@@ -17,3 +17,13 @@ export interface ConsultancyFormInput {
   topic_ids: string;
   grecaptcha_token: string;
 }
+
+export interface Topic {
+  id: string;
+  displayOrder: number;
+  name: string;
+}
+
+export interface TopicRequestParams {
+  keyword?: string;
+}

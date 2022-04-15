@@ -32,7 +32,7 @@ export interface ConsultancyProps {
     checkbox?: {
       label: string,
       subLabel: string,
-      list: CheckboxTypes[],
+      list?: CheckboxTypes[],
     },
     btnText: string
   }
@@ -53,7 +53,7 @@ export interface ConsultancyPropsInput {
     checkbox?: {
       label: string,
       subLabel: string,
-      list: CheckboxTypes[],
+      list?: CheckboxTypes[],
     },
     btnText: string
   }
@@ -166,7 +166,8 @@ const Consultancy: React.FC<ConsultancyProps> = ({
                 </div>
                 <div className="o-consultancy_checkbox-list">
                   {
-                    consultancyInfo?.checkbox?.list.map((item, index) => (
+                    Array.isArray(consultancyInfo?.checkbox?.list)
+                    && consultancyInfo?.checkbox?.list.map((item, index) => (
                       <div
                         key={`o-consultancy_checkbox-${index.toString()}`}
                         className="o-consultancy_checkbox-list-item"
