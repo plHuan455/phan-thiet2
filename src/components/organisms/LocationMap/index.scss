@@ -98,6 +98,17 @@
     @include small-mobile {
       max-width: rem(12);
     }
+
+    &-circle {
+      border-radius: 50%;
+      border: 1px solid $white;
+      box-shadow: 0 0 10px $white;
+      left: 50%;
+      pointer-events: none;
+      position: absolute;
+      top: 80%;
+      transform: translate(-50%, -20%);
+    }
   }
 
   &-active {
@@ -109,6 +120,11 @@
 
         .a-image {
           transform: scale(1.5);
+        }
+
+        &-circle {
+          animation: rippleMaker 1.5s ease-in-out infinite backwards;
+          transform: translate(-50%, 65%) scale(1.5);
         }
       }
 
@@ -156,6 +172,38 @@
       position: absolute;
       top: 50%;
       transform: translate(-50%, -50%);
+    }
+  }
+
+  @keyframes  rippleMaker {
+    0% {
+      height: rem(10);
+      opacity: 0;
+      width: rem(15);
+    }
+
+    25% {
+      height: rem(13);
+      opacity: 0.5;
+      width: rem(20);
+    }
+
+    50% {
+      height: rem(15);
+      opacity: 1;
+      width: rem(25);
+    }
+
+    75% {
+      height: rem(17);
+      opacity: 0.5;
+      width: rem(30);
+    }
+
+    100% {
+      height: rem(20);
+      opacity: 0;
+      width: rem(35);
     }
   }
 
