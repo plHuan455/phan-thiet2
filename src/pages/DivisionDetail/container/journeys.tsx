@@ -1,9 +1,11 @@
 import React from 'react';
 
 import divisionJourneysData from 'assets/dataDummy/divisionJourneys';
-import DivisionJourneys from 'components/templates/DivisionJourneys';
+import DivisionJourneys, { DivisionJourneysProps } from 'components/templates/DivisionJourneys';
 
-const Journeys: React.FC = () => (
+interface JourneysProps extends DivisionJourneysProps {}
+
+const Journeys: React.FC<JourneysProps> = (props) => (
   <section>
     <DivisionJourneys
       {...divisionJourneysData}
@@ -11,6 +13,7 @@ const Journeys: React.FC = () => (
       textNotFound="Không tìm thấy dữ liệu"
       slugActive={divisionJourneysData.tabs[0].slug}
       handleClick={() => ''}
+      {...props}
     />
   </section>
 );

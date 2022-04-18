@@ -7,8 +7,6 @@ import layer4 from 'assets/images/consultancy/orange-background.png';
 import ConsultancyCommon from 'common/Consultancy';
 import Image from 'components/atoms/Image';
 
-interface ConsultancyProps {}
-
 const LayerSection: React.FC = () => (
   <div className="s-consultancy">
     <div className="s-consultancy_layer1">
@@ -26,7 +24,11 @@ const LayerSection: React.FC = () => (
   </div>
 );
 
-const Consultancy: React.FC<ConsultancyProps> = () => (
+interface ConsultancyProps {
+  title?: string;
+}
+
+const Consultancy: React.FC<ConsultancyProps> = ({ title }) => (
   <section
     className="position-relative"
     style={{ color: 'var(--theme)' }}
@@ -35,11 +37,15 @@ const Consultancy: React.FC<ConsultancyProps> = () => (
       layer={<LayerSection />}
       py="lg"
       title={{
-        text: 'ĐĂNG KÝ NHẬN <br /> THÔNG TIN DỰ ÁN',
+        text: title || '',
         modifiers: ['400', 'inherit', 's015'],
       }}
       variantButton="inherit"
     />
   </section>
 );
+
+Consultancy.defaultProps = {
+  title: '',
+};
 export default Consultancy;

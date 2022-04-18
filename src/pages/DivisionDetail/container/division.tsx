@@ -12,14 +12,15 @@ const dataDummy = new Array(10).fill({
 });
 
 interface DivisionProps {
+  title?: string;
 }
 
-const Division: React.FC<DivisionProps> = () => (
+const Division: React.FC<DivisionProps> = ({ title }) => (
   <section className="u-pt-md-80 u-pt-48 u-pb-md-80 u-pb-48" style={{ color: 'var(--theme)' }}>
     <Container>
       <FlatMore
         title={{
-          text: 'CÓ THỂ BẠN QUAN TÂM',
+          text: title || '',
           type: 'h2',
           modifiers: ['s015', '400', 'inherit'],
         }}
@@ -42,5 +43,9 @@ const Division: React.FC<DivisionProps> = () => (
     </Container>
   </section>
 );
+
+Division.defaultProps = {
+  title: '',
+};
 
 export default Division;

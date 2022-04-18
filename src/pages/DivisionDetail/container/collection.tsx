@@ -4,9 +4,12 @@ import layer1 from 'assets/images/divisionCollection/layer1.png';
 import layer2 from 'assets/images/divisionCollection/layer2.png';
 import layer3 from 'assets/images/divisionCollection/layer3.png';
 import layer4 from 'assets/images/divisionCollection/layer4.png';
-import DivisionCollection from 'components/templates/DivisionCollection';
+import DivisionCollection, { DivisionCollectionProps } from 'components/templates/DivisionCollection';
 
-const Collection: React.FC = () => (
+interface CollectionProps extends Omit<DivisionCollectionProps, 'dataList'> {
+}
+
+const Collection: React.FC<CollectionProps> = (props) => (
   <section>
     <DivisionCollection
       dataList={[
@@ -61,8 +64,7 @@ const Collection: React.FC = () => (
           thumbnail: layer1,
         },
       ]}
-      title="BỘ SƯU TẬP"
-      description="Chắt lọc tinh hoa kiến trúc của mỗi châu lục, tạo nên một bức tranh đa sắc màu, nơi hội tụ tinh hoa của nền văn hóa thế giới."
+      {...props}
     />
   </section>
 );

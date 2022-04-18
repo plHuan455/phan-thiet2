@@ -1,10 +1,11 @@
 import React from 'react';
 
-import banner from 'assets/images/banner.png';
-import DivisionBanner from 'components/templates/DivisionBanner';
+import DivisionBanner, { DivisionBannerProps } from 'components/templates/DivisionBanner';
 
-const Banner: React.FC = () => (
-  <DivisionBanner thumbnail={banner} title="NHỊP ĐẬP THẾ GIỚI MỚI" />
+interface BannerProps extends DivisionBannerProps {}
+
+const Banner: React.FC<BannerProps> = (props) => (
+  <DivisionBanner {...props} />
 );
 
 export default Banner;

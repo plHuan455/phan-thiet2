@@ -8,7 +8,7 @@ import Card from 'components/organisms/Card';
 import { CardLayerProps } from 'components/organisms/Card/Layer';
 import Carousel from 'components/organisms/Carousel';
 
-interface DivisionSummaryProps {
+export interface DivisionSummaryProps {
   title?: string;
   description?: string;
   data?: CardLayerProps[];
@@ -88,9 +88,6 @@ const DivisionSummary: React.FC<DivisionSummaryProps> = ({
 );
 
 DivisionSummary.defaultProps = {
-  title: '',
-  description: '',
-  data: [],
 };
 
 export default DivisionSummary;
