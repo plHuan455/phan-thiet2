@@ -125,6 +125,12 @@
         &-circle {
           animation: rippleMaker 1.5s ease-in-out infinite backwards;
           transform: translate(-50%, 65%) scale(1.5);
+          @include tablet-down {
+            transform: translate(-50%, 65%) scale(1.25);
+          }
+          @include small-mobile {
+            transform: translate(-50%, 10%);
+          }
         }
       }
 
