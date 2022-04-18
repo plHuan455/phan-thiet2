@@ -123,7 +123,7 @@
         }
 
         &-circle {
-          animation: rippleMaker 2s ease-in-out infinite backwards;
+          animation: rippleMaker 1.5s ease-in-out infinite backwards;
           transform: translate(-50%, 65%) scale(1.5);
         }
       }
