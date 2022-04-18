@@ -4,6 +4,7 @@ const Home = React.lazy(() => import('pages/Home'));
 const Contact = React.lazy(() => import('pages/Contact'));
 const Policy = React.lazy(() => import('pages/Policy'));
 const DivisionList = React.lazy(() => import('pages/DivisionList'));
+const News = React.lazy(() => import('pages/News'));
 
 export type TemplateCodeTypes = {
   code: string;
@@ -42,5 +43,9 @@ export const TemplateCode: TemplateCodeTypes[] = [
   {
     code: 'list_subdivision',
     component: DivisionList,
+  },
+  {
+    code: 'new_image',
+    component: News,
   },
 ];

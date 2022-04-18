@@ -19,11 +19,6 @@ const useAnimation = () => {
     opacity: 0,
   });
 
-  const slideToTopAnimation = useSpring({
-    y: 0,
-    opacity: 0,
-  });
-
   useEffect(() => {
     let res: NodeJS.Timeout;
     {
@@ -35,10 +30,6 @@ const useAnimation = () => {
         x: xReverseSlide,
         opacity: opacityReverseSlide,
       } = slideReverseAnimation;
-      const {
-        y: yTopSlide,
-        opacity: opacityToplide,
-      } = slideToTopAnimation;
 
       // -------------------- ballons ------------------
       opacity.start({
@@ -69,10 +60,6 @@ const useAnimation = () => {
       xReverseSlide.start({ from: -300, to: 0, config: { duration: 500 } });
       opacityReverseSlide.start({ from: 0, to: 1 });
 
-      // ----------------- slide to top ---------------- //
-      yTopSlide.start({ from: 100, to: 0 });
-      opacityToplide.start({ from: 0, to: 1 });
-
       res = setTimeout(() => {
         rotateZ.start({ cancel: true });
         xLeftFly.start({ cancel: true });
@@ -88,7 +75,6 @@ const useAnimation = () => {
     ballonAnimate: flyAnimation,
     slideAnimate: slideAnimation,
     slideReverseAnimate: slideReverseAnimation,
-    slideToTopAnimate: slideToTopAnimation,
   };
 };
 

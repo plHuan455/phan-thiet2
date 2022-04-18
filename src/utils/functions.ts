@@ -177,3 +177,10 @@ export const getTimePastToCurrent = (date?: string) => {
 };
 
 export const getSearchParams = (path: string) => Object.fromEntries(new URLSearchParams(path));
+
+export const getOgDataPage = (pageData?: PageDataTypes) => ({
+  ogDescription: pageData?.ogDescription,
+  ogImage: pageData?.ogImage,
+  ogTitle: pageData?.ogTitle,
+  ogType: pageData?.ogType,
+});

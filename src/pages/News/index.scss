@@ -92,11 +92,15 @@
   &_ballon {
     top: rem(-90);
     right: 0;
-    max-width: rem(359);
+    max-width: rem(320);
     @include position-section;
     @include break-max(1365px) {
       max-width: rem(180);
       top: rem(-50);
+    }
+    @include mobile-down {
+      max-width: rem(80);
+      top: rem(-16);
     }
   }
   &_leaf1 {
@@ -117,7 +121,11 @@
 
     @include tablet-down {
       max-width: rem(231);
-      bottom: -10%;
+      bottom: -19%;
+    }
+
+    @include mobile-down {
+      max-width: rem(160);
     }
   }
 }
@@ -145,6 +153,7 @@
       max-width: rem(140);
     }
     @include mobile-down {
+      max-width: rem(100);
       top: -25%;
     }
   }
@@ -153,12 +162,20 @@
 .s-consultancy {
   position: relative;
   &_layer {
+    z-index: 3;
     bottom: 0;
     left: 0;
     max-width: rem(326);
-    @include position-section;
+    position: absolute;
+    width: 100%;
     @include desktop-down {
-      max-width: rem(163);
+      max-width: rem(248);
+    }
+    @include tablet-down {
+      max-width: rem(160);
+    }
+    @include mobile-down {
+      max-width: rem(100);
     }
   }
 }

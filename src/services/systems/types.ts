@@ -41,4 +41,6 @@ export type SystemsData = {
     endDate: string;
   };
   googleRecaptchaSiteKey: string;
+  og?: OpenGraphDataTypes;
+  seo?: SEODataTypes;
 };
