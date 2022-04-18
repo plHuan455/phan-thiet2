@@ -8,7 +8,12 @@ import leaf2 from 'assets/images/pages/news/leaf_2.png';
 import Image from 'components/atoms/Image';
 import NewsList from 'components/templates/NewsList';
 import useScrollAnimate from 'hooks/useScrollAnimation';
+import { OverviewNewsType } from 'services/overviews/types';
 import { baseURL, getTimePastToCurrent } from 'utils/functions';
+
+interface NewsProps {
+  news?: OverviewNewsType[];
+}
 
 const News: React.FC<NewsProps> = ({ news }) => {
   const leaf1Ref = useRef<HTMLDivElement>(null);
