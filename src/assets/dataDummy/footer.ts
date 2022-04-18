@@ -1,5 +1,7 @@
 import fb from 'assets/images/footer/fb.svg';
+import instagram from 'assets/images/footer/instagram.svg';
 import tiktok from 'assets/images/footer/tiktok.svg';
+import twitter from 'assets/images/footer/twitter.svg';
 import youtube from 'assets/images/footer/youtube.svg';
 import zalo from 'assets/images/footer/zalo.svg';
 import logo from 'assets/images/logo_novaland.svg';
@@ -72,7 +74,19 @@ const socialList = {
       target: '_self',
     },
     {
+      icon: instagram,
+      text: 'Boutique Hotel',
+      url: '/',
+      target: '_self',
+    },
+    {
       icon: tiktok,
+      text: 'Boutique Hotel',
+      url: '/',
+      target: '_self',
+    },
+    {
+      icon: twitter,
       text: 'Boutique Hotel',
       url: '/',
       target: '_self',

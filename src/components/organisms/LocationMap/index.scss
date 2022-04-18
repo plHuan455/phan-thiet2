@@ -106,8 +106,8 @@
       left: 50%;
       pointer-events: none;
       position: absolute;
-      top: 80%;
-      transform: translate(-50%, -20%);
+      top: 70%;
+      transform: translate(-50%, -30%);
     }
   }
 
@@ -188,22 +188,10 @@
       width: rem(15);
     }
 
-    25% {
-      height: rem(13);
-      opacity: 0.5;
-      width: rem(20);
-    }
-
     50% {
       height: rem(15);
       opacity: 1;
       width: rem(25);
-    }
-
-    75% {
-      height: rem(17);
-      opacity: 0.5;
-      width: rem(30);
     }
 
     100% {
