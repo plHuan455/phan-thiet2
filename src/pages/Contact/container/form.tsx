@@ -16,14 +16,6 @@ import { getBlockData, getSearchParams } from 'utils/functions';
 import { schemasConsultancyForm } from 'utils/schemas';
 
 export interface FormProps {
-  form?: {
-    placeholderName?: string;
-    placeholderAddress?: string;
-    placeholderPhone?: string;
-    placeholderEmail?: string;
-    placeholderContent?: string;
-    button?: string;
-  };
   title: string;
   description?: string;
 }
@@ -41,12 +33,12 @@ const Form: React.FC<SectionBlocks> = ({ blocks }) => {
     const blockPageContent = getBlockData<FormProps>('form_contact', blocks);
     return {
       form: {
-        addressPlaceholder: blockPageContent?.form?.placeholderAddress,
-        contentPlaceholder: blockPageContent?.form?.placeholderContent,
-        emailPlaceholder: blockPageContent?.form?.placeholderEmail,
-        namePlaceholder: blockPageContent?.form?.placeholderName,
-        phonePlaceholder: blockPageContent?.form?.placeholderPhone,
-        btnText: blockPageContent?.form?.button,
+        addressPlaceholder: 'ĐỊA CHỈ',
+        contentPlaceholder: 'NỘI DUNG',
+        emailPlaceholder: 'EMAIL *',
+        namePlaceholder: 'HỌ VÀ TÊN',
+        phonePlaceholder: 'ĐIỆN THOẠI *',
+        btnText: 'Đăng ký nhận thông tin',
       },
       titleForm: blockPageContent?.title,
       descriptionForm: blockPageContent?.description,
