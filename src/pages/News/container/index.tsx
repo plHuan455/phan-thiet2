@@ -14,7 +14,7 @@ import Section from './section';
 import Videos from './videos';
 
 import HelmetContainer from 'common/Helmet';
-import { LanguageContext } from 'common/Language';
+import { LanguageContext, LanguageContextResponse } from 'common/Language';
 import { getOverviewListService } from 'services/overviews';
 import { getOgDataPage } from 'utils/functions';
 
@@ -25,8 +25,9 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
   seoData,
 }) => {
   const langContext = useContext(LanguageContext);
+  const { language } = langContext as LanguageContextResponse;
   const { ref } = useNews();
-  const { data } = useQuery(['getOverviewList', [langContext]], () => getOverviewListService());
+  const { data } = useQuery(['getOverviewList', [language.isChange]], () => getOverviewListService());
 
   return (
     <>
