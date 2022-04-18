@@ -51,7 +51,7 @@ const Videos: React.FC<VideoProps> = ({ videos }) => {
         const isVidOutside = item.video.includes('http://') || item.video.includes('https://');
         const vidUrl = isVidOutside ? item.video : linkURL(item.video);
         const vidData = {
-          thumbnail: baseURL(item?.thumbnail) || 'https://source.unsplash.com/random',
+          thumbnail: baseURL(item?.thumbnail),
           title: item.name,
           tag: item?.tag,
           datetime: item?.publishedAt ? getTimePastToCurrent(item.publishedAt) : undefined,
