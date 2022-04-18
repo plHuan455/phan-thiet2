@@ -35,7 +35,6 @@ const Player = forwardRef<HTMLVideoElement, PlayerProps>(
       isMuted,
       controls = true,
       modifiers,
-      // iconPlayer,
       isPlaying,
       isYoutube,
       onEnded,

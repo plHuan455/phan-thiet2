@@ -84,35 +84,6 @@
       visibility: hidden;
     }
   }
-  @include tablet-down {
-    #{$root}_play {
-      width: rem(60);
-      height: rem(60);
-    }
-
-    #{$root}_icon {
-      position: absolute;
-      bottom: rem(18);
-      left: rem(10);
-    }
-    #{$root}_triangle {
-      @include triangle(40px);
-    }
-  }
-  @include mobile-down {
-    #{$root}_play {
-      width: rem(40);
-      height: rem(40);
-    }
-    #{$root}_icon {
-      position: absolute;
-      bottom: rem(13);
-      left: rem(7);
-    }
-    #{$root}_triangle {
-      @include triangle(25px);
-    }
-  }
   &_play {
     position: relative;
     background: $white;
@@ -120,14 +91,38 @@
     height: rem(80);
     border-radius: 50%;
     transform: rotate(90deg);
+    @include tablet-down {
+      width: rem(45);
+      height: rem(45);
+    }
+    @include mobile-down {
+      width: rem(32);
+      height: rem(32);
+    }
   }
   &_icon {
     position: absolute;
-    bottom: rem(20);
-    left: rem(10);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, calc(-50% - 8px));
+
+    @include tablet-down {
+      transform: translate(-50%, calc(-50% - 5px));
+    }
+
+    @include mobile-down {
+      transform: translate(-50%, calc(-50% - 3px));
+    }
   }
 
   &_triangle {
-    @include triangle(60px);
+    @include triangle(rem(40));
+
+    @include tablet-down {
+      @include triangle(rem(24));
+    }
+    @include mobile-down {
+      @include triangle(rem(14));
+    }
   }
 }
