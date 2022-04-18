@@ -12,12 +12,21 @@ import News from './news';
 import Section from './section';
 import Videos from './videos';
 
-const Screen: React.FC = () => {
+import HelmetContainer from 'common/Helmet';
+import { getOgDataPage } from 'utils/functions';
+
+const Screen: React.FC<BasePageDataTypes<any>> = ({
+  blocks,
+  banners,
+  pageData,
+  seoData,
+}) => {
   const { ref } = useNews();
 
   return (
     <>
-      <Banner />
+      <HelmetContainer seoData={seoData} ogData={getOgDataPage(pageData)} />
+      <Banner banners={banners} blocks={blocks} />
       <MenuTag />
       <Section ref={ref.news}>
         <News />

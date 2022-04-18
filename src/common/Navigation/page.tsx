@@ -24,7 +24,6 @@ const Page: React.FC = () => {
   if (isLoading) {
     return <LoadingPage />;
   }
-
   if (error) {
     return <Error status={(error as AxiosError)?.response?.status} />;
   }
