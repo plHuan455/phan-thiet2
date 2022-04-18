@@ -27,7 +27,7 @@ const Documents: React.FC<DocumentProps> = ({ documents }) => {
     if (Array.isArray(documents)) {
       const cardNormals: CardNormalProps[] = documents.map((item) => ({
         thumbnail: item?.thumbnail || 'https://source.unsplash.com/random',
-        title: item.title || 'Nova World phan thiết và chuỗi cung cấp tiện ích',
+        title: item.title || '',
         href: linkURL(item.link),
         tag: item?.tag,
         dateTime: getTimePastToCurrent(item.publishedAt),

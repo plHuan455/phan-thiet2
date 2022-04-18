@@ -5,6 +5,7 @@ import FlatMore from 'common/FlatMore';
 import Image from 'components/atoms/Image';
 import PopupImage from 'components/templates/PopupImage';
 import { OverviewImageType } from 'services/overviews/types';
+import { baseURL } from 'utils/functions';
 
 export interface CardImageProps {
   thumbnail: string,
@@ -65,7 +66,7 @@ const Images: React.FC<ImagesProps> = ({ images }) => {
   const imageList = useMemo(() => {
     if (Array.isArray(images)) {
       return images?.map((item) => ({
-        thumbnail: item.path,
+        thumbnail: baseURL(item.path),
       }));
     }
     return [];
@@ -94,8 +95,8 @@ const Images: React.FC<ImagesProps> = ({ images }) => {
         handleClose={() => updateImageState({ isOpen: false })}
         currentImgIdx={state.currentImgIdx}
         dataImageList={
-            imageList?.map((item) => item.thumbnail) || []
-          }
+          imageList?.map((item) => item.thumbnail) || []
+        }
       />
     </div>
   );
