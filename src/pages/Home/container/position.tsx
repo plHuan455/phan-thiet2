@@ -5,8 +5,9 @@ import ProjectPositionHome from 'components/templates/ProjectPositionHome';
 import { baseString, getBlockData } from 'utils/functions';
 
 interface PositionItemProps {
-  titleMain: string
-  titleSub: string
+  number: string;
+  titleSub: string;
+  unit: string;
 }
 interface PositionProps{
   item1: PositionItemProps,
@@ -24,7 +25,7 @@ const Position: React.FC<SectionBlocks> = ({ blocks }) => {
     ];
     return data && data.map((val) => ({
       label: baseString(val?.titleSub),
-      value: baseString(val?.titleMain),
+      value: `${val?.number} ${val?.unit}`,
     }));
   }, [blocks]);
 
