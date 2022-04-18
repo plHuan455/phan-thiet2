@@ -100,10 +100,9 @@
     }
 
     &-circle {
-      animation: rippleMaker 2s ease-in-out infinite backwards;
       border-radius: 50%;
-      border: 1px solid $antique-white;
-      box-shadow: 0 0 10px $antique-white;
+      border: 1px solid $white;
+      box-shadow: 0 0 10px $white;
       left: 50%;
       pointer-events: none;
       position: absolute;
@@ -124,7 +123,8 @@
         }
 
         &-circle {
-          visibility: hidden;
+          animation: rippleMaker 2s ease-in-out infinite backwards;
+          transform: translate(-50%, 65%) scale(1.5);
         }
       }
 
