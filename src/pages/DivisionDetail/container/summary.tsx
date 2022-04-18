@@ -1,26 +1,37 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
-import DivisionSummary, { DivisionSummaryProps } from 'components/templates/DivisionSummary';
+import DivisionSummary from 'components/templates/DivisionSummary';
+import { SubDivisionDetailTypes } from 'services/subdivision/types';
+import { baseURL } from 'utils/functions';
 
-// const dataDummy = [
-//   {
-//     thumbnail: 'https://source.unsplash.com/random',
-//     title: 'OCEAN GOLF',
-//   },
-//   {
-//     thumbnail: 'https://source.unsplash.com/random',
-//     title: 'OCEAN GOLF',
-//   },
-// ];
+interface SummaryProps {
+  data?: SubDivisionDetailTypes;
+}
 
-interface SummaryProps extends DivisionSummaryProps {}
+const Summary: React.FC<SummaryProps> = ({
+  data,
+}) => {
+  const summaryData = useMemo(() => [
+    data?.content.items.item1,
+    data?.content.items.item2,
+  ].map((item) => ({
+    thumbnail: baseURL(item?.image),
+    title: item?.title,
+  })), [data]);
 
-const Summary: React.FC<SummaryProps> = (props) => (
-  <section className="u-pt-md-77 u-pt-48 u-pb-md-77 u-pb-48" style={{ color: 'var(--theme)' }}>
-    <DivisionSummary
-      {...props}
-    />
-  </section>
-);
+  return (
+    <section className="u-pt-md-77 u-pt-48 u-pb-md-77 u-pb-48" style={{ color: 'var(--theme)' }}>
+      <DivisionSummary
+        title={data?.content.title}
+        description={data?.content.description}
+        data={summaryData}
+      />
+    </section>
+  );
+};
+
+Summary.defaultProps = {
+  data: undefined,
+};
 
 export default Summary;

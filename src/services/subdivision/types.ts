@@ -55,13 +55,13 @@ interface Content {
 }
 
 export interface SubDivisionDetailTypes {
-  id: number
-  displayOrder: number
-  thumbnail: string
-  slug: string
-  name: string
-  logo: string
-  content: Content
-  openGraph: OpenGraphDataTypes
-  seoData: SEODataTypes
+  id: number;
+  displayOrder: number;
+  thumbnail: string;
+  slug: string;
+  name: string;
+  logo: string;
+  content: Content;
+  openGraph: OpenGraphDataTypes;
+  seoData: SEODataTypes;
 }
