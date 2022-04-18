@@ -16,7 +16,6 @@ import DivisionDetail from 'pages/DivisionDetail';
 import Error from 'pages/Error';
 import EventsDetail from 'pages/EventsDetail';
 import NewsDetail from 'pages/NewsDetail';
-import Search from 'pages/Search';
 import { store } from 'store';
 import { useAppSelector } from 'store/hooks';
 
@@ -39,7 +38,6 @@ const App: React.FC = () => (
           <Route index element={<HomeNavigation />} />
           <Route path=":slug" element={<PageNavigation />} />
           <Route path="404" element={<Error />} />
-          <Route path="tim-kiem" element={<Search />} />
           <Route path="tin-tuc/:slug" element={<NewsDetail />} />
           <Route path="su-kien/:slug" element={<EventsDetail />} />
           <Route path="phan-khu/:slug" element={<DivisionDetail />} />
