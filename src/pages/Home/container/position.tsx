@@ -38,6 +38,7 @@ const Position: React.FC<SectionBlocks> = ({ blocks }) => {
     id: Number(item.subdivisionId),
     imgSrc: baseURL(item.subdivision.thumbnail),
     title: item.subdivision.name,
+    active: item.subdivision.pinned,
     y: Number(item.point.y),
     x: Number(item.point.x),
   })), [mapData]);
