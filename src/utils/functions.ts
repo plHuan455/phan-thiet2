@@ -147,7 +147,6 @@ export const linkURL = (src?: string): string => {
 
 export const baseString = (str?: string): string => {
   if (!str) return '';
-
   return str;
 };
 
@@ -174,6 +173,20 @@ export const getTimePastToCurrent = (date?: string) => {
   const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   if (days > 0) return `${days} ngày trước`;
   return `${hours} giờ trước`;
+};
+
+// -------------------- datetime -------------- //
+export const getFullDate = (date?: string) => {
+  if (!date) return '';
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  let mm: number | string = today.getMonth() + 1; // Months start at 0!
+  let dd: number | string = today.getDate();
+
+  if (dd < 10) dd = `0${dd}`;
+  if (mm < 10) mm = `0${mm}`;
+
+  return `${dd}/${mm}/${yyyy}`;
 };
 
 export const getSearchParams = (path: string) => Object.fromEntries(new URLSearchParams(path));

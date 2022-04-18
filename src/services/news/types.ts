@@ -13,11 +13,16 @@ export interface NewsListTypes {
   id: number
   displayOrder: number
   thumbnail: string
-  category: any[]
+  tags: any[]
   title: string
   slug: string
   description: string
   content: string
   locale: string
   publishedAt: string
+}
+export interface NewsDetailTypes extends NewsListTypes {
+  seoData: SEODataTypes;
+  breadcrumbs: BreadcrumbsDataTypes[];
+  openGraph: OpenGraphDataTypes;
 }
