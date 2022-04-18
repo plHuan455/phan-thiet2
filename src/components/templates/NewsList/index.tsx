@@ -8,7 +8,7 @@ import Text from 'components/atoms/Text';
 import Card from 'components/organisms/Card';
 import { CardNewsProps } from 'components/organisms/Card/News';
 
-interface NewsListProps {
+export interface NewsListProps {
   title?: string
   listNews?: CardNewsProps[]
   button?: LinkTypes;
@@ -58,9 +58,6 @@ const NewsList: React.FC<NewsListProps> = ({
 );
 
 NewsList.defaultProps = {
-  title: '',
-  listNews: [],
-  button: undefined,
 };
 
 export default NewsList;

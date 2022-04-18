@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useMemo } from 'react';
 
 import useAnimation from '../hook/animation';
 
@@ -8,31 +8,34 @@ import leaf2 from 'assets/images/pages/news/leaf_2.png';
 import Image from 'components/atoms/Image';
 import NewsList from 'components/templates/NewsList';
 import useScrollAnimate from 'hooks/useScrollAnimation';
+import { baseURL, getTimePastToCurrent } from 'utils/functions';
 
-const dataNews = new Array(3).fill({
-  thumbnail: 'https://source.unsplash.com/random',
-  dateTime: '2 phút trước',
-  tag: 'The Kingdom',
-  button: {
-    text: 'Xem thêm',
-    url: '/',
-  },
-  title: 'Nova World phan thiết và chuỗi cung cấp tiện ích chăm sóc sức khỏe',
-  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consequat egestas eu egestas sed viverra urna. Purus accumsan feugiat feugiat nisl pulvinar faucibus eu. ',
-});
-
-const News: React.FC = () => {
+const News: React.FC<NewsProps> = ({ news }) => {
   const leaf1Ref = useRef<HTMLDivElement>(null);
   const leaf2Ref = useRef<HTMLDivElement>(null);
   const ballonRef = useRef<HTMLDivElement>(null);
-
   const isScrollLeaf1 = useScrollAnimate(leaf1Ref);
   const isScrollLeaf2 = useScrollAnimate(leaf2Ref);
   const isScrollBallon = useScrollAnimate(ballonRef);
-
   const {
     animated, ballonAnimate, slideAnimate, slideReverseAnimate,
   } = useAnimation();
+  const dataNews = useMemo(() => {
+    if (Array.isArray(news)) {
+      return news.map((item) => ({
+        thumbnail: baseURL(item.thumbnail),
+        dateTime: getTimePastToCurrent(item.publishedAt),
+        tag: item?.tag,
+        button: {
+          text: 'Xem thêm',
+          url: item.slug,
+        },
+        title: item.title,
+        description: item.description,
+      }));
+    }
+    return [];
+  }, [news]);
   return (
     <div className="s-news">
       <animated.div style={isScrollBallon ? ballonAnimate : {}} className="s-news_ballon" ref={ballonRef}>
@@ -47,11 +50,13 @@ const News: React.FC = () => {
       <NewsList
         title="TIN TỨC"
         listNews={dataNews}
-        button={{
-          text: 'Xem thêm',
-        }}
       />
     </div>
   );
 };
+
+News.defaultProps = {
+  news: [],
+};
+
 export default News;

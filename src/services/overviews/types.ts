@@ -5,6 +5,7 @@ export interface OverviewNewsType {
   slug: string;
   description: string;
   publishedAt: string;
+  tag?: string;
 }
 
 export interface OverviewVideoType {
@@ -15,6 +16,8 @@ export interface OverviewVideoType {
   video: string;
   videoType: string;
   slug: string;
+  tag?: string;
+  publishedAt?: string;
 }
 
 export interface OverviewImageType {
@@ -27,6 +30,9 @@ export interface OverviewDocumentType {
   slug: string;
   link: string;
   publishedAt: string;
+  tag?: string;
+  title?: string;
+  thumbnail?: string;
 }
 
 export interface OverviewType {

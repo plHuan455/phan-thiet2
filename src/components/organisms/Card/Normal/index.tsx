@@ -6,7 +6,7 @@ import Link from 'components/atoms/Link';
 import Text from 'components/atoms/Text';
 
 export interface CardNormalProps {
-  thumbnail: string;
+  thumbnail?: string;
   title?: string;
   href?: string;
   target?: string;
