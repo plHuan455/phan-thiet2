@@ -26,7 +26,11 @@ const dummyData = [
   },
 ];
 
-const Library: React.FC = () => {
+interface LibraryProps {
+  title?: string;
+}
+
+const Library: React.FC<LibraryProps> = ({ title }) => {
   const [indexActive, setIndexActive] = useState(0);
 
   return (
@@ -37,7 +41,7 @@ const Library: React.FC = () => {
         <Heading
           type="h2"
           modifiers={['s015', '400', 'seaBlue']}
-          content="THƯ VIỆN THE KINGDOM"
+          content={title}
         />
         <FlatList
           data={new Array(7).fill('')}
@@ -131,6 +135,10 @@ const Library: React.FC = () => {
       </Container>
     </section>
   );
+};
+
+Library.defaultProps = {
+  title: '',
 };
 
 export default Library;

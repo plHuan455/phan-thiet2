@@ -1,17 +1,25 @@
 import React from 'react';
 
-import dataDummy from 'assets/dataDummy/divisionUtilities';
 import imgMap from 'assets/images/divisionUtilities/bg.png';
 import DivisionUtilities from 'components/templates/DivisionUtilities';
+import { SubDivisionDetailTypes } from 'services/subdivision/types';
 
-const Utilities: React.FC = () => (
+interface UtilitiesProps {
+  data?: SubDivisionDetailTypes;
+}
+
+const Utilities: React.FC<UtilitiesProps> = ({ data }) => (
   <section className="u-pt-md-80 u-pt-48 u-pb-md-80 u-pb-48" style={{ color: 'var(--theme)' }}>
     <DivisionUtilities
-      title="TỔNG MẶT BẰNG TIỆN ÍCH PHÂN KHU"
-      listLocations={dataDummy}
       background={imgMap}
+      title={data?.content.utility.title}
+      listLocations={[]}
     />
   </section>
 );
+
+Utilities.defaultProps = {
+  data: undefined,
+};
 
 export default Utilities;

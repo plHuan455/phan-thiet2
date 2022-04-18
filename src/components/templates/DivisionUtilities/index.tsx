@@ -10,7 +10,7 @@ interface LocationsItemTypes extends MarkerCardProps{
   y: number;
 }
 
-interface DivisionUtilitiesProps {
+export interface DivisionUtilitiesProps {
   title?: string;
   listLocations?: LocationsItemTypes[];
   background: string;
@@ -70,8 +70,6 @@ const DivisionUtilities: React.FC<DivisionUtilitiesProps> = ({
 };
 
 DivisionUtilities.defaultProps = {
-  title: '',
-  listLocations: [],
 };
 
 export default DivisionUtilities;

@@ -39,8 +39,6 @@ const tabs = [
   },
 ];
 
-const title = 'HÀNH TRÌNH TRẢI NGHIỆM SIÊU THÀNH PHỐ BIỂN';
-
 const data = new Array(10).fill({
   thumbnail: 'https://source.unsplash.com/random',
   title: 'OCEAN GOLF',
@@ -50,7 +48,6 @@ const data = new Array(10).fill({
 
 export default {
   tabs,
-  title,
   srcBg,
   data,
 };

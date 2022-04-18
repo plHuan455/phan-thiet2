@@ -9,7 +9,7 @@ import Arrow from 'components/atoms/Arrow';
 import Heading from 'components/atoms/Heading';
 import Text from 'components/atoms/Text';
 
-interface DivisionCollectionProps {
+export interface DivisionCollectionProps {
   title: string;
   description?: string;
   dataList: CollectionProps[];
@@ -88,7 +88,6 @@ const DivisionCollection: React.FC<DivisionCollectionProps> = ({
 );
 
 DivisionCollection.defaultProps = {
-  description: undefined,
 };
 
 export default DivisionCollection;
