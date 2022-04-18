@@ -97,23 +97,6 @@ const Consultancy: React.FC<ConsultancyCommonProps> = ({
     }));
   }, [topicSelector]);
 
-  // const consultancyInfoTemp = useMemo<ConsultancyInfoTypes | undefined>(() => {
-  //   const { data } = topicSelector;
-  //   const checkboxList: CheckboxTypes[] = data.map(
-  //     (item) => ({ label: item.name, value: item.id.toString() }),
-  //   );
-  //   const checkboxTemp = form.consultancyInfo && form.consultancyInfo.checkbox ? {
-  //     ...form.consultancyInfo.checkbox,
-  //     list: checkboxList || undefined,
-  //   } : undefined;
-  //   const result = form.consultancyInfo ? {
-  //     ...form.consultancyInfo,
-  //     checkbox: checkboxTemp,
-  //   } : undefined;
-  //   return result;
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [topicSelector]);
-
   return (
     <ConsultancyTemplate
       title={title}
