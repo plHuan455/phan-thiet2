@@ -5,8 +5,10 @@ import useAnimation from '../animation';
 
 import bgLeft from 'assets/images/searchResult/bg_searchResult_left.png';
 import bgRight from 'assets/images/searchResult/bg_searchResult_right.png';
+import HelmetContainer from 'common/Helmet';
 import Image from 'components/atoms/Image';
 import SearchResult from 'components/templates/SearchResult';
+import { getOgDataPage } from 'utils/functions';
 
 const dataTabList = [
   {
@@ -52,7 +54,10 @@ const divisions = new Array(9).fill({
     'Ocean Residence kiến tạo nơi đáng  sống mới cho cư dân khi tận hưởng giá trị Ocean Residence kiến tạo nơi đáng  sống mới cho cư dân khi tận hưởng giá trị ..',
 });
 
-const Screen: React.FC = () => {
+const Screen: React.FC<BasePageDataTypes<any>> = ({
+  pageData,
+  seoData,
+}) => {
   const [tabActive, setTabActive] = useState<string | undefined>(
     dataTabList[0].slug,
   );
@@ -61,6 +66,7 @@ const Screen: React.FC = () => {
 
   return (
     <>
+      <HelmetContainer seoData={seoData} ogData={getOgDataPage(pageData)} />
       <animated.div style={animate}>
         <div className="p-search_bgLeft" ref={bgLeftRef}>
           <Image src={bgLeft} ratio="1x1" size="contain" />
