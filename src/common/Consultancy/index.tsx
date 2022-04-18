@@ -3,25 +3,32 @@ import axios from 'axios';
 import React, { useMemo } from 'react';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { useForm } from 'react-hook-form';
+import { useLocation } from 'react-router-dom';
 
-import { FormConsultancy, CheckboxTypes, ConsultancyInfoTypes } from 'components/organisms/Consultancy';
+import { Variants } from 'components/atoms/Button';
+import { FormConsultancy } from 'components/organisms/Consultancy';
 import { NotifyProps } from 'components/organisms/Notify';
-import ConsultancyTemplate, { ConsultancyPropsInput } from 'components/templates/Consultancy';
+import ConsultancyTemplate, { ConsultancyProps } from 'components/templates/Consultancy';
 import { useAsync } from 'hooks/useAsync';
 import { consultancyFormService } from 'services/contact';
 import { ConsultancyFormInput } from 'services/contact/types';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { updateNotifyProps } from 'store/notify';
-import { ContactState } from 'store/topics';
+import { getSearchParams } from 'utils/functions';
 import { schemasConsultancyForm } from 'utils/schemas';
 
-const Consultancy: React.FC<ConsultancyPropsInput> = ({
+interface ConsultancyCommonProps extends Omit<ConsultancyProps, 'form'> {
+  variantButton?: Variants
+}
+
+const Consultancy: React.FC<ConsultancyCommonProps> = ({
   title,
   layer,
-  form,
+  variantButton,
 }) => {
+  const location = useLocation();
   const { executeRecaptcha } = useGoogleReCaptcha();
-  const topicSelector: ContactState = useAppSelector((state) => state.topic as ContactState);
+  const topicSelector = useAppSelector((state) => state.topic);
   const dispatch = useAppDispatch();
   const method = useForm<FormConsultancy>({
     resolver: yupResolver(schemasConsultancyForm),
@@ -32,7 +39,15 @@ const Consultancy: React.FC<ConsultancyPropsInput> = ({
     if (!executeRecaptcha) return;
     const grecaptchaToken = await executeRecaptcha('submit');
     const topicIds: string = params.products?.reduce((prev, curr) => `${prev === '' ? '' : `${prev},`}${curr}`, '');
-    const newData: ConsultancyFormInput = {
+    const searchParmas = getSearchParams(location.search);
+    const paramsUTM = [
+      'utm_source',
+      'utm_medium',
+      'utm_term',
+      'utm_campaign',
+      'utm_content',
+    ];
+    let newData: ConsultancyFormInput = {
       name: params.name,
       email: params.email,
       phone: params.phone,
@@ -41,6 +56,11 @@ const Consultancy: React.FC<ConsultancyPropsInput> = ({
       topic_ids: topicIds,
       grecaptcha_token: grecaptchaToken,
     };
+    Object.keys(searchParmas).forEach((item: string) => {
+      if (paramsUTM.includes(item)) {
+        newData = { ...newData, [item]: searchParmas[item] };
+      }
+    });
     await consultancyFormService(newData);
   }, {
     onSuccess: () => {
@@ -67,42 +87,63 @@ const Consultancy: React.FC<ConsultancyPropsInput> = ({
     },
   });
 
-  const consultancyInfoTemp = useMemo<ConsultancyInfoTypes | undefined>(() => {
+  const topicsList = useMemo(() => {
     const { data } = topicSelector;
-    const checkboxList: CheckboxTypes[] = data.map(
-      (item) => ({ label: item.name, value: item.id.toString() }),
-    );
-    const checkboxTemp = form.consultancyInfo && form.consultancyInfo.checkbox ? {
-      ...form.consultancyInfo.checkbox,
-      list: checkboxList || undefined,
-    } : undefined;
-    const result = form.consultancyInfo ? {
-      ...form.consultancyInfo,
-      checkbox: checkboxTemp,
-    } : undefined;
-    return result;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (!data?.length) return [];
+
+    return data?.map((e) => ({
+      label: e.name,
+      value: e.id.toString(),
+    }));
   }, [topicSelector]);
 
-  const handleSubmit = async (data: FormConsultancy) => {
-    consultancyExecute(data);
-  };
+  // const consultancyInfoTemp = useMemo<ConsultancyInfoTypes | undefined>(() => {
+  //   const { data } = topicSelector;
+  //   const checkboxList: CheckboxTypes[] = data.map(
+  //     (item) => ({ label: item.name, value: item.id.toString() }),
+  //   );
+  //   const checkboxTemp = form.consultancyInfo && form.consultancyInfo.checkbox ? {
+  //     ...form.consultancyInfo.checkbox,
+  //     list: checkboxList || undefined,
+  //   } : undefined;
+  //   const result = form.consultancyInfo ? {
+  //     ...form.consultancyInfo,
+  //     checkbox: checkboxTemp,
+  //   } : undefined;
+  //   return result;
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [topicSelector]);
 
   return (
     <ConsultancyTemplate
       title={title}
       layer={layer}
       form={{
-        ...form,
+        title: 'Quý khách đăng ký nhận email thông tin dự án, các chương trình ưu đãi, khuyến mại</br>và tin tức mới nhất từ NovaWorld Phan Thiet',
         method,
         loading: consultancyState.loading,
-        handleSubmit,
-        consultancyInfo: consultancyInfoTemp,
+        handleSubmit: consultancyExecute,
+        variantButton,
+        consultancyInfo: {
+          placeholderName: 'Họ và tên',
+          placeholderPhone: 'Số điện thoại *',
+          placeholderEmail: 'Email *',
+          placeholderAddress: 'Địa chỉ',
+          placeholderContent: 'Nội dung',
+          checkbox: {
+            label: 'Sản phẩm quan tâm: ',
+            subLabel: '(Câu hỏi không bắt buộc)',
+            list: topicsList,
+          },
+          btnText: 'Đăng ký nhận thông tin',
+        },
       }}
     />
   );
 };
 
-Consultancy.defaultProps = {};
+Consultancy.defaultProps = {
+  variantButton: 'primary-green',
+};
 
 export default Consultancy;

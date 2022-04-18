@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React from 'react';
 
 import layer3 from 'assets/images/consultancy/blue-background-2.png';
@@ -39,37 +38,7 @@ const Consultancy: React.FC<ConsultancyProps> = () => (
         text: 'ĐĂNG KÝ NHẬN <br /> THÔNG TIN DỰ ÁN',
         modifiers: ['400', 'inherit', 's015'],
       }}
-      form={{
-        title:
-            'Quý khách đăng ký nhận email thông tin dự án, các chương trình ưu đãi, khuyến mại</br>và tin tức mới nhất từ NovaWorld Phan Thiet',
-        variantButton: 'inherit',
-        consultancyInfo: {
-          placeholderName: 'Họ và tên',
-          placeholderPhone: 'Số điện thoại *',
-          placeholderEmail: 'Email *',
-          placeholderAddress: 'Địa chỉ',
-          placeholderContent: 'Nội dung',
-          checkbox: {
-            label: 'Sản phẩm quan tâm: ',
-            subLabel: '(Câu hỏi không bắt buộc)',
-            list: [
-              {
-                label: 'Biệt thự',
-                value: '1',
-              },
-              {
-                label: 'Nhà phố',
-                value: '2',
-              },
-              {
-                label: 'Shophouse',
-                value: '3',
-              },
-            ],
-          },
-          btnText: 'Đăng ký nhận thông tin',
-        },
-      }}
+      variantButton="inherit"
     />
   </section>
 );

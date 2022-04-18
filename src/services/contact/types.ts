@@ -6,6 +6,11 @@ export interface ContactFormInput {
   email?: string;
   content?: string;
   grecaptcha_token: string;
+  utm_source?: string;
+  utm_medium?: string;
+  utm_term?: string;
+  utm_campaign?: string;
+  utm_content?: string
 }
 export interface ConsultancyFormInput {
   name?: string;

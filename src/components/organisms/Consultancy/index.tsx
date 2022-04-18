@@ -44,15 +44,6 @@ export interface ConsultancyProps {
   variantButton?: Variants;
 }
 
-export interface ConsultancyPropsInput {
-  title: string;
-  consultancyInfo: ConsultancyInfoTypes;
-  handleSubmit?: (data: FormConsultancy) => void;
-  method?: UseFormReturn<FormConsultancy>;
-  loading?: boolean,
-  variantButton?: Variants;
-}
-
 const Consultancy: React.FC<ConsultancyProps> = ({
   title,
   consultancyInfo,

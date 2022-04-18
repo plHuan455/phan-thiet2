@@ -175,3 +175,5 @@ export const getTimePastToCurrent = (date?: string) => {
   if (days > 0) return `${days} ngày trước`;
   return `${hours} giờ trước`;
 };
+
+export const getSearchParams = (path: string) => Object.fromEntries(new URLSearchParams(path));

@@ -5,7 +5,6 @@ import Container from 'common/Container';
 import Heading, { TextStyle } from 'components/atoms/Heading';
 import ConsultancyForm, {
   ConsultancyProps as ConsultancyFormProps,
-  ConsultancyPropsInput as ConsultancyFormPropsInput,
 } from 'components/organisms/Consultancy';
 import mapModifiers from 'utils/functions';
 
@@ -20,13 +19,6 @@ export interface ConsultancyProps {
   py?: 'md' | 'lg'
   layer?: React.ReactNode;
   form: ConsultancyFormProps;
-}
-
-export interface ConsultancyPropsInput {
-  title: ConsultancyTitle;
-  py?: 'md' | 'lg'
-  layer?: React.ReactNode;
-  form: ConsultancyFormPropsInput;
 }
 
 const Consultancy: React.FC<ConsultancyProps> = ({
