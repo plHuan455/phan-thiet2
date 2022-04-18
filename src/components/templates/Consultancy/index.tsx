@@ -8,12 +8,14 @@ import ConsultancyForm, {
 } from 'components/organisms/Consultancy';
 import mapModifiers from 'utils/functions';
 
+export interface ConsultancyTitle {
+  text: string;
+  modifiers?: TextStyle;
+  type?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+}
+
 export interface ConsultancyProps {
-  title: {
-    text: string;
-    modifiers?: TextStyle;
-    type?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
-  };
+  title: ConsultancyTitle;
   py?: 'md' | 'lg'
   layer?: React.ReactNode;
   form: ConsultancyFormProps;

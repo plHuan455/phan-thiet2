@@ -21,24 +21,26 @@ export interface CheckboxTypes {
   value: string,
 }
 
+export interface ConsultancyInfoTypes {
+  placeholderName: string;
+  placeholderPhone: string;
+  placeholderEmail: string;
+  placeholderAddress: string;
+  placeholderContent: string;
+  btnText: string;
+  checkbox?: {
+    label: string;
+    subLabel: string;
+    list?: CheckboxTypes[];
+  };
+}
+
 export interface ConsultancyProps {
   title: string;
-  consultancyInfo?: {
-    placeholderName: string,
-    placeholderPhone: string,
-    placeholderEmail: string,
-    placeholderAddress: string,
-    placeholderContent: string,
-    checkbox?: {
-      label: string,
-      subLabel: string,
-      list: CheckboxTypes[],
-    },
-    btnText: string
-  }
-  handleSubmit: (data: FormConsultancy) => void;
+  consultancyInfo?: ConsultancyInfoTypes;
+  handleSubmit?: (data: FormConsultancy) => void;
   method: UseFormReturn<FormConsultancy>;
-  loading?: boolean,
+  loading?: boolean;
   variantButton?: Variants;
 }
 
@@ -63,10 +65,12 @@ const Consultancy: React.FC<ConsultancyProps> = ({
   };
 
   const onSubmit = (data: FormConsultancy) => {
-    handleSubmit({
-      ...data,
-      products: listCheckbox,
-    });
+    if (handleSubmit) {
+      handleSubmit({
+        ...data,
+        products: listCheckbox,
+      });
+    }
   };
 
   return (
@@ -83,6 +87,7 @@ const Consultancy: React.FC<ConsultancyProps> = ({
                 render={({ field, fieldState: { error } }) => (
                   <Input
                     {...field}
+                    value={field.value || ''}
                     placeholder={consultancyInfo?.placeholderName}
                     error={error?.message}
                   />
@@ -95,6 +100,7 @@ const Consultancy: React.FC<ConsultancyProps> = ({
                 render={({ field, fieldState: { error } }) => (
                   <Input
                     {...field}
+                    value={field.value || ''}
                     placeholder={consultancyInfo?.placeholderPhone}
                     error={error?.message}
                   />
@@ -109,6 +115,7 @@ const Consultancy: React.FC<ConsultancyProps> = ({
                 render={({ field, fieldState: { error } }) => (
                   <Input
                     {...field}
+                    value={field.value || ''}
                     placeholder={consultancyInfo?.placeholderEmail}
                     error={error?.message}
                   />
@@ -123,6 +130,7 @@ const Consultancy: React.FC<ConsultancyProps> = ({
                 render={({ field, fieldState: { error } }) => (
                   <Input
                     {...field}
+                    value={field.value || ''}
                     placeholder={consultancyInfo?.placeholderAddress}
                     error={error?.message}
                   />
@@ -139,19 +147,20 @@ const Consultancy: React.FC<ConsultancyProps> = ({
                 </div>
                 <div className="o-consultancy_checkbox-list">
                   {
-                  consultancyInfo?.checkbox?.list.map((item, index) => (
-                    <div
-                      key={`o-consultancy_checkbox-${index.toString()}`}
-                      className="o-consultancy_checkbox-list-item"
-                    >
-                      <Checkbox
-                        onChange={handleChangeProduct}
-                        value={item.value}
-                        label={item?.label}
-                      />
-                    </div>
-                  ))
-                }
+                    Array.isArray(consultancyInfo?.checkbox?.list)
+                    && consultancyInfo?.checkbox?.list.map((item, index) => (
+                      <div
+                        key={`o-consultancy_checkbox-${index.toString()}`}
+                        className="o-consultancy_checkbox-list-item"
+                      >
+                        <Checkbox
+                          onChange={handleChangeProduct}
+                          value={item.value}
+                          label={item?.label}
+                        />
+                      </div>
+                    ))
+                  }
                 </div>
               </div>
             )
@@ -163,6 +172,7 @@ const Consultancy: React.FC<ConsultancyProps> = ({
                 render={({ field, fieldState: { error } }) => (
                   <TextArea
                     {...field}
+                    value={field.value || ''}
                     placeholder={consultancyInfo?.placeholderContent}
                     error={error?.message}
                     rows={4}
