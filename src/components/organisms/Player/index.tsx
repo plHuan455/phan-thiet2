@@ -5,8 +5,6 @@ import React, { forwardRef } from 'react';
 import { IconName } from 'components/atoms/Icon';
 import mapModifiers from 'utils/functions';
 
-// import mapModifiers from 'utils/functions';
-
 export interface PlayerProps {
   id?: string;
   src: string;
@@ -84,13 +82,6 @@ const Player = forwardRef<HTMLVideoElement, PlayerProps>(
                 <div className="o-player_triangle" />
               </div>
             </div>
-
-            {/* <div className="o-player_play">
-              <svg width="45" height="45" viewBox="-50 -50 300 300">
-                <polygon className="o-player_icon" strokeLinejoin="round"
-                 points="100,0 0,200 200,200" />
-              </svg>
-            </div> */}
           </div>
         </>
       )}
