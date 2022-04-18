@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 
 import useAnimation from '../hooks/animation';
 
+import layer from 'assets/images/introVideo/background-blue.png';
 import ballon from 'assets/images/introVideo/balloon.png';
 import Container from 'common/Container';
 import Image from 'components/atoms/Image';
@@ -39,6 +40,9 @@ const IntroVideo: React.FC = () => {
       <animated.div className="t-introVideo_ballon" style={ballonAnimate} ref={ballonRef}>
         <Image src={ballon} alt="ballon" ratio="132x202" />
       </animated.div>
+      <div className="t-introVideo_layer">
+        <Image src={layer} alt="ballon" ratio="1366x688" />
+      </div>
       <Container>
         <div className="t-introVideo_content">
           <IntroPlayer src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" />

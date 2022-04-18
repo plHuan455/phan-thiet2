@@ -27,6 +27,7 @@ type Ratio =
   | '238x150'
   | '78x25'
   | '132x202'
+  | '1366x688'
   | '1366x933';
 
 type FontWeightStyle =
