@@ -1,4 +1,7 @@
-import React, { useState, useRef } from 'react';
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React, { useMemo, useRef, useState } from 'react';
+import { useInfiniteQuery } from 'react-query';
 import { animated } from 'react-spring';
 
 import useAnimation from '../animation';
@@ -7,8 +10,14 @@ import bgLeft from 'assets/images/searchResult/bg_searchResult_left.png';
 import bgRight from 'assets/images/searchResult/bg_searchResult_right.png';
 import HelmetContainer from 'common/Helmet';
 import Image from 'components/atoms/Image';
+import { CardDivisionProps } from 'components/organisms/Card/Division';
+import { CardNormalProps } from 'components/organisms/Card/Normal';
 import SearchResult from 'components/templates/SearchResult';
-import { getOgDataPage } from 'utils/functions';
+import getNewsListService from 'services/news';
+import { NewsListTypes } from 'services/news/types';
+import getSubDivisionListService from 'services/subdivision';
+import { SubDivisionListTypes } from 'services/subdivision/types';
+import { baseURL, getOgDataPage } from 'utils/functions';
 
 const dataTabList = [
   {
@@ -34,26 +43,6 @@ const optionSort = [
   },
 ];
 
-const news = new Array(9).fill({
-  thumbnail: 'https://source.unsplash.com/random',
-  title: 'Nova World phan thiết và chuỗi cung cấp tiện ích',
-  href: '/',
-  tag: 'The Kingdom',
-  dateTime: '2 giờ trước',
-  url: {
-    text: 'Xem thêm',
-    iconName: 'arrowRightCopper',
-    animation: 'arrow',
-  },
-});
-
-const divisions = new Array(9).fill({
-  imgSrc: 'https://source.unsplash.com/random',
-  title: 'The Florida',
-  description:
-    'Ocean Residence kiến tạo nơi đáng  sống mới cho cư dân khi tận hưởng giá trị Ocean Residence kiến tạo nơi đáng  sống mới cho cư dân khi tận hưởng giá trị ..',
-});
-
 const Screen: React.FC<BasePageDataTypes<any>> = ({
   pageData,
   seoData,
@@ -63,6 +52,85 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
   );
   const bgLeftRef = useRef<HTMLDivElement>(null);
   const { animate, animateReverse } = useAnimation({ ref: bgLeftRef });
+
+  // Get News
+  const {
+    data: newsData,
+    hasNextPage: hasNextNews,
+    isFetching: fetchingNews,
+    fetchNextPage: fetchNextNews,
+  } = useInfiniteQuery(
+    ['getNews'],
+    ({ pageParam = 1 }) => getNewsListService({
+      page: pageParam,
+      limit: 3,
+    }),
+    {
+      getNextPageParam: (params) => (params.meta?.page >= params.meta.totalPages
+        ? false
+        : params.meta.page + 1),
+    },
+  );
+
+  const newsMapping = useMemo(
+    () => (newsData?.pages || [])
+      .reduce((
+        prev: NewsListTypes[],
+        curr,
+      ) => [...prev, ...curr.data], []),
+    [newsData?.pages],
+  );
+
+  const newsList = useMemo((): CardNormalProps[] => newsMapping.map((item) => ({
+    thumbnail: baseURL(item.thumbnail),
+    title: item.title,
+    href: item.slug,
+    dateTime: '2 giờ trước', // publishedAt,
+    tag: 'The Kingdom',
+    url: {
+      text: 'Xem thêm',
+      iconName: 'arrowRightCopper',
+      animation: 'arrow',
+    },
+  })), [newsMapping]);
+  // End - Get News
+
+  // Get Subdivision
+  const {
+    data: subdivisionData,
+    hasNextPage: hasNextSubdivision,
+    isFetching: fetchingSubdivision,
+    fetchNextPage: fetchNextSubdivision,
+  } = useInfiniteQuery(
+    ['getSubdivision'],
+    ({ pageParam = 1 }) => getSubDivisionListService({
+      page: pageParam,
+      limit: 3,
+    }),
+    {
+      getNextPageParam: (params) => (params.meta?.page >= params.meta.totalPages
+        ? false
+        : params.meta.page + 1),
+    },
+  );
+
+  const subdivisionMapping = useMemo(
+    () => (subdivisionData?.pages || [])
+      .reduce((
+        prev: SubDivisionListTypes[],
+        curr,
+      ) => [...prev, ...curr.data], []),
+    [subdivisionData?.pages],
+  );
+
+  const subdivisionList = useMemo((): CardDivisionProps[] => subdivisionMapping.map((item) => ({
+    imgSrc: baseURL(item.thumbnail),
+    title: item.name,
+    description: '',
+    href: item.slug,
+  })), [subdivisionMapping]);
+
+  // End - Get Subdivision
 
   return (
     <>
@@ -92,10 +160,20 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
           handleSelectTab={(tab) => setTabActive(tab)}
         />
         {tabActive === 'tin-tuc' && (
-          <SearchResult.Content news={news} hashShowMore />
+          <SearchResult.Content
+            news={newsList}
+            hashShowMore={hasNextNews}
+            loading={fetchingNews}
+            handleShowMore={fetchNextNews}
+          />
         )}
         {tabActive === 'phan-khu' && (
-          <SearchResult.Content divisions={divisions} hashShowMore />
+          <SearchResult.Content
+            divisions={subdivisionList}
+            hashShowMore={hasNextSubdivision}
+            loading={fetchingSubdivision}
+            handleShowMore={fetchNextSubdivision}
+          />
         )}
       </SearchResult.Wrapper>
     </>

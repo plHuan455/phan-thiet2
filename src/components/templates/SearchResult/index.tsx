@@ -110,6 +110,7 @@ export interface SearchContentProps {
   news?: CardNormalProps[];
   divisions?: CardDivisionProps[];
   hashShowMore?: boolean;
+  loading?: boolean;
   handleShowMore?: () => void;
 }
 
@@ -117,6 +118,7 @@ const SearchContent:React.FC<SearchContentProps> = ({
   news,
   divisions,
   hashShowMore,
+  loading,
   handleShowMore,
 }) => (
   <>
@@ -152,6 +154,13 @@ const SearchContent:React.FC<SearchContentProps> = ({
         </Row>
       )}
     </div>
+
+    {loading && (
+      <div className="d-flex justify-content-center u-mt-24 u-mb-24">
+        <Icon iconName="loadingWhite" />
+      </div>
+    )}
+
     {hashShowMore && (
     <div className="t-searchResult_showMore">
       <Button
