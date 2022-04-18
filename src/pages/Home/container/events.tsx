@@ -31,7 +31,7 @@ interface EventProps{
   button: string;
 }
 const Events: React.FC<SectionBlocks> = ({ blocks }) => {
-  const eventsBlock = getBlockData<EventProps>('envent', blocks);
+  const eventsBlock = getBlockData<EventProps>('event', blocks);
 
   const {
     days, hours, mins, secs,
@@ -43,9 +43,6 @@ const Events: React.FC<SectionBlocks> = ({ blocks }) => {
         button={{ ...eventsBlock?.link }}
         countDown={{
           title: 'Một vòng trải nghiệm siêu thành phố biển',
-          // button: {
-          //   text: eventsBlock?.button,
-          // },
           button: {
             // text: eventsBlock?.link?.text || 'Xem tất cả',
             // url: eventsBlock?.link?.url,
