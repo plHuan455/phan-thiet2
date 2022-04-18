@@ -2,9 +2,9 @@ import React from 'react';
 
 import Screen from './container';
 
-const Search: React.FC = () => (
+const Search: React.FC<BasePageDataTypes<any>> = (props) => (
   <div className="p-search">
-    <Screen />
+    <Screen {...props} />
   </div>
 );
 
