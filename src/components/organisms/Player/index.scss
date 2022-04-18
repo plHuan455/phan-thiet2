@@ -1,4 +1,4 @@
-@mixin triangle($size: 2rem, $background: $davy-grey) {
+@mixin triangle($size: 80px, $background: var(--theme)) {
   &,
   &::before,
   &::after {
@@ -96,7 +96,7 @@
       left: rem(10);
     }
     #{$root}_triangle {
-      @include triangle(40px, var(--theme));
+      @include triangle(40px);
     }
   }
   @include mobile-down {
@@ -110,7 +110,7 @@
       left: rem(7);
     }
     #{$root}_triangle {
-      @include triangle(25px, var(--theme));
+      @include triangle(25px);
     }
   }
   &_play {
@@ -128,6 +128,6 @@
   }
 
   &_triangle {
-    @include triangle(60px, var(--theme));
+    @include triangle(60px);
   }
 }

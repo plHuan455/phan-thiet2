@@ -16,7 +16,6 @@ const IntroPlayer: React.FC<IntroPlayerProps> = (props) => {
     <Player
       ref={videoRef}
       modifiers={['r10', 'shadow']}
-      iconPlayer="playerPersian"
       onClick={() => {
         if (videoRef?.current) {
           videoRef.current.play();
