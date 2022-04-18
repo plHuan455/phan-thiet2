@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import { useQuery } from 'react-query';
 
 import Container from 'common/Container';
 import FlatMore from 'common/FlatMore';
 import Card from 'components/organisms/Card';
-import getSubDivisionListService from 'services/subDivision';
+import getSubDivisionListService from 'services/subdivision';
 import { baseString, getBlockData, baseURL } from 'utils/functions';
 
 interface DivisionProps{
