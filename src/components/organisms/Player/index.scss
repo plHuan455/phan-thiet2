@@ -1,3 +1,37 @@
+@mixin triangle($size: 80px, $background: var(--theme)) {
+  &,
+  &::before,
+  &::after {
+    width: $size;
+    height: $size;
+  }
+  position: relative;
+  overflow: hidden;
+  transform: translateY(50%) rotate(30deg) skewY(30deg) scaleX(0.866);
+  pointer-events: none;
+  border-radius: 20%;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    background: $background;
+    pointer-events: auto;
+  }
+
+  &::before {
+    // prettier-ignore
+    transform: scaleX(1.155) skewY(-30deg) rotate(-30deg) translateY(-42.3%) skewX(30deg) scaleY(0.866) translateX(-24%);
+    border-radius: 20% 20% 20% 55%;
+  }
+
+  &::after {
+    // prettier-ignore
+    transform: scaleX(1.155) skewY(-30deg) rotate(-30deg) translateY(-42.3%) skewX(-30deg) scaleY(0.866) translateX(24%);
+    border-radius: 20% 20% 55% 20%;
+  }
+}
+
 .o-player {
   $root: &;
   padding-bottom: (526 / 934) * 100%;
@@ -48,6 +82,47 @@
     #{$root}_execute {
       opacity: 0;
       visibility: hidden;
+    }
+  }
+  &_play {
+    position: relative;
+    background: $white;
+    width: rem(80);
+    height: rem(80);
+    border-radius: 50%;
+    transform: rotate(90deg);
+    @include tablet-down {
+      width: rem(45);
+      height: rem(45);
+    }
+    @include mobile-down {
+      width: rem(32);
+      height: rem(32);
+    }
+  }
+  &_icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, calc(-50% - 8px));
+
+    @include tablet-down {
+      transform: translate(-50%, calc(-50% - 5px));
+    }
+
+    @include mobile-down {
+      transform: translate(-50%, calc(-50% - 3px));
+    }
+  }
+
+  &_triangle {
+    @include triangle(rem(40));
+
+    @include tablet-down {
+      @include triangle(rem(24));
+    }
+    @include mobile-down {
+      @include triangle(rem(14));
     }
   }
 }

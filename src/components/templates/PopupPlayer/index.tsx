@@ -1,18 +1,25 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {
+  useEffect, useMemo, useRef, useState,
+} from 'react';
 
 import CustomModal from 'components/molecules/Modal';
 import Player, { PlayerProps } from 'components/organisms/Player';
 import { youtubeControlIframe, youtubeParser } from 'utils/functions';
 
-interface PopupPlayerProps extends PlayerProps {
+interface MyCustomCSS extends React.CSSProperties {
+  '--theme'?: string;
+}
+interface PopupPlayerProps extends PlayerProps{
   isOpen: boolean;
   videoType: string;
+  theme?: string;
   handleClose?: () => void;
 }
 
 const PopupPlayer: React.FC<PopupPlayerProps> = ({
   isOpen,
   src,
+  theme,
   videoType,
   handleClose,
   ...rest
@@ -20,6 +27,10 @@ const PopupPlayer: React.FC<PopupPlayerProps> = ({
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlay, setPlay] = useState(false);
   const [videoSrc, setVideoSrc] = useState('');
+
+  const styles = useMemo((): MyCustomCSS => ({
+    '--theme': theme,
+  }), [theme]);
 
   useEffect(() => {
     if (!src || !videoType) return;
@@ -43,11 +54,10 @@ const PopupPlayer: React.FC<PopupPlayerProps> = ({
         size: '32',
       }}
     >
-      <div className="t-popupPlayer">
+      <div className="t-popupPlayer" style={styles}>
         <Player
           ref={videoRef}
           modifiers={['shadow']}
-          iconPlayer="playerPersian"
           onPlaying={() => setPlay(true)}
           onClick={() => {
             if (videoRef?.current) {
@@ -68,6 +78,7 @@ const PopupPlayer: React.FC<PopupPlayerProps> = ({
 
 PopupPlayer.defaultProps = {
   handleClose: undefined,
+  theme: undefined,
 };
 
 export default PopupPlayer;

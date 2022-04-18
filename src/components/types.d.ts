@@ -25,8 +25,9 @@ type Ratio =
   | '211x114'
   | '326x221'
   | '238x150'
-  | '1366x933'
-  | '78x25';
+  | '78x25'
+  | '132x202'
+  | '1366x933';
 
 type FontWeightStyle =
   | '100'
@@ -81,4 +82,9 @@ type FontFamily = 'fontOswald' | 'fontSvnGotham';
 
 type LetterSpacing = 's015';
 
-type GeneralTextStyle = FontWeightStyle | TextStyle | ColorStyle | FontFamily | LetterSpacing;
+type GeneralTextStyle =
+  | FontWeightStyle
+  | TextStyle
+  | ColorStyle
+  | FontFamily
+  | LetterSpacing;

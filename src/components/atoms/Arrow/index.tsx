@@ -26,7 +26,4 @@ const Arrow = {
   Next,
 };
 
-// Arrow.defaultProps = {
-// };
-
 export default Arrow;

@@ -2,10 +2,8 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import React, { forwardRef } from 'react';
 
-import Icon, { IconName } from 'components/atoms/Icon';
+import { IconName } from 'components/atoms/Icon';
 import mapModifiers from 'utils/functions';
-
-// import mapModifiers from 'utils/functions';
 
 export interface PlayerProps {
   id?: string;
@@ -37,7 +35,6 @@ const Player = forwardRef<HTMLVideoElement, PlayerProps>(
       isMuted,
       controls = true,
       modifiers,
-      iconPlayer,
       isPlaying,
       isYoutube,
       onEnded,
@@ -79,11 +76,14 @@ const Player = forwardRef<HTMLVideoElement, PlayerProps>(
             {/* <source src={src} type="video/wav" /> */}
           </video>
           <div className="o-player_execute" onClick={onClick}>
-            {iconPlayer && <Icon iconName={iconPlayer} size="80" />}
+            <div className="o-player_play">
+              <div className="o-player_icon">
+                <div className="o-player_triangle" />
+              </div>
+            </div>
           </div>
         </>
       )}
-
     </div>
   ),
 );
