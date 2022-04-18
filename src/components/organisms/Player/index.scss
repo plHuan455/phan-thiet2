@@ -1,3 +1,37 @@
+@mixin triangle($size: 2rem, $background: $davy-grey) {
+  &,
+  &::before,
+  &::after {
+    width: $size;
+    height: $size;
+  }
+  position: relative;
+  overflow: hidden;
+  transform: translateY(50%) rotate(30deg) skewY(30deg) scaleX(0.866);
+  pointer-events: none;
+  border-radius: 20%;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    background: $background;
+    pointer-events: auto;
+  }
+
+  &::before {
+    // prettier-ignore
+    transform: scaleX(1.155) skewY(-30deg) rotate(-30deg) translateY(-42.3%) skewX(30deg) scaleY(0.866) translateX(-24%);
+    border-radius: 20% 20% 20% 55%;
+  }
+
+  &::after {
+    // prettier-ignore
+    transform: scaleX(1.155) skewY(-30deg) rotate(-30deg) translateY(-42.3%) skewX(-30deg) scaleY(0.866) translateX(24%);
+    border-radius: 20% 20% 55% 20%;
+  }
+}
+
 .o-player {
   $root: &;
   padding-bottom: (526 / 934) * 100%;
@@ -50,40 +84,50 @@
       visibility: hidden;
     }
   }
-  @include mobile-down {
+  @include tablet-down {
     #{$root}_play {
       width: rem(60);
       height: rem(60);
     }
+
     #{$root}_icon {
+      position: absolute;
+      bottom: rem(18);
+      left: rem(10);
+    }
+    #{$root}_triangle {
+      @include triangle(40px, var(--theme));
+    }
+  }
+  @include mobile-down {
+    #{$root}_play {
       width: rem(40);
-      transform: translateY(-6px);
-      &::before {
-        padding-top: 100%;
-      }
+      height: rem(40);
+    }
+    #{$root}_icon {
+      position: absolute;
+      bottom: rem(13);
+      left: rem(7);
+    }
+    #{$root}_triangle {
+      @include triangle(25px, var(--theme));
     }
   }
   &_play {
+    position: relative;
     background: $white;
     width: rem(80);
     height: rem(80);
     border-radius: 50%;
     transform: rotate(90deg);
-    @include adjust-flex(center, center);
   }
   &_icon {
-    display: inline-block;
-    width: rem(60);
-    color: var(--theme);
-    filter: url('#goo');
-    transform: translateY(-8px);
+    position: absolute;
+    bottom: rem(20);
+    left: rem(10);
+  }
 
-    &::before {
-      content: '';
-      display: block;
-      padding-top: 86%;
-      background: currentColor;
-      clip-path: polygon(50% 0, 100% 100%, 0 100%);
-    }
+  &_triangle {
+    @include triangle(60px, var(--theme));
   }
 }
