@@ -5,7 +5,7 @@ import Container from 'common/Container';
 import FlatMore from 'common/FlatMore';
 import Card from 'components/organisms/Card';
 import { CardNormalProps } from 'components/organisms/Card/Normal';
-import getNewsListService from 'services/news';
+import { getNewsListService } from 'services/news';
 import {
   baseString, baseURL, getBlockData, getTimePastToCurrent,
 } from 'utils/functions';

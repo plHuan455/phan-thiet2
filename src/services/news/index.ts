@@ -2,7 +2,7 @@ import { NewsDetailTypes, NewsListParams, NewsListTypes } from './types';
 
 import axiosInstance from 'services/common/instance';
 
-const getNewsListService = async (
+export const getNewsListService = async (
   params?: NewsListParams,
 ): Promise<APIPaginationResponse<NewsListTypes[]>> => {
   const response = await axiosInstance.get('news', { params });
@@ -15,5 +15,3 @@ export const getNewsDetailService = async (
   const res = await axiosInstance.get(`news/${slug}`);
   return res.data.data;
 };
-
-export default getNewsListService;

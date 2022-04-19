@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 export interface ImageListParams {
-  subdivision_id: string;
+  subdivision_id?: string;
   page?: number;
   limit?: number;
   keyword?: string;

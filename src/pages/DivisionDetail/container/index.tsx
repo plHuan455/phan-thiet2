@@ -95,7 +95,10 @@ const Screen: React.FC = () => {
         <Collection data={collection} />
 
         {/* Library */}
-        <Library data={library} />
+        <Library
+          subDivisionId={subDivisionDetail?.id || -1}
+          data={library}
+        />
 
         {/* Journey */}
         <Journeys

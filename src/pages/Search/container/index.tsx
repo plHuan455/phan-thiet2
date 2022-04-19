@@ -20,7 +20,7 @@ import { OptionType } from 'components/molecules/PullDown';
 import { CardDivisionProps } from 'components/organisms/Card/Division';
 import { CardNormalProps } from 'components/organisms/Card/Normal';
 import SearchResult from 'components/templates/SearchResult';
-import getNewsListService from 'services/news';
+import { getNewsListService } from 'services/news';
 import { NewsListTypes } from 'services/news/types';
 import { getSubDivisionListService } from 'services/subdivision';
 import { SubDivisionListTypes } from 'services/subdivision/types';

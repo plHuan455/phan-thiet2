@@ -56,6 +56,7 @@
   }
   
   .s-library {
+    position: relative;
     &_wrapTab {
       margin: rem(32) 0;
       @include adjust-flex(space-between, center);
