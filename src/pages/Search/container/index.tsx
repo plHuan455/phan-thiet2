@@ -1,6 +1,11 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useMemo, useRef, useState } from 'react';
+import React, {
+  ChangeEvent,
+  useEffect,
+  useMemo,
+  useRef, useState,
+} from 'react';
 import { useInfiniteQuery } from 'react-query';
 import { animated } from 'react-spring';
 
@@ -10,14 +15,19 @@ import bgLeft from 'assets/images/searchResult/bg_searchResult_left.png';
 import bgRight from 'assets/images/searchResult/bg_searchResult_right.png';
 import HelmetContainer from 'common/Helmet';
 import Image from 'components/atoms/Image';
+import { OptionType } from 'components/molecules/PullDown';
 import { CardDivisionProps } from 'components/organisms/Card/Division';
 import { CardNormalProps } from 'components/organisms/Card/Normal';
 import SearchResult from 'components/templates/SearchResult';
+import useDebounce from 'hooks/useDebounce';
 import getNewsListService from 'services/news';
 import { NewsListTypes } from 'services/news/types';
 import getSubDivisionListService from 'services/subdivision';
 import { SubDivisionListTypes } from 'services/subdivision/types';
-import { baseURL, getOgDataPage } from 'utils/functions';
+import {
+  baseURL,
+  getOgDataPage,
+} from 'utils/functions';
 
 const dataTabList = [
   {
@@ -50,8 +60,21 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
   const [tabActive, setTabActive] = useState<string | undefined>(
     dataTabList[0].slug,
   );
+  const [currentValueSort, setCurrentValueSort] = useState<OptionType>(optionSort[0]);
   const bgLeftRef = useRef<HTMLDivElement>(null);
   const { animate, animateReverse } = useAnimation({ ref: bgLeftRef });
+  const [searchKeyValue, setSearchKeyValue] = useState('');
+  const debouncedSearch = useDebounce(searchKeyValue, 500);
+
+  useEffect(() => {
+    if (debouncedSearch) {
+      if (searchKeyValue) {
+        // control the txt search:
+      }
+    } else {
+      // set search list []
+    }
+  }, [debouncedSearch, searchKeyValue]);
 
   // Get News
   const {
@@ -148,16 +171,19 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
 
       <SearchResult.Wrapper titleMain="Tìm kiếm">
         <SearchResult.Summary
-          value="Nova world Phan Thiết"
+          value={searchKeyValue}
           placeholder="Tìm kiếm"
-          searchText="Novaworld Phan Thiết"
+          searchText=""
           length={9}
+          onChange={(e) => setSearchKeyValue(e.currentTarget.value)}
         />
         <SearchResult.Filter
           tabs={dataTabList}
           slugActive={tabActive}
           optionSort={optionSort}
           handleSelectTab={(tab) => setTabActive(tab)}
+          handleSort={(option) => option && setCurrentValueSort(option)}
+          valueSort={currentValueSort}
         />
         {tabActive === 'tin-tuc' && (
           <SearchResult.Content
