@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { KeyboardEvent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
 import Container from 'common/Container';
@@ -38,6 +38,9 @@ const SearchTop = React.forwardRef<
           ref={ref}
           type="text"
           autoComplete="off"
+          onKeyDown={(e: KeyboardEvent<HTMLInputElement>) => {
+            if (e.key === 'Enter' && handleSubmit) { handleSubmit(); }
+          }}
         />
         <button className="t-searchResult_searchInput_btn" type="button" onClick={handleSubmit}>
           <Icon iconName="searchGray" size="14" />

@@ -6,7 +6,7 @@ import React, {
   useMemo,
   useRef, useState,
 } from 'react';
-import { useInfiniteQuery } from 'react-query';
+import { useInfiniteQuery, useMutation, useQueryClient } from 'react-query';
 import { animated } from 'react-spring';
 
 import useAnimation from '../animation';
@@ -65,6 +65,48 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
   const { animate, animateReverse } = useAnimation({ ref: bgLeftRef });
   const [searchKeyValue, setSearchKeyValue] = useState('');
   const debouncedSearch = useDebounce(searchKeyValue, 500);
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation(
+    (pageParam) => getNewsListService({
+      page: pageParam.page,
+      limit: 3,
+      keyword: searchKeyValue,
+    }),
+    {
+      onMutate: async (params: any) => {
+        // Cancel any outgoing refetches (so they don't overwrite our optimistic update)
+        await queryClient.cancelQueries('getNews');
+
+        // Snapshot the previous value
+        const previousNews = queryClient.getQueryData<NewsListTypes[]>('getNews');
+
+        // Optimistically update to the new value
+        if (previousNews) {
+          queryClient.setQueryData<NewsListTypes[]>('getNews', params);
+        }
+
+        return previousNews;
+      },
+      // If the mutation fails, use the context returned from onMutate to roll back
+      onError: (err, variables, context) => {
+        // if (context?.previousNews) {
+        //   queryClient.setQueryData<NewsListTypes[]>('getNews', context.previousNews);
+        // }
+      },
+      onSettled: () => {
+        queryClient.invalidateQueries('getNews');
+      },
+    },
+  );
+
+  const handleSearch = () => {
+    mutation.mutate({
+      page: 1,
+      limit: 3,
+      keyword: searchKeyValue,
+    });
+  };
 
   useEffect(() => {
     if (debouncedSearch) {
@@ -176,6 +218,7 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
           searchText=""
           length={9}
           onChange={(e) => setSearchKeyValue(e.currentTarget.value)}
+          handleSubmit={handleSearch}
         />
         <SearchResult.Filter
           tabs={dataTabList}
