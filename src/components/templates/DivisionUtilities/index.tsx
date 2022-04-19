@@ -36,7 +36,7 @@ const DivisionUtilities: React.FC<DivisionUtilitiesProps> = ({
           <Heading type="h2" modifiers={['inherit', 's015', '400']} content={title} />
         </div>
         <div className="t-divisionUtilities_map u-mt-41">
-          <div className="t-divisionUtilities_image" style={{ paddingBottom: `calc(${heightImage} / ${widthImage}  * 100%)` }}>
+          <div className="t-divisionUtilities_image" style={{ paddingBottom: heightImage && widthImage ? `calc(${heightImage / widthImage}  * 100%)` : '0%' }}>
             <img src={background} alt="location-map" loading="lazy" />
           </div>
           {

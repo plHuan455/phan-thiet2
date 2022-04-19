@@ -13,5 +13,5 @@ export interface DocumentParams {
   page?: number;
   limit?: number;
   keyword?: string;
-  subdivision_id?: number;
+  subdivision_id?: string;
 }

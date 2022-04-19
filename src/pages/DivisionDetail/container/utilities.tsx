@@ -30,7 +30,7 @@ const Utilities: React.FC<UtilitiesProps> = ({ data }) => {
         return error;
       }
     })();
-  }, [data]);
+  }, [data?.map.image]);
 
   const listLocations = useMemo(() => data?.map.items?.map((item, index) => ({
     x: Number(item.point.x),
@@ -46,7 +46,7 @@ const Utilities: React.FC<UtilitiesProps> = ({ data }) => {
 
   if (!data?.active) return null;
 
-  if (dimension.width <= 0 && dimension.height <= 0) return null;
+  // if (dimension.width <= 0 && dimension.height <= 0) return null;
 
   return (
     <section className="u-pt-md-80 u-pt-48 u-pb-md-80 u-pb-48" style={{ color: 'var(--theme)' }}>
@@ -65,4 +65,4 @@ Utilities.defaultProps = {
   data: undefined,
 };
 
-export default Utilities;
+export default React.memo(Utilities);

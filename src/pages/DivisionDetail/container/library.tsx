@@ -1,5 +1,9 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable camelcase */
-import React, { useState, useEffect, useReducer } from 'react';
+import React, {
+  useState, useEffect, useReducer, useRef, useMemo,
+} from 'react';
 
 import Container from 'common/Container';
 import FlatList from 'common/FlatList';
@@ -10,6 +14,8 @@ import Link from 'components/atoms/Link';
 import Text from 'components/atoms/Text';
 import Card from 'components/organisms/Card';
 import Tabs, { Tab } from 'components/organisms/Tabs';
+import PopupImage from 'components/templates/PopupImage';
+import PopupPlayer from 'components/templates/PopupPlayer';
 import { useAsync } from 'hooks/useAsync';
 import { CardImage } from 'pages/News/container/images';
 import { getDocumentsService } from 'services/documents';
@@ -46,11 +52,15 @@ interface LibraryProps {
 
 interface LibraryState {
   isLoading?: boolean;
-  currentList?: NewsListTypes[] | DocumentTypes[] | ImageListTypes[] | VideoTypes[];
   news?: NewsListTypes[];
   documents?: DocumentTypes[];
   images?: ImageListTypes[];
   videos?: VideoTypes[];
+  isPopImageOpen?: boolean;
+  currentImgIdx?: number;
+  isPopPlayerOpen?: boolean;
+  currVidSrc?: string;
+  currVidType?: string;
 }
 
 interface ActionWithPayload {
@@ -64,12 +74,24 @@ const reducer = (state: LibraryState, action: ActionWithPayload) => {
       return { ...state, isLoading: true };
     case 'update_library':
       return { ...state, ...action.payload };
+    case 'close_image_popup':
+      return { ...state, isPopImageOpen: false };
+    case 'close_player_popup':
+      return { ...state, isPopPlayerOpen: false };
     default:
       return state;
   }
 };
 
 const Library: React.FC<LibraryProps> = ({ data, subDivisionId }) => {
+  const settingRef = useRef({
+    prevArrow: <Arrow.Prev />,
+    nextArrow: <Arrow.Next />,
+    customPaging() {
+      return <span className="o-carousel_dot rect inherit" style={{ backgroundColor: 'var(--theme)' }} />;
+    },
+  });
+
   const [indexActive, setIndexActive] = useState(0);
   const [state, dispatch] = useReducer(reducer, {
     news: undefined,
@@ -77,42 +99,34 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId }) => {
     images: undefined,
     videos: undefined,
     isLoading: false,
-    currentList: [],
+    isPopImageOpen: false,
+    currentImgIdx: 0,
+    isPopPlayerOpen: false,
+    currVidSrc: '',
+    currVidType: '',
   });
 
   const [libraryExecute] = useAsync(
     async () => {
       const temp: LibraryState = { ...state };
       if (subDivisionId !== -1) {
-        dispatch({ type: 'start_loading' });
         const subdivision_id = subDivisionId?.toString();
-        if (indexActive === 0) {
-          if (!temp.news) {
-            const res = await getNewsListService({ subdivision_id });
-            temp.news = res.data;
-          }
-          temp.currentList = temp.news;
+        dispatch({ type: 'start_loading' });
+        if (indexActive === 0 && !temp.news) {
+          const res = await getNewsListService({ subdivision_id });
+          temp.news = res.data;
         }
-        if (indexActive === 1) {
-          if (!temp.images) {
-            const res = await getImageListService({ subdivision_id });
-            temp.images = res.data;
-          }
-          temp.currentList = temp.images;
+        if (indexActive === 1 && !temp.images) {
+          const res = await getImageListService({ subdivision_id });
+          temp.images = res.data;
         }
-        if (indexActive === 2) {
-          if (!temp.videos) {
-            const res = await getVideosService({ subdivision_id });
-            temp.videos = res.data;
-          }
-          temp.currentList = temp.videos;
+        if (indexActive === 2 && !temp.videos) {
+          const res = await getVideosService({ subdivision_id });
+          temp.videos = res.data;
         }
-        if (indexActive === 3) {
-          if (!temp.documents) {
-            const res = await getDocumentsService();
-            temp.documents = res.data;
-          }
-          temp.currentList = temp.documents;
+        if (indexActive === 3 && !temp.documents) {
+          const res = await getDocumentsService({ subdivision_id });
+          temp.documents = res.data;
         }
         temp.isLoading = false;
       }
@@ -125,10 +139,28 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId }) => {
     },
   );
 
+  const listData = useMemo(() => {
+    switch (indexActive) {
+      case 0:
+        return state.news;
+      case 1:
+        return state.images;
+      case 2:
+        return state.videos;
+      case 3:
+        return state.documents;
+
+      default:
+        return [];
+    }
+  }, [state, indexActive]);
+
   useEffect(() => {
     libraryExecute();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [subDivisionId, indexActive]);
+
+  console.log(listData);
 
   if (!data?.active) return null;
 
@@ -164,16 +196,50 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId }) => {
             </Link>
           </div>
         </div>
-        {indexActive === 0 && (
+        <FlatList<any>
+          data={listData || []}
+          settings={settingRef.current}
+          render={(item) => {
+            if (listData?.length) {
+              switch (indexActive) {
+                case 0:
+                  return (
+                    <Card.Normal
+                      thumbnail={baseURL(item.thumbnail)}
+                      title={item.title}
+                      href={`/${CONSTANTS.PREFIX.NEWS.VI}/${item.slug}`}
+                      tag={{
+                        text: item?.subdivision?.name,
+                        // TODO: Add locale later
+                        url: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item?.subdivision?.slug}`,
+                      }}
+                      dateTime={getTimePastToCurrent(item.publishedAt)}
+                      url={{
+                        text: 'Xem thêm',
+                        iconName: 'arrowRightCopper',
+                        animation: 'arrow',
+                      }}
+                    />
+                  );
+
+                default:
+                  return null;
+              }
+            } else {
+              return (
+                <div>
+                  <Text modifiers={['14x20', 'raisinBlack', '400', 'center']}>
+                    Không có dữ liệu
+                  </Text>
+                </div>
+              );
+            }
+          }}
+        />
+        {/* {indexActive === 0 && (
           <FlatList
             data={state.news || []}
-            settings={{
-              prevArrow: <Arrow.Prev />,
-              nextArrow: <Arrow.Next />,
-              customPaging() {
-                return <span className="o-carousel_dot rect inherit" style={{ backgroundColor: 'var(--theme)' }} />;
-              },
-            }}
+            settings={settingRef.current}
             render={(item) => (
               <Card.Normal
                 thumbnail={baseURL(item.thumbnail)}
@@ -193,60 +259,59 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId }) => {
               />
             )}
           />
-        )}
-        {indexActive === 1 && (
-        <FlatList
-          data={state.images || []}
-          settings={{
-            prevArrow: <Arrow.Prev />,
-            nextArrow: <Arrow.Next />,
-            customPaging() {
-              return <span className="o-carousel_dot rect inherit" style={{ backgroundColor: 'var(--theme)' }} />;
-            },
-          }}
-          render={(item) => (
-            <CardImage
-              thumbnail={baseURL(item.subdivision?.thumbnail)}
-              handleClick={() => ''}
-            />
-          )}
-        />
-        )}
-        {indexActive === 2 && (
-        <FlatList
-          data={state.videos || []}
-          settings={{
-            prevArrow: <Arrow.Prev />,
-            nextArrow: <Arrow.Next />,
-            customPaging() {
-              return <span className="o-carousel_dot rect inherit" style={{ backgroundColor: 'var(--theme)' }} />;
-            },
-          }}
-          render={(item) => (
-            <Card.Player
-              thumbnail={baseURL(item.thumbnail)}
-              tag={{
-                text: item?.subdivision?.name,
-                // TODO: Add locale later
-                url: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item?.subdivision?.slug}`,
-              }}
-              title={item.name}
-              dateTime={getTimePastToCurrent(item.createdAt)}
-              modifiers={['reverse', 'shadow']}
-            />
-          )}
-        />
-        )}
-        {indexActive === 3 && (
+        )} */}
+        {/* {indexActive === 1 && (
+          <FlatList
+            data={state.images || []}
+            settings={settingRef.current}
+            render={(item, itemIdx) => (
+              <CardImage
+                // thumbnail={baseURL(item.path)}
+                thumbnail=""
+                handleClick={() =>
+                  dispatch({
+                    type: 'update_library',
+                    payload: { isPopImageOpen: true, currentImgIdx: itemIdx
+                     } })}
+              />
+            )}
+          />
+        )} */}
+        {/* {indexActive === 2 && (
+          <FlatList
+            data={state.videos || []}
+            settings={settingRef.current}
+            render={(item) => {
+              const isVidOutside = item.video?.includes('http://') || item.video?.includes('https://');
+              const vidUrl = isVidOutside ? item.video : baseURL(item.video);
+              return (
+                <Card.Player
+                  thumbnail={baseURL(item.thumbnail)}
+                  tag={{
+                    text: item?.subdivision?.name,
+                    // TODO: Add locale later
+                    url: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item?.subdivision?.slug}`,
+                  }}
+                  title={item.name}
+                  dateTime={getTimePastToCurrent(item.createdAt)}
+                  modifiers={['reverse', 'shadow']}
+                  onClick={() => {
+                    const res = {
+                      isPopPlayerOpen: true,
+                      currVidSrc: vidUrl,
+                      currVidType: item.videoType,
+                    };
+                    dispatch({ type: 'update_library', payload: res });
+                  }}
+                />
+              );
+            }}
+          />
+        )} */}
+        {/* {indexActive === 3 && (
           <FlatList
             data={state.documents || []}
-            settings={{
-              prevArrow: <Arrow.Prev />,
-              nextArrow: <Arrow.Next />,
-              customPaging() {
-                return <span className="o-carousel_dot rect inherit" style={{ backgroundColor: 'var(--theme)' }} />;
-              },
-            }}
+            settings={settingRef.current}
             render={(item) => (
               <Card.Normal
                 thumbnail={baseURL(item.thumbnail)}
@@ -257,6 +322,7 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId }) => {
                   // url: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item?.subdivision?.slug}`
                   url: 'missing',
                 }}
+                target="_blank"
                 dateTime={getTimePastToCurrent(item.publishedAt)}
                 url={{
                   text: 'Tải xuống',
@@ -266,7 +332,20 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId }) => {
               />
             )}
           />
-        )}
+        )} */}
+        <PopupImage
+          isOpen={state.isPopImageOpen || false}
+          handleClose={() => dispatch({ type: 'close_image_popup' })}
+          currentImgIdx={state.currentImgIdx}
+          // dataImageList={state.images?.map((item) => baseURL(item.iam)) || []}
+          dataImageList={[]}
+        />
+        <PopupPlayer
+          isOpen={state.isPopPlayerOpen || false}
+          handleClose={() => dispatch({ type: 'close_player_popup' })}
+          videoType={state.currVidType || ''}
+          src={state.currVidSrc || ''}
+        />
         <div className="d-flex justify-content-center d-lg-none u-mt-32">
           <Link href="/" target="_self">
             <div className="animate animate-arrowSlide d-flex align-items-center">
