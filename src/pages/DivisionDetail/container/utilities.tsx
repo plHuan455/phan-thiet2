@@ -43,6 +43,8 @@ const Utilities: React.FC<UtilitiesProps> = ({ data }) => {
     },
   })), [data]);
 
+  if (demension.width <= 0 && demension.height <= 0) return <div />;
+
   return (
     <section className="u-pt-md-80 u-pt-48 u-pb-md-80 u-pb-48" style={{ color: 'var(--theme)' }}>
       <DivisionUtilities
