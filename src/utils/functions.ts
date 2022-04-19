@@ -172,8 +172,11 @@ export const getTimePastToCurrent = (date?: string) => {
   const distance = toDay - dateFormat;
   const days = Math.floor(distance / (1000 * 60 * 60 * 24));
   const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
   if (days > 0) return `${days} ngày trước`;
-  return `${hours} giờ trước`;
+  if (hours > 0) return `${hours} giờ trước`;
+  return `${mins > 0 ? mins : 1} phút trước`;
 };
 
 export const getSearchParams = (path: string) => Object.fromEntries(new URLSearchParams(path));
