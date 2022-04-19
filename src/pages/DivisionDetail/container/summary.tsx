@@ -12,8 +12,8 @@ const Summary: React.FC<SummaryProps> = ({
   data,
 }) => {
   const summaryData = useMemo(() => [
-    data?.content.items.item1,
-    data?.content.items.item2,
+    data?.content?.items?.item1,
+    data?.content?.items?.item2,
   ].map((item) => ({
     thumbnail: baseURL(item?.image),
     title: item?.title,

@@ -1,8 +1,7 @@
 import imgBoutique from 'assets/images/divisionLocation/boutique.png';
 import imgFestivalStreet from 'assets/images/divisionLocation/festivalStreet.png';
 import imgFestivalTown from 'assets/images/divisionLocation/festivalTown.png';
-import imgFloridaFirst from 'assets/images/divisionLocation/floridaFirst.png';
-import imgFloridaSecond from 'assets/images/divisionLocation/floridaSecond.png';
+import imgFlorida from 'assets/images/divisionLocation/florida.png';
 import imgKingDom from 'assets/images/divisionLocation/kingDom.png';
 import imgOceanResidence from 'assets/images/divisionLocation/oceanResidence.png';
 import imgPgaGolf from 'assets/images/divisionLocation/pgaGolf.png';
@@ -26,14 +25,9 @@ const mapData = [
     img: imgFestivalTown,
   },
   {
-    className: 'florida-1',
-    line: 'M1005 512.5L931.5 475L963 431.5H985C986.167 431.333 988.5 430.4 988.5 428C1002 426 1002.5 423.5 1005 419.5C994.2 397.1 975.167 381.5 967 376.5V354.5C969.499 350.5 968.299 350.6 973.499 343C983.499 346.5 1051 366.5 1096.5 380.5L1161.5 401C1185.67 408.5 1235.1 425.8 1253.5 433L1254.56 433.415C1272.13 440.29 1277.95 442.568 1284 446L1074.5 626L958 563L1005 512.5Z',
-    img: imgFloridaFirst,
-  },
-  {
-    className: 'florida-2',
-    line: 'M989 319.5L973.5 343.5L988 348C1011 355.5 1044.24 363.996 1052.5 366.5C1069 371.5 1101 380.833 1118.5 386.5C1145.67 395.833 1199.6 413.1 1206 415.5C1212.4 417.9 1261 437.167 1284.5 446.5L1315.5 423C1307.5 419.167 1287.9 410.2 1275.5 405C1263.1 399.8 1191.33 377.167 1157 366.5L1118.5 357L1047.5 337.5L989 319.5Z',
-    img: imgFloridaSecond,
+    className: 'florida',
+    line: 'M1010.99 519.059L933.102 483.13L966.483 441.452H989.797C991.033 441.293 993.506 440.398 993.506 438.099C1007.81 436.183 1008.34 433.787 1010.99 429.955C999.546 408.493 979.376 393.547 970.722 388.756V367.678C957.5 347 987.995 303.782 993.506 296.5C1004.1 299.853 1105.78 324.086 1154 337.5L1231.5 359C1257.11 366.186 1344.5 393.102 1364 400C1383.5 406.898 1300.12 451.991 1306.65 455.345L1084.64 627.805L961.184 567.444L1010.99 519.059Z',
+    img: imgFlorida,
   },
   {
     className: 'the-kingdom',
