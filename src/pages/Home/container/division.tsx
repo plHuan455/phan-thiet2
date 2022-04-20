@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
 
 import dataJourneys from 'assets/dataDummy/journeys';
@@ -6,6 +6,7 @@ import Container from 'common/Container';
 import FlatMore from 'common/FlatMore';
 import Card from 'components/organisms/Card';
 import JourneysTemplate from 'components/templates/Journeys';
+import getImageListService from 'services/image';
 import { getSubDivisionListService } from 'services/subdivision';
 import CONSTANTS from 'utils/constants';
 import {
@@ -25,7 +26,7 @@ const Division: React.FC<SectionBlocks> = ({ blocks }) => {
   const divisionBlocks = getBlockData<DivisionProps>('subdivision_novaworld', blocks);
   const journeysBlocks = getBlockData<JourneysProps>('experience_secondhome', blocks);
   const { data: subDivisionList } = useQuery('getSubDivisionListHome', () => getSubDivisionListService());
-
+  const [activeJourneys, setActiveJourneys] = useState(0);
   const subDivisionData = useMemo(() => subDivisionList?.data?.map((item) => ({
     imgSrc: baseURL(item.thumbnail),
     title: item.name,
@@ -42,6 +43,21 @@ const Division: React.FC<SectionBlocks> = ({ blocks }) => {
     //  TODO: Add locale later
     href: `${CONSTANTS.PREFIX.DIVISION.VI}/${item.slug}`,
   })), [subDivisionList]);
+
+  const handleClickTimeLine = (idx: number) => {
+    setActiveJourneys(idx);
+  };
+
+  const { data: imageList, isLoading } = useQuery(
+    ['getImageJourneys', activeJourneys], () => getImageListService({
+      subdivision_id: String(subDivisionList?.data[activeJourneys].id),
+    }),
+  );
+
+  const listCardJourneys = useMemo(() => imageList?.data.map((item) => ({
+    thumbnail: baseURL(item.thumbnailHome),
+    title: item.name,
+  })), [imageList]);
 
   return (
     <>
@@ -72,8 +88,10 @@ const Division: React.FC<SectionBlocks> = ({ blocks }) => {
           title={journeysBlocks?.titleSection}
           titleField="Các mẫu nhà"
           dataTimeLine={journeysData}
-          listCard={dataJourneys.listCard}
+          listCard={listCardJourneys}
           srcBg={dataJourneys.srcBg}
+          handleClickTimeLine={handleClickTimeLine}
+          loading={isLoading}
         />
       </section>
 

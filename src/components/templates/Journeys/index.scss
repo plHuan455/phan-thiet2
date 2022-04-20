@@ -254,6 +254,7 @@
   }
 
   &_right {
+    $right: &;
     align-items: flex-end;
     display: flex;
     flex: 0 0 calc(89% - 420px);
@@ -269,6 +270,17 @@
       margin: rem(20) 0 0;
       max-width: 100%;
     }
+
+
+  &-empty {
+    align-items: center;
+
+    @include mobile-down {
+      #{$right}_list {
+        min-height: inherit;
+      }
+    }
+  }
 
     &_list {
       margin-bottom: rem(40);

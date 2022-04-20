@@ -14,6 +14,7 @@ import Card from 'components/organisms/Card';
 import { CardLayerProps } from 'components/organisms/Card/Layer';
 import { NextArrow, PrevArrow } from 'components/organisms/Carousel';
 import useWindowResize from 'hooks/useWindowResize';
+import mapModifiers from 'utils/functions';
 
 export interface TimeLineItemType {
   title?: string;
@@ -72,10 +73,12 @@ export const TimeLineCard:React.FC<TimeLineCardProps> = ({
 
 export interface VerticalJourneysProps {
   dataTimeLine?: TimeLineItemType[];
+  handleClickTimeLine?: (i: number) => void;
 }
 
 export const VerticalJourneys: React.FC<VerticalJourneysProps> = ({
   dataTimeLine,
+  handleClickTimeLine,
 }) => {
   const [indexActive, setIndexActive] = useState(0);
   const refTimeLine = useRef<HTMLDivElement|null>(null);
@@ -94,7 +97,10 @@ export const VerticalJourneys: React.FC<VerticalJourneysProps> = ({
     refIndexActive.current = i;
     setIndexActive(i);
     handleScrollCenter(i);
-  }, [handleScrollCenter]);
+    if (handleClickTimeLine) {
+      handleClickTimeLine(i);
+    }
+  }, [handleClickTimeLine, handleScrollCenter]);
 
   useWindowResize(() => {
     if (refTimeout.current) clearTimeout(refTimeout.current);
@@ -149,11 +155,13 @@ export const VerticalJourneys: React.FC<VerticalJourneysProps> = ({
 export interface JourneysListProps {
   listCard?: CardLayerProps[];
   titleField?: string;
+  loading?: boolean;
 }
 
 export const JourneysList:React.FC<JourneysListProps> = ({
   listCard,
   titleField,
+  loading,
 }) => {
   const settings = useMemo(() => ({
     infinite: listCard && listCard?.length > 3,
@@ -224,24 +232,43 @@ export const JourneysList:React.FC<JourneysListProps> = ({
     ],
   }), [listCard]);
 
+  if (loading) {
+    return (
+      <div className="d-flex justify-content-center">
+        <Icon iconName="loadingWhite" />
+      </div>
+    );
+  }
+
   return (
-    <div className="t-journeysList">
-      <div className="u-mb-16">
-        <Text modifiers={['20x32', 'white', 's015']} content={titleField} />
-      </div>
-      <div>
-        <FlatList
-          settings={settings}
-          data={listCard}
-          render={(item) => (
-            <Card.Layer
-              {...item}
-              ratio="258x334"
-              modifiers={['r15', 'pd-6x20']}
+    <div className={mapModifiers('t-journeysList', !listCard?.length && 'empty')}>
+      {listCard?.length ? (
+        <>
+          <div className="u-mb-16">
+            <Text modifiers={['20x32', 'white', 's015']} content={titleField} />
+          </div>
+          <div>
+            <FlatList
+              settings={settings}
+              data={listCard}
+              render={(item) => (
+                <Card.Layer
+                  {...item}
+                  ratio="258x334"
+                  modifiers={['r15', 'pd-6x20']}
+                />
+              )}
             />
-          )}
-        />
-      </div>
+          </div>
+        </>
+      ) : (
+        <div className="t-journeysList_empty">
+          <Text modifiers={['20x32', 'white', 's015', 'center']}>
+            {/* TODO: Translations later */}
+            Chưa có mẫu nhà
+          </Text>
+        </div>
+      )}
     </div>
   );
 };
@@ -257,6 +284,8 @@ const Journeys: React.FC<JourneysProps> = ({
   title,
   listCard,
   titleField,
+  handleClickTimeLine,
+  loading,
 }) => (
   <div className="t-journeys">
     <img
@@ -272,13 +301,15 @@ const Journeys: React.FC<JourneysProps> = ({
           <div className="t-journeys_left">
             <VerticalJourneys
               dataTimeLine={dataTimeLine}
+              handleClickTimeLine={handleClickTimeLine}
             />
           </div>
-          <div className="t-journeys_right">
+          <div className={mapModifiers('t-journeys_right', !listCard?.length && 'empty')}>
             <div className="t-journeys_right_list">
               <JourneysList
                 listCard={listCard}
                 titleField={titleField}
+                loading={loading}
               />
             </div>
           </div>
