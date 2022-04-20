@@ -14,8 +14,8 @@
     top: 0;
     width: 100%;
     z-index: 1;
-    
-    @include break-max (1366px) {
+    opacity: 0;
+    @include break-max(1366px) {
       max-width: 8%;
     }
 
@@ -37,8 +37,9 @@
     transform: translateY(-25%);
     width: 100%;
     z-index: 1;
-    
-    @include break-max (1366px) {
+    opacity: 0;
+
+    @include break-max(1366px) {
       max-width: 13.4%;
     }
 
@@ -145,7 +146,7 @@
       list-style: none;
       margin: -4px rem(-6) 0;
     }
-    
+
     li {
       flex-shrink: 0;
       margin-top: 4px;
@@ -153,7 +154,7 @@
     }
 
     &_link {
-      @include font-base(12,18);
+      @include font-base(12, 18);
       background: $gradient-blue-3;
       border-radius: 2px;
       color: $raisin-black;
