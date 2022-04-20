@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 interface CountDownHookProps {
-  endTime: string
+  endTime?: string
 }
 
 const useCountDown = ({ endTime }: CountDownHookProps) => {
@@ -10,6 +10,7 @@ const useCountDown = ({ endTime }: CountDownHookProps) => {
     hours: '00',
     mins: '00',
     secs: '00',
+    totalHours: '00',
   });
 
   const format = (value: number): string => {
@@ -23,6 +24,7 @@ const useCountDown = ({ endTime }: CountDownHookProps) => {
   };
 
   useEffect(() => {
+    if (!endTime) return;
     const dateTime = new Date(endTime).getTime();
 
     const countdown = setInterval(() => {
@@ -34,12 +36,17 @@ const useCountDown = ({ endTime }: CountDownHookProps) => {
       const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const secs = Math.floor((distance % (1000 * 60)) / 1000);
+      let totalHours = hours;
+      if (days > 0) {
+        totalHours = Math.floor((days * 24) + hours);
+      }
 
       setTimer({
         days: format(days),
         hours: format(hours),
         mins: format(mins),
         secs: format(secs),
+        totalHours: format(totalHours),
       });
 
       if (distance < 0) {

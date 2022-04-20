@@ -100,20 +100,22 @@ const Detail: React.FC<DetailProps> = ({
           <div className="t-detail_content u-mt-30 u-mt-lg-64">
             <Text modifiers={['16x28', 'justify', 'davyGrey']} type="div" content={content} />
           </div>
-          <div className="t-detail_tags u-mt-24 u-mt-lg-56">
-            <div className="t-detail_tags_text">
-              <Text modifiers={['14x20', 'davyGrey']}>
-                {`${textTopic}:`}
-              </Text>
+          {tags && tags?.length > 0 && (
+            <div className="t-detail_tags u-mt-24 u-mt-lg-56">
+              <div className="t-detail_tags_text">
+                <Text modifiers={['14x20', 'davyGrey']}>
+                  {`${textTopic}:`}
+                </Text>
+              </div>
+              <ul>
+                {tags?.map((item, index) => (
+                  <li key={`tag-${index.toString()}`}>
+                    <Link className="t-detail_tags_link" href={item.href}>{item.name}</Link>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <ul>
-              {tags?.map((item, index) => (
-                <li key={`tag-${index.toString()}`}>
-                  <Link className="t-detail_tags_link" href={item.href}>{item.name}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          )}
         </div>
       </Container>
       {hasRelated && (
