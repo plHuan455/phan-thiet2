@@ -5,6 +5,9 @@ export interface SubDivisionParams {
 }
 
 export interface SubDivisionListTypes {
+  title: any;
+  addressLat: number;
+  addressLong: number;
   id: number;
   displayOrder: number;
   thumbnail: string;
