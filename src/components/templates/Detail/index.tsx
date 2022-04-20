@@ -75,7 +75,7 @@ const Detail: React.FC<DetailProps> = ({
             </div>
             <div className="t-detail_share">
               <div className="t-detail_share_text">
-                <Text modifiers={['24x36', 's015', 'raisinBlack']}>{`${textShare}:`}</Text>
+                <Heading type="h6" modifiers={['s015', 'raisinBlack']}>{`${textShare}:`}</Heading>
               </div>
               <ul>
                 <li>
