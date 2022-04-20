@@ -46,7 +46,7 @@ const Screen: React.FC = () => {
       }
       {
         Boolean(Number(content?.location.active)) && (
-          <Location />
+          <Location data={subDivisionDetail} />
         )
       }
       {
@@ -57,29 +57,34 @@ const Screen: React.FC = () => {
       {
         Boolean(Number(content?.collection.active)) && (
           <Collection
-            title={baseString(subDivisionDetail?.content.collection.title)}
-            description={subDivisionDetail?.content.collection.description}
+            title={baseString(content?.collection.title)}
+            description={content?.collection.description}
           />
         )
       }
       {
         Boolean(Number(content?.library.active)) && (
-          <Library title={subDivisionDetail?.content.library.title} />
+          <Library title={content?.library.title} />
         )
       }
       {
         Boolean(Number(content?.journey.active)) && (
-          <Journeys title={subDivisionDetail?.content.journey.title} />
+          <Journeys
+            id={subDivisionDetail?.id}
+            title={content?.journey.title}
+          />
         )
       }
       {
         Boolean(Number(content?.related.active)) && (
-          <Division title={subDivisionDetail?.content.related.title} />
+          <Division title={content?.related.title} />
         )
       }
       {
         Boolean(Number(content?.subscribe.active)) && (
-          <Consultancy title={subDivisionDetail?.content.subscribe.title} />
+          <Consultancy
+            title={content?.subscribe.title}
+          />
         )
       }
     </>

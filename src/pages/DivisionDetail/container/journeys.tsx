@@ -8,9 +8,14 @@ import DivisionJourneys, { DivisionJourneysProps } from 'components/templates/Di
 import getUtilityCategoriesService, { getUtilityListService } from 'services/utilities';
 import { baseURL } from 'utils/functions';
 
-interface JourneysProps extends DivisionJourneysProps {}
+interface JourneysProps extends DivisionJourneysProps {
+  id?: number;
+}
 
-const Journeys: React.FC<JourneysProps> = (props) => {
+const Journeys: React.FC<JourneysProps> = ({
+  id,
+  ...props
+}) => {
   const [open, setOpen] = useState<number | undefined>(undefined);
 
   const { data: utilityCategories } = useQuery(
@@ -59,6 +64,10 @@ const Journeys: React.FC<JourneysProps> = (props) => {
       />
     </section>
   );
+};
+
+Journeys.defaultProps = {
+  id: undefined,
 };
 
 export default Journeys;

@@ -93,6 +93,7 @@ export interface SubDivisionDetailTypes {
   content: Content;
   openGraph: OpenGraphDataTypes;
   seoData: SEODataTypes;
+  type: string;
 }
 
 export interface SubDivisionMapListTypes {
