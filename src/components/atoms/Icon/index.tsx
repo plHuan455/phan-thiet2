@@ -30,6 +30,7 @@ export const iconList = {
   arrowRightWhite: 'arrowRightWhite',
   arrowLeftWhite: 'arrowLeftWhite',
   chevronDownWhite: 'chevronDownWhite',
+  loadingBlue: 'loadingBlue',
 };
 
 export type IconName = keyof typeof iconList;

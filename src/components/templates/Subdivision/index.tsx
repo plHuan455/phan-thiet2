@@ -11,9 +11,10 @@ import { CardDivisionProps } from 'components/organisms/Card/Division';
 interface SubdivisionProps {
   list?: CardDivisionProps[];
   title?: string;
-  btn?: LinkTypes & {disabled?: boolean};
-  onMore?: () => void
+  btn?: LinkTypes;
   loading?: boolean;
+  hasShowMore?: boolean;
+  onClick?: () => void
 }
 
 const Subdivision: React.FC<SubdivisionProps> = ({
@@ -21,7 +22,8 @@ const Subdivision: React.FC<SubdivisionProps> = ({
   title,
   btn,
   loading,
-  onMore,
+  hasShowMore,
+  onClick,
 }) => (
   <div className="t-subdivision">
     <Heading
@@ -48,19 +50,17 @@ const Subdivision: React.FC<SubdivisionProps> = ({
       {loading && (
       <div className="u-mt-16 u-pt-16 u-pb-16">
         <div className="d-flex justify-content-center">
-          {/* TODO: edit iconName */}
-          loading
-          <Icon iconName="loadingWhite" size="36" />
+          <Icon iconName="loadingBlue" size="36" />
         </div>
       </div>
       )}
-      {btn && !btn?.disabled && (
+      {hasShowMore && (
       <div className="u-mt-16 u-mt-lg-32 d-flex justify-content-center">
         <Button
           {...btn}
           variant="primary-green"
           onClick={() => {
-            if (onMore) onMore();
+            if (onClick) onClick();
           }}
         >
           {btn?.text}
@@ -75,8 +75,9 @@ Subdivision.defaultProps = {
   list: undefined,
   title: undefined,
   btn: undefined,
-  onMore: undefined,
   loading: undefined,
+  hasShowMore: undefined,
+  onClick: undefined,
 };
 
 export default Subdivision;

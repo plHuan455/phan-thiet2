@@ -6,7 +6,8 @@ import Image from 'components/atoms/Image';
 import { CardDivisionProps } from 'components/organisms/Card/Division';
 import Subdivision from 'components/templates/Subdivision';
 import getSubDivisionListService from 'services/subdivision';
-import { baseURL, getBlockData, linkURL } from 'utils/functions';
+import Constants from 'utils/constants';
+import { baseURL, getBlockData } from 'utils/functions';
 
 interface DivisionProps {
   title: string;
@@ -34,7 +35,7 @@ const Divisions: React.FC<SectionBlocks> = ({ blocks }) => {
     ['getSubDivisionList'],
     ({ pageParam = 1 }) => getSubDivisionListService({
       page: pageParam,
-      limit: 9,
+      limit: 3,
     }),
     {
       getNextPageParam: (params) => (params.meta?.page >= params.meta.totalPages
@@ -51,7 +52,8 @@ const Divisions: React.FC<SectionBlocks> = ({ blocks }) => {
           imgSrc: baseURL(item?.thumbnail),
           title: item.name,
           description: item?.content?.description,
-          href: linkURL(`/phan-khu/${item.slug}`),
+          // TODO: Add locale later
+          href: `/${Constants.PREFIX.DIVISION.VI}/${item.slug}`,
         })),
       ],
       [],
@@ -67,14 +69,13 @@ const Divisions: React.FC<SectionBlocks> = ({ blocks }) => {
       </div>
       <Subdivision
         loading={isFetchingNextPage}
-        onMore={fetchNextSubdivision}
+        onClick={fetchNextSubdivision}
         title={blockContent?.title}
         list={subdivisionList}
         btn={{
           text: blockContent?.button,
-          url: '/',
-          disabled: !hasNextSubdivision,
         }}
+        hasShowMore={hasNextSubdivision}
       />
     </section>
   );
