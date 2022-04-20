@@ -47,6 +47,10 @@
       transform: none;
     }
 
+    @include small-mobile {
+      max-width: rem(80);
+    }
+
     .a-image {
       padding-bottom: calc(246 / 184 * 100%);
     }
