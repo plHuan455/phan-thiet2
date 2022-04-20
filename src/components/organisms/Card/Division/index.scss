@@ -1,7 +1,11 @@
 .m-subDivisionCard {
-  display: flex;
-  flex-direction: column;
   height: 100%;
+
+  &_wrap {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
 
   &_image {
     border-radius: rem(12);
