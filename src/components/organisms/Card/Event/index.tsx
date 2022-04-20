@@ -9,7 +9,7 @@ import useCountDown from 'hooks/useCountDown';
 export interface CardEventProps {
   endTime?: string;
   thumbnail: string;
-  tag?: string;
+  tag?: LinkTypes;
   title?: string;
   summary?: {
     iconName: IconName,
@@ -49,9 +49,11 @@ const CardEvent: React.FC<CardEventProps> = ({
         </div>
       </Link>
       <div className="o-cardEvent_content">
-        <Text modifiers={['400', '14x20', 'gradientGreen']}>
-          {tag}
-        </Text>
+        <Link href={tag?.url} target={tag?.target}>
+          <Text modifiers={['400', '14x20', 'gradientGreen']}>
+            {tag?.text}
+          </Text>
+        </Link>
         <div className="u-mt-md-16 u-mt-12" />
         <Link href={href} target={target}>
           <Text modifiers={['raisinBlack', '700', '20x32', 's015']}>

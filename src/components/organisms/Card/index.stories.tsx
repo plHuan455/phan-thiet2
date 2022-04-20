@@ -36,7 +36,9 @@ export const event: Story = () => (
     <div style={{ maxWidth: 394, background: 'gray', padding: 20 }}>
       <Card.Event
         thumbnail="https://source.unsplash.com/random"
-        tag="The Kingdom"
+        tag={{
+          text: 'The Kingdom',
+        }}
         title="Nova World phan thiết và chuỗi cung cấp tiện ích"
         endTime="2022-04-10T07:47:00.595"
         href="/"

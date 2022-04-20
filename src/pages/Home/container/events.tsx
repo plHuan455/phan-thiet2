@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import React, { useMemo } from 'react';
 import { useQuery } from 'react-query';
 
@@ -5,7 +6,8 @@ import { IconName } from 'components/atoms/Icon';
 import EventsTemplate from 'components/templates/Events';
 import useCountDown from 'hooks/useCountDown';
 import getEventListService from 'services/event';
-import { baseURL, formatDateDDMMYYYY, getBlockData } from 'utils/functions';
+import Constants from 'utils/constants';
+import { baseURL, getBlockData } from 'utils/functions';
 
 interface EventProps{
   titleSection: string;
@@ -24,10 +26,15 @@ const Events: React.FC<SectionBlocks> = ({ blocks }) => {
 
   const eventsData = useMemo(() => eventList?.data?.slice(1).map((item) => ({
     thumbnail: baseURL(item.thumbnail),
-    tag: 'The Kingdom',
+    // TODO: Update locale later
+    tag: {
+      text: item.subdivision?.name,
+      url: `/${Constants.PREFIX.DIVISION.VI}/${item.slug}`,
+    },
     title: item.title,
     endTime: item.startDate,
-    href: `su-kien/${item.slug}`,
+    // TODO: Update locale later
+    href: `/${Constants.PREFIX.EVENT.VI}/${item.slug}`,
     summary: [
       {
         iconName: 'clock' as IconName,
@@ -35,7 +42,7 @@ const Events: React.FC<SectionBlocks> = ({ blocks }) => {
       },
       {
         iconName: 'calendar' as IconName,
-        text: formatDateDDMMYYYY(item.startDate),
+        text: dayjs(item.startDate).format('DD/MM/YYYY'),
       },
       {
         iconName: 'location' as IconName,
@@ -53,11 +60,11 @@ const Events: React.FC<SectionBlocks> = ({ blocks }) => {
           button: {
             // TODO: ADD Translations later
             text: 'Xem chi tiết',
-            url: 'su-kien/slug',
+            url: `/${Constants.PREFIX.EVENT.VI}/${eventList?.data[0]?.slug}`,
           },
           address: eventList?.data[0].address || '',
           duration: `${eventList?.data[0].startTime} - ${eventList?.data[0].endTime}`,
-          date: formatDateDDMMYYYY(eventList?.data[0].startDate),
+          date: dayjs(eventList?.data[0].startDate).format('DD/MM/YYYY'),
           list: [
             {
               label: 'ngày',

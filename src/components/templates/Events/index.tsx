@@ -52,44 +52,46 @@ const Events: React.FC<EventsProps> = ({
           />
         )}
       >
-        <div className="t-events_wrapCountDown u-mb-md-40 u-mb-20">
-          <div className="t-events_countDown-title">
-            <Heading type="h4" modifiers={['400', 'center', 'gradientGreen']} content={countDown?.title} />
-          </div>
-          <div className="t-events_countDown">
-            {
-              countDown?.list?.map((item, index) => (
-                <div key={`t-events_countDown-${index.toString()}`} className="t-events_countDown-item">
-                  <div className="t-events_countDown-value">
-                    <Heading modifiers={['s015', '400', 'copper', 'center']} content={item.value} />
-                  </div>
-                  <div className="t-events_countDown-label">
-                    <Text modifiers={['24x36', '200', 'center', 'copper', 's015']} content={item.label} />
-                  </div>
-                </div>
-              ))
-            }
-          </div>
-          <div className="t-events_wrapDate">
-            <div className="t-events_wrapDate-duration">
-              <Icon iconName="clock" />
-              <Text modifiers={['raisinBlack', '400', '16x28']} content={countDown?.duration} />
+        {countDown && (
+          <div className="t-events_wrapCountDown u-mb-md-40 u-mb-20">
+            <div className="t-events_countDown-title">
+              <Heading type="h4" modifiers={['400', 'center', 'gradientGreen']} content={countDown?.title} />
             </div>
-            <div className="t-events_wrapDate-date">
-              <Icon iconName="calendar" />
-              <Text modifiers={['raisinBlack', '400', '16x28']} content={countDown?.date} />
+            <div className="t-events_countDown">
+              {
+                countDown?.list?.map((item, index) => (
+                  <div key={`t-events_countDown-${index.toString()}`} className="t-events_countDown-item">
+                    <div className="t-events_countDown-value">
+                      <Heading modifiers={['s015', '400', 'copper', 'center']} content={item.value} />
+                    </div>
+                    <div className="t-events_countDown-label">
+                      <Text modifiers={['24x36', '200', 'center', 'copper', 's015']} content={item.label} />
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
+            <div className="t-events_wrapDate">
+              <div className="t-events_wrapDate-duration">
+                <Icon iconName="clock" />
+                <Text modifiers={['raisinBlack', '400', '16x28']} content={countDown?.duration} />
+              </div>
+              <div className="t-events_wrapDate-date">
+                <Icon iconName="calendar" />
+                <Text modifiers={['raisinBlack', '400', '16x28']} content={countDown?.date} />
+              </div>
+            </div>
+            <div className="t-events_address">
+              <Icon iconName="location" size="24" />
+              <Text modifiers={['raisinBlack', '400', '16x28']} content={countDown?.address} />
+            </div>
+            <div className="t-events_button">
+              <Link href={countDown?.button?.url} target={countDown?.button?.target}>
+                <Button variant="primary-green">{countDown?.button.text}</Button>
+              </Link>
             </div>
           </div>
-          <div className="t-events_address">
-            <Icon iconName="location" size="24" />
-            <Text modifiers={['raisinBlack', '400', '16x28']} content={countDown?.address} />
-          </div>
-          <div className="t-events_button">
-            <Link href={countDown?.button?.url} target={countDown?.button?.target}>
-              <Button variant="primary-green">{countDown?.button.text}</Button>
-            </Link>
-          </div>
-        </div>
+        )}
       </FlatMore>
     </Container>
   </div>

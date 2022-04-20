@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import React, { useMemo } from 'react';
 
 import Banner from './banner';
@@ -10,7 +11,7 @@ import Error from 'pages/Error';
 import { getNewsDetailService } from 'services/news';
 import Constants from 'utils/constants';
 import {
-  baseString, baseURL, getFullDate, getTimePastToCurrent,
+  baseString, baseURL, getTimePastToCurrent,
 } from 'utils/functions';
 
 const Screen: React.FC = () => {
@@ -24,7 +25,7 @@ const Screen: React.FC = () => {
     content: baseString(data?.content),
     title: baseString(data?.title),
     timeLeave: getTimePastToCurrent(data?.publishedAt),
-    dateLeave: getFullDate(data?.publishedAt),
+    dateLeave: dayjs(data?.publishedAt).format('DD/MM/YYYY'),
     tags: data?.tags.map((item) => ({
       // TODO: Update href later
       href: '',
