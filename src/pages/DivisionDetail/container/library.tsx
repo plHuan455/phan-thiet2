@@ -28,7 +28,7 @@ import { SubdivisionLibraryTypes } from 'services/subdivision/types';
 import { getVideosService } from 'services/videos';
 import { VideoTypes } from 'services/videos/types';
 import CONSTANTS from 'utils/constants';
-import { baseURL, getTimePastToCurrent } from 'utils/functions';
+import { baseURL, getTimePastToCurrent, linkURL } from 'utils/functions';
 
 const dummyData = [
   {
@@ -203,143 +203,109 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId }) => {
             </Link>
           </div>
         </div>
-        <FlatList<any>
-          data={listData || []}
-          settings={settingRef.current}
-          render={(item) => {
-            if (listData?.length) {
-              switch (indexActive) {
-                case 0:
-                  return (
-                    <Card.Normal
-                      thumbnail={baseURL(item.thumbnail)}
-                      title={item.title}
-                      href={`/${CONSTANTS.PREFIX.NEWS.VI}/${item.slug}`}
-                      tag={{
-                        text: item?.subdivision?.name,
-                        // TODO: Add locale later
-                        url: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item?.subdivision?.slug}`,
-                      }}
-                      dateTime={getTimePastToCurrent(item.publishedAt)}
-                      url={{
-                        text: 'Xem thêm',
-                        iconName: 'arrowRightCopper',
-                        animation: 'arrow',
-                      }}
-                    />
-                  );
-
-                default:
-                  return null;
-              }
-            } else {
-              return (
-                <div>
-                  <Text modifiers={['14x20', 'raisinBlack', '400', 'center']}>
-                    Không có dữ liệu
-                  </Text>
-                </div>
-              );
-            }
-          }}
-        />
-        {/* {indexActive === 0 && (
-          <FlatList
-            data={state.news || []}
-            settings={settingRef.current}
-            render={(item) => (
-              <Card.Normal
-                thumbnail={baseURL(item.thumbnail)}
-                title={item.title}
-                href={`/${CONSTANTS.PREFIX.NEWS.VI}/${item.slug}`}
-                tag={{
-                  text: item?.subdivision?.name,
-                  // TODO: Add locale later
-                  url: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item?.subdivision?.slug}`,
-                }}
-                dateTime={getTimePastToCurrent(item.publishedAt)}
-                url={{
-                  text: 'Xem thêm',
-                  iconName: 'arrowRightCopper',
-                  animation: 'arrow',
-                }}
-              />
-            )}
-          />
-        )} */}
-        {/* {indexActive === 1 && (
-          <FlatList
-            data={state.images || []}
-            settings={settingRef.current}
-            render={(item, itemIdx) => (
-              <CardImage
-                // thumbnail={baseURL(item.path)}
-                thumbnail=""
-                handleClick={() =>
-                  dispatch({
-                    type: 'update_library',
-                    payload: { isPopImageOpen: true, currentImgIdx: itemIdx
-                     } })}
-              />
-            )}
-          />
-        )} */}
-        {/* {indexActive === 2 && (
-          <FlatList
-            data={state.videos || []}
-            settings={settingRef.current}
-            render={(item) => {
-              const isVidOutside = item.video?.includes('http://') || item.video?.includes('https://');
-              const vidUrl = isVidOutside ? item.video : baseURL(item.video);
-              return (
-                <Card.Player
+        {indexActive === 0 && !state.isLoading && (
+          state.news && state.news.length > 0 ? (
+            <FlatList
+              data={state.news || []}
+              settings={settingRef.current}
+              render={(item) => (
+                <Card.Normal
                   thumbnail={baseURL(item.thumbnail)}
+                  title={item.title}
+                  href={`/tin-tuc/${item.slug}`}
                   tag={{
                     text: item?.subdivision?.name,
                     // TODO: Add locale later
                     url: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item?.subdivision?.slug}`,
                   }}
-                  title={item.name}
-                  dateTime={getTimePastToCurrent(item.createdAt)}
-                  modifiers={['reverse', 'shadow']}
-                  onClick={() => {
-                    const res = {
-                      isPopPlayerOpen: true,
-                      currVidSrc: vidUrl,
-                      currVidType: item.videoType,
-                    };
-                    dispatch({ type: 'update_library', payload: res });
+                  dateTime={getTimePastToCurrent(item.publishedAt)}
+                  url={{
+                    text: 'Xem thêm',
+                    iconName: 'arrowRightCopper',
+                    animation: 'arrow',
                   }}
                 />
-              );
-            }}
-          />
-        )} */}
-        {/* {indexActive === 3 && (
-          <FlatList
-            data={state.documents || []}
-            settings={settingRef.current}
-            render={(item) => (
-              <Card.Normal
-                thumbnail={baseURL(item.thumbnail)}
-                href={baseURL(item.link)}
-                tag={{
-                  text: 'Missing',
-                  // TODO: Add locale later
-                  // url: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item?.subdivision?.slug}`
-                  url: 'missing',
-                }}
-                target="_blank"
-                dateTime={getTimePastToCurrent(item.publishedAt)}
-                url={{
-                  text: 'Tải xuống',
-                  iconName: 'downloadOrange',
-                  animation: 'download',
-                }}
-              />
-            )}
-          />
-        )} */}
+              )}
+            />
+          )
+            : (
+              <div>Không có dữ liệu!</div>
+            ))}
+        {indexActive === 1 && !state.isLoading && (
+          state.images && state.images.length > 0 ? (
+            <FlatList
+              data={state.images || []}
+              settings={settingRef.current}
+              render={(item, itemIdx) => (
+                <CardImage
+                  // thumbnail={baseURL(item.path)}
+                  thumbnail=""
+                  handleClick={() => dispatch({ type: 'update_library', payload: { isPopImageOpen: true, currentImgIdx: itemIdx } })}
+                />
+              )}
+            />
+          )
+            : (
+              <div>Không có dữ liệu!</div>
+            ))}
+        {indexActive === 2 && !state.isLoading && (
+          state.videos && state.videos.length > 0 ? (
+            <FlatList
+              data={state.videos || []}
+              settings={settingRef.current}
+              render={(item) => {
+                const isVidOutside = item.video?.includes('http://') || item.video?.includes('https://');
+                const vidUrl = isVidOutside ? item.video : baseURL(item.video);
+                return (
+                  <Card.Player
+                    thumbnail={baseURL(item.thumbnail)}
+                    tag={{
+                      text: item?.subdivision?.name,
+                      // TODO: Add locale later
+                      url: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item?.subdivision?.slug}`,
+                    }}
+                    title={item.name}
+                    dateTime={getTimePastToCurrent(item.createdAt)}
+                    modifiers={['reverse', 'shadow']}
+                    onClick={() => {
+                      const res = {
+                        isPopPlayerOpen: true,
+                        currVidSrc: vidUrl,
+                        currVidType: item.videoType,
+                      };
+                      dispatch({ type: 'update_library', payload: res });
+                    }}
+                  />
+                );
+              }}
+            />
+          )
+            : (
+              <div>Không có dữ liệu!</div>
+            ))}
+        {indexActive === 3 && !state.isLoading && (
+          state.documents && state.documents.length > 0 ? (
+            <FlatList
+              data={state.documents || []}
+              settings={settingRef.current}
+              render={(item) => (
+                <Card.Normal
+                  thumbnail={baseURL(item.thumbnail)}
+                  href={linkURL(item.link)}
+                  target="_blank"
+                  dateTime={getTimePastToCurrent(item.publishedAt)}
+                  url={{
+                    text: 'Tải xuống',
+                    iconName: 'downloadOrange',
+                    animation: 'download',
+                  }}
+                />
+              )}
+            />
+          )
+            : (
+              <div>Không có dữ liệu!</div>
+            ))}
         <PopupImage
           isOpen={state.isPopImageOpen || false}
           handleClose={() => dispatch({ type: 'close_image_popup' })}
