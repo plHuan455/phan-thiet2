@@ -1,4 +1,8 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, {
+  useCallback, useEffect, useRef, useState,
+} from 'react';
+
+import useAnimation from './hooks/animation';
 
 import bgLeft from 'assets/images/projectPosition/home/bg_left.png';
 import bgRight from 'assets/images/projectPosition/home/bg_right.png';
@@ -7,10 +11,13 @@ import Heading from 'components/atoms/Heading';
 import Image from 'components/atoms/Image';
 import Text from 'components/atoms/Text';
 import LocationMap, { DivisionTypes } from 'components/organisms/LocationMap';
+import useScrollAnimate from 'hooks/useScrollAnimation';
+import { formatNumber } from 'utils/functions';
 
 interface InfoTypes {
-  label: string
-  value: string
+  label?: string
+  value?: string
+  unit?: string
 }
 
 interface ProjectPositionHomeProps {
@@ -20,6 +27,35 @@ interface ProjectPositionHomeProps {
   utility?: InfoTypes;
   thumbnail?: string;
 }
+
+interface ContentProps extends InfoTypes {
+  active?: boolean;
+}
+
+const Content = React.memo<ContentProps>(({
+  value = '',
+  label,
+  unit = '',
+  active = false,
+}) => {
+  const { animated, countNumberAnimate } = useAnimation({
+    countNumber: parseInt(value, 10),
+    isActive: active,
+  });
+
+  return (
+    <>
+      <Text modifiers={['20x32', '400', 'copper', 'uppercase']} content={label} />
+      <div className="u-mt-8" />
+      <Heading type="h1" modifiers={['700', 'gradientGreen', 'uppercase']}>
+        <animated.div className="o-cardIntro_title">
+          {countNumberAnimate.number.to((i) => `${formatNumber(i)} ${unit}`)}
+        </animated.div>
+      </Heading>
+
+    </>
+  );
+});
 
 const ProjectPositionHome: React.FC<ProjectPositionHomeProps> = ({
   listDivision, scale, investment, utility, thumbnail,
@@ -40,8 +76,18 @@ const ProjectPositionHome: React.FC<ProjectPositionHomeProps> = ({
     }
   }, [listDivision]);
 
+  const refCount = useRef<HTMLDivElement>(null);
+  const isRefCount = useScrollAnimate(refCount);
+  const [activeCount, setActiveCount] = useState(false);
+
+  useEffect(() => {
+    if (isRefCount) {
+      setActiveCount(true);
+    }
+  }, [isRefCount]);
+
   return (
-    <div className="t-projectPositionHome">
+    <div ref={refCount} className="t-projectPositionHome">
       {/** TODO: Add animation later */}
       <div className="t-projectPositionHome_bgLeft">
         <Image src={bgLeft} ratio="1x1" />
@@ -61,20 +107,14 @@ const ProjectPositionHome: React.FC<ProjectPositionHomeProps> = ({
           />
           <div className="t-projectPositionHome_info">
             <div className="t-projectPositionHome_scale">
-              <Text modifiers={['20x32', '400', 'copper', 'uppercase']} content={scale?.label} />
-              <div className="u-mt-8" />
-              <Heading type="h1" modifiers={['700', 'gradientGreen', 'uppercase']} content={scale?.value} />
+              <Content active={activeCount} {...scale} />
             </div>
             <div className="t-projectPositionHome_wrap">
               <div className="t-projectPositionHome_investment">
-                <Text modifiers={['20x32', '400', 'copper', 'uppercase']} content={investment?.label} />
-                <div className="u-mt-8" />
-                <Heading type="h2" modifiers={['700', 'gradientGreen', 'uppercase']} content={investment?.value} />
+                <Content active={activeCount} {...investment} />
               </div>
               <div className="t-projectPositionHome_utility">
-                <Text modifiers={['20x32', '400', 'copper', 'uppercase']} content={utility?.label} />
-                <div className="u-mt-8" />
-                <Heading type="h2" modifiers={['700', 'gradientGreen', 'uppercase']} content={utility?.value} />
+                <Content active={activeCount} {...utility} />
               </div>
             </div>
           </div>

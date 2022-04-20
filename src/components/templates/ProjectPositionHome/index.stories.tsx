@@ -16,15 +16,18 @@ export const normal: Story = () => (
     listDivision={listDivisionDummy}
     scale={{
       label: 'QUY MÔ',
-      value: '1.000 HECTA',
+      value: '1000',
+      unit: 'HECTA',
     }}
     investment={{
       label: 'VỐN ĐẦU TƯ',
-      value: '5 TỶ USD',
+      value: '5',
+      unit: 'TỶ USD',
     }}
     utility={{
       label: 'LẦN ĐẦU TIÊN TẠI VIỆT NAM',
-      value: '200 TIỆN ÍCH KHỦNG',
+      value: '200',
+      unit: 'TIỆN ÍCH KHỦNG',
     }}
   />
 );
