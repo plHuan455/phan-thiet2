@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useMemo } from 'react';
 
 import useAnimation from '../hook/animation';
 
@@ -10,94 +10,89 @@ import Image from 'components/atoms/Image';
 import Card from 'components/organisms/Card';
 import { CardNormalProps } from 'components/organisms/Card/Normal';
 import useScrollAnimate from 'hooks/useScrollAnimation';
+import { OverviewDocumentType } from 'services/overviews/types';
+import CONSTANTS from 'utils/constants';
+import {
+  linkURL, getTimePastToCurrent, getBlockData, baseString, baseURL,
+} from 'utils/functions';
 
-const dataDummy: CardNormalProps[] = [
-  {
-    thumbnail: 'https://source.unsplash.com/random',
-    title: 'Nova World phan thiết và chuỗi cung cấp tiện ích',
-    href: '/',
-    tag: 'The Kingdom',
-    dateTime: '2 giờ trước',
-    url: {
-      text: 'Tải xuống',
-      iconName: 'downloadOrange',
-      animation: 'download',
-    },
-  },
-  {
-    thumbnail: 'https://source.unsplash.com/random',
-    title: 'Nova World phan thiết và chuỗi cung cấp tiện ích',
-    href: '/',
-    tag: 'The Kingdom',
-    dateTime: '2 giờ trước',
-    url: {
-      text: 'Tải xuống',
-      iconName: 'downloadOrange',
-      animation: 'download',
-    },
-  },
-  {
-    thumbnail: 'https://source.unsplash.com/random',
-    title: 'Nova World phan thiết và chuỗi cung cấp tiện ích',
-    href: '/',
-    tag: 'The Kingdom',
-    dateTime: '2 giờ trước',
-    url: {
-      text: 'Tải xuống',
-      iconName: 'downloadOrange',
-      animation: 'download',
-    },
-  },
-  {
-    thumbnail: 'https://source.unsplash.com/random',
-    title: 'Nova World phan thiết và chuỗi cung cấp tiện ích',
-    href: '/',
-    tag: 'The Kingdom',
-    dateTime: '2 giờ trước',
-    url: {
-      text: 'Tải xuống',
-      iconName: 'downloadOrange',
-      animation: 'download',
-    },
-  },
-];
+interface DocumentBlocks {
+  title: string;
+}
 
-const Documents: React.FC = () => {
+interface DocumentProps extends SectionBlocks {
+  documents?: OverviewDocumentType[];
+}
+
+const Documents: React.FC<DocumentProps> = ({ documents, blocks }) => {
+  const documentBlock = getBlockData<DocumentBlocks>('document', blocks);
+
   const leafRef = useRef<HTMLDivElement>(null);
   const ballonRef = useRef<HTMLDivElement>(null);
-
   const isScrollLeaf = useScrollAnimate(leafRef);
   const isScrollBallon = useScrollAnimate(ballonRef);
   const { animated, ballonAnimate, slideReverseAnimate } = useAnimation();
-
+  const documentList = useMemo(() => {
+    if (Array.isArray(documents)) {
+      const cardNormals: CardNormalProps[] = documents.map((item) => ({
+        thumbnail: baseURL(item?.thumbnail),
+        title: item.title || '',
+        href: linkURL(item.link),
+        tag: {
+          text: item.subdivision?.name,
+          url: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item.slug}`,
+        },
+        dateTime: getTimePastToCurrent(item.publishedAt),
+        target: '_blank',
+        url: {
+          text: 'Tải xuống',
+          iconName: 'downloadOrange',
+          animation: 'download',
+        },
+      }));
+      return cardNormals;
+    }
+    return [];
+  }, [documents]);
   return (
-    <div className="s-documents">
-      <animated.div
-        style={isScrollLeaf ? slideReverseAnimate : {}}
-        className="s-documents_leaf"
-        ref={leafRef}
-      >
-        <Image src={leaf3} alt="ballon" ratio="1x1" />
-      </animated.div>
-      <animated.div
-        style={isScrollBallon ? ballonAnimate : {}}
-        className="s-documents_ballon"
-        ref={ballonRef}
-      >
-        <Image src={ballon2} alt="ballon" ratio="359x247" />
-      </animated.div>
-      <Container>
-        <FlatMore
-          title={{
-            text: 'Tài liệu khác',
-            type: 'h4',
-            modifiers: ['gradientGreen', '700', 's015', 'uppercase'],
-          }}
-          data={dataDummy}
-          render={(item) => <Card.Normal {...item} />}
-        />
-      </Container>
-    </div>
+    <>
+      <div className="s-documents">
+        <animated.div
+          style={isScrollLeaf ? slideReverseAnimate : {}}
+          className="s-documents_leaf"
+          ref={leafRef}
+        >
+          <Image src={leaf3} alt="ballon" ratio="1x1" />
+        </animated.div>
+        <animated.div
+          style={isScrollBallon ? ballonAnimate : {}}
+          className="s-documents_ballon"
+          ref={ballonRef}
+        >
+          <Image src={ballon2} alt="ballon" ratio="359x247" />
+        </animated.div>
+        <Container>
+          <FlatMore
+            title={{
+              text: baseString(documentBlock?.title),
+              type: 'h4',
+              modifiers: ['gradientGreen', '700', 's015', 'uppercase'],
+            }}
+            data={documentList}
+            render={(item) => (
+              <Card.Normal
+                {...item}
+              />
+            )}
+          />
+        </Container>
+      </div>
+    </>
   );
 };
+
+Documents.defaultProps = {
+  documents: [],
+};
+
 export default Documents;

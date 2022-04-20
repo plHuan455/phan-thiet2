@@ -1,71 +1,72 @@
-import React from 'react';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-vars */
+import dayjs from 'dayjs';
+import React, { useMemo } from 'react';
 
+import { IconName } from 'components/atoms/Icon';
 import EventsTemplate from 'components/templates/Events';
-import useCountDown from 'hooks/useCountDown';
+import { OverviewEventsType } from 'services/overviews/types';
+import CONSTANTS from 'utils/constants';
+import { baseURL, getBlockData } from 'utils/functions';
 
-const dataEvent = new Array(7).fill({
-  thumbnail: 'https://source.unsplash.com/random',
-  tag: 'The Kingdom',
-  title: 'Nova World phan thiết và chuỗi cung cấp tiện ích',
-  endTime: '2022-04-10T07:47:00.595',
-  href: '/',
-  summary: [
-    {
-      iconName: 'clock',
-      text: '13:30 - 17:00',
-    },
-    {
-      iconName: 'calendar',
-      text: '30/04/2022',
-    },
-    {
-      iconName: 'location',
-      text: '2Bis Nguyễn Thị Minh Khai, Phường Đa Kao, Quận 1',
-    },
-  ],
-});
+interface EventsBlock {
+  title: string;
+  button: string;
+}
+interface EventsProps extends SectionBlocks {
+  events?: OverviewEventsType[];
+}
 
-const Events: React.FC = () => {
-  const {
-    days, hours, mins, secs,
-  } = useCountDown({ endTime: '2022-05-10T07:47:00.595' });
+const Events: React.FC<EventsProps> = ({ events, blocks }) => {
+  const eventsBlock = getBlockData<EventsBlock>('event', blocks);
+
+  const dataEvents = useMemo(() => {
+    if (!events?.length) return [];
+
+    return events?.map((item) => ({
+      thumbnail: baseURL(item.thumbnail),
+      // TODO: Update locale later
+      tag: {
+        text: item.subdivision?.name,
+        url: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item.slug}`,
+      },
+      title: item.title,
+      endTime: item.startDate,
+      // TODO: Update locale later
+      summary: [
+        {
+          iconName: 'clock' as IconName,
+          text: `${item.startTime} - ${item.endTime}`,
+        },
+        {
+          iconName: 'calendar' as IconName,
+          text: dayjs(item.startDate).format('DD/MM/YYYY'),
+        },
+        {
+          iconName: 'location' as IconName,
+          text: item.address,
+        },
+      ],
+      button: {
+        text: eventsBlock?.button,
+        url: `/${CONSTANTS.PREFIX.EVENT.VI}/${item.slug}`,
+      },
+    }));
+  }, [events, eventsBlock]);
 
   return (
     <div className="s-events">
       <EventsTemplate
-        title="SỰ KIỆN"
-        countDown={{
-          title: 'Một vòng trải nghiệm siêu thành phố biển',
-          button: {
-            text: 'Xem chi tiết',
-          },
-          address: '2Bis Nguyễn Thị Minh Khai, Phường Đa Kao, Quận 1',
-          duration: '13:30 - 17:00',
-          date: '30/04/2022',
-          list: [
-            {
-              label: 'ngày',
-              value: days,
-            },
-            {
-              label: 'giờ',
-              value: hours,
-            },
-            {
-              label: 'phút',
-              value: mins,
-            },
-            {
-              label: 'giây',
-              value: secs,
-            },
-          ],
-        }}
-        listEvents={dataEvent}
+        title={eventsBlock?.title}
+        listEvents={dataEvents}
       />
     </div>
 
   );
+};
+
+Events.defaultProps = {
+  events: [],
 };
 
 export default Events;

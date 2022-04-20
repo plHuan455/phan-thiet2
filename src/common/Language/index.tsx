@@ -8,7 +8,7 @@ import { staticAllAsync, staticErrorsAsync } from 'store/static';
 import { systemsGeneralAsync } from 'store/systems';
 import { topicsListAsync } from 'store/topics';
 
-type LanguageContextResponse = {
+export type LanguageContextResponse = {
   language: {
     isChange: boolean;
     toggle?: (bool: boolean) => void;
@@ -17,9 +17,9 @@ type LanguageContextResponse = {
     data: Translation[];
     setData: (val: Translation[]) => void;
   };
-} | undefined;
+};
 
-export const LanguageContext = createContext<LanguageContextResponse>(undefined);
+export const LanguageContext = createContext<LanguageContextResponse | undefined>(undefined);
 
 const LanguageProvider: React.FC = ({ children }) => {
   const dispatch = useAppDispatch();

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Slider from 'react-slick';
 
 import Image from 'components/atoms/Image';
@@ -9,12 +9,14 @@ interface PopupImageProps {
   isOpen: boolean;
   handleClose: () => void;
   dataImageList: string[];
+  currentImgIdx?: number;
 }
 
 const PopupImage: React.FC<PopupImageProps> = ({
   isOpen,
   handleClose,
   dataImageList,
+  currentImgIdx,
 }) => {
   const [nav1, setNav1] = useState<Slider | null>();
   const [nav2, setNav2] = useState<Slider | null>();
@@ -68,6 +70,12 @@ const PopupImage: React.FC<PopupImageProps> = ({
       },
     ],
   };
+  useEffect(() => {
+    if (nav1 && currentImgIdx && isOpen) {
+      nav1?.slickGoTo(currentImgIdx);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [nav1]);
 
   return (
     <div className="t-popupImage">
@@ -115,6 +123,10 @@ const PopupImage: React.FC<PopupImageProps> = ({
       </CustomModal>
     </div>
   );
+};
+
+PopupImage.defaultProps = {
+  currentImgIdx: 0,
 };
 
 export default PopupImage;

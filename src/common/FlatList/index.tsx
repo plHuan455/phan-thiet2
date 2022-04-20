@@ -6,7 +6,7 @@ import Carousel, { NextArrow, PrevArrow } from 'components/organisms/Carousel';
 export type FlatListProps<T> = {
   settings?: Settings;
   data?: T[];
-  render: (item: T)=> any;
+  render: (item: T, index?: number)=> any;
   innerDots?: boolean;
 }
 
@@ -77,7 +77,7 @@ const FlatList = <T, >({
       >
         {data.map((x, i) => (
           <React.Fragment key={`item-${i.toString()}`}>
-            {render(x)}
+            {render(x, i)}
           </React.Fragment>
         ))}
       </Carousel>

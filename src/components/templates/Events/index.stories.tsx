@@ -4,8 +4,6 @@ import { BrowserRouter } from 'react-router-dom';
 
 import Events from '.';
 
-import useCountDown from 'hooks/useCountDown';
-
 export default {
   title: 'Components/templates/Events',
   component: Events,
@@ -32,50 +30,48 @@ const data = new Array(7).fill({
       text: '2Bis Nguyễn Thị Minh Khai, Phường Đa Kao, Quận 1',
     },
   ],
+  button: {
+    text: 'Xem Chi Tiết',
+    url: '/',
+  },
 });
 
-export const Normal: Story = () => {
-  const {
-    days, hours, mins, secs,
-  } = useCountDown({ endTime: '2022-04-10T07:47:00.595' || new Date().toISOString() });
-
-  return (
-    <BrowserRouter>
-      <Events
-        title="SỰ KIỆN"
-        button={{
-          text: 'Xem tất cả',
-          url: '/',
-        }}
-        countDown={{
-          title: 'Một vòng trải nghiệm siêu thành phố biển',
-          button: {
-            text: 'Xem chi tiết',
-          },
-          address: '2Bis Nguyễn Thị Minh Khai, Phường Đa Kao, Quận 1',
-          duration: '13:30 - 17:00',
-          date: '30/04/2022',
-          list: [
-            {
-              label: 'ngày',
-              value: days,
-            },
-            {
-              label: 'giờ',
-              value: hours,
-            },
-            {
-              label: 'phút',
-              value: mins,
-            },
-            {
-              label: 'giây',
-              value: secs,
-            },
-          ],
-        }}
-        listEvents={data}
-      />
-    </BrowserRouter>
-  );
-};
+export const Normal: Story = () => (
+  <BrowserRouter>
+    <Events
+      title="SỰ KIỆN"
+      button={{
+        text: 'Xem tất cả',
+        url: '/',
+      }}
+        // countDown={{
+        //   title: 'Một vòng trải nghiệm siêu thành phố biển',
+        //   button: {
+        //     text: 'Xem chi tiết',
+        //   },
+        //   address: '2Bis Nguyễn Thị Minh Khai, Phường Đa Kao, Quận 1',
+        //   duration: '13:30 - 17:00',
+        //   date: '30/04/2022',
+        //   list: [
+        //     {
+        //       label: 'ngày',
+        //       value: days,
+        //     },
+        //     {
+        //       label: 'giờ',
+        //       value: hours,
+        //     },
+        //     {
+        //       label: 'phút',
+        //       value: mins,
+        //     },
+        //     {
+        //       label: 'giây',
+        //       value: secs,
+        //     },
+        //   ],
+        // }}
+      listEvents={data}
+    />
+  </BrowserRouter>
+);

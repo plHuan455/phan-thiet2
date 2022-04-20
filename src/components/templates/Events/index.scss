@@ -61,25 +61,8 @@
       max-width: rem(250);
     }
 
-    &-duration {
+    &-duration, &-date {
       @include adjust-flex(flex-start, center);
-
-      .a-text {
-        @include mobile-down {
-          @include font-base(12,20); }
-      }
-
-      .a-icon {
-        margin-right: rem(16);
-      }
-    }
-
-    &-date {
-      @include adjust-flex(flex-start, center);
-
-      @include mobile-down {
-        margin-top: rem(10);
-      }
 
       .a-text {
         @include mobile-down {

@@ -9,7 +9,7 @@ import LoadingPage from 'common/Navigation/loading';
 import RedirectNav from 'common/Navigation/redirect';
 import useDetail from 'hooks/useDetail';
 import { getNewsDetailService } from 'services/news';
-import Constants from 'utils/constants';
+import CONSTANTS from 'utils/constants';
 import {
   baseString, baseURL, getTimePastToCurrent,
 } from 'utils/functions';
@@ -34,10 +34,13 @@ const Screen: React.FC = () => {
     subdivision: {
       name: data?.subdivision?.name,
       // TODO: add locale later
-      slug: `/${Constants.PREFIX.DIVISION.VI}/${data?.subdivision?.slug}`,
+      slug: `/${CONSTANTS.PREFIX.DIVISION.VI}/${data?.subdivision?.slug}`,
     },
     relatedNews: data?.relatedNews?.map((item) => ({
-      tag: baseString(data?.subdivision?.name),
+      tag: {
+        text: baseString(data?.subdivision?.name),
+        url: `/${CONSTANTS.PREFIX.DIVISION.VI}/${data?.subdivision?.slug}`,
+      },
       title: baseString(item.title),
       thumbnail: baseURL(item.thumbnail),
       href: `/tin-tuc/${item.slug}`,

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { useQuery } from 'react-query';
 
 import useNews from '../hook';
 
@@ -13,6 +14,8 @@ import Section from './section';
 import Videos from './videos';
 
 import HelmetContainer from 'common/Helmet';
+import { LanguageContext, LanguageContextResponse } from 'common/Language';
+import { getOverviewListService } from 'services/overviews';
 import { getOgDataPage } from 'utils/functions';
 
 const Screen: React.FC<BasePageDataTypes<any>> = ({
@@ -21,7 +24,10 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
   pageData,
   seoData,
 }) => {
+  const langContext = useContext(LanguageContext);
+  const { language } = langContext as LanguageContextResponse;
   const { ref } = useNews();
+  const { data } = useQuery(['getOverviewList', [language.isChange]], () => getOverviewListService());
 
   return (
     <>
@@ -29,22 +35,22 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
       <Banner banners={banners} blocks={blocks} />
       <MenuTag />
       <Section ref={ref.news}>
-        <News />
+        <News news={data?.news} blocks={blocks} />
       </Section>
       <Section ref={ref.events}>
-        <Events />
+        <Events events={data?.events} blocks={blocks} />
       </Section>
       <Section ref={ref.images}>
-        <Images />
+        <Images images={data?.images} blocks={blocks} />
       </Section>
       <Section ref={ref.videos}>
-        <Videos />
+        <Videos videos={data?.videos} blocks={blocks} />
       </Section>
       <Section ref={ref.documents}>
-        <Documents />
+        <Documents documents={data?.documents} blocks={blocks} />
       </Section>
       <section>
-        <Consultancy />
+        <Consultancy blocks={blocks} />
       </section>
     </>
   );
