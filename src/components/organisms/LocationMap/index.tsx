@@ -13,6 +13,7 @@ interface LocationMapProps {
   active?: number;
   handleLeave?: () => void;
   handleHover?: (id: number) => void;
+  thumbnail?: string;
 }
 
 const WIDTH_IMAGE = 1126;
@@ -23,11 +24,12 @@ const LocationMap: React.FC<LocationMapProps> = ({
   active,
   handleHover,
   handleLeave,
+  thumbnail,
 }) => (
   <div className="t-projectMap">
     <div className="t-projectMap_map">
       <div className="t-projectMap_image" style={{ paddingBottom: `calc(${HEIGHT_IMAGE} / ${WIDTH_IMAGE}  * 100%)` }}>
-        <img src={imgMap} alt="location-map" loading="lazy" />
+        <img src={thumbnail || imgMap} alt="location-map" loading="lazy" />
       </div>
       {
         listDivision?.map((item, index) => (
@@ -59,6 +61,7 @@ LocationMap.defaultProps = {
   handleHover: undefined,
   handleLeave: undefined,
   listDivision: undefined,
+  thumbnail: undefined,
 };
 
 export default LocationMap;

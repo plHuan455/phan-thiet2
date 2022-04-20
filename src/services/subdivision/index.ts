@@ -1,8 +1,10 @@
-import { SubDivisionDetailTypes, SubDivisionListTypes, SubDivisionParams } from './types';
+import {
+  SubDivisionDetailTypes, SubDivisionListTypes, SubDivisionParams, SubDivisionMapListTypes,
+} from './types';
 
 import axiosInstance from 'services/common/instance';
 
-const getSubDivisionListService = async (
+export const getSubDivisionListService = async (
   params?: SubDivisionParams,
 ): Promise<APIPaginationResponse<SubDivisionListTypes[]>> => {
   const response = await axiosInstance.get('subdivisions', { params });
@@ -16,4 +18,8 @@ export const getSubDivisionDetailService = async (
   return response.data.data;
 };
 
-export default getSubDivisionListService;
+export const getSubDivisionMapListService = async (
+): Promise<SubDivisionMapListTypes> => {
+  const response = await axiosInstance.get('subdivision-maps');
+  return response.data.data;
+};

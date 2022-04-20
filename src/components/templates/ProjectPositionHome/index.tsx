@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import bgLeft from 'assets/images/projectPosition/home/bg_left.png';
 import bgRight from 'assets/images/projectPosition/home/bg_right.png';
@@ -18,12 +18,28 @@ interface ProjectPositionHomeProps {
   scale?: InfoTypes;
   investment?: InfoTypes;
   utility?: InfoTypes;
+  thumbnail?: string;
 }
 
 const ProjectPositionHome: React.FC<ProjectPositionHomeProps> = ({
-  listDivision, scale, investment, utility,
+  listDivision, scale, investment, utility, thumbnail,
 }) => {
   const [active, setActive] = useState<number>();
+
+  const handleLeave = useCallback(() => {
+    if (listDivision?.length) {
+      listDivision.forEach((item) => item.active && setActive(item.id));
+    } else {
+      setActive(undefined);
+    }
+  }, [listDivision]);
+
+  useEffect(() => {
+    if (listDivision) {
+      listDivision.forEach((item) => item.active && setActive(item.id));
+    }
+  }, [listDivision]);
+
   return (
     <div className="t-projectPositionHome">
       {/** TODO: Add animation later */}
@@ -40,7 +56,8 @@ const ProjectPositionHome: React.FC<ProjectPositionHomeProps> = ({
             listDivision={listDivision}
             active={active}
             handleHover={(id) => setActive(id)}
-            handleLeave={() => setActive(undefined)}
+            handleLeave={handleLeave}
+            thumbnail={thumbnail}
           />
           <div className="t-projectPositionHome_info">
             <div className="t-projectPositionHome_scale">
@@ -72,6 +89,7 @@ ProjectPositionHome.defaultProps = {
   investment: undefined,
   utility: undefined,
   listDivision: undefined,
+  thumbnail: undefined,
 };
 
 export default ProjectPositionHome;

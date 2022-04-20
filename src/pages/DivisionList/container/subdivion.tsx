@@ -5,7 +5,7 @@ import balloon from 'assets/images/pages/divisionList/balloonDivisions.png';
 import Image from 'components/atoms/Image';
 import { CardDivisionProps } from 'components/organisms/Card/Division';
 import Subdivision from 'components/templates/Subdivision';
-import getSubDivisionListService from 'services/subdivision';
+import { getSubDivisionListService } from 'services/subdivision';
 import Constants from 'utils/constants';
 import { baseURL, getBlockData } from 'utils/functions';
 
