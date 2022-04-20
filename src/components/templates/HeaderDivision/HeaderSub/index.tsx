@@ -62,7 +62,7 @@ const HeaderSub:React.FC<HeaderSubProps> = ({
                 className={`t-headerSub_menu_list ${active ? 'active' : ''}`}
               >
                 {menu?.map((item, index) => (
-                  <li className="t-headerSub_menu_item">
+                  <li key={`t-headerSub_menu-${index.toString()}`} className="t-headerSub_menu_item">
                     <Link
                       key={`index-${index.toString()}`}
                       href={item.reference?.slug || item.link}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 
@@ -26,21 +26,62 @@ const Screen: React.FC = () => {
     },
   );
 
+  const content = useMemo(
+    () => subDivisionDetail && subDivisionDetail.content, [subDivisionDetail],
+  );
+
   return (
     <>
       <Banner thumbnail={baseURL(subDivisionDetail?.thumbnail)} />
-      <IntroVideo />
-      <Summary data={subDivisionDetail} />
-      <Location />
-      <Utilities data={subDivisionDetail} />
-      <Collection
-        title={baseString(subDivisionDetail?.content.collection.title)}
-        description={subDivisionDetail?.content.collection.description}
-      />
-      <Library title={subDivisionDetail?.content.library.title} />
-      <Journeys title={subDivisionDetail?.content.journey.title} />
-      <Division title={subDivisionDetail?.content.related.title} />
-      <Consultancy title={subDivisionDetail?.content.subscribe.title} />
+      {
+        Boolean(Number(content?.video.active))
+        && (
+        <IntroVideo src={content?.video.link || ''} />
+        )
+      }
+      {
+        Boolean(Number(content?.content.active)) && (
+          <Summary data={subDivisionDetail} />
+        )
+      }
+      {
+        Boolean(Number(content?.location.active)) && (
+          <Location />
+        )
+      }
+      {
+        Boolean(Number(content?.utility.active)) && (
+          <Utilities data={subDivisionDetail} />
+        )
+      }
+      {
+        Boolean(Number(content?.collection.active)) && (
+          <Collection
+            title={baseString(subDivisionDetail?.content.collection.title)}
+            description={subDivisionDetail?.content.collection.description}
+          />
+        )
+      }
+      {
+        Boolean(Number(content?.library.active)) && (
+          <Library title={subDivisionDetail?.content.library.title} />
+        )
+      }
+      {
+        Boolean(Number(content?.journey.active)) && (
+          <Journeys title={subDivisionDetail?.content.journey.title} />
+        )
+      }
+      {
+        Boolean(Number(content?.related.active)) && (
+          <Division title={subDivisionDetail?.content.related.title} />
+        )
+      }
+      {
+        Boolean(Number(content?.subscribe.active)) && (
+          <Consultancy title={subDivisionDetail?.content.subscribe.title} />
+        )
+      }
     </>
   );
 };

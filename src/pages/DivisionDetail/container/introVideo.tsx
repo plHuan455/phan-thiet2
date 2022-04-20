@@ -7,6 +7,7 @@ import ballon from 'assets/images/introVideo/balloon.png';
 import Container from 'common/Container';
 import Image from 'components/atoms/Image';
 import Player, { PlayerProps } from 'components/organisms/Player';
+import { youtubeControlIframe } from 'utils/functions';
 
 interface IntroPlayerProps extends PlayerProps{}
 
@@ -31,7 +32,11 @@ const IntroPlayer: React.FC<IntroPlayerProps> = (props) => {
   );
 };
 
-const IntroVideo: React.FC = () => {
+interface IntroVideoProps {
+  src: string
+}
+
+const IntroVideo: React.FC<IntroVideoProps> = ({ src }) => {
   const ballonRef = useRef<HTMLDivElement>(null);
   const { animated, ballonAnimate } = useAnimation({ ballonRef });
 
@@ -45,7 +50,7 @@ const IntroVideo: React.FC = () => {
       </div>
       <Container>
         <div className="s-introVideo_content">
-          <IntroPlayer src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" />
+          <IntroPlayer isYoutube={src.includes('youtube')} src={src.includes('youtube') ? youtubeControlIframe(src) : src} />
         </div>
       </Container>
     </section>

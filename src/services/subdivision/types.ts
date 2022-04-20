@@ -19,25 +19,35 @@ export interface SubDivisionListTypes {
 }
 
 interface Content {
-  items: {
-    item1: {
-      image: string;
-      title: string;
-    },
-    item2: {
-      image: string;
-      title: string;
+  content: {
+    active: string;
+    description: string;
+    title: string;
+    items: {
+      item1: {
+        image: string;
+        title: string;
+      },
+      item2: {
+        image: string;
+        title: string;
+      }
     }
   }
-  title: string;
-  video: string;
+  video: {
+    active: string;
+    link: string;
+  };
   journey: {
+    active: string;
     title: string;
   }
   library: {
+    active: string;
     title: string;
   }
   related: {
+    active: string;
     title: string;
   }
   utility: {
@@ -54,17 +64,23 @@ interface Content {
         number: string;
       }[];
     },
+    active: string;
     title: string;
   }
-  location: Location;
+  location: {
+    active: string;
+    title: string;
+    description: string;
+  };
   subscribe: {
+    active: string;
     title: string;
   }
   collection: {
     title: string;
+    active: string;
     description: string;
   }
-  description: string;
 }
 
 export interface SubDivisionDetailTypes {

@@ -12,8 +12,8 @@ const Summary: React.FC<SummaryProps> = ({
   data,
 }) => {
   const summaryData = useMemo(() => [
-    data?.content?.items?.item1,
-    data?.content?.items?.item2,
+    data?.content?.content.items?.item1,
+    data?.content?.content?.items?.item2,
   ].map((item) => ({
     thumbnail: baseURL(item?.image),
     title: item?.title,
@@ -22,8 +22,8 @@ const Summary: React.FC<SummaryProps> = ({
   return (
     <section className="u-pt-md-77 u-pt-48 u-pb-md-77 u-pb-48" style={{ color: 'var(--theme)' }}>
       <DivisionSummary
-        title={data?.content.title}
-        description={data?.content.description}
+        title={data?.content.content.title}
+        description={data?.content.content.description}
         data={summaryData}
       />
     </section>

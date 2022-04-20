@@ -147,3 +147,59 @@
   }
 }
 
+.t-popupImageDetail {
+  &_imageList {
+    $imageList: &;
+
+    &_item {
+      margin: 0 rem(4);
+      border-radius: rem(12);
+      overflow: hidden;
+      transition: all $transition ease-in;
+      cursor: pointer;
+    }
+
+    .slick-current {
+      #{$imageList}_item {
+        border: rem(2) solid $white;
+        border-radius: rem(12);
+        overflow: hidden;
+      }
+    }
+  }
+
+  &_imageShow {
+
+    &-desc {
+      @include mobile-down {
+        @include text-overflow(5);
+      }
+    }
+    &-content {
+      padding: rem(24) rem(32);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: $black06;
+
+      @include tablet-down {
+        padding: rem(12) rem(16);
+      }
+
+      @include mobile-down {
+        .a-text {
+          @include font-base(12, 20);
+        }
+      }
+    }
+    &_item {
+      position: relative;
+      margin: 0 auto rem(12);
+      max-width: rem(930);
+      border-radius: rem(12);
+      overflow: hidden;
+    }
+  }
+}
+

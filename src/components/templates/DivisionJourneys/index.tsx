@@ -64,7 +64,6 @@ const DivisionJourneys: React.FC<DivisionJourneysProps> = ({
     </Container>
   </div>
 );
-
 DivisionJourneys.defaultProps = {
 };
 
