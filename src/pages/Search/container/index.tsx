@@ -1,12 +1,11 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, {
-  ChangeEvent,
-  useEffect,
+  useCallback,
   useMemo,
   useRef, useState,
 } from 'react';
-import { useInfiniteQuery, useMutation, useQueryClient } from 'react-query';
+import { useInfiniteQuery } from 'react-query';
 import { animated } from 'react-spring';
 
 import useAnimation from '../animation';
@@ -19,7 +18,6 @@ import { OptionType } from 'components/molecules/PullDown';
 import { CardDivisionProps } from 'components/organisms/Card/Division';
 import { CardNormalProps } from 'components/organisms/Card/Normal';
 import SearchResult from 'components/templates/SearchResult';
-import useDebounce from 'hooks/useDebounce';
 import getNewsListService from 'services/news';
 import { NewsListTypes } from 'services/news/types';
 import getSubDivisionListService from 'services/subdivision';
@@ -64,59 +62,11 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
   const bgLeftRef = useRef<HTMLDivElement>(null);
   const { animate, animateReverse } = useAnimation({ ref: bgLeftRef });
   const [searchKeyValue, setSearchKeyValue] = useState('');
-  const debouncedSearch = useDebounce(searchKeyValue, 500);
-  const queryClient = useQueryClient();
+  const [search, setSearch] = useState('');
 
-  const mutation = useMutation(
-    (pageParam) => getNewsListService({
-      page: pageParam.page,
-      limit: 3,
-      keyword: searchKeyValue,
-    }),
-    {
-      onMutate: async (params: any) => {
-        // Cancel any outgoing refetches (so they don't overwrite our optimistic update)
-        await queryClient.cancelQueries('getNews');
-
-        // Snapshot the previous value
-        const previousNews = queryClient.getQueryData<NewsListTypes[]>('getNews');
-
-        // Optimistically update to the new value
-        if (previousNews) {
-          queryClient.setQueryData<NewsListTypes[]>('getNews', params);
-        }
-
-        return previousNews;
-      },
-      // If the mutation fails, use the context returned from onMutate to roll back
-      onError: (err, variables, context) => {
-        // if (context?.previousNews) {
-        //   queryClient.setQueryData<NewsListTypes[]>('getNews', context.previousNews);
-        // }
-      },
-      onSettled: () => {
-        queryClient.invalidateQueries('getNews');
-      },
-    },
-  );
-
-  const handleSearch = () => {
-    mutation.mutate({
-      page: 1,
-      limit: 3,
-      keyword: searchKeyValue,
-    });
-  };
-
-  useEffect(() => {
-    if (debouncedSearch) {
-      if (searchKeyValue) {
-        // control the txt search:
-      }
-    } else {
-      // set search list []
-    }
-  }, [debouncedSearch, searchKeyValue]);
+  const handleSearch = useCallback(() => {
+    setSearch(searchKeyValue);
+  }, [searchKeyValue]);
 
   // Get News
   const {
@@ -125,10 +75,11 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
     isFetching: fetchingNews,
     fetchNextPage: fetchNextNews,
   } = useInfiniteQuery(
-    ['getNews'],
+    ['getNews', search],
     ({ pageParam = 1 }) => getNewsListService({
       page: pageParam,
       limit: 3,
+      keyword: search,
     }),
     {
       getNextPageParam: (params) => (params.meta?.page >= params.meta.totalPages
