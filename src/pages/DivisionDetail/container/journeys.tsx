@@ -11,8 +11,6 @@ const Journeys: React.FC<JourneysProps> = (props) => (
       {...divisionJourneysData}
       loading={false}
       textNotFound="Không tìm thấy dữ liệu"
-      slugActive={divisionJourneysData.tabs[0].slug}
-      handleClick={() => ''}
       {...props}
     />
   </section>

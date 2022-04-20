@@ -29,6 +29,7 @@ export const normal: Story = ({
         textNotFound="Không tìm thấy dữ liệu"
         slugActive={slugActive}
         handleClick={(slug) => setSlugActive(slug)}
+        title="HÀNH TRÌNH TRẢI NGHIỆM SIÊU THÀNH PHỐ BIỂN"
       />
     </div>
   );

@@ -1,19 +1,19 @@
 .t-divisionJourneys {
-  position: relative;
   padding: rem(80) 0;
+  position: relative;
 
   @include mobile-down {
     padding: rem(48) 0;
   }
 
   &::before {
+    background: $black06;
+    content: '';
     height: 100%;
     left: 0;
     position: absolute;
     top: 0;
     width: 100%;
-    background: $black06; 
-    content: '';
   }
 
   &_bg {
@@ -30,79 +30,28 @@
     position: relative;
   }
 
-  &_panel {
-    min-height: rem(288);
-    
-    @include desktop-down {
-      min-height: rem(230);
-    }
-
-    @include tablet-down {
-      min-height: rem(256);
-    }
-
-    @include mobile-down {
-      min-height: rem(200);
-    }
-
-    @include small-mobile {
-      min-height: rem(288);
-    }
-
+  &_carousel {
     .slick-dots {
       bottom: rem(-32);
-    }
-  }
 
-  .o-tabs {
-    &_labels {
-      display: inline-flex;
-      max-width: 100%;
-      overflow-x: auto;
-      position: relative;
-      background: $gradient-white;
-      border-bottom: 1px solid rgba($white, 0.4);;
-      &::-webkit-scrollbar {
-        display: none;
+      @include mobile-down {
+        bottom: rem(-15);
       }
     }
 
-    &_label {
-      @include font-base(14,20);
-      color: $white;
-      white-space: nowrap;
-      transition: $transition-long linear;
-    }
+    .slick-slide {
+      height: inherit;
+      margin: rem(-16) 0;
+      padding: rem(16);
 
-    &_tab {
-      cursor: pointer;
-      padding: rem(12);
-      position: relative;
-
-      &::after {
-        bottom: 0;
-        height: 2px;
-        width: 0%;
-        transform: translateX(-50%);
-        left: 50%;
-        border-radius: 2px 2px 0px 0px;
-        content: '';
-        transition: $transition-long linear;
-        position: absolute;
-        background-color: $white;
+      > div {
+        padding: rem(16) 0;
       }
 
-      &-active {
-        .o-tabs_label {
-          font-weight: bold;
-        }
-      }
-      
-      &:hover ,
-      &-active {
-        &::after {
-          width: 100%;
-        }
+      > div,
+      .o-carousel_wrap,
+      .o-carousel_item {
+        height: inherit;
       }
     }
   }
