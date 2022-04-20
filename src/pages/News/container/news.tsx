@@ -9,13 +9,20 @@ import Image from 'components/atoms/Image';
 import NewsList from 'components/templates/NewsList';
 import useScrollAnimate from 'hooks/useScrollAnimation';
 import { OverviewNewsType } from 'services/overviews/types';
-import { baseURL, getTimePastToCurrent } from 'utils/functions';
+import CONSTANTS from 'utils/constants';
+import { baseURL, getBlockData, getTimePastToCurrent } from 'utils/functions';
 
-interface NewsProps {
+interface NewsBlocks {
+  title: string;
+  button: string;
+}
+
+interface NewsProps extends SectionBlocks {
   news?: OverviewNewsType[];
 }
 
-const News: React.FC<NewsProps> = ({ news }) => {
+const News: React.FC<NewsProps> = ({ news, blocks }) => {
+  const newsBlocks = getBlockData<NewsBlocks>('news', blocks);
   const leaf1Ref = useRef<HTMLDivElement>(null);
   const leaf2Ref = useRef<HTMLDivElement>(null);
   const ballonRef = useRef<HTMLDivElement>(null);
@@ -25,22 +32,29 @@ const News: React.FC<NewsProps> = ({ news }) => {
   const {
     animated, ballonAnimate, slideAnimate, slideReverseAnimate,
   } = useAnimation();
+
   const dataNews = useMemo(() => {
     if (Array.isArray(news)) {
       return news.map((item) => ({
         thumbnail: baseURL(item.thumbnail),
         dateTime: getTimePastToCurrent(item.publishedAt),
-        tag: item?.tag,
+        tag: item?.subdivision ? {
+          text: item?.subdivision?.name,
+          // TODO: Update locale later
+          url: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item?.subdivision?.slug}`,
+        } : undefined,
         button: {
-          text: 'Xem thêm',
-          url: item.slug,
+          text: newsBlocks?.button,
+          // TODO: Update locale later
+          url: `/${CONSTANTS.PREFIX.NEWS.VI}/${item.slug}`,
         },
         title: item.title,
         description: item.description,
       }));
     }
     return [];
-  }, [news]);
+  }, [news, newsBlocks]);
+
   return (
     <div className="s-news">
       <animated.div style={isScrollBallon ? ballonAnimate : {}} className="s-news_ballon" ref={ballonRef}>
@@ -53,7 +67,7 @@ const News: React.FC<NewsProps> = ({ news }) => {
         <Image src={leaf2} alt="leaf2" ratio="548x612" />
       </animated.div>
       <NewsList
-        title="TIN TỨC"
+        title={newsBlocks?.title}
         listNews={dataNews}
       />
     </div>

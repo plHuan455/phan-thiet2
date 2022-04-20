@@ -15,8 +15,7 @@ export interface CardEventProps {
     iconName: IconName,
     text: string;
   }[];
-  href?: string;
-  target?: string;
+  button?: LinkTypes;
 }
 
 const CardEvent: React.FC<CardEventProps> = ({
@@ -25,13 +24,12 @@ const CardEvent: React.FC<CardEventProps> = ({
   tag,
   title,
   summary,
-  href,
-  target,
+  button,
 }) => {
   const { totalHours, mins, secs } = useCountDown({ endTime: endTime || new Date().toISOString() });
   return (
     <div className="o-cardEvent">
-      <Link href={href} target={target}>
+      <Link href={button?.url} target={button?.target}>
         <div className="o-cardEvent_thumbnail">
           <Image alt={title} ratio="354x199" src={thumbnail} />
           <div className="o-cardEvent_endtime">
@@ -55,7 +53,7 @@ const CardEvent: React.FC<CardEventProps> = ({
           </Text>
         </Link>
         <div className="u-mt-md-16 u-mt-12" />
-        <Link href={href} target={target}>
+        <Link href={button?.url} target={button?.target}>
           <Text modifiers={['raisinBlack', '700', '20x32', 's015']}>
             {title}
           </Text>
@@ -72,10 +70,9 @@ const CardEvent: React.FC<CardEventProps> = ({
           </div>
         ))}
         <div className="o-cardEvent_content-button u-mt-md-24 u-mt-16" />
-        <Link target={target} href={href}>
+        <Link target={button?.target} href={button?.url}>
           <div className="animate animate-arrowSlide d-flex align-items-center">
-            {/* TODO: Translation later */}
-            <Text modifiers={['14x20', '400', 'copper']} content="Xem Chi Tiết" />
+            <Text modifiers={['14x20', '400', 'copper']} content={button?.text} />
             <div className="u-ml-8" />
             <Icon iconName="arrowRightCopper" size="16" />
           </div>

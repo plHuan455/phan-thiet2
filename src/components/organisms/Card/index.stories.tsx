@@ -24,7 +24,10 @@ export const player: Story = () => (
   <div style={{ maxWidth: 391, background: 'gray', padding: 20 }}>
     <Card.Player
       thumbnail="https://source.unsplash.com/random"
-      tag="The Kingdom"
+      tag={{
+        text: 'The Kingdom',
+        url: '/',
+      }}
       title="OCEAN RESIDENCE - MẢNH GHÉP ĐẶC SẮC MỚI TẠI NOVAWORLD PHAN THIET"
       dateTime="2 giờ trước"
     />
@@ -38,10 +41,14 @@ export const event: Story = () => (
         thumbnail="https://source.unsplash.com/random"
         tag={{
           text: 'The Kingdom',
+          url: '',
         }}
         title="Nova World phan thiết và chuỗi cung cấp tiện ích"
         endTime="2022-04-10T07:47:00.595"
-        href="/"
+        button={{
+          url: '/',
+          text: 'Xem chi tiết',
+        }}
         summary={[
           {
             iconName: 'clock',
@@ -148,7 +155,10 @@ export const news: Story = () => (
         <Card.News
           thumbnail="https://source.unsplash.com/random"
           dateTime="1 phút trước"
-          tag="The Kingdom"
+          tag={{
+            text: 'The Kingdom',
+            url: '/',
+          }}
           button={{
             text: 'Xem thêm',
             url: '/',

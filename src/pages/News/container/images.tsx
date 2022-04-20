@@ -5,7 +5,7 @@ import FlatMore from 'common/FlatMore';
 import Image from 'components/atoms/Image';
 import PopupImage from 'components/templates/PopupImage';
 import { OverviewImageType } from 'services/overviews/types';
-import { baseURL } from 'utils/functions';
+import { baseString, baseURL, getBlockData } from 'utils/functions';
 
 export interface CardImageProps {
   thumbnail: string,
@@ -24,7 +24,10 @@ interface ActionWithPayload {
   payload: ImageState;
 }
 
-interface ImagesProps {
+interface ImagesBlock {
+  title: string;
+}
+interface ImagesProps extends SectionBlocks {
   images?: OverviewImageType[];
 }
 
@@ -50,7 +53,9 @@ export const CardImage: React.FC<CardImageProps> = ({ thumbnail, alt, handleClic
   </div>
 );
 
-const Images: React.FC<ImagesProps> = ({ images }) => {
+const Images: React.FC<ImagesProps> = ({ images, blocks }) => {
+  const imageBlocks = getBlockData<ImagesBlock>('image', blocks);
+
   const [state, dispatch] = useReducer(reducer, {
     isOpen: false,
     currentImgIdx: 0,
@@ -77,7 +82,7 @@ const Images: React.FC<ImagesProps> = ({ images }) => {
       <Container>
         <FlatMore
           title={{
-            text: 'HÌNH ẢNH',
+            text: baseString(imageBlocks?.title),
             type: 'h4',
             modifiers: ['gradientGreen', '700', 's015', 'uppercase'],
           }}

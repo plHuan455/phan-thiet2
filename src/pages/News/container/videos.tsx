@@ -5,9 +5,16 @@ import FlatMore from 'common/FlatMore';
 import Card from 'components/organisms/Card';
 import PopupPlayer from 'components/templates/PopupPlayer';
 import { OverviewVideoType } from 'services/overviews/types';
-import { baseURL, linkURL, getTimePastToCurrent } from 'utils/functions';
+import CONSTANTS from 'utils/constants';
+import {
+  baseURL, linkURL, getTimePastToCurrent, getBlockData, baseString,
+} from 'utils/functions';
 
-interface VideoProps {
+interface VideoBlocks {
+  title: string;
+}
+
+interface VideoProps extends SectionBlocks {
   videos?: OverviewVideoType[];
 }
 
@@ -31,7 +38,8 @@ const reducer = (state: PlayerState, action: ActionWithPayload) => {
   }
 };
 
-const Videos: React.FC<VideoProps> = ({ videos }) => {
+const Videos: React.FC<VideoProps> = ({ videos, blocks }) => {
+  const videoBlock = getBlockData<VideoBlocks>('video', blocks);
   const [state, dispatch] = useReducer(reducer, {
     isOpen: false,
     vidSrc: '',
@@ -53,7 +61,10 @@ const Videos: React.FC<VideoProps> = ({ videos }) => {
         const vidData = {
           thumbnail: baseURL(item?.thumbnail),
           title: item.name,
-          tag: item?.tag,
+          tag: {
+            text: item.subdivision?.name,
+            url: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item.slug}`,
+          },
           datetime: item?.publishedAt ? getTimePastToCurrent(item.publishedAt) : undefined,
           onClick: () => {
             updatePlayerState({
@@ -73,7 +84,7 @@ const Videos: React.FC<VideoProps> = ({ videos }) => {
       <Container>
         <FlatMore
           title={{
-            text: 'VIDEO',
+            text: baseString(videoBlock?.title),
             type: 'h4',
             modifiers: ['gradientGreen', '700', 's015', 'uppercase'],
           }}

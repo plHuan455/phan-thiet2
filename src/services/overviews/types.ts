@@ -1,3 +1,10 @@
+interface Subdivision {
+  name: string;
+  logo: string;
+  slug: string;
+  thumbnail: string;
+}
+
 export interface OverviewNewsType {
   id: number;
   thumbnail: string;
@@ -5,7 +12,22 @@ export interface OverviewNewsType {
   slug: string;
   description: string;
   publishedAt: string;
-  tag?: string;
+  subdivision: Subdivision;
+}
+
+export interface OverviewEventsType {
+  id: number;
+  address: string;
+  description: string;
+  displayOrder: number;
+  endTime: string;
+  locale: string;
+  slug: string;
+  startDate: string;
+  startTime: string;
+  subdivision?: Subdivision;
+  thumbnail: string;
+  title: string;
 }
 
 export interface OverviewVideoType {
@@ -18,6 +40,7 @@ export interface OverviewVideoType {
   slug: string;
   tag?: string;
   publishedAt?: string;
+  subdivision?: Subdivision;
 }
 
 export interface OverviewImageType {
@@ -40,6 +63,7 @@ export interface OverviewType {
   videos?: OverviewVideoType[];
   images?: OverviewImageType[];
   documents?: OverviewDocumentType[];
+  events?: OverviewEventsType[];
 }
 
 export interface OverviewParams {

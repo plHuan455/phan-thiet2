@@ -11,13 +11,21 @@ import Card from 'components/organisms/Card';
 import { CardNormalProps } from 'components/organisms/Card/Normal';
 import useScrollAnimate from 'hooks/useScrollAnimation';
 import { OverviewDocumentType } from 'services/overviews/types';
-import { linkURL, getTimePastToCurrent } from 'utils/functions';
+import {
+  linkURL, getTimePastToCurrent, getBlockData, baseString,
+} from 'utils/functions';
 
-interface DocumentProps {
+interface DocumentBlocks {
+  title: string;
+}
+
+interface DocumentProps extends SectionBlocks {
   documents?: OverviewDocumentType[];
 }
 
-const Documents: React.FC<DocumentProps> = ({ documents }) => {
+const Documents: React.FC<DocumentProps> = ({ documents, blocks }) => {
+  const documentBlock = getBlockData<DocumentBlocks>('document', blocks);
+
   const leafRef = useRef<HTMLDivElement>(null);
   const ballonRef = useRef<HTMLDivElement>(null);
   const isScrollLeaf = useScrollAnimate(leafRef);
@@ -62,7 +70,7 @@ const Documents: React.FC<DocumentProps> = ({ documents }) => {
         <Container>
           <FlatMore
             title={{
-              text: 'Tài liệu khác',
+              text: baseString(documentBlock?.title),
               type: 'h4',
               modifiers: ['gradientGreen', '700', 's015', 'uppercase'],
             }}

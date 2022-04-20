@@ -13,7 +13,7 @@ export interface CardNewsProps {
   title?: string;
   description?: string;
   button?: LinkTypes;
-  tag?: string;
+  tag?: LinkTypes;
 }
 
 const CardNews: React.FC<CardNewsProps> = ({
@@ -40,10 +40,12 @@ const CardNews: React.FC<CardNewsProps> = ({
             {tag && (
             <>
               <Icon iconName="dot" size="16" />
-              <Text
-                modifiers={['400', '14x20', 'gradientGreen']}
-                content={tag}
-              />
+              <Link href={tag.url} target={tag.target}>
+                <Text
+                  modifiers={['400', '14x20', 'gradientGreen']}
+                  content={tag.text}
+                />
+              </Link>
             </>
             )}
           </div>

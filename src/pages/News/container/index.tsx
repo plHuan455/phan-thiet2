@@ -34,33 +34,23 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
       <HelmetContainer seoData={seoData} ogData={getOgDataPage(pageData)} />
       <Banner banners={banners} blocks={blocks} />
       <MenuTag />
-      {Array.isArray(data?.news) && data?.news && data?.news?.length > 0 && (
-        <Section ref={ref.news}>
-          <News news={data?.news} />
-        </Section>
-      )}
-      <Section ref={ref.events}>
-        <Events />
+      <Section ref={ref.news}>
+        <News news={data?.news} blocks={blocks} />
       </Section>
-      {Array.isArray(data?.images) && data?.images && data?.images?.length > 0 && (
-        <Section ref={ref.images}>
-          <Images images={data?.images} />
-        </Section>
-      )}
-
-      {Array.isArray(data?.videos) && data?.videos && data?.videos?.length > 0 && (
-        <Section ref={ref.videos}>
-          <Videos videos={data?.videos} />
-        </Section>
-      )}
-
-      {Array.isArray(data?.documents) && data?.documents && data?.documents?.length > 0 && (
-        <Section ref={ref.documents}>
-          <Documents documents={data?.documents} />
-        </Section>
-      )}
+      <Section ref={ref.events}>
+        <Events events={data?.events} blocks={blocks} />
+      </Section>
+      <Section ref={ref.images}>
+        <Images images={data?.images} blocks={blocks} />
+      </Section>
+      <Section ref={ref.videos}>
+        <Videos videos={data?.videos} blocks={blocks} />
+      </Section>
+      <Section ref={ref.documents}>
+        <Documents documents={data?.documents} blocks={blocks} />
+      </Section>
       <section>
-        <Consultancy />
+        <Consultancy blocks={blocks} />
       </section>
     </>
   );
