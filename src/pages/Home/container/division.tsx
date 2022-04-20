@@ -7,6 +7,7 @@ import FlatMore from 'common/FlatMore';
 import Card from 'components/organisms/Card';
 import JourneysTemplate from 'components/templates/Journeys';
 import getSubDivisionListService from 'services/subdivision';
+import CONSTANTS from 'utils/constants';
 import {
   baseString, getBlockData, baseURL,
 } from 'utils/functions';
@@ -38,8 +39,8 @@ const Division: React.FC<SectionBlocks> = ({ blocks }) => {
     description: item.content.description,
     // TODO: Add Translations Later
     textBtn: 'Tham quan các mẫu nhà',
-    href: '/',
-    target: '_blank',
+    //  TODO: Add locale later
+    href: `${CONSTANTS.PREFIX.DIVISION.VI}/${item.slug}`,
   })), [subDivisionList]);
 
   return (
