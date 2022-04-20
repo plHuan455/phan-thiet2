@@ -110,4 +110,4 @@ Videos.defaultProps = {
   videos: [],
 };
 
-export default Videos;
+export default React.memo(Videos);

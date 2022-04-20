@@ -29,6 +29,11 @@ const menuDummy = [
   },
 ];
 
+// interface TabMenuProps {
+//   setRef: (index: number) => void;
+//   refIdx: number | undefined;
+// }
+
 const Menus: React.FC = () => {
   const { setRef, refIdx } = useNews();
   return (
