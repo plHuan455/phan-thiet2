@@ -6,8 +6,8 @@ import Detail, { DetailProps } from './detail';
 
 import HelmetContainer from 'common/Helmet';
 import LoadingPage from 'common/Navigation/loading';
+import RedirectNav from 'common/Navigation/redirect';
 import useDetail from 'hooks/useDetail';
-import Error from 'pages/Error';
 import { getNewsDetailService } from 'services/news';
 import Constants from 'utils/constants';
 import {
@@ -52,7 +52,7 @@ const Screen: React.FC = () => {
 
   if (loading) return <LoadingPage />;
 
-  if (error) return <Error />;
+  if (error) return <RedirectNav />;
 
   return (
     <>
