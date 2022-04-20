@@ -118,10 +118,11 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
     isFetching: fetchingSubdivision,
     fetchNextPage: fetchNextSubdivision,
   } = useInfiniteQuery(
-    ['getSubdivision'],
+    ['getSubdivision', search],
     ({ pageParam = 1 }) => getSubDivisionListService({
       page: pageParam,
       limit: 3,
+      keyword: search,
     }),
     {
       getNextPageParam: (params) => (params.meta?.page >= params.meta.totalPages
@@ -166,8 +167,8 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
         <SearchResult.Summary
           value={searchKeyValue}
           placeholder="Tìm kiếm"
-          searchText=""
-          length={9}
+          searchText={search}
+          length={(tabActive === 'tin-tuc' && newsList.length) || (tabActive === 'phan-khu' && subdivisionList.length) || 0}
           onChange={(e) => setSearchKeyValue(e.currentTarget.value)}
           handleSubmit={handleSearch}
         />
