@@ -133,8 +133,8 @@
     mix-blend-mode: screen;
     opacity: 0;
 
-    &.florida-2 {
-      @include imageShine(418,193,287,940)
+    &.florida {
+      @include imageShine(462,396,273,905)
     }
 
     &.festival-street {
@@ -147,10 +147,6 @@
     
     &.pga-golf-villas {
       @include imageShine(384,167,187,604)
-    }
-
-    &.florida-1 {
-      @include imageShine(461,359,311,904)
     }
 
     &.santa-monica {
