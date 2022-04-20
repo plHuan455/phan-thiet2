@@ -11,8 +11,9 @@ import Card from 'components/organisms/Card';
 import { CardNormalProps } from 'components/organisms/Card/Normal';
 import useScrollAnimate from 'hooks/useScrollAnimation';
 import { OverviewDocumentType } from 'services/overviews/types';
+import CONSTANTS from 'utils/constants';
 import {
-  linkURL, getTimePastToCurrent, getBlockData, baseString,
+  linkURL, getTimePastToCurrent, getBlockData, baseString, baseURL,
 } from 'utils/functions';
 
 interface DocumentBlocks {
@@ -34,10 +35,13 @@ const Documents: React.FC<DocumentProps> = ({ documents, blocks }) => {
   const documentList = useMemo(() => {
     if (Array.isArray(documents)) {
       const cardNormals: CardNormalProps[] = documents.map((item) => ({
-        thumbnail: item?.thumbnail || 'https://source.unsplash.com/random',
+        thumbnail: baseURL(item?.thumbnail),
         title: item.title || '',
         href: linkURL(item.link),
-        tag: item?.tag,
+        tag: {
+          text: item.subdivision?.name,
+          url: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item.slug}`,
+        },
         dateTime: getTimePastToCurrent(item.publishedAt),
         target: '_blank',
         url: {

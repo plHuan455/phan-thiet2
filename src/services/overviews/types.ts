@@ -56,6 +56,7 @@ export interface OverviewDocumentType {
   tag?: string;
   title?: string;
   thumbnail?: string;
+  subdivision?: Subdivision;
 }
 
 export interface OverviewType {

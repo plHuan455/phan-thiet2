@@ -75,7 +75,10 @@ export const document: Story = () => (
         thumbnail="https://source.unsplash.com/random"
         title="Nova World phan thiết và chuỗi cung cấp tiện ích"
         href="/"
-        tag="The Kingdom"
+        tag={{
+          text: 'The Kingdom',
+          url: '/',
+        }}
         dateTime="2 giờ trước"
         url={{
           text: 'Tải xuống',
@@ -94,7 +97,10 @@ export const normal: Story = () => (
         thumbnail="https://source.unsplash.com/random"
         title="Nova World phan thiết và chuỗi cung cấp tiện ích"
         href="/"
-        tag="The Kingdom"
+        tag={{
+          text: 'The Kingdom',
+          url: '/',
+        }}
         dateTime="2 giờ trước"
         url={{
           text: 'Xem thêm',

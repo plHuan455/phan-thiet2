@@ -11,7 +11,7 @@ export interface CardNormalProps {
   href?: string;
   target?: string;
   dateTime?: string;
-  tag?: string;
+  tag?: LinkTypes;
   url?: {
     text?: string;
     iconName: IconName;
@@ -40,10 +40,12 @@ const CardNormal: React.FC<CardNormalProps> = ({
         {tag && (
           <>
             <Icon iconName="dot" size="16" />
-            <Text
-              modifiers={['400', '12x20', 'gradientGreen']}
-              content={tag}
-            />
+            <Link href={tag?.url} target={tag?.target}>
+              <Text
+                modifiers={['400', '12x20', 'gradientGreen']}
+                content={tag?.text}
+              />
+            </Link>
           </>
         )}
       </div>

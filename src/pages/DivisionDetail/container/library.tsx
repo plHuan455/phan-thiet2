@@ -60,7 +60,10 @@ const Library: React.FC<LibraryProps> = ({ title }) => {
                     thumbnail="https://source.unsplash.com/random"
                     title="Nova World phan thiết và chuỗi cung cấp tiện ích"
                     href="/"
-                    tag="The Kingdom"
+                    tag={{
+                      text: 'The Kingdom',
+                      url: '/',
+                    }}
                     dateTime="2 giờ trước"
                     url={{
                       text: 'Xem thêm',
@@ -92,7 +95,10 @@ const Library: React.FC<LibraryProps> = ({ title }) => {
                   thumbnail="https://source.unsplash.com/random"
                   title="ƯU ĐÃI QUÝ I/2022"
                   href="/"
-                  tag="The Kingdom"
+                  tag={{
+                    text: 'The Kingdom',
+                    url: '/',
+                  }}
                   dateTime="2 giờ trước"
                   url={{
                     text: 'Tải xuống',
