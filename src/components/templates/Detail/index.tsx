@@ -60,13 +60,13 @@ const Detail: React.FC<DetailProps> = ({
             </li>
           </ul>
         </div>
-        <div className="t-detail_heading u-mt-12">
-          <div className="t-detail_title">
+        <div className="t-detail_heading">
+          <div className="t-detail_title u-mt-12">
             <Heading type="h4" modifiers={['700', 'gradientGreen', 's015']} content={title} />
           </div>
-          <div className="t-detail_share">
+          <div className="t-detail_share u-mt-12">
             <div className="t-detail_share_text">
-              <Text modifiers={['24x36', 's015', 'raisinBlack']}>{`${textShare}:`}</Text>
+              <Heading type="h6" modifiers={['s015', 'raisinBlack']}>{`${textShare}:`}</Heading>
             </div>
             <ul>
               <li>
@@ -108,7 +108,7 @@ const Detail: React.FC<DetailProps> = ({
       </div>
     </Container>
     {hasRelated && (
-    <div className="t-detail_related u-pt-80 u-pt-lg-120">
+    <div className="t-detail_related u-pt-80 u-pt-md-120 u-pt-lg-164">
       {/** TODO: Add animation */}
       <div className="t-detail_balloonBottom">
         <Image src={balloonBottom} ratio="1x1" alt="balloon" />

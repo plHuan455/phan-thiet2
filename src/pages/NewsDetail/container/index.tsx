@@ -1,64 +1,63 @@
 import React, { useMemo } from 'react';
-import { useQuery } from 'react-query';
-import { useParams } from 'react-router-dom';
 
 import Banner from './banner';
 import Detail, { DetailProps } from './detail';
 
-import error404 from 'assets/images/error/404.png';
+import HelmetContainer from 'common/Helmet';
 import LoadingPage from 'common/Navigation/loading';
-import Error from 'components/templates/Error';
+import useDetail from 'hooks/useDetail';
+import Error from 'pages/Error';
 import { getNewsDetailService } from 'services/news';
-import { DEFAULT_QUERY_OPTION } from 'utils/constants';
-import { baseString, getFullDate, getTimePastToCurrent } from 'utils/functions';
-
-const ErrorTemplate = () => (
-  <Error
-    imgSrc={error404}
-    title="Rất tiếc, chúng tôi không tìm thấy trang tin tức này"
-    description="Vui lòng trở về trang chủ hoặc liên hệ với chúng tôi để được hỗ trợ."
-    back={{
-      text: 'Trang chủ',
-      url: '/',
-      target: '_self',
-    }}
-    contact={{
-      text: 'Liên hệ',
-      url: '/',
-      target: '_self',
-    }}
-  />
-);
+import Constants from 'utils/constants';
+import {
+  baseString, baseURL, getFullDate, getTimePastToCurrent,
+} from 'utils/functions';
 
 const Screen: React.FC = () => {
-  const { slug } = useParams<{ slug: string }>();
+  const {
+    data,
+    loading,
+    error,
+  } = useDetail({ service: getNewsDetailService });
 
-  const { data: newsDetail, isLoading, error } = useQuery(
-    ['getNewsDetailData', slug],
-    () => getNewsDetailService(slug),
-    {
-      ...DEFAULT_QUERY_OPTION,
-      enabled: !!slug,
-    },
-  );
-  const newsDetaiLData = useMemo(() : DetailProps => ({
-    content: baseString(newsDetail?.content),
-    title: baseString(newsDetail?.title),
-    timeLeave: getTimePastToCurrent(newsDetail?.publishedAt),
-    dateLeave: getFullDate(newsDetail?.publishedAt),
-    tags: newsDetail?.tags.map((item) => ({
-      href: '/',
+  const newsDetailData = useMemo(() : DetailProps => ({
+    content: baseString(data?.content),
+    title: baseString(data?.title),
+    timeLeave: getTimePastToCurrent(data?.publishedAt),
+    dateLeave: getFullDate(data?.publishedAt),
+    tags: data?.tags.map((item) => ({
+      // TODO: Update href later
+      href: '',
       name: item?.name,
     })) || [],
-  }), [newsDetail]);
+    subdivision: {
+      name: data?.subdivision?.name,
+      // TODO: add locale later
+      slug: `/${Constants.PREFIX.DIVISION.VI}/${data?.subdivision?.slug}`,
+    },
+    relatedNews: data?.relatedNews?.map((item) => ({
+      tag: baseString(data?.subdivision?.name),
+      title: baseString(item.title),
+      thumbnail: baseURL(item.thumbnail),
+      href: `/tin-tuc/${item.slug}`,
+      dateTime: getTimePastToCurrent(item?.publishedAt),
+      url: {
+        text: 'Xem thêm',
+        iconName: 'arrowRightCopper',
+        animation: 'arrow',
+      },
+    })),
+  }), [data]);
 
-  if (isLoading) return <LoadingPage />;
-  if (error) return <ErrorTemplate />;
+  if (loading) return <LoadingPage />;
+
+  if (error) return <Error />;
 
   return (
     <>
-      <Banner thumbnail={newsDetail?.thumbnail} />
-      <Detail {...newsDetaiLData} />
+      <HelmetContainer seoData={data?.seoData} ogData={data?.openGraph} />
+      <Banner thumbnail={data?.thumbnail} />
+      <Detail {...newsDetailData} />
     </>
   );
 };
