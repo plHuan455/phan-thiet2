@@ -44,3 +44,9 @@ export type SystemsData = {
   og?: OpenGraphDataTypes;
   seo?: SEODataTypes;
 };
+
+export interface RedirectsTypes {
+  id: number;
+  from: string;
+  to: string;
+}

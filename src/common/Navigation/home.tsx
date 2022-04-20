@@ -1,7 +1,9 @@
 import { AxiosError } from 'axios';
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 
 import Loading from './loading';
+import RedirectNav from './redirect';
 
 import RenderPage from '.';
 
@@ -10,6 +12,7 @@ import Error from 'pages/Error';
 import { staticHomeService } from 'services/pages';
 
 const HomeNavigation: React.FC = () => {
+  const { state } = useLocation();
   const {
     data,
     isLoading,
@@ -28,6 +31,9 @@ const HomeNavigation: React.FC = () => {
   }
 
   if (error) {
+    if ((error as AxiosError)?.response?.status === 404 && !state) {
+      return <RedirectNav />;
+    }
     return <Error status={(error as AxiosError)?.response?.status} />;
   }
 
