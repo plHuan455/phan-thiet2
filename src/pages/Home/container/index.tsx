@@ -23,7 +23,7 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
     <Banner banners={banners} blocks={blocks} />
     <Position blocks={blocks} />
     <Selection blocks={blocks} />
-    <Highway />
+    <Highway blocks={blocks} />
     <Utilities blocks={blocks} />
     <div className="p-home_sand1">
       <div className="p-home_sand1_layer">
