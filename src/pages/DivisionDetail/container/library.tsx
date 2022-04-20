@@ -106,11 +106,19 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId }) => {
     currVidType: '',
   });
 
+  const subDivisionRef = useRef(subDivisionId);
+
   const [libraryExecute] = useAsync(
     async () => {
       const temp: LibraryState = { ...state };
       if (subDivisionId !== -1) {
         const subdivision_id = subDivisionId?.toString();
+        if (subDivisionId !== subDivisionRef.current) {
+          subDivisionRef.current = subDivisionId;
+          temp.news = undefined;
+          temp.documents = undefined;
+          temp.images = undefined;
+        }
         dispatch({ type: 'start_loading' });
         if (indexActive === 0 && !temp.news) {
           const res = await getNewsListService({ subdivision_id });
@@ -118,7 +126,6 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId }) => {
         }
         if (indexActive === 1 && !temp.images) {
           const res = await getImageListService({ subdivision_id });
-          temp.images = res.data;
         }
         if (indexActive === 2 && !temp.videos) {
           const res = await getVideosService({ subdivision_id });
