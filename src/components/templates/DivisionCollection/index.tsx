@@ -14,6 +14,7 @@ export interface DivisionCollectionProps {
   title: string;
   description?: string;
   dataList: CollectionProps[];
+  handleClick?: (id?: number) => void;
 }
 const settings = {
   dots: false,
@@ -62,6 +63,7 @@ const DivisionCollection: React.FC<DivisionCollectionProps> = ({
   title,
   description,
   dataList,
+  handleClick,
 }) => (
   <div className="t-divisionCollection" style={{ color: 'var(--theme)' }}>
     <Container>
@@ -81,7 +83,7 @@ const DivisionCollection: React.FC<DivisionCollectionProps> = ({
                 settings={settings}
                 data={dataList}
                 render={(item) => (
-                  <Collection {...item} />
+                  <Collection {...item} handleClick={() => handleClick && handleClick(item.id)} />
                 )}
               />
             </div>
@@ -93,6 +95,7 @@ const DivisionCollection: React.FC<DivisionCollectionProps> = ({
             titleCard={dataList[0].title}
             thumbnail={dataList[0].thumbnail}
             button={dataList[0].button}
+            handleClick={() => handleClick && handleClick(dataList[0].id)}
           />
         )
       }

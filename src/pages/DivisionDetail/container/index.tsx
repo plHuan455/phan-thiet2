@@ -14,6 +14,8 @@ import Summary from './summary';
 import Utilities from './utilities';
 
 import HelmetContainer from 'common/Helmet';
+import LoadingPage from 'common/Navigation/loading';
+import RedirectNav from 'common/Navigation/redirect';
 import { getSubDivisionDetailService } from 'services/subdivision';
 import { baseString, baseURL } from 'utils/functions';
 
@@ -24,7 +26,7 @@ export interface MyCustomCSS extends React.CSSProperties {
 const Screen: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
 
-  const { data: subDivisionDetail } = useQuery(
+  const { data: subDivisionDetail, isFetching, error } = useQuery(
     ['getSubDivisionDetail', [slug]],
     () => getSubDivisionDetailService(slug),
     {
@@ -53,6 +55,18 @@ const Screen: React.FC = () => {
   } = useMemo(() => ({
     ...contentSubdivision,
   }), [contentSubdivision]);
+
+  if (isFetching) {
+    return (
+      <LoadingPage />
+    );
+  }
+
+  if (error) {
+    return (
+      <RedirectNav />
+    );
+  }
 
   return (
     <>
