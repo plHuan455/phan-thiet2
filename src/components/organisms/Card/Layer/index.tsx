@@ -14,6 +14,7 @@ export interface CardLayerProps {
   ratio?: Ratio;
   isBold?: boolean;
   modifiers?: ('r15' | 'r12' | 'filter' | 'hover' | 'pd-6x20' | 'pd-8x16' | 'pd-24x16' | 'pd-6x16')[];
+  handleClick?: () => void;
 }
 
 const CardLayer: React.FC<CardLayerProps> = ({
@@ -25,8 +26,9 @@ const CardLayer: React.FC<CardLayerProps> = ({
   ratio,
   isBold,
   modifiers,
+  handleClick,
 }) => (
-  <div className={mapModifiers('o-cardLayer', modifiers)}>
+  <div className={mapModifiers('o-cardLayer', modifiers)} onClick={handleClick}>
     <Link href={href} target={target}>
       <div className="o-cardLayer_image">
         <Image src={thumbnail} alt={title} ratio={ratio || '258x334'} />

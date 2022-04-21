@@ -14,7 +14,9 @@ export interface ImageListTypes {
   thumbnailHome: string;
   thumbnailSubdivision: string;
   color: string;
-  images: string[];
+  images: {
+    path: string;
+  }[];
   subdivision: Subdivision;
 }
 

@@ -155,13 +155,17 @@ export const VerticalJourneys: React.FC<VerticalJourneysProps> = ({
 export interface JourneysListProps {
   listCard?: CardLayerProps[];
   titleField?: string;
+  emptyStr?: string;
   loading?: boolean;
+  handleClick?: (idx?: number) => void;
 }
 
 export const JourneysList:React.FC<JourneysListProps> = ({
   listCard,
   titleField,
+  emptyStr,
   loading,
+  handleClick,
 }) => {
   const settings = useMemo(() => ({
     infinite: listCard && listCard?.length > 3,
@@ -232,43 +236,37 @@ export const JourneysList:React.FC<JourneysListProps> = ({
     ],
   }), [listCard]);
 
-  if (loading) {
-    return (
-      <div className="d-flex justify-content-center">
-        <Icon iconName="loadingWhite" />
-      </div>
-    );
-  }
-
   return (
     <div className={mapModifiers('t-journeysList', !listCard?.length && 'empty')}>
-      {listCard?.length ? (
-        <>
-          <div className="u-mb-16">
-            <Text modifiers={['20x32', 'white', 's015']} content={titleField} />
-          </div>
-          <div>
-            <FlatList
-              settings={settings}
-              data={listCard}
-              render={(item) => (
-                <Card.Layer
-                  {...item}
-                  ratio="258x334"
-                  modifiers={['r15', 'pd-6x20']}
-                />
-              )}
+      <div className="u-mb-16">
+        <Text modifiers={['20x32', 'white', 's015']} content={titleField} />
+      </div>
+      <div>
+        <FlatList
+          settings={settings}
+          data={listCard}
+          render={(item, idx) => (
+            <Card.Layer
+              {...item}
+              ratio="258x334"
+              modifiers={['r15', 'pd-6x20']}
+              handleClick={() => handleClick && handleClick(idx)}
             />
-          </div>
-        </>
-      ) : (
+          )}
+        />
+        {loading && (
+        <div className="d-flex justify-content-center d-md-block u-mt-16">
+          <Icon iconName="loadingWhite" />
+        </div>
+        )}
+        {!listCard?.length && !loading && (
         <div className="t-journeysList_empty">
-          <Text modifiers={['20x32', 'white', 's015', 'center']}>
-            {/* TODO: Translations later */}
-            Chưa có mẫu nhà
+          <Text modifiers={['14x20', 'white', 's015']}>
+            {emptyStr}
           </Text>
         </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };
@@ -276,6 +274,8 @@ export const JourneysList:React.FC<JourneysListProps> = ({
 export interface JourneysProps extends VerticalJourneysProps, JourneysListProps {
   srcBg?: string;
   title?: string;
+  emptyStr?: string;
+  handleClickCard?: (idx?: number) => void;
 }
 
 const Journeys: React.FC<JourneysProps> = ({
@@ -284,7 +284,9 @@ const Journeys: React.FC<JourneysProps> = ({
   title,
   listCard,
   titleField,
+  emptyStr,
   handleClickTimeLine,
+  handleClickCard,
   loading,
 }) => (
   <div className="t-journeys">
@@ -310,6 +312,8 @@ const Journeys: React.FC<JourneysProps> = ({
                 listCard={listCard}
                 titleField={titleField}
                 loading={loading}
+                emptyStr={emptyStr}
+                handleClick={handleClickCard}
               />
             </div>
           </div>

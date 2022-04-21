@@ -255,15 +255,17 @@
 
   &_right {
     $right: &;
-    align-items: flex-end;
+    // align-items: flex-end;
     display: flex;
     flex: 0 0 calc(89% - 420px);
     margin-left: 11%;
     max-width: calc(89% - 420px);
+    margin-top: rem(80);
 
     @include desktop-down {
       flex: 0 0 calc(89% - 320px);
       max-width: calc(89% - 320px);
+      margin-top: rem(60);
     }
     @include small-mobile {
       flex: 0 0 100%;
@@ -273,7 +275,7 @@
 
 
   &-empty {
-    align-items: center;
+    align-items: flex-start;
 
     @include mobile-down {
       #{$right}_list {
