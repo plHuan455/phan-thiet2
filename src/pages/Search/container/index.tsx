@@ -3,7 +3,8 @@
 import React, {
   useCallback,
   useMemo,
-  useRef, useState,
+  useRef,
+  useState,
   useEffect,
 } from 'react';
 import { useInfiniteQuery } from 'react-query';
@@ -24,10 +25,7 @@ import getNewsListService from 'services/news';
 import { NewsListTypes } from 'services/news/types';
 import { getSubDivisionListService } from 'services/subdivision';
 import { SubDivisionListTypes } from 'services/subdivision/types';
-import {
-  baseURL,
-  getOgDataPage,
-} from 'utils/functions';
+import { baseURL, getOgDataPage } from 'utils/functions';
 
 const dataTabList = [
   {
@@ -53,15 +51,14 @@ const optionSort = [
   },
 ];
 
-const Screen: React.FC<BasePageDataTypes<any>> = ({
-  pageData,
-  seoData,
-}) => {
+const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
   const [tabActive, setTabActive] = useState<string | undefined>(
     dataTabList[0].slug,
   );
   const [searchParams, setSearchParams] = useSearchParams();
-  const [currentValueSort, setCurrentValueSort] = useState<OptionType>(optionSort[0]);
+  const [currentValueSort, setCurrentValueSort] = useState<OptionType>(
+    optionSort[0],
+  );
   const bgLeftRef = useRef<HTMLDivElement>(null);
   const { animate, animateReverse } = useAnimation({ ref: bgLeftRef });
   const [searchKeyValue, setSearchKeyValue] = useState('');
@@ -106,28 +103,30 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
   );
 
   const newsMapping = useMemo(
-    () => (newsData?.pages || [])
-      .reduce((
-        prev: NewsListTypes[],
-        curr,
-      ) => [...prev, ...curr.data], []),
+    () => (newsData?.pages || []).reduce(
+      (prev: NewsListTypes[], curr) => [...prev, ...curr.data],
+      [],
+    ),
     [newsData?.pages],
   );
 
-  const newsList = useMemo((): CardNormalProps[] => newsMapping.map((item) => ({
-    thumbnail: baseURL(item.thumbnail),
-    title: item.title,
-    href: item.slug,
-    dateTime: '2 giờ trước', // publishedAt,
-    tag: {
-      text: 'The Kingdom',
-    },
-    url: {
-      text: 'Xem thêm',
-      iconName: 'arrowRightCopper',
-      animation: 'arrow',
-    },
-  })), [newsMapping]);
+  const newsList = useMemo(
+    (): CardNormalProps[] => newsMapping.map((item) => ({
+      thumbnail: baseURL(item.thumbnail),
+      title: item.title,
+      href: item.slug,
+      dateTime: '2 giờ trước', // publishedAt,
+      tag: {
+        text: 'The Kingdom',
+      },
+      url: {
+        text: 'Xem thêm',
+        iconName: 'arrowRightCopper',
+        animation: 'arrow',
+      },
+    })),
+    [newsMapping],
+  );
   // End - Get News
 
   // Get Subdivision
@@ -152,20 +151,22 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
   );
 
   const subdivisionMapping = useMemo(
-    () => (subdivisionData?.pages || [])
-      .reduce((
-        prev: SubDivisionListTypes[],
-        curr,
-      ) => [...prev, ...curr.data], []),
+    () => (subdivisionData?.pages || []).reduce(
+      (prev: SubDivisionListTypes, curr) => [...prev, ...curr.data],
+      [],
+    ),
     [subdivisionData?.pages],
   );
 
-  const subdivisionList = useMemo((): CardDivisionProps[] => subdivisionMapping.map((item) => ({
-    imgSrc: baseURL(item.thumbnail),
-    title: item.name,
-    description: '',
-    href: item.slug,
-  })), [subdivisionMapping]);
+  const subdivisionList = useMemo(
+    (): CardDivisionProps[] => subdivisionMapping.map((item) => ({
+      imgSrc: baseURL(item.thumbnail),
+      title: item.name,
+      description: '',
+      href: item.slug,
+    })),
+    [subdivisionMapping],
+  );
 
   // End - Get Subdivision
 
@@ -188,7 +189,11 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
           value={searchKeyValue}
           placeholder="Tìm kiếm"
           searchText={search}
-          length={(tabActive === 'tin-tuc' && newsList.length) || (tabActive === 'phan-khu' && subdivisionList.length) || 0}
+          length={
+            (tabActive === 'tin-tuc' && newsList.length)
+            || (tabActive === 'phan-khu' && subdivisionList.length)
+            || 0
+          }
           onChange={(e) => setSearchKeyValue(e.currentTarget.value)}
           handleSubmit={handleSearch}
         />
