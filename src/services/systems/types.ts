@@ -14,7 +14,7 @@ export type SystemsData = {
   };
   gaId: string[];
   gtmId: string[];
-  messengerId: string;
+  messengerId: number;
   receiverContacts: string[];
   logoHeader: string;
   logoFooter: string;

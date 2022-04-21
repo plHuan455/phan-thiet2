@@ -2,9 +2,8 @@ import React from 'react';
 
 import FlatList from 'common/FlatList';
 import Card from 'components/organisms/Card';
-import { CardNormalProps } from 'components/organisms/Card/Normal';
+import { CardEventProps } from 'components/organisms/Card/Event';
 import DetailTemplate from 'components/templates/Detail';
-import useScript from 'hooks/useScript';
 
 export interface DetailProps {
   title: string;
@@ -15,34 +14,31 @@ export interface DetailProps {
     href: string;
     name: string;
   }[];
-  relatedNews?: CardNormalProps[];
+  related?: CardEventProps[];
   subdivision?: {
     name?: string;
     slug?: string;
   };
 }
 const Detail: React.FC<DetailProps> = ({
-  relatedNews,
+  related,
   subdivision,
   ...rest
-}) => {
-  useScript('https://sp.zalo.me/plugins/sdk.js');
-  return (
-    <DetailTemplate
-      hasRelated={!!relatedNews?.length}
-      titleRelated="Các Tin tức liên quan"
-      reactRelated={(
-        <FlatList
-          data={relatedNews}
-          render={(item) => <Card.Normal {...item} />}
-        />
+}) => (
+  <DetailTemplate
+    hasRelated={!!related?.length}
+    titleRelated="Các sự kiện liên quan"
+    reactRelated={(
+      <FlatList
+        data={related}
+        render={(item) => <Card.Event {...item} />}
+      />
     )}
-      textShare="Chia sẻ"
-      textTopic="Từ khóa"
-      label={subdivision?.name}
-      {...rest}
-    />
-  );
-};
+    textShare="Chia sẻ"
+    textTopic="Từ khóa"
+    label={subdivision?.name}
+    {...rest}
+  />
+);
 
 export default Detail;

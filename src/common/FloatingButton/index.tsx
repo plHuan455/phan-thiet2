@@ -1,21 +1,22 @@
-import React, { useRef, useState } from 'react';
+/* eslint-disable jsx-a11y/iframe-has-title */
+import React, { useEffect, useState } from 'react';
 
 import Icon from 'components/atoms/Icon';
 import useWindowScroll from 'hooks/useWindowScroll';
+import { useAppSelector } from 'store/hooks';
 import mapModifiers from 'utils/functions';
+import initFacebookSdk from 'utils/sdkFacebook';
 
 const FloatingButton: React.FC = () => {
-  const refPageYOffset = useRef<number>();
+  const dataSystem = useAppSelector((state) => state.system.data);
   const [isShow, setIsShow] = useState(false);
 
   useWindowScroll(() => {
-    if (window.pageYOffset > 1040) {
+    if (window.pageYOffset > 200) {
       setIsShow(true);
     } else {
       setIsShow(false);
     }
-
-    refPageYOffset.current = window.pageYOffset;
   });
 
   const handleScrollTop = () => {
@@ -25,6 +26,11 @@ const FloatingButton: React.FC = () => {
     });
   };
 
+  useEffect(() => {
+    if (dataSystem?.messengerId) {
+      initFacebookSdk('vi', dataSystem.messengerId);
+    }
+  }, [dataSystem]);
   return (
     <div className="floatingButton">
       <div id="fb-root" />

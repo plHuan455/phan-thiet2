@@ -1,10 +1,10 @@
-export interface EventListParams {
+export type EventListParams = {
   page?: number;
   limit?: number;
   keyword?: string;
 }
 
-export interface EventListTypes {
+export type EventItemCommonTypes = {
   id: number;
   displayOrder: number;
   thumbnail: string;
@@ -19,14 +19,20 @@ export interface EventListTypes {
   endTime: string;
 }
 
-interface Subdivision {
+export type EventListTypes = EventItemCommonTypes[];
+
+type Subdivision = {
   name: string;
   slug: string;
   thumbnail: string;
   logo: string;
 }
 
-export interface EventDetailTypes {
+type Tag = {
+  name: string;
+}
+
+export type EventDetailTypes ={
   id: number;
   displayOrder: number;
   thumbnail: string;
@@ -37,8 +43,8 @@ export interface EventDetailTypes {
   description: string;
   startDate: string;
   subdivision: Subdivision;
-  tags: any[];
+  tags: Tag[];
   startTime: string;
   endTime: string;
-  relatedEvents: any[];
+  relatedEvents: EventItemCommonTypes[];
 }

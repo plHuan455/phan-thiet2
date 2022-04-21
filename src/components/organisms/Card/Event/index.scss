@@ -18,6 +18,10 @@
     position: absolute;
     right: 0;
     top: rem(16);
+    transition: all $transition ease-in-out;
+    #{$root}-end & {
+      transform: translateX(100%);
+    }
   }
 
   &_content {

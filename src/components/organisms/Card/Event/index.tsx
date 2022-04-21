@@ -5,6 +5,7 @@ import Image from 'components/atoms/Image';
 import Link from 'components/atoms/Link';
 import Text from 'components/atoms/Text';
 import useCountDown from 'hooks/useCountDown';
+import mapModifiers from 'utils/functions';
 
 export interface CardEventProps {
   endTime?: string;
@@ -26,9 +27,11 @@ const CardEvent: React.FC<CardEventProps> = ({
   summary,
   button,
 }) => {
-  const { totalHours, mins, secs } = useCountDown({ endTime: endTime || new Date().toISOString() });
+  const { totalHours, mins, secs } = useCountDown({ endTime });
+  const isEnd = !Number(totalHours) && !Number(mins) && !Number(secs);
+
   return (
-    <div className="o-cardEvent">
+    <div className={mapModifiers('o-cardEvent', isEnd && 'end')}>
       <Link href={button?.url} target={button?.target}>
         <div className="o-cardEvent_thumbnail">
           <Image alt={title} ratio="354x199" src={thumbnail} />

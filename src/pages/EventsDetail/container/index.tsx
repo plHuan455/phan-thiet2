@@ -6,6 +6,7 @@ import Detail, { DetailProps } from './detail';
 
 import LoadingPage from 'common/Navigation/loading';
 import RedirectNav from 'common/Navigation/redirect';
+import { IconName } from 'components/atoms/Icon';
 import useDetail from 'hooks/useDetail';
 import { getEventDetailService } from 'services/event';
 import CONSTANTS from 'utils/constants';
@@ -33,19 +34,34 @@ const Screen: React.FC = () => {
       // TODO: add locale later
       slug: `/${CONSTANTS.PREFIX.DIVISION.VI}/${data?.subdivision?.slug}`,
     },
-    relatedNews: data?.relatedEvents?.map((item) => ({
+    related: data?.relatedEvents?.map((item) => ({
+      thumbnail: baseURL(item.thumbnail),
       tag: {
         text: baseString(data?.subdivision?.name),
         url: `/${CONSTANTS.PREFIX.DIVISION.VI}/${data?.subdivision?.slug}`,
       },
       title: baseString(item.title),
-      thumbnail: baseURL(item.thumbnail),
+      endTime: item.startDate,
+      // TODO: Add locale later
       href: `/${CONSTANTS.PREFIX.EVENT.VI}/${item.slug}`,
-      dateTime: getTimePastToCurrent(item?.publishedAt),
-      url: {
-        text: 'Xem thêm',
-        iconName: 'arrowRightCopper',
-        animation: 'arrow',
+      summary: [
+        {
+          iconName: 'clock' as IconName,
+          text: `${item.startTime} - ${item.endTime}`,
+        },
+        {
+          iconName: 'calendar' as IconName,
+          text: dayjs(item.startDate).format('DD/MM/YYYY'),
+        },
+        {
+          iconName: 'location' as IconName,
+          text: item.address,
+        },
+      ],
+      button: {
+        // TODO: translate later
+        text: 'Xem chi tiết',
+        url: `/${CONSTANTS.PREFIX.EVENT.VI}/${item.slug}`,
       },
     })),
   }), [data]);
