@@ -4,6 +4,8 @@ import Container from 'common/Container';
 import FlatMore from 'common/FlatMore';
 import Arrow from 'components/atoms/Arrow';
 import Card from 'components/organisms/Card';
+import { SubdivisionRelatedTypes } from 'services/subdivision/types';
+import { baseString } from 'utils/functions';
 
 const dataDummy = new Array(10).fill({
   imgSrc: 'https://source.unsplash.com/random',
@@ -12,15 +14,15 @@ const dataDummy = new Array(10).fill({
 });
 
 interface DivisionProps {
-  title?: string;
+  data?: SubdivisionRelatedTypes;
 }
 
-const Division: React.FC<DivisionProps> = ({ title }) => (
+const Division: React.FC<DivisionProps> = ({ data }) => (
   <section className="u-pt-md-80 u-pt-48 u-pb-md-80 u-pb-48" style={{ color: 'var(--theme)' }}>
     <Container>
       <FlatMore
         title={{
-          text: title || '',
+          text: baseString(data?.title),
           type: 'h2',
           modifiers: ['s015', '400', 'inherit'],
         }}
@@ -45,7 +47,7 @@ const Division: React.FC<DivisionProps> = ({ title }) => (
 );
 
 Division.defaultProps = {
-  title: '',
+  data: undefined,
 };
 
 export default Division;

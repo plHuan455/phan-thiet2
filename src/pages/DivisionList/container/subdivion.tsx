@@ -7,7 +7,7 @@ import { CardDivisionProps } from 'components/organisms/Card/Division';
 import Subdivision from 'components/templates/Subdivision';
 import { getSubDivisionListService } from 'services/subdivision';
 import Constants from 'utils/constants';
-import { baseURL, getBlockData } from 'utils/functions';
+import { baseString, baseURL, getBlockData } from 'utils/functions';
 
 interface DivisionProps {
   title: string;
@@ -51,8 +51,7 @@ const Divisions: React.FC<SectionBlocks> = ({ blocks }) => {
         ...curr.data.map((item) => ({
           imgSrc: baseURL(item?.thumbnail),
           title: item.name,
-          // description: item?.content?.description,
-          description: '',
+          description: baseString(item?.description),
           // TODO: Add locale later
           href: `/${Constants.PREFIX.DIVISION.VI}/${item.slug}`,
         })),

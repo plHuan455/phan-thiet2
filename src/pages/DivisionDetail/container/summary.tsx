@@ -1,29 +1,31 @@
 import React, { useMemo } from 'react';
 
 import DivisionSummary from 'components/templates/DivisionSummary';
-import { SubDivisionDetailTypes } from 'services/subdivision/types';
+import { SubdivisionContentTypes } from 'services/subdivision/types';
 import { baseURL } from 'utils/functions';
 
 interface SummaryProps {
-  data?: SubDivisionDetailTypes;
+  data?: SubdivisionContentTypes;
 }
 
 const Summary: React.FC<SummaryProps> = ({
   data,
 }) => {
   const summaryData = useMemo(() => [
-    data?.content?.content.items?.item1,
-    data?.content?.content?.items?.item2,
+    data?.items?.item1,
+    data?.items?.item2,
   ].map((item) => ({
     thumbnail: baseURL(item?.image),
     title: item?.title,
   })), [data]);
 
+  if (!data?.active) return null;
+
   return (
     <section className="u-pt-md-77 u-pt-48 u-pb-md-77 u-pb-48" style={{ color: 'var(--theme)' }}>
       <DivisionSummary
-        title={data?.content.content.title}
-        description={data?.content.content.description}
+        title={data?.title}
+        description={data?.description}
         data={summaryData}
       />
     </section>

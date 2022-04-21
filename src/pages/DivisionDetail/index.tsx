@@ -1,19 +1,11 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 
 import Screen from './container';
 
 import { useAppDispatch } from 'store/hooks';
 import { setTypePage } from 'store/systems';
 
-export interface MyCustomCSS extends React.CSSProperties {
-  '--theme': string;
-}
-
 const DivisionDetail: React.FC = () => {
-  const styles = useMemo((): MyCustomCSS => ({
-    '--theme': 'rgb(0, 92, 143)',
-  }), []);
-
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -25,7 +17,7 @@ const DivisionDetail: React.FC = () => {
   }, []);
 
   return (
-    <div className="p-divisionDetail" style={styles}>
+    <div className="p-divisionDetail">
       <Screen />
     </div>
   );

@@ -15,51 +15,67 @@ interface SubdivisionCommonTypes {
   type: string;
   locale: string;
   color: string;
+  description?: string;
 }
 
 interface Title {
-  active: string;
+  active: boolean;
   title: string;
   description?: string;
 }
 
-interface Content {
-  content: Title & {
-    items: {
-      item1: {
-        image: string;
-        title: string;
-      },
-      item2: {
-        image: string;
-        title: string;
-      }
+export type SubdivisionContentTypes = Title & {
+  items: {
+    item1: {
+      image: string;
+      title: string;
+    },
+    item2: {
+      image: string;
+      title: string;
     }
   }
-  video: Title & {
-    link?: string;
-  };
-  journey: Title;
-  library: Title;
-  related: Title;
-  utility: Title & {
-    map: {
+}
+
+export type SubdivisionVideoTypes = Title & {
+  link?: string;
+};
+
+export type SubdivisionJourneyTypes = Title;
+export type SubdivisionLibraryTypes = Title;
+export type SubdivisionRelatedTypes = Title;
+export type SubdivisionLocationTypes = Title & {
+  titleSection?: string;
+};
+export type SubdivisionSubscribeTypes = Title;
+export type SubdivisionCollectionTypes = Title;
+
+export type SubdivisionUtilityTypes = Title & {
+  map: {
+    image: string;
+    items: {
+      color: string;
       image: string;
-      items: {
-        color: string;
-        image: string;
-        point: {
-          x: string;
-          y: string;
-        };
-        title: string;
-        number: string;
-      }[];
-    };
-  }
-  location: Title;
-  subscribe: Title;
-  collection: Title;
+      point: {
+        x: string;
+        y: string;
+      };
+      title: string;
+      number: string;
+    }[];
+  };
+};
+
+interface Content {
+  content: SubdivisionContentTypes;
+  video: SubdivisionVideoTypes;
+  journey: SubdivisionJourneyTypes;
+  library: SubdivisionLibraryTypes;
+  related: SubdivisionRelatedTypes;
+  utility: SubdivisionUtilityTypes;
+  location: SubdivisionLocationTypes;
+  subscribe: SubdivisionSubscribeTypes;
+  collection: SubdivisionCollectionTypes;
 }
 
 export type SubDivisionListTypes = SubdivisionCommonTypes[];

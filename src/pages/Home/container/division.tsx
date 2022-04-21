@@ -70,14 +70,12 @@ const Division: React.FC<SectionBlocks> = ({ blocks }) => {
     title: item.name,
     // TODO: Add locale later
     href: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item.slug}`,
-    // description: item.content.description,
-    description: 'sadasd',
+    description: baseString(item?.description),
   })), [subDivisionList]);
 
   const journeysData = useMemo(() => subDivisionList?.data.map((item) => ({
     title: item.name,
-    // description: item.content.description,
-    description: 'adasd',
+    description: baseString(item?.description),
     // TODO: Add Translations Later
     textBtn: 'Tham quan các mẫu nhà',
     //  TODO: Add locale later

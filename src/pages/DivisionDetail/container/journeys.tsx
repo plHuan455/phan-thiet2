@@ -1,20 +1,23 @@
+/* eslint-disable no-unused-vars */
 import React, { useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
 
 import PopupImageDetail from '../component/popupImageDetail';
 
 import divisionJourneysData from 'assets/dataDummy/divisionJourneys';
-import DivisionJourneys, { DivisionJourneysProps } from 'components/templates/DivisionJourneys';
+import DivisionJourneys from 'components/templates/DivisionJourneys';
+import { SubdivisionJourneyTypes } from 'services/subdivision/types';
 import getUtilityCategoriesService, { getUtilityListService } from 'services/utilities';
 import { baseURL } from 'utils/functions';
 
-interface JourneysProps extends DivisionJourneysProps {
+interface JourneysProps {
   id?: number;
+  data?: SubdivisionJourneyTypes;
 }
 
 const Journeys: React.FC<JourneysProps> = ({
   id,
-  ...props
+  data,
 }) => {
   const [open, setOpen] = useState<number | undefined>(undefined);
 
@@ -47,6 +50,8 @@ const Journeys: React.FC<JourneysProps> = ({
     });
   };
 
+  if (!data?.active) return null;
+
   return (
     <section>
       <DivisionJourneys
@@ -54,7 +59,7 @@ const Journeys: React.FC<JourneysProps> = ({
         srcBg={divisionJourneysData.srcBg}
         loading={isLoading}
         textNotFound="Không tìm thấy dữ liệu"
-        {...props}
+        title={data?.title}
       />
       <PopupImageDetail
         isOpen={open !== undefined}
@@ -68,6 +73,7 @@ const Journeys: React.FC<JourneysProps> = ({
 
 Journeys.defaultProps = {
   id: undefined,
+  data: undefined,
 };
 
 export default Journeys;

@@ -4,69 +4,83 @@ import layer1 from 'assets/images/divisionCollection/layer1.png';
 import layer2 from 'assets/images/divisionCollection/layer2.png';
 import layer3 from 'assets/images/divisionCollection/layer3.png';
 import layer4 from 'assets/images/divisionCollection/layer4.png';
-import DivisionCollection, { DivisionCollectionProps } from 'components/templates/DivisionCollection';
+import DivisionCollection from 'components/templates/DivisionCollection';
+import { SubdivisionCollectionTypes } from 'services/subdivision/types';
+import { baseString } from 'utils/functions';
 
-interface CollectionProps extends Omit<DivisionCollectionProps, 'dataList'> {
+interface CollectionProps {
+  data?: SubdivisionCollectionTypes;
 }
 
-const Collection: React.FC<CollectionProps> = (props) => (
-  <section>
-    <DivisionCollection
-      dataList={[
-        {
-          title: 'BERMUDA',
-          color: 'rgba(0, 92, 143, 1)',
-          button: {
-            url: '/',
-            text: 'Xem thêm',
-            target: '_self',
+const Collection: React.FC<CollectionProps> = ({
+  data,
+}) => {
+  if (!data?.active) return null;
+
+  return (
+    <section>
+      <DivisionCollection
+        dataList={[
+          {
+            title: 'BERMUDA',
+            color: 'rgba(0, 92, 143, 1)',
+            button: {
+              url: '/',
+              text: 'Xem thêm',
+              target: '_self',
+            },
+            thumbnail: layer1,
           },
-          thumbnail: layer1,
-        },
-        {
-          title: 'SANTORINI',
-          color: 'rgba(10, 182, 244, 1)',
-          button: {
-            url: '/',
-            text: 'Xem thêm',
-            target: '_self',
+          {
+            title: 'SANTORINI',
+            color: 'rgba(10, 182, 244, 1)',
+            button: {
+              url: '/',
+              text: 'Xem thêm',
+              target: '_self',
+            },
+            thumbnail: layer2,
           },
-          thumbnail: layer2,
-        },
-        {
-          title: 'JAPAN',
-          color: 'rgba(231, 73, 77, 1)',
-          button: {
-            url: '/',
-            text: 'Xem thêm',
-            target: '_self',
+          {
+            title: 'JAPAN',
+            color: 'rgba(231, 73, 77, 1)',
+            button: {
+              url: '/',
+              text: 'Xem thêm',
+              target: '_self',
+            },
+            thumbnail: layer3,
           },
-          thumbnail: layer3,
-        },
-        {
-          title: 'EDWARDIAN',
-          color: 'rgba(187, 109, 63, 1)',
-          button: {
-            url: '/',
-            text: 'Xem thêm',
-            target: '_self',
+          {
+            title: 'EDWARDIAN',
+            color: 'rgba(187, 109, 63, 1)',
+            button: {
+              url: '/',
+              text: 'Xem thêm',
+              target: '_self',
+            },
+            thumbnail: layer4,
           },
-          thumbnail: layer4,
-        },
-        {
-          title: 'BERMUDA',
-          color: 'rgba(0, 92, 143, 1)',
-          button: {
-            url: '/',
-            text: 'Xem thêm',
-            target: '_self',
+          {
+            title: 'BERMUDA',
+            color: 'rgba(0, 92, 143, 1)',
+            button: {
+              url: '/',
+              text: 'Xem thêm',
+              target: '_self',
+            },
+            thumbnail: layer1,
           },
-          thumbnail: layer1,
-        },
-      ]}
-      {...props}
-    />
-  </section>
-);
+        ]}
+        title={baseString(data?.title)}
+        description={data?.description}
+      />
+    </section>
+  );
+};
+
+Collection.defaultProps = {
+  data: undefined,
+};
 
 export default Collection;

@@ -13,11 +13,17 @@ import Location from './location';
 import Summary from './summary';
 import Utilities from './utilities';
 
+import HelmetContainer from 'common/Helmet';
 import { getSubDivisionDetailService } from 'services/subdivision';
 import { baseString, baseURL } from 'utils/functions';
 
+export interface MyCustomCSS extends React.CSSProperties {
+  '--theme': string;
+}
+
 const Screen: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
+
   const { data: subDivisionDetail } = useQuery(
     ['getSubDivisionDetail', [slug]],
     () => getSubDivisionDetailService(slug),
@@ -26,67 +32,69 @@ const Screen: React.FC = () => {
     },
   );
 
-  const content = useMemo(
+  const styles = useMemo((): MyCustomCSS => ({
+    '--theme': baseString(subDivisionDetail?.color),
+  }), [subDivisionDetail]);
+
+  const contentSubdivision = useMemo(
     () => subDivisionDetail && subDivisionDetail.content, [subDivisionDetail],
   );
 
+  const {
+    video,
+    content,
+    location,
+    utility,
+    collection,
+    library,
+    journey,
+    related,
+    subscribe,
+  } = useMemo(() => ({
+    ...contentSubdivision,
+  }), [contentSubdivision]);
+
   return (
     <>
-      <Banner thumbnail={baseURL(subDivisionDetail?.thumbnail)} />
-      {
-        Boolean(Number(content?.video.active))
-        && (
-        <IntroVideo src={content?.video.link || ''} />
-        )
-      }
-      {
-        Boolean(Number(content?.content.active)) && (
-          <Summary data={subDivisionDetail} />
-        )
-      }
-      {
-        Boolean(Number(content?.location.active)) && (
-          <Location data={subDivisionDetail} />
-        )
-      }
-      {
-        Boolean(Number(content?.utility.active)) && (
-          <Utilities data={subDivisionDetail} />
-        )
-      }
-      {
-        Boolean(Number(content?.collection.active)) && (
-          <Collection
-            title={baseString(content?.collection.title)}
-            description={content?.collection.description}
-          />
-        )
-      }
-      {
-        Boolean(Number(content?.library.active)) && (
-          <Library title={content?.library.title} />
-        )
-      }
-      {
-        Boolean(Number(content?.journey.active)) && (
-          <Journeys
-            id={subDivisionDetail?.id}
-            title={content?.journey.title}
-          />
-        )
-      }
-      {
-        Boolean(Number(content?.related.active)) && (
-          <Division title={content?.related.title} />
-        )
-      }
-      {
-        Boolean(Number(content?.subscribe.active)) && (
-          <Consultancy
-            title={content?.subscribe.title}
-          />
-        )
-      }
+      <HelmetContainer
+        seoData={subDivisionDetail?.seoData}
+        ogData={subDivisionDetail?.openGraph}
+      />
+
+      <div style={styles}>
+        {/* Banner */}
+        <Banner thumbnail={baseURL(subDivisionDetail?.thumbnail)} />
+
+        {/* Video */}
+        <IntroVideo data={video} />
+
+        {/* Content */}
+        <Summary data={content} />
+
+        {/* Location */}
+        <Location data={location} type={subDivisionDetail?.type} />
+
+        {/* Utilities */}
+        <Utilities data={utility} />
+
+        {/* Collection */}
+        <Collection data={collection} />
+
+        {/* Library */}
+        <Library data={library} />
+
+        {/* Journey */}
+        <Journeys
+          id={subDivisionDetail?.id}
+          data={journey}
+        />
+
+        {/* Related */}
+        <Division data={related} />
+
+        {/* Consultancy */}
+        <Consultancy data={subscribe} />
+      </div>
     </>
   );
 };
