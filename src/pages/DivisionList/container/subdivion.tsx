@@ -51,7 +51,8 @@ const Divisions: React.FC<SectionBlocks> = ({ blocks }) => {
         ...curr.data.map((item) => ({
           imgSrc: baseURL(item?.thumbnail),
           title: item.name,
-          description: item?.content?.description,
+          // description: item?.content?.description,
+          description: '',
           // TODO: Add locale later
           href: `/${Constants.PREFIX.DIVISION.VI}/${item.slug}`,
         })),

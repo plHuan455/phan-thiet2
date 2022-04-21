@@ -4,25 +4,27 @@ export interface SubDivisionParams {
   keyword?: string;
 }
 
-export interface SubDivisionListTypes {
-  title: any;
-  addressLat: number;
-  addressLong: number;
+interface SubdivisionCommonTypes {
   id: number;
   displayOrder: number;
   thumbnail: string;
-  logo: string;
-  name: string;
   slug: string;
-  locale: string;
+  name: string;
+  logo: string;
   content: Content;
+  type: string;
+  locale: string;
+  color: string;
+}
+
+interface Title {
+  active: string;
+  title: string;
+  description?: string;
 }
 
 interface Content {
-  content: {
-    active: string;
-    description: string;
-    title: string;
+  content: Title & {
     items: {
       item1: {
         image: string;
@@ -34,23 +36,13 @@ interface Content {
       }
     }
   }
-  video: {
-    active: string;
-    link: string;
+  video: Title & {
+    link?: string;
   };
-  journey: {
-    active: string;
-    title: string;
-  }
-  library: {
-    active: string;
-    title: string;
-  }
-  related: {
-    active: string;
-    title: string;
-  }
-  utility: {
+  journey: Title;
+  library: Title;
+  related: Title;
+  utility: Title & {
     map: {
       image: string;
       items: {
@@ -63,37 +55,18 @@ interface Content {
         title: string;
         number: string;
       }[];
-    },
-    active: string;
-    title: string;
+    };
   }
-  location: {
-    active: string;
-    title: string;
-    description: string;
-  };
-  subscribe: {
-    active: string;
-    title: string;
-  }
-  collection: {
-    title: string;
-    active: string;
-    description: string;
-  }
+  location: Title;
+  subscribe: Title;
+  collection: Title;
 }
 
-export interface SubDivisionDetailTypes {
-  id: number;
-  displayOrder: number;
-  thumbnail: string;
-  slug: string;
-  name: string;
-  logo: string;
-  content: Content;
+export type SubDivisionListTypes = SubdivisionCommonTypes[];
+
+export type SubDivisionDetailTypes = SubdivisionCommonTypes & {
   openGraph: OpenGraphDataTypes;
   seoData: SEODataTypes;
-  type: string;
 }
 
 export interface SubDivisionMapListTypes {

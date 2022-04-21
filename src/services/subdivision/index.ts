@@ -6,7 +6,7 @@ import axiosInstance from 'services/common/instance';
 
 export const getSubDivisionListService = async (
   params?: SubDivisionParams,
-): Promise<APIPaginationResponse<SubDivisionListTypes[]>> => {
+): Promise<APIPaginationResponse<SubDivisionListTypes>> => {
   const response = await axiosInstance.get('subdivisions', { params });
   return response.data;
 };
