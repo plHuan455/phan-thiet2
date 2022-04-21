@@ -77,14 +77,7 @@ const ProjectPositionHome: React.FC<ProjectPositionHomeProps> = ({
   }, [listDivision]);
 
   const refCount = useRef<HTMLDivElement>(null);
-  const isRefCount = useScrollAnimate(refCount);
-  const [activeCount, setActiveCount] = useState(false);
-
-  useEffect(() => {
-    if (isRefCount) {
-      setActiveCount(true);
-    }
-  }, [isRefCount]);
+  const countActive = useScrollAnimate(refCount);
 
   return (
     <div ref={refCount} className="t-projectPositionHome">
@@ -107,14 +100,14 @@ const ProjectPositionHome: React.FC<ProjectPositionHomeProps> = ({
           />
           <div className="t-projectPositionHome_info">
             <div className="t-projectPositionHome_scale">
-              <Content active={activeCount} {...scale} />
+              <Content active={countActive} {...scale} />
             </div>
             <div className="t-projectPositionHome_wrap">
               <div className="t-projectPositionHome_investment">
-                <Content active={activeCount} {...investment} />
+                <Content active={countActive} {...investment} />
               </div>
               <div className="t-projectPositionHome_utility">
-                <Content active={activeCount} {...utility} />
+                <Content active={countActive} {...utility} />
               </div>
             </div>
           </div>

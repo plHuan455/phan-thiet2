@@ -9,7 +9,7 @@ const useAnimation = ({ countNumber, isActive } : AnimationProps) => {
   const [countNumberSpring, setAnimate] = useSpring(() => ({
     reset: true,
     from: { number: 0 },
-    delay: 200,
+    delay: 400,
     config: config.molasses,
   }));
   useEffect(() => {
