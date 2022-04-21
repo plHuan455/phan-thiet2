@@ -24,7 +24,6 @@ const Utilities: React.FC<UtilitiesProps> = ({ data }) => {
             width: image.width,
             height: image.height,
           });
-          console.log(image);
         }
         return null;
       } catch (error) {
