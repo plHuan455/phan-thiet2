@@ -186,3 +186,8 @@ export const getOgDataPage = (pageData?: PageDataTypes) => ({
   ogTitle: pageData?.ogTitle,
   ogType: pageData?.ogType,
 });
+
+export function formatNumber(countNumber: number) {
+  const value: string = countNumber.toFixed(0);
+  return value.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.');
+}

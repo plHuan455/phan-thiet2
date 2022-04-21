@@ -26,7 +26,8 @@ const Position: React.FC<SectionBlocks> = ({ blocks }) => {
     ];
     return data && data.map((val) => ({
       label: baseString(val?.titleSub),
-      value: `${val?.number} ${val?.unit}`,
+      value: val?.number,
+      unit: val?.unit,
     }));
   }, [blocks]);
 
