@@ -22,12 +22,11 @@ const Collection: React.FC<CollectionProps> = ({
       <DivisionCollection
         dataList={[
           {
+            id: 1,
             title: 'BERMUDA',
             color: 'rgba(0, 92, 143, 1)',
             button: {
-              url: '/',
               text: 'Xem thêm',
-              target: '_self',
             },
             thumbnail: layer1,
           },
@@ -35,9 +34,7 @@ const Collection: React.FC<CollectionProps> = ({
             title: 'SANTORINI',
             color: 'rgba(10, 182, 244, 1)',
             button: {
-              url: '/',
               text: 'Xem thêm',
-              target: '_self',
             },
             thumbnail: layer2,
           },
@@ -45,9 +42,7 @@ const Collection: React.FC<CollectionProps> = ({
             title: 'JAPAN',
             color: 'rgba(231, 73, 77, 1)',
             button: {
-              url: '/',
               text: 'Xem thêm',
-              target: '_self',
             },
             thumbnail: layer3,
           },
@@ -55,9 +50,7 @@ const Collection: React.FC<CollectionProps> = ({
             title: 'EDWARDIAN',
             color: 'rgba(187, 109, 63, 1)',
             button: {
-              url: '/',
               text: 'Xem thêm',
-              target: '_self',
             },
             thumbnail: layer4,
           },
@@ -65,15 +58,14 @@ const Collection: React.FC<CollectionProps> = ({
             title: 'BERMUDA',
             color: 'rgba(0, 92, 143, 1)',
             button: {
-              url: '/',
               text: 'Xem thêm',
-              target: '_self',
             },
             thumbnail: layer1,
           },
         ]}
         title={baseString(data?.title)}
         description={data?.description}
+        // handleClick={(id) => console.log(id)}
       />
     </section>
   );
