@@ -31,6 +31,7 @@ export const iconList = {
   arrowLeftWhite: 'arrowLeftWhite',
   chevronDownWhite: 'chevronDownWhite',
   loadingBlue: 'loadingBlue',
+  arrowUp: 'arrowUp',
 };
 
 export type IconName = keyof typeof iconList;

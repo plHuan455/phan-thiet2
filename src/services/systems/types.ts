@@ -14,7 +14,7 @@ export type SystemsData = {
   };
   gaId: string[];
   gtmId: string[];
-  messengerId: string;
+  messengerId: number;
   receiverContacts: string[];
   logoHeader: string;
   logoFooter: string;
@@ -43,6 +43,7 @@ export type SystemsData = {
   googleRecaptchaSiteKey: string;
   og?: OpenGraphDataTypes;
   seo?: SEODataTypes;
+  footScripts?: string;
 };
 
 export interface RedirectsTypes {
