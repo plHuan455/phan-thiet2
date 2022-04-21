@@ -10,19 +10,21 @@ interface UtilitiesProps {
 }
 
 const Utilities: React.FC<UtilitiesProps> = ({ data }) => {
-  const [demension, setDemension] = useState({
+  const [dimension, setDimension] = useState({
     width: 0,
     height: 0,
   });
+
   useEffect(() => {
     (async () => {
       try {
         if (data?.content.utility.map.image) {
           const image = await imageLoader(baseURL(data.content.utility.map.image));
-          setDemension({
+          setDimension({
             width: image.width,
             height: image.height,
           });
+          console.log(image);
         }
         return null;
       } catch (error) {
@@ -43,7 +45,7 @@ const Utilities: React.FC<UtilitiesProps> = ({ data }) => {
     },
   })), [data]);
 
-  if (demension.width <= 0 && demension.height <= 0) return <div />;
+  if (dimension.width <= 0 && dimension.height <= 0) return null;
 
   return (
     <section className="u-pt-md-80 u-pt-48 u-pb-md-80 u-pb-48" style={{ color: 'var(--theme)' }}>
@@ -51,8 +53,8 @@ const Utilities: React.FC<UtilitiesProps> = ({ data }) => {
         background={baseURL(data?.content.utility.map.image) || imgMap}
         title={data?.content.utility.title}
         listLocations={listLocations}
-        heightImage={demension.height}
-        widthImage={demension.width}
+        heightImage={dimension.height}
+        widthImage={dimension.width}
       />
     </section>
   );
