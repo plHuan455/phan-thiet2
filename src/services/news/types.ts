@@ -4,9 +4,11 @@ export interface NewsListParams {
   limit?: number;
   keyword?: string;
   category_slug?: string;
+  subdivision_id?: string;
   form_date?: string;
   to_date?: string;
   except_ids?: string;
+  sort?: SortTypes;
 }
 
 export interface NewsListTypes {

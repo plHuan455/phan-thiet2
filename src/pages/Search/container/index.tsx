@@ -4,6 +4,7 @@ import React, {
   useCallback,
   useMemo,
   useRef, useState,
+  useEffect,
 } from 'react';
 import { useInfiniteQuery } from 'react-query';
 import { animated } from 'react-spring';
@@ -41,12 +42,12 @@ const dataTabList = [
 const optionSort = [
   {
     id: '1',
-    value: '1',
+    value: 'asc',
     label: 'Mới nhất',
   },
   {
     id: '2',
-    value: '2',
+    value: 'desc',
     label: 'Cũ nhất',
   },
 ];
@@ -63,6 +64,11 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
   const { animate, animateReverse } = useAnimation({ ref: bgLeftRef });
   const [searchKeyValue, setSearchKeyValue] = useState('');
   const [search, setSearch] = useState('');
+  const [sort, setSort] = useState<SortTypes>('desc');
+
+  useEffect(() => {
+    setSort(currentValueSort.value as SortTypes);
+  }, [currentValueSort]);
 
   const handleSearch = useCallback(() => {
     setSearch(searchKeyValue);
@@ -75,11 +81,12 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
     isFetching: fetchingNews,
     fetchNextPage: fetchNextNews,
   } = useInfiniteQuery(
-    ['getNews', search],
+    ['getNews', search, sort],
     ({ pageParam = 1 }) => getNewsListService({
       page: pageParam,
       limit: 3,
       keyword: search,
+      // sort,// TODO: gắn param sort news data theo BE.
     }),
     {
       getNextPageParam: (params) => (params.meta?.page >= params.meta.totalPages
@@ -118,11 +125,12 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
     isFetching: fetchingSubdivision,
     fetchNextPage: fetchNextSubdivision,
   } = useInfiniteQuery(
-    ['getSubdivision', search],
+    ['getSubdivision', search, sort],
     ({ pageParam = 1 }) => getSubDivisionListService({
       page: pageParam,
       limit: 3,
       keyword: search,
+      // sort,// TODO: gắn param sort subdivision data theo BE.
     }),
     {
       getNextPageParam: (params) => (params.meta?.page >= params.meta.totalPages
