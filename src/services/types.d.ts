@@ -151,7 +151,7 @@ type ErrorsResponse = {
 
 type LangPrefixTypes = 'EN' | 'VI';
 
-type SortTypes = 'asc' | 'desc';
+type SortTypes = 'newest' | 'oldest';
 
 type SectionBlocks = {
   blocks: BlockDataTypes<T>[];

@@ -24,12 +24,14 @@ export interface HeaderProps {
     value: OptionType;
     handleChangeLang?: (item?: OptionType) => void;
   }
+  handleSearch?: (val: string | undefined) => void;
 }
 
 const Header: React.FC<HeaderProps> = ({
   mainLogo,
   menu,
   language,
+  handleSearch,
 }) => {
   const { pathname } = useLocation();
 
@@ -87,6 +89,13 @@ const Header: React.FC<HeaderProps> = ({
     refPageYOffset.current = window.pageYOffset;
   });
 
+  const onSearch = (val: string | undefined) => {
+    setIsOpenSearch(false);
+    if (handleSearch) {
+      handleSearch(val);
+    }
+  };
+
   return (
     <header className="t-header">
       <div className={mapModifiers('t-header_main', isScroll && 'isScroll')}>
@@ -99,7 +108,7 @@ const Header: React.FC<HeaderProps> = ({
               <Heading type="h2" modifiers={['700', 'uppercase', 'center', 'white']}>
                 Tìm kiếm
               </Heading>
-              <Search search={{ placeholder: 'Tìm kiếm nội dung' }} />
+              <Search search={{ placeholder: 'Tìm kiếm nội dung', onSearch }} />
             </div>
           </div>
           <div className="t-header_wrap">

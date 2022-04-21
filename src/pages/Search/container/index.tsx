@@ -7,6 +7,7 @@ import React, {
   useEffect,
 } from 'react';
 import { useInfiniteQuery } from 'react-query';
+import { useSearchParams } from 'react-router-dom';
 import { animated } from 'react-spring';
 
 import useAnimation from '../animation';
@@ -21,7 +22,7 @@ import { CardNormalProps } from 'components/organisms/Card/Normal';
 import SearchResult from 'components/templates/SearchResult';
 import getNewsListService from 'services/news';
 import { NewsListTypes } from 'services/news/types';
-import getSubDivisionListService from 'services/subdivision';
+import { getSubDivisionListService } from 'services/subdivision';
 import { SubDivisionListTypes } from 'services/subdivision/types';
 import {
   baseURL,
@@ -42,12 +43,12 @@ const dataTabList = [
 const optionSort = [
   {
     id: '1',
-    value: 'asc',
+    value: 'newest',
     label: 'Mới nhất',
   },
   {
     id: '2',
-    value: 'desc',
+    value: 'oldest',
     label: 'Cũ nhất',
   },
 ];
@@ -59,12 +60,13 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
   const [tabActive, setTabActive] = useState<string | undefined>(
     dataTabList[0].slug,
   );
+  const [searchParams, setSearchParams] = useSearchParams();
   const [currentValueSort, setCurrentValueSort] = useState<OptionType>(optionSort[0]);
   const bgLeftRef = useRef<HTMLDivElement>(null);
   const { animate, animateReverse } = useAnimation({ ref: bgLeftRef });
   const [searchKeyValue, setSearchKeyValue] = useState('');
   const [search, setSearch] = useState('');
-  const [sort, setSort] = useState<SortTypes>('desc');
+  const [sort, setSort] = useState<SortTypes>('newest');
 
   useEffect(() => {
     setSort(currentValueSort.value as SortTypes);
@@ -72,7 +74,15 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
 
   const handleSearch = useCallback(() => {
     setSearch(searchKeyValue);
+    setSearchParams({ keyword: searchKeyValue });
   }, [searchKeyValue]);
+
+  useEffect(() => {
+    if (searchParams) {
+      setSearchKeyValue(searchParams.get('keyword') || '');
+      setSearch(searchParams.get('keyword') || '');
+    }
+  }, [searchParams.get('keyword')]);
 
   // Get News
   const {
@@ -86,7 +96,7 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
       page: pageParam,
       limit: 3,
       keyword: search,
-      // sort,// TODO: gắn param sort news data theo BE.
+      sort,
     }),
     {
       getNextPageParam: (params) => (params.meta?.page >= params.meta.totalPages
@@ -109,7 +119,9 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
     title: item.title,
     href: item.slug,
     dateTime: '2 giờ trước', // publishedAt,
-    tag: 'The Kingdom',
+    tag: {
+      text: 'The Kingdom',
+    },
     url: {
       text: 'Xem thêm',
       iconName: 'arrowRightCopper',
@@ -130,7 +142,7 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
       page: pageParam,
       limit: 3,
       keyword: search,
-      // sort,// TODO: gắn param sort subdivision data theo BE.
+      sort,
     }),
     {
       getNextPageParam: (params) => (params.meta?.page >= params.meta.totalPages

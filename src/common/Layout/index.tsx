@@ -1,5 +1,5 @@
 import React, { useLayoutEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import useLayout from './functions';
 
@@ -11,6 +11,8 @@ import HeaderDivision from 'components/templates/HeaderDivision';
 
 const Layout: React.FC = ({ children }) => {
   const location = useLocation();
+  const navigate = useNavigate();
+
   const {
     dataHeaderDefault,
     dataFooter,
@@ -24,9 +26,16 @@ const Layout: React.FC = ({ children }) => {
     });
   }, [location.pathname]);
 
+  const handleSearch = (val: string | undefined) => {
+    navigate(`/tim-kiem?keyword=${val}`);
+    console.log(val);
+  };
+
   return (
     <div>
-      {pageType === 'subdivisions' ? <HeaderDivision {...dataHeaderDefault} /> : <Header {...dataHeaderDefault} /> }
+      {pageType === 'subdivisions'
+        ? <HeaderDivision handleSearch={handleSearch} {...dataHeaderDefault} />
+        : <Header handleSearch={handleSearch} {...dataHeaderDefault} /> }
       <main>
         {children}
       </main>
