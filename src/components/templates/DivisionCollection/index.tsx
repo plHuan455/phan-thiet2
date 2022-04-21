@@ -2,6 +2,7 @@ import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 
 import Collection, { CollectionProps } from './components/Collection';
+import CollectionSingle from './components/CollectionSingle';
 
 import Container from 'common/Container';
 import FlatList from 'common/FlatList';
@@ -64,25 +65,37 @@ const DivisionCollection: React.FC<DivisionCollectionProps> = ({
 }) => (
   <div className="t-divisionCollection" style={{ color: 'var(--theme)' }}>
     <Container>
-      <div className="t-divisionCollection_wrapper">
-        <Row className="d-xl-flex align-items-xl-center">
-          <Col xl={3}>
-            <Heading type="h2" modifiers={['400', 'inherit', 's015', 'uppercase']} content={title} />
-          </Col>
-          <Col xl={9} className="u-mt-16 u-mt-md-24 u-mt-xl-0">
-            <Text modifiers={['400', '14x20', 'davyGrey']} content={description} />
-          </Col>
-        </Row>
-        <div className="u-mt-md-64 u-mt-32">
-          <FlatList
-            settings={settings}
-            data={dataList}
-            render={(item) => (
-              <Collection {...item} />
-            )}
+      {
+        dataList.length > 1 ? (
+          <div className="t-divisionCollection_wrapper">
+            <Row className="d-xl-flex align-items-xl-center">
+              <Col xl={3}>
+                <Heading type="h2" modifiers={['400', 'inherit', 's015', 'uppercase']} content={title} />
+              </Col>
+              <Col xl={9} className="u-mt-16 u-mt-md-24 u-mt-xl-0">
+                <Text modifiers={['400', '14x20', 'davyGrey']} content={description} />
+              </Col>
+            </Row>
+            <div className="u-mt-md-64 u-mt-32">
+              <FlatList
+                settings={settings}
+                data={dataList}
+                render={(item) => (
+                  <Collection {...item} />
+                )}
+              />
+            </div>
+          </div>
+        ) : (
+          <CollectionSingle
+            title={title}
+            description={description}
+            titleCard={dataList[0].title}
+            thumbnail={dataList[0].thumbnail}
+            button={dataList[0].button}
           />
-        </div>
-      </div>
+        )
+      }
     </Container>
   </div>
 );

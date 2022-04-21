@@ -124,3 +124,10 @@
     }
   }
 }
+
+.m-collectionSingle {
+  .a-image {
+    border-radius: rem(12);
+    transform: matrix(-1, 0, 0, 1, 0, 0);
+  }
+}
