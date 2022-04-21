@@ -1,0 +1,27 @@
+.floatingButton {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  bottom: rem(32);
+  position: fixed;
+  right: rem(32);
+  z-index: 100;
+
+  &_scrollTop {
+    border-radius: 50%;
+    box-shadow: 4px 4px 36px rgba($black, 0.2);
+    background: $copper;
+    width: rem(64);
+    height: rem(64);
+    @include adjust-flex();
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all $transition ease-in-out;
+
+    &-show {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}

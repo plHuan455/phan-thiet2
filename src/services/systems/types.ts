@@ -43,6 +43,7 @@ export type SystemsData = {
   googleRecaptchaSiteKey: string;
   og?: OpenGraphDataTypes;
   seo?: SEODataTypes;
+  footScripts?: string;
 };
 
 export interface RedirectsTypes {

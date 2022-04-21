@@ -1,12 +1,17 @@
 import React from 'react';
 
-import bannerImage from 'assets/images/pages/divisionList/banner.png';
 import BannerTemplate from 'components/templates/Banner';
 
-const Banner: React.FC = () => (
+interface BannerProps {
+  thumbnail?: string
+}
+
+const Banner: React.FC<BannerProps> = ({
+  thumbnail,
+}) => (
   <>
     <BannerTemplate
-      image={{ src: bannerImage }}
+      image={{ src: thumbnail }}
       isLayer
       search={{
         placeholder: 'Tìm kiếm tin tức',
@@ -33,5 +38,9 @@ const Banner: React.FC = () => (
     />
   </>
 );
+
+Banner.defaultProps = {
+  thumbnail: '',
+};
 
 export default Banner;

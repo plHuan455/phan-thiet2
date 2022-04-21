@@ -25,3 +25,20 @@ interface Subdivision {
   thumbnail: string;
   logo: string;
 }
+
+export interface EventDetailTypes {
+  id: number;
+  displayOrder: number;
+  thumbnail: string;
+  title: string;
+  slug: string;
+  locale: string;
+  address: string;
+  description: string;
+  startDate: string;
+  subdivision: Subdivision;
+  tags: any[];
+  startTime: string;
+  endTime: string;
+  relatedEvents: any[];
+}

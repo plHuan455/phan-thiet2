@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 
 import useLayout from './functions';
 
+import FloatingButton from 'common/FloatingButton';
 import NotifyWrapper from 'common/NotifyWrapper';
 import Footer from 'components/templates/Footer';
 import Header from 'components/templates/Header';
@@ -24,14 +25,15 @@ const Layout: React.FC = ({ children }) => {
   }, [location.pathname]);
 
   return (
-    <>
+    <div>
       {pageType === 'subdivisions' ? <HeaderDivision {...dataHeaderDefault} /> : <Header {...dataHeaderDefault} /> }
       <main>
         {children}
       </main>
       <Footer {...dataFooter} />
       <NotifyWrapper />
-    </>
+      <FloatingButton />
+    </div>
   );
 };
 
