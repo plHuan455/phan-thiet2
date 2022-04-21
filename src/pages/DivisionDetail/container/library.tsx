@@ -10,6 +10,7 @@ import Text from 'components/atoms/Text';
 import Card from 'components/organisms/Card';
 import Tabs, { Tab } from 'components/organisms/Tabs';
 import { CardImage } from 'pages/News/container/images';
+import { SubdivisionLibraryTypes } from 'services/subdivision/types';
 
 const dummyData = [
   {
@@ -27,21 +28,24 @@ const dummyData = [
 ];
 
 interface LibraryProps {
-  title?: string;
+  data?: SubdivisionLibraryTypes;
 }
 
-const Library: React.FC<LibraryProps> = ({ title }) => {
+const Library: React.FC<LibraryProps> = ({ data }) => {
   const [indexActive, setIndexActive] = useState(0);
+
+  if (!data?.active) return null;
 
   return (
     <section
       className="s-library u-mt-md-80 u-mt-48 u-mb-md-80 u-mb-48"
+      style={{ color: 'var(--theme)' }}
     >
       <Container>
         <Heading
           type="h2"
-          modifiers={['s015', '400', 'seaBlue']}
-          content={title}
+          modifiers={['s015', '400', 'inherit']}
+          content={data?.title}
         />
         <FlatList
           data={new Array(7).fill('')}
@@ -147,7 +151,7 @@ const Library: React.FC<LibraryProps> = ({ title }) => {
 };
 
 Library.defaultProps = {
-  title: '',
+  data: undefined,
 };
 
 export default Library;

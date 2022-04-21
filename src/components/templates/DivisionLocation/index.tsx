@@ -9,7 +9,7 @@ import Heading from 'components/atoms/Heading';
 import Image from 'components/atoms/Image';
 import useScrollAnimate from 'hooks/useScrollAnimation';
 
-type TypeDivision =
+export type TypeDivision =
   | 'boutique-hotel'
   | 'festival-street'
   | 'festival-town'

@@ -97,7 +97,7 @@ export function scrollStop(callback: (value: any) => void, time = 2000) {
 export const handleScrollCenter = (ref: React.RefObject<HTMLDivElement | null>,
   classNameEleActive: string) => {
   const eleScroll = ref.current;
-  const eleActive = document.querySelector(classNameEleActive);
+  const eleActive = eleScroll && eleScroll.querySelector(classNameEleActive);
   if (!eleActive || !eleScroll) return;
   // get width element scroll
   const widthEleScroll = eleScroll.getBoundingClientRect().width;

@@ -30,11 +30,11 @@ const CardLayer: React.FC<CardLayerProps> = ({
 }) => (
   <div className={mapModifiers('o-cardLayer', modifiers)} onClick={handleClick}>
     <Link href={href} target={target}>
-      <div className="o-cardLayer_image">
+      <div className="o-cardLayer_image" onClick={handleClick}>
         <Image src={thumbnail} alt={title} ratio={ratio || '258x334'} />
       </div>
     </Link>
-    <div className="o-cardLayer_content">
+    <div className="o-cardLayer_content" onClick={handleClick}>
       <Link href={href} target={target}>
         <div className="o-cardLayer_content-title">
           <Text modifiers={['16x28', 'white', isBold ? '700' : '400']} content={title} />

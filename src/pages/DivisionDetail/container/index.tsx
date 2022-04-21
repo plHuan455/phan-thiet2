@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 
@@ -13,11 +13,17 @@ import Location from './location';
 import Summary from './summary';
 import Utilities from './utilities';
 
+import HelmetContainer from 'common/Helmet';
 import { getSubDivisionDetailService } from 'services/subdivision';
 import { baseString, baseURL } from 'utils/functions';
 
+export interface MyCustomCSS extends React.CSSProperties {
+  '--theme': string;
+}
+
 const Screen: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
+
   const { data: subDivisionDetail } = useQuery(
     ['getSubDivisionDetail', [slug]],
     () => getSubDivisionDetailService(slug),
@@ -26,21 +32,69 @@ const Screen: React.FC = () => {
     },
   );
 
+  const styles = useMemo((): MyCustomCSS => ({
+    '--theme': baseString(subDivisionDetail?.color),
+  }), [subDivisionDetail]);
+
+  const contentSubdivision = useMemo(
+    () => subDivisionDetail && subDivisionDetail.content, [subDivisionDetail],
+  );
+
+  const {
+    video,
+    content,
+    location,
+    utility,
+    collection,
+    library,
+    journey,
+    related,
+    subscribe,
+  } = useMemo(() => ({
+    ...contentSubdivision,
+  }), [contentSubdivision]);
+
   return (
     <>
-      <Banner thumbnail={baseURL(subDivisionDetail?.thumbnail)} />
-      <IntroVideo />
-      <Summary data={subDivisionDetail} />
-      <Location />
-      <Utilities data={subDivisionDetail} />
-      <Collection
-        title={baseString(subDivisionDetail?.content.collection.title)}
-        description={subDivisionDetail?.content.collection.description}
+      <HelmetContainer
+        seoData={subDivisionDetail?.seoData}
+        ogData={subDivisionDetail?.openGraph}
       />
-      <Library title={subDivisionDetail?.content.library.title} />
-      <Journeys title={subDivisionDetail?.content.journey.title} />
-      <Division title={subDivisionDetail?.content.related.title} />
-      <Consultancy title={subDivisionDetail?.content.subscribe.title} />
+
+      <div style={styles}>
+        {/* Banner */}
+        <Banner thumbnail={baseURL(subDivisionDetail?.thumbnail)} />
+
+        {/* Video */}
+        <IntroVideo data={video} />
+
+        {/* Content */}
+        <Summary data={content} />
+
+        {/* Location */}
+        <Location data={location} type={subDivisionDetail?.type} />
+
+        {/* Utilities */}
+        <Utilities data={utility} />
+
+        {/* Collection */}
+        <Collection data={collection} />
+
+        {/* Library */}
+        <Library data={library} />
+
+        {/* Journey */}
+        <Journeys
+          id={subDivisionDetail?.id}
+          data={journey}
+        />
+
+        {/* Related */}
+        <Division data={related} />
+
+        {/* Consultancy */}
+        <Consultancy data={subscribe} />
+      </div>
     </>
   );
 };

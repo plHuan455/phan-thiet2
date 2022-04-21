@@ -4,21 +4,27 @@ export interface SubDivisionParams {
   keyword?: string;
 }
 
-export interface SubDivisionListTypes {
-  title: any;
-  addressLat: number;
-  addressLong: number;
+interface SubdivisionCommonTypes {
   id: number;
   displayOrder: number;
   thumbnail: string;
-  logo: string;
-  name: string;
   slug: string;
-  locale: string;
+  name: string;
+  logo: string;
   content: Content;
+  type: string;
+  locale: string;
+  color: string;
+  description?: string;
 }
 
-interface Content {
+interface Title {
+  active: boolean;
+  title: string;
+  description?: string;
+}
+
+export type SubdivisionContentTypes = Title & {
   items: {
     item1: {
       image: string;
@@ -29,52 +35,52 @@ interface Content {
       title: string;
     }
   }
-  title: string;
-  video: string;
-  journey: {
-    title: string;
-  }
-  library: {
-    title: string;
-  }
-  related: {
-    title: string;
-  }
-  utility: {
-    map: {
-      image: string;
-      items: {
-        color: string;
-        image: string;
-        point: {
-          x: string;
-          y: string;
-        };
-        title: string;
-        number: string;
-      }[];
-    },
-    title: string;
-  }
-  location: Location;
-  subscribe: {
-    title: string;
-  }
-  collection: {
-    title: string;
-    description: string;
-  }
-  description: string;
 }
 
-export interface SubDivisionDetailTypes {
-  id: number;
-  displayOrder: number;
-  thumbnail: string;
-  slug: string;
-  name: string;
-  logo: string;
-  content: Content;
+export type SubdivisionVideoTypes = Title & {
+  link?: string;
+};
+
+export type SubdivisionJourneyTypes = Title;
+export type SubdivisionLibraryTypes = Title;
+export type SubdivisionRelatedTypes = Title;
+export type SubdivisionLocationTypes = Title & {
+  titleSection?: string;
+};
+export type SubdivisionSubscribeTypes = Title;
+export type SubdivisionCollectionTypes = Title;
+
+export type SubdivisionUtilityTypes = Title & {
+  map: {
+    image: string;
+    items: {
+      color: string;
+      image: string;
+      point: {
+        x: string;
+        y: string;
+      };
+      title: string;
+      number: string;
+    }[];
+  };
+};
+
+interface Content {
+  content: SubdivisionContentTypes;
+  video: SubdivisionVideoTypes;
+  journey: SubdivisionJourneyTypes;
+  library: SubdivisionLibraryTypes;
+  related: SubdivisionRelatedTypes;
+  utility: SubdivisionUtilityTypes;
+  location: SubdivisionLocationTypes;
+  subscribe: SubdivisionSubscribeTypes;
+  collection: SubdivisionCollectionTypes;
+}
+
+export type SubDivisionListTypes = SubdivisionCommonTypes[];
+
+export type SubDivisionDetailTypes = SubdivisionCommonTypes & {
   openGraph: OpenGraphDataTypes;
   seoData: SEODataTypes;
 }

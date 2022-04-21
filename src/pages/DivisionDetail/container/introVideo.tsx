@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 
 import useAnimation from '../hooks/animation';
 
@@ -7,6 +7,8 @@ import ballon from 'assets/images/introVideo/balloon.png';
 import Container from 'common/Container';
 import Image from 'components/atoms/Image';
 import Player, { PlayerProps } from 'components/organisms/Player';
+import { SubdivisionVideoTypes } from 'services/subdivision/types';
+import { baseString, youtubeControlIframe } from 'utils/functions';
 
 interface IntroPlayerProps extends PlayerProps{}
 
@@ -31,9 +33,17 @@ const IntroPlayer: React.FC<IntroPlayerProps> = (props) => {
   );
 };
 
-const IntroVideo: React.FC = () => {
+interface IntroVideoProps {
+  data?: SubdivisionVideoTypes;
+}
+
+const IntroVideo: React.FC<IntroVideoProps> = ({ data }) => {
   const ballonRef = useRef<HTMLDivElement>(null);
   const { animated, ballonAnimate } = useAnimation({ ballonRef });
+  const link = useMemo(() => baseString(data?.link), [data]);
+  const isYoutube = useMemo(() => link.includes('youtube'), [link]);
+
+  if (!data?.active || !data?.link) return null;
 
   return (
     <section className="u-pt-md-80 u-pt-48 u-pb-md-61 u-pb-32 s-introVideo">
@@ -45,11 +55,18 @@ const IntroVideo: React.FC = () => {
       </div>
       <Container>
         <div className="s-introVideo_content">
-          <IntroPlayer src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" />
+          <IntroPlayer
+            isYoutube={isYoutube}
+            src={isYoutube ? youtubeControlIframe(link) : link}
+          />
         </div>
       </Container>
     </section>
   );
+};
+
+IntroVideo.defaultProps = {
+  data: undefined,
 };
 
 export default IntroVideo;

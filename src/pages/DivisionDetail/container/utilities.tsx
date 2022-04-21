@@ -2,11 +2,11 @@ import React, { useEffect, useMemo, useState } from 'react';
 
 import imgMap from 'assets/images/divisionUtilities/bg.png';
 import DivisionUtilities from 'components/templates/DivisionUtilities';
-import { SubDivisionDetailTypes } from 'services/subdivision/types';
+import { SubdivisionUtilityTypes } from 'services/subdivision/types';
 import { baseURL, imageLoader } from 'utils/functions';
 
 interface UtilitiesProps {
-  data?: SubDivisionDetailTypes;
+  data?: SubdivisionUtilityTypes;
 }
 
 const Utilities: React.FC<UtilitiesProps> = ({ data }) => {
@@ -18,8 +18,8 @@ const Utilities: React.FC<UtilitiesProps> = ({ data }) => {
   useEffect(() => {
     (async () => {
       try {
-        if (data?.content.utility.map.image) {
-          const image = await imageLoader(baseURL(data.content.utility.map.image));
+        if (data?.map.image) {
+          const image = await imageLoader(baseURL(data.map.image));
           setDimension({
             width: image.width,
             height: image.height,
@@ -32,7 +32,7 @@ const Utilities: React.FC<UtilitiesProps> = ({ data }) => {
     })();
   }, [data]);
 
-  const listLocations = useMemo(() => data?.content.utility.map.items?.map((item, index) => ({
+  const listLocations = useMemo(() => data?.map.items?.map((item, index) => ({
     x: Number(item.point.x),
     y: Number(item.point.y),
     id: index,
@@ -44,13 +44,15 @@ const Utilities: React.FC<UtilitiesProps> = ({ data }) => {
     },
   })), [data]);
 
+  if (!data?.active) return null;
+
   if (dimension.width <= 0 && dimension.height <= 0) return null;
 
   return (
     <section className="u-pt-md-80 u-pt-48 u-pb-md-80 u-pb-48" style={{ color: 'var(--theme)' }}>
       <DivisionUtilities
-        background={baseURL(data?.content.utility.map.image) || imgMap}
-        title={data?.content.utility.title}
+        background={baseURL(data?.map.image) || imgMap}
+        title={data?.title}
         listLocations={listLocations}
         heightImage={dimension.height}
         widthImage={dimension.width}
