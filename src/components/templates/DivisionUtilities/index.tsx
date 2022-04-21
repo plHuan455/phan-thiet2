@@ -10,32 +10,33 @@ interface LocationsItemTypes extends MarkerCardProps{
   y: number;
 }
 
-export interface DivisionUtilitiesProps {
+interface DivisionUtilitiesProps {
   title?: string;
   listLocations?: LocationsItemTypes[];
   background: string;
+  widthImage?: number;
+  heightImage?: number;
 }
-
-const WIDTH_IMAGE = 931;
-const HEIGHT_IMAGE = 752;
 
 const DivisionUtilities: React.FC<DivisionUtilitiesProps> = ({
   title,
   listLocations,
   background,
+  heightImage,
+  widthImage,
 }) => {
   const [active, setActive] = useState<number | undefined>(undefined);
-  const ref = useRef<HTMLDivElement>(null);
-  const animate = useScrollAnimate(ref);
+  const refUtilitiesMap = useRef<HTMLDivElement>(null);
+  const animate = useScrollAnimate(refUtilitiesMap);
 
   return (
     <div className="t-divisionUtilities">
       <Container>
-        <div ref={ref} className="t-divisionUtilities_title">
+        <div ref={refUtilitiesMap} className="t-divisionUtilities_title">
           <Heading type="h2" modifiers={['inherit', 's015', '400']} content={title} />
         </div>
         <div className="t-divisionUtilities_map u-mt-41">
-          <div className="t-divisionUtilities_image" style={{ paddingBottom: `calc(${HEIGHT_IMAGE} / ${WIDTH_IMAGE}  * 100%)` }}>
+          <div className="t-divisionUtilities_image" style={{ paddingBottom: `calc(${heightImage} / ${widthImage}  * 100%)` }}>
             <img src={background} alt="location-map" loading="lazy" />
           </div>
           {
@@ -45,8 +46,8 @@ const DivisionUtilities: React.FC<DivisionUtilitiesProps> = ({
                 className={`t-divisionUtilities_item ${animate && 'animate animate-dropdown'} 
                 ${active === item.id && 't-divisionUtilities_item-active'}`}
                 style={{
-                  top: `calc(${item.y} / ${HEIGHT_IMAGE} * 100%)`,
-                  left: `calc(${item.x} / ${WIDTH_IMAGE} * 100%)`,
+                  top: `calc(${item.y} / ${heightImage} * 100%)`,
+                  left: `calc(${item.x} / ${widthImage} * 100%)`,
                 }}
               >
                 <MarkerCard
@@ -70,6 +71,10 @@ const DivisionUtilities: React.FC<DivisionUtilitiesProps> = ({
 };
 
 DivisionUtilities.defaultProps = {
+  title: '',
+  listLocations: [],
+  heightImage: 752,
+  widthImage: 931,
 };
 
 export default DivisionUtilities;

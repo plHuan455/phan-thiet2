@@ -43,6 +43,16 @@ interface Content {
   utility: {
     map: {
       image: string;
+      items: {
+        color: string;
+        image: string;
+        point: {
+          x: string;
+          y: string;
+        };
+        title: string;
+        number: string;
+      }[];
     },
     title: string;
   }
