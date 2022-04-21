@@ -33,7 +33,7 @@ const PopupInfo:React.FC<PopupInfoProps> = ({
         </div>
       )}
       {content && (
-        <Text modifiers={['black', '16x28']} content={content} />
+        <Text type="div" modifiers={['black', '16x28']} content={content} />
       )}
     </div>
   </Modal>

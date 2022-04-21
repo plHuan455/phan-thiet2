@@ -103,7 +103,7 @@
 
   &_expected {
     position: absolute;
-    max-width: rem(278);
+    max-width: fit-content;
     bottom: 74%;
     right: 70%;
     z-index: 2;
@@ -119,7 +119,7 @@
 
   &_airport {
     position: absolute;
-    max-width: rem(387);
+    max-width: fit-content;
     top: 80%;
     left: 9.5%;
     width: 100%;
@@ -329,6 +329,13 @@
         @include font-base(12, 20);
       }
     }
+
+    ul {
+      padding-left: rem(24);
+      @include tablet-down {
+        padding-left: rem(16);
+      }
+    }
   }
 
   &_plane {
@@ -456,6 +463,10 @@
   &_image {
     max-width: rem(300);
     margin: 0 auto;
+  }
+
+  ul {
+    padding-left: rem(24);
   }
 }
 
