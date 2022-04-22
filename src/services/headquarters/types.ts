@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 export type HeadquatersData = {
   id: number;
   name: string;
@@ -12,4 +13,5 @@ export type HeadquatersParams = {
   limit?: number;
   keyword?: string;
   page?: number;
+  is_view?: number;
 };

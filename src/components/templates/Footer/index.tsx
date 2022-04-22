@@ -20,7 +20,7 @@ export interface FooterProps {
   subMenu?: MenuItem[],
   copyRightTitle?: string,
   addressList: {
-    title: string,
+    title?: string,
     subTitle?: string,
     address?: string,
     contact?: {
@@ -79,9 +79,11 @@ const Footer: React.FC<FooterProps> = ({
             {
                 addressList?.map((item, index) => (
                   <div key={`t-footer_address-${index.toString()}`} className="t-footer_address-item">
+                    {item.title && (
                     <div className="t-footer_address-title">
                       <Text modifiers={['12x20', '700', 'davyGrey']} content={item.title} />
                     </div>
+                    )}
                     {
                       item.subTitle && (
                         <div className="t-footer_address-subTitle">
@@ -116,7 +118,7 @@ const Footer: React.FC<FooterProps> = ({
                     socialList.list.map((item, index) => (
                       <div className="t-footer_social-item" key={`social-${index.toString()}`}>
                         <Link key={`t-footer_social-${index.toString()}`} href={item.url} target={item.target} className="a-link">
-                          <Image src={item.icon} ratio="1x1" alt={item.text} />
+                          <Image src={item.icon} ratio="1x1" alt={item.text} size="contain" />
                         </Link>
                       </div>
                     ))
