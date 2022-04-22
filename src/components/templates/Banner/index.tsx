@@ -41,7 +41,7 @@ const Tag: React.FC<Pick<BannerProps, 'tag'>> = ({ tag }) => (
         <li key={`${e.text}-${i.toString()}`} className="t-banner_tag_item">
           <Link href={e.href} target={e.target}>
             <div className="t-banner_tag_wrap">
-              <Text type="p" modifiers={['raisinBlack', '12x20', '400']}>
+              <Text type="p" modifiers={['raisinBlack', '12x20', '400', 'sm']}>
                 {e.text}
               </Text>
             </div>
