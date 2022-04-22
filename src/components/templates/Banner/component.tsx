@@ -101,7 +101,7 @@ const Search: React.FC<SearchProps> = ({
                 key={`t-banner_search-suggest-${index.toString()}`}
               >
                 <Text
-                  modifiers={['16x28', '400', 'raisinBlack']}
+                  modifiers={['14x20', '400', 'raisinBlack']}
                   content={item.keyword}
                 />
               </li>
