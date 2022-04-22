@@ -12,11 +12,7 @@ const getKeywordService = async (
 export const postKeywordService = async (
   params: KeywordParams,
 ): Promise<void> => {
-  const formData = new FormData();
-  formData.append('keyword', params?.keyword);
-  formData.append('locale', params.locale);
-  formData.append('grecaptcha_token', params?.grecaptcha_token);
-  await axiosInstance.post('keywords', formData);
+  await axiosInstance.post('keywords', params);
 };
 
 export default getKeywordService;

@@ -1,9 +1,8 @@
-import React, { useCallback } from 'react';
-import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import BannerTemplate from 'components/templates/Banner';
 import useKeywords from 'hooks/useKeywords';
-import { postKeywordService } from 'services/keyword';
 
 interface BannerProps {
   thumbnail?: string
@@ -12,19 +11,17 @@ interface BannerProps {
 const Banner: React.FC<BannerProps> = ({
   thumbnail,
 }) => {
-  const { executeRecaptcha } = useGoogleReCaptcha();
+  const navigate = useNavigate();
+  const {
+    options, hasNextPage, fetchNextPage, onSubmit,
+  } = useKeywords();
 
-  const { options, hasNextPage, fetchNextPage } = useKeywords();
-
-  const onSearch = useCallback(async (keyword: string | undefined) => {
-    if (!executeRecaptcha) return;
-    const grecaptchaToken = await executeRecaptcha('submit');
-    await postKeywordService({
-      grecaptcha_token: grecaptchaToken,
-      keyword: keyword || '',
-      locale: 'vi',
-    });
-  }, [executeRecaptcha]);
+  const onSearch = (keyword: string | undefined) => {
+    if (!keyword) return;
+    onSubmit(keyword);
+    // TODO: get slug from static all later
+    navigate(`/tong-quan-tin-tuc-va-hinh-anh?keyword=${keyword}`);
+  };
 
   return (
     <>
@@ -34,8 +31,8 @@ const Banner: React.FC<BannerProps> = ({
         isLayer
         isSuggest={!!options?.length}
         search={{
+          // TODO: Add Translations Later
           placeholder: 'Tìm kiếm sự kiện',
-          // eslint-disable-next-line no-console
           onSearch,
         }}
         optionSuggest={options}

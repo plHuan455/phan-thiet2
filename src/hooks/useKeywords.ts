@@ -1,10 +1,13 @@
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { useInfiniteQuery } from 'react-query';
 
 import { OptionSuggestTypes } from 'components/templates/Banner/component';
-import getKeywordService from 'services/keyword';
+import getKeywordService, { postKeywordService } from 'services/keyword';
 
 const useKeywords = () => {
+  const { executeRecaptcha } = useGoogleReCaptcha();
+
   const {
     data,
     hasNextPage,
@@ -37,11 +40,22 @@ const useKeywords = () => {
     [data],
   );
 
+  const onSubmit = useCallback(async (keyword: string | undefined) => {
+    if (!executeRecaptcha) return;
+    const grecaptchaToken = await executeRecaptcha('submit');
+    await postKeywordService({
+      grecaptcha_token: grecaptchaToken,
+      keyword: keyword || '',
+      locale: 'vi',
+    });
+  }, [executeRecaptcha]);
+
   return {
     options,
     hasNextPage,
     isLoading,
     fetchNextPage,
+    onSubmit,
   };
 };
 

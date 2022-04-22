@@ -15,6 +15,7 @@ export interface SearchProps {
   isSuggest?: boolean;
   optionSuggests?: OptionSuggestTypes[];
   search?: {
+    value?: string;
     placeholder?: string;
     onSearch?: (val?: string) => void;
   };
@@ -71,7 +72,10 @@ const Search: React.FC<SearchProps> = ({
     if (optionSuggests.length) {
       setOptions(optionSuggests);
     }
-  }, [optionSuggests]);
+    if (search?.value) {
+      setVal(search.value);
+    }
+  }, [optionSuggests, search?.value]);
 
   const { setNode } = useScrollInfinite(onLoadMore);
 

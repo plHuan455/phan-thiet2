@@ -22,6 +22,7 @@ export interface BannerProps {
     }[];
   };
   search?: {
+    value?: string;
     placeholder?: string;
     onSearch?: (val?: string) => void;
   };
