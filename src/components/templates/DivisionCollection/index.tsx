@@ -92,10 +92,10 @@ const DivisionCollection: React.FC<DivisionCollectionProps> = ({
           <CollectionSingle
             title={title}
             description={description}
-            titleCard={dataList[0].title}
-            thumbnail={dataList[0].thumbnail}
-            button={dataList[0].button}
-            handleClick={() => handleClick && handleClick(dataList[0].id)}
+            titleCard={dataList[0]?.title}
+            thumbnail={dataList[0]?.thumbnail}
+            button={dataList[0]?.button}
+            handleClick={() => handleClick && handleClick(dataList[0]?.id)}
           />
         )
       }

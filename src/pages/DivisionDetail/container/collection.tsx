@@ -1,71 +1,66 @@
-import React from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
+import { useQuery } from 'react-query';
 
-import layer1 from 'assets/images/divisionCollection/layer1.png';
-import layer2 from 'assets/images/divisionCollection/layer2.png';
-import layer3 from 'assets/images/divisionCollection/layer3.png';
-import layer4 from 'assets/images/divisionCollection/layer4.png';
 import DivisionCollection from 'components/templates/DivisionCollection';
+import PopupImage from 'components/templates/PopupImage';
+import getImageListService from 'services/image';
 import { SubdivisionCollectionTypes } from 'services/subdivision/types';
-import { baseString } from 'utils/functions';
+import { baseString, baseURL } from 'utils/functions';
 
 interface CollectionProps {
+  subDivisionId?: number;
   data?: SubdivisionCollectionTypes;
 }
 
 const Collection: React.FC<CollectionProps> = ({
   data,
+  subDivisionId,
 }) => {
+  const [open, setOpen] = useState<string[] | undefined>(undefined);
+  const { data: imageList } = useQuery(
+    ['getCollection'], () => getImageListService({
+      subdivision_id: String(subDivisionId),
+    }),
+  );
+
+  const dataCollection = useMemo(() => imageList?.data.map((item) => ({
+    id: item.id,
+    title: item.name,
+    color: item.color,
+    // TODO: Translations later
+    button: {
+      text: 'Xem thêm',
+    },
+    thumbnail: baseURL(item.thumbnailSubdivision),
+  })), [imageList]);
+
+  const handleOpenPopup = useCallback(
+    (id: number | undefined) => {
+      imageList?.data.forEach((item) => {
+        if (item.id === id) {
+          const listImg = item.images.map((img) => baseURL(img.path));
+          if (listImg.length) {
+            setOpen(listImg);
+          }
+        }
+      });
+    }, [imageList?.data],
+  );
+
   if (!data?.active) return null;
 
   return (
     <section>
       <DivisionCollection
-        dataList={[
-          {
-            id: 1,
-            title: 'BERMUDA',
-            color: 'rgba(0, 92, 143, 1)',
-            button: {
-              text: 'Xem thêm',
-            },
-            thumbnail: layer1,
-          },
-          {
-            title: 'SANTORINI',
-            color: 'rgba(10, 182, 244, 1)',
-            button: {
-              text: 'Xem thêm',
-            },
-            thumbnail: layer2,
-          },
-          {
-            title: 'JAPAN',
-            color: 'rgba(231, 73, 77, 1)',
-            button: {
-              text: 'Xem thêm',
-            },
-            thumbnail: layer3,
-          },
-          {
-            title: 'EDWARDIAN',
-            color: 'rgba(187, 109, 63, 1)',
-            button: {
-              text: 'Xem thêm',
-            },
-            thumbnail: layer4,
-          },
-          {
-            title: 'BERMUDA',
-            color: 'rgba(0, 92, 143, 1)',
-            button: {
-              text: 'Xem thêm',
-            },
-            thumbnail: layer1,
-          },
-        ]}
+        dataList={dataCollection || []}
         title={baseString(data?.title)}
         description={data?.description}
-        // handleClick={(id) => console.log(id)}
+        handleClick={handleOpenPopup}
+      />
+      <PopupImage
+        isOpen={!!open}
+        dataImageList={open || []}
+        handleClose={() => setOpen(undefined)}
       />
     </section>
   );
@@ -73,6 +68,7 @@ const Collection: React.FC<CollectionProps> = ({
 
 Collection.defaultProps = {
   data: undefined,
+  subDivisionId: undefined,
 };
 
 export default Collection;
