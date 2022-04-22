@@ -28,6 +28,7 @@ export interface HeaderDivisionProps {
     value: OptionType;
     handleChangeLang?: (item?: OptionType) => void;
   };
+  handleSearch?: (val: string | undefined) => void;
 }
 
 const HeaderDivision: React.FC<HeaderDivisionProps> = ({
@@ -36,6 +37,7 @@ const HeaderDivision: React.FC<HeaderDivisionProps> = ({
   menuMainDivision,
   language,
   logoDivision,
+  handleSearch,
 }) => {
   const { pathname } = useLocation();
 
@@ -102,6 +104,13 @@ const HeaderDivision: React.FC<HeaderDivisionProps> = ({
     }
   });
 
+  const onSearch = (val: string | undefined) => {
+    setIsOpenSearch(false);
+    if (handleSearch) {
+      handleSearch(val);
+    }
+  };
+
   return (
     <header className="t-headerDivision">
       <div className="t-headerDivision_subHeader">
@@ -118,10 +127,11 @@ const HeaderDivision: React.FC<HeaderDivisionProps> = ({
               <Icon iconName="closeWhite" size="36" />
             </button>
             <div className="t-headerDivision_layer-search_content">
+              {/* TODO: ADD Translations Later */}
               <Heading type="h2" modifiers={['700', 'uppercase', 'center', 'white']}>
                 Tìm kiếm
               </Heading>
-              <Search search={{ placeholder: 'Tìm kiếm nội dung' }} />
+              <Search search={{ placeholder: 'Tìm kiếm nội dung', onSearch }} />
             </div>
           </div>
           <div className="t-headerDivision_wrap">

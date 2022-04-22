@@ -1,5 +1,5 @@
 import React, {
-  useCallback, useEffect, useRef, useState,
+  useCallback, useRef, useState,
 } from 'react';
 
 import Icon from 'components/atoms/Icon';
@@ -25,7 +25,7 @@ const Search: React.FC<SearchProps> = ({
   optionSuggests = [],
 }) => {
   const [val, setVal] = useState<string>('');
-  const [options, setOptions] = useState<OptionSuggestTypes[]>([]);
+  const [options, setOptions] = useState<OptionSuggestTypes[]>(optionSuggests);
   const [isFocus, setIsFocus] = useState(false);
   const refInput = useRef<HTMLInputElement>(null);
 
@@ -63,12 +63,6 @@ const Search: React.FC<SearchProps> = ({
       setVal(keyword);
     }
   };
-
-  useEffect(() => {
-    if (optionSuggests) {
-      setOptions(optionSuggests);
-    }
-  }, [optionSuggests]);
 
   return (
     <div className="t-banner_search">
@@ -113,4 +107,4 @@ const Search: React.FC<SearchProps> = ({
   );
 };
 
-export default Search;
+export default React.memo(Search);

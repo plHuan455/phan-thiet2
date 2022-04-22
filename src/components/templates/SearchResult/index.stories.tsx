@@ -55,13 +55,21 @@ export const Normal: Story = () => (
       <SearchResult.Summary
         value="Nova world Phan Thiết"
         placeholder="Tìm kiếm"
-        searchText="Novaworld Phan Thiết"
-        length={9}
+        searchText={{
+          text: 'kết quả tìm thấy cho',
+          length: 9,
+          value: 'Nova World',
+        }}
       />
       <SearchResult.Filter
-        tabs={dataTabList}
-        slugActive="tin-tuc"
-        optionSort={optionSort}
+        tab={{
+          list: dataTabList,
+          active: 'tin-tuc',
+        }}
+        filter={{
+          placeholder: 'Kết quả mới nhất',
+          options: optionSort,
+        }}
       />
       <SearchResult.Content
         news={data}
