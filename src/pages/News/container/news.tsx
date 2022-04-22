@@ -78,4 +78,4 @@ News.defaultProps = {
   news: [],
 };
 
-export default News;
+export default React.memo(News);

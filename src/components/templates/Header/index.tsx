@@ -97,7 +97,7 @@ const Header: React.FC<HeaderProps> = ({
   };
 
   return (
-    <header className="t-header">
+    <header id="app-header" className="t-header">
       <div className={mapModifiers('t-header_main', isScroll && 'isScroll')}>
         <Container>
           <div className={mapModifiers('t-header_layer-search', isOpenSearch && 'open')}>

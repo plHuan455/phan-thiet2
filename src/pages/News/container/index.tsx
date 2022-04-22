@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useQuery } from 'react-query';
 
-import useNews from '../hook';
+import useTab from '../hook/useTab';
 
 import Banner from './banner';
 import Consultancy from './consultancy';
@@ -26,27 +26,29 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
 }) => {
   const langContext = useContext(LanguageContext);
   const { language } = langContext as LanguageContextResponse;
-  const { ref } = useNews();
   const { data } = useQuery(['getOverviewList', [language.isChange]], () => getOverviewListService());
+  const tabMenu = useTab();
 
   return (
     <>
       <HelmetContainer seoData={seoData} ogData={getOgDataPage(pageData)} />
       <Banner banners={banners} blocks={blocks} />
-      <MenuTag />
-      <Section ref={ref.news}>
+      <MenuTag
+        {...tabMenu}
+      />
+      <Section ref={tabMenu.menuList[0].ref}>
         <News news={data?.news} blocks={blocks} />
       </Section>
-      <Section ref={ref.events}>
+      <Section ref={tabMenu.menuList[1].ref}>
         <Events events={data?.events} blocks={blocks} />
       </Section>
-      <Section ref={ref.images}>
+      <Section ref={tabMenu.menuList[2].ref}>
         <Images images={data?.images} blocks={blocks} />
       </Section>
-      <Section ref={ref.videos}>
+      <Section ref={tabMenu.menuList[3].ref}>
         <Videos videos={data?.videos} blocks={blocks} />
       </Section>
-      <Section ref={ref.documents}>
+      <Section ref={tabMenu.menuList[4].ref}>
         <Documents documents={data?.documents} blocks={blocks} />
       </Section>
       <section>

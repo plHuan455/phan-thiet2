@@ -95,4 +95,4 @@ Documents.defaultProps = {
   documents: [],
 };
 
-export default Documents;
+export default React.memo(Documents);

@@ -69,4 +69,4 @@ Events.defaultProps = {
   events: [],
 };
 
-export default Events;
+export default React.memo(Events);
