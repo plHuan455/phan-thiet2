@@ -8,7 +8,7 @@ export interface NewsListParams {
   form_date?: string;
   to_date?: string;
   except_ids?: string;
-  sort?: SortTypes;
+  sort?: string;
 }
 
 export interface NewsListTypes {

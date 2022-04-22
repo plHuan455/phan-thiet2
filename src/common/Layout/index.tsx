@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useCallback, useLayoutEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import useLayout from './functions';
@@ -26,10 +26,10 @@ const Layout: React.FC = ({ children }) => {
     });
   }, [location.pathname]);
 
-  const handleSearch = (val: string | undefined) => {
+  const handleSearch = useCallback((val: string | undefined) => {
+    // TODO: get slug from static all later
     navigate(`/tim-kiem?keyword=${val}`);
-    console.log(val);
-  };
+  }, [navigate]);
 
   return (
     <div>

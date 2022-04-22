@@ -17,8 +17,11 @@ export interface SearchResultWrapProps {
 }
 export interface SearchTopProps extends React.InputHTMLAttributes<HTMLInputElement> {
   handleSubmit?: () => void;
-  searchText?: string;
-  length?: number;
+  searchText?: {
+    length: number;
+    text: string;
+    value: string;
+  };
 }
 
 const SearchTop = React.forwardRef<
@@ -27,7 +30,6 @@ const SearchTop = React.forwardRef<
 >(({
   handleSubmit,
   searchText,
-  length,
   ...rest
 }, ref) => (
   <>
@@ -49,15 +51,12 @@ const SearchTop = React.forwardRef<
     </div>
     {searchText && (
     <div className="t-searchResult_textResult u-mt-16">
-      {/* TODO: Translation later */}
-      <Text
-        modifiers={['14x20', '400', 'fontSvnGotham', 'black', 'center']}
-      >
-        {length}
+      <Text modifiers={['14x20', '400', 'fontSvnGotham', 'black', 'center']}>
+        {searchText.length}
         {' '}
-        kết quả tìm thấy cho
+        {searchText.text}
         {' '}
-        <strong>{`"${searchText}"`}</strong>
+        <strong>{`"${searchText.value}"`}</strong>
       </Text>
     </div>
     )}
@@ -65,45 +64,45 @@ const SearchTop = React.forwardRef<
 ));
 
 export interface SearchFilterProps {
-  tabs?: {
-    label?: string;
-    slug?: string;
-  }[];
-  slugActive?: string;
-  optionSort?: OptionType[];
-  valueSort?: OptionType;
-  handleSelectTab?: (slug?:string) => void;
-  handleSort?: (item?: OptionType) => void;
+  tab?: {
+    list?: {
+      label?: string;
+      slug?: string;
+    }[];
+    active?: string;
+    onSelect?: (slug?: string) => void;
+  };
+  filter?: {
+    value?: OptionType;
+    options: OptionType[];
+    placeholder?: string;
+    onFilter?: (item?: OptionType) => void;
+  };
 }
 
 const SearchFilter:React.FC<SearchFilterProps> = ({
-  tabs,
-  slugActive,
-  optionSort,
-  handleSelectTab,
-  valueSort,
-  handleSort,
+  tab,
+  filter,
 }) => (
   <div className="t-searchResult_wrapTabs u-mt-24 u-mt-md-32">
     <div className="t-searchResult_tab">
-      <Tabs variableMutate={slugActive}>
-        {tabs?.map((item, index) => (
+      <Tabs variableMutate={tab?.active}>
+        {tab?.list?.map((item, index) => (
           <Tab
             key={`tab-${index.toString()}`}
             label={item.label}
-            active={item.slug === slugActive}
-            handleClick={() => handleSelectTab && handleSelectTab(item.slug)}
+            active={item.slug === tab?.active}
+            handleClick={() => tab?.onSelect && tab?.onSelect(item.slug)}
           />
         ))}
       </Tabs>
     </div>
     <div className="t-searchResult_filter">
-      {/* TODO: Translation later */}
       <PullDown
-        options={optionSort || []}
-        placeholder="Kết quả mới nhất"
-        handleSelect={handleSort}
-        value={valueSort}
+        options={filter?.options || []}
+        placeholder={filter?.placeholder}
+        handleSelect={filter?.onFilter}
+        value={filter?.value}
       />
     </div>
   </div>
@@ -126,7 +125,7 @@ const SearchContent:React.FC<SearchContentProps> = ({
 }) => (
   <>
     <div className="t-searchResult_list">
-      {news && news.length > 0 && (
+      {news && news?.length > 0 && (
         <Row className="u-ml-negative-md-16 u-mr-negative-md-16 u-ml-negative-10 u-mr-negative-10">
           {news.map((item, index) => (
             <Col
@@ -141,7 +140,7 @@ const SearchContent:React.FC<SearchContentProps> = ({
           ))}
         </Row>
       )}
-      {divisions && divisions.length > 0 && (
+      {divisions && divisions?.length > 0 && (
         <Row className="u-ml-negative-md-16 u-mr-negative-md-16 u-ml-negative-10 u-mr-negative-10">
           {divisions.map((item, index) => (
             <Col
@@ -156,6 +155,7 @@ const SearchContent:React.FC<SearchContentProps> = ({
           ))}
         </Row>
       )}
+
     </div>
 
     {loading && (

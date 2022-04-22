@@ -2,7 +2,7 @@ export interface SubDivisionParams {
   page?: number;
   limit?: number;
   keyword?: string;
-  sort?: SortTypes;
+  sort?: string;
 }
 
 interface SubdivisionCommonTypes {

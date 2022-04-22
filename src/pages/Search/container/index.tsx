@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, {
   useCallback,
   useMemo,
@@ -17,6 +15,7 @@ import bgLeft from 'assets/images/searchResult/bg_searchResult_left.png';
 import bgRight from 'assets/images/searchResult/bg_searchResult_right.png';
 import HelmetContainer from 'common/Helmet';
 import Image from 'components/atoms/Image';
+import Text from 'components/atoms/Text';
 import { OptionType } from 'components/molecules/PullDown';
 import { CardDivisionProps } from 'components/organisms/Card/Division';
 import { CardNormalProps } from 'components/organisms/Card/Normal';
@@ -25,7 +24,13 @@ import getNewsListService from 'services/news';
 import { NewsListTypes } from 'services/news/types';
 import { getSubDivisionListService } from 'services/subdivision';
 import { SubDivisionListTypes } from 'services/subdivision/types';
-import { baseURL, getOgDataPage } from 'utils/functions';
+import CONSTANTS from 'utils/constants';
+import {
+  baseString,
+  baseURL,
+  getOgDataPage,
+  getTimePastToCurrent,
+} from 'utils/functions';
 
 const dataTabList = [
   {
@@ -63,23 +68,48 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
   const { animate, animateReverse } = useAnimation({ ref: bgLeftRef });
   const [searchKeyValue, setSearchKeyValue] = useState('');
   const [search, setSearch] = useState('');
-  const [sort, setSort] = useState<SortTypes>('newest');
 
-  useEffect(() => {
-    setSort(currentValueSort.value as SortTypes);
-  }, [currentValueSort]);
+  const keywordParams = useMemo(() => searchParams.get('keyword') || '', [
+    searchParams,
+  ]);
+  const sortParams = useMemo(
+    () => searchParams.get('sort') || optionSort[0].value,
+    [searchParams],
+  );
 
   const handleSearch = useCallback(() => {
-    setSearch(searchKeyValue);
-    setSearchParams({ keyword: searchKeyValue });
-  }, [searchKeyValue]);
+    if (searchKeyValue) {
+      searchParams.set('keyword', searchKeyValue);
+      setSearchParams(searchParams);
+    } else {
+      searchParams.delete('keyword');
+      setSearchParams(searchParams);
+    }
+  }, [searchKeyValue, searchParams, setSearchParams]);
+
+  const handleSort = useCallback(
+    (option?: OptionType) => {
+      if (option) {
+        searchParams.set('sort', option.value.toString());
+        setSearchParams(searchParams);
+      }
+    },
+    [searchParams, setSearchParams],
+  );
 
   useEffect(() => {
-    if (searchParams) {
-      setSearchKeyValue(searchParams.get('keyword') || '');
-      setSearch(searchParams.get('keyword') || '');
+    if (keywordParams) {
+      setSearchKeyValue(keywordParams);
+      setSearch(keywordParams);
     }
-  }, [searchParams.get('keyword')]);
+  }, [keywordParams]);
+
+  useEffect(() => {
+    const sortItem = optionSort?.find((item) => item.value === sortParams);
+    if (sortItem) {
+      setCurrentValueSort(sortItem);
+    }
+  }, [sortParams]);
 
   // Get News
   const {
@@ -88,12 +118,12 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
     isFetching: fetchingNews,
     fetchNextPage: fetchNextNews,
   } = useInfiniteQuery(
-    ['getNews', search, sort],
+    ['getNews', [keywordParams, sortParams]],
     ({ pageParam = 1 }) => getNewsListService({
       page: pageParam,
       limit: 3,
-      keyword: search,
-      sort,
+      keyword: keywordParams,
+      sort: sortParams,
     }),
     {
       getNextPageParam: (params) => (params.meta?.page >= params.meta.totalPages
@@ -102,30 +132,25 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
     },
   );
 
-  const newsMapping = useMemo(
-    () => (newsData?.pages || []).reduce(
-      (prev: NewsListTypes[], curr) => [...prev, ...curr.data],
-      [],
-    ),
-    [newsData?.pages],
-  );
-
   const newsList = useMemo(
-    (): CardNormalProps[] => newsMapping.map((item) => ({
-      thumbnail: baseURL(item.thumbnail),
-      title: item.title,
-      href: item.slug,
-      dateTime: '2 giờ trước', // publishedAt,
-      tag: {
-        text: 'The Kingdom',
-      },
-      url: {
-        text: 'Xem thêm',
-        iconName: 'arrowRightCopper',
-        animation: 'arrow',
-      },
-    })),
-    [newsMapping],
+    (): CardNormalProps[] => (newsData?.pages || [])
+      .reduce((prev: NewsListTypes[], curr) => [...prev, ...curr.data], [])
+      ?.map((item) => ({
+        thumbnail: baseURL(item.thumbnail),
+        title: item.title,
+        href: item.slug,
+        dateTime: getTimePastToCurrent(item.publishedAt),
+        tag: {
+          text: item.subdivision?.name,
+          url: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item.slug}`,
+        },
+        url: {
+          text: 'Xem thêm',
+          iconName: 'arrowRightCopper',
+          animation: 'arrow',
+        },
+      })),
+    [newsData?.pages],
   );
   // End - Get News
 
@@ -136,12 +161,12 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
     isFetching: fetchingSubdivision,
     fetchNextPage: fetchNextSubdivision,
   } = useInfiniteQuery(
-    ['getSubdivision', search, sort],
+    ['getSubdivision', [keywordParams, sortParams]],
     ({ pageParam = 1 }) => getSubDivisionListService({
       page: pageParam,
       limit: 3,
-      keyword: search,
-      sort,
+      keyword: keywordParams,
+      sort: sortParams,
     }),
     {
       getNextPageParam: (params) => (params.meta?.page >= params.meta.totalPages
@@ -150,25 +175,32 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
     },
   );
 
-  const subdivisionMapping = useMemo(
-    () => (subdivisionData?.pages || []).reduce(
-      (prev: SubDivisionListTypes, curr) => [...prev, ...curr.data],
-      [],
-    ),
+  const subdivisionList = useMemo(
+    (): CardDivisionProps[] => (subdivisionData?.pages || [])
+      .reduce(
+        (prev: SubDivisionListTypes, curr) => [...prev, ...curr.data],
+        [],
+      )
+      ?.map((item) => ({
+        imgSrc: baseURL(item.thumbnail),
+        title: item.name,
+        description: baseString(item.description),
+        // TODO: Add locale later
+        href: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item.slug}`,
+      })),
     [subdivisionData?.pages],
   );
 
-  const subdivisionList = useMemo(
-    (): CardDivisionProps[] => subdivisionMapping.map((item) => ({
-      imgSrc: baseURL(item.thumbnail),
-      title: item.name,
-      description: '',
-      href: item.slug,
-    })),
-    [subdivisionMapping],
+  // End - Get Subdivision
+
+  const lengthItem = useMemo(
+    () => (tabActive === 'tin-tuc' && newsList.length)
+      || (tabActive === 'phan-khu' && subdivisionList.length)
+      || 0,
+    [tabActive, newsList, subdivisionList],
   );
 
-  // End - Get Subdivision
+  // TODO: translate later
 
   return (
     <>
@@ -188,22 +220,26 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
         <SearchResult.Summary
           value={searchKeyValue}
           placeholder="Tìm kiếm"
-          searchText={search}
-          length={
-            (tabActive === 'tin-tuc' && newsList.length)
-            || (tabActive === 'phan-khu' && subdivisionList.length)
-            || 0
-          }
+          searchText={{
+            text: 'kết quả tìm thấy cho',
+            length: lengthItem,
+            value: search,
+          }}
           onChange={(e) => setSearchKeyValue(e.currentTarget.value)}
           handleSubmit={handleSearch}
         />
         <SearchResult.Filter
-          tabs={dataTabList}
-          slugActive={tabActive}
-          optionSort={optionSort}
-          handleSelectTab={(tab) => setTabActive(tab)}
-          handleSort={(option) => option && setCurrentValueSort(option)}
-          valueSort={currentValueSort}
+          tab={{
+            list: dataTabList,
+            active: tabActive,
+            onSelect: (tab) => setTabActive(tab),
+          }}
+          filter={{
+            options: optionSort,
+            value: currentValueSort,
+            placeholder: 'Kết quả mới nhất',
+            onFilter: handleSort,
+          }}
         />
         {tabActive === 'tin-tuc' && (
           <SearchResult.Content
@@ -213,6 +249,13 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
             handleShowMore={fetchNextNews}
           />
         )}
+        {tabActive === 'tin-tuc' && !newsList?.length && (
+          <div className="u-mt-24">
+            <Text modifiers={['14x20', 'raisinBlack', '400', 'center']}>
+              Không có dữ liệu
+            </Text>
+          </div>
+        )}
         {tabActive === 'phan-khu' && (
           <SearchResult.Content
             divisions={subdivisionList}
@@ -221,6 +264,14 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
             handleShowMore={fetchNextSubdivision}
           />
         )}
+        {tabActive === 'phan-khu' && !subdivisionList?.length && (
+          <div className="u-mt-24">
+            <Text modifiers={['14x20', 'raisinBlack', '400', 'center']}>
+              Không có dữ liệu
+            </Text>
+          </div>
+        )}
+
       </SearchResult.Wrapper>
     </>
   );
