@@ -4,7 +4,8 @@ import React, {
 
 import Icon from 'components/atoms/Icon';
 import Text from 'components/atoms/Text';
-import mapModifiers from 'utils/functions';
+import useScrollInfinite from 'hooks/useScrollInfinite';
+import mapModifiers, { removeAccents } from 'utils/functions';
 
 export interface OptionSuggestTypes {
   id: string;
@@ -17,12 +18,14 @@ export interface SearchProps {
     placeholder?: string;
     onSearch?: (val?: string) => void;
   };
+  onLoadMore?: () => void;
 }
 
 const Search: React.FC<SearchProps> = ({
   search,
   isSuggest,
   optionSuggests = [],
+  onLoadMore,
 }) => {
   const [val, setVal] = useState<string>('');
   const [options, setOptions] = useState<OptionSuggestTypes[]>(optionSuggests);
@@ -36,9 +39,9 @@ const Search: React.FC<SearchProps> = ({
     let newOptions;
     if (value) {
       newOptions = cloneOptions.filter(
-        (item) => item.keyword
+        (item) => removeAccents(item.keyword)
           .toLocaleLowerCase()
-          .indexOf(value.toLocaleLowerCase()) !== -1,
+          .includes(removeAccents(value.toLocaleLowerCase())),
       );
     } else {
       newOptions = optionSuggests;
@@ -91,6 +94,7 @@ const Search: React.FC<SearchProps> = ({
           <ul>
             {options?.map((item, index) => (
               <li
+                ref={index + 1 === options.length ? (node) => setNode(node) : undefined}
                 onClick={handleSelected(item.keyword)}
                 key={`t-banner_search-suggest-${index.toString()}`}
               >

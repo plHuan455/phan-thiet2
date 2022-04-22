@@ -27,6 +27,7 @@ export interface BannerProps {
   };
   isSuggest?: boolean;
   optionSuggest?: OptionSuggestTypes[];
+  onLoadMore?: () => void;
 }
 
 const Tag: React.FC<Pick<BannerProps, 'tag'>> = ({ tag }) => (
@@ -60,6 +61,7 @@ const Banner: React.FC<BannerProps> = ({
   search,
   isSuggest,
   optionSuggest,
+  onLoadMore,
 }) => {
   const styles = useSpring({
     from: {
@@ -95,6 +97,7 @@ const Banner: React.FC<BannerProps> = ({
             isSuggest={isSuggest}
             optionSuggests={optionSuggest}
             search={search}
+            onLoadMore={onLoadMore}
           />
           )}
           {tag && <Tag tag={tag} />}

@@ -203,3 +203,8 @@ export const imageLoader = (url: string) => new Promise<HTMLImageElement>((resol
   };
   img.src = url;
 });
+
+export const removeAccents = (text?:string) => {
+  if (!text) return '';
+  return text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+};
