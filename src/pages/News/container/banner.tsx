@@ -1,6 +1,8 @@
 import React, { useMemo } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import BannerTemplate from 'components/templates/Banner';
+import useKeywords from 'hooks/useKeywords';
 import { baseURL, getBannerData, getBlockData } from 'utils/functions';
 
 interface NewsSearch {
@@ -27,15 +29,33 @@ const Banner: React.FC<Pick<BasePageDataTypes<any>, 'banners' | 'blocks'>> = ({ 
     });
   }, [blocks]);
 
+  const {
+    options, hasNextPage, fetchNextPage, onSubmit,
+  } = useKeywords();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const keywordParams = useMemo(() => searchParams.get('keyword') || '', [
+    searchParams,
+  ]);
+
+  const onSearch = (keyword: string | undefined) => {
+    if (!keyword) return;
+    onSubmit(keyword);
+    searchParams.set('keyword', keyword);
+    setSearchParams(searchParams);
+  };
+
   return (
     <div className="s-banner">
       <BannerTemplate
         image={bannerData.image}
         isLayer
+        onLoadMore={() => hasNextPage && fetchNextPage()}
+        isSuggest={!!options?.length}
+        optionSuggest={options}
         search={{
           placeholder: newsSearchData?.placeholder,
-          // eslint-disable-next-line no-console
-          onSearch: (search) => console.log('search', search),
+          value: keywordParams,
+          onSearch,
         }}
         tag={{
           // TODO: translate later
