@@ -117,7 +117,7 @@ const Screen: React.FC<ScreenProps> = ({ setLogoDivision }) => {
         />
 
         {/* Related */}
-        <Division data={related} />
+        <Division subdivisionId={subDivisionDetail?.id} data={related} />
 
         {/* Consultancy */}
         <Consultancy data={subscribe} />
