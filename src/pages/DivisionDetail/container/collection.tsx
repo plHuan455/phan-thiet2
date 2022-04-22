@@ -39,9 +39,7 @@ const Collection: React.FC<CollectionProps> = ({
       imageList?.data.forEach((item) => {
         if (item.id === id) {
           const listImg = item.images.map((img) => baseURL(img.path));
-          if (listImg.length) {
-            setOpen(listImg);
-          }
+          setOpen(listImg);
         }
       });
     }, [imageList?.data],
