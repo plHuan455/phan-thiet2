@@ -1,6 +1,8 @@
 .o-cardNews {
   &_thumbnail {
-    border-radius: rem(12);
+    @include tablet-up {
+      border-radius: rem(12);
+    }
     @include thumbnail-scale-hover();
   }
 
