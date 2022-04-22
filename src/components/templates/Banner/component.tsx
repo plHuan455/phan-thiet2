@@ -1,5 +1,5 @@
 import React, {
-  useCallback, useRef, useState,
+  useCallback, useEffect, useRef, useState,
 } from 'react';
 
 import Icon from 'components/atoms/Icon';
@@ -66,6 +66,12 @@ const Search: React.FC<SearchProps> = ({
       setVal(keyword);
     }
   };
+
+  useEffect(() => {
+    if (optionSuggests.length) {
+      setOptions(optionSuggests);
+    }
+  }, [optionSuggests]);
 
   const { setNode } = useScrollInfinite(onLoadMore);
 
