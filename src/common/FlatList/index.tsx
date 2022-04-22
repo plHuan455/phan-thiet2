@@ -62,12 +62,11 @@ const FlatList = <T, >({
     ],
   }), []);
 
-  if (!data?.length) return null;
-
   return (
     <div className="c-flatList">
       {children}
 
+      {data && data?.length > 0 && (
       <Carousel
         innerDots={innerDots}
         settings={{
@@ -81,6 +80,7 @@ const FlatList = <T, >({
           </React.Fragment>
         ))}
       </Carousel>
+      )}
     </div>
   );
 };
