@@ -16,6 +16,9 @@
     &_content {
       display: flex;
       @include list-style-none();
+      @include mobile-down {
+        overflow-x: auto;
+      }
     }
     &_item {
       padding: rem(12);
@@ -50,12 +53,8 @@
           font-weight: 700;
         }
       }
-    }
-    @include mobile-down {
-      #{$root}_content {
-        overflow-x: auto;
-      }
-      #{$root}_item {
+
+      @include mobile-down {
         white-space: nowrap;
       }
     }

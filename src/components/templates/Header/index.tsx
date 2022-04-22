@@ -10,7 +10,7 @@ import Image from 'components/atoms/Image';
 import Link from 'components/atoms/Link';
 import Nav from 'components/molecules/Nav';
 import Pulldown, { OptionType } from 'components/molecules/PullDown';
-import { Search } from 'components/templates/Banner';
+import Search from 'components/templates/Banner/component';
 import useDetectHeader from 'hooks/useDetectHeader';
 import useWindowScroll from 'hooks/useWindowScroll';
 import { MenuItem } from 'services/menus/types';
