@@ -55,4 +55,61 @@
       }
     }
   }
+
+  .o-tabs {
+    background: $gradient-white;
+    border-bottom: 1px solid rgba($white, 0.4);;
+    backdrop-filter: blur(4px);
+
+    &_labels {
+      display: inline-flex;
+      max-width: 100%;
+      overflow-x: auto;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    &_label {
+      @include font-base(14,20);
+      color: $white;
+      white-space: nowrap;
+      transition: $transition-long linear;
+    }
+
+    &_tab {
+      cursor: pointer;
+      padding: rem(12);
+      position: relative;
+
+      &::after {
+        bottom: 0;
+        height: 2px;
+        width: 0%;
+        transform: translateX(-50%);
+        left: 50%;
+        border-radius: 2px 2px 0px 0px;
+        content: '';
+        transition: $transition-long linear;
+        position: absolute;
+        background-color: $white;
+      }
+
+      &-active {
+        .o-tabs_label {
+          font-weight: bold;
+        }
+      }
+      
+      &:hover ,
+      &-active {
+        &::after {
+          width: 100%;
+        }
+      }
+    }
+  }
 }
