@@ -126,6 +126,7 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId }) => {
         }
         if (indexActive === 1 && !temp.images) {
           const res = await getImageListService({ subdivision_id });
+          temp.images = res.data;
         }
         if (indexActive === 2 && !temp.videos) {
           const res = await getVideosService({ subdivision_id });
@@ -146,29 +147,29 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId }) => {
     },
   );
 
-  const listData = useMemo(():
-  NewsListTypes[] | DocumentTypes[] | ImageListTypes[] | VideoTypes[] => {
-    switch (indexActive) {
-      case 0:
-        return state.news || [];
-      case 1:
-        return state.images || [];
-      case 2:
-        return state.videos || [];
-      case 3:
-        return state.documents || [];
+  // const listData = useMemo(():
+  // NewsListTypes[] | DocumentTypes[] | ImageListTypes[] | VideoTypes[] => {
+  //   switch (indexActive) {
+  //     case 0:
+  //       return state.news || [];
+  //     case 1:
+  //       return state.images || [];
+  //     case 2:
+  //       return state.videos || [];
+  //     case 3:
+  //       return state.documents || [];
 
-      default:
-        return [];
-    }
-  }, [state, indexActive]);
+  //     default:
+  //       return [];
+  //   }
+  // }, [state, indexActive]);
 
   useEffect(() => {
     libraryExecute();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [subDivisionId, indexActive]);
 
-  console.log(listData);
+  // console.log(listData);
 
   if (!data?.active) return null;
 
@@ -205,32 +206,6 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId }) => {
           </div>
         </div>
         {indexActive === 0 && !state.isLoading && (
-        <FlatList
-          data={state.news || []}
-          settings={settingRef.current}
-          render={(item) => (
-            <Card.Normal
-              thumbnail={baseURL(item.thumbnail)}
-              title={item.title}
-              href={`/tin-tuc/${item.slug}`}
-              tag={{
-                text: item?.subdivision?.name,
-                // TODO: Add locale later
-                url: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item?.subdivision?.slug}`,
-              }}
-              dateTime={getTimePastToCurrent(item.publishedAt)}
-              url={{
-                text: 'Xem thêm',
-                iconName: 'arrowRightCopper',
-                animation: 'arrow',
-              }}
-            />
-          )}
-        >
-          <div>Không có dữ liệu asd asd!</div>
-        </FlatList>
-        )}
-        {/* {indexActive === 0 && !state.isLoading && (
           state.news && state.news.length > 0 ? (
             <FlatList
               data={state.news || []}
@@ -253,13 +228,15 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId }) => {
                   }}
                 />
               )}
-            >
-              <div>Không có dữ liệu asd asd!</div>
-            </FlatList>
+            />
           )
             : (
-              <div>Không có dữ liệu!</div>
-            ))} */}
+              <div>
+                <Text modifiers={['14x20', '400', 'inherit', 'center']}>
+                  Không có dữ liệu!
+                </Text>
+              </div>
+            ))}
         {indexActive === 1 && !state.isLoading && (
           state.images && state.images.length > 0 ? (
             <FlatList
@@ -275,7 +252,11 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId }) => {
             />
           )
             : (
-              <div>Không có dữ liệu!</div>
+              <div>
+                <Text modifiers={['14x20', '400', 'inherit', 'center']}>
+                  Không có dữ liệu!
+                </Text>
+              </div>
             ))}
         {indexActive === 2 && !state.isLoading && (
           state.videos && state.videos.length > 0 ? (
@@ -310,7 +291,11 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId }) => {
             />
           )
             : (
-              <div>Không có dữ liệu!</div>
+              <div>
+                <Text modifiers={['14x20', '400', 'inherit', 'center']}>
+                  Không có dữ liệu!
+                </Text>
+              </div>
             ))}
         {indexActive === 3 && !state.isLoading && (
           state.documents && state.documents.length > 0 ? (
@@ -333,7 +318,11 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId }) => {
             />
           )
             : (
-              <div>Không có dữ liệu!</div>
+              <div>
+                <Text modifiers={['14x20', '400', 'inherit', 'center']}>
+                  Không có dữ liệu!
+                </Text>
+              </div>
             ))}
         <PopupImage
           isOpen={state.isPopImageOpen || false}

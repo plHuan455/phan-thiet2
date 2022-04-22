@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 
@@ -23,7 +23,11 @@ export interface MyCustomCSS extends React.CSSProperties {
   '--theme': string;
 }
 
-const Screen: React.FC = () => {
+interface ScreenProps {
+  setLogoDivision?: (val: string) => void;
+}
+
+const Screen: React.FC<ScreenProps> = ({ setLogoDivision }) => {
   const { slug } = useParams<{ slug: string }>();
 
   const { data: subDivisionDetail, isFetching, error } = useQuery(
@@ -55,6 +59,12 @@ const Screen: React.FC = () => {
   } = useMemo(() => ({
     ...contentSubdivision,
   }), [contentSubdivision]);
+
+  useEffect(() => {
+    if (subDivisionDetail?.logo && setLogoDivision) {
+      setLogoDivision(baseURL(subDivisionDetail?.logo));
+    }
+  }, [subDivisionDetail, setLogoDivision]);
 
   if (isFetching) {
     return (
@@ -114,6 +124,10 @@ const Screen: React.FC = () => {
       </div>
     </>
   );
+};
+
+Screen.defaultProps = {
+  setLogoDivision: undefined,
 };
 
 export default Screen;

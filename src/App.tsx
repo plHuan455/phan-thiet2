@@ -11,6 +11,7 @@ import {
 
 import LanguageProvider from 'common/Language';
 import Layout from 'common/Layout';
+import LayoutProvider from 'common/Layout/context';
 import LoadingPage from 'common/Navigation/loading';
 import DivisionDetail from 'pages/DivisionDetail';
 import Error from 'pages/Error';
@@ -28,9 +29,11 @@ const App: React.FC = () => (
       <Route
         path="/"
         element={(
-          <Layout>
-            <Outlet />
-          </Layout>
+          <LayoutProvider>
+            <Layout>
+              <Outlet />
+            </Layout>
+          </LayoutProvider>
             )}
       >
         {/* TODO: Implement translation later */}
