@@ -97,8 +97,8 @@ const Header: React.FC<HeaderProps> = ({
   };
 
   return (
-    <header className="t-header">
-      <div id="app-header" className={mapModifiers('t-header_main', isScroll && 'isScroll')}>
+    <header id="app-header" className="t-header">
+      <div className={mapModifiers('t-header_main', isScroll && 'isScroll')}>
         <Container>
           <div className={mapModifiers('t-header_layer-search', isOpenSearch && 'open')}>
             <button className="button-close" type="button" onClick={() => setIsOpenSearch(false)}>

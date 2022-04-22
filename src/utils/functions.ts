@@ -94,7 +94,7 @@ export function scrollStop(callback: (value: any) => void, time = 2000) {
   );
 }
 
-export const handleScrollCenter = (ref: React.RefObject<HTMLDivElement | null>,
+export const handleScrollCenter = (ref: React.RefObject<HTMLDivElement| HTMLUListElement | null>,
   classNameEleActive: string) => {
   const eleScroll = ref.current;
   const eleActive = eleScroll && eleScroll.querySelector(classNameEleActive);
