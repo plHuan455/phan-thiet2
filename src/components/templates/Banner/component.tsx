@@ -67,6 +67,8 @@ const Search: React.FC<SearchProps> = ({
     }
   };
 
+  const { setNode } = useScrollInfinite(onLoadMore);
+
   return (
     <div className="t-banner_search">
       <div className="t-banner_search-input">
