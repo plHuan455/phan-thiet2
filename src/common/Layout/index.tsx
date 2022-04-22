@@ -30,7 +30,7 @@ const Layout: React.FC = ({ children }) => {
 
   const handleSearch = useCallback((val: string | undefined) => {
     // TODO: get slug from static all later
-    navigate(`/tim-kiem?keyword=${val}`);
+    navigate(`/tim-kiem?keyword=${val}&sort=newest`);
   }, [navigate]);
 
   useGaTracker();
