@@ -21,6 +21,9 @@
     @include desktop-down {
       @include aspect-ratio(1366, 800);
     }
+    @include small-mobile {
+      @include aspect-ratio(1366, 1000);
+    }
     #{$root}-layer & {
       &::before {
         background: linear-gradient(0deg, rgba($black, 0.6), rgba($black, 0.6));
@@ -69,6 +72,11 @@
           padding: rem(10) rem(8);
           @include font-base(12, 20);
         }
+
+        @include mobile-down {
+          padding: rem(6) rem(8);
+          @include font-base(10, 18);
+        }
   
         &::placeholder {
           color: $taupe-gray;
@@ -86,6 +94,11 @@
         @include tablet-down {
           height: rem(42);
           width: rem(42);
+        }
+
+        @include mobile-down {
+          width: rem(32);
+          height: rem(32);
         }
       }
     }
