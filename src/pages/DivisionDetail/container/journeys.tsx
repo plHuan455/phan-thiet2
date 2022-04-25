@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 
 import PopupImageDetail from '../component/popupImageDetail';
 
-import divisionJourneysData from 'assets/dataDummy/divisionJourneys';
+import srcBg from 'assets/images/divisionJourneys/bg.jpg';
 import DivisionJourneys from 'components/templates/DivisionJourneys';
 import { SubdivisionJourneyTypes } from 'services/subdivision/types';
 import { getUtilityListBySubDivisionService } from 'services/utilities';
@@ -68,7 +68,7 @@ const Journeys: React.FC<JourneysProps> = ({
       <DivisionJourneys
         tabs={tabs}
         data={dataJourneys}
-        srcBg={divisionJourneysData.srcBg}
+        srcBg={srcBg}
         title={data?.title}
         idActive={idActive}
         handleClick={(val) => setIdActive(val)}
