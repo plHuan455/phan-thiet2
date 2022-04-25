@@ -189,7 +189,7 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId, color }) => {
 
         {/* TODO: Update icon loading inherit */}
         {state.isLoading && (
-          <div className="u-pt-15 u-pb-15">
+          <div className="u-pt-15 u-pb-15 d-flex justify-content-center">
             <Icon iconName="loadingInherit" />
           </div>
         )}
