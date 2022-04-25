@@ -56,6 +56,7 @@
   }
   
   .s-library {
+    position: relative;
     &_wrapTab {
       margin: rem(32) 0;
       @include adjust-flex(space-between, center);
@@ -143,6 +144,16 @@
         top: rem(-120);
         left: rem(-20);
       }
+    }
+  }
+
+  .o-cardImage {
+    cursor: pointer;
+    &_wrapper {
+      position: relative;
+      border-radius: rem(12);
+      cursor: pointer;
+      @include thumbnail-scale-hover();
     }
   }
 }

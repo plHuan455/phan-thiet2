@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import systemsGeneralService from 'services/systems';
 import { SystemsData } from 'services/systems/types';
@@ -8,11 +8,8 @@ type MessageNotify = {
   type?: 'warning' | 'success',
 }
 
-type PageType = 'default' | 'subdivisions';
-
 type InitialState = {
   messageNotify?: MessageNotify;
-  pageType?: PageType;
   data?: SystemsData
 };
 
@@ -21,7 +18,6 @@ const initialState: InitialState = {
     message: undefined,
     type: undefined,
   },
-  pageType: 'default',
 };
 
 export const systemsGeneralAsync = createAsyncThunk<
@@ -42,20 +38,12 @@ void,
 const systemsSlice = createSlice({
   name: 'systems',
   initialState,
-  reducers: {
-    setTypePage: ($state, action: PayloadAction<PageType>) => {
-      $state.pageType = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers(builder) {
     builder.addCase(systemsGeneralAsync.fulfilled, ($state, action) => {
       $state.data = action.payload;
     });
   },
 });
-
-export const {
-  setTypePage,
-} = systemsSlice.actions;
 
 export default systemsSlice.reducer;

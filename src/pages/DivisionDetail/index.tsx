@@ -1,24 +1,27 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import Screen from './container';
 
-import { useAppDispatch } from 'store/hooks';
-import { setTypePage } from 'store/systems';
+import { LayoutContext } from 'common/Layout/context';
 
 const DivisionDetail: React.FC = () => {
-  const dispatch = useAppDispatch();
+  const { setPageType, setLogoSubdivisions } = useContext(LayoutContext);
 
   useEffect(() => {
-    dispatch(setTypePage('subdivisions'));
+    if (setPageType) {
+      setPageType('subdivisions');
+    }
     return () => {
-      dispatch(setTypePage('default'));
+      if (setPageType) {
+        setPageType('default');
+      }
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="p-divisionDetail">
-      <Screen />
+      <Screen setLogoDivision={setLogoSubdivisions} />
     </div>
   );
 };

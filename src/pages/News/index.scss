@@ -94,6 +94,7 @@
   }
 
   .o-cardImage {
+    cursor: pointer;
     &_wrapper {
       position: relative;
       border-radius: rem(12);

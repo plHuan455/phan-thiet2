@@ -9,7 +9,7 @@ import FlatMore from 'common/FlatMore';
 import Card from 'components/organisms/Card';
 import JourneysTemplate from 'components/templates/Journeys';
 import PopupImage from 'components/templates/PopupImage';
-import getImageListService from 'services/image';
+import { getImageListService } from 'services/images';
 import { getSubDivisionListService } from 'services/subdivision';
 import CONSTANTS from 'utils/constants';
 import {

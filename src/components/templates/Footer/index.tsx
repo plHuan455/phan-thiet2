@@ -16,10 +16,10 @@ interface MenuItemFooter {
   list?: MenuItem[];
 }
 export interface FooterProps {
-  logo: string,
+  logo?: string,
   subMenu?: MenuItem[],
   copyRightTitle?: string,
-  addressList: {
+  addressList?: {
     title?: string,
     subTitle?: string,
     address?: string,
@@ -31,7 +31,7 @@ export interface FooterProps {
   menuList?: MenuItemFooter,
   divisionList?: MenuItemFooter,
   serviceList?: MenuItemFooter,
-  socialList: ListTypes
+  socialList?: ListTypes
 }
 
 export interface MenuFooterProps {
@@ -112,10 +112,10 @@ const Footer: React.FC<FooterProps> = ({
             <MenuFooter data={serviceList} />
           </div>
           <div className="t-footer_social">
-            <Text modifiers={['700', '12x20', 'davyGrey']} content={socialList.title} />
+            <Text modifiers={['700', '12x20', 'davyGrey']} content={socialList?.title} />
             <div className="t-footer_social-list">
               {
-                    socialList.list.map((item, index) => (
+                    socialList?.list.map((item, index) => (
                       <div className="t-footer_social-item" key={`social-${index.toString()}`}>
                         <Link key={`t-footer_social-${index.toString()}`} href={item.url} target={item.target} className="a-link">
                           <Image src={item.icon} ratio="1x1" alt={item.text} size="contain" />

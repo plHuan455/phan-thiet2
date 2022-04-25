@@ -24,6 +24,7 @@ export interface NewsListTypes {
   content: string;
   locale: string;
   publishedAt: string;
+  category?: []; // TODO: update type later
   subdivision: {
     name: string;
     slug: string;

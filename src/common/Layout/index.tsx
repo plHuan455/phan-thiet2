@@ -1,7 +1,7 @@
-import React, { useCallback, useLayoutEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useContext, useLayoutEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
-import useLayout from './functions';
+import { LayoutContext } from './context';
 
 import FloatingButton from 'common/FloatingButton';
 import NotifyWrapper from 'common/NotifyWrapper';
@@ -13,13 +13,10 @@ import useGTM from 'hooks/useGTM';
 
 const Layout: React.FC = ({ children }) => {
   const location = useLocation();
-  const navigate = useNavigate();
 
   const {
-    dataHeaderDefault,
-    dataFooter,
-    pageType,
-  } = useLayout();
+    header, pageType, footer, headerSubdivisions, onSearch,
+  } = useContext(LayoutContext);
 
   useLayoutEffect(() => {
     window.scrollTo({
@@ -28,23 +25,18 @@ const Layout: React.FC = ({ children }) => {
     });
   }, [location.pathname]);
 
-  const handleSearch = useCallback((val: string | undefined) => {
-    // TODO: get slug from static all later
-    navigate(`/tim-kiem?keyword=${val}&sort=newest`);
-  }, [navigate]);
-
   useGaTracker();
   useGTM();
 
   return (
     <div>
       {pageType === 'subdivisions'
-        ? <HeaderDivision handleSearch={handleSearch} {...dataHeaderDefault} />
-        : <Header handleSearch={handleSearch} {...dataHeaderDefault} /> }
+        ? <HeaderDivision handleSearch={onSearch} {...headerSubdivisions} />
+        : <Header handleSearch={onSearch} {...header} /> }
       <main>
         {children}
       </main>
-      <Footer {...dataFooter} />
+      <Footer {...footer} />
       <NotifyWrapper />
       <FloatingButton />
     </div>
