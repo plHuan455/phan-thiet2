@@ -11,7 +11,7 @@ import Documents from './documents';
 import Events from './events';
 import Images from './images';
 import MenuTag from './menus';
-import News, { AnimationNews } from './news';
+import News from './news';
 import Videos from './videos';
 
 import HelmetContainer from 'common/Helmet';
@@ -49,7 +49,6 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
       <div ref={tabMenu.menuList[0].ref}>
         <div className="s-news">
           <News news={data?.news} blocks={blocks} />
-          <AnimationNews />
         </div>
       </div>
       <div ref={tabMenu.menuList[1].ref}>

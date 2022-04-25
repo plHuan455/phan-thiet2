@@ -79,6 +79,11 @@ const News: React.FC<NewsProps> = ({ news, blocks }) => {
         title={newsBlocks?.title}
         listNews={dataNews}
       />
+      {
+        news && news.length && (
+          <AnimationNews />
+        )
+      }
     </Section>
   );
 };
