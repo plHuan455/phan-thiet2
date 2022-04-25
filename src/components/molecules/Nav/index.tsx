@@ -38,6 +38,13 @@ export const checkActiveMenu = (item: MenuItem, pathname: string) => {
   return flag;
 };
 
+export const getLink = (item: MenuItem, pathname: string) => {
+  if (item.type === 'custom_link' && item.link?.match(/^#/)) {
+    return pathname + item.link;
+  }
+  return item.reference?.slug || item.link;
+};
+
 export const NavItem: React.FC<NavItemProps> = ({
   isChild,
   idExpand,
@@ -60,7 +67,11 @@ export const NavItem: React.FC<NavItemProps> = ({
     {!props.subMenu?.length && (
       <Link
         onClick={handleCloseMenu}
-        href={props.reference?.slug || props.link}
+        href={
+          (props.type === 'custom_link' && props.link?.match(/^#/))
+            ? (pathname + props.link)
+            : (props.reference?.slug || props.link)
+        }
         target={props.target}
         className="menu-item_link"
       >
