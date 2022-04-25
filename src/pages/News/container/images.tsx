@@ -1,5 +1,7 @@
 import React, { useReducer, useMemo } from 'react';
 
+import Section from './section';
+
 import Container from 'common/Container';
 import FlatMore from 'common/FlatMore';
 import Image from 'components/atoms/Image';
@@ -77,8 +79,10 @@ const Images: React.FC<ImagesProps> = ({ images, blocks }) => {
     return [];
   }, [images]);
 
+  if (!images?.length) return null;
+
   return (
-    <div className="s-images">
+    <Section className="s-images">
       <Container>
         <FlatMore
           title={{
@@ -103,7 +107,7 @@ const Images: React.FC<ImagesProps> = ({ images, blocks }) => {
           imageList?.map((item) => item.thumbnail) || []
         }
       />
-    </div>
+    </Section>
   );
 };
 

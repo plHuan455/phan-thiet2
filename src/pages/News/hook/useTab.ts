@@ -2,9 +2,19 @@ import {
   useEffect, useMemo, useRef, useState,
 } from 'react';
 
-import { getDimensions } from 'utils/functions';
+import { OverviewType } from 'services/overviews/types';
+import { baseString, getBlockData, getDimensions } from 'utils/functions';
 
-const useMenu = () => {
+export type BlockItemTypes = {
+  title?: string;
+  button?: string;
+}
+
+interface MenuNewsProps extends SectionBlocks {
+  data?: OverviewType,
+}
+
+const useMenu = ({ data, blocks } : MenuNewsProps) => {
   const [active, setActive] = useState<string>();
 
   const refBarWrap = useRef<HTMLDivElement|null>(null);
@@ -15,33 +25,45 @@ const useMenu = () => {
   const refVideo = useRef<HTMLDivElement|null>(null);
   const refDiffer = useRef<HTMLDivElement|null>(null);
 
+  const newsBlocks = getBlockData<BlockItemTypes>('news', blocks);
+  const eventsBlock = getBlockData<BlockItemTypes>('event', blocks);
+  const imageBlocks = getBlockData<BlockItemTypes>('image', blocks);
+  const videoBlock = getBlockData<BlockItemTypes>('video', blocks);
+  const documentBlock = getBlockData<BlockItemTypes>('document', blocks);
+
   const menuList = useMemo(() => ([
     {
-      label: 'Tin tức', // TODO: translation later
+      label: baseString(newsBlocks?.title), // TODO: translation later
       value: 'tin-tuc',
       ref: refNews,
+      active: true,
     },
     {
-      label: 'Sự kiện',
+      label: baseString(eventsBlock?.title),
       value: 'su-kien',
       ref: refEvent,
+      active: !!data?.events?.length,
     },
     {
-      label: 'Hình ảnh',
+      label: baseString(imageBlocks?.title),
       value: 'hinh-anh',
       ref: refImage,
+      active: !!data?.images?.length,
     },
     {
-      label: 'Video',
+      label: baseString(videoBlock?.title),
       value: 'video',
       ref: refVideo,
+      active: !!data?.videos?.length,
     },
     {
-      label: 'Tài liệu khác',
+      label: baseString(documentBlock?.title),
       value: 'differ',
       ref: refDiffer,
+      active: !!data?.documents?.length,
     },
-  ]), []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  ]), [data, blocks]);
 
   useEffect(() => {
     const handleScroll = () => {
