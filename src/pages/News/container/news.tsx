@@ -73,14 +73,16 @@ const News: React.FC<NewsProps> = ({ news, blocks }) => {
     return [];
   }, [news, newsBlocks]);
 
+  if (!news?.length) return null;
+
   return (
-    <Section className="u-pb-lg-100 u-pt-lg-100">
+    <Section>
       <NewsList
         title={newsBlocks?.title}
         listNews={dataNews}
       />
       {
-        news && news.length && (
+        news && news?.length > 0 && (
           <AnimationNews />
         )
       }

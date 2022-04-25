@@ -14,7 +14,7 @@ interface MenuNewsProps extends SectionBlocks {
   data?: OverviewType,
 }
 
-const useMenu = ({ data, blocks } : MenuNewsProps) => {
+const useTab = ({ data, blocks } : MenuNewsProps) => {
   const [active, setActive] = useState<string>();
 
   const refBarWrap = useRef<HTMLDivElement|null>(null);
@@ -36,7 +36,7 @@ const useMenu = ({ data, blocks } : MenuNewsProps) => {
       label: baseString(newsBlocks?.title), // TODO: translation later
       value: 'tin-tuc',
       ref: refNews,
-      active: true,
+      active: !!data?.news?.length,
     },
     {
       label: baseString(eventsBlock?.title),
@@ -127,4 +127,4 @@ const useMenu = ({ data, blocks } : MenuNewsProps) => {
   };
 };
 
-export default useMenu;
+export default useTab;

@@ -2,7 +2,6 @@ import React, { useContext, useMemo } from 'react';
 import { useQuery } from 'react-query';
 import { useSearchParams } from 'react-router-dom';
 
-// eslint-disable-next-line import/no-cycle
 import useTab from '../hook/useTab';
 
 import Banner from './banner';
