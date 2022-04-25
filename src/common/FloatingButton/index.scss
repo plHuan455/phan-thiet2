@@ -11,8 +11,8 @@
     border-radius: 50%;
     box-shadow: 4px 4px 36px rgba($black, 0.2);
     background: $copper;
-    width: rem(64);
-    height: rem(64);
+    width: rem(52);
+    height: rem(52);
     @include adjust-flex();
     cursor: pointer;
     opacity: 0;

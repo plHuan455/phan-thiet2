@@ -16,19 +16,22 @@ interface DivisionProps {
 }
 
 const Division: React.FC<DivisionProps> = ({ data, subdivisionId }) => {
-  const { data: subDivisionList } = useQuery(['getSubDivisionList'], () => getSubDivisionListService());
+  const { data: subDivisionList } = useQuery(['getSubDivisionList'], () => getSubDivisionListService({
+    except_ids: subdivisionId?.toString(),
+  }));
 
   const subDivisionData = useMemo(
     () => subDivisionList?.data
-      .filter((item) => item.id !== subdivisionId)
       .map((division) => ({
         imgSrc: baseURL(division.thumbnail),
         title: division.name,
-        description: division.description || '',
+        description: baseString(division.description),
+        // TODO: update locale later
         href: `/${CONSTANTS.PREFIX.DIVISION.VI}/${division.slug}`,
       })),
-    [subDivisionList?.data, subdivisionId],
+    [subDivisionList?.data],
   );
+
   return (
     <section
       className="u-pt-md-80 u-pt-48 u-pb-md-80 u-pb-48"
@@ -41,6 +44,7 @@ const Division: React.FC<DivisionProps> = ({ data, subdivisionId }) => {
             type: 'h2',
             modifiers: ['s015', '400', 'inherit'],
           }}
+          // TODO: Update link later
           link={{
             text: 'Xem tất cả',
             href: '/',

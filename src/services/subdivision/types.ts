@@ -1,8 +1,10 @@
+/* eslint-disable camelcase */
 export interface SubDivisionParams {
   page?: number;
   limit?: number;
   keyword?: string;
   sort?: string;
+  except_ids?: string;
 }
 
 interface SubdivisionCommonTypes {
