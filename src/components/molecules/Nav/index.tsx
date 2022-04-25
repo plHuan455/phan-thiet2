@@ -2,7 +2,7 @@ import React from 'react';
 
 import Link from 'components/atoms/Link';
 import { MenuItem } from 'services/menus/types';
-import mapModifiers from 'utils/functions';
+import mapModifiers, { uniqueId } from 'utils/functions';
 
 interface InternalNavItemTypes {
   isChild?: boolean;
@@ -18,6 +18,9 @@ export interface NavItemProps extends MenuItem, InternalNavItemTypes { }
 
 const recursiveMenuActive = (item: MenuItem, pathname: string, cb: () => void) => {
   const link = item.reference?.slug || item?.link;
+  if (item.importantActive) {
+    cb();
+  }
   if (`/${link}` === pathname) {
     cb();
   } else if (link === '/' && pathname === '/') {
@@ -71,6 +74,11 @@ export const NavItem: React.FC<NavItemProps> = ({
           (props.type === 'custom_link' && props.link?.match(/^#/))
             ? (pathname + props.link)
             : (props.reference?.slug || props.link)
+        }
+        state={
+          (props.type === 'custom_link' && props.link?.match(/^#/))
+            ? { division: uniqueId() }
+            : undefined
         }
         target={props.target}
         className="menu-item_link"

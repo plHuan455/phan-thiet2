@@ -2,6 +2,8 @@ import React, { useEffect, useMemo } from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 
+import useMenu from '../hooks/useMenu';
+
 import Banner from './banner';
 import Collection from './collection';
 import Consultancy from './consultancy';
@@ -60,6 +62,8 @@ const Screen: React.FC<ScreenProps> = ({ setLogoDivision }) => {
     ...contentSubdivision,
   }), [contentSubdivision]);
 
+  const refSection = useMenu();
+
   useEffect(() => {
     if (subDivisionDetail?.logo && setLogoDivision) {
       setLogoDivision(baseURL(subDivisionDetail?.logo));
@@ -93,16 +97,20 @@ const Screen: React.FC<ScreenProps> = ({ setLogoDivision }) => {
         <IntroVideo data={video} />
 
         {/* Content */}
-        <Summary data={content} />
+        <Summary ref={refSection.menuList[0].ref} data={content} />
 
         {/* Location */}
         <Location data={location} type={subDivisionDetail?.type} />
 
         {/* Utilities */}
-        <Utilities data={utility} />
+        <Utilities ref={refSection.menuList[1].ref} data={utility} />
 
         {/* Collection */}
-        <Collection subDivisionId={subDivisionDetail?.id} data={collection} />
+        <Collection
+          ref={refSection.menuList[2].ref}
+          subDivisionId={subDivisionDetail?.id}
+          data={collection}
+        />
 
         {/* Library */}
         <Library

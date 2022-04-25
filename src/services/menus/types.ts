@@ -15,6 +15,7 @@ export type MenuItemData = {
   createdAt: string;
   updatedAt: string;
   reference?: Reference;
+  importantActive?: boolean;
 }
 
 export type Reference = {

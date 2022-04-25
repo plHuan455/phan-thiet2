@@ -9,7 +9,7 @@ interface UtilitiesProps {
   data?: SubdivisionUtilityTypes;
 }
 
-const Utilities: React.FC<UtilitiesProps> = ({ data }) => {
+const Utilities = React.forwardRef<HTMLDivElement, UtilitiesProps>(({ data }, ref) => {
   const [dimension, setDimension] = useState({
     width: 0,
     height: 0,
@@ -49,7 +49,7 @@ const Utilities: React.FC<UtilitiesProps> = ({ data }) => {
   // if (dimension.width <= 0 && dimension.height <= 0) return null;
 
   return (
-    <section className="u-pt-md-80 u-pt-48 u-pb-md-80 u-pb-48" style={{ color: 'var(--theme)' }}>
+    <section ref={ref} className="u-pt-md-80 u-pt-48 u-pb-md-80 u-pb-48" style={{ color: 'var(--theme)' }}>
       <DivisionUtilities
         background={baseURL(data?.map.image) || imgMap}
         title={data?.title}
@@ -59,7 +59,7 @@ const Utilities: React.FC<UtilitiesProps> = ({ data }) => {
       />
     </section>
   );
-};
+});
 
 Utilities.defaultProps = {
   data: undefined,

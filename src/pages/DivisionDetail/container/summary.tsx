@@ -8,9 +8,9 @@ interface SummaryProps {
   data?: SubdivisionContentTypes;
 }
 
-const Summary: React.FC<SummaryProps> = ({
+const Summary = React.forwardRef<HTMLDivElement, SummaryProps>(({
   data,
-}) => {
+}, ref) => {
   const summaryData = useMemo(() => [
     data?.items?.item1,
     data?.items?.item2,
@@ -22,7 +22,7 @@ const Summary: React.FC<SummaryProps> = ({
   if (!data?.active) return null;
 
   return (
-    <section className="u-pt-md-77 u-pt-48 u-pb-md-77 u-pb-48" style={{ color: 'var(--theme)' }}>
+    <section ref={ref} className="u-pt-md-77 u-pt-48 u-pb-md-77 u-pb-48" style={{ color: 'var(--theme)' }}>
       <DivisionSummary
         title={data?.title}
         description={data?.description}
@@ -30,7 +30,7 @@ const Summary: React.FC<SummaryProps> = ({
       />
     </section>
   );
-};
+});
 
 Summary.defaultProps = {
   data: undefined,
