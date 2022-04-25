@@ -25,8 +25,6 @@ const Events: React.FC<EventsProps> = ({
   const firstItem = listEvents[0] || undefined;
   const anotherItem = listEvents?.slice(1) || [];
 
-  console.log(listEvents, '====');
-
   const {
     days, hours, mins, secs,
   } = useCountDown({ endTime: firstItem?.endTime });
