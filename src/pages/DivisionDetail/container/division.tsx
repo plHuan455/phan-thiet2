@@ -1,53 +1,77 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import { useQuery } from 'react-query';
 
 import Container from 'common/Container';
 import FlatMore from 'common/FlatMore';
 import Arrow from 'components/atoms/Arrow';
 import Card from 'components/organisms/Card';
+import { getSubDivisionListService } from 'services/subdivision';
 import { SubdivisionRelatedTypes } from 'services/subdivision/types';
-import { baseString } from 'utils/functions';
-
-const dataDummy = new Array(10).fill({
-  imgSrc: 'https://source.unsplash.com/random',
-  title: 'The Florida',
-  description: 'Ocean Residence kiến tạo nơi đáng  sống mới cho cư dân khi tận hưởng giá trị Ocean Residence kiến tạo nơi đáng  sống mới cho cư dân khi tận hưởng giá trị ..',
-});
+import CONSTANTS from 'utils/constants';
+import { baseString, baseURL } from 'utils/functions';
 
 interface DivisionProps {
   data?: SubdivisionRelatedTypes;
+  subdivisionId?: number;
 }
 
-const Division: React.FC<DivisionProps> = ({ data }) => (
-  <section className="u-pt-md-80 u-pt-48 u-pb-md-80 u-pb-48" style={{ color: 'var(--theme)' }}>
-    <Container>
-      <FlatMore
-        title={{
-          text: baseString(data?.title),
-          type: 'h2',
-          modifiers: ['s015', '400', 'inherit'],
-        }}
-        link={{
-          text: 'Xem tất cả',
-          href: '/',
-        }}
-        data={dataDummy}
-        settings={{
-          prevArrow: <Arrow.Prev />,
-          nextArrow: <Arrow.Next />,
-          customPaging() {
-            return (
-              <span className="o-carousel_dot rect inherit" style={{ backgroundColor: 'var(--theme)' }} />
-            );
-          },
-        }}
-        render={(item) => <Card.Division {...item} />}
-      />
-    </Container>
-  </section>
-);
+const Division: React.FC<DivisionProps> = ({ data, subdivisionId }) => {
+  const { data: subDivisionList } = useQuery(['getSubDivisionList'], () => getSubDivisionListService({
+    except_ids: subdivisionId?.toString(),
+  }));
+
+  const subDivisionData = useMemo(
+    () => subDivisionList?.data
+      .map((division) => ({
+        imgSrc: baseURL(division.thumbnail),
+        title: division.name,
+        description: baseString(division.description),
+        // TODO: update locale later
+        href: `/${CONSTANTS.PREFIX.DIVISION.VI}/${division.slug}`,
+      })),
+    [subDivisionList?.data],
+  );
+
+  return (
+    <section
+      className="u-pt-md-80 u-pt-48 u-pb-md-80 u-pb-48"
+      style={{ color: 'var(--theme)' }}
+    >
+      <Container>
+        <FlatMore
+          title={{
+            text: baseString(data?.title),
+            type: 'h2',
+            modifiers: ['s015', '400', 'inherit'],
+          }}
+          // TODO: Update link later
+          link={{
+            text: 'Xem tất cả',
+            href: '/',
+          }}
+          data={subDivisionData}
+          settings={{
+            prevArrow: <Arrow.Prev />,
+            nextArrow: <Arrow.Next />,
+            customPaging() {
+              return (
+                <span
+                  className="o-carousel_dot rect inherit"
+                  style={{ backgroundColor: 'var(--theme)' }}
+                />
+              );
+            },
+          }}
+          render={(item) => <Card.Division {...item} />}
+        />
+      </Container>
+    </section>
+  );
+};
 
 Division.defaultProps = {
   data: undefined,
+  subdivisionId: undefined,
 };
 
 export default Division;

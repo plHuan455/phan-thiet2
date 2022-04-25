@@ -35,7 +35,7 @@ const FloatingButton: React.FC = () => {
       <div id="fb-root" />
       <div id="fb-customer-chat" className="fb-customerchat" />
       <div className={mapModifiers('floatingButton_scrollTop', isShow && 'show')} onClick={handleScrollTop}>
-        <Icon iconName="arrowUp" size="32" />
+        <Icon iconName="arrowUp" size="24" />
       </div>
     </div>
   );
