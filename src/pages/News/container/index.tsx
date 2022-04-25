@@ -18,6 +18,10 @@ import i18n from 'i18n';
 import { getOverviewListService } from 'services/overviews';
 import { getOgDataPage } from 'utils/functions';
 
+export interface MyCustomCSS extends React.CSSProperties {
+  '--theme': string;
+}
+
 const Screen: React.FC<BasePageDataTypes<any>> = ({
   blocks,
   banners,
@@ -32,10 +36,15 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
   const { data } = useQuery(['getOverviewList', [language, keywordParams]], () => getOverviewListService({
     keyword: keywordParams,
   }));
+
   const tabMenu = useTab({
     data,
     blocks,
   });
+
+  const styles = useMemo((): MyCustomCSS => ({
+    '--theme': '#005C8F',
+  }), []);
 
   return (
     <>
@@ -44,25 +53,25 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
       <MenuTag
         {...tabMenu}
       />
-      <div ref={tabMenu.menuList[0].ref}>
-        <div className="s-news">
+      <div style={styles}>
+        <div ref={tabMenu.menuList[0].ref}>
           <News news={data?.news} blocks={blocks} />
         </div>
-      </div>
-      <div ref={tabMenu.menuList[1].ref}>
-        <Events events={data?.events} blocks={blocks} />
-      </div>
-      <div ref={tabMenu.menuList[2].ref}>
-        <Images images={data?.images} blocks={blocks} />
-      </div>
-      <div ref={tabMenu.menuList[3].ref}>
-        <Videos videos={data?.videos} blocks={blocks} />
-      </div>
-      <div ref={tabMenu.menuList[4].ref}>
-        <Documents documents={data?.documents} blocks={blocks} />
-      </div>
-      <div>
-        <Consultancy blocks={blocks} />
+        <div ref={tabMenu.menuList[1].ref}>
+          <Events events={data?.events} blocks={blocks} />
+        </div>
+        <div ref={tabMenu.menuList[2].ref}>
+          <Images images={data?.images} blocks={blocks} />
+        </div>
+        <div ref={tabMenu.menuList[3].ref}>
+          <Videos videos={data?.videos} blocks={blocks} />
+        </div>
+        <div ref={tabMenu.menuList[4].ref}>
+          <Documents documents={data?.documents} blocks={blocks} />
+        </div>
+        <div>
+          <Consultancy blocks={blocks} />
+        </div>
       </div>
     </>
   );

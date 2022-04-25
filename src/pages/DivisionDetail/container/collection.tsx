@@ -3,6 +3,7 @@ import React, {
 } from 'react';
 import { useQuery } from 'react-query';
 
+import Animate from 'components/organisms/Animate';
 import DivisionCollection from 'components/templates/DivisionCollection';
 import PopupImage from 'components/templates/PopupImage';
 import { getImageListService } from 'services/images';
@@ -77,25 +78,27 @@ const Collection: React.FC<CollectionProps> = ({
   if (!data?.active) return null;
 
   return (
-    <section>
-      <DivisionCollection
-        dataList={dataCollection}
-        title={baseString(data?.title)}
-        description={data?.description}
-        handleClick={handleOpenPopup}
-      />
-      <PopupImage
-        isOpen={state.isOpen || false}
-        dataImageList={state.images || []}
-        handleClose={() => dispatch({
-          type: 'update_collection',
-          payload: {
-            isOpen: false,
-            images: [],
-          },
-        })}
-      />
-    </section>
+    <Animate type="fadeInUp">
+      <section>
+        <DivisionCollection
+          dataList={dataCollection}
+          title={baseString(data?.title)}
+          description={data?.description}
+          handleClick={handleOpenPopup}
+        />
+        <PopupImage
+          isOpen={state.isOpen || false}
+          dataImageList={state.images || []}
+          handleClose={() => dispatch({
+            type: 'update_collection',
+            payload: {
+              isOpen: false,
+              images: [],
+            },
+          })}
+        />
+      </section>
+    </Animate>
   );
 };
 

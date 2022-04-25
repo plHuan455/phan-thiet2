@@ -4,6 +4,7 @@ import Section from './section';
 
 import Container from 'common/Container';
 import FlatMore from 'common/FlatMore';
+import Animate from 'components/organisms/Animate';
 import Card from 'components/organisms/Card';
 import PopupPlayer from 'components/templates/PopupPlayer';
 import { OverviewVideoType } from 'services/overviews/types';
@@ -42,6 +43,7 @@ const reducer = (state: PlayerState, action: ActionWithPayload) => {
 
 const Videos: React.FC<VideoProps> = ({ videos, blocks }) => {
   const videoBlock = getBlockData<VideoBlocks>('video', blocks);
+
   const [state, dispatch] = useReducer(reducer, {
     isOpen: false,
     vidSrc: '',
@@ -85,29 +87,34 @@ const Videos: React.FC<VideoProps> = ({ videos, blocks }) => {
   if (!videos?.length) return null;
 
   return (
-    <Section className="s-videos">
-      <Container>
-        <FlatMore
-          title={{
-            text: baseString(videoBlock?.title),
-            type: 'h4',
-            modifiers: ['gradientGreen', '700', 's015', 'uppercase'],
-          }}
-          data={videoList}
-          render={(item) => (
-            <Card.Player
-              {...item}
+    <Animate type="fadeInUp">
+      <Section>
+        <div className="s-videos">
+          <Container>
+            <FlatMore
+              title={{
+                text: baseString(videoBlock?.title),
+                type: 'h4',
+                modifiers: ['gradientGreen', '700', 's015', 'uppercase'],
+              }}
+              data={videoList}
+              render={(item) => (
+                <Card.Player
+                  {...item}
+                />
+              )}
             />
-          )}
-        />
-      </Container>
-      <PopupPlayer
-        isOpen={state.isOpen || false}
-        handleClose={() => updatePlayerState({ isOpen: false })}
-        videoType={state.vidType || ''}
-        src={state.vidSrc || ''}
-      />
-    </Section>
+          </Container>
+          <PopupPlayer
+            isOpen={state.isOpen || false}
+            handleClose={() => updatePlayerState({ isOpen: false })}
+            videoType={state.vidType || ''}
+            src={state.vidSrc || ''}
+            theme="linear-gradient(180deg, #00a8a8 0%, #02747f 100%)"
+          />
+        </div>
+      </Section>
+    </Animate>
   );
 };
 

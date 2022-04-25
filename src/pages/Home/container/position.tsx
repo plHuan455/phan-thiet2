@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { useQuery } from 'react-query';
 
+import Animate from 'components/organisms/Animate';
 import ProjectPositionHome from 'components/templates/ProjectPositionHome';
 import { getSubDivisionMapListService } from 'services/subdivision';
 import { baseString, baseURL, getBlockData } from 'utils/functions';
@@ -37,21 +38,23 @@ const Position: React.FC<SectionBlocks> = ({ blocks }) => {
 
   const listLocation = useMemo(() => mapData?.items.map((item) => ({
     id: Number(item.subdivisionId),
-    imgSrc: baseURL(item.subdivision.thumbnail),
-    title: item.subdivision.name,
-    active: item.subdivision.pinned,
+    imgSrc: baseURL(item.subdivision?.thumbnail),
+    title: item.subdivision?.name,
+    active: item.subdivision?.pinned,
     y: Number(item.point.y),
     x: Number(item.point.x),
   })), [mapData]);
 
   return (
-    <ProjectPositionHome
-      listDivision={listLocation}
-      scale={positionBlockContent[0]}
-      investment={positionBlockContent[1]}
-      utility={positionBlockContent[2]}
-      thumbnail={baseURL(mapData?.image)}
-    />
+    <Animate type="fadeInUp">
+      <ProjectPositionHome
+        listDivision={listLocation}
+        scale={positionBlockContent[0]}
+        investment={positionBlockContent[1]}
+        utility={positionBlockContent[2]}
+        thumbnail={baseURL(mapData?.image)}
+      />
+    </Animate>
   );
 };
 

@@ -4,6 +4,7 @@ import React, {
 import { useInfiniteQuery } from 'react-query';
 
 import dummyContact from 'assets/dataDummy/contact';
+import Animate from 'components/organisms/Animate';
 import ContactMap from 'components/templates/ContactMap';
 import { AddressItemProps } from 'components/templates/ContactMap/component';
 import i18n from 'i18n';
@@ -88,17 +89,19 @@ const Map: React.FC<SectionBlocks> = ({ blocks }) => {
   );
 
   return (
-    <ContactMap
-      list={headquartersList}
-      title={mapBlock.title}
-      loading={isFetchingNextPage}
-      // TODO: add form general later
-      mapApiKey={dummyContact.mapApiKey}
-      defaultPosition={activeHeadquarter?.position}
-      headQuarterIdx={activeHeadquarter?.idx}
-      onLoadMore={() => hasNextHeadquarter && fetchNextHeadquarter()}
-      onClick={onClickHeadquarter}
-    />
+    <Animate type="fadeInUp">
+      <ContactMap
+        list={headquartersList}
+        title={mapBlock.title}
+        loading={isFetchingNextPage}
+        // TODO: add form general later
+        mapApiKey={dummyContact.mapApiKey}
+        defaultPosition={activeHeadquarter?.position}
+        headQuarterIdx={activeHeadquarter?.idx}
+        onLoadMore={() => hasNextHeadquarter && fetchNextHeadquarter()}
+        onClick={onClickHeadquarter}
+      />
+    </Animate>
   );
 };
 

@@ -6,6 +6,7 @@ import layer from 'assets/images/introVideo/background-blue.png';
 import ballon from 'assets/images/introVideo/balloon.png';
 import Container from 'common/Container';
 import Image from 'components/atoms/Image';
+import Animate from 'components/organisms/Animate';
 import Player, { PlayerProps } from 'components/organisms/Player';
 import { SubdivisionVideoTypes } from 'services/subdivision/types';
 import { baseString, youtubeControlIframe } from 'utils/functions';
@@ -46,22 +47,24 @@ const IntroVideo: React.FC<IntroVideoProps> = ({ data }) => {
   if (!data?.active || !data?.link) return null;
 
   return (
-    <section className="u-pt-md-80 u-pt-48 u-pb-md-61 u-pb-32 s-introVideo">
-      <animated.div className="s-introVideo_ballon" style={ballonAnimate} ref={ballonRef}>
-        <Image src={ballon} alt="ballon" ratio="132x202" />
-      </animated.div>
-      <div className="s-introVideo_layer">
-        <Image src={layer} alt="ballon" ratio="1366x688" />
-      </div>
-      <Container>
-        <div className="s-introVideo_content">
-          <IntroPlayer
-            isYoutube={isYoutube}
-            src={isYoutube ? youtubeControlIframe(link) : link}
-          />
+    <Animate type="fadeInUp">
+      <section className="u-pt-md-80 u-pt-48 u-pb-md-61 u-pb-32 s-introVideo">
+        <animated.div className="s-introVideo_ballon" style={ballonAnimate} ref={ballonRef}>
+          <Image src={ballon} alt="ballon" ratio="132x202" />
+        </animated.div>
+        <div className="s-introVideo_layer">
+          <Image src={layer} alt="ballon" ratio="1366x688" />
         </div>
-      </Container>
-    </section>
+        <Container>
+          <div className="s-introVideo_content">
+            <IntroPlayer
+              isYoutube={isYoutube}
+              src={isYoutube ? youtubeControlIframe(link) : link}
+            />
+          </div>
+        </Container>
+      </section>
+    </Animate>
   );
 };
 

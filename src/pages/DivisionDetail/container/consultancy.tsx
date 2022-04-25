@@ -6,6 +6,7 @@ import layer2 from 'assets/images/consultancy/kingdom-right.png';
 import layer4 from 'assets/images/consultancy/orange-background.png';
 import ConsultancyCommon from 'common/Consultancy';
 import Image from 'components/atoms/Image';
+import Animate from 'components/organisms/Animate';
 import { SubdivisionSubscribeTypes } from 'services/subdivision/types';
 import { baseString } from 'utils/functions';
 
@@ -34,20 +35,22 @@ const Consultancy: React.FC<ConsultancyProps> = ({ data }) => {
   if (!data?.active) return null;
 
   return (
-    <section
-      className="position-relative"
-      style={{ color: 'var(--theme)' }}
-    >
-      <ConsultancyCommon
-        layer={<LayerSection />}
-        py="lg"
-        title={{
-          text: baseString(data?.title),
-          modifiers: ['400', 'inherit', 's015'],
-        }}
-        variantButton="inherit"
-      />
-    </section>
+    <Animate type="fadeInUp">
+      <section
+        className="position-relative"
+        style={{ color: 'var(--theme)' }}
+      >
+        <ConsultancyCommon
+          layer={<LayerSection />}
+          py="lg"
+          title={{
+            text: baseString(data?.title),
+            modifiers: ['400', 'inherit', 's015'],
+          }}
+          variantButton="inherit"
+        />
+      </section>
+    </Animate>
   );
 };
 

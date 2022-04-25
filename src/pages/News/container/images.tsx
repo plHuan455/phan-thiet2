@@ -5,15 +5,16 @@ import Section from './section';
 import Container from 'common/Container';
 import FlatMore from 'common/FlatMore';
 import Image from 'components/atoms/Image';
+import Animate from 'components/organisms/Animate';
 import PopupImage from 'components/templates/PopupImage';
 import { OverviewImageType } from 'services/overviews/types';
 import { baseString, baseURL, getBlockData } from 'utils/functions';
 
 export interface CardImageProps {
-  thumbnail: string,
-  alt?: string,
-  href?: string,
-  handleClick?: () => void
+  thumbnail: string;
+  alt?: string;
+  href?: string;
+  handleClick?: () => void;
 }
 
 interface ImageState {
@@ -42,7 +43,11 @@ const reducer = (state: ImageState, action: ActionWithPayload) => {
   }
 };
 
-export const CardImage: React.FC<CardImageProps> = ({ thumbnail, alt, handleClick }) => (
+export const CardImage: React.FC<CardImageProps> = ({
+  thumbnail,
+  alt,
+  handleClick,
+}) => (
   <div className="o-cardImage">
     <div
       className="o-cardImage_wrapper"
@@ -82,32 +87,34 @@ const Images: React.FC<ImagesProps> = ({ images, blocks }) => {
   if (!images?.length) return null;
 
   return (
-    <Section className="s-images">
-      <Container>
-        <FlatMore
-          title={{
-            text: baseString(imageBlocks?.title),
-            type: 'h4',
-            modifiers: ['gradientGreen', '700', 's015', 'uppercase'],
-          }}
-          data={imageList}
-          render={(item, itemIdx) => (
-            <CardImage
-              {...item}
-              handleClick={() => updateImageState({ isOpen: true, currentImgIdx: itemIdx })}
+    <Animate type="fadeInUp">
+      <Section>
+        <div className="s-images">
+          <Container>
+            <FlatMore
+              title={{
+                text: baseString(imageBlocks?.title),
+                type: 'h4',
+                modifiers: ['gradientGreen', '700', 's015', 'uppercase'],
+              }}
+              data={imageList}
+              render={(item, itemIdx) => (
+                <CardImage
+                  {...item}
+                  handleClick={() => updateImageState({ isOpen: true, currentImgIdx: itemIdx })}
+                />
+              )}
             />
-          )}
-        />
-      </Container>
-      <PopupImage
-        isOpen={state.isOpen || false}
-        handleClose={() => updateImageState({ isOpen: false })}
-        currentImgIdx={state.currentImgIdx}
-        dataImageList={
-          imageList?.map((item) => item.thumbnail) || []
-        }
-      />
-    </Section>
+          </Container>
+          <PopupImage
+            isOpen={state.isOpen || false}
+            handleClose={() => updateImageState({ isOpen: false })}
+            currentImgIdx={state.currentImgIdx}
+            dataImageList={imageList?.map((item) => item.thumbnail) || []}
+          />
+        </div>
+      </Section>
+    </Animate>
   );
 };
 

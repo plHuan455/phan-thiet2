@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 
+import Animate from 'components/organisms/Animate';
 import SelectionTemplate from 'components/templates/Selection';
 import { getBlockData, baseURL, baseString } from 'utils/functions';
 
@@ -18,12 +19,14 @@ const Selection: React.FC<SectionBlocks> = ({ blocks }) => {
   }, [blocks]);
 
   return (
-    <section className="u-mt-xl-206 u-mt-lg-160 u-mt-0">
-      <SelectionTemplate
-        title={positionBlockContent.title}
-        image={positionBlockContent.image}
-      />
-    </section>
+    <Animate type="fadeInUp">
+      <section className="u-mt-xl-206 u-mt-lg-160 u-mt-0">
+        <SelectionTemplate
+          title={positionBlockContent.title}
+          image={positionBlockContent.image}
+        />
+      </section>
+    </Animate>
   );
 };
 

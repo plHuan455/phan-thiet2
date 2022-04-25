@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 
 import imgMap from 'assets/images/divisionUtilities/bg.png';
+import Animate from 'components/organisms/Animate';
 import DivisionUtilities from 'components/templates/DivisionUtilities';
 import { SubdivisionUtilityTypes } from 'services/subdivision/types';
 import { baseURL, imageLoader } from 'utils/functions';
@@ -49,15 +50,17 @@ const Utilities: React.FC<UtilitiesProps> = ({ data }) => {
   // if (dimension.width <= 0 && dimension.height <= 0) return null;
 
   return (
-    <section className="u-pt-md-80 u-pt-48 u-pb-md-80 u-pb-48" style={{ color: 'var(--theme)' }}>
-      <DivisionUtilities
-        background={baseURL(data?.map.image) || imgMap}
-        title={data?.title}
-        listLocations={listLocations}
-        heightImage={dimension.height}
-        widthImage={dimension.width}
-      />
-    </section>
+    <Animate type="fadeInUp">
+      <section className="u-pt-md-80 u-pt-48 u-pb-md-80 u-pb-48" style={{ color: 'var(--theme)' }}>
+        <DivisionUtilities
+          background={baseURL(data?.map.image) || imgMap}
+          title={data?.title}
+          listLocations={listLocations}
+          heightImage={dimension.height}
+          widthImage={dimension.width}
+        />
+      </section>
+    </Animate>
   );
 };
 
