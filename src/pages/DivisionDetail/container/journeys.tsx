@@ -1,13 +1,13 @@
-/* eslint-disable no-unused-vars */
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
 
 import PopupImageDetail from '../component/popupImageDetail';
 
-import divisionJourneysData from 'assets/dataDummy/divisionJourneys';
+import srcBg from 'assets/images/divisionJourneys/bg.jpg';
 import DivisionJourneys from 'components/templates/DivisionJourneys';
 import { SubdivisionJourneyTypes } from 'services/subdivision/types';
-import getUtilityCategoriesService, { getUtilityListService } from 'services/utilities';
+import { getUtilityListBySubDivisionService } from 'services/utilities';
+import { UtilitiesItemType } from 'services/utilities/types';
 import { baseURL } from 'utils/functions';
 
 interface JourneysProps {
@@ -15,57 +15,74 @@ interface JourneysProps {
   data?: SubdivisionJourneyTypes;
 }
 
+const fnCustomData = (list?:UtilitiesItemType[]) => list?.map((x) => ({
+  thumbnail: baseURL(x.thumbnail),
+  title: x.name,
+  description: x.description,
+})) || [];
+
 const Journeys: React.FC<JourneysProps> = ({
   id,
   data,
 }) => {
-  const [open, setOpen] = useState<number | undefined>(undefined);
+  const [open, setOpen] = useState<boolean>(false);
+  const [idActive, setIdActive] = useState<number>();
+  const [slideActive, setSlideActive] = useState<number>();
 
-  const { data: utilityCategories } = useQuery(
-    'getUtilityCategories', getUtilityCategoriesService,
-  );
-
-  const { data: utilitiesList, isLoading } = useQuery(
-    ['getUtilitiesList'], () => getUtilityListService(),
+  const { data: utilitiesData } = useQuery(
+    ['getListBySubDivision', { id }],
+    () => getUtilityListBySubDivisionService(`${id}`),
     {
-      enabled: !!utilityCategories?.length,
+      enabled: !!id,
     },
   );
 
-  const utilitiesData = useMemo(() => utilitiesList?.data?.map((item) => ({
-    thumbnail: baseURL(item.thumbnail),
-    title: item.name,
-    ratio: '354x221' as Ratio,
-    description: item.description,
-    handleClick: () => handleOpenPopup(item.slug),
-    slug: item.slug,
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  })), [utilitiesList]);
+  useEffect(() => {
+    if (utilitiesData && utilitiesData.hasCategory && utilitiesData.categories) {
+      setIdActive(utilitiesData.categories[0]?.id);
+    }
+  }, [utilitiesData]);
 
-  const handleOpenPopup = (slug: string) => {
-    utilitiesData?.forEach((item, index) => {
-      if (item.slug === slug) {
-        setOpen(index);
-      }
-    });
-  };
+  const findUtilitiesActive = useMemo(
+    () => utilitiesData?.categories?.find((x) => x.id === idActive),
+    [idActive, utilitiesData?.categories],
+  );
 
-  if (!data?.active) return null;
+  const tabs = useMemo(() => utilitiesData?.categories?.map((x) => ({
+    name: x.name,
+    id: x.id,
+  })), [utilitiesData?.categories]);
+
+  const dataJourneys = useMemo(() => (
+    !utilitiesData?.hasCategory
+      ? fnCustomData(utilitiesData?.utilities)
+      : fnCustomData(findUtilitiesActive?.utilities)
+  ), [
+    findUtilitiesActive?.utilities,
+    utilitiesData?.hasCategory,
+    utilitiesData?.utilities,
+  ]);
 
   return (
     <section>
       <DivisionJourneys
-        data={utilitiesData}
-        srcBg={divisionJourneysData.srcBg}
-        loading={isLoading}
-        textNotFound="Không tìm thấy dữ liệu"
+        tabs={tabs}
+        data={dataJourneys}
+        srcBg={srcBg}
         title={data?.title}
+        idActive={idActive}
+        handleClick={(val) => setIdActive(val)}
+        handleClickCard={(val) => {
+          setOpen(true);
+          setSlideActive(val);
+        }}
+        textNotFound="Không tìm thấy dữ liệu" // TODO: translation later
       />
       <PopupImageDetail
-        isOpen={open !== undefined}
-        handleClose={() => setOpen(undefined)}
-        dataList={utilitiesData || []}
-        slideActive={open || 0}
+        isOpen={open}
+        handleClose={() => setOpen(false)}
+        dataList={dataJourneys}
+        slideActive={slideActive || 0}
       />
     </section>
   );

@@ -1,6 +1,5 @@
 import {
   UtilityCategoriesTypes,
-  UtilityListBySubDivisionHasCategoryTypes,
   UtilityListBySubDivisionParams,
   UtilityListBySubDivisionTypes,
   UtilityListParams,
@@ -24,10 +23,9 @@ export const getUtilityListService = async (
 export const getUtilityListBySubDivisionService = async (
   id: string,
   params?: UtilityListBySubDivisionParams,
-): Promise<APIPaginationResponse<UtilityListBySubDivisionTypes
-  | UtilityListBySubDivisionHasCategoryTypes>> => {
+): Promise<UtilityListBySubDivisionTypes> => {
   const response = await axiosInstance.get(`utilities/list-by-subdivision/${id}`, { params });
-  return response.data;
+  return response.data.data;
 };
 
 export default getUtilityCategoriesService;

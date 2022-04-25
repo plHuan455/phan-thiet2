@@ -7,15 +7,20 @@ import Text from 'components/atoms/Text';
 import Card from 'components/organisms/Card';
 import { CardLayerProps } from 'components/organisms/Card/Layer';
 import { NextArrow, PrevArrow } from 'components/organisms/Carousel';
+import Tabs, { Tab } from 'components/organisms/Tabs';
 
 export interface DivisionJourneysProps {
   srcBg?: string;
   title?: string;
-  slugActive?: string;
   data?: CardLayerProps[];
-  loading?: boolean;
   textNotFound?: string;
-  handleClick?: (slug?: string) => void;
+  tabs?: {
+    name?: string;
+    id?: number;
+  }[];
+  idActive?: number;
+  handleClick?: (id?: number) => void;
+  handleClickCard?: (index?: number) => void;
 }
 
 const DivisionJourneys: React.FC<DivisionJourneysProps> = ({
@@ -23,12 +28,30 @@ const DivisionJourneys: React.FC<DivisionJourneysProps> = ({
   title,
   data,
   textNotFound,
+  tabs,
+  idActive,
+  handleClick,
+  handleClickCard,
 }) => (
   <div className="t-divisionJourneys">
     <img className="t-divisionJourneys_bg" src={srcBg} alt="background" />
     <Container>
       <div className="t-divisionJourneys_content">
         <Heading type="h2" modifiers={['400', 'white', 's015']} content={title} />
+        {tabs && tabs.length > 0 && (
+        <div className="t-divisionJourneys_tabs u-mt-30 u-mt-md-56">
+          <Tabs variableMutate={idActive}>
+            {tabs?.map((item, index) => (
+              <Tab
+                key={`tab-${index.toString()}`}
+                label={item.name}
+                active={item.id === idActive}
+                handleClick={() => handleClick && handleClick(item.id)}
+              />
+            ))}
+          </Tabs>
+        </div>
+        )}
         <div className="t-divisionJourneys_carousel u-mt-40">
           {!data?.length && (
             <div className="u-pt-50 u-pb-50">
@@ -50,11 +73,13 @@ const DivisionJourneys: React.FC<DivisionJourneysProps> = ({
               },
             }}
             data={data}
-            render={(item) => (
+            render={(item, index) => (
               <Card.Layer
                 {...item}
+                ratio="354x221"
                 isBold
                 modifiers={['filter', 'hover', 'r15', 'pd-24x16']}
+                handleClick={() => handleClickCard && handleClickCard(index)}
               />
             )}
           />

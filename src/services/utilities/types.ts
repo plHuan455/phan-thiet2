@@ -31,24 +31,37 @@ export interface UtilityListBySubDivisionParams {
   limit?: number;
 }
 
-export interface UtilityListBySubDivisionTypes {
-  hasCategory: boolean;
-  utilities: [
+export interface UtilitiesItemType {
+  id: number;
+  name: string;
+  slug: string;
+  thumbnail: string;
+  description: string;
+  displayOrder: number,
+  subdivision?: {
+    name?: string;
+    slug?: string;
+    thumbnail?: string;
+    logo?: string;
+  }
+  utilityCategories: [
     {
-      id: number;
-      name: string;
-      slug: string;
-      thumbnail: string;
-      description: string;
-      displayOrder: number,
-      utilityCategories: [
-        {
-          id: number,
-          name: string
-        }
-      ]
+      id: number,
+      name: string
     }
   ]
+}
+
+export interface UtilityListBySubDivisionTypes {
+  hasCategory: boolean;
+  utilities?: UtilitiesItemType[];
+  categories?: {
+    id?: number;
+    name?: string;
+    slug?: string;
+    displayOrder?: number;
+    utilities?: UtilitiesItemType[];
+  }[]
 }
 
 export interface UtilityListBySubDivisionHasCategoryTypes {
