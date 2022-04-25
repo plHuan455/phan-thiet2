@@ -46,6 +46,7 @@ const dummyData = [
 interface LibraryProps {
   subDivisionId?: number;
   data?: SubdivisionLibraryTypes;
+  color?: string;
 }
 
 interface LibraryState {
@@ -81,7 +82,7 @@ const reducer = (state: LibraryState, action: ActionWithPayload) => {
   }
 };
 
-const Library: React.FC<LibraryProps> = ({ data, subDivisionId }) => {
+const Library: React.FC<LibraryProps> = ({ data, subDivisionId, color }) => {
   const settingRef = useRef({
     prevArrow: <Arrow.Prev />,
     nextArrow: <Arrow.Next />,
@@ -187,9 +188,9 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId }) => {
         </div>
 
         {/* TODO: Update icon loading inherit */}
-        {state?.isLoading && (
-          <div>
-            <Icon iconName="loadingBlue" />
+        {state.isLoading && (
+          <div className="u-pt-15 u-pb-15">
+            <Icon iconName="loadingInherit" />
           </div>
         )}
 
@@ -321,6 +322,7 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId }) => {
           handleClose={() => dispatch({ type: 'close_player_popup' })}
           videoType={state.currVidType || ''}
           src={state.currVidSrc || ''}
+          theme={color}
         />
         <div className="d-flex justify-content-center d-lg-none u-mt-32">
           <Link href="/" target="_self">
@@ -339,6 +341,7 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId }) => {
 Library.defaultProps = {
   data: undefined,
   subDivisionId: -1,
+  color: undefined,
 };
 
 export default Library;

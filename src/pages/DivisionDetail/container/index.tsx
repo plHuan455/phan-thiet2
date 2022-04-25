@@ -108,6 +108,7 @@ const Screen: React.FC<ScreenProps> = ({ setLogoDivision }) => {
         <Library
           subDivisionId={subDivisionDetail?.id || -1}
           data={library}
+          color={baseString(subDivisionDetail?.color)}
         />
 
         {/* Journey */}
