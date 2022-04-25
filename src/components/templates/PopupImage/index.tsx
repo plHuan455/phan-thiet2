@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Slider from 'react-slick';
 
 import Image from 'components/atoms/Image';
+import Text from 'components/atoms/Text';
 import CustomModal from 'components/molecules/Modal';
 import Carousel, { PrevArrow, NextArrow } from 'components/organisms/Carousel';
 
@@ -118,7 +119,8 @@ const PopupImage: React.FC<PopupImageProps> = ({
             </div>
           </div>
         ) : (
-          <></>
+          // TODO: ADD Translations later
+          <Text modifiers={['24x36', 'white', 'center']}>Không có dữ liệu</Text>
         )}
       </CustomModal>
     </div>

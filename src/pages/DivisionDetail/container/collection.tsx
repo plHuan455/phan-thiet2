@@ -1,71 +1,99 @@
-import React from 'react';
+import React, {
+  useCallback, useMemo, useReducer,
+} from 'react';
+import { useQuery } from 'react-query';
 
-import layer1 from 'assets/images/divisionCollection/layer1.png';
-import layer2 from 'assets/images/divisionCollection/layer2.png';
-import layer3 from 'assets/images/divisionCollection/layer3.png';
-import layer4 from 'assets/images/divisionCollection/layer4.png';
 import DivisionCollection from 'components/templates/DivisionCollection';
+import PopupImage from 'components/templates/PopupImage';
+import { getImageListService } from 'services/images';
 import { SubdivisionCollectionTypes } from 'services/subdivision/types';
-import { baseString } from 'utils/functions';
+import { baseString, baseURL } from 'utils/functions';
+
+interface CollectionState {
+  images?: string[];
+  isOpen?: boolean;
+}
+
+interface ActionWithPayload {
+  type: string;
+  payload?: CollectionState;
+}
+
+const reducer = (state: CollectionState, action: ActionWithPayload) => {
+  switch (action.type) {
+    case 'update_collection':
+      return { ...state, ...action.payload };
+    default:
+      return state;
+  }
+};
 
 interface CollectionProps {
+  subDivisionId?: number;
   data?: SubdivisionCollectionTypes;
 }
 
 const Collection: React.FC<CollectionProps> = ({
   data,
+  subDivisionId,
 }) => {
+  const [state, dispatch] = useReducer(reducer, {
+    images: [],
+    isOpen: false,
+  });
+
+  const { data: imageList } = useQuery(
+    ['getCollection'], () => getImageListService({
+      subdivision_id: String(subDivisionId),
+    }),
+  );
+
+  const dataCollection = useMemo(() => imageList?.data.map((item) => ({
+    id: item.id,
+    title: baseString(item.name),
+    color: item.color,
+    // TODO: Translations later
+    button: {
+      text: 'Xem thêm',
+    },
+    thumbnail: baseURL(item.thumbnailSubdivision),
+  })) || [], [imageList]);
+
+  const handleOpenPopup = useCallback(
+    (id: number | undefined) => {
+      const item = imageList?.data?.find((e) => e.id === id);
+      if (item) {
+        dispatch({
+          type: 'update_collection',
+          payload: {
+            isOpen: true,
+            images: item.images?.map((e) => baseURL(e.path)),
+          },
+        });
+      }
+    }, [imageList?.data],
+  );
+
   if (!data?.active) return null;
 
   return (
     <section>
       <DivisionCollection
-        dataList={[
-          {
-            id: 1,
-            title: 'BERMUDA',
-            color: 'rgba(0, 92, 143, 1)',
-            button: {
-              text: 'Xem thêm',
-            },
-            thumbnail: layer1,
-          },
-          {
-            title: 'SANTORINI',
-            color: 'rgba(10, 182, 244, 1)',
-            button: {
-              text: 'Xem thêm',
-            },
-            thumbnail: layer2,
-          },
-          {
-            title: 'JAPAN',
-            color: 'rgba(231, 73, 77, 1)',
-            button: {
-              text: 'Xem thêm',
-            },
-            thumbnail: layer3,
-          },
-          {
-            title: 'EDWARDIAN',
-            color: 'rgba(187, 109, 63, 1)',
-            button: {
-              text: 'Xem thêm',
-            },
-            thumbnail: layer4,
-          },
-          {
-            title: 'BERMUDA',
-            color: 'rgba(0, 92, 143, 1)',
-            button: {
-              text: 'Xem thêm',
-            },
-            thumbnail: layer1,
-          },
-        ]}
+        dataList={dataCollection}
         title={baseString(data?.title)}
         description={data?.description}
-        // handleClick={(id) => console.log(id)}
+        handleClick={handleOpenPopup}
+      />
+      <PopupImage
+        isOpen={state.isOpen || false}
+        dataImageList={state.images || []}
+        handleClose={() => dispatch({
+          type: 'update_collection',
+          payload: {
+            isOpen: false,
+            images: [],
+          },
+        })}
       />
     </section>
   );
@@ -73,6 +101,7 @@ const Collection: React.FC<CollectionProps> = ({
 
 Collection.defaultProps = {
   data: undefined,
+  subDivisionId: undefined,
 };
 
 export default Collection;

@@ -102,7 +102,7 @@ const Screen: React.FC<ScreenProps> = ({ setLogoDivision }) => {
         <Utilities data={utility} />
 
         {/* Collection */}
-        <Collection data={collection} />
+        <Collection subDivisionId={subDivisionDetail?.id} data={collection} />
 
         {/* Library */}
         <Library
