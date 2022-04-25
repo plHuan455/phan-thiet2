@@ -1,8 +1,6 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable camelcase */
 import React, {
-  useState, useEffect, useReducer, useRef, useMemo,
+  useState, useEffect, useReducer, useRef,
 } from 'react';
 
 import Container from 'common/Container';
@@ -20,8 +18,8 @@ import { useAsync } from 'hooks/useAsync';
 import { CardImage } from 'pages/News/container/images';
 import { getDocumentsService } from 'services/documents';
 import { DocumentTypes } from 'services/documents/types';
-import { getImageListService } from 'services/image';
-import { ImageListTypes } from 'services/image/types';
+import { getAllImagesService } from 'services/images';
+import { ImageOnlyTypes } from 'services/images/types';
 import { getNewsListService } from 'services/news';
 import { NewsListTypes } from 'services/news/types';
 import { SubdivisionLibraryTypes } from 'services/subdivision/types';
@@ -54,7 +52,7 @@ interface LibraryState {
   isLoading?: boolean;
   news?: NewsListTypes[];
   documents?: DocumentTypes[];
-  images?: ImageListTypes[];
+  images?: ImageOnlyTypes[];
   videos?: VideoTypes[];
   isPopImageOpen?: boolean;
   currentImgIdx?: number;
@@ -94,10 +92,10 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId }) => {
 
   const [indexActive, setIndexActive] = useState(0);
   const [state, dispatch] = useReducer(reducer, {
-    news: undefined,
-    documents: undefined,
-    images: undefined,
-    videos: undefined,
+    news: [],
+    documents: [],
+    images: [],
+    videos: [],
     isLoading: false,
     isPopImageOpen: false,
     currentImgIdx: 0,
@@ -115,24 +113,25 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId }) => {
         const subdivision_id = subDivisionId?.toString();
         if (subDivisionId !== subDivisionRef.current) {
           subDivisionRef.current = subDivisionId;
-          temp.news = undefined;
-          temp.documents = undefined;
-          temp.images = undefined;
+          temp.news = [];
+          temp.documents = [];
+          temp.images = [];
+          temp.videos = [];
         }
         dispatch({ type: 'start_loading' });
-        if (indexActive === 0 && !temp.news) {
+        if (indexActive === 0 && !temp.news?.length) {
           const res = await getNewsListService({ subdivision_id });
           temp.news = res.data;
         }
-        if (indexActive === 1 && !temp.images) {
-          const res = await getImageListService({ subdivision_id });
+        if (indexActive === 1 && !temp.images?.length) {
+          const res = await getAllImagesService({ subdivision_id });
           temp.images = res.data;
         }
-        if (indexActive === 2 && !temp.videos) {
+        if (indexActive === 2 && !temp.videos?.length) {
           const res = await getVideosService({ subdivision_id });
           temp.videos = res.data;
         }
-        if (indexActive === 3 && !temp.documents) {
+        if (indexActive === 3 && !temp.documents?.length) {
           const res = await getDocumentsService({ subdivision_id });
           temp.documents = res.data;
         }
@@ -147,35 +146,16 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId }) => {
     },
   );
 
-  // const listData = useMemo(():
-  // NewsListTypes[] | DocumentTypes[] | ImageListTypes[] | VideoTypes[] => {
-  //   switch (indexActive) {
-  //     case 0:
-  //       return state.news || [];
-  //     case 1:
-  //       return state.images || [];
-  //     case 2:
-  //       return state.videos || [];
-  //     case 3:
-  //       return state.documents || [];
-
-  //     default:
-  //       return [];
-  //   }
-  // }, [state, indexActive]);
-
   useEffect(() => {
     libraryExecute();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [subDivisionId, indexActive]);
 
-  // console.log(listData);
-
   if (!data?.active) return null;
 
   return (
     <section
-      className="s-library u-mt-md-80 u-mt-48 u-mb-md-80 u-mb-48"
+      className="s-library u-pt-md-80 u-pt-48 u-pb-md-80 u-pb-48"
       style={{ color: 'var(--theme)' }}
     >
       <Container>
@@ -205,16 +185,25 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId }) => {
             </Link>
           </div>
         </div>
+
+        {/* TODO: Update icon loading inherit */}
+        {state?.isLoading && (
+          <div>
+            <Icon iconName="loadingBlue" />
+          </div>
+        )}
+
+        {/* News */}
         {indexActive === 0 && !state.isLoading && (
           state.news && state.news.length > 0 ? (
             <FlatList
-              data={state.news || []}
+              data={state.news}
               settings={settingRef.current}
               render={(item) => (
                 <Card.Normal
                   thumbnail={baseURL(item.thumbnail)}
                   title={item.title}
-                  href={`/tin-tuc/${item.slug}`}
+                  href={`/${CONSTANTS.PREFIX.NEWS.VI}/${item.slug}`}
                   tag={{
                     text: item?.subdivision?.name,
                     // TODO: Add locale later
@@ -231,37 +220,36 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId }) => {
             />
           )
             : (
-              <div>
-                <Text modifiers={['14x20', '400', 'inherit', 'center']}>
-                  Không có dữ liệu!
-                </Text>
-              </div>
+              <Text modifiers={['14x20', '400', 'inherit', 'center']}>
+                Không có dữ liệu!
+              </Text>
             ))}
+
+        {/* Images */}
         {indexActive === 1 && !state.isLoading && (
           state.images && state.images.length > 0 ? (
             <FlatList
-              data={state.images || []}
+              data={state.images}
               settings={settingRef.current}
               render={(item, itemIdx) => (
                 <CardImage
-                  // thumbnail={baseURL(item.path)}
-                  thumbnail=""
+                  thumbnail={baseURL(item.path)}
                   handleClick={() => dispatch({ type: 'update_library', payload: { isPopImageOpen: true, currentImgIdx: itemIdx } })}
                 />
               )}
             />
           )
             : (
-              <div>
-                <Text modifiers={['14x20', '400', 'inherit', 'center']}>
-                  Không có dữ liệu!
-                </Text>
-              </div>
+              <Text modifiers={['14x20', '400', 'inherit', 'center']}>
+                Không có dữ liệu!
+              </Text>
             ))}
+
+        {/* Videos */}
         {indexActive === 2 && !state.isLoading && (
           state.videos && state.videos.length > 0 ? (
             <FlatList
-              data={state.videos || []}
+              data={state.videos}
               settings={settingRef.current}
               render={(item) => {
                 const isVidOutside = item.video?.includes('http://') || item.video?.includes('https://');
@@ -291,16 +279,16 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId }) => {
             />
           )
             : (
-              <div>
-                <Text modifiers={['14x20', '400', 'inherit', 'center']}>
-                  Không có dữ liệu!
-                </Text>
-              </div>
+              <Text modifiers={['14x20', '400', 'inherit', 'center']}>
+                Không có dữ liệu!
+              </Text>
             ))}
+
+        {/* Documents */}
         {indexActive === 3 && !state.isLoading && (
           state.documents && state.documents.length > 0 ? (
             <FlatList
-              data={state.documents || []}
+              data={state.documents}
               settings={settingRef.current}
               render={(item) => (
                 <Card.Normal
@@ -318,18 +306,15 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId }) => {
             />
           )
             : (
-              <div>
-                <Text modifiers={['14x20', '400', 'inherit', 'center']}>
-                  Không có dữ liệu!
-                </Text>
-              </div>
+              <Text modifiers={['14x20', '400', 'inherit', 'center']}>
+                Không có dữ liệu!
+              </Text>
             ))}
         <PopupImage
           isOpen={state.isPopImageOpen || false}
           handleClose={() => dispatch({ type: 'close_image_popup' })}
           currentImgIdx={state.currentImgIdx}
-          // dataImageList={state.images?.map((item) => baseURL(item.iam)) || []}
-          dataImageList={[]}
+          dataImageList={state.images?.map((item) => baseURL(item.path)) || []}
         />
         <PopupPlayer
           isOpen={state.isPopPlayerOpen || false}

@@ -6,7 +6,7 @@ export const getDocumentsService = async (
   params?: DocumentParams,
 ): Promise<APIPaginationResponse<DocumentTypes[]>> => {
   const response = await axiosInstance.get('documents', { params });
-  return response.data.data;
+  return response.data;
 };
 
 const documentService = {
