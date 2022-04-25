@@ -1,5 +1,7 @@
 import React, { useMemo, useReducer } from 'react';
 
+import Section from './section';
+
 import Container from 'common/Container';
 import FlatMore from 'common/FlatMore';
 import Card from 'components/organisms/Card';
@@ -79,8 +81,11 @@ const Videos: React.FC<VideoProps> = ({ videos, blocks }) => {
     }
     return [];
   }, [videos]);
+
+  if (!videos?.length) return null;
+
   return (
-    <div className="s-videos">
+    <Section className="s-videos">
       <Container>
         <FlatMore
           title={{
@@ -102,7 +107,7 @@ const Videos: React.FC<VideoProps> = ({ videos, blocks }) => {
         videoType={state.vidType || ''}
         src={state.vidSrc || ''}
       />
-    </div>
+    </Section>
   );
 };
 

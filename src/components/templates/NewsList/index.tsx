@@ -60,4 +60,4 @@ const NewsList: React.FC<NewsListProps> = ({
 NewsList.defaultProps = {
 };
 
-export default NewsList;
+export default React.memo(NewsList);

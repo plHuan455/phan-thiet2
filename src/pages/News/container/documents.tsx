@@ -2,6 +2,8 @@ import React, { useRef, useMemo } from 'react';
 
 import useAnimation from '../hook/animation';
 
+import Section from './section';
+
 import ballon2 from 'assets/images/pages/news/ballon_2.png';
 import leaf3 from 'assets/images/pages/news/leaf_3.png';
 import Container from 'common/Container';
@@ -54,9 +56,12 @@ const Documents: React.FC<DocumentProps> = ({ documents, blocks }) => {
     }
     return [];
   }, [documents]);
+
+  if (!documents?.length) return null;
+
   return (
     <>
-      <div className="s-documents">
+      <Section className="s-documents">
         <animated.div
           style={isScrollLeaf ? slideReverseAnimate : {}}
           className="s-documents_leaf"
@@ -86,7 +91,7 @@ const Documents: React.FC<DocumentProps> = ({ documents, blocks }) => {
             )}
           />
         </Container>
-      </div>
+      </Section>
     </>
   );
 };

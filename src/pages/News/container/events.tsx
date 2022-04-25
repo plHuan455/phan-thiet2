@@ -3,6 +3,8 @@
 import dayjs from 'dayjs';
 import React, { useMemo } from 'react';
 
+import Section from './section';
+
 import { IconName } from 'components/atoms/Icon';
 import EventsTemplate from 'components/templates/Events';
 import { OverviewEventsType } from 'services/overviews/types';
@@ -54,14 +56,15 @@ const Events: React.FC<EventsProps> = ({ events, blocks }) => {
     }));
   }, [events, eventsBlock]);
 
+  if (!events?.length) return null;
+
   return (
-    <div className="s-events">
+    <Section className="s-events">
       <EventsTemplate
         title={eventsBlock?.title}
         listEvents={dataEvents}
       />
-    </div>
-
+    </Section>
   );
 };
 

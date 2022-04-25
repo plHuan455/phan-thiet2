@@ -38,10 +38,14 @@ const Banner: React.FC<Pick<BasePageDataTypes<any>, 'banners' | 'blocks'>> = ({ 
   ]);
 
   const onSearch = (keyword: string | undefined) => {
-    if (!keyword) return;
-    onSubmit(keyword);
-    searchParams.set('keyword', keyword);
-    setSearchParams(searchParams);
+    if (keyword) {
+      onSubmit(keyword);
+      searchParams.set('keyword', keyword);
+      setSearchParams(searchParams);
+    } else {
+      searchParams.delete('keyword');
+      setSearchParams(searchParams);
+    }
   };
 
   return (

@@ -12,6 +12,7 @@ export interface MenusProps {
     label: string;
     value: string;
     ref: MutableRefObject<HTMLDivElement | null>;
+    active: boolean;
   }[];
 }
 
@@ -33,7 +34,7 @@ const Menus: React.FC<MenusProps> = ({
         <Container>
           <div className="s-menus_wrapper">
             <ul ref={refContent} className="s-menus_content">
-              {menuList?.map((item, idx) => (
+              {menuList?.map((item, idx) => item.active && (
                 <li
                   className={mapModifiers('s-menus_item', active === item.value ? 'active' : '')}
                   key={idx.toString()}
