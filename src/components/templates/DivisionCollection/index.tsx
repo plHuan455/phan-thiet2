@@ -95,6 +95,7 @@ const DivisionCollection: React.FC<DivisionCollectionProps> = ({
             titleCard={dataList[0]?.title}
             thumbnail={dataList[0]?.thumbnail}
             button={dataList[0]?.button}
+            color={dataList[0]?.color}
             handleClick={() => handleClick && handleClick(dataList[0]?.id)}
           />
         )

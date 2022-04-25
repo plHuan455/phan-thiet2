@@ -1,11 +1,32 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, {
+  useCallback, useMemo, useReducer,
+} from 'react';
 import { useQuery } from 'react-query';
 
 import DivisionCollection from 'components/templates/DivisionCollection';
 import PopupImage from 'components/templates/PopupImage';
-import getImageListService from 'services/image';
+import { getImageListService } from 'services/images';
 import { SubdivisionCollectionTypes } from 'services/subdivision/types';
 import { baseString, baseURL } from 'utils/functions';
+
+interface CollectionState {
+  images?: string[];
+  isOpen?: boolean;
+}
+
+interface ActionWithPayload {
+  type: string;
+  payload?: CollectionState;
+}
+
+const reducer = (state: CollectionState, action: ActionWithPayload) => {
+  switch (action.type) {
+    case 'update_collection':
+      return { ...state, ...action.payload };
+    default:
+      return state;
+  }
+};
 
 interface CollectionProps {
   subDivisionId?: number;
@@ -16,7 +37,11 @@ const Collection: React.FC<CollectionProps> = ({
   data,
   subDivisionId,
 }) => {
-  const [open, setOpen] = useState<string[] | undefined>(undefined);
+  const [state, dispatch] = useReducer(reducer, {
+    images: [],
+    isOpen: false,
+  });
+
   const { data: imageList } = useQuery(
     ['getCollection'], () => getImageListService({
       subdivision_id: String(subDivisionId),
@@ -25,23 +50,27 @@ const Collection: React.FC<CollectionProps> = ({
 
   const dataCollection = useMemo(() => imageList?.data.map((item) => ({
     id: item.id,
-    title: item.name,
+    title: baseString(item.name),
     color: item.color,
     // TODO: Translations later
     button: {
       text: 'Xem thêm',
     },
     thumbnail: baseURL(item.thumbnailSubdivision),
-  })), [imageList]);
+  })) || [], [imageList]);
 
   const handleOpenPopup = useCallback(
     (id: number | undefined) => {
-      imageList?.data.forEach((item) => {
-        if (item.id === id) {
-          const listImg = item.images.map((img) => baseURL(img.path));
-          setOpen(listImg);
-        }
-      });
+      const item = imageList?.data?.find((e) => e.id === id);
+      if (item) {
+        dispatch({
+          type: 'update_collection',
+          payload: {
+            isOpen: true,
+            images: item.images?.map((e) => baseURL(e.path)),
+          },
+        });
+      }
     }, [imageList?.data],
   );
 
@@ -50,15 +79,21 @@ const Collection: React.FC<CollectionProps> = ({
   return (
     <section>
       <DivisionCollection
-        dataList={dataCollection || []}
+        dataList={dataCollection}
         title={baseString(data?.title)}
         description={data?.description}
         handleClick={handleOpenPopup}
       />
       <PopupImage
-        isOpen={!!open}
-        dataImageList={open || []}
-        handleClose={() => setOpen(undefined)}
+        isOpen={state.isOpen || false}
+        dataImageList={state.images || []}
+        handleClose={() => dispatch({
+          type: 'update_collection',
+          payload: {
+            isOpen: false,
+            images: [],
+          },
+        })}
       />
     </section>
   );
