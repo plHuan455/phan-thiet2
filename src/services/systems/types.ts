@@ -4,14 +4,18 @@ export type Locales = {
   active: boolean;
 };
 
+export type LanguageKeyTypes = keyof LocalesTypes;
+
+export type LocalesTypes = {
+  vi?: Locales;
+  en?: Locales;
+  kr?: Locales;
+  jp?: Locales;
+  cn?: Locales;
+}
+
 export type SystemsData = {
-  locales: {
-    vi?: Locales;
-    en?: Locales;
-    kr?: Locales;
-    jp?: Locales;
-    cn?: Locales;
-  };
+  locales: LocalesTypes;
   gaId: string[];
   gtmId: string[];
   messengerId: number;

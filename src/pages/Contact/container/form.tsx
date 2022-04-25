@@ -3,6 +3,7 @@ import axios from 'axios';
 import React, { useMemo } from 'react';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 
 import { NotifyProps } from 'components/organisms/Notify';
@@ -21,6 +22,7 @@ export interface FormProps {
 }
 
 const Form: React.FC<SectionBlocks> = ({ blocks }) => {
+  const { t } = useTranslation();
   const location = useLocation();
 
   const { executeRecaptcha } = useGoogleReCaptcha();
@@ -33,17 +35,17 @@ const Form: React.FC<SectionBlocks> = ({ blocks }) => {
     const blockPageContent = getBlockData<FormProps>('form_contact', blocks);
     return {
       form: {
-        addressPlaceholder: 'ĐỊA CHỈ',
-        contentPlaceholder: 'NỘI DUNG',
-        emailPlaceholder: 'EMAIL *',
-        namePlaceholder: 'HỌ VÀ TÊN',
-        phonePlaceholder: 'ĐIỆN THOẠI *',
-        btnText: 'Đăng ký nhận thông tin',
+        addressPlaceholder: t('form.address'),
+        contentPlaceholder: t('form.content'),
+        emailPlaceholder: t('form.email'),
+        namePlaceholder: t('form.name'),
+        phonePlaceholder: t('form.phone'),
+        btnText: t('form.register'),
       },
       titleForm: blockPageContent?.title,
       descriptionForm: blockPageContent?.description,
     };
-  }, [blocks]);
+  }, [blocks, t]);
 
   const [contactExecute, contactState] = useAsync(
     async (params: ContactFormType) => {

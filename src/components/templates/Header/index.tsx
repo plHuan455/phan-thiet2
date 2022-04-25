@@ -21,7 +21,7 @@ export interface HeaderProps {
   menu?: MenuItem[];
   language?: {
     langList: OptionType[];
-    value: OptionType;
+    value?: OptionType;
     handleChangeLang?: (item?: OptionType) => void;
   }
   handleSearch?: (val: string | undefined) => void;

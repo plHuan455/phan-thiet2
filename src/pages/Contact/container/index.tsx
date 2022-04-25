@@ -11,7 +11,7 @@ import imgLeaf from 'assets/images/pages/contact/leaf.png';
 import Image from 'components/atoms/Image';
 import useScrollAnimate from 'hooks/useScrollAnimation';
 
-const Layer = () => {
+const Layer = React.memo(() => {
   const ballonRef = useRef<HTMLDivElement>(null);
   const leafRef = useRef<HTMLDivElement>(null);
   const isScrollToBallon = useScrollAnimate(ballonRef);
@@ -27,7 +27,8 @@ const Layer = () => {
       </animated.div>
     </div>
   );
-};
+});
+
 const Screen: React.FC<BasePageDataTypes<any>> = ({
   banners,
   blocks,
