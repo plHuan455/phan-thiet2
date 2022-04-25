@@ -1,9 +1,10 @@
 import React, {
-  useCallback, useEffect, useMemo, useState,
+  useCallback, useContext, useEffect, useMemo, useState,
 } from 'react';
 import { useInfiniteQuery } from 'react-query';
 
 import dummyContact from 'assets/dataDummy/contact';
+import { LanguageContext } from 'common/Language';
 import ContactMap from 'components/templates/ContactMap';
 import { AddressItemProps } from 'components/templates/ContactMap/component';
 import { headquartersService } from 'services/headquarters';
@@ -18,6 +19,8 @@ interface ActiveProps extends AddressItemProps {
 }
 
 const Map: React.FC<SectionBlocks> = ({ blocks }) => {
+  const { flag } = useContext(LanguageContext).language;
+
   const [activeHeadquarter, setActiveHeadquarter] = useState<ActiveProps>({
     idx: -1,
     position: { lat: 0, lng: 0 },
@@ -39,7 +42,7 @@ const Map: React.FC<SectionBlocks> = ({ blocks }) => {
     isFetchingNextPage,
     fetchNextPage: fetchNextHeadquarter,
   } = useInfiniteQuery(
-    ['getHeadquartersData'],
+    ['getHeadquartersData', [flag]],
     ({ pageParam = 1 }) => headquartersService({
       page: pageParam,
       limit: 3,

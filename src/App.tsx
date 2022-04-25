@@ -1,6 +1,6 @@
 import 'App.scss';
 
-import React, { Suspense } from 'react';
+import React, { Suspense, useContext } from 'react';
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 import { HelmetProvider } from 'react-helmet-async';
 import { QueryClient, QueryClientProvider } from 'react-query';
@@ -9,7 +9,7 @@ import {
   BrowserRouter as Router, Outlet, Route, Routes,
 } from 'react-router-dom';
 
-import LanguageProvider from 'common/Language';
+import LanguageProvider, { LanguageContext, LanguagePrefix } from 'common/Language';
 import Layout from 'common/Layout';
 import LayoutProvider from 'common/Layout/context';
 import LoadingPage from 'common/Navigation/loading';
@@ -19,42 +19,61 @@ import EventsDetail from 'pages/EventsDetail';
 import NewsDetail from 'pages/NewsDetail';
 import { store } from 'store';
 import { useAppSelector } from 'store/hooks';
+import CONSTANTS from 'utils/constants';
 
 const HomeNavigation = React.lazy(() => import('common/Navigation/home'));
 const PageNavigation = React.lazy(() => import('common/Navigation/page'));
 
-const App: React.FC = () => (
-  <Suspense fallback={<LoadingPage />}>
-    <Routes>
-      <Route
-        path="/"
-        element={(
-          <LayoutProvider>
-            <Layout>
-              <Outlet />
-            </Layout>
-          </LayoutProvider>
-            )}
-      >
-        {/* TODO: Implement translation later */}
-        <Route path="">
-          <Route index element={<HomeNavigation />} />
-          <Route path=":slug" element={<PageNavigation />} />
-          <Route path="404" element={<Error />} />
-          <Route path="tin-tuc/:slug" element={<NewsDetail />} />
-          <Route path="su-kien/:slug" element={<EventsDetail />} />
-          <Route path="phan-khu/:slug" element={<DivisionDetail />} />
+const App: React.FC = () => {
+  const activeLocales = useContext(LanguageContext).language.active;
+
+  if (!activeLocales?.length) return null;
+
+  return (
+    <Suspense fallback={<LoadingPage />}>
+      <Routes>
+        <Route
+          path="/"
+          element={(
+            <LayoutProvider>
+              <Layout>
+                <Outlet />
+              </Layout>
+            </LayoutProvider>
+              )}
+        >
+          {activeLocales?.map((e, i) => {
+            const prefix = e.toUpperCase() as LanguagePrefix;
+            return (
+              <Route key={`route-${i.toString()}`} path={e === 'vi' ? '' : e}>
+                <Route index element={<HomeNavigation />} />
+                <Route path=":slug" element={<PageNavigation />} />
+                <Route
+                  path={`${CONSTANTS.PREFIX.NEWS[prefix]}/:slug`}
+                  element={<NewsDetail />}
+                />
+                <Route
+                  path={`${CONSTANTS.PREFIX.DIVISION[prefix]}/:slug`}
+                  element={<DivisionDetail />}
+                />
+                <Route
+                  path={`${CONSTANTS.PREFIX.EVENT[prefix]}/:slug`}
+                  element={<EventsDetail />}
+                />
+              </Route>
+            );
+          })}
+          <Route path="*" element={<Error />} />
         </Route>
-      </Route>
-    </Routes>
-  </Suspense>
-);
+      </Routes>
+    </Suspense>
+  );
+};
 
 const GoogleReCaptchaWrapper: React.FC = ({ children }) => {
   const { data: dataSystems } = useAppSelector((state) => state.system);
   return (
     <GoogleReCaptchaProvider
-        // reCaptchaKey={dataSystems?.googleRecaptchaSiteKey}
       reCaptchaKey={dataSystems?.googleRecaptchaSiteKey}
       scriptProps={{
         appendTo: 'head',
@@ -80,17 +99,17 @@ const AppWrapper: React.FC = () => {
   });
   return (
     <Provider store={store}>
-      <LanguageProvider>
-        <GoogleReCaptchaWrapper>
-          <QueryClientProvider client={queryClient}>
-            <Router>
+      <Router>
+        <LanguageProvider>
+          <GoogleReCaptchaWrapper>
+            <QueryClientProvider client={queryClient}>
               <HelmetProvider>
                 <App />
               </HelmetProvider>
-            </Router>
-          </QueryClientProvider>
-        </GoogleReCaptchaWrapper>
-      </LanguageProvider>
+            </QueryClientProvider>
+          </GoogleReCaptchaWrapper>
+        </LanguageProvider>
+      </Router>
     </Provider>
   );
 };

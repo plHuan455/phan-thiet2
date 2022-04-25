@@ -14,7 +14,7 @@ import News from './news';
 import Videos from './videos';
 
 import HelmetContainer from 'common/Helmet';
-import { LanguageContext, LanguageContextResponse } from 'common/Language';
+import { LanguageContext } from 'common/Language';
 import { getOverviewListService } from 'services/overviews';
 import { getOgDataPage } from 'utils/functions';
 
@@ -24,13 +24,12 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
   pageData,
   seoData,
 }) => {
-  const langContext = useContext(LanguageContext);
-  const { language } = langContext as LanguageContextResponse;
+  const { flag } = useContext(LanguageContext).language;
   const [searchParams] = useSearchParams();
   const keywordParams = useMemo(() => searchParams.get('keyword') || '', [
     searchParams,
   ]);
-  const { data } = useQuery(['getOverviewList', [language.isChange, keywordParams]], () => getOverviewListService({
+  const { data } = useQuery(['getOverviewList', [flag, keywordParams]], () => getOverviewListService({
     keyword: keywordParams,
   }));
   const tabMenu = useTab({
