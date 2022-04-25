@@ -28,7 +28,7 @@ const CardPlayer: React.FC<CardPlayerProps> = ({
       <Image src={thumbnail} alt="card-thumbnail" ratio="354x221" />
 
       <div className="o-cardPlayer_player">
-        <Icon iconName="playerPersian" size="40" />
+        <Icon iconName="playerInherit" />
       </div>
     </button>
 

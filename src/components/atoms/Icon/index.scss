@@ -1,187 +1,217 @@
 .a-icon {
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  display: block;
 
-  &-11 {
-    height: rem(11);
-    width: rem(11);
-  }
-
-  &-14 {
-    height: rem(14);
-    width: rem(14);
-  }
-
-  &-16 {
-    height: rem(16);
-    width: rem(16);
-  }
-
-  &-16 {
-    height: rem(16);
-    width: rem(16);
-  }
-
-  &-18 {
-    height: rem(18);
-    width: rem(18);
-  }
-
-  &-20 {
-    height: rem(20);
-    width: rem(20);
-  }
-
-  &-24 {
-    height: rem(24);
-    width: rem(24);
-  }
-
-  &-32 {
-    height: rem(32);
-    width: rem(32);
-  }
-
-  &-36 {
-    height: rem(36);
-    width: rem(36);
-  }
-
-  &-40 {
-    height: rem(40);
-    width: rem(40);
-  }
-
-  &-80 {
-    height: rem(80);
-    width: rem(80);
-
-    @include desktop-down {
-      height: rem(60);
-      width: rem(60);
+  &_loadingInherit {
+    svg {
+      background: none;
+      display: block;
+      margin: auto;
+      shape-rendering: auto;
+      height: rem(24);
+      width: rem(24);
     }
 
-    @include mobile-down {
+    circle {
+      stroke: var(--theme);
+    }
+  }
+
+  &_playerInherit {
+    svg {
+      height: rem(40);
+      width: rem(40);
+    }
+
+    path {
+      stroke: var(--theme);
+      fill: var(--theme);
+    }
+  }
+  &_icon {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: block;
+  
+    &-11 {
+      height: rem(11);
+      width: rem(11);
+    }
+  
+    &-14 {
+      height: rem(14);
+      width: rem(14);
+    }
+  
+    &-16 {
+      height: rem(16);
+      width: rem(16);
+    }
+  
+    &-16 {
+      height: rem(16);
+      width: rem(16);
+    }
+  
+    &-18 {
+      height: rem(18);
+      width: rem(18);
+    }
+  
+    &-20 {
+      height: rem(20);
+      width: rem(20);
+    }
+  
+    &-24 {
+      height: rem(24);
+      width: rem(24);
+    }
+  
+    &-32 {
       height: rem(32);
       width: rem(32);
     }
+  
+    &-36 {
+      height: rem(36);
+      width: rem(36);
+    }
+  
+    &-40 {
+      height: rem(40);
+      width: rem(40);
+    }
+  
+    &-80 {
+      height: rem(80);
+      width: rem(80);
+  
+      @include desktop-down {
+        height: rem(60);
+        width: rem(60);
+      }
+  
+      @include mobile-down {
+        height: rem(32);
+        width: rem(32);
+      }
+    }
+  
+    &-searchWhite {
+      background-image: url('~assets/icons/ic_search_white.svg');
+    }
+  
+    &-loadingWhite {
+      background-image: url('~assets/icons/ic_loading_white.svg');
+    }
+  
+    &-closeBlack {
+      background-image: url('~assets/icons/ic_close_black.svg');
+    }
+  
+    &-closeOrange {
+      background-image: url('~assets/icons/ic_close_orange.svg');
+    }
+  
+    &-chevronRight {
+      background-image: url('~assets/icons/ic_chevron_right.svg');
+    }
+  
+    &-arrowRightCopper {
+      background-image: url('~assets/icons/ic_arrow_right_copper.svg');
+    }
+  
+    &-searchOrange {
+      background-image: url('~assets/icons/ic_search_orange.svg');
+    }
+  
+    &-closeWhite {
+      background-image: url('~assets/icons/ic_close_white.svg');
+    }
+  
+    &-calendar {
+      background-image: url('~assets/icons/ic_calendar.svg');
+    }
+  
+    &-clock {
+      background-image: url('~assets/icons/ic_clock.svg');
+    }
+  
+    &-location {
+      background-image: url('~assets/icons/ic_location.svg');
+    }
+  
+    &-downloadOrange {
+      background-image: url('~assets/icons/ic_download_orange.svg');
+    }
+  
+    &-dot {
+      background-image: url('~assets/icons/ic_dot.svg');
+    }
+  
+    &-closeGreen {
+      background-image: url('~assets/icons/ic_close_green.svg');
+    }
+  
+    &-markerGgMap {
+      background-image: url('~assets/icons/ic_marker_gg_map.svg');
+    }
+  
+    &-playerBlue {
+      background-image: url('~assets/icons/ic_player_blue.svg');
+    }
+  
+    &-playerCamel {
+      background-image: url('~assets/icons/ic_player_camel.svg');
+    }
+  
+    &-playerLemon {
+      background-image: url('~assets/icons/ic_player_lemon.svg');
+    }
+  
+    &-playerOcean {
+      background-image: url('~assets/icons/ic_player_ocean.svg');
+    }
+  
+    &-playerPersian {
+      background-image: url('~assets/icons/ic_player_persian.svg');
+    }
+  
+    &-playerSeaweed {
+      background-image: url('~assets/icons/ic_player_seaweed.svg');
+    }
+  
+    &-searchGray {
+      background-image: url('~assets/icons/ic_search_gray.svg');
+    }
+  
+    &-zalo {
+      background-image: url('~assets/icons/ic_zalo.svg');
+    }
+  
+    &-facebook {
+      background-image: url('~assets/icons/ic_facebook.svg');
+    }
+  
+    &-arrowRightWhite {
+      background-image: url('~assets/icons/ic_arrow_carousel_next_white.svg');
+    }
+  
+    &-arrowLeftWhite {
+      background-image: url('~assets/icons/ic_arrow_carousel_back_white.svg');
+    }
+  
+    &-chevronDownWhite {
+      background-image: url('~assets/icons/ic_chevron_down_white.svg');
+    }
+  
+    &-loadingBlue {
+      background-image: url('~assets/icons/ic_loading_blue.svg');
+    }
+  
+    &-arrowUp {
+      background-image: url('~assets/icons/ic_arrow_up.svg');
+    }
   }
-
-  &-searchWhite {
-    background-image: url('~assets/icons/ic_search_white.svg');
-  }
-
-  &-loadingWhite {
-    background-image: url('~assets/icons/ic_loading_white.svg');
-  }
-
-  &-closeBlack {
-    background-image: url('~assets/icons/ic_close_black.svg');
-  }
-
-  &-closeOrange {
-    background-image: url('~assets/icons/ic_close_orange.svg');
-  }
-
-  &-chevronRight {
-    background-image: url('~assets/icons/ic_chevron_right.svg');
-  }
-
-  &-arrowRightCopper {
-    background-image: url('~assets/icons/ic_arrow_right_copper.svg');
-  }
-
-  &-searchOrange {
-    background-image: url('~assets/icons/ic_search_orange.svg');
-  }
-
-  &-closeWhite {
-    background-image: url('~assets/icons/ic_close_white.svg');
-  }
-
-  &-calendar {
-    background-image: url('~assets/icons/ic_calendar.svg');
-  }
-
-  &-clock {
-    background-image: url('~assets/icons/ic_clock.svg');
-  }
-
-  &-location {
-    background-image: url('~assets/icons/ic_location.svg');
-  }
-
-  &-downloadOrange {
-    background-image: url('~assets/icons/ic_download_orange.svg');
-  }
-
-  &-dot {
-    background-image: url('~assets/icons/ic_dot.svg');
-  }
-
-  &-closeGreen {
-    background-image: url('~assets/icons/ic_close_green.svg');
-  }
-
-  &-markerGgMap {
-    background-image: url('~assets/icons/ic_marker_gg_map.svg');
-  }
-
-  &-playerBlue {
-    background-image: url('~assets/icons/ic_player_blue.svg');
-  }
-
-  &-playerCamel {
-    background-image: url('~assets/icons/ic_player_camel.svg');
-  }
-
-  &-playerLemon {
-    background-image: url('~assets/icons/ic_player_lemon.svg');
-  }
-
-  &-playerOcean {
-    background-image: url('~assets/icons/ic_player_ocean.svg');
-  }
-
-  &-playerPersian {
-    background-image: url('~assets/icons/ic_player_persian.svg');
-  }
-
-  &-playerSeaweed {
-    background-image: url('~assets/icons/ic_player_seaweed.svg');
-  }
-
-  &-searchGray {
-    background-image: url('~assets/icons/ic_search_gray.svg');
-  }
-
-  &-zalo {
-    background-image: url('~assets/icons/ic_zalo.svg');
-  }
-
-  &-facebook {
-    background-image: url('~assets/icons/ic_facebook.svg');
-  }
-
-  &-arrowRightWhite {
-    background-image: url('~assets/icons/ic_arrow_carousel_next_white.svg');
-  }
-
-  &-arrowLeftWhite {
-    background-image: url('~assets/icons/ic_arrow_carousel_back_white.svg');
-  }
-
-  &-chevronDownWhite {
-    background-image: url('~assets/icons/ic_chevron_down_white.svg');
-  }
-
-  &-loadingBlue {
-    background-image: url('~assets/icons/ic_loading_blue.svg');
-  }
-
-  &-arrowUp {
-    background-image: url('~assets/icons/ic_arrow_up.svg');
-  }
+ 
 }
