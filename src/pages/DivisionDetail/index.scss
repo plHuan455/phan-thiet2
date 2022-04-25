@@ -60,6 +60,7 @@
     &_wrapTab {
       margin: rem(32) 0;
       @include adjust-flex(space-between, center);
+      border-bottom: 1px solid $anti-flash-white;
   
       @include mobile-down {
         display: block;
@@ -86,6 +87,10 @@
   
           span {
             color: $raisin-black;
+            @include font-base(14, 20);
+            @include mobile-down {
+              @include font-base(12, 20);
+            }
           }
   
           &::before {
