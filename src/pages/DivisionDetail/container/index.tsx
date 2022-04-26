@@ -72,6 +72,19 @@ const Screen: React.FC<ScreenProps> = ({ setLogoDivision }) => {
     }
   }, [subDivisionDetail, setLogoDivision]);
 
+  const banner = useMemo(() => [
+    {
+      data: {
+        link: subDivisionDetail?.banner[0].data?.link,
+        title: subDivisionDetail?.banner[0].data?.title,
+        subTitle: subDivisionDetail?.banner[0].data?.subTitle,
+        imageMobile: baseURL(subDivisionDetail?.banner[0].data?.imageMobile),
+        imageTablet: baseURL(subDivisionDetail?.banner[0].data?.imageTablet),
+        imageDesktop: baseURL(subDivisionDetail?.banner[0].data?.imageDesktop),
+      },
+    },
+  ], [subDivisionDetail]);
+
   if (isFetching) {
     return (
       <LoadingPage />
@@ -93,7 +106,7 @@ const Screen: React.FC<ScreenProps> = ({ setLogoDivision }) => {
 
       <div style={styles}>
         {/* Banner */}
-        <Banner thumbnail={baseURL(subDivisionDetail?.thumbnail)} />
+        <Banner banner={banner} />
 
         {/* Video */}
         <IntroVideo data={video} />

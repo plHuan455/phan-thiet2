@@ -12,5 +12,17 @@ export default {
 } as Meta;
 
 export const normal: Story = () => (
-  <DivisionBanner thumbnail={banner} title="NHỊP ĐẬP THẾ GIỚI MỚI" />
+  <DivisionBanner banner={[
+    {
+      data: {
+        imageDesktop: banner,
+        imageMobile: banner,
+        imageTablet: banner,
+        title: 'The Kingdom',
+        subTitle: 'The Kingdom',
+      },
+      type: 'Basic',
+    },
+  ]}
+  />
 );

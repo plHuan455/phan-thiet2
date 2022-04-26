@@ -37,16 +37,16 @@ type PageDataTypes = {
 
 type BannersData = {
   link?: string;
-  title: string;
-  subTitle: string;
-  imageMobile: string;
-  imageTablet: string;
+  title?: string;
+  subTitle?: string;
+  imageMobile?: string;
+  imageTablet?: string;
   imageDesktop: string;
 }
 
 type BannersDataTypes = {
-  data: BannersData;
-  type: string;
+  data?: BannersData;
+  type?: string;
 }
 
 type SEODataTypes = {
