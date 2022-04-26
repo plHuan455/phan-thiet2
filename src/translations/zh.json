@@ -4,7 +4,18 @@
     "address": "ĐỊA CHỈ ZH",
     "phone": "ĐIỆN THOẠI ZH",
     "email": "EMAIL ZH",
-    "content": "NỘI DUNG ZH",
-    "register": "Đăng ký nhận thông tin ZH"
+    "content": "NỘI DUNG ZH"
+  },
+  "button": {
+    "register": "Đăng ký nhận thông tin ZH",
+    "visiting_houses": "Tham quan các mẫu nhà ZH",
+    "more": "Xem thêm ZH",
+    "detail": "Xem Chi Tiết ZH"
+  },
+  "general": {
+    "not_found_data": "Không tìm thấy dữ liệu ZH"
+  },
+  "home": {
+    "house_models": "Các mẫu nhà ZH"
   }
 }

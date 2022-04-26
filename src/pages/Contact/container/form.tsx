@@ -40,7 +40,7 @@ const Form: React.FC<SectionBlocks> = ({ blocks }) => {
         emailPlaceholder: t('form.email'),
         namePlaceholder: t('form.name'),
         phonePlaceholder: t('form.phone'),
-        btnText: t('form.register'),
+        btnText: t('button.register'),
       },
       titleForm: blockPageContent?.title,
       descriptionForm: blockPageContent?.description,
