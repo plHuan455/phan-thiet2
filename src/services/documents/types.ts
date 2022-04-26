@@ -1,13 +1,7 @@
+import { OverviewDocumentType } from 'services/overviews/types';
+
 /* eslint-disable camelcase */
-export interface DocumentTypes {
-  id: number;
-  displayOrder: number;
-  slug: string;
-  link: string;
-  publishedAt: string;
-  tag?: string;
-  thumbnail?: string;
-}
+export interface DocumentTypes extends OverviewDocumentType {}
 
 export interface DocumentParams {
   page?: number;
