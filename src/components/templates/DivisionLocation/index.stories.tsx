@@ -20,6 +20,7 @@ export default {
           'pga-golf-villas',
           'santa-monica',
           'waikiki',
+          'star-avenue',
         ],
       },
       defaultValue: 'boutique-hotel',

@@ -168,6 +168,10 @@
     &.the-kingdom {
       @include imageShine(243,195,222,511)
     }
+
+    &.star-avenue {
+      @include imageShine(225,190,135,385)
+    }
   }
 
   &-line {
