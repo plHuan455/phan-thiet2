@@ -46,7 +46,9 @@ export type SubdivisionVideoTypes = Title & {
 
 export type SubdivisionJourneyTypes = Title;
 export type SubdivisionLibraryTypes = Title;
-export type SubdivisionRelatedTypes = Title;
+export type SubdivisionRelatedTypes = Title & {
+  btn: LinkTypes;
+};
 export type SubdivisionLocationTypes = Title & {
   titleSection?: string;
 };
