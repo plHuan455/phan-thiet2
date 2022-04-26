@@ -10,6 +10,7 @@ import Heading from 'components/atoms/Heading';
 import Icon from 'components/atoms/Icon';
 import Link from 'components/atoms/Link';
 import Text from 'components/atoms/Text';
+import Animate from 'components/organisms/Animate';
 import Card from 'components/organisms/Card';
 import Tabs, { Tab } from 'components/organisms/Tabs';
 import PopupImage from 'components/templates/PopupImage';
@@ -165,152 +166,154 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId, color }) => {
           modifiers={['s015', '400', 'inherit']}
           content={data?.title}
         />
-        <div className="s-library_wrapTab">
-          <Tabs variableMutate={indexActive}>
-            {dummyData.map((item, index) => (
-              <Tab
-                key={`tab-${index.toString()}`}
-                label={item.label}
-                active={index === indexActive}
-                handleClick={() => setIndexActive(index)}
-              />
-            ))}
-          </Tabs>
-          <div className="d-lg-block d-none">
-            <Link href="/" target="_self">
-              <div className="animate animate-arrowSlide d-flex align-items-center">
-                <Text modifiers={['14x20', '400', 'copper']} content="Xem thêm" />
-                <div className="u-ml-8" />
-                <Icon iconName="arrowRightCopper" size="16" />
-              </div>
-            </Link>
-          </div>
-        </div>
-
-        {/* TODO: Update icon loading inherit */}
-        {state.isLoading && (
-          <div className="u-pt-15 u-pb-15 d-flex justify-content-center">
-            <Icon iconName="loadingInherit" />
-          </div>
-        )}
-
-        {/* News */}
-        {indexActive === 0 && !state.isLoading && (
-          state.news && state.news.length > 0 ? (
-            <FlatList
-              data={state.news}
-              settings={settingRef.current}
-              render={(item) => (
-                <Card.Normal
-                  thumbnail={baseURL(item.thumbnail)}
-                  title={item.title}
-                  href={`/${CONSTANTS.PREFIX.NEWS.VI}/${item.slug}`}
-                  tag={{
-                    text: item?.subdivision?.name,
-                    // TODO: Add locale later
-                    url: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item?.subdivision?.slug}`,
-                  }}
-                  dateTime={getTimePastToCurrent(item.publishedAt)}
-                  url={{
-                    text: 'Xem thêm',
-                    iconName: 'arrowRightCopper',
-                    animation: 'arrow',
-                  }}
+        <Animate type="fadeInUp">
+          <div className="s-library_wrapTab">
+            <Tabs variableMutate={indexActive}>
+              {dummyData.map((item, index) => (
+                <Tab
+                  key={`tab-${index.toString()}`}
+                  label={item.label}
+                  active={index === indexActive}
+                  handleClick={() => setIndexActive(index)}
                 />
-              )}
-            />
-          )
-            : (
-              <Text modifiers={['14x20', '400', 'inherit', 'center']}>
-                Không có dữ liệu!
-              </Text>
-            ))}
+              ))}
+            </Tabs>
+            <div className="d-lg-block d-none">
+              <Link href="/" target="_self">
+                <div className="animate animate-arrowSlide d-flex align-items-center">
+                  <Text modifiers={['14x20', '400', 'copper']} content="Xem thêm" />
+                  <div className="u-ml-8" />
+                  <Icon iconName="arrowRightCopper" size="16" />
+                </div>
+              </Link>
+            </div>
+          </div>
 
-        {/* Images */}
-        {indexActive === 1 && !state.isLoading && (
-          state.images && state.images.length > 0 ? (
-            <FlatList
-              data={state.images}
-              settings={settingRef.current}
-              render={(item, itemIdx) => (
-                <CardImage
-                  thumbnail={baseURL(item.path)}
-                  handleClick={() => dispatch({ type: 'update_library', payload: { isPopImageOpen: true, currentImgIdx: itemIdx } })}
-                />
-              )}
-            />
-          )
-            : (
-              <Text modifiers={['14x20', '400', 'inherit', 'center']}>
-                Không có dữ liệu!
-              </Text>
-            ))}
+          {/* TODO: Update icon loading inherit */}
+          {state.isLoading && (
+            <div className="u-pt-15 u-pb-15 d-flex justify-content-center">
+              <Icon iconName="loadingInherit" />
+            </div>
+          )}
 
-        {/* Videos */}
-        {indexActive === 2 && !state.isLoading && (
-          state.videos && state.videos.length > 0 ? (
-            <FlatList
-              data={state.videos}
-              settings={settingRef.current}
-              render={(item) => {
-                const isVidOutside = item.video?.includes('http://') || item.video?.includes('https://');
-                const vidUrl = isVidOutside ? item.video : baseURL(item.video);
-                return (
-                  <Card.Player
+          {/* News */}
+          {indexActive === 0 && !state.isLoading && (
+            state.news && state.news.length > 0 ? (
+              <FlatList
+                data={state.news}
+                settings={settingRef.current}
+                render={(item) => (
+                  <Card.Normal
                     thumbnail={baseURL(item.thumbnail)}
+                    title={item.title}
+                    href={`/${CONSTANTS.PREFIX.NEWS.VI}/${item.slug}`}
                     tag={{
                       text: item?.subdivision?.name,
                       // TODO: Add locale later
                       url: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item?.subdivision?.slug}`,
                     }}
-                    title={item.name}
-                    dateTime={getTimePastToCurrent(item.createdAt)}
-                    modifiers={['reverse', 'shadow']}
-                    onClick={() => {
-                      const res = {
-                        isPopPlayerOpen: true,
-                        currVidSrc: vidUrl,
-                        currVidType: item.videoType,
-                      };
-                      dispatch({ type: 'update_library', payload: res });
+                    dateTime={getTimePastToCurrent(item.publishedAt)}
+                    url={{
+                      text: 'Xem thêm',
+                      iconName: 'arrowRightCopper',
+                      animation: 'arrow',
                     }}
                   />
-                );
-              }}
-            />
-          )
-            : (
-              <Text modifiers={['14x20', '400', 'inherit', 'center']}>
-                Không có dữ liệu!
-              </Text>
-            ))}
+                )}
+              />
+            )
+              : (
+                <Text modifiers={['14x20', '400', 'inherit', 'center']}>
+                  Không có dữ liệu!
+                </Text>
+              ))}
 
-        {/* Documents */}
-        {indexActive === 3 && !state.isLoading && (
-          state.documents && state.documents.length > 0 ? (
-            <FlatList
-              data={state.documents}
-              settings={settingRef.current}
-              render={(item) => (
-                <Card.Normal
-                  thumbnail={baseURL(item.thumbnail)}
-                  href={linkURL(item.link)}
-                  target="_blank"
-                  dateTime={getTimePastToCurrent(item.publishedAt)}
-                  url={{
-                    text: 'Tải xuống',
-                    iconName: 'downloadOrange',
-                    animation: 'download',
-                  }}
-                />
-              )}
-            />
-          )
-            : (
-              <Text modifiers={['14x20', '400', 'inherit', 'center']}>
-                Không có dữ liệu!
-              </Text>
-            ))}
+          {/* Images */}
+          {indexActive === 1 && !state.isLoading && (
+            state.images && state.images.length > 0 ? (
+              <FlatList
+                data={state.images}
+                settings={settingRef.current}
+                render={(item, itemIdx) => (
+                  <CardImage
+                    thumbnail={baseURL(item.path)}
+                    handleClick={() => dispatch({ type: 'update_library', payload: { isPopImageOpen: true, currentImgIdx: itemIdx } })}
+                  />
+                )}
+              />
+            )
+              : (
+                <Text modifiers={['14x20', '400', 'inherit', 'center']}>
+                  Không có dữ liệu!
+                </Text>
+              ))}
+
+          {/* Videos */}
+          {indexActive === 2 && !state.isLoading && (
+            state.videos && state.videos.length > 0 ? (
+              <FlatList
+                data={state.videos}
+                settings={settingRef.current}
+                render={(item) => {
+                  const isVidOutside = item.video?.includes('http://') || item.video?.includes('https://');
+                  const vidUrl = isVidOutside ? item.video : baseURL(item.video);
+                  return (
+                    <Card.Player
+                      thumbnail={baseURL(item.thumbnail)}
+                      tag={{
+                        text: item?.subdivision?.name,
+                        // TODO: Add locale later
+                        url: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item?.subdivision?.slug}`,
+                      }}
+                      title={item.name}
+                      dateTime={getTimePastToCurrent(item.createdAt)}
+                      modifiers={['reverse', 'shadow']}
+                      onClick={() => {
+                        const res = {
+                          isPopPlayerOpen: true,
+                          currVidSrc: vidUrl,
+                          currVidType: item.videoType,
+                        };
+                        dispatch({ type: 'update_library', payload: res });
+                      }}
+                    />
+                  );
+                }}
+              />
+            )
+              : (
+                <Text modifiers={['14x20', '400', 'inherit', 'center']}>
+                  Không có dữ liệu!
+                </Text>
+              ))}
+
+          {/* Documents */}
+          {indexActive === 3 && !state.isLoading && (
+            state.documents && state.documents.length > 0 ? (
+              <FlatList
+                data={state.documents}
+                settings={settingRef.current}
+                render={(item) => (
+                  <Card.Normal
+                    thumbnail={baseURL(item.thumbnail)}
+                    href={linkURL(item.link)}
+                    target="_blank"
+                    dateTime={getTimePastToCurrent(item.publishedAt)}
+                    url={{
+                      text: 'Tải xuống',
+                      iconName: 'downloadOrange',
+                      animation: 'download',
+                    }}
+                  />
+                )}
+              />
+            )
+              : (
+                <Text modifiers={['14x20', '400', 'inherit', 'center']}>
+                  Không có dữ liệu!
+                </Text>
+              ))}
+        </Animate>
         <PopupImage
           isOpen={state.isPopImageOpen || false}
           handleClose={() => dispatch({ type: 'close_image_popup' })}

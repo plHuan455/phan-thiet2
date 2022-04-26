@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 
+import Animate from 'components/organisms/Animate';
 import { NotifyProps } from 'components/organisms/Notify';
 import ContactForm, { ContactFormType } from 'components/templates/ContactForm';
 import { useAsync } from 'hooks/useAsync';
@@ -105,13 +106,16 @@ const Form: React.FC<SectionBlocks> = ({ blocks }) => {
   const executeSubmit = async (data: ContactFormType) => {
     contactExecute(data);
   };
+
   return (
-    <ContactForm
-      method={method}
-      handleSubmit={executeSubmit}
-      {...formBlock}
-      loading={contactState.loading}
-    />
+    <Animate type="fadeInUp">
+      <ContactForm
+        method={method}
+        handleSubmit={executeSubmit}
+        {...formBlock}
+        loading={contactState.loading}
+      />
+    </Animate>
   );
 };
 

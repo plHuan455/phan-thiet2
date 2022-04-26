@@ -11,6 +11,7 @@ import Icon from 'components/atoms/Icon';
 import Image from 'components/atoms/Image';
 import Link from 'components/atoms/Link';
 import Text from 'components/atoms/Text';
+import Animate from 'components/organisms/Animate';
 import useScrollAnimate from 'hooks/useScrollAnimation';
 
 export interface DetailProps {
@@ -55,7 +56,7 @@ const Detail: React.FC<DetailProps> = ({
         <Image src={balloonTop} ratio="1x1" alt="balloon" />
       </animated.div>
       <Container>
-        <div className="t-detail_content">
+        <Animate type="fadeInUp" extendClassName="t-detail_content">
           <div className="t-detail_sub">
             <ul>
               <li>
@@ -116,7 +117,7 @@ const Detail: React.FC<DetailProps> = ({
               </ul>
             </div>
           )}
-        </div>
+        </Animate>
       </Container>
       {hasRelated && (
       <div className="t-detail_related u-pt-80 u-pt-lg-120">

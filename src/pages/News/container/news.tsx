@@ -31,17 +31,32 @@ export const AnimationNews = React.memo(() => {
   const isScrollLeaf2 = useScrollAnimate(leaf2Ref);
   const isScrollBallon = useScrollAnimate(ballonRef);
   const {
-    animated, ballonAnimate, slideAnimate, slideReverseAnimate,
+    animated,
+    ballonAnimate,
+    slideAnimate,
+    slideReverseAnimate,
   } = useAnimation();
   return (
     <>
-      <animated.div style={isScrollBallon ? ballonAnimate : {}} className="s-news_ballon" ref={ballonRef}>
+      <animated.div
+        style={isScrollBallon ? ballonAnimate : {}}
+        className="s-news_ballon"
+        ref={ballonRef}
+      >
         <Image src={ballon1} alt="ballon" ratio="359x247" />
       </animated.div>
-      <animated.div className="s-news_leaf1" style={isScrollLeaf1 ? slideReverseAnimate : {}} ref={leaf1Ref}>
+      <animated.div
+        className="s-news_leaf1"
+        style={isScrollLeaf1 ? slideReverseAnimate : {}}
+        ref={leaf1Ref}
+      >
         <Image src={leaf1} alt="leaf1" ratio="113x182" />
       </animated.div>
-      <animated.div className="s-news_leaf2" style={isScrollLeaf2 ? slideAnimate : {}} ref={leaf2Ref}>
+      <animated.div
+        className="s-news_leaf2"
+        style={isScrollLeaf2 ? slideAnimate : {}}
+        ref={leaf2Ref}
+      >
         <Image src={leaf2} alt="leaf2" ratio="548x612" />
       </animated.div>
     </>
@@ -56,11 +71,13 @@ const News: React.FC<NewsProps> = ({ news, blocks }) => {
       return news.map((item) => ({
         thumbnail: baseURL(item.thumbnail),
         dateTime: getTimePastToCurrent(item.publishedAt),
-        tag: item?.subdivision ? {
-          text: item?.subdivision?.name,
-          // TODO: Update locale later
-          url: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item?.subdivision?.slug}`,
-        } : undefined,
+        tag: item?.subdivision
+          ? {
+            text: item?.subdivision?.name,
+            // TODO: Update locale later
+            url: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item?.subdivision?.slug}`,
+          }
+          : undefined,
         button: {
           text: newsBlocks?.button,
           // TODO: Update locale later
@@ -77,15 +94,10 @@ const News: React.FC<NewsProps> = ({ news, blocks }) => {
 
   return (
     <Section>
-      <NewsList
-        title={newsBlocks?.title}
-        listNews={dataNews}
-      />
-      {
-        news && news?.length > 0 && (
-          <AnimationNews />
-        )
-      }
+      <div className="s-news">
+        <NewsList title={newsBlocks?.title} listNews={dataNews} />
+        {news && news?.length > 0 && <AnimationNews />}
+      </div>
     </Section>
   );
 };

@@ -9,6 +9,7 @@ import FlatList from 'common/FlatList';
 import Arrow from 'components/atoms/Arrow';
 import Heading from 'components/atoms/Heading';
 import Text from 'components/atoms/Text';
+import Animate from 'components/organisms/Animate';
 
 export interface DivisionCollectionProps {
   title: string;
@@ -78,7 +79,7 @@ const DivisionCollection: React.FC<DivisionCollectionProps> = ({
                 <Text modifiers={['400', '14x20', 'davyGrey']} content={description} />
               </Col>
             </Row>
-            <div className="u-mt-md-64 u-mt-32">
+            <Animate type="fadeInUp" extendClassName="u-mt-md-64 u-mt-32">
               <FlatList
                 settings={settings}
                 data={dataList}
@@ -86,7 +87,7 @@ const DivisionCollection: React.FC<DivisionCollectionProps> = ({
                   <Collection {...item} handleClick={() => handleClick && handleClick(item.id)} />
                 )}
               />
-            </div>
+            </Animate>
           </div>
         ) : (
           <CollectionSingle

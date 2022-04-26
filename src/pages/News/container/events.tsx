@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable no-unused-vars */
 import dayjs from 'dayjs';
 import React, { useMemo } from 'react';
 
@@ -59,11 +57,13 @@ const Events: React.FC<EventsProps> = ({ events, blocks }) => {
   if (!events?.length) return null;
 
   return (
-    <Section className="s-events">
-      <EventsTemplate
-        title={eventsBlock?.title}
-        listEvents={dataEvents}
-      />
+    <Section>
+      <div className="s-events">
+        <EventsTemplate
+          title={eventsBlock?.title}
+          listEvents={dataEvents}
+        />
+      </div>
     </Section>
   );
 };

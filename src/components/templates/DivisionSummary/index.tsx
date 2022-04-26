@@ -4,6 +4,7 @@ import { Col, Row } from 'react-bootstrap';
 import Container from 'common/Container';
 import Heading from 'components/atoms/Heading';
 import Text from 'components/atoms/Text';
+import Animate from 'components/organisms/Animate';
 import Card from 'components/organisms/Card';
 import { CardLayerProps } from 'components/organisms/Card/Layer';
 import Carousel from 'components/organisms/Carousel';
@@ -48,7 +49,7 @@ const DivisionSummary: React.FC<DivisionSummaryProps> = ({
           </div>
         </Col>
         <Col lg={6}>
-          <div className={`t-divisionSummary_wrap ${data && data?.length > 2 ? 'carousel' : ''}`}>
+          <Animate type="fadeInUp" extendClassName={`t-divisionSummary_wrap ${data && data?.length > 2 ? 'carousel' : ''}`}>
             {data && data.length > 2 ? (
               <Carousel settings={setting}>
                 {data?.map((item, index) => (
@@ -80,7 +81,7 @@ const DivisionSummary: React.FC<DivisionSummaryProps> = ({
                 ))}
               </div>
             )}
-          </div>
+          </Animate>
         </Col>
       </Row>
     </Container>

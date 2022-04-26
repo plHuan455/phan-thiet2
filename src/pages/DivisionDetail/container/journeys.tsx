@@ -76,7 +76,7 @@ const Journeys: React.FC<JourneysProps> = ({
           setOpen(true);
           setSlideActive(val);
         }}
-        textNotFound="Không tìm thấy dữ liệu" // TODO: translation later
+        textNotFound="Không tìm thấy dữ liệu"
       />
       <PopupImageDetail
         isOpen={open}

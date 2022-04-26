@@ -1,6 +1,7 @@
 import React, { PropsWithChildren, useMemo } from 'react';
 import { Settings } from 'react-slick';
 
+import Animate from 'components/organisms/Animate';
 import Carousel, { NextArrow, PrevArrow } from 'components/organisms/Carousel';
 
 export type FlatListProps<T> = {
@@ -67,19 +68,21 @@ const FlatList = <T, >({
       {children}
 
       {data && data?.length > 0 && (
-      <Carousel
-        innerDots={innerDots}
-        settings={{
-          ...settingSelf,
-          ...(settings || {}),
-        }}
-      >
-        {data.map((x, i) => (
-          <React.Fragment key={`item-${i.toString()}`}>
-            {render(x, i)}
-          </React.Fragment>
-        ))}
-      </Carousel>
+        <Animate type="fadeInUp">
+          <Carousel
+            innerDots={innerDots}
+            settings={{
+              ...settingSelf,
+              ...(settings || {}),
+            }}
+          >
+            {data.map((x, i) => (
+              <React.Fragment key={`item-${i.toString()}`}>
+                {render(x, i)}
+              </React.Fragment>
+            ))}
+          </Carousel>
+        </Animate>
       )}
     </div>
   );

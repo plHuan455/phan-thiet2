@@ -6,6 +6,7 @@ import layer from 'assets/images/introVideo/background-blue.png';
 import ballon from 'assets/images/introVideo/balloon.png';
 import Container from 'common/Container';
 import Image from 'components/atoms/Image';
+import Animate from 'components/organisms/Animate';
 import Player, { PlayerProps } from 'components/organisms/Player';
 import { SubdivisionVideoTypes } from 'services/subdivision/types';
 import { baseString, youtubeControlIframe } from 'utils/functions';
@@ -54,12 +55,12 @@ const IntroVideo: React.FC<IntroVideoProps> = ({ data }) => {
         <Image src={layer} alt="ballon" ratio="1366x688" />
       </div>
       <Container>
-        <div className="s-introVideo_content">
+        <Animate extendClassName="s-introVideo_content" type="fadeInUp">
           <IntroPlayer
             isYoutube={isYoutube}
             src={isYoutube ? youtubeControlIframe(link) : link}
           />
-        </div>
+        </Animate>
       </Container>
     </section>
   );

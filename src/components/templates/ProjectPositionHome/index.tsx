@@ -10,6 +10,7 @@ import Container from 'common/Container';
 import Heading from 'components/atoms/Heading';
 import Image from 'components/atoms/Image';
 import Text from 'components/atoms/Text';
+import Animate from 'components/organisms/Animate';
 import LocationMap, { DivisionTypes } from 'components/organisms/LocationMap';
 import useScrollAnimate from 'hooks/useScrollAnimation';
 import { formatNumber } from 'utils/functions';
@@ -91,13 +92,15 @@ const ProjectPositionHome: React.FC<ProjectPositionHomeProps> = ({
       </div>
       <Container>
         <div className="t-projectPositionHome_map">
-          <LocationMap
-            listDivision={listDivision}
-            active={active}
-            handleHover={(id) => setActive(id)}
-            handleLeave={handleLeave}
-            thumbnail={thumbnail}
-          />
+          <Animate type="fadeInUp">
+            <LocationMap
+              listDivision={listDivision}
+              active={active}
+              handleHover={(id) => setActive(id)}
+              handleLeave={handleLeave}
+              thumbnail={thumbnail}
+            />
+          </Animate>
           <div className="t-projectPositionHome_info">
             <div className="t-projectPositionHome_scale">
               <Content active={countActive} {...scale} />

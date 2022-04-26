@@ -10,6 +10,7 @@ import Heading from 'components/atoms/Heading';
 import Icon from 'components/atoms/Icon';
 import Link from 'components/atoms/Link';
 import Text from 'components/atoms/Text';
+import Animate from 'components/organisms/Animate';
 import Card from 'components/organisms/Card';
 import { CardLayerProps } from 'components/organisms/Card/Layer';
 import { NextArrow, PrevArrow } from 'components/organisms/Carousel';
@@ -300,14 +301,14 @@ const Journeys: React.FC<JourneysProps> = ({
       <Container modifiers={['journeys']}>
         <Heading content={title} type="h2" modifiers={['s015', 'white']} />
         <div className="t-journeys_content">
-          <div className="t-journeys_left">
+          <Animate type="fadeInUp" extendClassName="t-journeys_left">
             <VerticalJourneys
               dataTimeLine={dataTimeLine}
               handleClickTimeLine={handleClickTimeLine}
             />
-          </div>
+          </Animate>
           <div className={mapModifiers('t-journeys_right', !listCard?.length && 'empty')}>
-            <div className="t-journeys_right_list">
+            <Animate type="slideInRight" extendClassName="t-journeys_right_list">
               <JourneysList
                 listCard={listCard}
                 titleField={titleField}
@@ -315,7 +316,7 @@ const Journeys: React.FC<JourneysProps> = ({
                 emptyStr={emptyStr}
                 handleClick={handleClickCard}
               />
-            </div>
+            </Animate>
           </div>
         </div>
       </Container>

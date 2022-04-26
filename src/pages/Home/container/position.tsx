@@ -37,9 +37,9 @@ const Position: React.FC<SectionBlocks> = ({ blocks }) => {
 
   const listLocation = useMemo(() => mapData?.items.map((item) => ({
     id: Number(item.subdivisionId),
-    imgSrc: baseURL(item.subdivision.thumbnail),
-    title: item.subdivision.name,
-    active: item.subdivision.pinned,
+    imgSrc: baseURL(item.subdivision?.thumbnail),
+    title: item.subdivision?.name,
+    active: item.subdivision?.pinned,
     y: Number(item.point.y),
     x: Number(item.point.x),
   })), [mapData]);

@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Animate from 'components/organisms/Animate';
 import PlanningHighway from 'components/templates/PlanningHighway';
 import { baseURL, getBlockData } from 'utils/functions';
 
@@ -30,8 +31,9 @@ const Highway: React.FC<SectionBlocks> = ({ blocks }) => {
   );
 
   return (
-    <section>
-      {
+    <Animate type="fadeInUp">
+      <section>
+        {
         highwayBlock && (
           <PlanningHighway
             dataInfo={{
@@ -59,7 +61,8 @@ const Highway: React.FC<SectionBlocks> = ({ blocks }) => {
           />
         )
       }
-    </section>
+      </section>
+    </Animate>
   );
 };
 

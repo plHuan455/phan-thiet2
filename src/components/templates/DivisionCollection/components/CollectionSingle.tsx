@@ -5,6 +5,7 @@ import Button from 'components/atoms/Button';
 import Heading from 'components/atoms/Heading';
 import Image from 'components/atoms/Image';
 import Text from 'components/atoms/Text';
+import Animate from 'components/organisms/Animate';
 
 export interface CollectionSingleProps {
   title: string;
@@ -26,13 +27,15 @@ const CollectionSingle: React.FC<CollectionSingleProps> = ({
         <Text modifiers={['16x28', '400', 'raisinBlack']} content={description} />
       </Col>
       <Col lg={6} className="u-mt-8 u-mt-lg-0">
-        <Image src={thumbnail} alt={titleCard} ratio="546x308" />
-        <div className="u-mt-8 d-sm-flex justify-content-sm-between align-items-sm-center" style={{ color }}>
-          <Text modifiers={['24x36', '400', 'inherit', 's015']} content={titleCard} />
-          <div className="u-mt-16 u-mt-sm-0 d-block">
-            <Button variant="inherit" onClick={handleClick}>{button?.text}</Button>
+        <Animate type="fadeInUp">
+          <Image src={thumbnail} alt={titleCard} ratio="546x308" />
+          <div className="u-mt-8 d-sm-flex justify-content-sm-between align-items-sm-center" style={{ color }}>
+            <Text modifiers={['24x36', '400', 'inherit', 's015']} content={titleCard} />
+            <div className="u-mt-16 u-mt-sm-0 d-block">
+              <Button variant="inherit" onClick={handleClick}>{button?.text}</Button>
+            </div>
           </div>
-        </div>
+        </Animate>
       </Col>
     </Row>
   </div>

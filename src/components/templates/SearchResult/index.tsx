@@ -7,6 +7,7 @@ import Heading from 'components/atoms/Heading';
 import Icon from 'components/atoms/Icon';
 import Text from 'components/atoms/Text';
 import PullDown, { OptionType } from 'components/molecules/PullDown';
+import Animate from 'components/organisms/Animate';
 import Card from 'components/organisms/Card';
 import { CardDivisionProps } from 'components/organisms/Card/Division';
 import { CardNormalProps } from 'components/organisms/Card/Normal';
@@ -125,7 +126,8 @@ const SearchContent:React.FC<SearchContentProps> = ({
 }) => (
   <>
     <div className="t-searchResult_list">
-      {news && news?.length > 0 && (
+      <Animate type="fadeInUp">
+        {news && news?.length > 0 && (
         <Row className="u-ml-negative-md-16 u-mr-negative-md-16 u-ml-negative-10 u-mr-negative-10">
           {news.map((item, index) => (
             <Col
@@ -139,8 +141,8 @@ const SearchContent:React.FC<SearchContentProps> = ({
             </Col>
           ))}
         </Row>
-      )}
-      {divisions && divisions?.length > 0 && (
+        )}
+        {divisions && divisions?.length > 0 && (
         <Row className="u-ml-negative-md-16 u-mr-negative-md-16 u-ml-negative-10 u-mr-negative-10">
           {divisions.map((item, index) => (
             <Col
@@ -154,28 +156,29 @@ const SearchContent:React.FC<SearchContentProps> = ({
             </Col>
           ))}
         </Row>
-      )}
+        )}
+        {loading && (
+        <div className="d-flex justify-content-center u-mt-24 u-mb-24">
+          <Icon iconName="loadingWhite" />
+        </div>
+        )}
+
+        {hashShowMore && (
+        <div className="t-searchResult_showMore">
+          <Button
+            variant="primary-green"
+            size="lg"
+            onClick={handleShowMore}
+          >
+            {/* TODO: Translation later */}
+            Xem thêm
+          </Button>
+        </div>
+        )}
+      </Animate>
 
     </div>
 
-    {loading && (
-      <div className="d-flex justify-content-center u-mt-24 u-mb-24">
-        <Icon iconName="loadingWhite" />
-      </div>
-    )}
-
-    {hashShowMore && (
-    <div className="t-searchResult_showMore">
-      <Button
-        variant="primary-green"
-        size="lg"
-        onClick={handleShowMore}
-      >
-        {/* TODO: Translation later */}
-        Xem thêm
-      </Button>
-    </div>
-    )}
   </>
 );
 

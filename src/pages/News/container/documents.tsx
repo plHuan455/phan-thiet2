@@ -28,12 +28,13 @@ interface DocumentProps extends SectionBlocks {
 
 const Documents: React.FC<DocumentProps> = ({ documents, blocks }) => {
   const documentBlock = getBlockData<DocumentBlocks>('document', blocks);
-
   const leafRef = useRef<HTMLDivElement>(null);
   const ballonRef = useRef<HTMLDivElement>(null);
   const isScrollLeaf = useScrollAnimate(leafRef);
   const isScrollBallon = useScrollAnimate(ballonRef);
-  const { animated, ballonAnimate, slideReverseAnimate } = useAnimation();
+  const {
+    animated, ballonAnimate, slideReverseAnimate,
+  } = useAnimation();
   const documentList = useMemo(() => {
     if (Array.isArray(documents)) {
       const cardNormals: CardNormalProps[] = documents.map((item) => ({
@@ -60,8 +61,8 @@ const Documents: React.FC<DocumentProps> = ({ documents, blocks }) => {
   if (!documents?.length) return null;
 
   return (
-    <>
-      <Section className="s-documents">
+    <Section>
+      <div className="s-documents">
         <animated.div
           style={isScrollLeaf ? slideReverseAnimate : {}}
           className="s-documents_leaf"
@@ -91,8 +92,8 @@ const Documents: React.FC<DocumentProps> = ({ documents, blocks }) => {
             )}
           />
         </Container>
-      </Section>
-    </>
+      </div>
+    </Section>
   );
 };
 
