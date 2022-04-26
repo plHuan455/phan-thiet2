@@ -22,7 +22,7 @@ const Division: React.FC<DivisionProps> = ({ data, subdivisionId }) => {
 
   const subDivisionData = useMemo(
     () => subDivisionList?.data
-      .map((division) => ({
+      ?.map((division) => ({
         imgSrc: baseURL(division.thumbnail),
         title: division.name,
         description: baseString(division.description),
