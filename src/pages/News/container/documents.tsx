@@ -39,7 +39,7 @@ const Documents: React.FC<DocumentProps> = ({ documents, blocks }) => {
     if (Array.isArray(documents)) {
       const cardNormals: CardNormalProps[] = documents.map((item) => ({
         thumbnail: baseURL(item?.subdivision?.thumbnail),
-        title: item.title || '',
+        title: item.name,
         href: linkURL(item.link),
         tag: {
           text: item.subdivision?.name,

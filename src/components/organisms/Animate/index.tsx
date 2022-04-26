@@ -26,7 +26,7 @@ const Animate: React.FC<AnimateProps> = ({
   type,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const animate = useScrollAnimate(ref);
+  const animate = useScrollAnimate(ref, 1.3);
   return (
     <div ref={ref} className={animate ? `${extendClassName || ''} animate animate-${type || ''}` : `${extendClassName || ''} preanimate`}>
       {children}
