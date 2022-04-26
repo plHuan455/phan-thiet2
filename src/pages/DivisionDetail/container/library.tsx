@@ -295,7 +295,7 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId, color }) => {
                 settings={settingRef.current}
                 render={(item) => (
                   <Card.Normal
-                    thumbnail={baseURL(item.thumbnail)}
+                    thumbnail={baseURL(item?.subdivision?.thumbnail)}
                     href={item.link.includes('http') ? item.link : linkURL(item.link)}
                     target="_blank"
                     dateTime={getTimePastToCurrent(item.publishedAt)}

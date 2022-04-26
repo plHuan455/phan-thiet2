@@ -55,7 +55,6 @@ export interface OverviewDocumentType {
   publishedAt: string;
   tag?: string;
   title?: string;
-  thumbnail?: string;
   subdivision?: Subdivision;
 }
 
