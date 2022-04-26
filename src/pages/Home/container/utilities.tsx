@@ -7,6 +7,7 @@ interface UtilitiesItemProps {
   description?: string;
   image?: string;
   title?: string;
+  thumbnail?: string;
 }
 interface UtilitiesProps {
   titleSection: string;
@@ -21,7 +22,7 @@ const Utilities: React.FC<SectionBlocks> = ({ blocks }) => {
     thumbnail: baseURL(val.image),
     title: val.title,
     icon: {
-      imgSrc: baseURL(val?.image),
+      imgSrc: baseURL(val?.thumbnail),
       label: baseString(val?.title),
     },
   })), [utilitiesBlockData]);
