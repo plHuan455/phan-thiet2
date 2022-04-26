@@ -58,9 +58,11 @@ const Screen: React.FC<ScreenProps> = ({ setLogoDivision }) => {
     journey,
     related,
     subscribe,
+    map,
   } = useMemo(() => ({
     ...contentSubdivision,
-  }), [contentSubdivision]);
+    ...subDivisionDetail?.utilityMap,
+  }), [contentSubdivision, subDivisionDetail]);
 
   const refSection = useMenu();
 
@@ -103,7 +105,7 @@ const Screen: React.FC<ScreenProps> = ({ setLogoDivision }) => {
         <Location data={location} type={subDivisionDetail?.type} />
 
         {/* Utilities */}
-        <Utilities ref={refSection.menuList[1].ref} data={utility} />
+        <Utilities ref={refSection.menuList[1].ref} data={utility} map={map} />
 
         {/* Collection */}
         <Collection
