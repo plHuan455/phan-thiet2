@@ -54,8 +54,8 @@ export interface OverviewDocumentType {
   link: string;
   publishedAt: string;
   tag?: string;
-  title?: string;
   subdivision?: Subdivision;
+  name: string;
 }
 
 export interface OverviewType {

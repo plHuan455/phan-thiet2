@@ -298,6 +298,7 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId, color }) => {
                     thumbnail={baseURL(item?.subdivision?.thumbnail)}
                     href={item.link.includes('http') ? item.link : linkURL(item.link)}
                     target="_blank"
+                    title={item.name}
                     dateTime={getTimePastToCurrent(item.publishedAt)}
                     url={{
                       text: 'Tải xuống',
