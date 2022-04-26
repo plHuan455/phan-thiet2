@@ -34,8 +34,13 @@ const PREFIX = {
   },
 };
 
+const TEMPLATE_CODE = {
+  NEW_IMAGE: 'new_image',
+};
+
 export default {
   MENU_CODE,
   LOCAL_STORAGE,
   PREFIX,
+  TEMPLATE_CODE,
 };

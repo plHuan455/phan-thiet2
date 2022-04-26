@@ -1,8 +1,12 @@
 import React, { useMemo } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useQuery } from 'react-query';
+import { useParams, useSearchParams } from 'react-router-dom';
 
 import BannerTemplate from 'components/templates/Banner';
 import useKeywords from 'hooks/useKeywords';
+import i18n from 'i18n';
+import FUNCTIONS_LANGUAGE from 'i18n/functions';
+import { getAllHashtagListService } from 'services/hashtag';
 import { baseURL, getBannerData, getBlockData } from 'utils/functions';
 
 interface NewsSearch {
@@ -10,6 +14,15 @@ interface NewsSearch {
 }
 
 const Banner: React.FC<Pick<BasePageDataTypes<any>, 'banners' | 'blocks'>> = ({ banners, blocks }) => {
+  const { language } = i18n;
+  const { slug } = useParams<{slug:string}>();
+  const {
+    data: dataTag,
+  } = useQuery(
+    ['getAllHashtagListInOverview', language],
+    () => getAllHashtagListService({ in_overview: 1 }),
+  );
+
   const bannerData = useMemo(() => {
     const banner = getBannerData('basic', banners);
     return ({
@@ -48,6 +61,11 @@ const Banner: React.FC<Pick<BasePageDataTypes<any>, 'banners' | 'blocks'>> = ({ 
     }
   };
 
+  const listTag = useMemo(() => dataTag?.map(((x) => ({
+    text: x.name,
+    href: `${FUNCTIONS_LANGUAGE.languageURL(language)}${slug}?keyword=${x.name}`,
+  }))) || [], [dataTag, slug, language]);
+
   return (
     <div className="s-banner">
       <BannerTemplate
@@ -64,20 +82,7 @@ const Banner: React.FC<Pick<BasePageDataTypes<any>, 'banners' | 'blocks'>> = ({ 
         tag={{
           // TODO: translate later
           keyword: 'Từ khóa nổi bật:',
-          list: [
-            {
-              text: 'Du lịch',
-              href: 'du-lich',
-            },
-            {
-              text: 'The King Dom',
-              href: 'the-king-dom',
-            },
-            {
-              text: 'Tour trọn gói',
-              href: 'tour-tron-goi',
-            },
-          ],
+          list: listTag,
         }}
       />
     </div>
