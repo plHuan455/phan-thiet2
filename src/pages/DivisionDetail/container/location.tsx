@@ -15,7 +15,7 @@ const Location: React.FC<LocationProps> = ({
   if (!data?.active) return null;
 
   return (
-    <section className="u-pt-md-80 u-pt-48" style={{ color: 'var(--theme)' }}>
+    <section className="u-pt-md-80 u-pt-48 position-relative" style={{ color: 'var(--theme)' }}>
       <DivisionLocation
         title={data?.titleSection}
         titleBox={data?.title}

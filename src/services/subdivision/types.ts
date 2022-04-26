@@ -8,6 +8,7 @@ export interface SubDivisionParams {
 }
 
 interface SubdivisionCommonTypes {
+  banner: BannersDataTypes[];
   id: number;
   displayOrder: number;
   thumbnail: string;
