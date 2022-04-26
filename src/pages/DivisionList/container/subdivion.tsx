@@ -3,7 +3,6 @@ import { useInfiniteQuery } from 'react-query';
 
 import balloon from 'assets/images/pages/divisionList/balloonDivisions.png';
 import Image from 'components/atoms/Image';
-import Animate from 'components/organisms/Animate';
 import { CardDivisionProps } from 'components/organisms/Card/Division';
 import Subdivision from 'components/templates/Subdivision';
 import { getSubDivisionListService } from 'services/subdivision';
@@ -63,24 +62,22 @@ const Divisions: React.FC<SectionBlocks> = ({ blocks }) => {
   );
 
   return (
-    <Animate type="fadeInUp">
-      <section className="s-divisions u-mt-md-88 u-mt-48">
-        {/* TODO: Add Animation Later */}
-        <div className="s-divisions-balloon">
-          <Image src={balloon} ratio="1x1" size="contain" />
-        </div>
-        <Subdivision
-          loading={isFetchingNextPage}
-          onClick={fetchNextSubdivision}
-          title={blockContent?.title}
-          list={subdivisionList}
-          btn={{
-            text: blockContent?.button,
-          }}
-          hasShowMore={hasNextSubdivision}
-        />
-      </section>
-    </Animate>
+    <section className="s-divisions u-mt-md-88 u-mt-48">
+      {/* TODO: Add Animation Later */}
+      <div className="s-divisions-balloon">
+        <Image src={balloon} ratio="1x1" size="contain" />
+      </div>
+      <Subdivision
+        loading={isFetchingNextPage}
+        onClick={fetchNextSubdivision}
+        title={blockContent?.title}
+        list={subdivisionList}
+        btn={{
+          text: blockContent?.button,
+        }}
+        hasShowMore={hasNextSubdivision}
+      />
+    </section>
   );
 };
 export default Divisions;

@@ -5,6 +5,7 @@ import Container from 'common/Container';
 import Button from 'components/atoms/Button';
 import Heading from 'components/atoms/Heading';
 import Text from 'components/atoms/Text';
+import Animate from 'components/organisms/Animate';
 import Card from 'components/organisms/Card';
 import { CardNewsProps } from 'components/organisms/Card/News';
 
@@ -19,7 +20,7 @@ const NewsList: React.FC<NewsListProps> = ({
   listNews,
   button,
 }) => (
-  <div className="t-newsList">
+  <Animate type="fadeInUp" extendClassName="t-newsList">
     <Container>
       <div className="t-newsList_title">
         <Heading type="h4" modifiers={['s015', 'gradientGreen', '700']} content={title} />
@@ -54,7 +55,7 @@ const NewsList: React.FC<NewsListProps> = ({
         </div>
       )}
     </Container>
-  </div>
+  </Animate>
 );
 
 NewsList.defaultProps = {

@@ -2,6 +2,7 @@ import React from 'react';
 
 import Heading from 'components/atoms/Heading';
 import Image from 'components/atoms/Image';
+import Animate from 'components/organisms/Animate';
 
 interface SelectionProps {
   title: string,
@@ -17,9 +18,9 @@ const Selection: React.FC<SelectionProps> = ({ title, image }) => (
             <Heading type="h4" modifiers={['gradientGreen', '700', 's015']} content={title} />
           </div>
         </div>
-        <div className="t-selection_thumbnail">
+        <Animate type="slideInRight" extendClassName="t-selection_thumbnail">
           <Image src={image} alt="thumbnail" ratio="912x455" size="cover" />
-        </div>
+        </Animate>
         <div className="t-selection_layer" />
       </div>
     </div>

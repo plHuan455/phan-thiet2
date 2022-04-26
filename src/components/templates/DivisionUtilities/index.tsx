@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 
 import Container from 'common/Container';
 import Heading from 'components/atoms/Heading';
+import Animate from 'components/organisms/Animate';
 import MarkerCard, { MarkerCardProps } from 'components/organisms/LocationMap/component';
 import useScrollAnimate from 'hooks/useScrollAnimation';
 
@@ -35,7 +36,7 @@ const DivisionUtilities: React.FC<DivisionUtilitiesProps> = ({
         <div ref={refUtilitiesMap} className="t-divisionUtilities_title">
           <Heading type="h2" modifiers={['inherit', 's015', '400']} content={title} />
         </div>
-        <div className="t-divisionUtilities_map u-mt-41">
+        <Animate type="fadeInUp" extendClassName="t-divisionUtilities_map u-mt-41">
           <div className="t-divisionUtilities_image" style={{ paddingBottom: heightImage && widthImage ? `calc(${heightImage / widthImage}  * 100%)` : '0%' }}>
             <img src={background} alt="location-map" loading="lazy" />
           </div>
@@ -64,7 +65,7 @@ const DivisionUtilities: React.FC<DivisionUtilitiesProps> = ({
               </div>
             ))
           }
-        </div>
+        </Animate>
       </Container>
     </div>
   );

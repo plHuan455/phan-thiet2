@@ -5,6 +5,7 @@ import Container from 'common/Container';
 import Button from 'components/atoms/Button';
 import Heading from 'components/atoms/Heading';
 import Icon from 'components/atoms/Icon';
+import Animate from 'components/organisms/Animate';
 import Card from 'components/organisms/Card';
 import { CardDivisionProps } from 'components/organisms/Card/Division';
 
@@ -31,43 +32,45 @@ const Subdivision: React.FC<SubdivisionProps> = ({
       type="h4"
       modifiers={['700', 's015', 'center', 'gradientGreen', 'uppercase']}
     />
-    <Container>
-      <Row className="u-mt-8 u-ml-negative-16 u-mr-negative-16">
-        {list?.map((card, index) => (
-          <Col
-            key={`card-${index.toString()}`}
-            className="u-mt-16 u-mt-lg-32 u-pl-16 u-pr-16"
-            lg={4}
-            sm={6}
-            xs={12}
-          >
-            <Card.Division
-              {...card}
-            />
-          </Col>
-        ))}
-      </Row>
-      {loading && (
-      <div className="u-mt-16 u-pt-16 u-pb-16">
-        <div className="d-flex justify-content-center">
-          <Icon iconName="loadingBlue" size="36" />
+    <Animate type="fadeInUp">
+      <Container>
+        <Row className="u-mt-8 u-ml-negative-16 u-mr-negative-16">
+          {list?.map((card, index) => (
+            <Col
+              key={`card-${index.toString()}`}
+              className="u-mt-16 u-mt-lg-32 u-pl-16 u-pr-16"
+              lg={4}
+              sm={6}
+              xs={12}
+            >
+              <Card.Division
+                {...card}
+              />
+            </Col>
+          ))}
+        </Row>
+        {loading && (
+        <div className="u-mt-16 u-pt-16 u-pb-16">
+          <div className="d-flex justify-content-center">
+            <Icon iconName="loadingBlue" size="36" />
+          </div>
         </div>
-      </div>
-      )}
-      {hasShowMore && (
-      <div className="u-mt-16 u-mt-lg-32 d-flex justify-content-center">
-        <Button
-          {...btn}
-          variant="primary-green"
-          onClick={() => {
-            if (onClick) onClick();
-          }}
-        >
-          {btn?.text}
-        </Button>
-      </div>
-      )}
-    </Container>
+        )}
+        {hasShowMore && (
+        <div className="u-mt-16 u-mt-lg-32 d-flex justify-content-center">
+          <Button
+            {...btn}
+            variant="primary-green"
+            onClick={() => {
+              if (onClick) onClick();
+            }}
+          >
+            {btn?.text}
+          </Button>
+        </div>
+        )}
+      </Container>
+    </Animate>
   </div>
 );
 

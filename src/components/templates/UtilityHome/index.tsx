@@ -5,6 +5,7 @@ import Slider from 'react-slick';
 import Heading from 'components/atoms/Heading';
 import Image from 'components/atoms/Image';
 import Text from 'components/atoms/Text';
+import Animate from 'components/organisms/Animate';
 import Carousel, { NextArrow, PrevArrow } from 'components/organisms/Carousel';
 import useDeviceQueries from 'hooks/useDeviceQueries';
 
@@ -94,15 +95,15 @@ const UtilityHome: React.FC<UtilityHomeProps> = ({
                           <div className="t-utilityHome_itemMain-desc">
                             <Text modifiers={['14x20', '400', 'davyGrey']} content={item.description} />
                           </div>
-                          <div className="t-utilityHome_itemMain-thumb">
+                          <Animate type="fadeInUp" extendClassName="t-utilityHome_itemMain-thumb">
                             <Image src={item.thumbnail} alt={item.title} ratio="929x479" size="contain" />
-                          </div>
+                          </Animate>
                         </div>
                       ))
                     }
                   </Carousel>
                 </div>
-                <div className="t-utilityHome_carouselMenu">
+                <Animate type="fadeInUp" extendClassName="t-utilityHome_carouselMenu">
                   <Carousel
                     asNavFor={nav1 as Slider}
                     ref={(slider) => setNav2(slider)}
@@ -128,7 +129,7 @@ const UtilityHome: React.FC<UtilityHomeProps> = ({
                       ))
                     }
                   </Carousel>
-                </div>
+                </Animate>
               </div>
             )
           }

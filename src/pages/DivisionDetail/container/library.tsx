@@ -156,17 +156,17 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId, color }) => {
   if (!data?.active) return null;
 
   return (
-    <Animate type="fadeInUp">
-      <section
-        className="s-library u-pt-md-80 u-pt-48 u-pb-md-80 u-pb-48"
-        style={{ color: 'var(--theme)' }}
-      >
-        <Container>
-          <Heading
-            type="h2"
-            modifiers={['s015', '400', 'inherit']}
-            content={data?.title}
-          />
+    <section
+      className="s-library u-pt-md-80 u-pt-48 u-pb-md-80 u-pb-48"
+      style={{ color: 'var(--theme)' }}
+    >
+      <Container>
+        <Heading
+          type="h2"
+          modifiers={['s015', '400', 'inherit']}
+          content={data?.title}
+        />
+        <Animate type="fadeInUp">
           <div className="s-library_wrapTab">
             <Tabs variableMutate={indexActive}>
               {dummyData.map((item, index) => (
@@ -191,9 +191,9 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId, color }) => {
 
           {/* TODO: Update icon loading inherit */}
           {state.isLoading && (
-          <div className="u-pt-15 u-pb-15 d-flex justify-content-center">
-            <Icon iconName="loadingInherit" />
-          </div>
+            <div className="u-pt-15 u-pb-15 d-flex justify-content-center">
+              <Icon iconName="loadingInherit" />
+            </div>
           )}
 
           {/* News */}
@@ -313,31 +313,31 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId, color }) => {
                   Không có dữ liệu!
                 </Text>
               ))}
-          <PopupImage
-            isOpen={state.isPopImageOpen || false}
-            handleClose={() => dispatch({ type: 'close_image_popup' })}
-            currentImgIdx={state.currentImgIdx}
-            dataImageList={state.images?.map((item) => baseURL(item.path)) || []}
-          />
-          <PopupPlayer
-            isOpen={state.isPopPlayerOpen || false}
-            handleClose={() => dispatch({ type: 'close_player_popup' })}
-            videoType={state.currVidType || ''}
-            src={state.currVidSrc || ''}
-            theme={color}
-          />
-          <div className="d-flex justify-content-center d-lg-none u-mt-32">
-            <Link href="/" target="_self">
-              <div className="animate animate-arrowSlide d-flex align-items-center">
-                <Text modifiers={['14x20', '400', 'copper']} content="Xem thêm" />
-                <div className="u-ml-8" />
-                <Icon iconName="arrowRightCopper" size="16" />
-              </div>
-            </Link>
-          </div>
-        </Container>
-      </section>
-    </Animate>
+        </Animate>
+        <PopupImage
+          isOpen={state.isPopImageOpen || false}
+          handleClose={() => dispatch({ type: 'close_image_popup' })}
+          currentImgIdx={state.currentImgIdx}
+          dataImageList={state.images?.map((item) => baseURL(item.path)) || []}
+        />
+        <PopupPlayer
+          isOpen={state.isPopPlayerOpen || false}
+          handleClose={() => dispatch({ type: 'close_player_popup' })}
+          videoType={state.currVidType || ''}
+          src={state.currVidSrc || ''}
+          theme={color}
+        />
+        <div className="d-flex justify-content-center d-lg-none u-mt-32">
+          <Link href="/" target="_self">
+            <div className="animate animate-arrowSlide d-flex align-items-center">
+              <Text modifiers={['14x20', '400', 'copper']} content="Xem thêm" />
+              <div className="u-ml-8" />
+              <Icon iconName="arrowRightCopper" size="16" />
+            </div>
+          </Link>
+        </div>
+      </Container>
+    </section>
   );
 };
 

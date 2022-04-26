@@ -7,6 +7,7 @@ import Heading from 'components/atoms/Heading';
 import Icon from 'components/atoms/Icon';
 import Link from 'components/atoms/Link';
 import Text from 'components/atoms/Text';
+import Animate from 'components/organisms/Animate';
 import Card from 'components/organisms/Card';
 import { CardEventProps } from 'components/organisms/Card/Event';
 import useCountDown from 'hooks/useCountDown';
@@ -50,7 +51,7 @@ const Events: React.FC<EventsProps> = ({
           )}
         >
           {firstItem && (
-            <div className="t-events_wrapCountDown u-mb-md-40 u-mb-20">
+            <Animate type="fadeInUp" extendClassName="t-events_wrapCountDown u-mb-md-40 u-mb-20">
               <div className="t-events_countDown-title">
                 <Heading type="h4" modifiers={['400', 'center', 'gradientGreen']} content={firstItem?.title} />
               </div>
@@ -141,7 +142,7 @@ const Events: React.FC<EventsProps> = ({
                   <Button variant="primary-green">{firstItem?.button?.text}</Button>
                 </Link>
               </div>
-            </div>
+            </Animate>
           )}
         </FlatMore>
       </Container>

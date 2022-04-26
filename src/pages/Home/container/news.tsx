@@ -4,7 +4,6 @@ import { useQuery } from 'react-query';
 
 import Container from 'common/Container';
 import FlatMore from 'common/FlatMore';
-import Animate from 'components/organisms/Animate';
 import Card from 'components/organisms/Card';
 import { CardNormalProps } from 'components/organisms/Card/Normal';
 import i18n from 'i18n';
@@ -44,30 +43,28 @@ const News: React.FC<SectionBlocks> = ({ blocks }) => {
   })) || [], [newsList, language, t]);
 
   return (
-    <Animate type="fadeInUp">
-      <section className="u-pt-md-80 u-pb-48 u-pt-48 u-pb-md-88 position-relative">
-        <Container>
-          <FlatMore
-            title={{
-              text: baseString(newsBlock?.titleSection),
-              type: 'h4',
-              modifiers: ['gradientGreen', '700', 's015'],
-            }}
-            link={{
-              text: newsBlock?.link?.text,
-              href: newsBlock?.link?.url,
-              target: newsBlock?.link?.target,
-            }}
-            data={newsData}
-            render={(item) => (
-              <Card.Normal
-                {...item}
-              />
-            )}
-          />
-        </Container>
-      </section>
-    </Animate>
+    <section className="u-pt-md-80 u-pb-48 u-pt-48 u-pb-md-88 position-relative">
+      <Container>
+        <FlatMore
+          title={{
+            text: baseString(newsBlock?.titleSection),
+            type: 'h4',
+            modifiers: ['gradientGreen', '700', 's015'],
+          }}
+          link={{
+            text: newsBlock?.link?.text,
+            href: newsBlock?.link?.url,
+            target: newsBlock?.link?.target,
+          }}
+          data={newsData}
+          render={(item) => (
+            <Card.Normal
+              {...item}
+            />
+          )}
+        />
+      </Container>
+    </section>
   );
 };
 

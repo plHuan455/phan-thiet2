@@ -3,7 +3,6 @@ import React, { useMemo } from 'react';
 import bgConsultancy from 'assets/images/pages/divisionList/bgConsultancy.png';
 import ConsultancyCommon from 'common/Consultancy';
 import Image from 'components/atoms/Image';
-import Animate from 'components/organisms/Animate';
 import { baseString, getBlockData } from 'utils/functions';
 
 interface ConsultancyProps {
@@ -22,21 +21,19 @@ const Consultancy: React.FC<SectionBlocks> = ({ blocks }) => {
   }, [blocks]);
 
   return (
-    <Animate type="fadeInUp">
-      <div className="s-consultancy">
-        <ConsultancyCommon
-          title={{
-            text: blockContent?.title,
-            modifiers: ['700', 'gradientGreen', 's015'],
-          }}
-          layer={(
-            <div className="s-consultancy-bg">
-              <Image src={bgConsultancy} />
-            </div>
+    <div className="s-consultancy">
+      <ConsultancyCommon
+        title={{
+          text: blockContent?.title,
+          modifiers: ['700', 'gradientGreen', 's015'],
+        }}
+        layer={(
+          <div className="s-consultancy-bg">
+            <Image src={bgConsultancy} />
+          </div>
         )}
-        />
-      </div>
-    </Animate>
+      />
+    </div>
   );
 };
 export default Consultancy;

@@ -6,6 +6,7 @@ import Container from 'common/Container';
 import Heading from 'components/atoms/Heading';
 import Image from 'components/atoms/Image';
 import PullDown, { OptionType } from 'components/molecules/PullDown';
+import Animate from 'components/organisms/Animate';
 import LocationMap, { DivisionTypes } from 'components/organisms/LocationMap';
 
 interface ProjectPositionSummaryProps {
@@ -55,23 +56,25 @@ const ProjectPositionSummary: React.FC<ProjectPositionSummaryProps> = ({
         <div className="t-projectPositionSummary_title">
           <Heading type="h4" modifiers={['700', 'gradientGreen', 'center']} content={title} />
         </div>
-        <div className="t-projectPositionSummary_pulldown">
-          <PullDown
-            variant="highLight"
-            value={valueDivision}
-            options={optionsDivision || []}
-            handleSelect={handleSelected}
-            placeholder={placeholderPulldown}
-          />
-        </div>
-        <div className="t-projectPositionSummary_map">
-          <LocationMap
-            listDivision={listDivision}
-            active={active}
-            handleHover={(id) => setActive(id)}
-            handleLeave={handleLeave}
-          />
-        </div>
+        <Animate type="fadeInUp">
+          <div className="t-projectPositionSummary_pulldown">
+            <PullDown
+              variant="highLight"
+              value={valueDivision}
+              options={optionsDivision || []}
+              handleSelect={handleSelected}
+              placeholder={placeholderPulldown}
+            />
+          </div>
+          <div className="t-projectPositionSummary_map">
+            <LocationMap
+              listDivision={listDivision}
+              active={active}
+              handleHover={(id) => setActive(id)}
+              handleLeave={handleLeave}
+            />
+          </div>
+        </Animate>
       </Container>
     </div>
   );

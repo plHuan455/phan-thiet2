@@ -7,7 +7,6 @@ import { useQuery } from 'react-query';
 import srcBg from 'assets/images/journeys/bg.jpg';
 import Container from 'common/Container';
 import FlatMore from 'common/FlatMore';
-import Animate from 'components/organisms/Animate';
 import Card from 'components/organisms/Card';
 import JourneysTemplate from 'components/templates/Journeys';
 import PopupImage from 'components/templates/PopupImage';
@@ -110,45 +109,41 @@ const Division: React.FC<SectionBlocks> = ({ blocks }) => {
 
   return (
     <>
-      <Animate type="fadeInUp">
-        <section className="u-pt-md-83 u-pb-80 u-pt-48 u-pb-48 position-relative">
-          <Container>
-            <FlatMore
-              title={{
-                text: baseString(divisionBlocks?.titleSection),
-                type: 'h4',
-                modifiers: ['gradientGreen', '700', 's015'],
-              }}
-              link={{
-                text: divisionBlocks?.link?.text,
-                href: divisionBlocks?.link?.url,
-                target: divisionBlocks?.link?.target,
-              }}
-              data={subDivisionData}
-              render={(item) => (
-                <Card.Division
-                  {...item}
-                />
-              )}
-            />
-          </Container>
-        </section>
-      </Animate>
-      <Animate type="fadeInUp">
-        <section>
-          <JourneysTemplate
-            title={journeysBlocks?.titleSection}
-            titleField={t('home.house_models')}
-            emptyStr={t('general.not_found_data')}
-            dataTimeLine={journeysData}
-            listCard={listCardJourneys}
-            srcBg={srcBg}
-            handleClickTimeLine={handleClickTimeLine}
-            loading={isLoading}
-            handleClickCard={handleClickCard}
+      <section className="u-pt-md-83 u-pb-80 u-pt-48 u-pb-48 position-relative">
+        <Container>
+          <FlatMore
+            title={{
+              text: baseString(divisionBlocks?.titleSection),
+              type: 'h4',
+              modifiers: ['gradientGreen', '700', 's015'],
+            }}
+            link={{
+              text: divisionBlocks?.link?.text,
+              href: divisionBlocks?.link?.url,
+              target: divisionBlocks?.link?.target,
+            }}
+            data={subDivisionData}
+            render={(item) => (
+              <Card.Division
+                {...item}
+              />
+            )}
           />
-        </section>
-      </Animate>
+        </Container>
+      </section>
+      <section>
+        <JourneysTemplate
+          title={journeysBlocks?.titleSection}
+          titleField={t('home.house_models')}
+          emptyStr={t('general.not_found_data')}
+          dataTimeLine={journeysData}
+          listCard={listCardJourneys}
+          srcBg={srcBg}
+          handleClickTimeLine={handleClickTimeLine}
+          loading={isLoading}
+          handleClickCard={handleClickCard}
+        />
+      </section>
       <PopupImage
         isOpen={state.isOpen || false}
         handleClose={() => dispatcher({

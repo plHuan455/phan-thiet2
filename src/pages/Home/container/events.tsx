@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
 
 import { IconName } from 'components/atoms/Icon';
-import Animate from 'components/organisms/Animate';
 import EventsTemplate from 'components/templates/Events';
 import i18n from 'i18n';
 import getEventListService from 'services/event';
@@ -53,15 +52,13 @@ const Events: React.FC<SectionBlocks> = ({ blocks }) => {
     },
   })), [eventList, language, t]);
   return (
-    <Animate type="fadeInUp">
-      <section className="u-pt-md-80 u-pb-48 u-pt-48 u-pb-md-80 position-relative">
-        <EventsTemplate
-          title={eventsBlock?.titleSection}
-          button={{ ...eventsBlock?.link }}
-          listEvents={eventsData}
-        />
-      </section>
-    </Animate>
+    <section className="u-pt-md-80 u-pb-48 u-pt-48 u-pb-md-80 position-relative">
+      <EventsTemplate
+        title={eventsBlock?.titleSection}
+        button={{ ...eventsBlock?.link }}
+        listEvents={eventsData}
+      />
+    </section>
   );
 };
 

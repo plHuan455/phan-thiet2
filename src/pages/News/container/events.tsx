@@ -1,16 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable no-unused-vars */
 import dayjs from 'dayjs';
-import React, { useMemo, useRef } from 'react';
-
-import useAnimation from '../hook/animation';
+import React, { useMemo } from 'react';
 
 import Section from './section';
 
 import { IconName } from 'components/atoms/Icon';
-import Animate from 'components/organisms/Animate';
 import EventsTemplate from 'components/templates/Events';
-import useScrollAnimate from 'hooks/useScrollAnimation';
 import { OverviewEventsType } from 'services/overviews/types';
 import CONSTANTS from 'utils/constants';
 import { baseURL, getBlockData } from 'utils/functions';
@@ -63,16 +57,14 @@ const Events: React.FC<EventsProps> = ({ events, blocks }) => {
   if (!events?.length) return null;
 
   return (
-    <Animate type="fadeInUp">
-      <Section>
-        <div className="s-events">
-          <EventsTemplate
-            title={eventsBlock?.title}
-            listEvents={dataEvents}
-          />
-        </div>
-      </Section>
-    </Animate>
+    <Section>
+      <div className="s-events">
+        <EventsTemplate
+          title={eventsBlock?.title}
+          listEvents={dataEvents}
+        />
+      </div>
+    </Section>
   );
 };
 

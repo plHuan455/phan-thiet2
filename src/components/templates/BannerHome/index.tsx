@@ -3,6 +3,7 @@ import React from 'react';
 import Container from 'common/Container';
 import Image, { ImageProps } from 'components/atoms/Image';
 import Text from 'components/atoms/Text';
+import Animate from 'components/organisms/Animate';
 import Carousel from 'components/organisms/Carousel';
 
 export interface CardBannerProps {
@@ -90,7 +91,7 @@ const BannerHome: React.FC<BannerHomeProps> = ({
         ratio="1365x1290"
       />
     </div>
-    <div className="t-bannerHome_content">
+    <Animate type="fadeInUp" extendClassName="t-bannerHome_content">
       <Container>
         {!!list?.length && (
           <div className="t-bannerHome_list">
@@ -109,7 +110,7 @@ const BannerHome: React.FC<BannerHomeProps> = ({
           <Text modifiers={['s015', 'center', 'davyGrey', '20x32']} content={description} />
         </div>
       </Container>
-    </div>
+    </Animate>
   </div>
 );
 

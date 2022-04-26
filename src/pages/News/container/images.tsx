@@ -5,7 +5,6 @@ import Section from './section';
 import Container from 'common/Container';
 import FlatMore from 'common/FlatMore';
 import Image from 'components/atoms/Image';
-import Animate from 'components/organisms/Animate';
 import PopupImage from 'components/templates/PopupImage';
 import { OverviewImageType } from 'services/overviews/types';
 import { baseString, baseURL, getBlockData } from 'utils/functions';
@@ -87,34 +86,32 @@ const Images: React.FC<ImagesProps> = ({ images, blocks }) => {
   if (!images?.length) return null;
 
   return (
-    <Animate type="fadeInUp">
-      <Section>
-        <div className="s-images">
-          <Container>
-            <FlatMore
-              title={{
-                text: baseString(imageBlocks?.title),
-                type: 'h4',
-                modifiers: ['gradientGreen', '700', 's015', 'uppercase'],
-              }}
-              data={imageList}
-              render={(item, itemIdx) => (
-                <CardImage
-                  {...item}
-                  handleClick={() => updateImageState({ isOpen: true, currentImgIdx: itemIdx })}
-                />
-              )}
-            />
-          </Container>
-          <PopupImage
-            isOpen={state.isOpen || false}
-            handleClose={() => updateImageState({ isOpen: false })}
-            currentImgIdx={state.currentImgIdx}
-            dataImageList={imageList?.map((item) => item.thumbnail) || []}
+    <Section>
+      <div className="s-images">
+        <Container>
+          <FlatMore
+            title={{
+              text: baseString(imageBlocks?.title),
+              type: 'h4',
+              modifiers: ['gradientGreen', '700', 's015', 'uppercase'],
+            }}
+            data={imageList}
+            render={(item, itemIdx) => (
+              <CardImage
+                {...item}
+                handleClick={() => updateImageState({ isOpen: true, currentImgIdx: itemIdx })}
+              />
+            )}
           />
-        </div>
-      </Section>
-    </Animate>
+        </Container>
+        <PopupImage
+          isOpen={state.isOpen || false}
+          handleClose={() => updateImageState({ isOpen: false })}
+          currentImgIdx={state.currentImgIdx}
+          dataImageList={imageList?.map((item) => item.thumbnail) || []}
+        />
+      </div>
+    </Section>
   );
 };
 

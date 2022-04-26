@@ -8,7 +8,6 @@ import ballon1 from 'assets/images/pages/news/ballon_1.png';
 import leaf1 from 'assets/images/pages/news/leaf_1.png';
 import leaf2 from 'assets/images/pages/news/leaf_2.png';
 import Image from 'components/atoms/Image';
-import Animate from 'components/organisms/Animate';
 import NewsList from 'components/templates/NewsList';
 import useScrollAnimate from 'hooks/useScrollAnimation';
 import { OverviewNewsType } from 'services/overviews/types';
@@ -94,14 +93,12 @@ const News: React.FC<NewsProps> = ({ news, blocks }) => {
   if (!news?.length) return null;
 
   return (
-    <Animate type="fadeInUp">
-      <Section>
-        <div className="s-news">
-          <NewsList title={newsBlocks?.title} listNews={dataNews} />
-          {news && news?.length > 0 && <AnimationNews />}
-        </div>
-      </Section>
-    </Animate>
+    <Section>
+      <div className="s-news">
+        <NewsList title={newsBlocks?.title} listNews={dataNews} />
+        {news && news?.length > 0 && <AnimationNews />}
+      </div>
+    </Section>
   );
 };
 

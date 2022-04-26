@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 
-import Animate from 'components/organisms/Animate';
 import UtilitiesTemplate from 'components/templates/UtilityHome';
 import { baseString, baseURL, getBlockData } from 'utils/functions';
 
@@ -28,12 +27,10 @@ const Utilities: React.FC<SectionBlocks> = ({ blocks }) => {
   })), [utilitiesBlockData]);
 
   return (
-    <Animate type="fadeInUp">
-      <UtilitiesTemplate
-        title={utilitiesBlockData?.titleSection}
-        listUtilities={utilitiesBlockContent}
-      />
-    </Animate>
+    <UtilitiesTemplate
+      title={utilitiesBlockData?.titleSection}
+      listUtilities={utilitiesBlockContent}
+    />
   );
 };
 export default Utilities;

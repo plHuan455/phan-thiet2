@@ -3,6 +3,7 @@ import { Col, Row } from 'react-bootstrap';
 
 import Container from 'common/Container';
 import Heading, { TextStyle } from 'components/atoms/Heading';
+import Animate from 'components/organisms/Animate';
 import ConsultancyForm, {
   ConsultancyProps as ConsultancyFormProps,
 } from 'components/organisms/Consultancy';
@@ -38,9 +39,9 @@ const Consultancy: React.FC<ConsultancyProps> = ({
             </div>
           </Col>
           <Col xl={7} className="u-mt-xl-0 u-mt-32">
-            <div className="t-consultancy_form">
+            <Animate type="fadeInUp" extendClassName="t-consultancy_form">
               <ConsultancyForm {...form} />
-            </div>
+            </Animate>
           </Col>
         </Row>
       </Container>

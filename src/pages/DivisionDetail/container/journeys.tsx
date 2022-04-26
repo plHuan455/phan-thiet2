@@ -4,7 +4,6 @@ import { useQuery } from 'react-query';
 import PopupImageDetail from '../component/popupImageDetail';
 
 import srcBg from 'assets/images/divisionJourneys/bg.jpg';
-import Animate from 'components/organisms/Animate';
 import DivisionJourneys from 'components/templates/DivisionJourneys';
 import { SubdivisionJourneyTypes } from 'services/subdivision/types';
 import { getUtilityListBySubDivisionService } from 'services/utilities';
@@ -65,29 +64,27 @@ const Journeys: React.FC<JourneysProps> = ({
   ]);
 
   return (
-    <Animate type="fadeInUp">
-      <section>
-        <DivisionJourneys
-          tabs={tabs}
-          data={dataJourneys}
-          srcBg={srcBg}
-          title={data?.title}
-          idActive={idActive}
-          handleClick={(val) => setIdActive(val)}
-          handleClickCard={(val) => {
-            setOpen(true);
-            setSlideActive(val);
-          }}
-          textNotFound="Không tìm thấy dữ liệu"
-        />
-        <PopupImageDetail
-          isOpen={open}
-          handleClose={() => setOpen(false)}
-          dataList={dataJourneys}
-          slideActive={slideActive || 0}
-        />
-      </section>
-    </Animate>
+    <section>
+      <DivisionJourneys
+        tabs={tabs}
+        data={dataJourneys}
+        srcBg={srcBg}
+        title={data?.title}
+        idActive={idActive}
+        handleClick={(val) => setIdActive(val)}
+        handleClickCard={(val) => {
+          setOpen(true);
+          setSlideActive(val);
+        }}
+        textNotFound="Không tìm thấy dữ liệu"
+      />
+      <PopupImageDetail
+        isOpen={open}
+        handleClose={() => setOpen(false)}
+        dataList={dataJourneys}
+        slideActive={slideActive || 0}
+      />
+    </section>
   );
 };
 

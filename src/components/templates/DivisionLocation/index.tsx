@@ -7,6 +7,7 @@ import bg from 'assets/images/divisionLocation/bg.jpg';
 import Container from 'common/Container';
 import Heading from 'components/atoms/Heading';
 import Image from 'components/atoms/Image';
+import Animate from 'components/organisms/Animate';
 import useScrollAnimate from 'hooks/useScrollAnimation';
 
 export type TypeDivision =
@@ -42,7 +43,7 @@ const DivisionLocation: React.FC<DivisionLocationProps> = ({
       <Container>
         <Heading type="h2" modifiers={['inherit', 's015', 'uppercase']} content={title} />
       </Container>
-      <div className="t-divisionLocation_wrapContent u-mt-30 u-mt-md-56">
+      <Animate type="fadeInUp" extendClassName="t-divisionLocation_wrapContent u-mt-30 u-mt-md-56">
         <div className="t-divisionLocation_map">
           <img className="t-divisionLocation_bg" src={bg} loading="lazy" alt="bg" />
           {mapData.map((item, index) => (
@@ -73,7 +74,7 @@ const DivisionLocation: React.FC<DivisionLocationProps> = ({
             contentBox={contentBox}
           />
         </div>
-      </div>
+      </Animate>
     </div>
   );
 };

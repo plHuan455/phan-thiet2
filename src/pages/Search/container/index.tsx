@@ -65,7 +65,7 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
     optionSort[0],
   );
   const bgLeftRef = useRef<HTMLDivElement>(null);
-  const { animate, animateReverse, animationSection } = useAnimation({ ref: bgLeftRef });
+  const { animate, animateReverse } = useAnimation({ ref: bgLeftRef });
   const [searchKeyValue, setSearchKeyValue] = useState('');
   const [search, setSearch] = useState('');
 
@@ -216,65 +216,63 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
         </div>
       </animated.div>
 
-      <animated.div style={animationSection}>
-        <SearchResult.Wrapper titleMain="Tìm kiếm">
-          <SearchResult.Summary
-            value={searchKeyValue}
-            placeholder="Tìm kiếm"
-            searchText={{
-              text: 'kết quả tìm thấy cho',
-              length: lengthItem,
-              value: search,
-            }}
-            onChange={(e) => setSearchKeyValue(e.currentTarget.value)}
-            handleSubmit={handleSearch}
-          />
-          <SearchResult.Filter
-            tab={{
-              list: dataTabList,
-              active: tabActive,
-              onSelect: (tab) => setTabActive(tab),
-            }}
-            filter={{
-              options: optionSort,
-              value: currentValueSort,
-              placeholder: 'Kết quả mới nhất',
-              onFilter: handleSort,
-            }}
-          />
-          {tabActive === 'tin-tuc' && (
+      <SearchResult.Wrapper titleMain="Tìm kiếm">
+        <SearchResult.Summary
+          value={searchKeyValue}
+          placeholder="Tìm kiếm"
+          searchText={{
+            text: 'kết quả tìm thấy cho',
+            length: lengthItem,
+            value: search,
+          }}
+          onChange={(e) => setSearchKeyValue(e.currentTarget.value)}
+          handleSubmit={handleSearch}
+        />
+        <SearchResult.Filter
+          tab={{
+            list: dataTabList,
+            active: tabActive,
+            onSelect: (tab) => setTabActive(tab),
+          }}
+          filter={{
+            options: optionSort,
+            value: currentValueSort,
+            placeholder: 'Kết quả mới nhất',
+            onFilter: handleSort,
+          }}
+        />
+        {tabActive === 'tin-tuc' && (
           <SearchResult.Content
             news={newsList}
             hashShowMore={hasNextNews}
             loading={fetchingNews}
             handleShowMore={fetchNextNews}
           />
-          )}
-          {tabActive === 'tin-tuc' && !newsList?.length && (
+        )}
+        {tabActive === 'tin-tuc' && !newsList?.length && (
           <div className="u-mt-24">
             <Text modifiers={['14x20', 'raisinBlack', '400', 'center']}>
               Không có dữ liệu
             </Text>
           </div>
-          )}
-          {tabActive === 'phan-khu' && (
+        )}
+        {tabActive === 'phan-khu' && (
           <SearchResult.Content
             divisions={subdivisionList}
             hashShowMore={hasNextSubdivision}
             loading={fetchingSubdivision}
             handleShowMore={fetchNextSubdivision}
           />
-          )}
-          {tabActive === 'phan-khu' && !subdivisionList?.length && (
+        )}
+        {tabActive === 'phan-khu' && !subdivisionList?.length && (
           <div className="u-mt-24">
             <Text modifiers={['14x20', 'raisinBlack', '400', 'center']}>
               Không có dữ liệu
             </Text>
           </div>
-          )}
+        )}
 
-        </SearchResult.Wrapper>
-      </animated.div>
+      </SearchResult.Wrapper>
     </>
   );
 };

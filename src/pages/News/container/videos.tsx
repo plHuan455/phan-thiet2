@@ -4,7 +4,6 @@ import Section from './section';
 
 import Container from 'common/Container';
 import FlatMore from 'common/FlatMore';
-import Animate from 'components/organisms/Animate';
 import Card from 'components/organisms/Card';
 import PopupPlayer from 'components/templates/PopupPlayer';
 import { OverviewVideoType } from 'services/overviews/types';
@@ -87,34 +86,32 @@ const Videos: React.FC<VideoProps> = ({ videos, blocks }) => {
   if (!videos?.length) return null;
 
   return (
-    <Animate type="fadeInUp">
-      <Section>
-        <div className="s-videos">
-          <Container>
-            <FlatMore
-              title={{
-                text: baseString(videoBlock?.title),
-                type: 'h4',
-                modifiers: ['gradientGreen', '700', 's015', 'uppercase'],
-              }}
-              data={videoList}
-              render={(item) => (
-                <Card.Player
-                  {...item}
-                />
-              )}
-            />
-          </Container>
-          <PopupPlayer
-            isOpen={state.isOpen || false}
-            handleClose={() => updatePlayerState({ isOpen: false })}
-            videoType={state.vidType || ''}
-            src={state.vidSrc || ''}
-            theme="linear-gradient(180deg, #00a8a8 0%, #02747f 100%)"
+    <Section>
+      <div className="s-videos">
+        <Container>
+          <FlatMore
+            title={{
+              text: baseString(videoBlock?.title),
+              type: 'h4',
+              modifiers: ['gradientGreen', '700', 's015', 'uppercase'],
+            }}
+            data={videoList}
+            render={(item) => (
+              <Card.Player
+                {...item}
+              />
+            )}
           />
-        </div>
-      </Section>
-    </Animate>
+        </Container>
+        <PopupPlayer
+          isOpen={state.isOpen || false}
+          handleClose={() => updatePlayerState({ isOpen: false })}
+          videoType={state.vidType || ''}
+          src={state.vidSrc || ''}
+          theme="linear-gradient(180deg, #00a8a8 0%, #02747f 100%)"
+        />
+      </div>
+    </Section>
   );
 };
 

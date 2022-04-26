@@ -22,10 +22,6 @@ const useAnimation = ({ ref }: AnimationParams) => {
   const slideYReversAnimation = useSpring({
     y: 340,
   });
-  const sectionAnimation = useSpring({
-    y: 0,
-    opacity: 1,
-  });
 
   useEffect(() => {
     let res: NodeJS.Timeout;
@@ -41,8 +37,6 @@ const useAnimation = ({ ref }: AnimationParams) => {
       slideYAnimation.y.start({ from: -180, to: 0, config: { duration: 2500 } });
       slideYAnimation.x.start({ from: -100, to: 0, config: { duration: 2500 } });
       slideYReverse.start({ from: 540, to: 0, config: { duration: 1300 } });
-      sectionAnimation.y.start({ from: 500, to: 0, config: { duration: 1000 } });
-      sectionAnimation.opacity.start({ from: 0, to: 1, config: { duration: 1000 } });
 
       res = setTimeout(() => {
         x.start({ cancel: true });
@@ -57,7 +51,6 @@ const useAnimation = ({ ref }: AnimationParams) => {
   return {
     animate: { ...slideYAnimation },
     animateReverse: { ...slideXAnimation, ...slideYReversAnimation },
-    animationSection: sectionAnimation,
   };
 };
 
