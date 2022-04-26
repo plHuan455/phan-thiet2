@@ -6,6 +6,7 @@ import imgKingDom from 'assets/images/divisionLocation/kingDom.png';
 import imgOceanResidence from 'assets/images/divisionLocation/oceanResidence.png';
 import imgPgaGolf from 'assets/images/divisionLocation/pgaGolf.png';
 import imgSanta from 'assets/images/divisionLocation/santa.png';
+import imgStarAvenue from 'assets/images/divisionLocation/starAvenue.png';
 import imgWaikiki from 'assets/images/divisionLocation/waikiki.png';
 
 const mapData = [
@@ -53,6 +54,11 @@ const mapData = [
     className: 'waikiki',
     line: 'M823.367 357.651L783.367 390.651C796.367 382.651 865.867 361.651 908.367 385.151C955.867 410.151 955.867 424.151 954.367 434.151L976.866 433.151L979.367 430.651C978.167 373.451 862.866 344.151 823.367 357.651Z',
     img: imgWaikiki,
+  },
+  {
+    className: 'star-avenue',
+    line: 'M500.616 188.398C499.636 185.137 498.09 179.994 496.08 177.762L474.787 181.369C480.115 197.316 488.943 237.943 501.5 250.5C520.5 269.5 508.818 295.308 504.818 302.308C503.318 304.933 538.778 293.942 550.563 285.228C558.764 267.806 529.897 230.732 526.5 233.487C514.313 243.374 502 193 500.644 188.489L500.616 188.398Z',
+    img: imgStarAvenue,
   },
 ];
 
