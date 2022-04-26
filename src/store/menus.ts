@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import menusService from 'services/menus';
 import { MenuDataTypes, MenuItem } from 'services/menus/types';
@@ -36,7 +36,13 @@ export const menusAsync = createAsyncThunk<
 export const menusSlice = createSlice({
   name: 'menus',
   initialState,
-  reducers: {},
+  reducers: {
+    setActiveHashDivision: ($state, action: PayloadAction<string>) => {
+      $state.header2 = $state.header2.map(
+        (x) => ({ ...x, importantActive: x.link === action.payload }),
+      );
+    },
+  },
   extraReducers(builder) {
     builder.addCase(menusAsync.fulfilled, ($state, action) => {
       const mainHeader = action.payload.find(
@@ -66,5 +72,7 @@ export const menusSlice = createSlice({
     });
   },
 });
+
+export const { setActiveHashDivision } = menusSlice.actions;
 
 export default menusSlice.reducer;

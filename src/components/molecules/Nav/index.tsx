@@ -2,7 +2,7 @@ import React from 'react';
 
 import Link from 'components/atoms/Link';
 import { MenuItem } from 'services/menus/types';
-import mapModifiers from 'utils/functions';
+import mapModifiers, { uniqueId } from 'utils/functions';
 
 interface InternalNavItemTypes {
   isChild?: boolean;
@@ -18,6 +18,9 @@ export interface NavItemProps extends MenuItem, InternalNavItemTypes { }
 
 const recursiveMenuActive = (item: MenuItem, pathname: string, cb: () => void) => {
   const link = item.reference?.slug || item?.link;
+  if (item.importantActive) {
+    cb();
+  }
   if (`/${link}` === pathname) {
     cb();
   } else if (link === '/' && pathname === '/') {
@@ -47,71 +50,83 @@ export const NavItem: React.FC<NavItemProps> = ({
   handleClickExpand,
   handleCloseMenu,
   ...props
-}) => (
-  <li
-    className={mapModifiers(
-      'menu-item',
-      isChild && 'isChild',
-      !isChild && checkActiveMenu(props, pathname) && 'active',
-      props.subMenu?.length ? 'hasChild' : undefined,
-      idExpand && idExpand.includes(props.id) && 'expand',
-    )}
-  >
-    {!props.subMenu?.length && (
-      <Link
-        onClick={handleCloseMenu}
-        href={props.reference?.slug || props.link}
-        target={props.target}
-        className="menu-item_link"
-      >
-        {props.title}
-      </Link>
-    )}
-    {props.subMenu?.length && (
-      <span
-        onClick={(e) => {
-          e.stopPropagation();
-          if (handleClickExpand) handleClickExpand(props);
-        }}
-        className="menu-item_link"
-      >
-        {props.reference?.slug || props.link ? (
-          <Link
-            onClick={handleCloseMenu}
-            href={props.reference?.slug || props.link}
-            target={props.target}
-            className="menu-item_title"
-          >
-            {props.title}
-          </Link>
-        ) : (
-          props.title
-        )}
-      </span>
-    )}
-    {!isChild && <span className="menu-item_line" />}
-    {props.subMenu?.length && (
-      <>
-        <div className="menu-item_wrap">
-          <ul className="menu-item_list">
-            {props.subMenu.map((x, i) => (
-              <NavItem
-                {...x}
-                idExpand={idExpand}
-                handleClickExpand={handleClickExpand}
-                handleCloseMenu={handleCloseMenu}
-                key={i.toString()}
-                isChild
-                pageSlug={pageSlug}
-                pathname={pathname}
-              />
-            ))}
-          </ul>
-        </div>
-      </>
-    )}
-  </li>
-);
+}) => {
+  const isHash = props.type === 'custom_link' && props.link?.match(/^#/);
+  return (
+    <li
+      className={mapModifiers(
+        'menu-item',
+        isChild && 'isChild',
+        !isChild && checkActiveMenu(props, pathname) && 'active',
+        props.subMenu?.length ? 'hasChild' : undefined,
+        idExpand && idExpand.includes(props.id) && 'expand',
+      )}
+    >
+      {!props.subMenu?.length && (
+        <Link
+          onClick={handleCloseMenu}
+          href={
+            isHash
+              ? (pathname + props.link)
+              : (props.reference?.slug || props.link)
+          }
+          state={
+            isHash
+              ? { division: uniqueId() }
+              : undefined
+          }
+          target={props.target}
+          className="menu-item_link"
+        >
+          {props.title}
+        </Link>
+      )}
+      {props.subMenu?.length && (
+        <span
+          onClick={(e) => {
+            e.stopPropagation();
+            if (handleClickExpand) handleClickExpand(props);
+          }}
+          className="menu-item_link"
+        >
+          {props.reference?.slug || props.link ? (
+            <Link
+              onClick={handleCloseMenu}
+              href={props.reference?.slug || props.link}
+              target={props.target}
+              className="menu-item_title"
+            >
+              {props.title}
+            </Link>
+          ) : (
+            props.title
+          )}
+        </span>
+      )}
+      {!isChild && <span className="menu-item_line" />}
+      {props.subMenu?.length && (
+        <>
+          <div className="menu-item_wrap">
+            <ul className="menu-item_list">
+              {props.subMenu.map((x, i) => (
+                <NavItem
+                  {...x}
+                  idExpand={idExpand}
+                  handleClickExpand={handleClickExpand}
+                  handleCloseMenu={handleCloseMenu}
+                  key={i.toString()}
+                  isChild
+                  pageSlug={pageSlug}
+                  pathname={pathname}
+                />
+              ))}
+            </ul>
+          </div>
+        </>
+      )}
+    </li>
+  );
+};
 
 export interface NavProps extends InternalNavItemTypes {
   menu?: MenuItem[];

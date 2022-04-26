@@ -19,6 +19,9 @@ interface SubdivisionCommonTypes {
   locale: string;
   color: string;
   description?: string;
+  utilityMap?: {
+    map: SubdivisionUtilityMapTypes;
+  };
 }
 
 interface Title {
@@ -55,20 +58,19 @@ export type SubdivisionLocationTypes = Title & {
 export type SubdivisionSubscribeTypes = Title;
 export type SubdivisionCollectionTypes = Title;
 
-export type SubdivisionUtilityTypes = Title & {
-  map: {
+export type SubdivisionUtilityTypes = Title;
+export type SubdivisionUtilityMapTypes = {
+  image: string;
+  items: {
+    color: string;
     image: string;
-    items: {
-      color: string;
-      image: string;
-      point: {
-        x: string;
-        y: string;
-      };
-      title: string;
-      number: string;
-    }[];
-  };
+    point: {
+      x: string;
+      y: string;
+    };
+    title: string;
+    number: string;
+  }[];
 };
 
 interface Content {

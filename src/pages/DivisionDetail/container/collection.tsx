@@ -33,10 +33,10 @@ interface CollectionProps {
   data?: SubdivisionCollectionTypes;
 }
 
-const Collection: React.FC<CollectionProps> = ({
+const Collection = React.forwardRef<HTMLDivElement, CollectionProps>(({
   data,
   subDivisionId,
-}) => {
+}, ref) => {
   const [state, dispatch] = useReducer(reducer, {
     images: [],
     isOpen: false,
@@ -77,7 +77,7 @@ const Collection: React.FC<CollectionProps> = ({
   if (!data?.active) return null;
 
   return (
-    <section>
+    <section ref={ref}>
       <DivisionCollection
         dataList={dataCollection}
         title={baseString(data?.title)}
@@ -97,7 +97,7 @@ const Collection: React.FC<CollectionProps> = ({
       />
     </section>
   );
-};
+});
 
 Collection.defaultProps = {
   data: undefined,
