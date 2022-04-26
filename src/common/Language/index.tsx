@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, {
   createContext, useEffect, useRef, useState,
 } from 'react';
@@ -28,7 +26,6 @@ export type LanguagePrefix = 'VI' | 'EN' | 'JA' | 'KO' | 'ZH';
 
 export type LanguageContextResponse = {
   language: {
-    flag: boolean;
     list: OptionType[];
     selected: OptionType;
     active: string[];
@@ -42,7 +39,6 @@ export type LanguageContextResponse = {
 
 export const LanguageContext = createContext<LanguageContextResponse>({
   language: {
-    flag: false,
     list: [],
     selected: INIT_LOCALE,
     active: [],
@@ -61,7 +57,7 @@ const LanguageProvider: React.FC = ({ children }) => {
   const isFirst = useRef(true);
 
   const dataSystems = useAppSelector((state) => state.system.data);
-  const [flag, setFlag] = useState(false);
+  const { language } = i18n;
   const [pageTranslation, setPageTranslation] = useState<Translation[]>([]);
   const [locales, setLocales] = useState<OptionType[]>([]);
   const [localesActive, setLocaleActive] = useState<string[]>([]);
@@ -75,7 +71,7 @@ const LanguageProvider: React.FC = ({ children }) => {
     dispatch(topicsListAsync());
     dispatch(systemsGeneralAsync());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [flag]);
+  }, [language]);
 
   useEffect(() => {
     if (
@@ -112,7 +108,6 @@ const LanguageProvider: React.FC = ({ children }) => {
     if (inActiveLocale && locale) {
       i18n.changeLanguage(locale?.value, () => {
         setLocaleSelected(locale);
-        setFlag(!flag);
 
         if (pageTranslation?.length) {
           const translation = pageTranslation.find((e) => e.locale === locale.value);
@@ -124,7 +119,7 @@ const LanguageProvider: React.FC = ({ children }) => {
           if (translation?.slug) {
             navigate(`${FUNCTIONS.languageURL(translation.locale)}${translation.slug !== '/' ? translation.slug : ''}`);
           } else {
-            navigate(FUNCTIONS.languageURL(locale.value));
+            navigate(FUNCTIONS.languageURL(locale.value, true));
           }
         } else {
           navigate(FUNCTIONS.languageURL(locale?.value));
@@ -133,13 +128,13 @@ const LanguageProvider: React.FC = ({ children }) => {
     }
     if (!inActiveLocale) {
       // TODO: Show popup
+      // eslint-disable-next-line no-console
       console.log('show popup language not active !!');
     }
   };
 
   const context: LanguageContextResponse = {
     language: {
-      flag,
       list: locales,
       active: localesActive,
       selected: localeSelected,

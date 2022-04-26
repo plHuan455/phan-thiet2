@@ -19,7 +19,7 @@ const Page: React.FC = () => {
   const { data, isLoading, error } = usePreview<BasePageDataTypes<any>, BasePageDataTypes<any>>({
     name: 'PageData',
     cb: () => pageService(baseString(slug)),
-    deps: pathname,
+    deps: [pathname],
   });
 
   if (isLoading) {

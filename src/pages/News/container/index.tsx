@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { useQuery } from 'react-query';
 import { useSearchParams } from 'react-router-dom';
 
@@ -14,7 +14,7 @@ import News from './news';
 import Videos from './videos';
 
 import HelmetContainer from 'common/Helmet';
-import { LanguageContext } from 'common/Language';
+import i18n from 'i18n';
 import { getOverviewListService } from 'services/overviews';
 import { getOgDataPage } from 'utils/functions';
 
@@ -24,12 +24,12 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
   pageData,
   seoData,
 }) => {
-  const { flag } = useContext(LanguageContext).language;
+  const { language } = i18n;
   const [searchParams] = useSearchParams();
   const keywordParams = useMemo(() => searchParams.get('keyword') || '', [
     searchParams,
   ]);
-  const { data } = useQuery(['getOverviewList', [flag, keywordParams]], () => getOverviewListService({
+  const { data } = useQuery(['getOverviewList', [language, keywordParams]], () => getOverviewListService({
     keyword: keywordParams,
   }));
   const tabMenu = useTab({

@@ -1,5 +1,7 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { AxiosError } from 'axios';
-import React from 'react';
+import React, { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import Loading from './loading';
@@ -7,12 +9,16 @@ import RedirectNav from './redirect';
 
 import RenderPage from '.';
 
+import { LanguageContext } from 'common/Language';
 import usePreview from 'hooks/usePreview';
+import i18n from 'i18n';
 import Error from 'pages/Error';
 import { staticHomeService } from 'services/pages';
 
 const HomeNavigation: React.FC = () => {
-  const { state } = useLocation();
+  const { pathname, state } = useLocation();
+  const { language } = i18n;
+  // const { language } = useContext(LanguageContext);
   const {
     data,
     isLoading,
@@ -23,7 +29,7 @@ const HomeNavigation: React.FC = () => {
   >({
     name: 'HomeData',
     cb: () => staticHomeService(),
-    deps: [],
+    deps: [language],
   });
 
   if (isLoading) {
