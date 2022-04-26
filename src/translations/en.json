@@ -4,7 +4,18 @@
     "address": "ĐỊA CHỈ EN",
     "phone": "ĐIỆN THOẠI EN",
     "email": "EMAIL EN",
-    "content": "NỘI DUNG EN",
-    "register": "Đăng ký nhận thông tin EN"
+    "content": "NỘI DUNG EN"
+  },
+  "button": {
+    "register": "Đăng ký nhận thông tin EN",
+    "visiting_houses": "Tham quan các mẫu nhà EN",
+    "more": "Xem thêm EN",
+    "detail": "Xem Chi Tiết EN"
+  },
+  "general": {
+    "not_found_data": "Không tìm thấy dữ liệu EN"
+  },
+  "home": {
+    "house_models": "Các mẫu nhà EN"
   }
 }

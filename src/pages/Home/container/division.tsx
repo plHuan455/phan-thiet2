@@ -1,6 +1,7 @@
 import React, {
   useCallback, useMemo, useReducer, useState,
 } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
 
 import srcBg from 'assets/images/journeys/bg.jpg';
@@ -9,11 +10,12 @@ import FlatMore from 'common/FlatMore';
 import Card from 'components/organisms/Card';
 import JourneysTemplate from 'components/templates/Journeys';
 import PopupImage from 'components/templates/PopupImage';
+import i18n from 'i18n';
 import { getImageListService } from 'services/images';
 import { getSubDivisionListService } from 'services/subdivision';
 import CONSTANTS from 'utils/constants';
 import {
-  baseString, getBlockData, baseURL,
+  baseString, getBlockData, baseURL, redirectURL,
 } from 'utils/functions';
 
 interface DivisionProps{
@@ -47,6 +49,8 @@ const reducer = (state: ImageState, action: ActionWithPayload) => {
 };
 
 const Division: React.FC<SectionBlocks> = ({ blocks }) => {
+  const { language } = i18n;
+  const { t } = useTranslation();
   const divisionBlocks = getBlockData<DivisionProps>('subdivision_novaworld', blocks);
   const journeysBlocks = getBlockData<JourneysProps>('experience_secondhome', blocks);
 
@@ -57,7 +61,7 @@ const Division: React.FC<SectionBlocks> = ({ blocks }) => {
 
   const [activeJourneys, setActiveJourneys] = useState(0);
 
-  const { data: subDivisionList } = useQuery(['getSubDivisionListHome'], () => getSubDivisionListService());
+  const { data: subDivisionList } = useQuery(['getSubDivisionListHome', [language]], () => getSubDivisionListService());
 
   const { data: imageList, isLoading } = useQuery(
     ['getImageJourneys', activeJourneys], () => getImageListService({
@@ -68,19 +72,16 @@ const Division: React.FC<SectionBlocks> = ({ blocks }) => {
   const subDivisionData = useMemo(() => subDivisionList?.data?.map((item) => ({
     imgSrc: baseURL(item.thumbnail),
     title: item.name,
-    // TODO: Add locale later
-    href: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item.slug}`,
+    href: redirectURL(CONSTANTS.PREFIX.DIVISION, item.slug, language),
     description: baseString(item?.description),
-  })), [subDivisionList]);
+  })), [subDivisionList, language]);
 
   const journeysData = useMemo(() => subDivisionList?.data.map((item) => ({
     title: item.name,
     description: baseString(item?.description),
-    // TODO: Add Translations Later
-    textBtn: 'Tham quan các mẫu nhà',
-    //  TODO: Add locale later
-    href: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item.slug}`,
-  })), [subDivisionList]);
+    textBtn: t('button.visiting_houses'),
+    href: redirectURL(CONSTANTS.PREFIX.DIVISION, item.slug, language),
+  })), [subDivisionList, language, t]);
 
   const listCardJourneys = useMemo(() => imageList?.data.map((item) => ({
     thumbnail: baseURL(item.thumbnailHome),
@@ -133,8 +134,8 @@ const Division: React.FC<SectionBlocks> = ({ blocks }) => {
       <section>
         <JourneysTemplate
           title={journeysBlocks?.titleSection}
-          titleField="Các mẫu nhà"
-          emptyStr="Chưa có dữ liệu"
+          titleField={t('home.house_models')}
+          emptyStr={t('general.not_found_data')}
           dataTimeLine={journeysData}
           listCard={listCardJourneys}
           srcBg={srcBg}

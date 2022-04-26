@@ -4,7 +4,18 @@
     "address": "ĐỊA CHỈ JA",
     "phone": "ĐIỆN THOẠI JA",
     "email": "EMAIL JA",
-    "content": "NỘI DUNG JA",
-    "register": "Đăng ký nhận thông tin JA"
+    "content": "NỘI DUNG JA"
+  },
+  "button": {
+    "register": "Đăng ký nhận thông tin JA",
+    "visiting_houses": "Tham quan các mẫu nhà JA",
+    "more": "Xem thêm JA",
+    "detail": "Xem Chi Tiết JA"
+  },
+  "general": {
+    "not_found_data": "Không tìm thấy dữ liệu JA"
+  },
+  "home": {
+    "house_models": "Các mẫu nhà JA"
   }
 }

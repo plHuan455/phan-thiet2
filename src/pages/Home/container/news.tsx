@@ -1,13 +1,16 @@
 import React, { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
 
 import Container from 'common/Container';
 import FlatMore from 'common/FlatMore';
 import Card from 'components/organisms/Card';
 import { CardNormalProps } from 'components/organisms/Card/Normal';
+import i18n from 'i18n';
 import { getNewsListService } from 'services/news';
+import CONSTANTS from 'utils/constants';
 import {
-  baseString, baseURL, getBlockData, getTimePastToCurrent,
+  baseString, baseURL, getBlockData, getTimePastToCurrent, redirectURL,
 } from 'utils/functions';
 
 interface NewsProps{
@@ -16,27 +19,28 @@ interface NewsProps{
 }
 
 const News: React.FC<SectionBlocks> = ({ blocks }) => {
+  const { t } = useTranslation();
+  const { language } = i18n;
   const newsBlock = getBlockData<NewsProps>('general_news', blocks);
   const { data: newsList } = useQuery('getNewsListHome', () => getNewsListService());
 
   const newsData = useMemo((): CardNormalProps[] => newsList?.data?.map((item) => ({
     thumbnail: baseURL(item.thumbnail),
     title: item.title,
-    href: `tin-tuc/${item.slug}`,
-    // TODO: API News missing key Tag
+    href: redirectURL(CONSTANTS.PREFIX.NEWS, item.slug, language),
     tag: {
-      text: 'The Kingdom',
-      url: '/',
+      text: item.subdivision.name,
+      url: redirectURL(CONSTANTS.PREFIX.DIVISION, item.subdivision.slug, language),
     },
     // TODO: Update time later
     dateTime: getTimePastToCurrent(item.publishedAt),
     url: {
       // TODO: ADD Translation Later
-      text: 'Xem thêm',
+      text: t('button.more'),
       iconName: 'arrowRightCopper',
       animation: 'arrow',
     },
-  })) || [], [newsList]);
+  })) || [], [newsList, language, t]);
 
   return (
     <section className="u-pt-md-80 u-pb-48 u-pt-48 u-pb-md-88 position-relative">

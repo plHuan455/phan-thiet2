@@ -4,7 +4,18 @@
     "address": "ĐỊA CHỈ KO",
     "phone": "ĐIỆN THOẠI KO",
     "email": "EMAIL KO",
-    "content": "NỘI DUNG KO",
-    "register": "Đăng ký nhận thông tin KO"
+    "content": "NỘI DUNG KO"
+  },
+  "button": {
+    "register": "Đăng ký nhận thông tin KO",
+    "visiting_houses": "Tham quan các mẫu nhà KO",
+    "more": "Xem thêm KO",
+    "detail": "Xem Chi Tiết KO"
+  },
+  "general": {
+    "not_found_data": "Không tìm thấy dữ liệu KO"
+  },
+  "home": {
+    "house_models": "Các mẫu nhà KO"
   }
 }

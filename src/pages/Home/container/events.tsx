@@ -1,15 +1,14 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import dayjs from 'dayjs';
 import React, { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
 
 import { IconName } from 'components/atoms/Icon';
 import EventsTemplate from 'components/templates/Events';
-import useCountDown from 'hooks/useCountDown';
+import i18n from 'i18n';
 import getEventListService from 'services/event';
 import CONSTANTS from 'utils/constants';
-import { baseURL, getBlockData } from 'utils/functions';
+import { baseURL, getBlockData, redirectURL } from 'utils/functions';
 
 interface EventProps{
   titleSection: string;
@@ -17,26 +16,22 @@ interface EventProps{
   button: string;
 }
 const Events: React.FC<SectionBlocks> = ({ blocks }) => {
+  const { t } = useTranslation();
+  const { language } = i18n;
   const eventsBlock = getBlockData<EventProps>('event', blocks);
   const { data: eventList } = useQuery(
     'getEventListHome', () => getEventListService(),
   );
 
-  const {
-    days, hours, mins, secs,
-  } = useCountDown({ endTime: eventList?.data[0].startDate || '' });
-
   const eventsData = useMemo(() => eventList?.data?.slice(1).map((item) => ({
     thumbnail: baseURL(item.thumbnail),
-    // TODO: Update locale later
     tag: {
       text: item.subdivision?.name,
-      url: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item.slug}`,
+      url: redirectURL(CONSTANTS.PREFIX.DIVISION, item.slug, language),
     },
     title: item.title,
     endTime: item.startDate,
-    // TODO: Update locale later
-    href: `/${CONSTANTS.PREFIX.EVENT.VI}/${item.slug}`,
+    url: redirectURL(CONSTANTS.PREFIX.EVENT, item.slug, language),
     summary: [
       {
         iconName: 'clock' as IconName,
@@ -52,11 +47,10 @@ const Events: React.FC<SectionBlocks> = ({ blocks }) => {
       },
     ],
     button: {
-      // TODO: translate later
-      text: 'Xem Chi Tiết',
-      url: `/${CONSTANTS.PREFIX.EVENT.VI}/${item.slug}`,
+      text: t('button.detail'),
+      url: redirectURL(CONSTANTS.PREFIX.EVENT, item.slug, language),
     },
-  })), [eventList]);
+  })), [eventList, language, t]);
   return (
     <section className="u-pt-md-80 u-pb-48 u-pt-48 u-pb-md-80 position-relative">
       <EventsTemplate

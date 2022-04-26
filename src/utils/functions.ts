@@ -208,3 +208,18 @@ export const removeAccents = (text?:string) => {
   if (!text) return '';
   return text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 };
+
+export const redirectURL = (
+  prefix: Record<string, Object>,
+  slug?: string,
+  locale?: string,
+): string => {
+  const initLocale = locale || 'vi';
+  const lang = initLocale === 'vi' ? '/' : `/${initLocale}`;
+
+  if (!slug) return lang;
+
+  const pref = `${prefix[initLocale.toUpperCase()]}/`;
+
+  return `${lang}${pref}${slug}`;
+};
