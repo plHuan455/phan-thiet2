@@ -35,7 +35,7 @@ const Divisions: React.FC<SectionBlocks> = ({ blocks }) => {
     ['getSubDivisionList'],
     ({ pageParam = 1 }) => getSubDivisionListService({
       page: pageParam,
-      limit: 3,
+      limit: 9,
     }),
     {
       getNextPageParam: (params) => (params.meta?.page >= params.meta.totalPages
