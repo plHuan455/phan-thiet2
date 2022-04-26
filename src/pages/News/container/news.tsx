@@ -10,9 +10,12 @@ import leaf2 from 'assets/images/pages/news/leaf_2.png';
 import Image from 'components/atoms/Image';
 import NewsList from 'components/templates/NewsList';
 import useScrollAnimate from 'hooks/useScrollAnimation';
+import i18n from 'i18n';
 import { OverviewNewsType } from 'services/overviews/types';
 import CONSTANTS from 'utils/constants';
-import { baseURL, getBlockData, getTimePastToCurrent } from 'utils/functions';
+import {
+  baseURL, getBlockData, getTimePastToCurrent, redirectURL,
+} from 'utils/functions';
 
 interface NewsBlocks {
   title: string;
@@ -65,23 +68,22 @@ export const AnimationNews = React.memo(() => {
 
 const News: React.FC<NewsProps> = ({ news, blocks }) => {
   const newsBlocks = getBlockData<NewsBlocks>('news', blocks);
+  const { language } = i18n;
 
   const dataNews = useMemo(() => {
     if (Array.isArray(news)) {
       return news.map((item) => ({
         thumbnail: baseURL(item.thumbnail),
         dateTime: getTimePastToCurrent(item.publishedAt),
-        tag: item?.subdivision
-          ? {
-            text: item?.subdivision?.name,
-            // TODO: Update locale later
-            url: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item?.subdivision?.slug}`,
-          }
-          : undefined,
+        tag: item?.subdivision ? {
+          text: item?.subdivision?.name,
+          // TODO: Update locale later
+          url: redirectURL(CONSTANTS.PREFIX.DIVISION, item?.subdivision?.slug, language),
+        } : undefined,
         button: {
           text: newsBlocks?.button,
           // TODO: Update locale later
-          url: `/${CONSTANTS.PREFIX.NEWS.VI}/${item.slug}`,
+          url: redirectURL(CONSTANTS.PREFIX.NEWS, item.slug, language),
         },
         title: item.title,
         description: item.description,

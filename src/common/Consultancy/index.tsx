@@ -103,7 +103,7 @@ const Consultancy: React.FC<ConsultancyCommonProps> = ({
       title={title}
       layer={layer}
       form={{
-        title: 'Quý khách đăng ký nhận email thông tin dự án, các chương trình ưu đãi, khuyến mại</br>và tin tức mới nhất từ NovaWorld Phan Thiet',
+        title: t('form.title'),
         method,
         loading: consultancyState.loading,
         handleSubmit: consultancyExecute,
@@ -119,7 +119,7 @@ const Consultancy: React.FC<ConsultancyCommonProps> = ({
             subLabel: t('form.option'),
             list: topicsList,
           },
-          btnText: t('form.register'),
+          btnText: t('button.register'),
         },
       }}
     />

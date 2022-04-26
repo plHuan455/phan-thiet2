@@ -5,13 +5,7 @@
     "day": "Day",
     "hours": "Hours",
     "min": "Min",
-    "sec": "Sec",
-    "success": "Register Success",
-    "confirm": "Confirm",
-    "messageSuccess": "Thank you for receiving information about NovaWorld Phan Thiet project. Novaland will contact you as soon as possible.",
-    "tryAgain": "Try Again",
-    "systemError": "System Error",
-    "fail": "Register Fail"
+    "sec": "Sec"
   },
   "banner": {
     "featuredKeywords": "Featured Keywords:",
@@ -19,11 +13,12 @@
     "packageTour": "Package Tour"
   },
   "form": {
-    "name": "HỌ VÀ TÊN EN",
-    "address": "ĐỊA CHỈ EN",
-    "phone": "ĐIỆN THOẠI EN",
-    "email": "EMAIL EN",
-    "content": "NỘI DUNG EN",
+    "title": "You register to receive email project information, preferential programs, promotions and the latest news from NovaWorld Phan Thiet",
+    "name": "Name",
+    "address": "Address",
+    "phone": "Phone",
+    "email": "Email",
+    "content": "Content",
     "interest": "Products of interest: ",
     "option": "(Optional question)"
   },
@@ -35,6 +30,14 @@
   },
   "home": {
     "house_models": "Các mẫu nhà EN"
+  },
+  "notification": {
+    "success": "Register Success",
+    "confirm": "Confirm",
+    "messageSuccess": "Thank you for receiving information about NovaWorld Phan Thiet project. Novaland will contact you as soon as possible.",
+    "tryAgain": "Try Again",
+    "systemError": "System Error",
+    "fail": "Register Fail"
   },
   "search": {
     "placeholderSearch": "Search",
