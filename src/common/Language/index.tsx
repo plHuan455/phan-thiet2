@@ -70,7 +70,6 @@ const LanguageProvider: React.FC = ({ children }) => {
     dispatch(menusAsync());
     dispatch(topicsListAsync());
     dispatch(systemsGeneralAsync());
-    console.log(123);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [flag]);
 
