@@ -39,7 +39,7 @@
     pointer-events: none;
     opacity: 0;
 
-    @include tablet-desktop {
+    @include break-max(1365px){
       left: 5%;
       bottom: 5%;
     }
