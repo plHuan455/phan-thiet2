@@ -95,7 +95,7 @@ const UtilityHome: React.FC<UtilityHomeProps> = ({
                             <Text modifiers={['14x20', '400', 'davyGrey']} content={item.description} />
                           </div>
                           <div className="t-utilityHome_itemMain-thumb">
-                            <Image src={item.thumbnail} alt={item.title} ratio="929x479" />
+                            <Image src={item.thumbnail} alt={item.title} ratio="929x479" size="contain" />
                           </div>
                         </div>
                       ))
@@ -120,7 +120,7 @@ const UtilityHome: React.FC<UtilityHomeProps> = ({
                           <div className="t-utilityHome_itemMenu-wrapper">
                             <div className="t-utilityHome_itemMenu-border">
                               <div className="t-utilityHome_itemMenu-icon">
-                                <Image src={item?.icon?.imgSrc} alt={item?.icon?.label} ratio="1x1" />
+                                <Image src={item?.icon?.imgSrc} alt={item?.icon?.label} ratio="1x1" size="contain" />
                               </div>
                             </div>
                           </div>
