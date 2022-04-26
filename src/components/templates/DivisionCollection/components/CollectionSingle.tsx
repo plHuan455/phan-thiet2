@@ -30,7 +30,7 @@ const CollectionSingle: React.FC<CollectionSingleProps> = ({
         <Animate type="fadeInUp">
           <Image src={thumbnail} alt={titleCard} ratio="546x308" />
           <div className="u-mt-8 d-sm-flex justify-content-sm-between align-items-sm-center" style={{ color }}>
-            <Text modifiers={['24x36', '400', 'inherit', 's015']} content={titleCard} />
+            <Text modifiers={['24x36', '400', 'inherit', 's015', 'fontOswald']} content={titleCard} />
             <div className="u-mt-16 u-mt-sm-0 d-block">
               <Button variant="inherit" onClick={handleClick}>{button?.text}</Button>
             </div>
