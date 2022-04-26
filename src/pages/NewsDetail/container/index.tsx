@@ -8,6 +8,8 @@ import HelmetContainer from 'common/Helmet';
 import LoadingPage from 'common/Navigation/loading';
 import RedirectNav from 'common/Navigation/redirect';
 import useDetail from 'hooks/useDetail';
+import i18n from 'i18n';
+import FUNCTIONS_LANGUAGE from 'i18n/functions';
 import { getNewsDetailService } from 'services/news';
 import { useAppSelector } from 'store/hooks';
 import CONSTANTS from 'utils/constants';
@@ -16,6 +18,7 @@ import {
 } from 'utils/functions';
 
 const Screen: React.FC = () => {
+  const { language } = i18n;
   const staticAll = useAppSelector((state) => state.static.static);
 
   const slugPage = staticAll?.find(
@@ -34,7 +37,7 @@ const Screen: React.FC = () => {
     timeLeave: getTimePastToCurrent(data?.publishedAt),
     dateLeave: dayjs(data?.publishedAt).format('DD/MM/YYYY'),
     tags: data?.tags.map((item) => ({
-      href: `/${slugPage}?keyword=${item.name}`,
+      href: `${FUNCTIONS_LANGUAGE.languageURL(language)}${slugPage}?keyword=${item.name}`,
       name: item?.name,
     })) || [],
     subdivision: {
@@ -57,7 +60,7 @@ const Screen: React.FC = () => {
         animation: 'arrow',
       },
     })),
-  }), [data, slugPage]);
+  }), [data, slugPage, language]);
 
   if (loading) return <LoadingPage />;
 

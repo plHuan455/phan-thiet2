@@ -31,7 +31,7 @@ export interface BannerProps {
   onLoadMore?: () => void;
 }
 
-const Tag: React.FC<Pick<BannerProps, 'tag'>> = ({ tag }) => (
+const Tag: React.FC<Pick<BannerProps, 'tag'>> = ({ tag }) => (tag?.list?.length ? (
   <div className="t-banner_tag">
     <div className="t-banner_tag_keywords">
       <Text type="p" modifiers={['white', '12x20', '400']}>
@@ -52,7 +52,7 @@ const Tag: React.FC<Pick<BannerProps, 'tag'>> = ({ tag }) => (
       ))}
     </ul>
   </div>
-);
+) : null);
 
 const Banner: React.FC<BannerProps> = ({
   image,
