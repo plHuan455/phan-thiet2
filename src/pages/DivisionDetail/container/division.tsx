@@ -44,10 +44,10 @@ const Division: React.FC<DivisionProps> = ({ data, subdivisionId }) => {
             type: 'h2',
             modifiers: ['s015', '400', 'inherit'],
           }}
-          // TODO: Update link later
           link={{
-            text: 'Xem tất cả',
-            href: '/',
+            text: data?.btn?.text,
+            href: data?.btn?.url,
+            target: data?.btn?.target,
           }}
           data={subDivisionData}
           settings={{
