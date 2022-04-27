@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import Icon from 'components/atoms/Icon';
 import useWindowScroll from 'hooks/useWindowScroll';
+import i18n from 'i18n';
 import { useAppSelector } from 'store/hooks';
 import mapModifiers from 'utils/functions';
 import initFacebookSdk from 'utils/sdkFacebook';
@@ -9,7 +10,7 @@ import initFacebookSdk from 'utils/sdkFacebook';
 const FloatingButton: React.FC = () => {
   const dataSystem = useAppSelector((state) => state.system.data);
   const [isShow, setIsShow] = useState(false);
-
+  const { language } = i18n;
   useWindowScroll(() => {
     if (window.pageYOffset > 200) {
       setIsShow(true);
@@ -27,9 +28,11 @@ const FloatingButton: React.FC = () => {
 
   useEffect(() => {
     if (dataSystem?.messengerId) {
-      initFacebookSdk('vi', dataSystem.messengerId);
+      initFacebookSdk(language, dataSystem.messengerId);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataSystem]);
+
   return (
     <div className="floatingButton">
       <div id="fb-root" />

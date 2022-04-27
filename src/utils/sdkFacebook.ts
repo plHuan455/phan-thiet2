@@ -1,4 +1,11 @@
 function initFacebookSdk(language?:string, fbAppId?: number) {
+  // https://developers.facebook.com/docs/messenger-platform/discovery/facebook-chat-plugin/
+  const chatbox = document.getElementById('fb-customer-chat');
+  if (chatbox && fbAppId) {
+    chatbox.setAttribute('page_id', `${fbAppId}`);
+    chatbox.setAttribute('attribution', 'biz_inbox');
+  }
+
   // https://stackoverflow.com/questions/28533824/change-facebook-like-button-language-without-reloading-page
   const newWindow = window as any;
   const jsSdk = document.getElementById('#facebook-jssdk');
@@ -30,8 +37,8 @@ function initFacebookSdk(language?:string, fbAppId?: number) {
   // eslint-disable-next-line func-names
   newWindow.fbAsyncInit = function () {
     newWindow.FB.init({
-      xfbml: true, // parse social plugins on this page
-      version: 'v2.0',
+      xfbml: true,
+      version: 'v13.0',
     });
   };
 
@@ -39,7 +46,7 @@ function initFacebookSdk(language?:string, fbAppId?: number) {
   const fjs = document.getElementsByTagName('script')[0];
   const js = document.createElement('script');
   js.id = 'facebook-jssdk';
-  js.src = `//connect.facebook.net/${codeLanguage()}/sdk.js#xfbml=1&version=v12.0${fbAppId ? `&appId=${fbAppId}&autoLogAppEvents=1&theme_color=#BB6D3F` : ''}`;
+  js.src = `https://connect.facebook.net/${codeLanguage()}/sdk/xfbml.customerchat.js`;
   if (fjs.parentNode) fjs.parentNode.insertBefore(js, fjs);
 }
 export default initFacebookSdk;
