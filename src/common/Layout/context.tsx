@@ -8,6 +8,8 @@ import { useNavigate } from 'react-router-dom';
 import { FooterProps } from 'components/templates/Footer';
 import { HeaderProps } from 'components/templates/Header';
 import { HeaderDivisionProps } from 'components/templates/HeaderDivision';
+import i18n from 'i18n';
+import FUNCTIONS_LANGUAGE from 'i18n/functions';
 import { headquartersService } from 'services/headquarters';
 import { useAppSelector } from 'store/hooks';
 import { baseString, baseURL } from 'utils/functions';
@@ -39,6 +41,7 @@ export const LayoutContext = createContext<LayoutContextResponse>({
 const LayoutProvider: React.FC = ({ children }) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { language } = i18n;
 
   const dataSystems = useAppSelector((state) => state.system.data);
   const staticAll = useAppSelector((state) => state.static.static);
@@ -97,15 +100,15 @@ const LayoutProvider: React.FC = ({ children }) => {
     menu: menuHeader,
     mainLogo: {
       icon: baseURL(dataSystems?.logoHeader),
-      url: '/',
+      url: FUNCTIONS_LANGUAGE.languageURL(language, true),
       target: '_self',
     },
-  }), [dataSystems, menuHeader]);
+  }), [dataSystems, menuHeader, language]);
 
   const headerSubdivisions = useMemo((): HeaderDivisionProps => ({
     mainLogo: {
       icon: baseURL(dataSystems?.logoHeader),
-      url: '/',
+      url: FUNCTIONS_LANGUAGE.languageURL(language, true),
       target: '_self',
     },
     menuSubDivision,
@@ -113,12 +116,12 @@ const LayoutProvider: React.FC = ({ children }) => {
     logoDivision: {
       icon: logoSubdivisions,
     },
-  }), [dataSystems, menuSubDivision, menuMainDivision, logoSubdivisions]);
+  }), [dataSystems, menuSubDivision, menuMainDivision, logoSubdivisions, language]);
 
   const footer = useMemo((): FooterProps => ({
     logo: baseURL(dataSystems?.logoFooter) || '',
     subMenu: menuTermFooter,
-    copyRightTitle: '@2021. Bản quyền thuộc về Tập đoàn Novaland (Việt Nam). Tất cả các quyền bảo hộ.',
+    copyRightTitle: dataSystems?.copyright,
     menuList: {
       title: mainFooter[0],
       list: mainFooter[0]?.subMenu || [],
@@ -139,8 +142,8 @@ const LayoutProvider: React.FC = ({ children }) => {
     if (!staticAll?.length) return;
     const slugSearch = staticAll?.find((e) => e.templateCode === 'SEARCH')?.slug;
     if (!slugSearch) return;
-    navigate(`/${slugSearch}?keyword=${val}&sort=newest`);
-  }, [staticAll, navigate]);
+    navigate(`${FUNCTIONS_LANGUAGE.languageURL(language)}${slugSearch}?keyword=${val}&sort=newest`);
+  }, [staticAll, navigate, language]);
 
   const context: LayoutContextResponse = {
     pageType,
