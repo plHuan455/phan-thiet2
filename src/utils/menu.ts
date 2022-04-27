@@ -1,7 +1,8 @@
 import CONSTANTS from './constants';
 
+import { LanguagePrefix } from 'common/Language';
+import i18n from 'i18n';
 import { MenuItem } from 'services/menus/types';
-
 // Recursive Menu
 const groupMenus = (menus?: MenuItem[]) => {
   if (!menus) return undefined;
@@ -37,34 +38,59 @@ const groupMenus = (menus?: MenuItem[]) => {
 export default groupMenus;
 
 const returnLinkPrefix = (menu:MenuItem, prefix:string) => {
+  const prefixLang = i18n.language === 'vi' ? '' : `/${i18n.language}`;
   if (menu.reference?.slug) {
     return ({
       ...menu,
       reference: {
-        slug: `${prefix}/${menu.reference?.slug}`,
+        slug: `${prefixLang}/${prefix}/${menu.reference?.slug}`,
       },
-    });
-  }
-  if (menu.link) {
-    return ({
-      ...menu,
-      link: `${prefix}/${menu.reference?.slug}`,
     });
   }
   return menu;
 };
 
-export const customLinkMenu = (menu: MenuItem):MenuItem => {
-  if (menu.type === 'OneContent\\Subdivision\\Models\\Subdivision') {
-    return returnLinkPrefix(menu, CONSTANTS.PREFIX.DIVISION.VI);
+const returnLink = (menu:MenuItem):MenuItem => {
+  const prefixLang = i18n.language === 'vi' ? '/' : `/${i18n.language}/`;
+
+  if (menu.reference?.slug === '/') {
+    return ({
+      ...menu,
+      reference: {
+        slug: i18n.language === 'vi' ? '/' : `/${i18n.language}`,
+      },
+    });
   }
-  if (menu.type === 'OneContent\\Event\\Models\\Event') {
-    return returnLinkPrefix(menu, CONSTANTS.PREFIX.EVENT.VI);
+
+  if (menu.reference?.slug) {
+    return ({
+      ...menu,
+      reference: {
+        slug: `${prefixLang}${menu.reference?.slug}`,
+      },
+    });
   }
-  if (menu.type === 'OneContent\\News\\Models\\News') {
-    return returnLinkPrefix(menu, CONSTANTS.PREFIX.NEWS.VI);
-  }
+
   return menu;
+};
+
+export const customLinkMenu = (menu: MenuItem):MenuItem => {
+  const keyLang = i18n.language.toUpperCase() as LanguagePrefix;
+
+  if (menu.type === 'OneContent\\Subdivision\\Models\\Subdivision') {
+    return returnLinkPrefix(menu,
+      CONSTANTS.PREFIX.DIVISION[keyLang]);
+  }
+
+  if (menu.type === 'OneContent\\Event\\Models\\Event') {
+    return returnLinkPrefix(menu, CONSTANTS.PREFIX.EVENT[keyLang]);
+  }
+
+  if (menu.type === 'OneContent\\News\\Models\\News') {
+    return returnLinkPrefix(menu, CONSTANTS.PREFIX.NEWS[keyLang]);
+  }
+
+  return returnLink(menu);
 };
 
 // Recursive Menu With Custom Link

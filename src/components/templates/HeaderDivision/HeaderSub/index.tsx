@@ -30,7 +30,7 @@ const HeaderSub:React.FC<HeaderSubProps> = ({
   });
 
   const findActive = useMemo(() => (
-    menu?.find((x) => `/${x.reference?.slug || x.link}` === pathname)
+    menu?.find((x) => `${x.reference?.slug || x.link}` === pathname)
   ), [pathname, menu]);
 
   return (
