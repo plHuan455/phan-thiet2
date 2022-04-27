@@ -36,7 +36,7 @@ const Divisions: React.FC<SectionBlocks> = ({ blocks }) => {
     isFetchingNextPage,
     fetchNextPage: fetchNextSubdivision,
   } = useInfiniteQuery(
-    ['getSubDivisionList'],
+    ['SubdivisionPageList'],
     ({ pageParam = 1 }) => getSubDivisionListService({
       page: pageParam,
       limit: 9,

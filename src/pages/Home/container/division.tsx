@@ -66,7 +66,9 @@ const Division: React.FC<SectionBlocks> = ({ blocks }) => {
   const { data: imageList, isLoading } = useQuery(
     ['getImageJourneys', activeJourneys], () => getImageListService({
       subdivision_id: String(subDivisionList?.data[activeJourneys].id),
-    }),
+    }), {
+      enabled: !!subDivisionList?.data[activeJourneys].id,
+    },
   );
 
   const subDivisionData = useMemo(() => subDivisionList?.data?.map((item) => ({
