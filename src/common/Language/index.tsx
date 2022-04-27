@@ -1,6 +1,7 @@
 import React, {
   createContext, useEffect, useRef, useState,
 } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { NotifyProps } from 'components/organisms/Notify';
@@ -55,6 +56,7 @@ export const LanguageContext = createContext<LanguageContextResponse>({
 const LanguageProvider: React.FC = ({ children }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const isFirst = useRef(true);
 
@@ -136,8 +138,7 @@ const LanguageProvider: React.FC = ({ children }) => {
         const notifyProps: NotifyProps = {
           isOpen: true,
           message: result.message,
-          // TODO: Add translations later
-          btnText: 'Xác nhận',
+          btnText: t('general.confirm'),
         };
         dispatch(updateNotifyProps(notifyProps));
       }

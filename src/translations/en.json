@@ -1,21 +1,57 @@
 {
+  "general": {
+    "not_found_data": "Not found data",
+    "day": "Day",
+    "hours": "Hours",
+    "min": "Min",
+    "sec": "Sec",
+    "success": "Register Success",
+    "confirm": "Confirm",
+    "message_success": "Thank you for receiving information about NovaWorld Phan Thiet project. Novaland will contact you as soon as possible.",
+    "try_again": "Try Again",
+    "system_error": "System Error",
+    "fail": "Register Fail",
+    "contact": "Contact",
+    "more_information": "MORE INFORMATION AT",
+    "featured_keywords": "Featured Keywords:",
+    "keyword": "Keyword",
+    "share": "Share",
+    "house_models": "House models",
+    "news_related": "News Related",
+    "events_related": "Events Related",
+    "latest": "Latest result",
+    "oldest": "Oldest result",
+    "division": "Division",
+    "news": "News",
+    "images": "Images",
+    "document": "Different document",
+    "videos": "Videos",
+    "search_result": "Results found for",
+    "search_placeholder": "Search"
+  },
   "form": {
-    "name": "HỌ VÀ TÊN EN",
-    "address": "ĐỊA CHỈ EN",
-    "phone": "ĐIỆN THOẠI EN",
-    "email": "EMAIL EN",
-    "content": "NỘI DUNG EN"
+    "contact_name": "NAME",
+    "contact_address": "ADDRESS",
+    "contact_phone": "PHONE *",
+    "contact_email": "EMAIL *",
+    "contact_content": "CONTENT",
+    "search": "Search",
+    "search_event": "Search Event",
+    "search_news": "Search News",
+    "consultancy_title": "You register to receive email project information, preferential programs, promotions and the latest news from NovaWorld Phan Thiet",
+    "consultancy_interest": "Products of interest: ",
+    "consultancy_option": "(Optional question)",
+    "consultancy_name": "Name",
+    "consultancy_address": "Address",
+    "consultancy_phone": "Phone *",
+    "consultancy_email": "Email *",
+    "consultancy_content": "Content"
   },
   "button": {
-    "register": "Đăng ký nhận thông tin EN",
-    "visiting_houses": "Tham quan các mẫu nhà EN",
-    "more": "Xem thêm EN",
-    "detail": "Xem Chi Tiết EN"
-  },
-  "general": {
-    "not_found_data": "Không tìm thấy dữ liệu EN"
-  },
-  "home": {
-    "house_models": "Các mẫu nhà EN"
+    "register": "Sign up to receive information",
+    "visiting_houses": "Visiting houses",
+    "more": "See more",
+    "detail": "See Detail",
+    "download": "Download"
   }
 }

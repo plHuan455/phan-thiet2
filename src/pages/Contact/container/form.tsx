@@ -36,11 +36,11 @@ const Form: React.FC<SectionBlocks> = ({ blocks }) => {
     const blockPageContent = getBlockData<FormProps>('form_contact', blocks);
     return {
       form: {
-        addressPlaceholder: t('form.address'),
-        contentPlaceholder: t('form.content'),
-        emailPlaceholder: t('form.email'),
-        namePlaceholder: t('form.name'),
-        phonePlaceholder: t('form.phone'),
+        addressPlaceholder: t('form.contact_address'),
+        contentPlaceholder: t('form.contact_content'),
+        emailPlaceholder: t('form.contact_email'),
+        namePlaceholder: t('form.contact_name'),
+        phonePlaceholder: t('form.contact_phone'),
         btnText: t('button.register'),
       },
       titleForm: blockPageContent?.title,
@@ -52,7 +52,7 @@ const Form: React.FC<SectionBlocks> = ({ blocks }) => {
     async (params: ContactFormType) => {
       if (!executeRecaptcha) return;
       const grecaptchaToken = await executeRecaptcha('submit');
-      const searchParmas = getSearchParams(location.search);
+      const searchParams = getSearchParams(location.search);
       const paramsUTM = [
         'utm_source',
         'utm_medium',
@@ -69,9 +69,9 @@ const Form: React.FC<SectionBlocks> = ({ blocks }) => {
         content: params.content,
         grecaptcha_token: grecaptchaToken,
       };
-      Object.keys(searchParmas).forEach((item: string) => {
+      Object.keys(searchParams).forEach((item: string) => {
         if (paramsUTM.includes(item)) {
-          newData = { ...newData, [item]: searchParmas[item] };
+          newData = { ...newData, [item]: searchParams[item] };
         }
       });
 
@@ -81,23 +81,22 @@ const Form: React.FC<SectionBlocks> = ({ blocks }) => {
       onSuccess: () => {
         const notifyProps: NotifyProps = {
           isOpen: true,
-          title: 'Đăng ký thành công',
-          message:
-            'Cảm ơn Quý Khách đã nhận thông tin dự án NovaWorld Phan Thiet. Novaland sẽ liên hệ trong thời gian sớm nhất.',
-          btnText: 'Xác nhận',
+          title: t('general.success'),
+          message: t('general.message_success'),
+          btnText: t('general.confirm'),
         };
         dispatch(updateNotifyProps(notifyProps));
       },
       onFailed: (err) => {
-        let message = 'Vui lòng thử lại';
+        let message = t('general.try_again');
         if (axios.isAxiosError(err) && err?.response?.status === 500) {
-          message = 'Lỗi hệ thống';
+          message = t('general.system_error');
         }
         const notifyProps: NotifyProps = {
           isOpen: true,
-          title: 'Đăng ký thất bại',
+          title: t('general.fail'),
           message,
-          btnText: 'Xác nhận',
+          btnText: t('general.confirm'),
         };
         dispatch(updateNotifyProps(notifyProps));
       },

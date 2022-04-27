@@ -1,6 +1,7 @@
 import React, {
   useCallback, useMemo, useReducer,
 } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
 
 import DivisionCollection from 'components/templates/DivisionCollection';
@@ -37,6 +38,7 @@ const Collection = React.forwardRef<HTMLDivElement, CollectionProps>(({
   data,
   subDivisionId,
 }, ref) => {
+  const { t } = useTranslation();
   const [state, dispatch] = useReducer(reducer, {
     images: [],
     isOpen: false,
@@ -52,11 +54,11 @@ const Collection = React.forwardRef<HTMLDivElement, CollectionProps>(({
     id: item.id,
     title: baseString(item.name),
     color: item.color,
-    // TODO: Translations later
     button: {
-      text: 'Xem thêm',
+      text: t('button.more'),
     },
     thumbnail: baseURL(item.thumbnailSubdivision),
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   })) || [], [imageList]);
 
   const handleOpenPopup = useCallback(

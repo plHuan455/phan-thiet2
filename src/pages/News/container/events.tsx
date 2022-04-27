@@ -5,9 +5,10 @@ import Section from './section';
 
 import { IconName } from 'components/atoms/Icon';
 import EventsTemplate from 'components/templates/Events';
+import i18n from 'i18n';
 import { OverviewEventsType } from 'services/overviews/types';
 import CONSTANTS from 'utils/constants';
-import { baseURL, getBlockData } from 'utils/functions';
+import { baseURL, getBlockData, redirectURL } from 'utils/functions';
 
 interface EventsBlock {
   title: string;
@@ -19,20 +20,19 @@ interface EventsProps extends SectionBlocks {
 
 const Events: React.FC<EventsProps> = ({ events, blocks }) => {
   const eventsBlock = getBlockData<EventsBlock>('event', blocks);
+  const { language } = i18n;
 
   const dataEvents = useMemo(() => {
     if (!events?.length) return [];
 
     return events?.map((item) => ({
       thumbnail: baseURL(item.thumbnail),
-      // TODO: Update locale later
       tag: {
         text: item.subdivision?.name,
-        url: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item.slug}`,
+        url: redirectURL(CONSTANTS.PREFIX.DIVISION, item.slug, language),
       },
       title: item.title,
       endTime: item.startDate,
-      // TODO: Update locale later
       summary: [
         {
           iconName: 'clock' as IconName,
@@ -49,10 +49,10 @@ const Events: React.FC<EventsProps> = ({ events, blocks }) => {
       ],
       button: {
         text: eventsBlock?.button,
-        url: `/${CONSTANTS.PREFIX.EVENT.VI}/${item.slug}`,
+        url: redirectURL(CONSTANTS.PREFIX.EVENT, item.slug, language),
       },
     }));
-  }, [events, eventsBlock]);
+  }, [events, eventsBlock, language]);
 
   if (!events?.length) return null;
 

@@ -5,6 +5,7 @@ import React, {
   useState,
   useEffect,
 } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useInfiniteQuery } from 'react-query';
 import { useSearchParams } from 'react-router-dom';
 import { animated } from 'react-spring';
@@ -20,6 +21,7 @@ import { OptionType } from 'components/molecules/PullDown';
 import { CardDivisionProps } from 'components/organisms/Card/Division';
 import { CardNormalProps } from 'components/organisms/Card/Normal';
 import SearchResult from 'components/templates/SearchResult';
+import i18n from 'i18n';
 import { getNewsListService } from 'services/news';
 import { NewsListTypes } from 'services/news/types';
 import { getSubDivisionListService } from 'services/subdivision';
@@ -30,33 +32,37 @@ import {
   baseURL,
   getOgDataPage,
   getTimePastToCurrent,
+  redirectURL,
 } from 'utils/functions';
 
-const dataTabList = [
-  {
-    slug: 'tin-tuc',
-    label: 'Tin tức',
-  },
-  {
-    slug: 'phan-khu',
-    label: 'Phân Khu',
-  },
-];
-
-const optionSort = [
-  {
-    id: '1',
-    value: 'newest',
-    label: 'Mới nhất',
-  },
-  {
-    id: '2',
-    value: 'oldest',
-    label: 'Cũ nhất',
-  },
-];
-
 const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
+  const { t } = useTranslation();
+  const { language } = i18n;
+
+  const dataTabList = [
+    {
+      slug: 'tin-tuc',
+      label: t('general.news'),
+    },
+    {
+      slug: 'phan-khu',
+      label: t('general.division'),
+    },
+  ];
+
+  const optionSort = useMemo(() => [
+    {
+      id: '1',
+      value: 'newest',
+      label: t('general.latest'),
+    },
+    {
+      id: '2',
+      value: 'oldest',
+      label: t('general.oldest'),
+    },
+  ], [t]);
+
   const [tabActive, setTabActive] = useState<string | undefined>(
     dataTabList[0].slug,
   );
@@ -74,6 +80,7 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
   ]);
   const sortParams = useMemo(
     () => searchParams.get('sort') || optionSort[0].value,
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [searchParams],
   );
 
@@ -109,6 +116,7 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
     if (sortItem) {
       setCurrentValueSort(sortItem);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortParams]);
 
   // Get News
@@ -142,15 +150,15 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
         dateTime: getTimePastToCurrent(item.publishedAt),
         tag: {
           text: item.subdivision?.name,
-          url: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item.slug}`,
+          url: redirectURL(CONSTANTS.PREFIX.DIVISION, item.slug, language),
         },
         url: {
-          text: 'Xem thêm',
+          text: t('button.more'),
           iconName: 'arrowRightCopper',
           animation: 'arrow',
         },
       })),
-    [newsData?.pages],
+    [newsData?.pages, language, t],
   );
   // End - Get News
 
@@ -185,10 +193,9 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
         imgSrc: baseURL(item.thumbnail),
         title: item.name,
         description: baseString(item.description),
-        // TODO: Add locale later
-        href: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item.slug}`,
+        href: redirectURL(CONSTANTS.PREFIX.DIVISION, item.slug, language),
       })),
-    [subdivisionData?.pages],
+    [subdivisionData?.pages, language],
   );
 
   // End - Get Subdivision
@@ -199,8 +206,6 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
       || 0,
     [tabActive, newsList, subdivisionList],
   );
-
-  // TODO: translate later
 
   return (
     <>
@@ -216,12 +221,12 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
         </div>
       </animated.div>
 
-      <SearchResult.Wrapper titleMain="Tìm kiếm">
+      <SearchResult.Wrapper titleMain={pageData.title}>
         <SearchResult.Summary
           value={searchKeyValue}
-          placeholder="Tìm kiếm"
+          placeholder={t('general.search_placeholder')}
           searchText={{
-            text: 'kết quả tìm thấy cho',
+            text: t('general.search_result'),
             length: lengthItem,
             value: search,
           }}
@@ -237,7 +242,6 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
           filter={{
             options: optionSort,
             value: currentValueSort,
-            placeholder: 'Kết quả mới nhất',
             onFilter: handleSort,
           }}
         />
@@ -251,9 +255,7 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
         )}
         {tabActive === 'tin-tuc' && !newsList?.length && (
           <div className="u-mt-24">
-            <Text modifiers={['14x20', 'raisinBlack', '400', 'center']}>
-              Không có dữ liệu
-            </Text>
+            <Text modifiers={['14x20', 'raisinBlack', '400', 'center']} content={t('general.not_found_data')} />
           </div>
         )}
         {tabActive === 'phan-khu' && (
@@ -266,9 +268,7 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
         )}
         {tabActive === 'phan-khu' && !subdivisionList?.length && (
           <div className="u-mt-24">
-            <Text modifiers={['14x20', 'raisinBlack', '400', 'center']}>
-              Không có dữ liệu
-            </Text>
+            <Text modifiers={['14x20', 'raisinBlack', '400', 'center']} content={t('general.not_found_data')} />
           </div>
         )}
 

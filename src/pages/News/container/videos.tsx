@@ -6,10 +6,11 @@ import Container from 'common/Container';
 import FlatMore from 'common/FlatMore';
 import Card from 'components/organisms/Card';
 import PopupPlayer from 'components/templates/PopupPlayer';
+import i18n from 'i18n';
 import { OverviewVideoType } from 'services/overviews/types';
 import CONSTANTS from 'utils/constants';
 import {
-  baseURL, linkURL, getTimePastToCurrent, getBlockData, baseString,
+  baseURL, linkURL, getTimePastToCurrent, getBlockData, baseString, redirectURL,
 } from 'utils/functions';
 
 interface VideoBlocks {
@@ -42,6 +43,7 @@ const reducer = (state: PlayerState, action: ActionWithPayload) => {
 
 const Videos: React.FC<VideoProps> = ({ videos, blocks }) => {
   const videoBlock = getBlockData<VideoBlocks>('video', blocks);
+  const { language } = i18n;
 
   const [state, dispatch] = useReducer(reducer, {
     isOpen: false,
@@ -66,7 +68,7 @@ const Videos: React.FC<VideoProps> = ({ videos, blocks }) => {
           title: item.name,
           tag: {
             text: item.subdivision?.name,
-            url: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item.slug}`,
+            url: redirectURL(CONSTANTS.PREFIX.DIVISION, item.slug, language),
           },
           datetime: item?.publishedAt ? getTimePastToCurrent(item.publishedAt) : undefined,
           onClick: () => {
@@ -81,7 +83,7 @@ const Videos: React.FC<VideoProps> = ({ videos, blocks }) => {
       });
     }
     return [];
-  }, [videos]);
+  }, [videos, language]);
 
   if (!videos?.length) return null;
 

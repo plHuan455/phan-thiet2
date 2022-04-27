@@ -1,6 +1,7 @@
 import React, {
   useCallback, useMemo, useRef, useState,
 } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 
 import HeaderSub from './HeaderSub';
@@ -40,7 +41,7 @@ const HeaderDivision: React.FC<HeaderDivisionProps> = ({
   handleSearch,
 }) => {
   const { pathname } = useLocation();
-
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenSearch, setIsOpenSearch] = useState(false);
   const [isScroll, setIsScroll] = useState(false);
@@ -127,9 +128,8 @@ const HeaderDivision: React.FC<HeaderDivisionProps> = ({
               <Icon iconName="closeWhite" size="36" />
             </button>
             <div className="t-headerDivision_layer-search_content">
-              {/* TODO: ADD Translations Later */}
               <Heading type="h2" modifiers={['700', 'uppercase', 'center', 'white']}>
-                Tìm kiếm
+                {t('form.search')}
               </Heading>
               <Search search={{ placeholder: 'Tìm kiếm nội dung', onSearch }} />
             </div>

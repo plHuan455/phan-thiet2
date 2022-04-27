@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import Container from 'common/Container';
 import FlatMore from 'common/FlatMore';
@@ -25,6 +26,7 @@ const Events: React.FC<EventsProps> = ({
 }) => {
   const firstItem = listEvents[0] || undefined;
   const anotherItem = listEvents?.slice(1) || [];
+  const { t } = useTranslation();
 
   const {
     days, hours, mins, secs,
@@ -66,7 +68,7 @@ const Events: React.FC<EventsProps> = ({
                   <div className="t-events_countDown-label">
                     <Text
                       modifiers={['24x36', '200', 'center', 'copper', 's015']}
-                      content="ngày"
+                      content={t('general.day')}
                     />
                   </div>
                 </div>
@@ -80,7 +82,7 @@ const Events: React.FC<EventsProps> = ({
                   <div className="t-events_countDown-label">
                     <Text
                       modifiers={['24x36', '200', 'center', 'copper', 's015']}
-                      content="giờ"
+                      content={t('general.hours')}
                     />
                   </div>
                 </div>
@@ -94,7 +96,7 @@ const Events: React.FC<EventsProps> = ({
                   <div className="t-events_countDown-label">
                     <Text
                       modifiers={['24x36', '200', 'center', 'copper', 's015']}
-                      content="phút"
+                      content={t('general.min')}
                     />
                   </div>
                 </div>
@@ -108,7 +110,7 @@ const Events: React.FC<EventsProps> = ({
                   <div className="t-events_countDown-label">
                     <Text
                       modifiers={['24x36', '200', 'center', 'copper', 's015']}
-                      content="giây"
+                      content={t('general.sec')}
                     />
                   </div>
                 </div>

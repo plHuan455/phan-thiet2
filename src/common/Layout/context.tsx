@@ -1,6 +1,7 @@
 import React, {
   createContext, useCallback, useMemo, useState,
 } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 
@@ -37,6 +38,7 @@ export const LayoutContext = createContext<LayoutContextResponse>({
 
 const LayoutProvider: React.FC = ({ children }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const dataSystems = useAppSelector((state) => state.system.data);
   const staticAll = useAppSelector((state) => state.static.static);
@@ -74,19 +76,21 @@ const LayoutProvider: React.FC = ({ children }) => {
       address: x.addressText,
       subTitle: '',
       contact: {
-        label: 'Liên hệ: ', // TODO: Translation later
+        label: t('general.contact'),
         value: x.phone,
       },
     })) || [];
     return [...addressGeneral, ...addressHeadquarters];
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [addressData?.data, dataSystems?.address]);
 
   const socialList = useMemo(() => ({
-    title: 'THAM KHẢO THÊM TẠI', // TODO: Translation later
+    title: t('general.more_information'),
     list: dataSystems?.socialMedia?.map((x) => ({
       icon: baseURL(x.icon),
       ...x.link,
     })) || [],
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }), [dataSystems?.socialMedia]);
 
   const header = useMemo((): HeaderProps => ({

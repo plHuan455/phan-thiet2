@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
 
 import PopupImageDetail from '../component/popupImageDetail';
@@ -25,6 +26,7 @@ const Journeys: React.FC<JourneysProps> = ({
   id,
   data,
 }) => {
+  const { t } = useTranslation();
   const [open, setOpen] = useState<boolean>(false);
   const [idActive, setIdActive] = useState<number>();
   const [slideActive, setSlideActive] = useState<number>();
@@ -76,7 +78,7 @@ const Journeys: React.FC<JourneysProps> = ({
           setOpen(true);
           setSlideActive(val);
         }}
-        textNotFound="Không tìm thấy dữ liệu"
+        textNotFound={t('general.not_found_data')}
       />
       <PopupImageDetail
         isOpen={open}

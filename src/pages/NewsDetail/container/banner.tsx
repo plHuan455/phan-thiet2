@@ -1,8 +1,13 @@
 import React, { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import BannerTemplate from 'components/templates/Banner';
 import useKeywords from 'hooks/useKeywords';
+import i18n from 'i18n';
+import FUNCTIONS_LANGUAGE from 'i18n/functions';
+import { useAppSelector } from 'store/hooks';
+import CONSTANTS from 'utils/constants';
 import { baseURL } from 'utils/functions';
 
 export interface BannerProps {
@@ -10,7 +15,15 @@ export interface BannerProps {
 }
 
 const Banner: React.FC<BannerProps> = ({ thumbnail }) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
+
+  const { language } = i18n;
+  const staticAll = useAppSelector((state) => state.static.static);
+
+  const slugPageNews = useMemo(() => staticAll?.find(
+    (e) => e.templateCode === CONSTANTS.TEMPLATE_CODE.NEW_IMAGE,
+  )?.slug, [staticAll]);
 
   const blockBanner = useMemo(() => baseURL(thumbnail), [thumbnail]);
 
@@ -21,8 +34,7 @@ const Banner: React.FC<BannerProps> = ({ thumbnail }) => {
   const onSearch = (keyword: string | undefined) => {
     if (!keyword) return;
     onSubmit(keyword);
-    // TODO: get slug from static all later
-    navigate(`/tong-quan-tin-tuc-va-hinh-anh?keyword=${keyword}`);
+    navigate(`${FUNCTIONS_LANGUAGE.languageURL(language)}${slugPageNews}?keyword=${keyword}`);
   };
 
   return (
@@ -34,12 +46,11 @@ const Banner: React.FC<BannerProps> = ({ thumbnail }) => {
         optionSuggest={options}
         isSuggest={!!options?.length}
         search={{
-          // TODO: Add Translations Later
-          placeholder: 'Tìm kiếm tin tức',
+          placeholder: t('form.search_news'),
           onSearch,
         }}
         tag={{
-          keyword: 'Từ khóa nổi bật:',
+          keyword: t('general.feature_keywords'),
           list: [
             {
               text: 'Du lịch',

@@ -3,6 +3,7 @@ import axios from 'axios';
 import React, { useMemo } from 'react';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 
 import { Variants } from 'components/atoms/Button';
@@ -26,6 +27,7 @@ const Consultancy: React.FC<ConsultancyCommonProps> = ({
   layer,
   variantButton,
 }) => {
+  const { t } = useTranslation();
   const location = useLocation();
   const { executeRecaptcha } = useGoogleReCaptcha();
   const topicSelector = useAppSelector((state) => state.topic);
@@ -66,22 +68,22 @@ const Consultancy: React.FC<ConsultancyCommonProps> = ({
     onSuccess: () => {
       const notifyProps: NotifyProps = {
         isOpen: true,
-        title: 'Đăng ký thành công',
-        message: 'Cảm ơn Quý Khách đã nhận thông tin dự án NovaWorld Phan Thiet. Novaland sẽ liên hệ trong thời gian sớm nhất.',
-        btnText: 'Xác nhận',
+        title: t('general.success'),
+        message: t('general.message_success'),
+        btnText: t('general.confirm'),
       };
       dispatch(updateNotifyProps(notifyProps));
     },
     onFailed: (err) => {
-      let message = 'Vui lòng thử lại';
+      let message = t('general.try_again');
       if (axios.isAxiosError(err) && err?.response?.status === 500) {
-        message = 'Lỗi hệ thống';
+        message = t('general.system_error');
       }
       const notifyProps: NotifyProps = {
         isOpen: true,
-        title: 'Đăng ký thất bại',
+        title: t('general.fail'),
         message,
-        btnText: 'Xác nhận',
+        btnText: t('general.confirm'),
       };
       dispatch(updateNotifyProps(notifyProps));
     },
@@ -102,23 +104,23 @@ const Consultancy: React.FC<ConsultancyCommonProps> = ({
       title={title}
       layer={layer}
       form={{
-        title: 'Quý khách đăng ký nhận email thông tin dự án, các chương trình ưu đãi, khuyến mại</br>và tin tức mới nhất từ NovaWorld Phan Thiet',
+        title: t('form.consultancy_title'),
         method,
         loading: consultancyState.loading,
         handleSubmit: consultancyExecute,
         variantButton,
         consultancyInfo: {
-          placeholderName: 'Họ và tên',
-          placeholderPhone: 'Số điện thoại *',
-          placeholderEmail: 'Email *',
-          placeholderAddress: 'Địa chỉ',
-          placeholderContent: 'Nội dung',
+          placeholderName: t('form.consultancy_name'),
+          placeholderPhone: t('form.consultancy_phone'),
+          placeholderEmail: t('form.consultancy_email'),
+          placeholderAddress: t('form.consultancy_address'),
+          placeholderContent: t('form.consultancy_content'),
           checkbox: {
-            label: 'Sản phẩm quan tâm: ',
-            subLabel: '(Câu hỏi không bắt buộc)',
+            label: t('form.consultancy_interest'),
+            subLabel: t('form.consultancy_option'),
             list: topicsList,
           },
-          btnText: 'Đăng ký nhận thông tin',
+          btnText: t('button.register'),
         },
       }}
     />
