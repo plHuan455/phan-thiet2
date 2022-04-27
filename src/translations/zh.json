@@ -1,20 +1,4 @@
 {
-  "form": {
-    "title": "You register to receive email project information, preferential programs, promotions and the latest news from NovaWorld Phan Thiet",
-    "name": "Name",
-    "address": "Address",
-    "phone": "Phone",
-    "email": "Email",
-    "content": "Content",
-    "interest": "Products of interest: ",
-    "option": "(Optional question)"
-  },
-  "button": {
-    "register": "Sign up to receive information",
-    "visiting_houses": "Tham quan các mẫu nhà ZH",
-    "more": "Xem thêm ZH",
-    "detail": "Xem Chi Tiết ZH"
-  },
   "general": {
     "not_found_data": "Not found data",
     "day": "Day",
@@ -23,28 +7,52 @@
     "sec": "Sec",
     "success": "Register Success",
     "confirm": "Confirm",
-    "message_Success": "Thank you for receiving information about NovaWorld Phan Thiet project. Novaland will contact you as soon as possible.",
+    "message_success": "Thank you for receiving information about NovaWorld Phan Thiet project. Novaland will contact you as soon as possible.",
     "try_again": "Try Again",
     "system_error": "System Error",
     "fail": "Register Fail",
-    "contact": "Liên hệ",
+    "contact": "Contact",
     "more-information": "MORE INFORMATION AT"
-  },
-  "home": {
-    "house_models": "Các mẫu nhà ZH"
   },
   "banner": {
     "featured_keywords": "Featured Keywords:",
     "travel": "Travel",
-    "packageTour": "Package Tour"
+    "package_tour": "Package Tour"
+  },
+  "form": {
+    "title": "You register to receive email project information, preferential programs, promotions and the latest news from NovaWorld Phan Thiet",
+    "name": "Name",
+    "address": "Address",
+    "phone": "Phone",
+    "email": "Email",
+    "content": "Content",
+    "interest": "Products of interest: ",
+    "option": "(Optional question)",
+    "search": "Search",
+    "search_event": "Search Event",
+    "search_news": "Search News"
+  },
+  "button": {
+    "register": "Sign up to receive information",
+    "visiting_houses": "Visiting houses",
+    "more": "See more",
+    "detail": "See Detail",
+    "download": "Download"
+  },
+  "home": {
+    "house_models": "House models"
   },
   "search": {
-    "placeholder_search": "Search",
     "result": "Results found for",
     "placeholder_filter": "Result latest",
     "news": "News",
     "division": "Division",
     "latest": "Latest",
     "oldest": "Oldest"
+  },
+  "library": {
+    "news": "News",
+    "images": "Images",
+    "document": "Different document"
   }
 }

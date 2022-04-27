@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import Slider from 'react-slick';
 
 import Image from 'components/atoms/Image';
@@ -19,6 +20,7 @@ const PopupImage: React.FC<PopupImageProps> = ({
   dataImageList,
   currentImgIdx,
 }) => {
+  const { t } = useTranslation();
   const [nav1, setNav1] = useState<Slider | null>();
   const [nav2, setNav2] = useState<Slider | null>();
   const imageShowSettings = {
@@ -119,8 +121,7 @@ const PopupImage: React.FC<PopupImageProps> = ({
             </div>
           </div>
         ) : (
-          // TODO: ADD Translations later
-          <Text modifiers={['24x36', 'white', 'center']}>Không có dữ liệu</Text>
+          <Text modifiers={['24x36', 'white', 'center']}>{t('general.not_found_data')}</Text>
         )}
       </CustomModal>
     </div>

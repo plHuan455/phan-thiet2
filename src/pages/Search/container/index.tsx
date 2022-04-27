@@ -21,6 +21,7 @@ import { OptionType } from 'components/molecules/PullDown';
 import { CardDivisionProps } from 'components/organisms/Card/Division';
 import { CardNormalProps } from 'components/organisms/Card/Normal';
 import SearchResult from 'components/templates/SearchResult';
+import i18n from 'i18n';
 import { getNewsListService } from 'services/news';
 import { NewsListTypes } from 'services/news/types';
 import { getSubDivisionListService } from 'services/subdivision';
@@ -31,10 +32,12 @@ import {
   baseURL,
   getOgDataPage,
   getTimePastToCurrent,
+  redirectURL,
 } from 'utils/functions';
 
 const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
   const { t } = useTranslation();
+  const { language } = i18n;
 
   const dataTabList = [
     {
@@ -190,10 +193,9 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
         imgSrc: baseURL(item.thumbnail),
         title: item.name,
         description: baseString(item.description),
-        // TODO: Add locale later
-        href: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item.slug}`,
+        href: redirectURL(CONSTANTS.PREFIX.DIVISION, item.slug, language),
       })),
-    [subdivisionData?.pages],
+    [subdivisionData?.pages, language],
   );
 
   // End - Get Subdivision

@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 import React, { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import Banner from './banner';
 import Detail, { DetailProps } from './detail';
@@ -13,7 +14,9 @@ import FUNCTIONS_LANGUAGE from 'i18n/functions';
 import { getEventDetailService } from 'services/event';
 import { useAppSelector } from 'store/hooks';
 import CONSTANTS from 'utils/constants';
-import { baseString, baseURL, getTimePastToCurrent } from 'utils/functions';
+import {
+  baseString, baseURL, getTimePastToCurrent, redirectURL,
+} from 'utils/functions';
 
 const Screen: React.FC = () => {
   const { language } = i18n;
@@ -28,6 +31,7 @@ const Screen: React.FC = () => {
     loading,
     error,
   } = useDetail({ service: getEventDetailService });
+  const { t } = useTranslation();
 
   const newsDetailData = useMemo(() : DetailProps => ({
     content: baseString(data?.description),
@@ -40,19 +44,17 @@ const Screen: React.FC = () => {
     })) || [],
     subdivision: {
       name: data?.subdivision?.name,
-      // TODO: add locale later
-      slug: `/${CONSTANTS.PREFIX.DIVISION.VI}/${data?.subdivision?.slug}`,
+      slug: redirectURL(CONSTANTS.PREFIX.DIVISION, data?.subdivision?.slug, language),
     },
     related: data?.relatedEvents?.map((item) => ({
       thumbnail: baseURL(item.thumbnail),
       tag: {
         text: baseString(data?.subdivision?.name),
-        url: `/${CONSTANTS.PREFIX.DIVISION.VI}/${data?.subdivision?.slug}`,
+        url: redirectURL(CONSTANTS.PREFIX.DIVISION, data?.subdivision?.slug, language),
       },
       title: baseString(item.title),
       endTime: item.startDate,
-      // TODO: Add locale later
-      href: `/${CONSTANTS.PREFIX.EVENT.VI}/${item.slug}`,
+      href: redirectURL(CONSTANTS.PREFIX.EVENT, item.slug, language),
       summary: [
         {
           iconName: 'clock' as IconName,
@@ -68,11 +70,11 @@ const Screen: React.FC = () => {
         },
       ],
       button: {
-        // TODO: translate later
-        text: 'Xem chi tiết',
-        url: `/${CONSTANTS.PREFIX.EVENT.VI}/${item.slug}`,
+        text: t('button.detail'),
+        url: redirectURL(CONSTANTS.PREFIX.EVENT, item.slug, language),
       },
     })),
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }), [data, slugPage, language]);
 
   if (loading) return <LoadingPage />;

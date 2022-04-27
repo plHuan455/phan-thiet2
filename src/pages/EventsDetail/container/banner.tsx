@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import BannerTemplate from 'components/templates/Banner';
@@ -12,6 +13,7 @@ const Banner: React.FC<BannerProps> = ({
   thumbnail,
 }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const {
     options, hasNextPage, fetchNextPage, onSubmit,
   } = useKeywords();
@@ -31,16 +33,15 @@ const Banner: React.FC<BannerProps> = ({
         isLayer
         isSuggest={!!options?.length}
         search={{
-          // TODO: Add Translations Later
-          placeholder: 'Tìm kiếm sự kiện',
+          placeholder: t('form.search_event'),
           onSearch,
         }}
         optionSuggest={options}
         tag={{
-          keyword: 'Từ khóa nổi bật:',
+          keyword: t('banner.featured_keywords'),
           list: [
             {
-              text: 'Du lịch',
+              text: t('banner.travel'),
               href: 'du-lich',
             },
             {
@@ -48,7 +49,7 @@ const Banner: React.FC<BannerProps> = ({
               href: 'the-king-dom',
             },
             {
-              text: 'Tour trọn gói',
+              text: t('banner.package_tour'),
               href: 'tour-tron-goi',
             },
           ],

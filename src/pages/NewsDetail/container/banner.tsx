@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import BannerTemplate from 'components/templates/Banner';
@@ -10,6 +11,7 @@ export interface BannerProps {
 }
 
 const Banner: React.FC<BannerProps> = ({ thumbnail }) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const blockBanner = useMemo(() => baseURL(thumbnail), [thumbnail]);
@@ -34,15 +36,14 @@ const Banner: React.FC<BannerProps> = ({ thumbnail }) => {
         optionSuggest={options}
         isSuggest={!!options?.length}
         search={{
-          // TODO: Add Translations Later
-          placeholder: 'Tìm kiếm tin tức',
+          placeholder: t('form.search_news'),
           onSearch,
         }}
         tag={{
-          keyword: 'Từ khóa nổi bật:',
+          keyword: t('banner.feature_keywords'),
           list: [
             {
-              text: 'Du lịch',
+              text: t('banner.travel'),
               href: 'du-lich',
             },
             {
@@ -50,7 +51,7 @@ const Banner: React.FC<BannerProps> = ({ thumbnail }) => {
               href: 'the-king-dom',
             },
             {
-              text: 'Tour trọn gói',
+              text: t('banner.package_tour'),
               href: 'tour-tron-goi',
             },
           ],

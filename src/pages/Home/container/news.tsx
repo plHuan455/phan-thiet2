@@ -35,7 +35,6 @@ const News: React.FC<SectionBlocks> = ({ blocks }) => {
     // TODO: Update time later
     dateTime: getTimePastToCurrent(item.publishedAt),
     url: {
-      // TODO: ADD Translation Later
       text: t('button.more'),
       iconName: 'arrowRightCopper',
       animation: 'arrow',

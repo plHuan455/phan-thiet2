@@ -27,24 +27,32 @@
     "email": "EMAIL",
     "content": "NỘI DUNG",
     "interest": "Sản phẩm quan tâm: ",
-    "option": "(Câu hỏi không bắt buộc)"
+    "option": "(Câu hỏi không bắt buộc)",
+    "search": "Tìm kiếm",
+    "search_event": "Tìm kiếm sự kiện",
+    "search_news": "Tìm kiếm tin tức"
   },
   "button": {
     "register": "Đăng ký nhận thông tin",
     "visiting_houses": "Tham quan các mẫu nhà",
     "more": "Xem thêm",
-    "detail": "Xem Chi Tiết"
+    "detail": "Xem Chi Tiết",
+    "download": "Tải xuống"
   },
   "home": {
     "house_models": "Các mẫu nhà"
   },
   "search": {
-    "placeholder_search": "Tìm kiếm",
     "result": "kết quả tìm thấy cho",
     "placeholder_filter": "Kết quả mới nhất",
     "news": "Tin tức",
     "division": "Phân Khu",
     "latest": "Mới nhất",
     "oldest": "Cũ nhất"
+  },
+  "library": {
+    "news": "Tin tức",
+    "images": "Hình ảnh",
+    "document": "Tài liệu khác"
   }
 }

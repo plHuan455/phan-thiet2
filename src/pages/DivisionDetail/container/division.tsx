@@ -5,10 +5,11 @@ import Container from 'common/Container';
 import FlatMore from 'common/FlatMore';
 import Arrow from 'components/atoms/Arrow';
 import Card from 'components/organisms/Card';
+import i18n from 'i18n';
 import { getSubDivisionListService } from 'services/subdivision';
 import { SubdivisionRelatedTypes } from 'services/subdivision/types';
 import CONSTANTS from 'utils/constants';
-import { baseString, baseURL } from 'utils/functions';
+import { baseString, baseURL, redirectURL } from 'utils/functions';
 
 interface DivisionProps {
   data?: SubdivisionRelatedTypes;
@@ -16,6 +17,7 @@ interface DivisionProps {
 }
 
 const Division: React.FC<DivisionProps> = ({ data, subdivisionId }) => {
+  const { language } = i18n;
   const { data: subDivisionList } = useQuery(['getSubDivisionList'], () => getSubDivisionListService({
     except_ids: subdivisionId?.toString(),
   }));
@@ -26,10 +28,9 @@ const Division: React.FC<DivisionProps> = ({ data, subdivisionId }) => {
         imgSrc: baseURL(division.thumbnail),
         title: division.name,
         description: baseString(division.description),
-        // TODO: update locale later
-        href: `/${CONSTANTS.PREFIX.DIVISION.VI}/${division.slug}`,
+        href: redirectURL(CONSTANTS.PREFIX.DIVISION, division.slug, language),
       })),
-    [subDivisionList?.data],
+    [subDivisionList?.data, language],
   );
 
   return (

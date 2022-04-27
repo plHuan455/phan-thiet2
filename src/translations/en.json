@@ -11,7 +11,7 @@
     "try_again": "Try Again",
     "system_error": "System Error",
     "fail": "Register Fail",
-    "contact": "Liên hệ",
+    "contact": "Contact",
     "more-information": "MORE INFORMATION AT"
   },
   "banner": {
@@ -27,24 +27,32 @@
     "email": "Email",
     "content": "Content",
     "interest": "Products of interest: ",
-    "option": "(Optional question)"
+    "option": "(Optional question)",
+    "search": "Search",
+    "search_event": "Search Event",
+    "search_news": "Search News"
   },
   "button": {
     "register": "Sign up to receive information",
-    "visiting_houses": "Tham quan các mẫu nhà EN",
-    "more": "Xem thêm EN",
-    "detail": "Xem Chi Tiết EN"
+    "visiting_houses": "Visiting houses",
+    "more": "See more",
+    "detail": "See Detail",
+    "download": "Download"
   },
   "home": {
-    "house_models": "Các mẫu nhà EN"
+    "house_models": "House models"
   },
   "search": {
-    "placeholder_search": "Search",
     "result": "Results found for",
     "placeholder_filter": "Result latest",
     "news": "News",
     "division": "Division",
     "latest": "Latest",
     "oldest": "Oldest"
+  },
+  "library": {
+    "news": "News",
+    "images": "Images",
+    "document": "Different document"
   }
 }

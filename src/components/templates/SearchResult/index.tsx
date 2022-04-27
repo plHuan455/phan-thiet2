@@ -1,5 +1,6 @@
 import React, { KeyboardEvent } from 'react';
 import { Col, Row } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 
 import Container from 'common/Container';
 import Button from 'components/atoms/Button';
@@ -123,64 +124,66 @@ const SearchContent:React.FC<SearchContentProps> = ({
   hashShowMore,
   loading,
   handleShowMore,
-}) => (
-  <>
-    <div className="t-searchResult_list">
-      <Animate type="fadeInUp">
-        {news && news?.length > 0 && (
-        <Row className="u-ml-negative-md-16 u-mr-negative-md-16 u-ml-negative-10 u-mr-negative-10">
-          {news.map((item, index) => (
-            <Col
-              key={`searchResultItem-${index.toString()}`}
-              className="u-mt-md-32 u-mt-20 u-pl-md-16 u-pr-md-16 u-pl-10 u-pr-10"
-              xs={12}
-              sm={6}
-              lg={4}
+}) => {
+  const { t } = useTranslation();
+  return (
+    <>
+      <div className="t-searchResult_list">
+        <Animate type="fadeInUp">
+          {news && news?.length > 0 && (
+          <Row className="u-ml-negative-md-16 u-mr-negative-md-16 u-ml-negative-10 u-mr-negative-10">
+            {news.map((item, index) => (
+              <Col
+                key={`searchResultItem-${index.toString()}`}
+                className="u-mt-md-32 u-mt-20 u-pl-md-16 u-pr-md-16 u-pl-10 u-pr-10"
+                xs={12}
+                sm={6}
+                lg={4}
+              >
+                <Card.Normal {...item} />
+              </Col>
+            ))}
+          </Row>
+          )}
+          {divisions && divisions?.length > 0 && (
+          <Row className="u-ml-negative-md-16 u-mr-negative-md-16 u-ml-negative-10 u-mr-negative-10">
+            {divisions.map((item, index) => (
+              <Col
+                key={`searchResultItem-${index.toString()}`}
+                className="u-mt-md-32 u-mt-20 u-pl-md-16 u-pr-md-16 u-pl-10 u-pr-10"
+                xs={12}
+                sm={6}
+                lg={4}
+              >
+                <Card.Division {...item} />
+              </Col>
+            ))}
+          </Row>
+          )}
+          {loading && (
+          <div className="d-flex justify-content-center u-mt-24 u-mb-24">
+            <Icon iconName="loadingWhite" />
+          </div>
+          )}
+
+          {hashShowMore && (
+          <div className="t-searchResult_showMore">
+            <Button
+              variant="primary-green"
+              size="lg"
+              onClick={handleShowMore}
             >
-              <Card.Normal {...item} />
-            </Col>
-          ))}
-        </Row>
-        )}
-        {divisions && divisions?.length > 0 && (
-        <Row className="u-ml-negative-md-16 u-mr-negative-md-16 u-ml-negative-10 u-mr-negative-10">
-          {divisions.map((item, index) => (
-            <Col
-              key={`searchResultItem-${index.toString()}`}
-              className="u-mt-md-32 u-mt-20 u-pl-md-16 u-pr-md-16 u-pl-10 u-pr-10"
-              xs={12}
-              sm={6}
-              lg={4}
-            >
-              <Card.Division {...item} />
-            </Col>
-          ))}
-        </Row>
-        )}
-        {loading && (
-        <div className="d-flex justify-content-center u-mt-24 u-mb-24">
-          <Icon iconName="loadingWhite" />
-        </div>
-        )}
+              {t('button.more')}
+            </Button>
+          </div>
+          )}
+        </Animate>
 
-        {hashShowMore && (
-        <div className="t-searchResult_showMore">
-          <Button
-            variant="primary-green"
-            size="lg"
-            onClick={handleShowMore}
-          >
-            {/* TODO: Translation later */}
-            Xem thêm
-          </Button>
-        </div>
-        )}
-      </Animate>
+      </div>
 
-    </div>
-
-  </>
-);
+    </>
+  );
+};
 
 const SearchResultWrap: React.FC<SearchResultWrapProps> = ({
   titleMain,

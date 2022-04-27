@@ -1,6 +1,7 @@
 import React, {
   useCallback, useEffect, useMemo, useState,
 } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useInfiniteQuery } from 'react-query';
 
 import dummyContact from 'assets/dataDummy/contact';
@@ -21,6 +22,7 @@ interface ActiveProps extends AddressItemProps {
 
 const Map: React.FC<SectionBlocks> = ({ blocks }) => {
   const { language } = i18n;
+  const { t } = useTranslation();
 
   const [activeHeadquarter, setActiveHeadquarter] = useState<ActiveProps>({
     idx: -1,
@@ -63,8 +65,7 @@ const Map: React.FC<SectionBlocks> = ({ blocks }) => {
           label: item.name,
           address: item.addressText,
           phone: item.phone,
-          // TODO: translate later
-          textContact: 'Liên hệ',
+          textContact: t('general.contact'),
           position: {
             lat: (item.addressLat && parseFloat(item.addressLat)) || 0,
             lng: (item.addressLong && parseFloat(item.addressLong)) || 0,
@@ -73,6 +74,7 @@ const Map: React.FC<SectionBlocks> = ({ blocks }) => {
       ],
       [],
     ),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [headquartersData],
   );
 

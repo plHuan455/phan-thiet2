@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 import React, { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import Banner from './banner';
 import Detail, { DetailProps } from './detail';
@@ -14,11 +15,10 @@ import { getNewsDetailService } from 'services/news';
 import { useAppSelector } from 'store/hooks';
 import CONSTANTS from 'utils/constants';
 import {
-  baseString, baseURL, getTimePastToCurrent,
+  baseString, baseURL, getTimePastToCurrent, redirectURL,
 } from 'utils/functions';
 
 const Screen: React.FC = () => {
-  const { language } = i18n;
   const staticAll = useAppSelector((state) => state.static.static);
 
   const slugPage = staticAll?.find(
@@ -30,6 +30,8 @@ const Screen: React.FC = () => {
     loading,
     error,
   } = useDetail({ service: getNewsDetailService });
+  const { language } = i18n;
+  const { t } = useTranslation();
 
   const newsDetailData = useMemo(() : DetailProps => ({
     content: baseString(data?.content),
@@ -42,24 +44,24 @@ const Screen: React.FC = () => {
     })) || [],
     subdivision: {
       name: data?.subdivision?.name,
-      // TODO: add locale later
-      slug: `/${CONSTANTS.PREFIX.DIVISION.VI}/${data?.subdivision?.slug}`,
+      slug: redirectURL(CONSTANTS.PREFIX.DIVISION, data?.subdivision?.slug, language),
     },
     relatedNews: data?.relatedNews?.map((item) => ({
       tag: {
         text: baseString(data?.subdivision?.name),
-        url: `/${CONSTANTS.PREFIX.DIVISION.VI}/${data?.subdivision?.slug}`,
+        url: redirectURL(CONSTANTS.PREFIX.DIVISION, data?.subdivision?.slug, language),
       },
       title: baseString(item.title),
       thumbnail: baseURL(item.thumbnail),
-      href: `/tin-tuc/${item.slug}`,
+      href: redirectURL(CONSTANTS.PREFIX.NEWS, item.slug, language),
       dateTime: getTimePastToCurrent(item?.publishedAt),
       url: {
-        text: 'Xem thêm',
+        text: t('button.more'),
         iconName: 'arrowRightCopper',
         animation: 'arrow',
       },
     })),
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }), [data, slugPage, language]);
 
   if (loading) return <LoadingPage />;

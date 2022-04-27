@@ -5,9 +5,12 @@ import balloon from 'assets/images/pages/divisionList/balloonDivisions.png';
 import Image from 'components/atoms/Image';
 import { CardDivisionProps } from 'components/organisms/Card/Division';
 import Subdivision from 'components/templates/Subdivision';
+import i18n from 'i18n';
 import { getSubDivisionListService } from 'services/subdivision';
 import Constants from 'utils/constants';
-import { baseString, baseURL, getBlockData } from 'utils/functions';
+import {
+  baseString, baseURL, getBlockData, redirectURL,
+} from 'utils/functions';
 
 interface DivisionProps {
   title: string;
@@ -15,6 +18,7 @@ interface DivisionProps {
 }
 
 const Divisions: React.FC<SectionBlocks> = ({ blocks }) => {
+  const { language } = i18n;
   const blockContent = useMemo(() => {
     const blockPageContent = getBlockData<DivisionProps>(
       'list_subdivision',
@@ -52,13 +56,12 @@ const Divisions: React.FC<SectionBlocks> = ({ blocks }) => {
           imgSrc: baseURL(item?.thumbnail),
           title: item.name,
           description: baseString(item?.description),
-          // TODO: Add locale later
-          href: `/${Constants.PREFIX.DIVISION.VI}/${item.slug}`,
+          href: redirectURL(Constants.PREFIX.DIVISION, item.slug, language),
         })),
       ],
       [],
     ),
-    [subdivisionData],
+    [subdivisionData, language],
   );
 
   return (

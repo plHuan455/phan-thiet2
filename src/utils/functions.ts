@@ -203,7 +203,7 @@ export const redirectURL = (
   locale?: string,
 ): string => {
   const initLocale = locale || 'vi';
-  const lang = initLocale === 'vi' ? '/' : `/${initLocale}`;
+  const lang = initLocale === 'vi' ? '/' : `/${initLocale}/`;
 
   if (!slug) return lang;
 

@@ -2,6 +2,7 @@
 import React, {
   useState, useEffect, useReducer, useRef,
 } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import Container from 'common/Container';
 import FlatList from 'common/FlatList';
@@ -30,22 +31,9 @@ import { getVideosService } from 'services/videos';
 import { VideoTypes } from 'services/videos/types';
 import { useAppSelector } from 'store/hooks';
 import CONSTANTS from 'utils/constants';
-import { baseURL, getTimePastToCurrent, linkURL } from 'utils/functions';
-
-const dummyData = [
-  {
-    label: 'Tin tức',
-  },
-  {
-    label: 'Hình ảnh',
-  },
-  {
-    label: 'Video',
-  },
-  {
-    label: 'Tài liệu khác',
-  },
-];
+import {
+  baseURL, getTimePastToCurrent, linkURL, redirectURL,
+} from 'utils/functions';
 
 interface LibraryProps {
   subDivisionId?: number;
@@ -87,16 +75,30 @@ const reducer = (state: LibraryState, action: ActionWithPayload) => {
   }
 };
 
-const Library: React.FC<LibraryProps> = ({
-  data, subDivisionId, color, subDivisionName,
-}) => {
-  const staticAll = useAppSelector((state) => state.static.static);
-
+const Library: React.FC<LibraryProps> = ({ data, subDivisionId, color }) => {
   const { language } = i18n;
+  const { t } = useTranslation();
+
+  const staticAll = useAppSelector((state) => state.static.static);
 
   const slugPageNews = staticAll?.find(
     (e) => e.templateCode === CONSTANTS.TEMPLATE_CODE.NEW_IMAGE,
   )?.slug;
+
+  const dummyData = [
+    {
+      label: t('library.news'),
+    },
+    {
+      label: t('library.images'),
+    },
+    {
+      label: 'Video',
+    },
+    {
+      label: t('library.document'),
+    },
+  ];
 
   const settingRef = useRef({
     prevArrow: <Arrow.Prev />,
@@ -203,7 +205,6 @@ const Library: React.FC<LibraryProps> = ({
             </div>
           </div>
 
-          {/* TODO: Update icon loading inherit */}
           {state.isLoading && (
             <div className="u-pt-15 u-pb-15 d-flex justify-content-center">
               <Icon iconName="loadingInherit" />
@@ -220,15 +221,15 @@ const Library: React.FC<LibraryProps> = ({
                   <Card.Normal
                     thumbnail={baseURL(item.thumbnail)}
                     title={item.title}
-                    href={`/${CONSTANTS.PREFIX.NEWS.VI}/${item.slug}`}
+                    href={redirectURL(CONSTANTS.PREFIX.NEWS, item.slug, language)}
                     tag={{
                       text: item?.subdivision?.name,
-                      // TODO: Add locale later
-                      url: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item?.subdivision?.slug}`,
+                      url: redirectURL(CONSTANTS.PREFIX.DIVISION,
+                        item?.subdivision?.slug, language),
                     }}
                     dateTime={getTimePastToCurrent(item.publishedAt)}
                     url={{
-                      text: 'Xem thêm',
+                      text: t('button.more'),
                       iconName: 'arrowRightCopper',
                       animation: 'arrow',
                     }}
@@ -238,7 +239,7 @@ const Library: React.FC<LibraryProps> = ({
             )
               : (
                 <Text modifiers={['14x20', '400', 'inherit', 'center']}>
-                  Không có dữ liệu!
+                  {t('general_not_found_data')}
                 </Text>
               ))}
 
@@ -258,7 +259,7 @@ const Library: React.FC<LibraryProps> = ({
             )
               : (
                 <Text modifiers={['14x20', '400', 'inherit', 'center']}>
-                  Không có dữ liệu!
+                  {t('general_not_found_data')}
                 </Text>
               ))}
 
@@ -276,8 +277,8 @@ const Library: React.FC<LibraryProps> = ({
                       thumbnail={baseURL(item.thumbnail)}
                       tag={{
                         text: item?.subdivision?.name,
-                        // TODO: Add locale later
-                        url: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item?.subdivision?.slug}`,
+                        url: redirectURL(CONSTANTS.PREFIX.DIVISION,
+                          item?.subdivision?.slug, language),
                       }}
                       title={item.name}
                       dateTime={getTimePastToCurrent(item.createdAt)}
@@ -297,7 +298,7 @@ const Library: React.FC<LibraryProps> = ({
             )
               : (
                 <Text modifiers={['14x20', '400', 'inherit', 'center']}>
-                  Không có dữ liệu!
+                  {t('general_not_found_data')}
                 </Text>
               ))}
 
@@ -315,7 +316,7 @@ const Library: React.FC<LibraryProps> = ({
                     title={item.name}
                     dateTime={getTimePastToCurrent(item.publishedAt)}
                     url={{
-                      text: 'Tải xuống',
+                      text: t('button.download'),
                       iconName: 'downloadOrange',
                       animation: 'download',
                     }}
@@ -325,7 +326,7 @@ const Library: React.FC<LibraryProps> = ({
             )
               : (
                 <Text modifiers={['14x20', '400', 'inherit', 'center']}>
-                  Không có dữ liệu!
+                  {t('general_not_found_data')}
                 </Text>
               ))}
         </Animate>
