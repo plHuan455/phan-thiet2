@@ -4,15 +4,15 @@
   justify-content: center;
   bottom: rem(32);
   position: fixed;
-  right: rem(32);
+  right: rem(24);
   z-index: 10;
 
   &_scrollTop {
     border-radius: 50%;
     box-shadow: 4px 4px 36px rgba($black, 0.2);
     background: $copper;
-    width: rem(52);
-    height: rem(52);
+    width: rem(44);
+    height: rem(44);
     @include adjust-flex();
     cursor: pointer;
     opacity: 0;

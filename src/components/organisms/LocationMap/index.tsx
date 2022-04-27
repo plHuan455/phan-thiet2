@@ -35,10 +35,10 @@ const LocationMap: React.FC<LocationMapProps> = ({
         listDivision?.map((item, index) => (
           <div
             key={`t-projectMap_listDivision-${index.toString()}`}
-            className="t-projectMap_listDivision-item"
+            className={`t-projectMap_listDivision-item ${active === item.id ? 'active' : ''}`}
             style={{
-              top: `calc(${item.y} / ${HEIGHT_IMAGE} * 100% - 30px)`,
-              left: `calc(${item.x} / ${WIDTH_IMAGE} * 100% - 15px)`,
+              top: `calc(${item.y} / ${HEIGHT_IMAGE} * 100%)`,
+              left: `calc(${item.x} / ${WIDTH_IMAGE} * 100%)`,
             }}
           >
             <MarkerCard

@@ -255,6 +255,15 @@
       max-width: rem(24);
       position: absolute;
       width: 100%;
+      transform: translate(-15px,-30px);
+
+      @include small-mobile {
+        transform: translate(-12px,-17px);
+      }
+
+      &.active{
+        z-index: 1;
+      }
     }
   }
 }
