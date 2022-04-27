@@ -3,6 +3,7 @@ import React, {
 } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
+import { useParams } from 'react-router-dom';
 
 import DivisionCollection from 'components/templates/DivisionCollection';
 import PopupImage from 'components/templates/PopupImage';
@@ -39,13 +40,14 @@ const Collection = React.forwardRef<HTMLDivElement, CollectionProps>(({
   subDivisionId,
 }, ref) => {
   const { t } = useTranslation();
+  const { slug } = useParams<{ slug: string }>();
   const [state, dispatch] = useReducer(reducer, {
     images: [],
     isOpen: false,
   });
 
   const { data: imageList } = useQuery(
-    ['getCollection'], () => getImageListService({
+    ['getCollection', [slug]], () => getImageListService({
       subdivision_id: String(subDivisionId),
     }),
   );

@@ -33,7 +33,7 @@ const Screen: React.FC<ScreenProps> = ({ setLogoDivision }) => {
   const { slug } = useParams<{ slug: string }>();
 
   const { data: subDivisionDetail, isFetching, error } = useQuery(
-    ['getSubDivisionDetail', [slug]],
+    ['SubdivisionDetail', [slug]],
     () => getSubDivisionDetailService(slug),
     {
       enabled: !!slug,
