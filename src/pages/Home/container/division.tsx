@@ -134,7 +134,7 @@ const Division: React.FC<SectionBlocks> = ({ blocks }) => {
       <section>
         <JourneysTemplate
           title={journeysBlocks?.titleSection}
-          titleField={t('home.house_models')}
+          titleField={t('general.house_models')}
           emptyStr={t('general.not_found_data')}
           dataTimeLine={journeysData}
           listCard={listCardJourneys}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import FlatList from 'common/FlatList';
 import Card from 'components/organisms/Card';
@@ -24,21 +25,24 @@ const Detail: React.FC<DetailProps> = ({
   relatedNews,
   subdivision,
   ...rest
-}) => (
-  <DetailTemplate
-    hasRelated={!!relatedNews?.length}
-    titleRelated="Các Tin tức liên quan"
-    reactRelated={(
-      <FlatList
-        data={relatedNews}
-        render={(item) => <Card.Normal {...item} />}
-      />
-    )}
-    textShare="Chia sẻ"
-    textTopic="Từ khóa"
-    label={subdivision?.name}
-    {...rest}
-  />
-);
+}) => {
+  const { t } = useTranslation();
+  return (
+    <DetailTemplate
+      hasRelated={!!relatedNews?.length}
+      titleRelated={t('general.news_related')}
+      reactRelated={(
+        <FlatList
+          data={relatedNews}
+          render={(item) => <Card.Normal {...item} />}
+        />
+      )}
+      textShare={t('general.share')}
+      textTopic={t('general.keyword')}
+      label={subdivision?.name}
+      {...rest}
+    />
+  );
+};
 
 export default Detail;

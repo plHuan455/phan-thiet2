@@ -12,12 +12,22 @@
     "system_error": "System Error",
     "fail": "Register Fail",
     "contact": "Contact",
-    "more_information": "MORE INFORMATION AT"
-  },
-  "banner": {
+    "more_information": "MORE INFORMATION AT",
     "featured_keywords": "Featured Keywords:",
-    "travel": "Travel",
-    "package_tour": "Package Tour"
+    "keyword": "Keyword",
+    "share": "Share",
+    "house_models": "House models",
+    "news_related": "News Related",
+    "events_related": "Events Related",
+    "latest": "Latest result",
+    "oldest": "Oldest result",
+    "division": "Division",
+    "news": "News",
+    "images": "Images",
+    "document": "Different document",
+    "videos": "Videos",
+    "search_result": "Results found for",
+    "search_placeholder": "Search"
   },
   "form": {
     "contact_name": "NAME",
@@ -43,22 +53,5 @@
     "more": "See more",
     "detail": "See Detail",
     "download": "Download"
-  },
-  "home": {
-    "house_models": "House models"
-  },
-  "search": {
-    "result": "Results found for",
-    "placeholder_filter": "Result latest",
-    "news": "News",
-    "division": "Division",
-    "latest": "Latest",
-    "oldest": "Oldest"
-  },
-  "library": {
-    "news": "News",
-    "images": "Images",
-    "document": "Different document",
-    "videos": "Videos"
   }
 }

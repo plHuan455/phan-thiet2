@@ -1,4 +1,5 @@
 import React, { useRef, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import useAnimation from '../hook/animation';
 
@@ -27,6 +28,7 @@ interface DocumentProps extends SectionBlocks {
 }
 
 const Documents: React.FC<DocumentProps> = ({ documents, blocks }) => {
+  const { t } = useTranslation();
   const documentBlock = getBlockData<DocumentBlocks>('document', blocks);
   const leafRef = useRef<HTMLDivElement>(null);
   const ballonRef = useRef<HTMLDivElement>(null);
@@ -48,7 +50,7 @@ const Documents: React.FC<DocumentProps> = ({ documents, blocks }) => {
         dateTime: getTimePastToCurrent(item.publishedAt),
         target: '_blank',
         url: {
-          text: 'Tải xuống',
+          text: t('button.download'),
           iconName: 'downloadOrange',
           animation: 'download',
         },
@@ -56,7 +58,7 @@ const Documents: React.FC<DocumentProps> = ({ documents, blocks }) => {
       return cardNormals;
     }
     return [];
-  }, [documents]);
+  }, [documents, t]);
 
   if (!documents?.length) return null;
 

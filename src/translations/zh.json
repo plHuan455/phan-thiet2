@@ -12,12 +12,22 @@
     "system_error": "System Error",
     "fail": "Register Fail",
     "contact": "Contact",
-    "more_information": "MORE INFORMATION AT"
-  },
-  "banner": {
+    "more_information": "MORE INFORMATION AT",
     "featured_keywords": "Featured Keywords:",
-    "travel": "Travel",
-    "package_tour": "Package Tour"
+    "keyword": "Keyword",
+    "share": "Share",
+    "house_models": "House models",
+    "news_related": "News Related",
+    "events_related": "Events Related",
+    "latest": "Latest",
+    "oldest": "Oldest",
+    "division": "Division",
+    "news": "News",
+    "images": "Images",
+    "document": "Different document",
+    "videos": "Videos",
+    "search_result": "Results found for",
+    "search_placeholder": "Search"
   },
   "form": {
     "contact_name": "NAME",

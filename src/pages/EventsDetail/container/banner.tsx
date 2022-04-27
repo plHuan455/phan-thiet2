@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import BannerTemplate from 'components/templates/Banner';
 import useKeywords from 'hooks/useKeywords';
+import i18n from 'i18n';
+import FUNCTIONS_LANGUAGE from 'i18n/functions';
+import { useAppSelector } from 'store/hooks';
+import CONSTANTS from 'utils/constants';
 
 interface BannerProps {
   thumbnail?: string
@@ -14,6 +18,13 @@ const Banner: React.FC<BannerProps> = ({
 }) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { language } = i18n;
+  const staticAll = useAppSelector((state) => state.static.static);
+
+  const slugPageNews = useMemo(() => staticAll?.find(
+    (e) => e.templateCode === CONSTANTS.TEMPLATE_CODE.NEW_IMAGE,
+  )?.slug, [staticAll]);
+
   const {
     options, hasNextPage, fetchNextPage, onSubmit,
   } = useKeywords();
@@ -21,8 +32,7 @@ const Banner: React.FC<BannerProps> = ({
   const onSearch = (keyword: string | undefined) => {
     if (!keyword) return;
     onSubmit(keyword);
-    // TODO: get slug from static all later
-    navigate(`/tong-quan-tin-tuc-va-hinh-anh?keyword=${keyword}`);
+    navigate(`${FUNCTIONS_LANGUAGE.languageURL(language)}${slugPageNews}?keyword=${keyword}`);
   };
 
   return (
@@ -41,7 +51,7 @@ const Banner: React.FC<BannerProps> = ({
           keyword: t('banner.featured_keywords'),
           list: [
             {
-              text: t('banner.travel'),
+              text: 'Du lịch',
               href: 'du-lich',
             },
             {
@@ -49,7 +59,7 @@ const Banner: React.FC<BannerProps> = ({
               href: 'the-king-dom',
             },
             {
-              text: t('banner.package_tour'),
+              text: 'Tour trọn gói',
               href: 'tour-tron-goi',
             },
           ],

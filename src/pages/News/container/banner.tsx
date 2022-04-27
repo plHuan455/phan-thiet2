@@ -82,7 +82,7 @@ const Banner: React.FC<Pick<BasePageDataTypes<any>, 'banners' | 'blocks'>> = ({ 
           onSearch,
         }}
         tag={{
-          keyword: t('banner.featuredKeywords'),
+          keyword: t('general.featured_keywords'),
           list: listTag,
         }}
       />

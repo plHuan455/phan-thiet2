@@ -12,12 +12,22 @@
     "system_error": "Lỗi hệ thống",
     "fail": "Đăng ký thất bại",
     "contact": "Liên hệ",
-    "more_information": "THAM KHẢO THÊM TẠI"
-  },
-  "banner": {
+    "more_information": "THAM KHẢO THÊM TẠI",
     "featured_keywords": "Từ khóa nổi bật:",
-    "travel": "Du lịch",
-    "package_tour": "Tour trọn gói"
+    "keyword": "Từ khoá",
+    "share": "Chia sẻ",
+    "house_models": "Các mẫu nhà",
+    "news_related": "Các Tin tức liên quan",
+    "events_related": "Các sự kiện liên quan",
+    "latest": "Kết quả mới nhất",
+    "oldest": "Kết quả cũ nhất",
+    "division": "Phân Khu",
+    "news": "Tin tức",
+    "images": "Hình ảnh",
+    "document": "Tài liệu khác",
+    "videos": "Videos",
+    "search_result": "kết quả tìm thấy cho",
+    "search_placeholder": "Tìm kiếm"
   },
   "form": {
     "contact_name": "HỌ VÀ TÊN",
@@ -43,22 +53,5 @@
     "more": "Xem thêm",
     "detail": "Xem Chi Tiết",
     "download": "Tải xuống"
-  },
-  "home": {
-    "house_models": "Các mẫu nhà"
-  },
-  "search": {
-    "result": "kết quả tìm thấy cho",
-    "placeholder_filter": "Kết quả mới nhất",
-    "news": "Tin tức",
-    "division": "Phân Khu",
-    "latest": "Mới nhất",
-    "oldest": "Cũ nhất"
-  },
-  "library": {
-    "news": "Tin tức",
-    "images": "Hình ảnh",
-    "document": "Tài liệu khác",
-    "videos": "Videos"
   }
 }

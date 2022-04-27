@@ -42,11 +42,11 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
   const dataTabList = [
     {
       slug: 'tin-tuc',
-      label: t('search.news'),
+      label: t('general.news'),
     },
     {
       slug: 'phan-khu',
-      label: t('search.division'),
+      label: t('general.division'),
     },
   ];
 
@@ -54,12 +54,12 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
     {
       id: '1',
       value: 'newest',
-      label: t('search.latest'),
+      label: t('general.latest'),
     },
     {
       id: '2',
       value: 'oldest',
-      label: t('search.oldest'),
+      label: t('general.oldest'),
     },
   ], [t]);
 
@@ -150,7 +150,7 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
         dateTime: getTimePastToCurrent(item.publishedAt),
         tag: {
           text: item.subdivision?.name,
-          url: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item.slug}`,
+          url: redirectURL(CONSTANTS.PREFIX.DIVISION, item.slug, language),
         },
         url: {
           text: t('button.more'),
@@ -158,7 +158,7 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
           animation: 'arrow',
         },
       })),
-    [newsData?.pages, t],
+    [newsData?.pages, language, t],
   );
   // End - Get News
 
@@ -224,9 +224,9 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
       <SearchResult.Wrapper titleMain={pageData.title}>
         <SearchResult.Summary
           value={searchKeyValue}
-          placeholder={t('search.placeholderSearch')}
+          placeholder={t('general.search_placeholder')}
           searchText={{
-            text: t('search.result'),
+            text: t('general.search_result'),
             length: lengthItem,
             value: search,
           }}
@@ -242,7 +242,6 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
           filter={{
             options: optionSort,
             value: currentValueSort,
-            placeholder: t('search.placeholderFilter'),
             onFilter: handleSort,
           }}
         />
@@ -256,7 +255,7 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
         )}
         {tabActive === 'tin-tuc' && !newsList?.length && (
           <div className="u-mt-24">
-            <Text modifiers={['14x20', 'raisinBlack', '400', 'center']} content={t('general.noData')} />
+            <Text modifiers={['14x20', 'raisinBlack', '400', 'center']} content={t('general.not_found_data')} />
           </div>
         )}
         {tabActive === 'phan-khu' && (
@@ -269,7 +268,7 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
         )}
         {tabActive === 'phan-khu' && !subdivisionList?.length && (
           <div className="u-mt-24">
-            <Text modifiers={['14x20', 'raisinBlack', '400', 'center']} content={t('general.noData')} />
+            <Text modifiers={['14x20', 'raisinBlack', '400', 'center']} content={t('general.not_found_data')} />
           </div>
         )}
 
