@@ -62,6 +62,8 @@ export type SubdivisionCollectionTypes = Title;
 export type SubdivisionUtilityTypes = Title;
 export type SubdivisionUtilityMapTypes = {
   image: string;
+  imageHeight: string;
+  imageWidth: string;
   items: {
     color: string;
     image: string;
