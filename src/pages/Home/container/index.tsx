@@ -19,7 +19,6 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
   blocks, banners,
 }) => (
   <>
-    {/* TODO: Add banner later */}
     <Banner banners={banners} blocks={blocks} />
     <Position blocks={blocks} />
     <Selection blocks={blocks} />
