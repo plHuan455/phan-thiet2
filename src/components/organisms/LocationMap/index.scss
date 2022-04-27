@@ -106,8 +106,8 @@
       left: 50%;
       pointer-events: none;
       position: absolute;
-      top: 70%;
-      transform: translate(-50%, -30%);
+      top: 80%;
+      transform: translate(-50%, -20%);
     }
   }
 
@@ -119,17 +119,18 @@
         animation: 0;
 
         .a-image {
+          transform-origin: bottom center;
           transform: scale(1.5);
         }
 
         &-circle {
           animation: rippleMaker 1.5s ease-in-out infinite backwards;
-          transform: translate(-50%, 65%) scale(1.5);
+          transform: translate(-50%, -20%) scale(1.5);
           @include tablet-down {
-            transform: translate(-50%, 65%) scale(1.25);
+            transform: translate(-50%, -20%) scale(1.25);
           }
           @include small-mobile {
-            transform: translate(-50%, 10%);
+            transform: translate(-50%, -10%);
           }
         }
       }

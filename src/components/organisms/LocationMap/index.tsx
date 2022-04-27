@@ -16,8 +16,8 @@ interface LocationMapProps {
   thumbnail?: string;
 }
 
-const WIDTH_IMAGE = 1126;
-const HEIGHT_IMAGE = 656;
+const WIDTH_IMAGE = 1127;
+const HEIGHT_IMAGE = 654;
 
 const LocationMap: React.FC<LocationMapProps> = ({
   listDivision,
@@ -37,8 +37,8 @@ const LocationMap: React.FC<LocationMapProps> = ({
             key={`t-projectMap_listDivision-${index.toString()}`}
             className="t-projectMap_listDivision-item"
             style={{
-              top: `calc(${item.y} / ${HEIGHT_IMAGE} * 100%)`,
-              left: `calc(${item.x} / ${WIDTH_IMAGE} * 100%)`,
+              top: `calc(${item.y} / ${HEIGHT_IMAGE} * 100% - 30px)`,
+              left: `calc(${item.x} / ${WIDTH_IMAGE} * 100% - 15px)`,
             }}
           >
             <MarkerCard
