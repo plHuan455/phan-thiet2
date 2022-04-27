@@ -13,7 +13,7 @@ import useDebounceInput from './useDebounceInput';
 import i18n from 'i18n';
 import getKeywordService, { postKeywordService } from 'services/keyword';
 
-const useKeywords = (searchValue?: string) => {
+const useKeywords = (searchValue?: string, isPopular?: number) => {
   const { executeRecaptcha } = useGoogleReCaptcha();
   const { language } = i18n;
   const searchDebounceValue = useDebounceInput(searchValue, 1000);
@@ -21,10 +21,11 @@ const useKeywords = (searchValue?: string) => {
   const {
     data: keywords,
     isFetching: isFetchingKeywords,
-  } = useQuery(['GetKeywords', [searchDebounceValue]], () => getKeywordService({
+  } = useQuery(['GetKeywords', [searchDebounceValue, isPopular]], () => getKeywordService({
     keyword: baseString(searchDebounceValue),
     limit: 15,
     page: 1,
+    is_popular: isPopular,
   }));
 
   const options = useMemo(() => keywords?.data?.map((e) => ({

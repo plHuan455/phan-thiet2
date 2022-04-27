@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import Icon from 'components/atoms/Icon';
 import Text from 'components/atoms/Text';
-import mapModifiers, { removeAccents } from 'utils/functions';
+import mapModifiers from 'utils/functions';
 
 export interface OptionSuggestTypes {
   id: string;
@@ -39,18 +39,18 @@ const Search: React.FC<SearchProps> = ({
     if (onChange) {
       onChange(event.target.value);
     }
-    const cloneOptions = [...options];
-    let newOptions;
-    if (value) {
-      newOptions = cloneOptions.filter(
-        (item) => removeAccents(item.keyword)
-          .toLocaleLowerCase()
-          .includes(removeAccents(value.toLocaleLowerCase())),
-      );
-    } else {
-      newOptions = list;
-    }
-    setOptions(newOptions);
+    // const cloneOptions = [...options];
+    // let newOptions;
+    // if (event.target.value) {
+    //   newOptions = cloneOptions.filter(
+    //     (item) => removeAccents(item.keyword)
+    //       .toLocaleLowerCase()
+    //       .includes(removeAccents(event.target.value.toLocaleLowerCase())),
+    //   );
+    // } else {
+    //   newOptions = list;
+    // }
+    // setOptions(newOptions);
   };
 
   const onKeyDown = useCallback(
