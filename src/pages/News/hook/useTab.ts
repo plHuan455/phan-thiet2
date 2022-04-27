@@ -33,7 +33,7 @@ const useTab = ({ data, blocks } : MenuNewsProps) => {
 
   const menuList = useMemo(() => ([
     {
-      label: baseString(newsBlocks?.title), // TODO: translation later
+      label: baseString(newsBlocks?.title),
       value: 'tin-tuc',
       ref: refNews,
       active: !!data?.news?.length,

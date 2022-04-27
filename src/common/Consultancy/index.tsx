@@ -1,5 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
+import { t } from 'i18next';
 import React, { useMemo } from 'react';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { useForm } from 'react-hook-form';
@@ -108,17 +109,17 @@ const Consultancy: React.FC<ConsultancyCommonProps> = ({
         handleSubmit: consultancyExecute,
         variantButton,
         consultancyInfo: {
-          placeholderName: 'Họ và tên',
-          placeholderPhone: 'Số điện thoại *',
-          placeholderEmail: 'Email *',
-          placeholderAddress: 'Địa chỉ',
-          placeholderContent: 'Nội dung',
+          placeholderName: t('form.name'),
+          placeholderPhone: `${t('form.phone')}*`,
+          placeholderEmail: `${t('form.email')}*`,
+          placeholderAddress: t('form.address'),
+          placeholderContent: t('form.content'),
           checkbox: {
-            label: 'Sản phẩm quan tâm: ',
-            subLabel: '(Câu hỏi không bắt buộc)',
+            label: t('form.interest'),
+            subLabel: t('form.option'),
             list: topicsList,
           },
-          btnText: 'Đăng ký nhận thông tin',
+          btnText: t('form.register'),
         },
       }}
     />

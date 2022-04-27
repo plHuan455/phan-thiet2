@@ -1,10 +1,31 @@
 {
+  "general": {
+    "not_found_data": "Không tìm thấy dữ liệu",
+    "seeMore": "Xem thêm",
+    "day": "Ngày",
+    "hours": "Giờ",
+    "min": "Phút",
+    "sec": "Giây",
+    "success": "Đăng ký thành công",
+    "confirm": "Xác nhận",
+    "messageSuccess": "Cảm ơn Quý Khách đã nhận thông tin dự án NovaWorld Phan Thiet. Novaland sẽ liên hệ trong thời gian sớm nhất.",
+    "tryAgain": "Vui lòng thử lại",
+    "systemError": "Lỗi hệ thống",
+    "fail": "Đăng ký thất bại"
+  },
+  "banner": {
+    "featuredKeywords": "Từ khóa nổi bật:",
+    "travel": "Du lịch",
+    "packageTour": "Tour trọn gói"
+  },
   "form": {
     "name": "HỌ VÀ TÊN",
     "address": "ĐỊA CHỈ",
     "phone": "ĐIỆN THOẠI",
     "email": "EMAIL",
-    "content": "NỘI DUNG"
+    "content": "NỘI DUNG",
+    "interest": "Sản phẩm quan tâm: ",
+    "option": "(Câu hỏi không bắt buộc)"
   },
   "button": {
     "register": "Đăng ký nhận thông tin",
@@ -12,10 +33,16 @@
     "more": "Xem thêm",
     "detail": "Xem Chi Tiết"
   },
-  "general": {
-    "not_found_data": "Không tìm thấy dữ liệu"
-  },
   "home": {
-    "house_models": "Các mẫu nhà"
+    "house_models": "Các mẫu nhà",
+  },
+  "search": {
+    "placeholderSearch": "Tìm kiếm",
+    "result": "kết quả tìm thấy cho",
+    "placeholderFilter": "Kết quả mới nhất",
+    "news": "Tin tức",
+    "division": "Phân Khu",
+    "latest": "Mới nhất",
+    "oldest": "Cũ nhất"
   }
 }

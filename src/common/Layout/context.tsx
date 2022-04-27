@@ -1,6 +1,7 @@
 import React, {
   createContext, useCallback, useMemo, useState,
 } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 
@@ -37,6 +38,7 @@ export const LayoutContext = createContext<LayoutContextResponse>({
 
 const LayoutProvider: React.FC = ({ children }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const dataSystems = useAppSelector((state) => state.system.data);
   const staticAll = useAppSelector((state) => state.static.static);
@@ -114,7 +116,7 @@ const LayoutProvider: React.FC = ({ children }) => {
   const footer = useMemo((): FooterProps => ({
     logo: baseURL(dataSystems?.logoFooter) || '',
     subMenu: menuTermFooter,
-    copyRightTitle: '@2021. Bản quyền thuộc về Tập đoàn Novaland (Việt Nam). Tất cả các quyền bảo hộ.',
+    copyRightTitle: t('footer.copyright'),
     menuList: {
       title: mainFooter[0],
       list: mainFooter[0]?.subMenu || [],

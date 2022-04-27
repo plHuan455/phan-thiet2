@@ -81,23 +81,22 @@ const Form: React.FC<SectionBlocks> = ({ blocks }) => {
       onSuccess: () => {
         const notifyProps: NotifyProps = {
           isOpen: true,
-          title: 'Đăng ký thành công',
-          message:
-            'Cảm ơn Quý Khách đã nhận thông tin dự án NovaWorld Phan Thiet. Novaland sẽ liên hệ trong thời gian sớm nhất.',
-          btnText: 'Xác nhận',
+          title: t('general.success'),
+          message: t('general.messageSuccess'),
+          btnText: t('general.confirm'),
         };
         dispatch(updateNotifyProps(notifyProps));
       },
       onFailed: (err) => {
-        let message = 'Vui lòng thử lại';
+        let message = t('general.tryAgain');
         if (axios.isAxiosError(err) && err?.response?.status === 500) {
-          message = 'Lỗi hệ thống';
+          message = t('general.systemError');
         }
         const notifyProps: NotifyProps = {
           isOpen: true,
-          title: 'Đăng ký thất bại',
+          title: t('general.fail'),
           message,
-          btnText: 'Xác nhận',
+          btnText: t('general.confirm'),
         };
         dispatch(updateNotifyProps(notifyProps));
       },

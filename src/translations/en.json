@@ -1,21 +1,48 @@
 {
+  "general": {
+    "not_found_data": "Not found data",
+    "seeMore": "Show more",
+    "day": "Day",
+    "hours": "Hours",
+    "min": "Min",
+    "sec": "Sec",
+    "success": "Register Success",
+    "confirm": "Confirm",
+    "messageSuccess": "Thank you for receiving information about NovaWorld Phan Thiet project. Novaland will contact you as soon as possible.",
+    "tryAgain": "Try Again",
+    "systemError": "System Error",
+    "fail": "Register Fail"
+  },
+  "banner": {
+    "featuredKeywords": "Featured Keywords:",
+    "travel": "Travel",
+    "packageTour": "Package Tour"
+  },
   "form": {
     "name": "HỌ VÀ TÊN EN",
     "address": "ĐỊA CHỈ EN",
     "phone": "ĐIỆN THOẠI EN",
     "email": "EMAIL EN",
-    "content": "NỘI DUNG EN"
+    "content": "NỘI DUNG EN",
+    "interest": "Products of interest: ",
+    "option": "(Optional question)"
   },
   "button": {
-    "register": "Đăng ký nhận thông tin EN",
+    "register": "Sign up to receive information",
     "visiting_houses": "Tham quan các mẫu nhà EN",
     "more": "Xem thêm EN",
     "detail": "Xem Chi Tiết EN"
   },
-  "general": {
-    "not_found_data": "Không tìm thấy dữ liệu EN"
-  },
   "home": {
     "house_models": "Các mẫu nhà EN"
-  }
+  },
+  "search": {
+    "placeholderSearch": "Search",
+    "result": "Results found for",
+    "placeholderFilter": "Result latest",
+    "news": "News",
+    "division": "Division",
+    "latest": "Latest",
+    "oldest": "Oldest"
+  },
 }

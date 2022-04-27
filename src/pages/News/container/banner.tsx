@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
 import { useParams, useSearchParams } from 'react-router-dom';
 
@@ -23,6 +24,7 @@ const Banner: React.FC<Pick<BasePageDataTypes<any>, 'banners' | 'blocks'>> = ({ 
     () => getAllHashtagListService({ in_overview: 1 }),
   );
 
+  const { t } = useTranslation();
   const bannerData = useMemo(() => {
     const banner = getBannerData('basic', banners);
     return ({
@@ -80,8 +82,7 @@ const Banner: React.FC<Pick<BasePageDataTypes<any>, 'banners' | 'blocks'>> = ({ 
           onSearch,
         }}
         tag={{
-          // TODO: translate later
-          keyword: 'Từ khóa nổi bật:',
+          keyword: t('banner.featuredKeywords'),
           list: listTag,
         }}
       />

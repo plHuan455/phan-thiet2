@@ -5,6 +5,7 @@ import React, {
   useState,
   useEffect,
 } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useInfiniteQuery } from 'react-query';
 import { useSearchParams } from 'react-router-dom';
 import { animated } from 'react-spring';
@@ -32,31 +33,33 @@ import {
   getTimePastToCurrent,
 } from 'utils/functions';
 
-const dataTabList = [
-  {
-    slug: 'tin-tuc',
-    label: 'Tin tức',
-  },
-  {
-    slug: 'phan-khu',
-    label: 'Phân Khu',
-  },
-];
-
-const optionSort = [
-  {
-    id: '1',
-    value: 'newest',
-    label: 'Mới nhất',
-  },
-  {
-    id: '2',
-    value: 'oldest',
-    label: 'Cũ nhất',
-  },
-];
-
 const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
+  const { t } = useTranslation();
+
+  const dataTabList = [
+    {
+      slug: 'tin-tuc',
+      label: t('search.news'),
+    },
+    {
+      slug: 'phan-khu',
+      label: t('search.division'),
+    },
+  ];
+
+  const optionSort = useMemo(() => [
+    {
+      id: '1',
+      value: 'newest',
+      label: t('search.latest'),
+    },
+    {
+      id: '2',
+      value: 'oldest',
+      label: t('search.oldest'),
+    },
+  ], [t]);
+
   const [tabActive, setTabActive] = useState<string | undefined>(
     dataTabList[0].slug,
   );
@@ -74,6 +77,7 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
   ]);
   const sortParams = useMemo(
     () => searchParams.get('sort') || optionSort[0].value,
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [searchParams],
   );
 
@@ -109,6 +113,7 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
     if (sortItem) {
       setCurrentValueSort(sortItem);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortParams]);
 
   // Get News
@@ -145,12 +150,12 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
           url: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item.slug}`,
         },
         url: {
-          text: 'Xem thêm',
+          text: t('general.seeMore'),
           iconName: 'arrowRightCopper',
           animation: 'arrow',
         },
       })),
-    [newsData?.pages],
+    [newsData?.pages, t],
   );
   // End - Get News
 
@@ -200,8 +205,6 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
     [tabActive, newsList, subdivisionList],
   );
 
-  // TODO: translate later
-
   return (
     <>
       <HelmetContainer seoData={seoData} ogData={getOgDataPage(pageData)} />
@@ -216,12 +219,12 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
         </div>
       </animated.div>
 
-      <SearchResult.Wrapper titleMain="Tìm kiếm">
+      <SearchResult.Wrapper titleMain={pageData.title}>
         <SearchResult.Summary
           value={searchKeyValue}
-          placeholder="Tìm kiếm"
+          placeholder={t('search.placeholderSearch')}
           searchText={{
-            text: 'kết quả tìm thấy cho',
+            text: t('search.result'),
             length: lengthItem,
             value: search,
           }}
@@ -237,7 +240,7 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
           filter={{
             options: optionSort,
             value: currentValueSort,
-            placeholder: 'Kết quả mới nhất',
+            placeholder: t('search.placeholderFilter'),
             onFilter: handleSort,
           }}
         />
@@ -251,9 +254,7 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
         )}
         {tabActive === 'tin-tuc' && !newsList?.length && (
           <div className="u-mt-24">
-            <Text modifiers={['14x20', 'raisinBlack', '400', 'center']}>
-              Không có dữ liệu
-            </Text>
+            <Text modifiers={['14x20', 'raisinBlack', '400', 'center']} content={t('general.noData')} />
           </div>
         )}
         {tabActive === 'phan-khu' && (
@@ -266,9 +267,7 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
         )}
         {tabActive === 'phan-khu' && !subdivisionList?.length && (
           <div className="u-mt-24">
-            <Text modifiers={['14x20', 'raisinBlack', '400', 'center']}>
-              Không có dữ liệu
-            </Text>
+            <Text modifiers={['14x20', 'raisinBlack', '400', 'center']} content={t('general.noData')} />
           </div>
         )}
 
