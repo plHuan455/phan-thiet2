@@ -192,18 +192,6 @@ export function formatNumber(countNumber: number) {
   return value.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.');
 }
 
-export const imageLoader = (url: string) => new Promise<HTMLImageElement>((resolve, reject) => {
-  const img = new Image();
-  img.crossOrigin = 'anonymous';
-  img.onload = () => {
-    resolve(img);
-  };
-  img.onerror = (err) => {
-    reject(err);
-  };
-  img.src = url;
-});
-
 export const removeAccents = (text?:string) => {
   if (!text) return '';
   return text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');

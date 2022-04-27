@@ -47,8 +47,8 @@ const DivisionUtilities: React.FC<DivisionUtilitiesProps> = ({
                 className={`t-divisionUtilities_item ${animate && 'animate animate-dropdown'} 
                 ${active === item.id && 't-divisionUtilities_item-active'}`}
                 style={{
-                  top: `calc(${item.y} / ${heightImage} * 100%)`,
-                  left: `calc(${item.x} / ${widthImage} * 100%)`,
+                  top: `calc(${item.y} / ${heightImage} * 100% - 15px)`,
+                  left: `calc(${item.x} / ${widthImage} * 100% - 15px)`,
                 }}
               >
                 <MarkerCard
