@@ -1,9 +1,8 @@
 import React, { useMemo } from 'react';
 
-import srcBanner from 'assets/images/bannerHome/banner_home.jpg';
 import fly from 'assets/images/bannerHome/fly.png';
 import BannerHome from 'components/templates/BannerHome';
-import { baseURL, getBlockData } from 'utils/functions';
+import { baseURL, getBannerData, getBlockData } from 'utils/functions';
 
 export interface BannerBlocks extends SectionBlocks {
   banners: BannersDataTypes[];
@@ -23,10 +22,20 @@ interface BannerProps {
 }
 
 const Banner: React.FC<BannerBlocks> = ({
-  // banners ,
+  banners,
   blocks,
 }) => {
   const bannerBlocks = getBlockData<BannerProps>('utilities', blocks);
+  const bannerData = useMemo(() => {
+    const banner = getBannerData('basic', banners);
+    return ({
+      src: baseURL(banner?.imageDesktop),
+      srcTablet: baseURL(banner?.imageTablet),
+      srcMobile: baseURL(banner?.imageMobile),
+      alt: banner?.title,
+    });
+  }, [banners]);
+
   const utilitiesBlockContent = useMemo(() => {
     const data: (BannerItemProps & {srcLayer?: string})[] = [
       { ...bannerBlocks?.item1 },
@@ -46,9 +55,7 @@ const Banner: React.FC<BannerBlocks> = ({
     <BannerHome
       description={bannerBlocks?.content}
       list={utilitiesBlockContent}
-      banner={{
-        src: srcBanner,
-      }}
+      banner={bannerData}
     />
   );
 };
