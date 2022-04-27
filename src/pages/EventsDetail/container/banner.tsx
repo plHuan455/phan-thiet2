@@ -48,7 +48,7 @@ const Banner: React.FC<BannerProps> = ({
           onSearch,
         }}
         tag={{
-          keyword: t('banner.featured_keywords'),
+          keyword: t('general.featured_keywords'),
           list: [
             {
               text: 'Du lịch',

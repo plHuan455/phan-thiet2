@@ -131,7 +131,7 @@ const HeaderDivision: React.FC<HeaderDivisionProps> = ({
               <Heading type="h2" modifiers={['700', 'uppercase', 'center', 'white']}>
                 {t('form.search')}
               </Heading>
-              <Search placeholder="Tìm kiếm nội dung" onSearch={onSearch} />
+              <Search placeholder={t('form.search_content')} onSearch={onSearch} />
             </div>
           </div>
           <div className="t-headerDivision_wrap">
