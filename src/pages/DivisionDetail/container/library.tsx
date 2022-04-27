@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import React, {
-  useState, useEffect, useReducer, useRef,
+  useState, useEffect, useReducer, useRef, useMemo,
 } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -85,20 +85,20 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId, color }) => {
     (e) => e.templateCode === CONSTANTS.TEMPLATE_CODE.NEW_IMAGE,
   )?.slug;
 
-  const dummyData = [
-    {
-      label: t('library.news'),
-    },
-    {
-      label: t('library.images'),
-    },
-    {
-      label: 'Video',
-    },
-    {
-      label: t('library.document'),
-    },
-  ];
+  const dummyData = useMemo(() => [{
+    label: t('library.news'),
+  },
+  {
+    label: t('library.images'),
+  },
+  {
+    label: 'Video',
+  },
+  {
+    label: t('library.document'),
+  },
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  ], [language]);
 
   const settingRef = useRef({
     prevArrow: <Arrow.Prev />,
