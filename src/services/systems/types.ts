@@ -40,6 +40,7 @@ export type SystemsData = {
     icon?: string;
     link?: LinkTypes;
   }[];
+  copyright: string;
 };
 
 export interface RedirectsTypes {
