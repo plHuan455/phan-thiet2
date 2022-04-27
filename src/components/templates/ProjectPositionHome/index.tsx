@@ -1,5 +1,5 @@
 import React, {
-  useCallback, useEffect, useRef, useState,
+  useEffect, useRef, useState,
 } from 'react';
 
 import useAnimation from './hooks/animation';
@@ -63,14 +63,6 @@ const ProjectPositionHome: React.FC<ProjectPositionHomeProps> = ({
 }) => {
   const [active, setActive] = useState<number>();
 
-  const handleLeave = useCallback(() => {
-    if (listDivision?.length) {
-      listDivision.forEach((item) => item.active && setActive(item.id));
-    } else {
-      setActive(undefined);
-    }
-  }, [listDivision]);
-
   useEffect(() => {
     if (listDivision) {
       listDivision.forEach((item) => item.active && setActive(item.id));
@@ -97,7 +89,6 @@ const ProjectPositionHome: React.FC<ProjectPositionHomeProps> = ({
               listDivision={listDivision}
               active={active}
               handleHover={(id) => setActive(id)}
-              handleLeave={handleLeave}
               thumbnail={thumbnail}
             />
           </Animate>
