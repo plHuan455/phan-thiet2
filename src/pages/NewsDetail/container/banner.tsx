@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -17,10 +19,8 @@ export interface BannerProps {
 const Banner: React.FC<BannerProps> = ({ thumbnail }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-
   const { language } = i18n;
   const staticAll = useAppSelector((state) => state.static.static);
-
   const slugPageNews = useMemo(() => staticAll?.find(
     (e) => e.templateCode === CONSTANTS.TEMPLATE_CODE.NEW_IMAGE,
   )?.slug, [staticAll]);
@@ -28,7 +28,7 @@ const Banner: React.FC<BannerProps> = ({ thumbnail }) => {
   const blockBanner = useMemo(() => baseURL(thumbnail), [thumbnail]);
 
   const {
-    options, hasNextPage, fetchNextPage, onSubmit,
+    options, onSubmit,
   } = useKeywords();
 
   const onSearch = (keyword: string | undefined) => {
@@ -42,10 +42,10 @@ const Banner: React.FC<BannerProps> = ({ thumbnail }) => {
       <BannerTemplate
         image={{ src: blockBanner }}
         isLayer
-        onLoadMore={() => hasNextPage && fetchNextPage()}
-        optionSuggest={options}
-        isSuggest={!!options?.length}
+        // onLoadMore={() => hasNextPage && fetchNextPage()}
+        // isSuggest={!!options?.length}
         search={{
+          list: options,
           placeholder: t('form.search_news'),
           onSearch,
         }}

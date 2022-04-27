@@ -83,22 +83,22 @@ const Library: React.FC<LibraryProps> = ({
 
   const staticAll = useAppSelector((state) => state.static.static);
 
-  const slugPageNews = staticAll?.find(
+  const slugPageNews = useMemo(() => staticAll?.find(
     (e) => e.templateCode === CONSTANTS.TEMPLATE_CODE.NEW_IMAGE,
-  )?.slug;
+  )?.slug, [staticAll]);
 
   const dummyData = useMemo(() => [
     {
-      label: t('library.news'),
+      label: t('general.news'),
     },
     {
-      label: t('library.images'),
+      label: t('general.images'),
     },
     {
-      label: t('library.videos'),
+      label: t('general.videos'),
     },
     {
-      label: t('library.document'),
+      label: t('general.document'),
     },
   ], [t]);
 

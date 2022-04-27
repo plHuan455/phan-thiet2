@@ -127,14 +127,16 @@
         }
 
         li {
-          cursor: pointer;
           padding: rem(6) rem(4);
-
-          &:hover {
-            background: $gradient-green;
-
-            .a-text {
-              color: $white;
+          
+          &:not(.empty) {
+            cursor: pointer;
+            &:hover {
+              background: $gradient-green;
+  
+              .a-text {
+                color: $white;
+              }
             }
           }
         }

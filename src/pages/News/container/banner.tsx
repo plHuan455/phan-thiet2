@@ -1,4 +1,6 @@
-import React, { useMemo } from 'react';
+import React, {
+  useCallback, useEffect, useMemo, useState,
+} from 'react';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
 import { useParams, useSearchParams } from 'react-router-dom';
@@ -15,8 +17,14 @@ interface NewsSearch {
 }
 
 const Banner: React.FC<Pick<BasePageDataTypes<any>, 'banners' | 'blocks'>> = ({ banners, blocks }) => {
+  const { t } = useTranslation();
   const { language } = i18n;
+  const [searchParams, setSearchParams] = useSearchParams();
+  const keywordParams = useMemo(() => searchParams.get('keyword') || '', [
+    searchParams,
+  ]);
   const { slug } = useParams<{slug:string}>();
+  const [searchValue, setSearchValue] = useState<string | undefined>(keywordParams);
   const {
     data: dataTag,
   } = useQuery(
@@ -24,7 +32,6 @@ const Banner: React.FC<Pick<BasePageDataTypes<any>, 'banners' | 'blocks'>> = ({ 
     () => getAllHashtagListService({ in_overview: 1 }),
   );
 
-  const { t } = useTranslation();
   const bannerData = useMemo(() => {
     const banner = getBannerData('basic', banners);
     return ({
@@ -44,15 +51,13 @@ const Banner: React.FC<Pick<BasePageDataTypes<any>, 'banners' | 'blocks'>> = ({ 
     });
   }, [blocks]);
 
-  const {
-    options, hasNextPage, fetchNextPage, onSubmit,
-  } = useKeywords();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const keywordParams = useMemo(() => searchParams.get('keyword') || '', [
-    searchParams,
-  ]);
+  const { options, onSubmit, isLoading } = useKeywords(searchValue);
 
-  const onSearch = (keyword: string | undefined) => {
+  useEffect(() => {
+    setSearchValue(keywordParams);
+  }, [keywordParams]);
+
+  const onSearch = useCallback((keyword: string | undefined) => {
     if (keyword) {
       onSubmit(keyword);
       searchParams.set('keyword', keyword);
@@ -61,7 +66,11 @@ const Banner: React.FC<Pick<BasePageDataTypes<any>, 'banners' | 'blocks'>> = ({ 
       searchParams.delete('keyword');
       setSearchParams(searchParams);
     }
-  };
+  }, [onSubmit, searchParams, setSearchParams]);
+
+  const onChangSearch = useCallback((keyword: string| undefined) => {
+    setSearchValue(keyword);
+  }, []);
 
   const listTag = useMemo(() => dataTag?.map(((x) => ({
     text: x.name,
@@ -73,13 +82,13 @@ const Banner: React.FC<Pick<BasePageDataTypes<any>, 'banners' | 'blocks'>> = ({ 
       <BannerTemplate
         image={bannerData.image}
         isLayer
-        onLoadMore={() => hasNextPage && fetchNextPage()}
-        isSuggest={!!options?.length}
-        optionSuggest={options}
         search={{
+          list: options,
           placeholder: newsSearchData?.placeholder,
-          value: keywordParams,
+          value: searchValue,
+          loading: isLoading,
           onSearch,
+          onChange: onChangSearch,
         }}
         tag={{
           keyword: t('general.featured_keywords'),
