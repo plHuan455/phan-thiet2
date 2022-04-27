@@ -1,6 +1,7 @@
 import React, {
   useCallback, useMemo, useRef, useState,
 } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 
 import Container from 'common/Container';
@@ -34,6 +35,7 @@ const Header: React.FC<HeaderProps> = ({
   handleSearch,
 }) => {
   const { pathname } = useLocation();
+  const { t } = useTranslation();
 
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenSearch, setIsOpenSearch] = useState(false);
@@ -106,12 +108,9 @@ const Header: React.FC<HeaderProps> = ({
             </button>
             <div className="t-header_layer-search_content">
               <Heading type="h2" modifiers={['700', 'uppercase', 'center', 'white']}>
-                Tìm kiếm
+                {t('form.search')}
               </Heading>
-              <Search
-                placeholder="Tìm kiếm nội dung"
-                onSearch={onSearch}
-              />
+              <Search placeholder={t('form.search_content')} onSearch={onSearch} />
             </div>
           </div>
           <div className="t-header_wrap">
