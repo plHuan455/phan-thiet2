@@ -11,7 +11,7 @@ import Image from 'components/atoms/Image';
 import NewsList from 'components/templates/NewsList';
 import useScrollAnimate from 'hooks/useScrollAnimation';
 import i18n from 'i18n';
-import { OverviewNewsType } from 'services/overviews/types';
+import { OverviewNewsType, PaginationOverview } from 'services/overviews/types';
 import CONSTANTS from 'utils/constants';
 import {
   baseURL, getBlockData, getTimePastToCurrent, redirectURL,
@@ -23,7 +23,7 @@ interface NewsBlocks {
 }
 
 interface NewsProps extends SectionBlocks {
-  news?: OverviewNewsType[];
+  news?: PaginationOverview<OverviewNewsType>;
 }
 
 export const AnimationNews = React.memo(() => {
@@ -70,40 +70,35 @@ const News: React.FC<NewsProps> = ({ news, blocks }) => {
   const newsBlocks = getBlockData<NewsBlocks>('news', blocks);
   const { language } = i18n;
 
-  const dataNews = useMemo(() => {
-    if (Array.isArray(news)) {
-      return news.map((item) => ({
-        thumbnail: baseURL(item.thumbnail),
-        dateTime: getTimePastToCurrent(item.publishedAt),
-        tag: item?.subdivision ? {
-          text: item?.subdivision?.name,
-          url: redirectURL(CONSTANTS.PREFIX.DIVISION, item?.subdivision?.slug, language),
-        } : undefined,
-        button: {
-          text: newsBlocks?.button,
-          url: redirectURL(CONSTANTS.PREFIX.NEWS, item.slug, language),
-        },
-        title: item.title,
-        description: item.description,
-      }));
-    }
-    return [];
-  }, [language, news, newsBlocks]);
+  const dataNews = useMemo(() => news?.data.map((item) => ({
+    thumbnail: baseURL(item.thumbnail),
+    dateTime: getTimePastToCurrent(item.publishedAt),
+    tag: item?.subdivision ? {
+      text: item?.subdivision?.name,
+      url: redirectURL(CONSTANTS.PREFIX.DIVISION, item?.subdivision?.slug, language),
+    } : undefined,
+    button: {
+      text: newsBlocks?.button,
+      url: redirectURL(CONSTANTS.PREFIX.NEWS, item.slug, language),
+    },
+    title: item.title,
+    description: item.description,
+  })) || [], [language, news?.data, newsBlocks]);
 
-  if (!news?.length) return null;
+  if (!news?.data.length) return null;
 
   return (
     <Section>
       <div className="s-news">
         <NewsList title={newsBlocks?.title} listNews={dataNews} />
-        {news && news?.length > 0 && <AnimationNews />}
+        {!!news?.data.length && <AnimationNews />}
       </div>
     </Section>
   );
 };
 
 News.defaultProps = {
-  news: [],
+  news: undefined,
 };
 
 export default React.memo(News);

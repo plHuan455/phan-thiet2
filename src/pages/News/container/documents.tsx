@@ -13,7 +13,7 @@ import Image from 'components/atoms/Image';
 import Card from 'components/organisms/Card';
 import { CardNormalProps } from 'components/organisms/Card/Normal';
 import useScrollAnimate from 'hooks/useScrollAnimation';
-import { OverviewDocumentType } from 'services/overviews/types';
+import { OverviewDocumentType, PaginationOverview } from 'services/overviews/types';
 import CONSTANTS from 'utils/constants';
 import {
   linkURL, getTimePastToCurrent, getBlockData, baseString, baseURL,
@@ -24,7 +24,7 @@ interface DocumentBlocks {
 }
 
 interface DocumentProps extends SectionBlocks {
-  documents?: OverviewDocumentType[];
+  documents?: PaginationOverview<OverviewDocumentType>;
 }
 
 const Documents: React.FC<DocumentProps> = ({ documents, blocks }) => {
@@ -37,30 +37,25 @@ const Documents: React.FC<DocumentProps> = ({ documents, blocks }) => {
   const {
     animated, ballonAnimate, slideReverseAnimate,
   } = useAnimation();
-  const documentList = useMemo(() => {
-    if (Array.isArray(documents)) {
-      const cardNormals: CardNormalProps[] = documents.map((item) => ({
-        thumbnail: baseURL(item?.subdivision?.thumbnail),
-        title: item.name,
-        href: linkURL(item.link),
-        tag: {
-          text: item.subdivision?.name,
-          url: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item.slug}`,
-        },
-        dateTime: getTimePastToCurrent(item.publishedAt),
-        target: '_blank',
-        url: {
-          text: t('button.download'),
-          iconName: 'downloadOrange',
-          animation: 'download',
-        },
-      }));
-      return cardNormals;
-    }
-    return [];
-  }, [documents, t]);
 
-  if (!documents?.length) return null;
+  const documentList : CardNormalProps[] = useMemo(() => documents?.data.map((item) => ({
+    thumbnail: baseURL(item?.subdivision?.thumbnail),
+    title: item.name,
+    href: linkURL(item.link),
+    tag: {
+      text: item.subdivision?.name,
+      url: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item.slug}`,
+    },
+    dateTime: getTimePastToCurrent(item.publishedAt),
+    target: '_blank',
+    url: {
+      text: t('button.download'),
+      iconName: 'downloadOrange',
+      animation: 'download',
+    },
+  })) || [], [documents?.data, t]);
+
+  if (!documents?.data.length) return null;
 
   return (
     <Section>
@@ -100,7 +95,7 @@ const Documents: React.FC<DocumentProps> = ({ documents, blocks }) => {
 };
 
 Documents.defaultProps = {
-  documents: [],
+  documents: undefined,
 };
 
 export default React.memo(Documents);

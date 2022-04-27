@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 interface Subdivision {
   name: string;
   logo: string;
@@ -58,14 +59,39 @@ export interface OverviewDocumentType {
   name: string;
 }
 
+export type PaginationOverview<T> = {
+  currentPage: number;
+  data: T[];
+  firstPageUrl: string;
+  from?: number;
+  lastPage: number;
+  lastPageUrl?: string;
+  nextPageUrl?: string;
+  path: string;
+  perPage: number;
+  prevPageUrl?: string;
+  to?: number;
+  total: number;
+}
+
 export interface OverviewType {
-  news?: OverviewNewsType[];
-  videos?: OverviewVideoType[];
-  images?: OverviewImageType[];
-  documents?: OverviewDocumentType[];
-  events?: OverviewEventsType[];
+  news: PaginationOverview<OverviewNewsType>;
+  videos: PaginationOverview<OverviewVideoType>;
+  images: PaginationOverview<OverviewImageType>;
+  documents: PaginationOverview<OverviewDocumentType>;
+  events: PaginationOverview<OverviewEventsType>;
 }
 
 export interface OverviewParams {
   keyword?: string;
+  news_limit?: number;
+  news_page?: number;
+  video_limit?: number;
+  video_page?: number;
+  image_limit?: number;
+  image_page?:number;
+  document_limit?: number;
+  document_page?: number;
+  event_limit?: number;
+  event_page?: number;
 }
