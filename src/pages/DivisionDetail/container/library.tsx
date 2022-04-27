@@ -75,7 +75,9 @@ const reducer = (state: LibraryState, action: ActionWithPayload) => {
   }
 };
 
-const Library: React.FC<LibraryProps> = ({ data, subDivisionId, color }) => {
+const Library: React.FC<LibraryProps> = ({
+  data, subDivisionId, color, subDivisionName,
+}) => {
   const { language } = i18n;
   const { t } = useTranslation();
 
@@ -85,20 +87,20 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId, color }) => {
     (e) => e.templateCode === CONSTANTS.TEMPLATE_CODE.NEW_IMAGE,
   )?.slug;
 
-  const dummyData = useMemo(() => [{
-    label: t('library.news'),
-  },
-  {
-    label: t('library.images'),
-  },
-  {
-    label: 'Video',
-  },
-  {
-    label: t('library.document'),
-  },
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  ], [language]);
+  const dummyData = useMemo(() => [
+    {
+      label: t('library.news'),
+    },
+    {
+      label: t('library.images'),
+    },
+    {
+      label: t('library.videos'),
+    },
+    {
+      label: t('library.document'),
+    },
+  ], [t]);
 
   const settingRef = useRef({
     prevArrow: <Arrow.Prev />,
@@ -197,7 +199,7 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId, color }) => {
             <div className="d-lg-block d-none">
               <Link href={`${FUNCTIONS_LANGUAGE.languageURL(language)}${slugPageNews}?keyword=${subDivisionName}`} target="_self">
                 <div className="animate animate-arrowSlide d-flex align-items-center">
-                  <Text modifiers={['14x20', '400', 'copper']} content="Xem thêm" />
+                  <Text modifiers={['14x20', '400', 'copper']} content={t('button.more')} />
                   <div className="u-ml-8" />
                   <Icon iconName="arrowRightCopper" size="16" />
                 </div>
@@ -346,8 +348,7 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId, color }) => {
         <div className="d-flex justify-content-center d-lg-none u-mt-32">
           <Link href={`${FUNCTIONS_LANGUAGE.languageURL(language)}${slugPageNews}?keyword=${subDivisionName}`} target="_self">
             <div className="animate animate-arrowSlide d-flex align-items-center">
-              {/* TODO: Translate later */}
-              <Text modifiers={['14x20', '400', 'copper']} content="Xem thêm" />
+              <Text modifiers={['14x20', '400', 'copper']} content={t('button.more')} />
               <div className="u-ml-8" />
               <Icon iconName="arrowRightCopper" size="16" />
             </div>

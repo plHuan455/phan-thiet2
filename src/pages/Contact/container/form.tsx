@@ -36,11 +36,11 @@ const Form: React.FC<SectionBlocks> = ({ blocks }) => {
     const blockPageContent = getBlockData<FormProps>('form_contact', blocks);
     return {
       form: {
-        addressPlaceholder: t('form.address'),
-        contentPlaceholder: t('form.content'),
-        emailPlaceholder: t('form.email'),
-        namePlaceholder: t('form.name'),
-        phonePlaceholder: t('form.phone'),
+        addressPlaceholder: t('form.contact_address'),
+        contentPlaceholder: t('form.contact_content'),
+        emailPlaceholder: t('form.contact_email'),
+        namePlaceholder: t('form.contact_name'),
+        phonePlaceholder: t('form.contact_phone'),
         btnText: t('button.register'),
       },
       titleForm: blockPageContent?.title,
@@ -52,7 +52,7 @@ const Form: React.FC<SectionBlocks> = ({ blocks }) => {
     async (params: ContactFormType) => {
       if (!executeRecaptcha) return;
       const grecaptchaToken = await executeRecaptcha('submit');
-      const searchParmas = getSearchParams(location.search);
+      const searchParams = getSearchParams(location.search);
       const paramsUTM = [
         'utm_source',
         'utm_medium',
@@ -69,9 +69,9 @@ const Form: React.FC<SectionBlocks> = ({ blocks }) => {
         content: params.content,
         grecaptcha_token: grecaptchaToken,
       };
-      Object.keys(searchParmas).forEach((item: string) => {
+      Object.keys(searchParams).forEach((item: string) => {
         if (paramsUTM.includes(item)) {
-          newData = { ...newData, [item]: searchParmas[item] };
+          newData = { ...newData, [item]: searchParams[item] };
         }
       });
 

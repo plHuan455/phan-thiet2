@@ -7,12 +7,12 @@
     "sec": "Giây",
     "success": "Đăng ký thành công",
     "confirm": "Xác nhận",
-    "message_Success": "Cảm ơn Quý Khách đã nhận thông tin dự án NovaWorld Phan Thiet. Novaland sẽ liên hệ trong thời gian sớm nhất.",
+    "message_success": "Cảm ơn Quý Khách đã nhận thông tin dự án NovaWorld Phan Thiet. Novaland sẽ liên hệ trong thời gian sớm nhất.",
     "try_again": "Vui lòng thử lại",
     "system_error": "Lỗi hệ thống",
     "fail": "Đăng ký thất bại",
     "contact": "Liên hệ",
-    "more-information": "THAM KHẢO THÊM TẠI"
+    "more_information": "THAM KHẢO THÊM TẠI"
   },
   "banner": {
     "featured_keywords": "Từ khóa nổi bật:",
@@ -20,17 +20,22 @@
     "package_tour": "Tour trọn gói"
   },
   "form": {
-    "title": "Quý khách đăng ký nhận email thông tin dự án, các chương trình ưu đãi, khuyến mại  và tin tức mới nhất từ NovaWorld Phan Thiet",
-    "name": "HỌ VÀ TÊN",
-    "address": "ĐỊA CHỈ",
-    "phone": "ĐIỆN THOẠI",
-    "email": "EMAIL",
-    "content": "NỘI DUNG",
-    "interest": "Sản phẩm quan tâm: ",
-    "option": "(Câu hỏi không bắt buộc)",
+    "contact_name": "HỌ VÀ TÊN",
+    "contact_address": "ĐỊA CHỈ",
+    "contact_phone": "ĐIỆN THOẠI *",
+    "contact_email": "EMAIL *",
+    "contact_content": "NỘI DUNG",
     "search": "Tìm kiếm",
     "search_event": "Tìm kiếm sự kiện",
-    "search_news": "Tìm kiếm tin tức"
+    "search_news": "Tìm kiếm tin tức",
+    "consultancy_title": "Quý khách đăng ký nhận email thông tin dự án, các chương trình ưu đãi, khuyến mại  và tin tức mới nhất từ NovaWorld Phan Thiet",
+    "consultancy_interest": "Sản phẩm quan tâm: ",
+    "consultancy_option": "(Câu hỏi không bắt buộc)",
+    "consultancy_name": "Họ và tên",
+    "consultancy_address": "Địa chỉ",
+    "consultancy_phone": "Số điện thoại *",
+    "consultancy_email": "Email *",
+    "consultancy_content": "Nội dung"
   },
   "button": {
     "register": "Đăng ký nhận thông tin",
@@ -53,6 +58,7 @@
   "library": {
     "news": "Tin tức",
     "images": "Hình ảnh",
-    "document": "Tài liệu khác"
+    "document": "Tài liệu khác",
+    "videos": "Videos"
   }
 }

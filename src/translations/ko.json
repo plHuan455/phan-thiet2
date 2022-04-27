@@ -12,7 +12,7 @@
     "system_error": "System Error",
     "fail": "Register Fail",
     "contact": "Contact",
-    "more-information": "MORE INFORMATION AT"
+    "more_information": "MORE INFORMATION AT"
   },
   "banner": {
     "featured_keywords": "Featured Keywords:",
@@ -20,17 +20,22 @@
     "package_tour": "Package Tour"
   },
   "form": {
-    "title": "You register to receive email project information, preferential programs, promotions and the latest news from NovaWorld Phan Thiet",
-    "name": "Name",
-    "address": "Address",
-    "phone": "Phone",
-    "email": "Email",
-    "content": "Content",
-    "interest": "Products of interest: ",
-    "option": "(Optional question)",
+    "contact_name": "NAME",
+    "contact_address": "ADDRESS",
+    "contact_phone": "PHONE *",
+    "contact_email": "EMAIL *",
+    "contact_content": "CONTENT",
     "search": "Search",
     "search_event": "Search Event",
-    "search_news": "Search News"
+    "search_news": "Search News",
+    "consultancy_title": "You register to receive email project information, preferential programs, promotions and the latest news from NovaWorld Phan Thiet",
+    "consultancy_interest": "Products of interest: ",
+    "consultancy_option": "(Optional question)",
+    "consultancy_name": "Name",
+    "consultancy_address": "Address",
+    "consultancy_phone": "Phone *",
+    "consultancy_email": "Email *",
+    "consultancy_content": "Content"
   },
   "button": {
     "register": "Sign up to receive information",
@@ -53,6 +58,7 @@
   "library": {
     "news": "News",
     "images": "Images",
-    "document": "Different document"
+    "document": "Different document",
+    "videos": "Videos"
   }
 }

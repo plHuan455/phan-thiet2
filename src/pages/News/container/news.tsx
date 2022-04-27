@@ -77,12 +77,10 @@ const News: React.FC<NewsProps> = ({ news, blocks }) => {
         dateTime: getTimePastToCurrent(item.publishedAt),
         tag: item?.subdivision ? {
           text: item?.subdivision?.name,
-          // TODO: Update locale later
           url: redirectURL(CONSTANTS.PREFIX.DIVISION, item?.subdivision?.slug, language),
         } : undefined,
         button: {
           text: newsBlocks?.button,
-          // TODO: Update locale later
           url: redirectURL(CONSTANTS.PREFIX.NEWS, item.slug, language),
         },
         title: item.title,

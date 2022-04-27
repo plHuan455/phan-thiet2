@@ -27,14 +27,12 @@ const Events: React.FC<EventsProps> = ({ events, blocks }) => {
 
     return events?.map((item) => ({
       thumbnail: baseURL(item.thumbnail),
-      // TODO: Update locale later
       tag: {
         text: item.subdivision?.name,
         url: redirectURL(CONSTANTS.PREFIX.DIVISION, item.slug, language),
       },
       title: item.title,
       endTime: item.startDate,
-      // TODO: Update locale later
       summary: [
         {
           iconName: 'clock' as IconName,

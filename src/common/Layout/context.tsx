@@ -85,7 +85,7 @@ const LayoutProvider: React.FC = ({ children }) => {
   }, [addressData?.data, dataSystems?.address]);
 
   const socialList = useMemo(() => ({
-    title: t('general.more-information'),
+    title: t('general.more_information'),
     list: dataSystems?.socialMedia?.map((x) => ({
       icon: baseURL(x.icon),
       ...x.link,
