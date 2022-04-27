@@ -76,19 +76,21 @@ const LayoutProvider: React.FC = ({ children }) => {
       address: x.addressText,
       subTitle: '',
       contact: {
-        label: 'Liên hệ: ', // TODO: Translation later
+        label: t('general.contact'),
         value: x.phone,
       },
     })) || [];
     return [...addressGeneral, ...addressHeadquarters];
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [addressData?.data, dataSystems?.address]);
 
   const socialList = useMemo(() => ({
-    title: 'THAM KHẢO THÊM TẠI', // TODO: Translation later
+    title: t('general.more-information'),
     list: dataSystems?.socialMedia?.map((x) => ({
       icon: baseURL(x.icon),
       ...x.link,
     })) || [],
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }), [dataSystems?.socialMedia]);
 
   const header = useMemo((): HeaderProps => ({
@@ -116,7 +118,7 @@ const LayoutProvider: React.FC = ({ children }) => {
   const footer = useMemo((): FooterProps => ({
     logo: baseURL(dataSystems?.logoFooter) || '',
     subMenu: menuTermFooter,
-    copyRightTitle: t('footer.copyright'),
+    copyRightTitle: '@2021. Bản quyền thuộc về Tập đoàn Novaland (Việt Nam). Tất cả các quyền bảo hộ.',
     menuList: {
       title: mainFooter[0],
       list: mainFooter[0]?.subMenu || [],

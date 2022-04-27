@@ -90,7 +90,7 @@ const News: React.FC<NewsProps> = ({ news, blocks }) => {
       }));
     }
     return [];
-  }, [news, newsBlocks]);
+  }, [language, news, newsBlocks]);
 
   if (!news?.length) return null;
 

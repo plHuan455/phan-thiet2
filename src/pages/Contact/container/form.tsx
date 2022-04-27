@@ -82,15 +82,15 @@ const Form: React.FC<SectionBlocks> = ({ blocks }) => {
         const notifyProps: NotifyProps = {
           isOpen: true,
           title: t('general.success'),
-          message: t('general.messageSuccess'),
+          message: t('general.message_success'),
           btnText: t('general.confirm'),
         };
         dispatch(updateNotifyProps(notifyProps));
       },
       onFailed: (err) => {
-        let message = t('general.tryAgain');
+        let message = t('general.try_again');
         if (axios.isAxiosError(err) && err?.response?.status === 500) {
-          message = t('general.systemError');
+          message = t('general.system_error');
         }
         const notifyProps: NotifyProps = {
           isOpen: true,

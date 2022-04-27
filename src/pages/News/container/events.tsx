@@ -54,7 +54,7 @@ const Events: React.FC<EventsProps> = ({ events, blocks }) => {
         url: redirectURL(CONSTANTS.PREFIX.EVENT, item.slug, language),
       },
     }));
-  }, [events, eventsBlock]);
+  }, [events, eventsBlock, language]);
 
   if (!events?.length) return null;
 

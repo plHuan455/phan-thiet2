@@ -150,7 +150,7 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
           url: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item.slug}`,
         },
         url: {
-          text: t('general.seeMore'),
+          text: t('button.more'),
           iconName: 'arrowRightCopper',
           animation: 'arrow',
         },
