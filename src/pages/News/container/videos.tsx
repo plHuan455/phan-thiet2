@@ -7,7 +7,7 @@ import FlatMore from 'common/FlatMore';
 import Card from 'components/organisms/Card';
 import PopupPlayer from 'components/templates/PopupPlayer';
 import i18n from 'i18n';
-import { OverviewVideoType } from 'services/overviews/types';
+import { OverviewVideoType, PaginationOverview } from 'services/overviews/types';
 import CONSTANTS from 'utils/constants';
 import {
   baseURL, linkURL, getTimePastToCurrent, getBlockData, baseString, redirectURL,
@@ -18,7 +18,7 @@ interface VideoBlocks {
 }
 
 interface VideoProps extends SectionBlocks {
-  videos?: OverviewVideoType[];
+  videos?: PaginationOverview<OverviewVideoType>;
 }
 
 interface PlayerState {
@@ -58,34 +58,29 @@ const Videos: React.FC<VideoProps> = ({ videos, blocks }) => {
     });
   };
 
-  const videoList = useMemo(() => {
-    if (Array.isArray(videos)) {
-      return videos.map((item) => {
-        const isVidOutside = item.video.includes('http://') || item.video.includes('https://');
-        const vidUrl = isVidOutside ? item.video : linkURL(item.video);
-        const vidData = {
-          thumbnail: baseURL(item?.thumbnail),
-          title: item.name,
-          tag: {
-            text: item.subdivision?.name,
-            url: redirectURL(CONSTANTS.PREFIX.DIVISION, item.slug, language),
-          },
-          datetime: item?.publishedAt ? getTimePastToCurrent(item.publishedAt) : undefined,
-          onClick: () => {
-            updatePlayerState({
-              isOpen: true,
-              vidSrc: vidUrl,
-              vidType: item.videoType,
-            });
-          },
-        };
-        return vidData;
-      });
-    }
-    return [];
-  }, [videos, language]);
+  const videoList = useMemo(() => videos?.data.map((item) => {
+    const isVidOutside = item.video.includes('http://') || item.video.includes('https://');
+    const vidUrl = isVidOutside ? item.video : linkURL(item.video);
+    const vidData = {
+      thumbnail: baseURL(item?.thumbnail),
+      title: item.name,
+      tag: {
+        text: item.subdivision?.name,
+        url: redirectURL(CONSTANTS.PREFIX.DIVISION, item.slug, language),
+      },
+      datetime: item?.publishedAt ? getTimePastToCurrent(item.publishedAt) : undefined,
+      onClick: () => {
+        updatePlayerState({
+          isOpen: true,
+          vidSrc: vidUrl,
+          vidType: item.videoType,
+        });
+      },
+    };
+    return vidData;
+  }) || [], [videos?.data, language]);
 
-  if (!videos?.length) return null;
+  if (!videos?.data.length) return null;
 
   return (
     <Section>
@@ -118,7 +113,7 @@ const Videos: React.FC<VideoProps> = ({ videos, blocks }) => {
 };
 
 Videos.defaultProps = {
-  videos: [],
+  videos: undefined,
 };
 
 export default React.memo(Videos);

@@ -13,10 +13,11 @@ import Image from 'components/atoms/Image';
 import Card from 'components/organisms/Card';
 import { CardNormalProps } from 'components/organisms/Card/Normal';
 import useScrollAnimate from 'hooks/useScrollAnimation';
-import { OverviewDocumentType } from 'services/overviews/types';
+import i18n from 'i18n';
+import { OverviewDocumentType, PaginationOverview } from 'services/overviews/types';
 import CONSTANTS from 'utils/constants';
 import {
-  linkURL, getTimePastToCurrent, getBlockData, baseString, baseURL,
+  linkURL, getTimePastToCurrent, getBlockData, baseString, baseURL, redirectURL,
 } from 'utils/functions';
 
 interface DocumentBlocks {
@@ -24,11 +25,12 @@ interface DocumentBlocks {
 }
 
 interface DocumentProps extends SectionBlocks {
-  documents?: OverviewDocumentType[];
+  documents?: PaginationOverview<OverviewDocumentType>;
 }
 
 const Documents: React.FC<DocumentProps> = ({ documents, blocks }) => {
   const { t } = useTranslation();
+  const { language } = i18n;
   const documentBlock = getBlockData<DocumentBlocks>('document', blocks);
   const leafRef = useRef<HTMLDivElement>(null);
   const ballonRef = useRef<HTMLDivElement>(null);
@@ -37,30 +39,25 @@ const Documents: React.FC<DocumentProps> = ({ documents, blocks }) => {
   const {
     animated, ballonAnimate, slideReverseAnimate,
   } = useAnimation();
-  const documentList = useMemo(() => {
-    if (Array.isArray(documents)) {
-      const cardNormals: CardNormalProps[] = documents.map((item) => ({
-        thumbnail: baseURL(item?.subdivision?.thumbnail),
-        title: item.name,
-        href: linkURL(item.link),
-        tag: {
-          text: item.subdivision?.name,
-          url: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item.slug}`,
-        },
-        dateTime: getTimePastToCurrent(item.publishedAt),
-        target: '_blank',
-        url: {
-          text: t('button.download'),
-          iconName: 'downloadOrange',
-          animation: 'download',
-        },
-      }));
-      return cardNormals;
-    }
-    return [];
-  }, [documents, t]);
 
-  if (!documents?.length) return null;
+  const documentList : CardNormalProps[] = useMemo(() => documents?.data.map((item) => ({
+    thumbnail: baseURL(item?.subdivision?.thumbnail),
+    title: item.name,
+    href: linkURL(item.link),
+    tag: {
+      text: item?.subdivision?.name,
+      href: redirectURL(CONSTANTS.PREFIX.DIVISION, item?.subdivision?.slug, language),
+    },
+    dateTime: getTimePastToCurrent(item.publishedAt),
+    target: '_blank',
+    url: {
+      text: t('button.download'),
+      iconName: 'downloadOrange',
+      animation: 'download',
+    },
+  })) || [], [documents?.data, language, t]);
+
+  if (!documents?.data.length) return null;
 
   return (
     <Section>
@@ -100,7 +97,7 @@ const Documents: React.FC<DocumentProps> = ({ documents, blocks }) => {
 };
 
 Documents.defaultProps = {
-  documents: [],
+  documents: undefined,
 };
 
 export default React.memo(Documents);

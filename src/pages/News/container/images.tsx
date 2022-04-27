@@ -6,7 +6,7 @@ import Container from 'common/Container';
 import FlatMore from 'common/FlatMore';
 import Image from 'components/atoms/Image';
 import PopupImage from 'components/templates/PopupImage';
-import { OverviewImageType } from 'services/overviews/types';
+import { OverviewImageType, PaginationOverview } from 'services/overviews/types';
 import { baseString, baseURL, getBlockData } from 'utils/functions';
 
 export interface CardImageProps {
@@ -30,7 +30,7 @@ interface ImagesBlock {
   title: string;
 }
 interface ImagesProps extends SectionBlocks {
-  images?: OverviewImageType[];
+  images?: PaginationOverview<OverviewImageType>;
 }
 
 const reducer = (state: ImageState, action: ActionWithPayload) => {
@@ -74,16 +74,11 @@ const Images: React.FC<ImagesProps> = ({ images, blocks }) => {
     });
   };
 
-  const imageList = useMemo(() => {
-    if (Array.isArray(images)) {
-      return images?.map((item) => ({
-        thumbnail: baseURL(item.path),
-      }));
-    }
-    return [];
-  }, [images]);
+  const imageList = useMemo(() => images?.data.map((item) => ({
+    thumbnail: baseURL(item.path),
+  })) || [], [images]);
 
-  if (!images?.length) return null;
+  if (!images?.data.length) return null;
 
   return (
     <Section>
@@ -116,7 +111,7 @@ const Images: React.FC<ImagesProps> = ({ images, blocks }) => {
 };
 
 Images.defaultProps = {
-  images: [],
+  images: undefined,
 };
 
 export default Images;

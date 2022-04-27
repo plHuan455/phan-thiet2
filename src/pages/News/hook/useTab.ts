@@ -36,31 +36,31 @@ const useTab = ({ data, blocks } : MenuNewsProps) => {
       label: baseString(newsBlocks?.title),
       value: 'tin-tuc',
       ref: refNews,
-      active: !!data?.news?.length,
+      active: !!data?.news?.total,
     },
     {
       label: baseString(eventsBlock?.title),
       value: 'su-kien',
       ref: refEvent,
-      active: !!data?.events?.length,
+      active: !!data?.events?.total,
     },
     {
       label: baseString(imageBlocks?.title),
       value: 'hinh-anh',
       ref: refImage,
-      active: !!data?.images?.length,
+      active: !!data?.images?.total,
     },
     {
       label: baseString(videoBlock?.title),
       value: 'video',
       ref: refVideo,
-      active: !!data?.videos?.length,
+      active: !!data?.videos?.total,
     },
     {
       label: baseString(documentBlock?.title),
       value: 'differ',
       ref: refDiffer,
-      active: !!data?.documents?.length,
+      active: !!data?.documents?.total,
     },
   // eslint-disable-next-line react-hooks/exhaustive-deps
   ]), [data, blocks]);
