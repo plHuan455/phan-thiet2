@@ -13,10 +13,11 @@ import Image from 'components/atoms/Image';
 import Card from 'components/organisms/Card';
 import { CardNormalProps } from 'components/organisms/Card/Normal';
 import useScrollAnimate from 'hooks/useScrollAnimation';
+import i18n from 'i18n';
 import { OverviewDocumentType, PaginationOverview } from 'services/overviews/types';
 import CONSTANTS from 'utils/constants';
 import {
-  linkURL, getTimePastToCurrent, getBlockData, baseString, baseURL,
+  linkURL, getTimePastToCurrent, getBlockData, baseString, baseURL, redirectURL,
 } from 'utils/functions';
 
 interface DocumentBlocks {
@@ -29,6 +30,7 @@ interface DocumentProps extends SectionBlocks {
 
 const Documents: React.FC<DocumentProps> = ({ documents, blocks }) => {
   const { t } = useTranslation();
+  const { language } = i18n;
   const documentBlock = getBlockData<DocumentBlocks>('document', blocks);
   const leafRef = useRef<HTMLDivElement>(null);
   const ballonRef = useRef<HTMLDivElement>(null);
@@ -43,8 +45,8 @@ const Documents: React.FC<DocumentProps> = ({ documents, blocks }) => {
     title: item.name,
     href: linkURL(item.link),
     tag: {
-      text: item.subdivision?.name,
-      url: `/${CONSTANTS.PREFIX.DIVISION.VI}/${item.slug}`,
+      text: item?.subdivision?.name,
+      href: redirectURL(CONSTANTS.PREFIX.DIVISION, item?.subdivision?.slug, language),
     },
     dateTime: getTimePastToCurrent(item.publishedAt),
     target: '_blank',
@@ -53,7 +55,7 @@ const Documents: React.FC<DocumentProps> = ({ documents, blocks }) => {
       iconName: 'downloadOrange',
       animation: 'download',
     },
-  })) || [], [documents?.data, t]);
+  })) || [], [documents?.data, language, t]);
 
   if (!documents?.data.length) return null;
 
