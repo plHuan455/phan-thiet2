@@ -4,7 +4,6 @@ import React, {
 
 import Icon from 'components/atoms/Icon';
 import Text from 'components/atoms/Text';
-import useScrollInfinite from 'hooks/useScrollInfinite';
 import mapModifiers, { removeAccents } from 'utils/functions';
 
 export interface OptionSuggestTypes {
@@ -19,14 +18,12 @@ export interface SearchProps {
     placeholder?: string;
     onSearch?: (val?: string) => void;
   };
-  onLoadMore?: () => void;
 }
 
 const Search: React.FC<SearchProps> = ({
   search,
   isSuggest,
   optionSuggests = [],
-  onLoadMore,
 }) => {
   const [val, setVal] = useState<string>('');
   const [options, setOptions] = useState<OptionSuggestTypes[]>(optionSuggests);
@@ -77,8 +74,6 @@ const Search: React.FC<SearchProps> = ({
     }
   }, [optionSuggests, search?.value]);
 
-  const { setNode } = useScrollInfinite(onLoadMore);
-
   return (
     <div className="t-banner_search">
       <div className="t-banner_search-input">
@@ -106,7 +101,6 @@ const Search: React.FC<SearchProps> = ({
           <ul>
             {options?.map((item, index) => (
               <li
-                ref={index + 1 === options.length ? (node) => setNode(node) : undefined}
                 onClick={handleSelected(item.keyword)}
                 key={`t-banner_search-suggest-${index.toString()}`}
               >

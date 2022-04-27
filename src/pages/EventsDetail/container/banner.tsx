@@ -26,7 +26,7 @@ const Banner: React.FC<BannerProps> = ({
   )?.slug, [staticAll]);
 
   const {
-    options, hasNextPage, fetchNextPage, onSubmit,
+    options, onSubmit,
   } = useKeywords();
 
   const onSearch = (keyword: string | undefined) => {
@@ -39,7 +39,7 @@ const Banner: React.FC<BannerProps> = ({
     <>
       <BannerTemplate
         image={{ src: thumbnail }}
-        onLoadMore={() => hasNextPage && fetchNextPage()}
+        // onLoadMore={() => hasNextPage && fetchNextPage()}
         isLayer
         isSuggest={!!options?.length}
         search={{

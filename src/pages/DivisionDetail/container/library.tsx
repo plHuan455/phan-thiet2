@@ -83,9 +83,9 @@ const Library: React.FC<LibraryProps> = ({
 
   const staticAll = useAppSelector((state) => state.static.static);
 
-  const slugPageNews = staticAll?.find(
+  const slugPageNews = useMemo(() => staticAll?.find(
     (e) => e.templateCode === CONSTANTS.TEMPLATE_CODE.NEW_IMAGE,
-  )?.slug;
+  )?.slug, [staticAll]);
 
   const dummyData = useMemo(() => [
     {

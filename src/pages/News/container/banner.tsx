@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
@@ -45,7 +47,7 @@ const Banner: React.FC<Pick<BasePageDataTypes<any>, 'banners' | 'blocks'>> = ({ 
   }, [blocks]);
 
   const {
-    options, hasNextPage, fetchNextPage, onSubmit,
+    options, onSubmit,
   } = useKeywords();
   const [searchParams, setSearchParams] = useSearchParams();
   const keywordParams = useMemo(() => searchParams.get('keyword') || '', [
@@ -73,7 +75,7 @@ const Banner: React.FC<Pick<BasePageDataTypes<any>, 'banners' | 'blocks'>> = ({ 
       <BannerTemplate
         image={bannerData.image}
         isLayer
-        onLoadMore={() => hasNextPage && fetchNextPage()}
+        // onLoadMore={() => hasNextPage && fetchNextPage()}
         isSuggest={!!options?.length}
         optionSuggest={options}
         search={{

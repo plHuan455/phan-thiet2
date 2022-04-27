@@ -117,6 +117,7 @@ const Screen: React.FC<ScreenProps> = ({ setLogoDivision }) => {
         {/* Library */}
         <Library
           subDivisionId={subDivisionDetail?.id || -1}
+          subDivisionName={subDivisionDetail?.name}
           data={library}
           color={baseString(subDivisionDetail?.color)}
         />

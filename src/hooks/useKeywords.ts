@@ -1,60 +1,43 @@
 import { useCallback, useMemo } from 'react';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
-import { useInfiniteQuery } from 'react-query';
+import { useQuery } from 'react-query';
 
-import { OptionSuggestTypes } from 'components/templates/Banner/component';
+import { baseString } from '../utils/functions';
+
+import i18n from 'i18n';
 import getKeywordService, { postKeywordService } from 'services/keyword';
 
-const useKeywords = () => {
+const useKeywords = (str?: string) => {
   const { executeRecaptcha } = useGoogleReCaptcha();
+  const { language } = i18n;
 
   const {
     data,
-    hasNextPage,
-    isFetchingNextPage: isLoading,
-    fetchNextPage,
-  } = useInfiniteQuery(
-    ['getKeywords'],
-    ({ pageParam = 1 }) => getKeywordService({
-      page: pageParam,
-      limit: 5,
-    }),
-    {
-      getNextPageParam: (params) => (params.meta?.page >= params.meta.totalPages
-        ? false
-        : params.meta.page + 1),
-    },
-  );
+    isFetching,
+  } = useQuery(['GetKeywords', []], () => getKeywordService({
+    keyword: baseString(str),
+    limit: 15,
+    page: 1,
+  }));
 
-  const options = useMemo(
-    (): OptionSuggestTypes[] => (data?.pages || []).reduce(
-      (prev: OptionSuggestTypes[], curr) => [
-        ...prev,
-        ...curr.data.map((item) => ({
-          id: String(item.id),
-          keyword: item.keyword,
-        })),
-      ],
-      [],
-    ),
-    [data],
-  );
+  const options = useMemo(() => data?.data?.map((e) => ({
+    id: String(e.id),
+    keyword: e.keyword,
+  })), [data]);
 
   const onSubmit = useCallback(async (keyword: string | undefined) => {
-    if (!executeRecaptcha) return;
+    if (!executeRecaptcha || !keyword) return;
     const grecaptchaToken = await executeRecaptcha('submit');
     await postKeywordService({
       grecaptcha_token: grecaptchaToken,
-      keyword: keyword || '',
-      locale: 'vi',
+      keyword,
+      locale: language,
     });
-  }, [executeRecaptcha]);
+  }, [executeRecaptcha, language]);
 
   return {
     options,
-    hasNextPage,
-    isLoading,
-    fetchNextPage,
+    isLoading: isFetching,
     onSubmit,
   };
 };
