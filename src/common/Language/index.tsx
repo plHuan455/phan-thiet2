@@ -3,11 +3,13 @@ import React, {
 } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { NotifyProps } from 'components/organisms/Notify';
 import i18n from 'i18n';
 import FUNCTIONS from 'i18n/functions';
 import { LanguageKeyTypes } from 'services/systems/types';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { menusAsync } from 'store/menus';
+import { updateNotifyProps } from 'store/notify';
 import { staticAllAsync, staticErrorsAsync } from 'store/static';
 import { systemsGeneralAsync } from 'store/systems';
 import { topicsListAsync } from 'store/topics';
@@ -127,10 +129,18 @@ const LanguageProvider: React.FC = ({ children }) => {
         }
       });
     }
-    if (!inActiveLocale) {
-      // TODO: Show popup
-      // eslint-disable-next-line no-console
-      console.log('show popup language not active !!');
+    if (!inActiveLocale && dataSystems) {
+      const result = (Object.keys(dataSystems.locales) as Array<LanguageKeyTypes>)
+        .map((e) => e === locale?.value && dataSystems.locales[e]).find((f) => f !== false);
+      if (result) {
+        const notifyProps: NotifyProps = {
+          isOpen: true,
+          message: result.message,
+          // TODO: Add translations later
+          btnText: 'Xác nhận',
+        };
+        dispatch(updateNotifyProps(notifyProps));
+      }
     }
   };
 
