@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
@@ -77,4 +75,4 @@ const Banner: React.FC<BannerProps> = ({ thumbnail }) => {
   );
 };
 
-export default Banner;
+export default React.memo(Banner);

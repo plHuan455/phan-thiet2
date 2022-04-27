@@ -39,18 +39,6 @@ const Search: React.FC<SearchProps> = ({
     if (onChange) {
       onChange(event.target.value);
     }
-    // const cloneOptions = [...options];
-    // let newOptions;
-    // if (event.target.value) {
-    //   newOptions = cloneOptions.filter(
-    //     (item) => removeAccents(item.keyword)
-    //       .toLocaleLowerCase()
-    //       .includes(removeAccents(event.target.value.toLocaleLowerCase())),
-    //   );
-    // } else {
-    //   newOptions = list;
-    // }
-    // setOptions(newOptions);
   };
 
   const onKeyDown = useCallback(
@@ -72,13 +60,13 @@ const Search: React.FC<SearchProps> = ({
   };
 
   useEffect(() => {
-    if (list.length) {
+    if (list && isFocus) {
       setOptions(list);
     }
     if (value) {
       setVal(value);
     }
-  }, [list, value]);
+  }, [list, value, isFocus]);
 
   return (
     <div className="t-banner_search">
