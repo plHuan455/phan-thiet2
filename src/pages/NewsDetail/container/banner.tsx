@@ -25,13 +25,6 @@ const Banner: React.FC<BannerProps> = ({ thumbnail }) => {
     (e) => e.templateCode === CONSTANTS.TEMPLATE_CODE.NEW_IMAGE,
   )?.slug, [staticAll]);
 
-  const { language } = i18n;
-  const staticAll = useAppSelector((state) => state.static.static);
-
-  const slugPageNews = useMemo(() => staticAll?.find(
-    (e) => e.templateCode === CONSTANTS.TEMPLATE_CODE.NEW_IMAGE,
-  )?.slug, [staticAll]);
-
   const blockBanner = useMemo(() => baseURL(thumbnail), [thumbnail]);
 
   const {
@@ -50,9 +43,9 @@ const Banner: React.FC<BannerProps> = ({ thumbnail }) => {
         image={{ src: blockBanner }}
         isLayer
         // onLoadMore={() => hasNextPage && fetchNextPage()}
-        optionSuggest={options}
-        isSuggest={!!options?.length}
+        // isSuggest={!!options?.length}
         search={{
+          list: options,
           placeholder: t('form.search_news'),
           onSearch,
         }}

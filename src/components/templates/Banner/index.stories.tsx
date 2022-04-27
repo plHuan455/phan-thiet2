@@ -38,6 +38,44 @@ export const search: Story = () => (
       }}
       isLayer
       search={{
+        list: [
+          {
+            keyword: 'Travel',
+            id: 'Travel',
+          },
+          {
+            keyword: 'Du lịch',
+            id: 'Du lịch',
+          },
+          {
+            keyword: 'Travel',
+            id: 'Travel',
+          },
+          {
+            keyword: 'Du lịch',
+            id: 'Du lịch',
+          },
+          {
+            keyword: 'Travel',
+            id: 'Travel',
+          },
+          {
+            keyword: 'Du lịch',
+            id: 'Du lịch',
+          },
+          {
+            keyword: 'Travel',
+            id: 'Travel',
+          },
+          {
+            keyword: 'Du lịch',
+            id: 'Du lịch',
+          },
+          {
+            keyword: 'Travel',
+            id: 'Travel',
+          },
+        ],
         placeholder: 'Tìm kiếm tin tức',
         onSearch: (val) => console.log(val),
       }}
@@ -58,45 +96,6 @@ export const search: Story = () => (
           },
         ],
       }}
-      isSuggest
-      optionSuggest={[
-        {
-          keyword: 'Travel',
-          id: 'Travel',
-        },
-        {
-          keyword: 'Du lịch',
-          id: 'Du lịch',
-        },
-        {
-          keyword: 'Travel',
-          id: 'Travel',
-        },
-        {
-          keyword: 'Du lịch',
-          id: 'Du lịch',
-        },
-        {
-          keyword: 'Travel',
-          id: 'Travel',
-        },
-        {
-          keyword: 'Du lịch',
-          id: 'Du lịch',
-        },
-        {
-          keyword: 'Travel',
-          id: 'Travel',
-        },
-        {
-          keyword: 'Du lịch',
-          id: 'Du lịch',
-        },
-        {
-          keyword: 'Travel',
-          id: 'Travel',
-        },
-      ]}
     />
   </BrowserRouter>
 );

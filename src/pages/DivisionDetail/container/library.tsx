@@ -89,16 +89,16 @@ const Library: React.FC<LibraryProps> = ({
 
   const dummyData = useMemo(() => [
     {
-      label: t('library.news'),
+      label: t('general.news'),
     },
     {
-      label: t('library.images'),
+      label: t('general.images'),
     },
     {
-      label: t('library.videos'),
+      label: t('general.videos'),
     },
     {
-      label: t('library.document'),
+      label: t('general.document'),
     },
   ], [t]);
 

@@ -108,7 +108,10 @@ const Header: React.FC<HeaderProps> = ({
               <Heading type="h2" modifiers={['700', 'uppercase', 'center', 'white']}>
                 Tìm kiếm
               </Heading>
-              <Search search={{ placeholder: 'Tìm kiếm nội dung', onSearch }} />
+              <Search
+                placeholder="Tìm kiếm nội dung"
+                onSearch={onSearch}
+              />
             </div>
           </div>
           <div className="t-header_wrap">

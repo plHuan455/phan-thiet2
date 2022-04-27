@@ -1,7 +1,7 @@
 import React from 'react';
 import { animated, useSpring } from 'react-spring';
 
-import Search, { OptionSuggestTypes } from './component';
+import Search, { SearchProps } from './component';
 
 import Heading from 'components/atoms/Heading';
 import Image, { ImageProps } from 'components/atoms/Image';
@@ -21,13 +21,7 @@ export interface BannerProps {
       target?: string;
     }[];
   };
-  search?: {
-    value?: string;
-    placeholder?: string;
-    onSearch?: (val?: string) => void;
-  };
-  isSuggest?: boolean;
-  optionSuggest?: OptionSuggestTypes[];
+  search?: SearchProps;
 }
 
 const Tag: React.FC<Pick<BannerProps, 'tag'>> = ({ tag }) => (tag?.list?.length ? (
@@ -59,8 +53,6 @@ const Banner: React.FC<BannerProps> = ({
   title,
   tag,
   search,
-  isSuggest,
-  optionSuggest,
 }) => {
   const styles = useSpring({
     from: {
@@ -92,11 +84,7 @@ const Banner: React.FC<BannerProps> = ({
             </div>
           )}
           {search && (
-          <Search
-            isSuggest={isSuggest}
-            optionSuggests={optionSuggest}
-            search={search}
-          />
+          <Search {...search} />
           )}
           {tag && <Tag tag={tag} />}
         </div>

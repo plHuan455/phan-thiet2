@@ -41,12 +41,12 @@ const Banner: React.FC<BannerProps> = ({
         image={{ src: thumbnail }}
         // onLoadMore={() => hasNextPage && fetchNextPage()}
         isLayer
-        isSuggest={!!options?.length}
+        // isSuggest={!!options?.length}
         search={{
+          list: options,
           placeholder: t('form.search_event'),
           onSearch,
         }}
-        optionSuggest={options}
         tag={{
           keyword: t('banner.featured_keywords'),
           list: [

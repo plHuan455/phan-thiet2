@@ -1,6 +1,7 @@
 import React, {
   useCallback, useEffect, useRef, useState,
 } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import Icon from 'components/atoms/Icon';
 import Text from 'components/atoms/Text';
@@ -11,28 +12,33 @@ export interface OptionSuggestTypes {
   keyword: string;
 }
 export interface SearchProps {
-  isSuggest?: boolean;
-  optionSuggests?: OptionSuggestTypes[];
-  search?: {
-    value?: string;
-    placeholder?: string;
-    onSearch?: (val?: string) => void;
-  };
+  list?: OptionSuggestTypes[];
+  loading?: boolean;
+  value?: string;
+  placeholder?: string;
+  onSearch?: (val?: string) => void;
+  onChange?: (val?: string) => void;
 }
 
 const Search: React.FC<SearchProps> = ({
-  search,
-  isSuggest,
-  optionSuggests = [],
+  list = [],
+  loading,
+  value,
+  placeholder,
+  onSearch,
+  onChange,
 }) => {
+  const { t } = useTranslation();
   const [val, setVal] = useState<string>('');
-  const [options, setOptions] = useState<OptionSuggestTypes[]>(optionSuggests);
+  const [options, setOptions] = useState<OptionSuggestTypes[]>(list);
   const [isFocus, setIsFocus] = useState(false);
   const refInput = useRef<HTMLInputElement>(null);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    setVal(value);
+    setVal(event.target.value);
+    if (onChange) {
+      onChange(event.target.value);
+    }
     const cloneOptions = [...options];
     let newOptions;
     if (value) {
@@ -42,37 +48,37 @@ const Search: React.FC<SearchProps> = ({
           .includes(removeAccents(value.toLocaleLowerCase())),
       );
     } else {
-      newOptions = optionSuggests;
+      newOptions = list;
     }
     setOptions(newOptions);
   };
 
   const onKeyDown = useCallback(
     ({ key }: React.KeyboardEvent<HTMLInputElement>) => {
-      if (key === 'Enter' && search?.onSearch) {
-        search?.onSearch(val);
+      if (key === 'Enter' && onSearch) {
+        onSearch(val);
         setIsFocus(false);
         refInput.current?.blur();
       }
     },
-    [search, val],
+    [onSearch, val],
   );
 
   const handleSelected = (keyword: string) => () => {
-    if (search?.onSearch) {
-      search.onSearch(keyword);
+    if (onSearch) {
+      onSearch(keyword);
       setVal(keyword);
     }
   };
 
   useEffect(() => {
-    if (optionSuggests.length) {
-      setOptions(optionSuggests);
+    if (list.length) {
+      setOptions(list);
     }
-    if (search?.value) {
-      setVal(search.value);
+    if (value) {
+      setVal(value);
     }
-  }, [optionSuggests, search?.value]);
+  }, [list, value]);
 
   return (
     <div className="t-banner_search">
@@ -81,7 +87,7 @@ const Search: React.FC<SearchProps> = ({
           ref={refInput}
           type="text"
           value={val}
-          placeholder={search?.placeholder}
+          placeholder={placeholder}
           onChange={handleChange}
           onKeyDown={onKeyDown}
           onFocus={() => setIsFocus(true)}
@@ -89,16 +95,22 @@ const Search: React.FC<SearchProps> = ({
         />
         <button
           type="button"
-          onClick={() => search?.onSearch && search?.onSearch(val)}
+          onClick={() => onSearch && onSearch(val)}
         >
           <Icon iconName="searchWhite" size="14" />
         </button>
       </div>
-      {isSuggest && (
-        <div
-          className={mapModifiers('t-banner_search-suggest', isFocus && 'open')}
-        >
-          <ul>
+      <div
+        className={mapModifiers('t-banner_search-suggest', isFocus && 'open')}
+      >
+        <ul>
+          {loading && (
+            <li className="empty d-flex justify-content-center">
+              <Icon iconName="loadingBlue" />
+            </li>
+          )}
+          {options?.length > 0 && !loading && (
+          <>
             {options?.map((item, index) => (
               <li
                 onClick={handleSelected(item.keyword)}
@@ -110,9 +122,18 @@ const Search: React.FC<SearchProps> = ({
                 />
               </li>
             ))}
-          </ul>
-        </div>
-      )}
+          </>
+          )}
+          {!options?.length && !loading && (
+            <li className="empty">
+              <Text
+                modifiers={['14x20', '400', 'raisinBlack']}
+                content={t('general.not_found_data')}
+              />
+            </li>
+          )}
+        </ul>
+      </div>
     </div>
   );
 };
