@@ -21,7 +21,7 @@ const recursiveMenuActive = (item: MenuItem, pathname: string, cb: () => void) =
   if (item.importantActive) {
     cb();
   }
-  if (`/${link}` === pathname) {
+  if (`${link}` === pathname) {
     cb();
   } else if (link === '/' && pathname === '/') {
     cb();
