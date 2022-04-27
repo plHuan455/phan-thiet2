@@ -21,7 +21,6 @@ interface SubdivisionCommonTypes {
   color: string;
   description?: string;
   utilityMap?: {
-    active: boolean;
     map: SubdivisionUtilityMapTypes;
   };
 }
