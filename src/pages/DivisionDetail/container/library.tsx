@@ -16,6 +16,8 @@ import Tabs, { Tab } from 'components/organisms/Tabs';
 import PopupImage from 'components/templates/PopupImage';
 import PopupPlayer from 'components/templates/PopupPlayer';
 import { useAsync } from 'hooks/useAsync';
+import i18n from 'i18n';
+import FUNCTIONS_LANGUAGE from 'i18n/functions';
 import { CardImage } from 'pages/News/container/images';
 import { getDocumentsService } from 'services/documents';
 import { DocumentTypes } from 'services/documents/types';
@@ -26,6 +28,7 @@ import { NewsListTypes } from 'services/news/types';
 import { SubdivisionLibraryTypes } from 'services/subdivision/types';
 import { getVideosService } from 'services/videos';
 import { VideoTypes } from 'services/videos/types';
+import { useAppSelector } from 'store/hooks';
 import CONSTANTS from 'utils/constants';
 import { baseURL, getTimePastToCurrent, linkURL } from 'utils/functions';
 
@@ -46,6 +49,7 @@ const dummyData = [
 
 interface LibraryProps {
   subDivisionId?: number;
+  subDivisionName?: string;
   data?: SubdivisionLibraryTypes;
   color?: string;
 }
@@ -83,7 +87,17 @@ const reducer = (state: LibraryState, action: ActionWithPayload) => {
   }
 };
 
-const Library: React.FC<LibraryProps> = ({ data, subDivisionId, color }) => {
+const Library: React.FC<LibraryProps> = ({
+  data, subDivisionId, color, subDivisionName,
+}) => {
+  const staticAll = useAppSelector((state) => state.static.static);
+
+  const { language } = i18n;
+
+  const slugPageNews = staticAll?.find(
+    (e) => e.templateCode === CONSTANTS.TEMPLATE_CODE.NEW_IMAGE,
+  )?.slug;
+
   const settingRef = useRef({
     prevArrow: <Arrow.Prev />,
     nextArrow: <Arrow.Next />,
@@ -179,7 +193,7 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId, color }) => {
               ))}
             </Tabs>
             <div className="d-lg-block d-none">
-              <Link href="/" target="_self">
+              <Link href={`${FUNCTIONS_LANGUAGE.languageURL(language)}${slugPageNews}?keyword=${subDivisionName}`} target="_self">
                 <div className="animate animate-arrowSlide d-flex align-items-center">
                   <Text modifiers={['14x20', '400', 'copper']} content="Xem thêm" />
                   <div className="u-ml-8" />
@@ -329,8 +343,9 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId, color }) => {
           theme={color}
         />
         <div className="d-flex justify-content-center d-lg-none u-mt-32">
-          <Link href="/" target="_self">
+          <Link href={`${FUNCTIONS_LANGUAGE.languageURL(language)}${slugPageNews}?keyword=${subDivisionName}`} target="_self">
             <div className="animate animate-arrowSlide d-flex align-items-center">
+              {/* TODO: Translate later */}
               <Text modifiers={['14x20', '400', 'copper']} content="Xem thêm" />
               <div className="u-ml-8" />
               <Icon iconName="arrowRightCopper" size="16" />
@@ -345,6 +360,7 @@ const Library: React.FC<LibraryProps> = ({ data, subDivisionId, color }) => {
 Library.defaultProps = {
   data: undefined,
   subDivisionId: -1,
+  subDivisionName: undefined,
   color: undefined,
 };
 
