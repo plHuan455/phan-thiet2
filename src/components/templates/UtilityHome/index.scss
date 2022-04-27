@@ -188,17 +188,6 @@
       }
     }
 
-    .slick-vertical {
-      .slick-list {
-        margin-left: rem(-16);
-        margin-right: rem(-16);
-      }
-      .slick-slide {
-        padding-left: rem(16);
-        padding-right: rem(16);
-      }
-    }
-
     .slick-slider {
       .slick-list {
         margin-top: rem(-24);
@@ -207,6 +196,16 @@
       .slick-slide {
         padding-top: rem(24);
         padding-bottom: rem(24);
+      }
+    }
+
+    .slick-vertical {
+      .slick-list {
+        margin-left: rem(-16);
+        margin-right: rem(-16);
+      }
+      .slick-slide {
+        padding: 0 rem(16);
       }
     }
   }
