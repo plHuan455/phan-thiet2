@@ -26,6 +26,7 @@ const Consultancy: React.FC<ConsultancyCommonProps> = ({
   title,
   layer,
   variantButton,
+  ...rest
 }) => {
   const { t } = useTranslation();
   const location = useLocation();
@@ -101,6 +102,7 @@ const Consultancy: React.FC<ConsultancyCommonProps> = ({
 
   return (
     <ConsultancyTemplate
+      {...rest}
       title={title}
       layer={layer}
       form={{
