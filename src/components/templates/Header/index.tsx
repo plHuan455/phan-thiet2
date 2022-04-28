@@ -13,6 +13,7 @@ import Nav from 'components/molecules/Nav';
 import Pulldown, { OptionType } from 'components/molecules/PullDown';
 import Search from 'components/templates/Banner/component';
 import useDetectHeader from 'hooks/useDetectHeader';
+import useKeywords from 'hooks/useKeywords';
 import useWindowScroll from 'hooks/useWindowScroll';
 import { MenuItem } from 'services/menus/types';
 import mapModifiers from 'utils/functions';
@@ -41,6 +42,8 @@ const Header: React.FC<HeaderProps> = ({
   const [isOpenSearch, setIsOpenSearch] = useState(false);
   const [isScroll, setIsScroll] = useState(false);
   const [idExpand, setIdExpand] = useState<Record<'parent' | 'child', number | undefined>>();
+  const [searchVal, setSearchVal] = useState<string | undefined>('');
+  const [isFocusInput, setIsFocusInput] = useState(false);
 
   const refPageYOffset = useRef<number>();
 
@@ -93,10 +96,16 @@ const Header: React.FC<HeaderProps> = ({
 
   const onSearch = (val: string | undefined) => {
     setIsOpenSearch(false);
+    onSubmit(val);
     if (handleSearch) {
       handleSearch(val);
     }
   };
+
+  const { options, isLoading, onSubmit } = useKeywords({
+    searchValue: searchVal,
+    isFocus: isFocusInput,
+  });
 
   return (
     <header id="app-header" className="t-header">
@@ -110,7 +119,14 @@ const Header: React.FC<HeaderProps> = ({
               <Heading type="h2" modifiers={['700', 'uppercase', 'center', 'white']}>
                 {t('form.search')}
               </Heading>
-              <Search placeholder={t('form.search_content')} onSearch={onSearch} />
+              <Search
+                list={options}
+                loading={isLoading}
+                onChange={(keyword) => setSearchVal(keyword)}
+                placeholder={t('form.search_content')}
+                onSearch={onSearch}
+                onFocus={() => setIsFocusInput(true)}
+              />
             </div>
           </div>
           <div className="t-header_wrap">

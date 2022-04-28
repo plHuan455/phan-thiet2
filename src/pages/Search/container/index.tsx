@@ -21,6 +21,7 @@ import { OptionType } from 'components/molecules/PullDown';
 import { CardDivisionProps } from 'components/organisms/Card/Division';
 import { CardNormalProps } from 'components/organisms/Card/Normal';
 import SearchResult from 'components/templates/SearchResult';
+import useKeywords from 'hooks/useKeywords';
 import i18n from 'i18n';
 import { getNewsListService } from 'services/news';
 import { NewsListTypes } from 'services/news/types';
@@ -73,7 +74,7 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
   const bgLeftRef = useRef<HTMLDivElement>(null);
   const { animate, animateReverse } = useAnimation({ ref: bgLeftRef });
   const [searchKeyValue, setSearchKeyValue] = useState('');
-  const [search, setSearch] = useState('');
+  const [isFocusInput, setIsFocusInput] = useState(false);
 
   const keywordParams = useMemo(() => searchParams.get('keyword') || '', [
     searchParams,
@@ -84,15 +85,21 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
     [searchParams],
   );
 
-  const handleSearch = useCallback(() => {
-    if (searchKeyValue) {
-      searchParams.set('keyword', searchKeyValue);
+  const { options, isLoading, onSubmit } = useKeywords({
+    searchValue: searchKeyValue,
+    isFocus: isFocusInput,
+  });
+
+  const handleSearch = useCallback((keyword: string) => {
+    if (keyword) {
+      onSubmit(keyword);
+      searchParams.set('keyword', keyword);
       setSearchParams(searchParams);
     } else {
       searchParams.delete('keyword');
       setSearchParams(searchParams);
     }
-  }, [searchKeyValue, searchParams, setSearchParams]);
+  }, [onSubmit, searchParams, setSearchParams]);
 
   const handleSort = useCallback(
     (option?: OptionType) => {
@@ -107,7 +114,6 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
   useEffect(() => {
     if (keywordParams) {
       setSearchKeyValue(keywordParams);
-      setSearch(keywordParams);
     }
   }, [keywordParams]);
 
@@ -224,14 +230,17 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
       <SearchResult.Wrapper titleMain={pageData.title}>
         <SearchResult.Summary
           value={searchKeyValue}
+          options={options}
+          loading={isLoading}
           placeholder={t('general.search_placeholder')}
           searchText={{
             text: t('general.search_result'),
             length: lengthItem,
-            value: search,
+            value: searchKeyValue,
           }}
-          onChange={(e) => setSearchKeyValue(e.currentTarget.value)}
+          handleChange={(keyword) => setSearchKeyValue(keyword)}
           handleSubmit={handleSearch}
+          handleFocus={() => setIsFocusInput(true)}
         />
         <SearchResult.Filter
           tab={{

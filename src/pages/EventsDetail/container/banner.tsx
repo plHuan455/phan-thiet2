@@ -23,6 +23,7 @@ const Banner: React.FC<BannerProps> = ({
   const { language } = i18n;
   const staticAll = useAppSelector((state) => state.static.static);
   const [searchValue, setSearchValue] = useState<string | undefined>();
+  const [isFocusInput, setIsFocusInput] = useState(false);
 
   const slugPageNews = useMemo(() => staticAll?.find(
     (e) => e.templateCode === CONSTANTS.TEMPLATE_CODE.NEW_IMAGE,
@@ -37,7 +38,11 @@ const Banner: React.FC<BannerProps> = ({
 
   const {
     options, onSubmit, isLoading,
-  } = useKeywords(searchValue, 1);
+  } = useKeywords({
+    searchValue,
+    isPopular: 1,
+    isFocus: isFocusInput,
+  });
 
   const onSearch = (keyword: string | undefined) => {
     if (!keyword) return;
@@ -66,6 +71,7 @@ const Banner: React.FC<BannerProps> = ({
           placeholder: t('form.search_event'),
           onSearch,
           onChange: onChangSearch,
+          onFocus: () => setIsFocusInput(true),
         }}
         tag={{
           keyword: t('general.featured_keywords'),

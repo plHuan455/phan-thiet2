@@ -18,6 +18,7 @@ export interface SearchProps {
   placeholder?: string;
   onSearch?: (val?: string) => void;
   onChange?: (val?: string) => void;
+  onFocus?: () => void;
 }
 
 const Search: React.FC<SearchProps> = ({
@@ -27,10 +28,10 @@ const Search: React.FC<SearchProps> = ({
   placeholder,
   onSearch,
   onChange,
+  onFocus,
 }) => {
   const { t } = useTranslation();
   const [val, setVal] = useState<string>('');
-  const [options, setOptions] = useState<OptionSuggestTypes[]>(list);
   const [isFocus, setIsFocus] = useState(false);
   const refInput = useRef<HTMLInputElement>(null);
 
@@ -60,13 +61,10 @@ const Search: React.FC<SearchProps> = ({
   };
 
   useEffect(() => {
-    if (list && isFocus) {
-      setOptions(list);
-    }
     if (value) {
       setVal(value);
     }
-  }, [list, value, isFocus]);
+  }, [value]);
 
   return (
     <div className="t-banner_search">
@@ -78,7 +76,10 @@ const Search: React.FC<SearchProps> = ({
           placeholder={placeholder}
           onChange={handleChange}
           onKeyDown={onKeyDown}
-          onFocus={() => setIsFocus(true)}
+          onFocus={() => {
+            setIsFocus(true);
+            if (onFocus) onFocus();
+          }}
           onBlur={() => setIsFocus(false)}
         />
         <button
@@ -97,9 +98,9 @@ const Search: React.FC<SearchProps> = ({
               <Icon iconName="loadingBlue" />
             </li>
           )}
-          {options?.length > 0 && !loading && (
+          {list?.length > 0 && !loading && (
           <>
-            {options?.map((item, index) => (
+            {list?.map((item, index) => (
               <li
                 onClick={handleSelected(item.keyword)}
                 key={`t-banner_search-suggest-${index.toString()}`}
@@ -112,7 +113,7 @@ const Search: React.FC<SearchProps> = ({
             ))}
           </>
           )}
-          {!options?.length && !loading && (
+          {!list?.length && !loading && (
             <li className="empty">
               <Text
                 modifiers={['14x20', '400', 'raisinBlack']}
