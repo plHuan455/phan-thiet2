@@ -59,9 +59,11 @@ const Detail: React.FC<DetailProps> = ({
         <Animate type="fadeInUp" extendClassName="t-detail_content">
           <div className="t-detail_sub">
             <ul>
+              {timeLeave && (
               <li>
                 <Text modifiers={['12x20', 'davyGrey']} content={timeLeave} />
               </li>
+              )}
               <li>
                 <Text modifiers={['12x20', 'davyGrey']} content={dateLeave} />
               </li>

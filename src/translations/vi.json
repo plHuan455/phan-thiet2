@@ -27,7 +27,8 @@
     "document": "Tài liệu khác",
     "videos": "Videos",
     "search_result": "kết quả tìm thấy cho",
-    "search_placeholder": "Tìm kiếm"
+    "search_placeholder": "Tìm kiếm",
+    "countdown": "Còn {{ totalHours }}:{{ mins }}:{{ secs }}"
   },
   "form": {
     "contact_name": "HỌ VÀ TÊN",

@@ -1,11 +1,11 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import Icon, { IconName } from 'components/atoms/Icon';
 import Image from 'components/atoms/Image';
 import Link from 'components/atoms/Link';
 import Text from 'components/atoms/Text';
 import useCountDown from 'hooks/useCountDown';
-import i18n from 'i18n';
 import mapModifiers from 'utils/functions';
 
 export interface CardEventProps {
@@ -28,9 +28,9 @@ const CardEvent: React.FC<CardEventProps> = ({
   summary,
   button,
 }) => {
+  const { t } = useTranslation();
   const { totalHours, mins, secs } = useCountDown({ endTime });
   const isEnd = !Number(totalHours) && !Number(mins) && !Number(secs);
-  const { language } = i18n;
 
   return (
     <div className={mapModifiers('o-cardEvent', isEnd && 'end')}>
@@ -39,15 +39,7 @@ const CardEvent: React.FC<CardEventProps> = ({
           <Image alt={title} ratio="354x199" src={thumbnail} />
           <div className="o-cardEvent_endtime">
             <Text modifiers={['400', '14x20', 'white']}>
-              {language === 'vi' && 'Còn'}
-              {' '}
-              {totalHours}
-              :
-              {mins}
-              :
-              {secs}
-              {' '}
-              {language !== 'vi' && 'left'}
+              {t('general.countdown', { totalHours, mins, secs })}
             </Text>
           </div>
         </div>

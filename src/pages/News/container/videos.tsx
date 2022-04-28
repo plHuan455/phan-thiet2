@@ -68,7 +68,7 @@ const Videos: React.FC<VideoProps> = ({ videos, blocks }) => {
         text: item.subdivision?.name,
         url: redirectURL(CONSTANTS.PREFIX.DIVISION, item.slug, language),
       },
-      datetime: item?.publishedAt ? getTimePastToCurrent(item.publishedAt) : undefined,
+      dateTime: getTimePastToCurrent(item.publishedAt),
       onClick: () => {
         updatePlayerState({
           isOpen: true,

@@ -1,4 +1,16 @@
+import dayjs from 'dayjs';
+import dayjsEN from 'dayjs/locale/en';
+import dayjsJA from 'dayjs/locale/ja';
+import dayjsKO from 'dayjs/locale/ko';
+import dayjsVI from 'dayjs/locale/vi';
+import dayjsZH from 'dayjs/locale/zh';
+import relativeTime from 'dayjs/plugin/relativeTime';
+
+import i18n from 'i18n';
+
 export const BASE_URL = process.env.REACT_APP_BASE_URL;
+
+dayjs.extend(relativeTime);
 
 function mapModifiers(
   baseClassName: string,
@@ -164,18 +176,37 @@ export const youtubeControlIframe = (url: string) => `<iframe src="https://www.y
   url,
 )}?autoplay=1&disablekb=1&enable&controls=1&jsapi=1&loop=1&modestbranding=1&playsinline=1&color=white&mute=0" frameborder="0" allowfullscreen allow="autoplay" autoplay></iframe>`;
 
-export const getTimePastToCurrent = (date?: string) => {
+export const getTimePastToCurrent = (date?: string, isHide?: boolean) => {
   if (!date) return '';
-  const dateFormat = new Date(date).getTime();
-  const toDay = new Date().getTime();
-  const distance = toDay - dateFormat;
-  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const { language } = i18n;
+  const now = dayjs();
+  const currentDate = dayjs(new Date(date));
 
-  if (days > 0) return `${days} ngày trước`;
-  if (hours > 0) return `${hours} giờ trước`;
-  return `${mins > 0 ? mins : 1} phút trước`;
+  const locale = () => {
+    switch (language) {
+      case 'en':
+        return dayjsEN;
+      case 'ja':
+        return dayjsJA;
+      case 'KO':
+        return dayjsKO;
+      case 'ZH':
+        return dayjsZH;
+      default:
+        return dayjsVI;
+    }
+  };
+
+  const distanceDay = dayjs(now).diff(currentDate, 'day');
+  const distanceHour = dayjs(now).diff(currentDate, 'hour');
+
+  if (distanceDay === 0 && distanceHour < 21) {
+    return currentDate.locale(language, locale()).fromNow();
+  }
+  if (((distanceDay === 0 && distanceHour > 20) || distanceDay > 0) && isHide) {
+    return '';
+  }
+  return currentDate.format('DD/MM/YYYY');
 };
 
 export const getSearchParams = (path: string) => Object.fromEntries(new URLSearchParams(path));

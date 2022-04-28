@@ -36,7 +36,7 @@ const Screen: React.FC = () => {
   const newsDetailData = useMemo(() : DetailProps => ({
     content: baseString(data?.description),
     title: baseString(data?.title),
-    timeLeave: getTimePastToCurrent(data?.startDate),
+    timeLeave: getTimePastToCurrent(data?.startDate, true),
     dateLeave: dayjs(data?.startDate).format('DD/MM/YYYY'),
     tags: data?.tags.map((item) => ({
       href: `${FUNCTIONS_LANGUAGE.languageURL(language)}${slugPage}?keyword=${item.name}`,
