@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import { useEffect, useState } from 'react';
 
 interface CountDownHookProps {
@@ -52,8 +53,11 @@ const useCountDown = ({ endTime }: CountDownHookProps) => {
       if (distance < 0) {
         clearInterval(countdown);
       }
-      return () => clearInterval(countdown);
     }, 1000);
+
+    return () => {
+      clearInterval(countdown);
+    };
   }, [endTime]);
 
   return timer;

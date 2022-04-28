@@ -10,7 +10,7 @@ import mapModifiers from 'utils/functions';
 
 export interface CardEventProps {
   endTime?: string;
-  thumbnail: string;
+  thumbnail?: string;
   tag?: LinkTypes;
   title?: string;
   summary?: {

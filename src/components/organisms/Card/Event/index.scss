@@ -12,6 +12,7 @@
   }
 
   &_endtime {
+    min-width: rem(120);
     background: $gradient-green;
     border-radius: rem(8) 0 0 rem(8);
     padding: rem(4) rem(8);
