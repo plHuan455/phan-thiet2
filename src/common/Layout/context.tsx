@@ -79,7 +79,7 @@ const LayoutProvider: React.FC = ({ children }) => {
       address: x.addressText,
       subTitle: '',
       contact: {
-        label: t('general.contact'),
+        label: `${t('general.contact')}: `,
         value: x.phone,
       },
     })) || [];
