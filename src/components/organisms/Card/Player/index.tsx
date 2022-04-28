@@ -36,8 +36,7 @@ const CardPlayer: React.FC<CardPlayerProps> = ({
       <div className="o-cardPlayer_title">
         <Text modifiers={['700', '14x20', 'raisinBlack']} content={title} />
       </div>
-      <div className="u-mt-12 flex-grow-1" />
-      <div className="d-flex align-items-center">
+      <div className="o-cardPlayer_tag d-flex align-items-end">
         <Text modifiers={['400', '12x20', 'davyGrey']} content={dateTime} />
         {tag && (
           <>

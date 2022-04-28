@@ -112,7 +112,6 @@ const LanguageProvider: React.FC = ({ children }) => {
     if (inActiveLocale && locale) {
       i18n.changeLanguage(locale?.value, () => {
         setLocaleSelected(locale);
-        setFlag(!flag);
 
         if (pageTranslation?.length) {
           const translation = pageTranslation.find((e) => e.locale === locale.value);
@@ -129,6 +128,7 @@ const LanguageProvider: React.FC = ({ children }) => {
         } else {
           navigate(FUNCTIONS.languageURL(locale?.value));
         }
+        setFlag(!flag);
       });
     }
     if (!inActiveLocale && dataSystems) {
