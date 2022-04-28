@@ -23,7 +23,7 @@ const Events: React.FC<SectionBlocks> = ({ blocks }) => {
     'getEventListHome', () => getEventListService(),
   );
 
-  const eventsData = useMemo(() => eventList?.data?.slice(1).map((item) => ({
+  const eventsData = useMemo(() => eventList?.data?.map((item) => ({
     thumbnail: baseURL(item.thumbnail),
     tag: {
       text: item.subdivision?.name,
@@ -50,6 +50,7 @@ const Events: React.FC<SectionBlocks> = ({ blocks }) => {
       text: t('button.detail'),
       url: redirectURL(CONSTANTS.PREFIX.EVENT, item.slug, language),
     },
+
   })), [eventList, language, t]);
   return (
     <section className="u-pt-md-80 u-pb-48 u-pt-48 u-pb-md-80 position-relative">

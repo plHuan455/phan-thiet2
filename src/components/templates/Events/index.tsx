@@ -1,4 +1,5 @@
-import React from 'react';
+import dayjs from 'dayjs';
+import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import Container from 'common/Container';
@@ -22,15 +23,42 @@ export interface EventsProps {
 const Events: React.FC<EventsProps> = ({
   title = '',
   button,
-  listEvents = [],
+  listEvents,
 }) => {
-  const firstItem = listEvents[0] || undefined;
-  const anotherItem = listEvents?.slice(1) || [];
   const { t } = useTranslation();
+  const [firstItem, setFirstItem] = useState<CardEventProps | undefined>();
+  const [anotherItem, setAnotherItem] = useState<CardEventProps[]>([]);
 
   const {
     days, hours, mins, secs,
   } = useCountDown({ endTime: firstItem?.endTime });
+
+  const isEnd = (!Number(days) && !Number(hours) && !Number(mins) && !Number(secs));
+  const isFirst = useRef(true);
+
+  useEffect(() => {
+    if (isEnd && isFirst && !isFirst.current) {
+      const cloneAnotherItem = [...anotherItem];
+      const cloneFirstItem = firstItem;
+      const itemIndexHasEvent = anotherItem.findIndex(
+        (item) => (dayjs(new Date()).isBefore(item.endTime)),
+      );
+      setFirstItem(cloneAnotherItem[itemIndexHasEvent]);
+      if (cloneFirstItem) {
+        cloneAnotherItem.push(cloneFirstItem);
+        setAnotherItem(cloneAnotherItem.filter((_, index) => index !== itemIndexHasEvent));
+      }
+    }
+    if (listEvents?.length && isFirst.current) {
+      const itemIndexHasEvent = listEvents.findIndex(
+        (item) => (dayjs(new Date()).isBefore(item.endTime)),
+      );
+      setFirstItem(listEvents[itemIndexHasEvent]);
+      setAnotherItem(listEvents.filter((_, index) => index !== itemIndexHasEvent));
+      isFirst.current = false;
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isEnd, listEvents]);
 
   return (
     <div className="t-events">
@@ -150,10 +178,6 @@ const Events: React.FC<EventsProps> = ({
       </Container>
     </div>
   );
-};
-
-Events.defaultProps = {
-
 };
 
 export default Events;
