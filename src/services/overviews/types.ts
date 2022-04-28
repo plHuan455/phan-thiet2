@@ -84,14 +84,7 @@ export interface OverviewType {
 
 export interface OverviewParams {
   keyword?: string;
-  news_limit?: number;
-  news_page?: number;
-  video_limit?: number;
-  video_page?: number;
-  image_limit?: number;
-  image_page?:number;
-  document_limit?: number;
-  document_page?: number;
-  event_limit?: number;
-  event_page?: number;
+  limit?: number;
+  page?: number;
+  type?: 'news' | 'video' | 'image' | 'document' | 'event';
 }

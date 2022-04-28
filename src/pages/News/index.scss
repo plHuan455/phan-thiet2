@@ -95,6 +95,7 @@
 
   .o-cardImage {
     cursor: pointer;
+
     &_wrapper {
       position: relative;
       border-radius: rem(12);
@@ -233,5 +234,22 @@
         max-width: rem(100);
       }
     }
+  }
+  
+  &_seeMore {
+    width: fit-content;
+    min-width: rem(217);
+    margin: rem(45) auto 0;
+    @include mobile-down {
+      margin: rem(30) auto 0;
+      min-width: rem(170)
+    }
+    .a-button {
+      width: 100%;
+    }
+  }
+
+  .loading-block {
+    pointer-events: none;
   }
 }

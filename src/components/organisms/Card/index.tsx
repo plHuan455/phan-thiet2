@@ -1,24 +1,13 @@
-import React from 'react';
+import CardDivision from './Division';
+import CardEvent from './Event';
+import CardFeedback from './Feedback';
+import CardLayer from './Layer';
+import CardLoadMore from './LoadMore';
+import CardNews from './News';
+import CardNormal from './Normal';
+import CardPlayer from './Player';
 
-import CardDivision, { CardDivisionProps } from './Division';
-import CardEvent, { CardEventProps } from './Event';
-import CardFeedback, { CardFeedbackProps } from './Feedback';
-import CardLayer, { CardLayerProps } from './Layer';
-import CardNews, { CardNewsProps } from './News';
-import CardNormal, { CardNormalProps } from './Normal';
-import CardPlayer, { CardPlayerProps } from './Player';
-
-interface CardResponse {
-  Player: React.FC<CardPlayerProps>;
-  Event: React.FC<CardEventProps>;
-  Normal: React.FC<CardNormalProps>;
-  Division: React.FC<CardDivisionProps>;
-  Feedback: React.FC<CardFeedbackProps>;
-  Layer: React.FC<CardLayerProps>;
-  News: React.FC<CardNewsProps>;
-}
-
-const Card: CardResponse = {
+const Card = {
   Player: CardPlayer,
   Event: CardEvent,
   Normal: CardNormal,
@@ -26,6 +15,7 @@ const Card: CardResponse = {
   Feedback: CardFeedback,
   Layer: CardLayer,
   News: CardNews,
+  LoadMore: CardLoadMore,
 };
 
 export default Card;

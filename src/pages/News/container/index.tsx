@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
 import { useSearchParams } from 'react-router-dom';
 
@@ -14,6 +15,8 @@ import News from './news';
 import Videos from './videos';
 
 import HelmetContainer from 'common/Helmet';
+import Icon from 'components/atoms/Icon';
+import Text from 'components/atoms/Text';
 import i18n from 'i18n';
 import { getOverviewListService } from 'services/overviews';
 import { getOgDataPage } from 'utils/functions';
@@ -28,13 +31,16 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
   pageData,
   seoData,
 }) => {
+  const { t } = useTranslation();
   const { language } = i18n;
   const [searchParams] = useSearchParams();
   const keywordParams = useMemo(() => searchParams.get('keyword') || '', [
     searchParams,
   ]);
-  const { data } = useQuery(['getOverviewList', [language, keywordParams]], () => getOverviewListService({
+  const { data, isLoading } = useQuery(['getOverviewList', [language, keywordParams]], () => getOverviewListService({
     keyword: keywordParams,
+    limit: 6,
+    page: 1,
   }));
 
   const tabMenu = useTab({
@@ -46,6 +52,15 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
     '--theme': '#005C8F',
   }), []);
 
+  const checkHasData = useMemo(
+    () => !data?.documents.total
+          && !data?.events.total
+          && !data?.images.total
+          && !data?.news.total
+          && !data?.videos.total,
+    [data],
+  );
+
   return (
     <>
       <HelmetContainer seoData={seoData} ogData={getOgDataPage(pageData)} />
@@ -54,20 +69,30 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
         {...tabMenu}
       />
       <div style={styles}>
+        {isLoading && (
+        <div className="d-flex justify-content-center u-mt-100 u-mb-60">
+          <Icon iconName="loadingInherit" size="40" />
+        </div>
+        )}
+        {checkHasData && !isLoading && (
+        <div className="u-mt-100 u-mb-60">
+          <Text modifiers={['gradientGreen', 'center', '500', '20x32']}>{t('general.not_found_data')}</Text>
+        </div>
+        )}
         <div ref={tabMenu.menuList[0].ref}>
-          <News news={data?.news} blocks={blocks} />
+          <News news={data?.news} blocks={blocks} keyword={keywordParams} />
         </div>
         <div ref={tabMenu.menuList[1].ref}>
-          <Events events={data?.events} blocks={blocks} />
+          <Events events={data?.events} blocks={blocks} keyword={keywordParams} />
         </div>
         <div ref={tabMenu.menuList[2].ref}>
-          <Images images={data?.images} blocks={blocks} />
+          <Images images={data?.images} blocks={blocks} keyword={keywordParams} />
         </div>
         <div ref={tabMenu.menuList[3].ref}>
-          <Videos videos={data?.videos} blocks={blocks} />
+          <Videos videos={data?.videos} blocks={blocks} keyword={keywordParams} />
         </div>
         <div ref={tabMenu.menuList[4].ref}>
-          <Documents documents={data?.documents} blocks={blocks} />
+          <Documents documents={data?.documents} blocks={blocks} keyword={keywordParams} />
         </div>
         <div>
           <Consultancy blocks={blocks} />

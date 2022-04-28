@@ -1,11 +1,19 @@
-import React, { useReducer, useMemo } from 'react';
+import React, {
+  useReducer, useMemo, useState, useCallback, useEffect,
+} from 'react';
+
+import settings from '../hook/settings';
 
 import Section from './section';
 
 import Container from 'common/Container';
 import FlatMore from 'common/FlatMore';
 import Image from 'components/atoms/Image';
+import Card from 'components/organisms/Card';
 import PopupImage from 'components/templates/PopupImage';
+import { useAsync } from 'hooks/useAsync';
+import useScrollInfinite from 'hooks/useScrollInfinite';
+import { getOverviewListService } from 'services/overviews';
 import { OverviewImageType, PaginationOverview } from 'services/overviews/types';
 import { baseString, baseURL, getBlockData } from 'utils/functions';
 
@@ -31,6 +39,7 @@ interface ImagesBlock {
 }
 interface ImagesProps extends SectionBlocks {
   images?: PaginationOverview<OverviewImageType>;
+  keyword?: string;
 }
 
 const reducer = (state: ImageState, action: ActionWithPayload) => {
@@ -42,7 +51,7 @@ const reducer = (state: ImageState, action: ActionWithPayload) => {
   }
 };
 
-export const CardImage: React.FC<CardImageProps> = ({
+export const CardImage:React.FC<CardImageProps> = ({
   thumbnail,
   alt,
   handleClick,
@@ -59,13 +68,20 @@ export const CardImage: React.FC<CardImageProps> = ({
   </div>
 );
 
-const Images: React.FC<ImagesProps> = ({ images, blocks }) => {
+type Meta = {
+  page: number;
+  lastPage: number;
+}
+
+const Images: React.FC<ImagesProps> = ({ images, blocks, keyword }) => {
   const imageBlocks = getBlockData<ImagesBlock>('image', blocks);
 
   const [state, dispatch] = useReducer(reducer, {
     isOpen: false,
     currentImgIdx: 0,
   });
+  const [meta, setMeta] = useState<Meta>({ page: 1, lastPage: 1 });
+  const [dataLoadMore, setDataLoadMore] = useState<CardImageProps[]>([]);
 
   const updateImageState = (payload: ImageState) => {
     dispatch({
@@ -74,17 +90,61 @@ const Images: React.FC<ImagesProps> = ({ images, blocks }) => {
     });
   };
 
-  const imageList = useMemo(() => images?.data.map((item) => ({
+  const formatData = useCallback((item:OverviewImageType):CardImageProps => ({
     thumbnail: baseURL(item.path),
-  })) || [], [images]);
+  }), []);
 
-  if (!images?.data.length) return null;
+  const [imageExecute, imagesState] = useAsync(getOverviewListService, {
+    onSuccess: (res) => {
+      const result = res.images.data.map(formatData);
+      setMeta((prev) => ({ ...prev, page: res.images.currentPage }));
+      setDataLoadMore(
+        (prev) => ([...(prev || []), ...result]),
+      );
+    },
+  });
+
+  const dataInitial = useMemo(
+    () => images?.data.map(formatData) || [],
+    [formatData, images?.data],
+  );
+
+  const imageList = useMemo(() => [...dataInitial, ...dataLoadMore], [dataInitial, dataLoadMore]);
+
+  useEffect(() => {
+    setDataLoadMore([]);
+    if (images) {
+      setMeta({
+        page: images.currentPage,
+        lastPage: images.lastPage,
+      });
+    }
+  }, [images]);
+
+  const handleLoadMore = useCallback(() => {
+    if (!imagesState.loading
+      && meta.page < meta.lastPage) {
+      imageExecute({
+        limit: 6,
+        page: meta.page + 1,
+        keyword,
+        type: 'image',
+      });
+    }
+  }, [imageExecute, imagesState.loading, keyword, meta]);
+
+  const { setNode } = useScrollInfinite(handleLoadMore);
+
+  if (!images?.total) return null;
 
   return (
     <Section>
-      <div className="s-images">
+      <div className={`s-images ${imagesState.loading ? 'loading-block' : ''}`}>
         <Container>
           <FlatMore
+            settings={{
+              ...settings(),
+            }}
             title={{
               text: baseString(imageBlocks?.title),
               type: 'h4',
@@ -92,10 +152,15 @@ const Images: React.FC<ImagesProps> = ({ images, blocks }) => {
             }}
             data={imageList}
             render={(item, itemIdx) => (
-              <CardImage
-                {...item}
-                handleClick={() => updateImageState({ isOpen: true, currentImgIdx: itemIdx })}
-              />
+              <Card.LoadMore
+                ref={(ref) => (itemIdx === imageList.length - 1 ? setNode(ref) : undefined)}
+                loading={itemIdx === imageList.length - 1 && imagesState.loading}
+              >
+                <CardImage
+                  {...item}
+                  handleClick={() => updateImageState({ isOpen: true, currentImgIdx: itemIdx })}
+                />
+              </Card.LoadMore>
             )}
           />
         </Container>
@@ -104,6 +169,8 @@ const Images: React.FC<ImagesProps> = ({ images, blocks }) => {
           handleClose={() => updateImageState({ isOpen: false })}
           currentImgIdx={state.currentImgIdx}
           dataImageList={imageList?.map((item) => item.thumbnail) || []}
+          handleLoadMore={handleLoadMore}
+          loading={imagesState.loading}
         />
       </div>
     </Section>
@@ -112,6 +179,7 @@ const Images: React.FC<ImagesProps> = ({ images, blocks }) => {
 
 Images.defaultProps = {
   images: undefined,
+  keyword: undefined,
 };
 
 export default Images;
