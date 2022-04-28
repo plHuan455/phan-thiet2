@@ -241,7 +241,7 @@ const Library: React.FC<LibraryProps> = ({
             )
               : (
                 <Text modifiers={['14x20', '400', 'inherit', 'center']}>
-                  {t('general_not_found_data')}
+                  {t('general.not_found_data')}
                 </Text>
               ))}
 
@@ -261,7 +261,7 @@ const Library: React.FC<LibraryProps> = ({
             )
               : (
                 <Text modifiers={['14x20', '400', 'inherit', 'center']}>
-                  {t('general_not_found_data')}
+                  {t('general.not_found_data')}
                 </Text>
               ))}
 
@@ -300,7 +300,7 @@ const Library: React.FC<LibraryProps> = ({
             )
               : (
                 <Text modifiers={['14x20', '400', 'inherit', 'center']}>
-                  {t('general_not_found_data')}
+                  {t('general.not_found_data')}
                 </Text>
               ))}
 
@@ -316,6 +316,11 @@ const Library: React.FC<LibraryProps> = ({
                     href={item.link.includes('http') ? item.link : linkURL(item.link)}
                     target="_blank"
                     title={item.name}
+                    tag={{
+                      text: item?.subdivision?.name,
+                      url: redirectURL(CONSTANTS.PREFIX.DIVISION,
+                        item?.subdivision?.slug, language),
+                    }}
                     dateTime={getTimePastToCurrent(item.publishedAt)}
                     url={{
                       text: t('button.download'),
@@ -328,7 +333,7 @@ const Library: React.FC<LibraryProps> = ({
             )
               : (
                 <Text modifiers={['14x20', '400', 'inherit', 'center']}>
-                  {t('general_not_found_data')}
+                  {t('general.not_found_data')}
                 </Text>
               ))}
         </Animate>

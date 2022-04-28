@@ -27,7 +27,8 @@
     "document": "Different document",
     "videos": "Videos",
     "search_result": "Results found for",
-    "search_placeholder": "Search"
+    "search_placeholder": "Search",
+    "countdown": "{{ totalHours }}:{{ mins }}:{{ secs }} left"
   },
   "form": {
     "contact_name": "NAME",
