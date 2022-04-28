@@ -32,7 +32,8 @@ export interface SearchTopProps extends React.InputHTMLAttributes<HTMLInputEleme
   loading?: boolean;
   options?: OptionSuggestTypes[];
   handleChange?: (keyword: string) => void;
-}
+  handleFocus?: () => void;
+ }
 
 const SearchTop = React.memo<
   SearchTopProps
@@ -42,6 +43,7 @@ const SearchTop = React.memo<
   options,
   loading,
   handleChange,
+  handleFocus,
   ...rest
 }) => {
   const [isFocus, setIsFocus] = useState(false);
@@ -101,7 +103,10 @@ const SearchTop = React.memo<
             type="text"
             autoComplete="off"
             onChange={onChange}
-            onFocus={() => setIsFocus(true)}
+            onFocus={() => {
+              setIsFocus(true);
+              if (handleFocus) handleFocus();
+            }}
             onKeyDown={onKeyDown}
           />
           <button className="t-searchResult_searchInput_btn" type="button" onClick={onSubmit}>

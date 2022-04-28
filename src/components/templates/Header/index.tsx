@@ -43,6 +43,7 @@ const Header: React.FC<HeaderProps> = ({
   const [isScroll, setIsScroll] = useState(false);
   const [idExpand, setIdExpand] = useState<Record<'parent' | 'child', number | undefined>>();
   const [searchVal, setSearchVal] = useState<string | undefined>('');
+  const [isFocusInput, setIsFocusInput] = useState(false);
 
   const refPageYOffset = useRef<number>();
 
@@ -95,12 +96,16 @@ const Header: React.FC<HeaderProps> = ({
 
   const onSearch = (val: string | undefined) => {
     setIsOpenSearch(false);
+    onSubmit(val);
     if (handleSearch) {
       handleSearch(val);
     }
   };
 
-  const { options, isLoading } = useKeywords(searchVal);
+  const { options, isLoading, onSubmit } = useKeywords({
+    searchValue: searchVal,
+    isFocus: isFocusInput,
+  });
 
   return (
     <header id="app-header" className="t-header">
@@ -114,7 +119,14 @@ const Header: React.FC<HeaderProps> = ({
               <Heading type="h2" modifiers={['700', 'uppercase', 'center', 'white']}>
                 {t('form.search')}
               </Heading>
-              <Search list={options} loading={isLoading} onChange={(keyword) => setSearchVal(keyword)} placeholder={t('form.search_content')} onSearch={onSearch} />
+              <Search
+                list={options}
+                loading={isLoading}
+                onChange={(keyword) => setSearchVal(keyword)}
+                placeholder={t('form.search_content')}
+                onSearch={onSearch}
+                onFocus={() => setIsFocusInput(true)}
+              />
             </div>
           </div>
           <div className="t-header_wrap">

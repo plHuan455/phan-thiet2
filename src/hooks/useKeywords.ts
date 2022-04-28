@@ -13,7 +13,13 @@ import useDebounceInput from './useDebounceInput';
 import i18n from 'i18n';
 import getKeywordService, { postKeywordService } from 'services/keyword';
 
-const useKeywords = (searchValue?: string, isPopular?: number) => {
+type KeywordsTypes = {
+  searchValue?: string;
+  isPopular?: number;
+  isFocus?: boolean;
+}
+
+const useKeywords = ({ searchValue, isPopular, isFocus }: KeywordsTypes) => {
   const { executeRecaptcha } = useGoogleReCaptcha();
   const { language } = i18n;
   const searchDebounceValue = useDebounceInput(searchValue, 1000);
@@ -26,7 +32,10 @@ const useKeywords = (searchValue?: string, isPopular?: number) => {
     limit: 15,
     page: 1,
     is_popular: isPopular,
-  }));
+  }),
+  {
+    enabled: isFocus,
+  });
 
   const options = useMemo(() => keywords?.data?.map((e) => ({
     id: String(e.id),

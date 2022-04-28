@@ -25,6 +25,7 @@ const Banner: React.FC<BannerProps> = ({ thumbnail }) => {
     (e) => e.templateCode === CONSTANTS.TEMPLATE_CODE.NEW_IMAGE,
   )?.slug, [staticAll]);
   const [searchValue, setSearchValue] = useState<string | undefined>();
+  const [isFocusInput, setIsFocusInput] = useState(false);
 
   const blockBanner = useMemo(() => baseURL(thumbnail), [thumbnail]);
 
@@ -37,7 +38,7 @@ const Banner: React.FC<BannerProps> = ({ thumbnail }) => {
 
   const {
     options, onSubmit, isLoading,
-  } = useKeywords(searchValue, 1);
+  } = useKeywords({ searchValue, isPopular: 1, isFocus: isFocusInput });
 
   const onSearch = (keyword: string | undefined) => {
     if (!keyword) return;
@@ -65,6 +66,7 @@ const Banner: React.FC<BannerProps> = ({ thumbnail }) => {
           placeholder: t('form.search_news'),
           onSearch,
           onChange: onChangSearch,
+          onFocus: () => setIsFocusInput(true),
         }}
         tag={{
           keyword: t('general.featured_keywords'),

@@ -51,7 +51,10 @@ const Banner: React.FC<Pick<BasePageDataTypes<any>, 'banners' | 'blocks'>> = ({ 
     });
   }, [blocks]);
 
-  const { options, onSubmit, isLoading } = useKeywords(searchValue, 1);
+  const { options, onSubmit, isLoading } = useKeywords({
+    searchValue,
+    isPopular: 1,
+  });
 
   useEffect(() => {
     setSearchValue(keywordParams);

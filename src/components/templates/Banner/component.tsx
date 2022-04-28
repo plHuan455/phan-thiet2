@@ -18,6 +18,7 @@ export interface SearchProps {
   placeholder?: string;
   onSearch?: (val?: string) => void;
   onChange?: (val?: string) => void;
+  onFocus?: () => void;
 }
 
 const Search: React.FC<SearchProps> = ({
@@ -27,6 +28,7 @@ const Search: React.FC<SearchProps> = ({
   placeholder,
   onSearch,
   onChange,
+  onFocus,
 }) => {
   const { t } = useTranslation();
   const [val, setVal] = useState<string>('');
@@ -74,7 +76,10 @@ const Search: React.FC<SearchProps> = ({
           placeholder={placeholder}
           onChange={handleChange}
           onKeyDown={onKeyDown}
-          onFocus={() => setIsFocus(true)}
+          onFocus={() => {
+            setIsFocus(true);
+            if (onFocus) onFocus();
+          }}
           onBlur={() => setIsFocus(false)}
         />
         <button

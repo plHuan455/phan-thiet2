@@ -61,10 +61,7 @@
       visibility: hidden;
       width: 100%;
       max-width: calc(100% - 32px);
-
-      @include mobile-down {
-        max-width: calc(100% - 34px);
-      }
+      z-index: 2;
 
       &-open {
         max-height: rem(300);

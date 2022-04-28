@@ -74,6 +74,7 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
   const bgLeftRef = useRef<HTMLDivElement>(null);
   const { animate, animateReverse } = useAnimation({ ref: bgLeftRef });
   const [searchKeyValue, setSearchKeyValue] = useState('');
+  const [isFocusInput, setIsFocusInput] = useState(false);
 
   const keywordParams = useMemo(() => searchParams.get('keyword') || '', [
     searchParams,
@@ -84,15 +85,21 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
     [searchParams],
   );
 
+  const { options, isLoading, onSubmit } = useKeywords({
+    searchValue: searchKeyValue,
+    isFocus: isFocusInput,
+  });
+
   const handleSearch = useCallback((keyword: string) => {
     if (keyword) {
+      onSubmit(keyword);
       searchParams.set('keyword', keyword);
       setSearchParams(searchParams);
     } else {
       searchParams.delete('keyword');
       setSearchParams(searchParams);
     }
-  }, [searchParams, setSearchParams]);
+  }, [onSubmit, searchParams, setSearchParams]);
 
   const handleSort = useCallback(
     (option?: OptionType) => {
@@ -206,8 +213,6 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
     [tabActive, newsList, subdivisionList],
   );
 
-  const { options, isLoading } = useKeywords(searchKeyValue);
-
   return (
     <>
       <HelmetContainer seoData={seoData} ogData={getOgDataPage(pageData)} />
@@ -235,6 +240,7 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
           }}
           handleChange={(keyword) => setSearchKeyValue(keyword)}
           handleSubmit={handleSearch}
+          handleFocus={() => setIsFocusInput(true)}
         />
         <SearchResult.Filter
           tab={{
