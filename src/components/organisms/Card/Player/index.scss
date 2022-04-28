@@ -42,4 +42,28 @@
       flex-direction: column-reverse;
     }
   }
+
+  &_title {
+    #{$root}-reverse & {
+      flex-grow: 1;
+      margin-top: rem(12);
+
+      @include mobile-down {
+        margin-top: rem(8);
+      }
+    }
+  }
+
+  &_tag {
+    flex-grow: 1;
+    margin-top: rem(12);
+
+    @include mobile-down {
+      margin-top: rem(8);
+    }
+    
+    #{$root}-reverse & {
+      flex-grow: 0;
+    }
+  }
 }
