@@ -15,6 +15,7 @@ import Nav from 'components/molecules/Nav';
 import Pulldown, { OptionType } from 'components/molecules/PullDown';
 import Search from 'components/templates/Banner/component';
 import useDetectHeader from 'hooks/useDetectHeader';
+import useKeywords from 'hooks/useKeywords';
 import useWindowScroll from 'hooks/useWindowScroll';
 import { MenuItem } from 'services/menus/types';
 import mapModifiers from 'utils/functions';
@@ -46,6 +47,7 @@ const HeaderDivision: React.FC<HeaderDivisionProps> = ({
   const [isOpenSearch, setIsOpenSearch] = useState(false);
   const [isScroll, setIsScroll] = useState(false);
   const [idExpand, setIdExpand] = useState<Record<'parent' | 'child', number | undefined>>();
+  const [searchVal, setSearchVal] = useState<string | undefined>();
 
   const refPageYOffset = useRef<number>();
 
@@ -112,6 +114,8 @@ const HeaderDivision: React.FC<HeaderDivisionProps> = ({
     }
   };
 
+  const { options, isLoading } = useKeywords(searchVal);
+
   return (
     <header className="t-headerDivision">
       <div className="t-headerDivision_subHeader">
@@ -131,7 +135,7 @@ const HeaderDivision: React.FC<HeaderDivisionProps> = ({
               <Heading type="h2" modifiers={['700', 'uppercase', 'center', 'white']}>
                 {t('form.search')}
               </Heading>
-              <Search placeholder={t('form.search_content')} onSearch={onSearch} />
+              <Search list={options} loading={isLoading} onChange={(keyword) => setSearchVal(keyword)} placeholder={t('form.search_content')} onSearch={onSearch} />
             </div>
           </div>
           <div className="t-headerDivision_wrap">
