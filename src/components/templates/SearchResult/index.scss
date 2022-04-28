@@ -13,6 +13,7 @@
     margin: auto;
     margin-top: rem(40);
     max-width: rem(740);
+    position: relative;
 
     @include mobile-down {
       margin-top: rem(26);
@@ -46,6 +47,56 @@
         width: rem(32);
       }
     }
+
+    &-suggest {
+      background: $white;
+      border-radius: rem(4);
+      left: 0;
+      margin-top: rem(4);
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      position: absolute;
+      transition: all $transition ease-in;
+      visibility: hidden;
+      width: 100%;
+      max-width: calc(100% - 32px);
+
+      @include mobile-down {
+        max-width: calc(100% - 34px);
+      }
+
+      &-open {
+        max-height: rem(300);
+        opacity: 1;
+        visibility: visible;
+      }
+
+      ul {
+        max-height: calc(35px * 4);
+        overflow-y: auto;
+        @include scroll-bars(4, $gradient-green,$antique-white, 0, 0);
+
+        @include mobile-down {
+          max-height: calc(36px * 3);
+        }
+
+        li {
+          padding: rem(6) rem(4);
+          
+          &:not(.empty) {
+            cursor: pointer;
+            &:hover {
+              background: $gradient-green;
+  
+              .a-text {
+                color: $white;
+              }
+            }
+          }
+        }
+      }
+    }    
   }
 
   &_wrapTabs {

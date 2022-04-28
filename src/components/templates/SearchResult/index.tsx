@@ -1,4 +1,6 @@
-import React, { KeyboardEvent } from 'react';
+import React, {
+  KeyboardEvent, useCallback, useEffect, useRef, useState,
+} from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
@@ -13,57 +15,148 @@ import Card from 'components/organisms/Card';
 import { CardDivisionProps } from 'components/organisms/Card/Division';
 import { CardNormalProps } from 'components/organisms/Card/Normal';
 import Tabs, { Tab } from 'components/organisms/Tabs';
+import { OptionSuggestTypes } from 'components/templates/Banner/component';
+import useClickOutside from 'hooks/useClickOutside';
+import mapModifiers from 'utils/functions';
 
 export interface SearchResultWrapProps {
   titleMain?: string;
 }
 export interface SearchTopProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  handleSubmit?: () => void;
+  handleSubmit?: (keyword: string) => void;
   searchText?: {
     length: number;
     text: string;
     value: string;
   };
+  loading?: boolean;
+  options?: OptionSuggestTypes[];
+  handleChange?: (keyword: string) => void;
 }
 
-const SearchTop = React.forwardRef<
-  HTMLInputElement,
+const SearchTop = React.memo<
   SearchTopProps
 >(({
   handleSubmit,
   searchText,
+  options,
+  loading,
+  handleChange,
   ...rest
-}, ref) => (
-  <>
-    <div className="t-searchResult_searchInput">
-      <div className="t-searchResult_searchInput_wrapper">
-        <input
-          {...rest}
-          ref={ref}
-          type="text"
-          autoComplete="off"
-          onKeyDown={(e: KeyboardEvent<HTMLInputElement>) => {
-            if (e.key === 'Enter' && handleSubmit) { handleSubmit(); }
-          }}
-        />
-        <button className="t-searchResult_searchInput_btn" type="button" onClick={handleSubmit}>
-          <Icon iconName="searchGray" size="14" />
-        </button>
+}) => {
+  const [isFocus, setIsFocus] = useState(false);
+  const refInput = useRef<HTMLInputElement>(null);
+  const [val, setVal] = useState<string>('');
+  const { t } = useTranslation();
+  const refSuggest = useRef(null);
+
+  const onSelected = (keyword: string) => () => {
+    if (handleSubmit) {
+      handleSubmit(keyword);
+      setVal(keyword);
+      refInput.current?.blur();
+      setIsFocus(false);
+    }
+  };
+
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setVal(event.target.value);
+    if (handleChange) {
+      handleChange(event.target.value);
+    }
+  };
+
+  const onKeyDown = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && handleSubmit) {
+      handleSubmit(val);
+      refInput.current?.blur();
+      setIsFocus(false);
+    }
+  }, [handleSubmit, val]);
+
+  const onSubmit = () => {
+    if (handleSubmit) {
+      handleSubmit(val);
+      refInput.current?.blur();
+      setIsFocus(false);
+    }
+  };
+
+  useClickOutside(refSuggest, () => setIsFocus(false));
+
+  useEffect(() => {
+    if (searchText?.value) {
+      setVal(searchText.value);
+    }
+  }, [searchText?.value]);
+
+  return (
+    <>
+      <div className="t-searchResult_searchInput" ref={refSuggest}>
+        <div className="t-searchResult_searchInput_wrapper">
+          <input
+            {...rest}
+            value={val}
+            ref={refInput}
+            type="text"
+            autoComplete="off"
+            onChange={onChange}
+            onFocus={() => setIsFocus(true)}
+            onKeyDown={onKeyDown}
+          />
+          <button className="t-searchResult_searchInput_btn" type="button" onClick={onSubmit}>
+            <Icon iconName="searchGray" size="14" />
+          </button>
+        </div>
+        <div
+          className={mapModifiers('t-searchResult_searchInput-suggest', isFocus && 'open')}
+        >
+          <ul>
+            {loading && (
+              <li className="empty d-flex justify-content-center">
+                <Icon iconName="loadingBlue" />
+              </li>
+            )}
+            {options && options?.length > 0 && !loading && (
+            <>
+              {options?.map((item, index) => (
+                <li
+                  onClick={onSelected(item.keyword)}
+                  key={`t-searchResult_searchInput-suggest-${index.toString()}`}
+                >
+                  <Text
+                    modifiers={['14x20', '400', 'raisinBlack']}
+                    content={item.keyword}
+                  />
+                </li>
+              ))}
+            </>
+            )}
+            {!options?.length && !loading && (
+              <li className="empty">
+                <Text
+                  modifiers={['14x20', '400', 'raisinBlack']}
+                  content={t('general.not_found_data')}
+                />
+              </li>
+            )}
+          </ul>
+        </div>
       </div>
-    </div>
-    {searchText && (
-    <div className="t-searchResult_textResult u-mt-16">
-      <Text modifiers={['14x20', '400', 'fontSvnGotham', 'black', 'center']}>
-        {searchText.length}
-        {' '}
-        {searchText.text}
-        {' '}
-        <strong>{`"${searchText.value}"`}</strong>
-      </Text>
-    </div>
-    )}
-  </>
-));
+      {searchText && (
+      <div className="t-searchResult_textResult u-mt-16">
+        <Text modifiers={['14x20', '400', 'fontSvnGotham', 'black', 'center']}>
+          {searchText.length}
+          {' '}
+          {searchText.text}
+          {' '}
+          <strong>{`"${searchText.value}"`}</strong>
+        </Text>
+      </div>
+      )}
+    </>
+  );
+});
 
 export interface SearchFilterProps {
   tab?: {
