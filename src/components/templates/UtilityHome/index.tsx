@@ -84,7 +84,7 @@ const UtilityHome: React.FC<UtilityHomeProps> = ({
                     ref={(slider) => {
                       setNav1(slider);
                     }}
-                    settings={settingMain}
+                    settings={{ lazyLoad: 'ondemand', ...settingMain }}
                   >
                     {
                       listUtilities.map((item, index) => (

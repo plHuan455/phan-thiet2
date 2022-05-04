@@ -51,7 +51,7 @@ const DivisionSummary: React.FC<DivisionSummaryProps> = ({
         <Col lg={6}>
           <Animate type="fadeInUp" extendClassName={`t-divisionSummary_wrap ${data && data?.length > 2 ? 'carousel' : ''}`}>
             {data && data.length > 2 ? (
-              <Carousel settings={setting}>
+              <Carousel settings={{ lazyLoad: 'ondemand', ...setting }}>
                 {data?.map((item, index) => (
                   <div
                     key={`t-divisionSummary-${index.toString()}`}

@@ -52,15 +52,16 @@
 
   &_imgSub {
     left: 0;
-    margin-left: auto;
     margin-top: rem(-50);
-    max-width: 42%;
     position: relative;
     top: 0;
     z-index: 3;
 
     img {
+      width: auto;
       max-width: 100%;
+      height: auto;
+      margin-left: auto;
     }
     @include tablet-down {
       max-width: 33%;
@@ -78,6 +79,8 @@
 
     img {
       max-width: 100%;
+      width: auto;
+      height: auto;
     }
   }
 }

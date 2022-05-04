@@ -244,7 +244,7 @@ export const JourneysList:React.FC<JourneysListProps> = ({
       </div>
       <div>
         <FlatList
-          settings={settings}
+          settings={{ lazyLoad: 'ondemand', ...settings }}
           data={listCard}
           render={(item, idx) => (
             <Card.Layer

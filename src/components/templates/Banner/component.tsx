@@ -84,6 +84,7 @@ const Search: React.FC<SearchProps> = ({
         />
         <button
           type="button"
+          aria-label="search"
           onClick={() => onSearch && onSearch(val)}
         >
           <Icon iconName="searchWhite" size="14" />

@@ -79,7 +79,7 @@ const Header: React.FC<HeaderProps> = ({
   ), [language]);
 
   const renderButtonSearch = useCallback((iconName:IconName) => (
-    <button type="button" className="t-header_btn-search" onClick={() => setIsOpenSearch(true)}>
+    <button aria-label="search" type="button" className="t-header_btn-search" onClick={() => setIsOpenSearch(true)}>
       <Icon iconName={iconName} size="20" />
     </button>
   ), []);
@@ -112,7 +112,7 @@ const Header: React.FC<HeaderProps> = ({
       <div className={mapModifiers('t-header_main', isScroll && 'isScroll')}>
         <Container>
           <div className={mapModifiers('t-header_layer-search', isOpenSearch && 'open')}>
-            <button className="button-close" type="button" onClick={() => setIsOpenSearch(false)}>
+            <button aria-label="search-close" className="button-close" type="button" onClick={() => setIsOpenSearch(false)}>
               <Icon iconName="closeWhite" size="36" />
             </button>
             <div className="t-header_layer-search_content">
