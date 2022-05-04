@@ -1,4 +1,5 @@
 import React from 'react';
+import LazyLoad from 'react-lazyload';
 
 import Banner from './banner';
 import Consultancy from './consultancy';
@@ -23,25 +24,43 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
   <>
     <HelmetContainer seoData={seoData} ogData={getOgDataPage(pageData)} />
     <Banner banners={banners} blocks={blocks} />
-    <Position blocks={blocks} />
-    <Selection blocks={blocks} />
-    <Highway blocks={blocks} />
-    <Utilities blocks={blocks} />
-    <div className="p-home_sand1">
-      <div className="p-home_sand1_layer">
-        <Image src={sand1} alt="sand" />
+    <LazyLoad height={300} once>
+      <Position blocks={blocks} />
+    </LazyLoad>
+    <LazyLoad height={300} once>
+      <Selection blocks={blocks} />
+    </LazyLoad>
+    <LazyLoad height={300} once>
+      <Highway blocks={blocks} />
+    </LazyLoad>
+    <LazyLoad height={300} once>
+      <Utilities blocks={blocks} />
+    </LazyLoad>
+    <LazyLoad height={300} once>
+      <div className="p-home_sand1">
+        <div className="p-home_sand1_layer">
+          <Image src={sand1} alt="sand" />
+        </div>
       </div>
-    </div>
-    <Division blocks={blocks} />
-    <div className="p-home_sand2">
-      <div className="p-home_sand2_layer">
-        <Image src={sand2} alt="sand" />
+      <Division blocks={blocks} />
+      <div className="p-home_sand2">
+        <div className="p-home_sand2_layer">
+          <Image src={sand2} alt="sand" />
+        </div>
       </div>
-    </div>
-    <News blocks={blocks} />
-    <Events blocks={blocks} />
-    <Feedbacks blocks={blocks} />
-    <Consultancy blocks={blocks} />
+    </LazyLoad>
+    <LazyLoad height={300} once>
+      <News blocks={blocks} />
+    </LazyLoad>
+    <LazyLoad height={300} once>
+      <Events blocks={blocks} />
+    </LazyLoad>
+    <LazyLoad height={300} once>
+      <Feedbacks blocks={blocks} />
+    </LazyLoad>
+    <LazyLoad height={300} once>
+      <Consultancy blocks={blocks} />
+    </LazyLoad>
   </>
 );
 

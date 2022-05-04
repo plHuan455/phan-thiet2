@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -11,10 +11,12 @@ import { FormConsultancy } from 'components/organisms/Consultancy';
 import { NotifyProps } from 'components/organisms/Notify';
 import ConsultancyTemplate, { ConsultancyProps } from 'components/templates/Consultancy';
 import { useAsync } from 'hooks/useAsync';
+import i18n from 'i18n';
 import { consultancyFormService } from 'services/contact';
 import { ConsultancyFormInput } from 'services/contact/types';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { updateNotifyProps } from 'store/notify';
+import { topicsListAsync } from 'store/topics';
 import { getSearchParams } from 'utils/functions';
 import { schemasConsultancyForm } from 'utils/schemas';
 
@@ -29,6 +31,7 @@ const Consultancy: React.FC<ConsultancyCommonProps> = ({
   ...rest
 }) => {
   const { t } = useTranslation();
+  const { language } = i18n;
   const location = useLocation();
   const { executeRecaptcha } = useGoogleReCaptcha();
   const topicSelector = useAppSelector((state) => state.topic);
@@ -99,6 +102,13 @@ const Consultancy: React.FC<ConsultancyCommonProps> = ({
       value: e.id.toString(),
     }));
   }, [topicSelector]);
+
+  useEffect(() => {
+    if (!topicSelector.data.length) {
+      dispatch(topicsListAsync());
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [language]);
 
   return (
     <ConsultancyTemplate

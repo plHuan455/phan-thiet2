@@ -13,7 +13,6 @@ import { menusAsync } from 'store/menus';
 import { updateNotifyProps } from 'store/notify';
 import { staticAllAsync, staticErrorsAsync } from 'store/static';
 import { systemsGeneralAsync } from 'store/systems';
-import { topicsListAsync } from 'store/topics';
 
 const INIT_LOCALE = {
   label: 'VI',
@@ -72,7 +71,6 @@ const LanguageProvider: React.FC = ({ children }) => {
     dispatch(staticAllAsync());
     dispatch(staticErrorsAsync());
     dispatch(menusAsync());
-    dispatch(topicsListAsync());
     dispatch(systemsGeneralAsync());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [flag]);
