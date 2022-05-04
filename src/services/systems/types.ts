@@ -29,6 +29,7 @@ export type SystemsData = {
     endDate: string;
   };
   googleRecaptchaSiteKey: string;
+  mapApiKey: string;
   og?: OpenGraphDataTypes;
   seo?: SEODataTypes;
   footScripts?: string;
