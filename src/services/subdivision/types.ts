@@ -23,6 +23,7 @@ interface SubdivisionCommonTypes {
   utilityMap?: {
     map: SubdivisionUtilityMapTypes;
   };
+  translations: Translation[];
 }
 
 interface Title {

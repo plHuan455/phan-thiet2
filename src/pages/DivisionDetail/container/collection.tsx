@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 
 import DivisionCollection from 'components/templates/DivisionCollection';
 import PopupImage from 'components/templates/PopupImage';
+import i18n from 'i18n';
 import { getImageListService } from 'services/images';
 import { SubdivisionCollectionTypes } from 'services/subdivision/types';
 import { baseString, baseURL } from 'utils/functions';
@@ -39,6 +40,7 @@ const Collection = React.forwardRef<HTMLDivElement, CollectionProps>(({
   data,
   subDivisionId,
 }, ref) => {
+  const { language } = i18n;
   const { t } = useTranslation();
   const { slug } = useParams<{ slug: string }>();
   const [state, dispatch] = useReducer(reducer, {
@@ -47,7 +49,7 @@ const Collection = React.forwardRef<HTMLDivElement, CollectionProps>(({
   });
 
   const { data: imageList } = useQuery(
-    ['getCollection', [slug]], () => getImageListService({
+    ['getCollection', { slug, language }], () => getImageListService({
       subdivision_id: String(subDivisionId),
     }),
   );

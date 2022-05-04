@@ -6,6 +6,7 @@ import PopupImageDetail from '../component/popupImageDetail';
 
 import srcBg from 'assets/images/divisionJourneys/bg.jpg';
 import DivisionJourneys from 'components/templates/DivisionJourneys';
+import i18n from 'i18n';
 import { SubdivisionJourneyTypes } from 'services/subdivision/types';
 import { getUtilityListBySubDivisionService } from 'services/utilities';
 import { UtilitiesItemType } from 'services/utilities/types';
@@ -26,13 +27,14 @@ const Journeys: React.FC<JourneysProps> = ({
   id,
   data,
 }) => {
+  const { language } = i18n;
   const { t } = useTranslation();
   const [open, setOpen] = useState<boolean>(false);
   const [idActive, setIdActive] = useState<number>();
   const [slideActive, setSlideActive] = useState<number>();
 
   const { data: utilitiesData } = useQuery(
-    ['getListBySubDivision', { id }],
+    ['getListBySubDivision', { id, language }],
     () => getUtilityListBySubDivisionService(`${id}`),
     {
       enabled: !!id,
