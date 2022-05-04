@@ -4,12 +4,12 @@ import React, {
 import { useTranslation } from 'react-i18next';
 import { useInfiniteQuery } from 'react-query';
 
-import dummyContact from 'assets/dataDummy/contact';
 import Animate from 'components/organisms/Animate';
 import ContactMap from 'components/templates/ContactMap';
 import { AddressItemProps } from 'components/templates/ContactMap/component';
 import i18n from 'i18n';
 import { headquartersService } from 'services/headquarters';
+import { useAppSelector } from 'store/hooks';
 import { getBlockData } from 'utils/functions';
 
 interface MapProps {
@@ -23,6 +23,7 @@ interface ActiveProps extends AddressItemProps {
 const Map: React.FC<SectionBlocks> = ({ blocks }) => {
   const { language } = i18n;
   const { t } = useTranslation();
+  const { data } = useAppSelector((state) => state.system);
 
   const [activeHeadquarter, setActiveHeadquarter] = useState<ActiveProps>({
     idx: -1,
@@ -97,7 +98,7 @@ const Map: React.FC<SectionBlocks> = ({ blocks }) => {
         title={mapBlock.title}
         loading={isFetchingNextPage}
         // TODO: add form general later
-        mapApiKey={dummyContact.mapApiKey}
+        mapApiKey={data?.mapApiKey}
         defaultPosition={activeHeadquarter?.position}
         headQuarterIdx={activeHeadquarter?.idx}
         onLoadMore={() => hasNextHeadquarter && fetchNextHeadquarter()}
