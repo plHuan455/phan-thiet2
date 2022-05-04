@@ -76,9 +76,9 @@ const GoogleReCaptchaWrapper: React.FC = ({ children }) => {
     <GoogleReCaptchaProvider
       reCaptchaKey={dataSystems?.googleRecaptchaSiteKey}
       scriptProps={{
-        appendTo: 'head',
-        async: true,
-        defer: true,
+        appendTo: 'body',
+        async: false,
+        defer: false,
       }}
     >
       {children}

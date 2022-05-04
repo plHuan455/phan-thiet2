@@ -23,17 +23,17 @@ export const CardBanner:React.FC<CardBannerProps> = ({
 }) => (
   <div className="m-cardBanner">
     <div className="m-cardBanner_imgMain">
-      <Image src={srcImgMain} alt={alt || ''} ratio="1x1" />
+      <Image src={srcImgMain} alt={alt || ''} ratio="1x1" loading="eager" />
     </div>
     <div className="m-cardBanner_title">
       <Text content={title} modifiers={['700', 'copper', 's015', '20x32']} />
     </div>
     <div className="m-cardBanner_imgSub">
-      <img src={srcImgSub} alt={alt || ''} loading="lazy" />
+      <img src={srcImgSub} alt={alt || ''} loading="eager" />
     </div>
     {srcLayer && (
     <div className="m-cardBanner_layer">
-      <img src={srcLayer} alt={alt || ''} loading="lazy" />
+      <img src={srcLayer} alt={alt || ''} loading="eager" />
     </div>
     )}
   </div>
@@ -90,6 +90,7 @@ const BannerHome: React.FC<BannerHomeProps> = ({
         {...banner}
         ratio="1365x1290"
         alt="bannerHome"
+        loading="eager"
       />
     </div>
     <Animate type="fadeInUp" extendClassName="t-bannerHome_content">

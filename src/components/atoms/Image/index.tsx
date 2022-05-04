@@ -12,6 +12,7 @@ export type ImageProps = {
   alt?: string;
   ratio?: Ratio;
   size?: SizeImageType;
+  loading?: 'lazy' | 'eager' | undefined;
 }
 
 const Image: React.FC<ImageProps> = ({
@@ -21,6 +22,7 @@ const Image: React.FC<ImageProps> = ({
   alt = 'replacing',
   ratio = '1x1',
   size = 'cover',
+  loading = 'lazy',
 }) => {
   const { isMobile, isTablet } = useDeviceQueries();
   const sourceImage = useMemo(() => {
@@ -35,7 +37,7 @@ const Image: React.FC<ImageProps> = ({
 
   return (
     <div className={mapModifiers('a-image', ratio, size)}>
-      <img src={sourceImage} alt={alt} loading="lazy" />
+      <img src={sourceImage} alt={alt} loading={loading} />
     </div>
   );
 };

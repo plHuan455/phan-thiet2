@@ -6,19 +6,26 @@ import { useAppSelector } from 'store/hooks';
 
 const useGaTracker = () => {
   const location = useLocation();
-  const [initialized, setInitialized] = useState(false);
+  const [initialized, setInitialized] = useState<ReactGA.Tracker[]>([]);
   const gaId = useAppSelector((state) => state.system?.data?.gaId);
 
   useEffect(() => {
     if (!gaId) return;
-    const tracker = gaId.map((x) => ({ trackingId: x }));
-    ReactGA.initialize(tracker);
-    setInitialized(true);
+    const tracker: ReactGA.Tracker[] = gaId.map((x, i) => ({
+      trackingId: x,
+      gaOptions: {
+        name: `tracker${i + 1}`,
+      },
+    }));
+    ReactGA.initialize(tracker[0]?.trackingId);
+    ReactGA.addTrackers(tracker.slice(1));
+    setInitialized(tracker);
   }, [gaId]);
 
   useEffect(() => {
-    if (initialized) {
-      ReactGA.pageview(location.pathname + location.search);
+    if (initialized?.length) {
+      const trackers = initialized?.map((e) => e.gaOptions?.name || '') || [];
+      ReactGA.pageview(location.pathname + location.search, trackers);
     }
   }, [initialized, location]);
 };
