@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useContext, useEffect, useMemo } from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 
@@ -16,9 +16,12 @@ import Summary from './summary';
 import Utilities from './utilities';
 
 import HelmetContainer from 'common/Helmet';
+import { LanguageContext, LanguagePrefix } from 'common/Language';
 import LoadingPage from 'common/Navigation/loading';
 import RedirectNav from 'common/Navigation/redirect';
+import i18n from 'i18n';
 import { getSubDivisionDetailService } from 'services/subdivision';
+import CONSTANTS from 'utils/constants';
 import { baseString, baseURL } from 'utils/functions';
 
 export interface MyCustomCSS extends React.CSSProperties {
@@ -30,10 +33,12 @@ interface ScreenProps {
 }
 
 const Screen: React.FC<ScreenProps> = ({ setLogoDivision }) => {
+  const { language } = i18n;
   const { slug } = useParams<{ slug: string }>();
+  const context = useContext(LanguageContext);
 
   const { data: subDivisionDetail, isFetching, error } = useQuery(
-    ['SubdivisionDetail', [slug]],
+    ['SubdivisionDetail', { slug, language }],
     () => getSubDivisionDetailService(slug),
     {
       enabled: !!slug,
@@ -43,6 +48,24 @@ const Screen: React.FC<ScreenProps> = ({ setLogoDivision }) => {
   const styles = useMemo((): MyCustomCSS => ({
     '--theme': baseString(subDivisionDetail?.color),
   }), [subDivisionDetail]);
+
+  useEffect(() => {
+    if (subDivisionDetail?.translations?.length && context?.translation?.setData) {
+      const divisionDetailTranslation = subDivisionDetail?.translations.map(
+        (x) => ({
+          ...x,
+          slug: `${CONSTANTS.PREFIX.DIVISION[x.locale.toUpperCase() as LanguagePrefix]}/${x.slug}`,
+        }),
+      );
+      context.translation.setData(divisionDetailTranslation);
+    }
+    return () => {
+      if (context?.translation?.setData) {
+        context.translation.setData([]);
+      }
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [subDivisionDetail]);
 
   const contentSubdivision = useMemo(
     () => subDivisionDetail && subDivisionDetail.content, [subDivisionDetail],
