@@ -96,7 +96,9 @@ const Footer: React.FC<FooterProps> = ({
                     </div>
                     <div className="t-footer_address-contact">
                       <Text type="span" modifiers={['12x20', '400', 'davyGrey']} content={item.contact?.label} />
-                      <Text type="span" modifiers={['12x20', '400', 'davyGrey']} content={item.contact?.value} />
+                      <Link useExternal href={`tel:${item.contact?.value}`}>
+                        <Text type="span" modifiers={['12x20', '400', 'davyGrey']} content={item.contact?.value} />
+                      </Link>
                     </div>
                   </div>
                 ))

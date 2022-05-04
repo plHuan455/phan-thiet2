@@ -1,7 +1,5 @@
 import React from 'react';
 
-import Section from './section';
-
 import layer1 from 'assets/images/pages/news/layer_1.png';
 import ConsultancyCommon from 'common/Consultancy';
 import Image from 'components/atoms/Image';
@@ -14,7 +12,7 @@ interface ConsultancyBlocks {
 const Consultancy: React.FC<SectionBlocks> = ({ blocks }) => {
   const consultancyBlock = getBlockData<ConsultancyBlocks>('form_register', blocks);
   return (
-    <Section className="s-consultancy">
+    <div className="s-consultancy u-pt-40 u-pt-md-80 position-relative">
       <ConsultancyCommon
         layer={(
           <div className="s-consultancy_layer">
@@ -26,7 +24,7 @@ const Consultancy: React.FC<SectionBlocks> = ({ blocks }) => {
           modifiers: ['700', 'gradientGreen', 's015'],
         }}
       />
-    </Section>
+    </div>
   );
 };
 
