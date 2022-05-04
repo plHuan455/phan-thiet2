@@ -64,6 +64,7 @@ const DivisionJourneys: React.FC<DivisionJourneysProps> = ({
             <FlatList
               innerDots
               settings={{
+                lazyLoad: 'ondemand',
                 prevArrow: <PrevArrow customArrow="circleWhite" />,
                 nextArrow: <NextArrow customArrow="circleWhite" />,
                 dots: true,

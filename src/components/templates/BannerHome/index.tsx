@@ -23,17 +23,17 @@ export const CardBanner:React.FC<CardBannerProps> = ({
 }) => (
   <div className="m-cardBanner">
     <div className="m-cardBanner_imgMain">
-      <Image src={srcImgMain} alt={alt} ratio="1x1" />
+      <Image src={srcImgMain} alt={alt || ''} ratio="1x1" />
     </div>
     <div className="m-cardBanner_title">
       <Text content={title} modifiers={['700', 'copper', 's015', '20x32']} />
     </div>
     <div className="m-cardBanner_imgSub">
-      <img src={srcImgSub} alt={alt || ''} />
+      <img src={srcImgSub} alt={alt || ''} loading="lazy" />
     </div>
     {srcLayer && (
     <div className="m-cardBanner_layer">
-      <img src={srcLayer} alt={alt || ''} />
+      <img src={srcLayer} alt={alt || ''} loading="lazy" />
     </div>
     )}
   </div>
@@ -89,13 +89,14 @@ const BannerHome: React.FC<BannerHomeProps> = ({
       <Image
         {...banner}
         ratio="1365x1290"
+        alt="bannerHome"
       />
     </div>
     <Animate type="fadeInUp" extendClassName="t-bannerHome_content">
       <Container>
         {!!list?.length && (
           <div className="t-bannerHome_list">
-            <Carousel settings={setting}>
+            <Carousel settings={{ lazyLoad: 'ondemand', ...setting }}>
               {list.map((x, i) => (
                 <div className="t-bannerHome_card" key={`card-${i.toString()}`}>
                   <CardBanner
