@@ -8,8 +8,10 @@ import Map from './map';
 
 import imgBalloon from 'assets/images/pages/contact/balloon.png';
 import imgLeaf from 'assets/images/pages/contact/leaf.png';
+import HelmetContainer from 'common/Helmet';
 import Image from 'components/atoms/Image';
 import useScrollAnimate from 'hooks/useScrollAnimation';
+import { getOgDataPage } from 'utils/functions';
 
 const Layer = React.memo(() => {
   const ballonRef = useRef<HTMLDivElement>(null);
@@ -32,8 +34,11 @@ const Layer = React.memo(() => {
 const Screen: React.FC<BasePageDataTypes<any>> = ({
   banners,
   blocks,
+  seoData,
+  pageData,
 }) => (
   <>
+    <HelmetContainer seoData={seoData} ogData={getOgDataPage(pageData)} />
     <Banner banners={banners} />
     <Map blocks={blocks} />
     <section className="s-contact_form position-relative">

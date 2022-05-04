@@ -13,12 +13,15 @@ import Utilities from './utilities';
 
 import sand1 from 'assets/images/pages/home/sand_1.png';
 import sand2 from 'assets/images/pages/home/sand_2.png';
+import HelmetContainer from 'common/Helmet';
 import Image from 'components/atoms/Image';
+import { getOgDataPage } from 'utils/functions';
 
 const Screen: React.FC<BasePageDataTypes<any>> = ({
-  blocks, banners,
+  blocks, banners, seoData, pageData,
 }) => (
   <>
+    <HelmetContainer seoData={seoData} ogData={getOgDataPage(pageData)} />
     <Banner banners={banners} blocks={blocks} />
     <Position blocks={blocks} />
     <Selection blocks={blocks} />
