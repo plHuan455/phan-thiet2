@@ -115,10 +115,10 @@ const UtilityHome: React.FC<UtilityHomeProps> = ({
                           key={`t-utilityHome-carouselMenu-${index.toString()}`}
                           className="t-utilityHome_itemMenu"
                         >
-                          <div className="t-utilityHome_itemMenu-label">
-                            <Text modifiers={['gradientGreen', '14x20', 'center', '700']} content={item.title} />
-                          </div>
                           <div className="t-utilityHome_itemMenu-wrapper">
+                            <div className="t-utilityHome_itemMenu-label">
+                              <Text modifiers={['gradientGreen', '14x20', 'center', '700']} content={item.title} />
+                            </div>
                             <div className="t-utilityHome_itemMenu-border">
                               <div className="t-utilityHome_itemMenu-borderAnimate" />
                               <div className="t-utilityHome_itemMenu-icon">

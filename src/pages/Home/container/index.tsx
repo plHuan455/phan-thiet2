@@ -12,8 +12,8 @@ import Position from './position';
 import Selection from './selection';
 import Utilities from './utilities';
 
-import sand1 from 'assets/images/pages/home/sand_1.png';
-import sand2 from 'assets/images/pages/home/sand_2.png';
+import sand1 from 'assets/images/pages/home/sand_1.jpg';
+import sand2 from 'assets/images/pages/home/sand_2.jpg';
 import HelmetContainer from 'common/Helmet';
 import Image from 'components/atoms/Image';
 import { getOgDataPage } from 'utils/functions';
@@ -43,21 +43,19 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
         </div>
       </div>
       <Division blocks={blocks} />
-      <div className="p-home_sand2">
-        <div className="p-home_sand2_layer">
-          <Image src={sand2} alt="sand" />
-        </div>
-      </div>
     </LazyLoad>
-    <LazyLoad height={300} once>
-      <News blocks={blocks} />
-    </LazyLoad>
-    <LazyLoad height={300} once>
-      <Events blocks={blocks} />
-    </LazyLoad>
-    <LazyLoad height={300} once>
-      <Feedbacks blocks={blocks} />
-    </LazyLoad>
+    <div className="p-home_section-bottom">
+      <img className="p-home_section-bottom_layer" src={sand2} alt="sand" loading="lazy" />
+      <LazyLoad height={300} once>
+        <News blocks={blocks} />
+      </LazyLoad>
+      <LazyLoad height={300} once>
+        <Events blocks={blocks} />
+      </LazyLoad>
+      <LazyLoad height={300} once>
+        <Feedbacks blocks={blocks} />
+      </LazyLoad>
+    </div>
     <LazyLoad height={300} once>
       <Consultancy blocks={blocks} />
     </LazyLoad>

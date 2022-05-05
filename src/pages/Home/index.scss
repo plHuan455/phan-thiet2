@@ -30,37 +30,19 @@
     }
   }
 
-  &_sand2 {
+  &_section-bottom {
     position: relative;
 
     &_layer {
       mix-blend-mode: overlay;
+      transform: matrix(-1, 0, 0, 1, 0, 0);
+      pointer-events: none;
+      height: 100%;
+      left: 0;
+      object-fit: cover;
       position: absolute;
       top: 0;
-      transform: matrix(-1, 0, 0, 1, 0, 0);
       width: 100%;
-
-      .a-image {
-        padding-bottom: (2606 / 1366) * 100%;
-      }
-
-      @include break-min(1600px) {
-        .a-image {
-          padding-bottom: 100%;
-        }
-      }
-
-      @include tablet-down {
-        .a-image {
-          padding-bottom: 250%;
-        }
-      }
-
-      @include mobile-down {
-        .a-image {
-          padding-bottom: 450%;
-        }
-      }
     }
   }
 
