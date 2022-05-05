@@ -11,7 +11,7 @@ import { LanguageKeyTypes } from 'services/systems/types';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { menusAsync } from 'store/menus';
 import { updateNotifyProps } from 'store/notify';
-import { staticAllAsync, staticErrorsAsync } from 'store/static';
+import { staticAllAsync } from 'store/static';
 import { systemsGeneralAsync } from 'store/systems';
 
 const INIT_LOCALE = {
@@ -69,7 +69,6 @@ const LanguageProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     dispatch(staticAllAsync());
-    dispatch(staticErrorsAsync());
     dispatch(menusAsync());
     dispatch(systemsGeneralAsync());
     // eslint-disable-next-line react-hooks/exhaustive-deps

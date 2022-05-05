@@ -1,10 +1,12 @@
 import React, { useMemo } from 'react';
+import { useQuery } from 'react-query';
 
 import { errorTemplateCode } from 'common/Navigation/constants';
 import ErrorTemplate, {
   ErrorProps as ErrorTemplateProps,
 } from 'components/templates/Error';
-import { useAppSelector } from 'store/hooks';
+import i18n from 'i18n';
+import { staticErrorsService } from 'services/pages';
 import { getBlockData, baseURL } from 'utils/functions';
 
 interface ErrorProps {
@@ -12,7 +14,8 @@ interface ErrorProps {
 }
 
 const Error: React.FC<ErrorProps> = ({ status = 404 }) => {
-  const staticErrors = useAppSelector((state) => state.static.errors);
+  const { language } = i18n;
+  const { data: staticErrors } = useQuery(['getError', [language]], staticErrorsService);
 
   const blockData = useMemo((): ErrorTemplateProps => {
     const blocks = staticErrors?.find(

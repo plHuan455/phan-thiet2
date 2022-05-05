@@ -13,16 +13,16 @@ import LanguageProvider, { LanguageContext, LanguagePrefix } from 'common/Langua
 import Layout from 'common/Layout';
 import LayoutProvider from 'common/Layout/context';
 import LoadingPage from 'common/Navigation/loading';
-import DivisionDetail from 'pages/DivisionDetail';
-import Error from 'pages/Error';
-import EventsDetail from 'pages/EventsDetail';
-import NewsDetail from 'pages/NewsDetail';
 import { store } from 'store';
 import { useAppSelector } from 'store/hooks';
 import CONSTANTS from 'utils/constants';
 
 const HomeNavigation = React.lazy(() => import('common/Navigation/home'));
 const PageNavigation = React.lazy(() => import('common/Navigation/page'));
+const DivisionDetail = React.lazy(() => import('pages/DivisionDetail'));
+const EventsDetail = React.lazy(() => import('pages/EventsDetail'));
+const NewsDetail = React.lazy(() => import('pages/NewsDetail'));
+const Error = React.lazy(() => import('pages/Error'));
 
 const App: React.FC = () => {
   const activeLocales = useContext(LanguageContext).language.active;
