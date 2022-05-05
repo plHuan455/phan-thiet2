@@ -19,13 +19,13 @@ const useAnimation = () => {
     from: { y: 600 },
   });
   const slideYTitleAnimation = useSpring({
-    to: { y: 0 },
-    from: { y: 600 },
+    to: { y: 0, opacity: 1 },
+    from: { y: 600, opacity: 0 },
     delay: 1000,
   });
   const slideYActionAnimation = useSpring({
-    to: { y: 0 },
-    from: { y: 600 },
+    to: { y: 0, opacity: 1 },
+    from: { y: 600, opacity: 0 },
     delay: 1500,
   });
 
