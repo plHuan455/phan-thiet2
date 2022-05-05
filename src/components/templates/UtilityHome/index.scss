@@ -68,7 +68,7 @@
 
   &_carouselMenu {
     $carouselMenu: &;
-    max-width: rem(332);
+    max-width: rem(432);
     padding: rem(45) 0;
     position: absolute;
     right: 0;
@@ -100,7 +100,7 @@
         &_prev {
           background: rgba($gamboge-orange, 0.1);
           left: unset;
-          right: calc(39 / 332 * 100%);
+          right: calc(40 / 432 * 100%);
           top: rem(-19);
 
           @include desktop-down {
@@ -121,7 +121,7 @@
         &_next {
           background: rgba($gamboge-orange, 0.1);
           bottom: rem(-59);
-          right: calc(40 / 332 * 100%);
+          right: calc(40 / 432 * 100%);
           top: unset;
 
           @include desktop-down {
@@ -215,6 +215,7 @@
     display: flex;
     justify-content: flex-end;
     margin: rem(25) 0;
+    position: relative;
 
     @include desktop-down {
       justify-content: center;
@@ -225,6 +226,7 @@
       #{$itemMenu} {
         &-label {
           opacity: 1;
+          right: 100%;
         }
       }
     }
@@ -339,11 +341,15 @@
       background: $floral-white;
       border-radius: 200px 0 0 200px;
       margin-right: rem(43);
-      opacity: 0;
+      min-width: rem(200);
       padding: rem(12) rem(24);
-      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      right: calc(100% + 20px);
+      opacity: 0;
+      position: absolute;
       transition: all $transition-long linear;
-
+     
       @include desktop-down {
         display: none;
       }
@@ -359,6 +365,10 @@
         top: 50%;
         transform: translateY(-50%);
         width: 0;
+      }
+
+      .a-text {
+        @include text-overflow(3);
       }
     }
   }
