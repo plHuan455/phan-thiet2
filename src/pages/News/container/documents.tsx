@@ -1,7 +1,10 @@
-import React, { useRef, useMemo } from 'react';
+import React, {
+  useRef, useMemo, useState, useCallback, useEffect,
+} from 'react';
 import { useTranslation } from 'react-i18next';
 
 import useAnimation from '../hook/animation';
+import settings from '../hook/settings';
 
 import Section from './section';
 
@@ -12,8 +15,11 @@ import FlatMore from 'common/FlatMore';
 import Image from 'components/atoms/Image';
 import Card from 'components/organisms/Card';
 import { CardNormalProps } from 'components/organisms/Card/Normal';
+import { useAsync } from 'hooks/useAsync';
 import useScrollAnimate from 'hooks/useScrollAnimation';
+import useScrollInfinite from 'hooks/useScrollInfinite';
 import i18n from 'i18n';
+import { getOverviewListService } from 'services/overviews';
 import { OverviewDocumentType, PaginationOverview } from 'services/overviews/types';
 import CONSTANTS from 'utils/constants';
 import {
@@ -26,9 +32,15 @@ interface DocumentBlocks {
 
 interface DocumentProps extends SectionBlocks {
   documents?: PaginationOverview<OverviewDocumentType>;
+  keyword?: string;
 }
 
-const Documents: React.FC<DocumentProps> = ({ documents, blocks }) => {
+type Meta = {
+  page: number;
+  lastPage: number;
+}
+
+const Documents: React.FC<DocumentProps> = ({ documents, blocks, keyword }) => {
   const { t } = useTranslation();
   const { language } = i18n;
   const documentBlock = getBlockData<DocumentBlocks>('document', blocks);
@@ -40,13 +52,16 @@ const Documents: React.FC<DocumentProps> = ({ documents, blocks }) => {
     animated, ballonAnimate, slideReverseAnimate,
   } = useAnimation();
 
-  const documentList : CardNormalProps[] = useMemo(() => documents?.data.map((item) => ({
+  const [meta, setMeta] = useState<Meta>({ page: 1, lastPage: 1 });
+  const [dataLoadMore, setDataLoadMore] = useState<CardNormalProps[]>([]);
+
+  const formatData = useCallback((item:OverviewDocumentType):CardNormalProps => ({
     thumbnail: baseURL(item?.subdivision?.thumbnail),
     title: item.name,
     href: linkURL(item.link),
     tag: {
       text: item?.subdivision?.name,
-      href: redirectURL(CONSTANTS.PREFIX.DIVISION, item?.subdivision?.slug, language),
+      url: redirectURL(CONSTANTS.PREFIX.DIVISION, item?.subdivision?.slug, language),
     },
     dateTime: getTimePastToCurrent(item.publishedAt),
     target: '_blank',
@@ -55,13 +70,56 @@ const Documents: React.FC<DocumentProps> = ({ documents, blocks }) => {
       iconName: 'downloadOrange',
       animation: 'download',
     },
-  })) || [], [documents?.data, language, t]);
+  }), [language, t]);
 
-  if (!documents?.data.length) return null;
+  const [documentExecute, documentState] = useAsync(getOverviewListService, {
+    onSuccess: (res) => {
+      const result = res.documents.data.map(formatData);
+      setMeta((prev) => ({ ...prev, page: res.documents.currentPage }));
+      setDataLoadMore(
+        (prev) => ([...(prev || []), ...result]),
+      );
+    },
+  });
+
+  const dataInitial = useMemo(
+    () => documents?.data.map(formatData) || [],
+    [formatData, documents?.data],
+  );
+
+  const documentList = useMemo(
+    () => [...dataInitial, ...dataLoadMore], [dataInitial, dataLoadMore],
+  );
+
+  useEffect(() => {
+    setDataLoadMore([]);
+    if (documents) {
+      setMeta({
+        page: documents.currentPage,
+        lastPage: documents.lastPage,
+      });
+    }
+  }, [documents]);
+
+  const handleLoadMore = useCallback(() => {
+    if (!documentState.loading
+      && meta.page < meta.lastPage) {
+      documentExecute({
+        limit: 6,
+        page: meta.page + 1,
+        keyword,
+        type: 'document',
+      });
+    }
+  }, [documentExecute, documentState.loading, keyword, meta]);
+
+  const { setNode } = useScrollInfinite(handleLoadMore);
+
+  if (!documents?.total) return null;
 
   return (
     <Section>
-      <div className="s-documents">
+      <div className={`s-documents ${documentState.loading ? 'loading-block' : ''}`}>
         <animated.div
           style={isScrollLeaf ? slideReverseAnimate : {}}
           className="s-documents_leaf"
@@ -78,16 +136,24 @@ const Documents: React.FC<DocumentProps> = ({ documents, blocks }) => {
         </animated.div>
         <Container>
           <FlatMore
+            settings={{
+              ...settings(),
+            }}
             title={{
               text: baseString(documentBlock?.title),
               type: 'h4',
               modifiers: ['gradientGreen', '700', 's015', 'uppercase'],
             }}
             data={documentList}
-            render={(item) => (
-              <Card.Normal
-                {...item}
-              />
+            render={(item, itemIdx) => (
+              <Card.LoadMore
+                ref={(ref) => (itemIdx === documentList.length - 1 ? setNode(ref) : undefined)}
+                loading={itemIdx === documentList.length - 1 && documentState.loading}
+              >
+                <Card.Normal
+                  {...item}
+                />
+              </Card.LoadMore>
             )}
           />
         </Container>
@@ -98,6 +164,7 @@ const Documents: React.FC<DocumentProps> = ({ documents, blocks }) => {
 
 Documents.defaultProps = {
   documents: undefined,
+  keyword: undefined,
 };
 
 export default React.memo(Documents);

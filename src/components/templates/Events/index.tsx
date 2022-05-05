@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Settings } from 'react-slick';
 
 import Container from 'common/Container';
 import FlatMore from 'common/FlatMore';
@@ -13,17 +14,24 @@ import Animate from 'components/organisms/Animate';
 import Card from 'components/organisms/Card';
 import { CardEventProps } from 'components/organisms/Card/Event';
 import useCountDown from 'hooks/useCountDown';
+import useScrollInfinite from 'hooks/useScrollInfinite';
 
 export interface EventsProps {
   title?: string;
   button?: LinkTypes;
   listEvents?: CardEventProps[];
+  settings?: Settings;
+  loading?: boolean;
+  handleLoadMore?: () => void;
 }
 
 const Events: React.FC<EventsProps> = ({
   title = '',
   button,
-  listEvents,
+  listEvents = [],
+  settings,
+  loading,
+  handleLoadMore,
 }) => {
   const { t } = useTranslation();
   const [firstItem, setFirstItem] = useState<CardEventProps | undefined>();
@@ -49,6 +57,13 @@ const Events: React.FC<EventsProps> = ({
         setAnotherItem(cloneAnotherItem.filter((_, index) => index !== itemIndexHasEvent));
       }
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isEnd]);
+
+  useEffect(() => {
+    if (listEvents?.length && !isFirst.current) {
+      isFirst.current = true;
+    }
     if (listEvents?.length && isFirst.current) {
       const itemIndexHasEvent = listEvents.findIndex(
         (item) => (dayjs(new Date()).isBefore(item.endTime)),
@@ -57,13 +72,15 @@ const Events: React.FC<EventsProps> = ({
       setAnotherItem(listEvents.filter((_, index) => index !== itemIndexHasEvent));
       isFirst.current = false;
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isEnd, listEvents]);
+  }, [listEvents]);
+
+  const { setNode } = useScrollInfinite(handleLoadMore);
 
   return (
     <div className="t-events">
       <Container>
         <FlatMore
+          settings={settings}
           title={{
             text: title || '',
             type: 'h4',
@@ -74,10 +91,15 @@ const Events: React.FC<EventsProps> = ({
             href: button?.url,
           }}
           data={anotherItem}
-          render={(item) => (
-            <Card.Event
-              {...item}
-            />
+          render={(item, itemIdx) => (
+            <Card.LoadMore
+              ref={(ref) => (itemIdx === anotherItem.length - 1 ? setNode(ref) : undefined)}
+              loading={itemIdx === anotherItem.length - 1 && loading}
+            >
+              <Card.Event
+                {...item}
+              />
+            </Card.LoadMore>
           )}
         >
           {firstItem && (

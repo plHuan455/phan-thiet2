@@ -25,4 +25,15 @@
       }
     }
   }
+
+  &_wrapper {
+    .arrow-disable {
+      pointer-events: none;
+    }
+
+    &.loading-block {
+      pointer-events: none;
+    }
+  }
+
 }

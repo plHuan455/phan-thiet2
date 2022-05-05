@@ -5,13 +5,17 @@ import Slider from 'react-slick';
 import Image from 'components/atoms/Image';
 import Text from 'components/atoms/Text';
 import CustomModal from 'components/molecules/Modal';
+import Card from 'components/organisms/Card';
 import Carousel, { PrevArrow, NextArrow } from 'components/organisms/Carousel';
+import useScrollInfinite from 'hooks/useScrollInfinite';
 
 interface PopupImageProps {
   isOpen: boolean;
   handleClose: () => void;
   dataImageList: string[];
   currentImgIdx?: number;
+  loading?: boolean;
+  handleLoadMore?: () => void;
 }
 
 const PopupImage: React.FC<PopupImageProps> = ({
@@ -19,10 +23,13 @@ const PopupImage: React.FC<PopupImageProps> = ({
   handleClose,
   dataImageList,
   currentImgIdx,
+  loading,
+  handleLoadMore,
 }) => {
   const { t } = useTranslation();
   const [nav1, setNav1] = useState<Slider | null>();
   const [nav2, setNav2] = useState<Slider | null>();
+  const { setNode } = useScrollInfinite(handleLoadMore);
   const imageShowSettings = {
     arrows: false,
     slidesToScroll: 1,
@@ -38,8 +45,8 @@ const PopupImage: React.FC<PopupImageProps> = ({
     slidesToScroll: 1,
     slidesToShow: 5,
     focusOnSelect: dataImageList.length > 1,
-    prevArrow: <PrevArrow customArrow="circleGray" />,
-    nextArrow: <NextArrow customArrow="circleGray" />,
+    prevArrow: <PrevArrow customArrow="circleGray" extendClassname={loading ? 'arrow-disable' : ''} />,
+    nextArrow: <NextArrow customArrow="circleGray" extendClassname={loading ? 'arrow-disable' : ''} />,
     responsive: [
       {
         breakpoint: 769,
@@ -47,7 +54,7 @@ const PopupImage: React.FC<PopupImageProps> = ({
           arrow: false,
           slidesToShow: 3,
           slidesToScroll: 1,
-          dots: true,
+          dots: false,
           cssEase: 'ease-in-out',
           customPaging() {
             return (
@@ -60,7 +67,7 @@ const PopupImage: React.FC<PopupImageProps> = ({
         breakpoint: 575,
         settings: {
           arrow: false,
-          dots: true,
+          dots: false,
           slidesToShow: 2,
           slidesToScroll: 1,
           cssEase: 'ease-in-out',
@@ -92,7 +99,7 @@ const PopupImage: React.FC<PopupImageProps> = ({
         }}
       >
         {dataImageList.length > 0 ? (
-          <div className="t-popupImage_wrapper">
+          <div className={`t-popupImage_wrapper ${loading ? 'loading-block' : ''}`}>
             <div className="t-popupImage_imageShow">
               <Carousel
                 asNavFor={nav2 as Slider}
@@ -100,9 +107,15 @@ const PopupImage: React.FC<PopupImageProps> = ({
                 settings={imageShowSettings}
               >
                 {dataImageList.map((item, index) => (
-                  <div className="t-popupImage_imageShow_item" key={`popupImageShow-${index.toString()}`}>
-                    <Image src={item} alt={item} ratio="934x526" />
-                  </div>
+                  <Card.LoadMore
+                    ref={(ref) => (index === dataImageList.length - 1 ? setNode(ref) : undefined)}
+                    key={`popupImageShow-${index.toString()}`}
+                    loading={loading}
+                  >
+                    <div className="t-popupImage_imageShow_item">
+                      <Image src={item} alt={item} ratio="934x526" />
+                    </div>
+                  </Card.LoadMore>
                 ))}
               </Carousel>
             </div>
@@ -130,6 +143,8 @@ const PopupImage: React.FC<PopupImageProps> = ({
 
 PopupImage.defaultProps = {
   currentImgIdx: 0,
+  loading: undefined,
+  handleLoadMore: undefined,
 };
 
 export default PopupImage;
