@@ -21,7 +21,7 @@ const FlatList = <T, >({
   const settingSelf = useMemo((): Settings => ({
     dots: false,
     slidesToShow: 3,
-    slidesToScroll: 1,
+    slidesToScroll: 3,
     arrows: true,
     prevArrow: <PrevArrow />,
     nextArrow: <NextArrow />,
@@ -34,10 +34,10 @@ const FlatList = <T, >({
     },
     responsive: [
       {
-        breakpoint: 1199,
+        breakpoint: 1281,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 1,
+          slidesToScroll: 3,
           arrows: false,
           dots: true,
         },
@@ -46,7 +46,7 @@ const FlatList = <T, >({
         breakpoint: 992,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 1,
+          slidesToScroll: 2,
           arrows: false,
           dots: true,
         },

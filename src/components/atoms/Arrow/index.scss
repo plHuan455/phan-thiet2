@@ -26,10 +26,16 @@
 
   &_prev {
     left: rem(-76);
+    @include break-max(1365px){
+      left: rem(-60);
+    }
   }
 
   &_next {
     right: rem(-76);
+    @include break-max(1365px){
+      right: rem(-60);
+    }
   }
 
   &_wrapper {

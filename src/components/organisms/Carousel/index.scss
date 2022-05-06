@@ -65,6 +65,10 @@
     &_prev {
       left: rem(-76);
 
+      @include break-max(1365px){
+        left: rem(-60);
+      }
+
       &.circleWhite {
         &::before {
           background-image: url('~assets/icons/ic_arrow_carousel_back_white.svg');
@@ -94,6 +98,10 @@
 
     &_next {
       right: rem(-76);
+
+      @include break-max(1365px){
+        right: rem(-60);
+      }
 
       &.circleWhite {
         &::before {
