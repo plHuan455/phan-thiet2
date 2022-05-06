@@ -1,7 +1,7 @@
 const settings = () => ({
   responsive: [
     {
-      breakpoint: 1199,
+      breakpoint: 1281,
       settings: {
         slidesToShow: 3,
         slidesToScroll: 3,
