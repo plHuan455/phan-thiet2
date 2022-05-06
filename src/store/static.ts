@@ -1,15 +1,13 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import { staticAllService, staticErrorsService } from 'services/pages';
+import { staticAllService } from 'services/pages';
 
 type State = {
   static?: DataStaticTypes[];
-  errors?: DataStaticErrorTypes[];
 };
 
 const initialState: State = {
   static: [],
-  errors: [],
 };
 
 export const staticAllAsync = createAsyncThunk<
@@ -27,21 +25,6 @@ export const staticAllAsync = createAsyncThunk<
   },
 );
 
-export const staticErrorsAsync = createAsyncThunk<
-  DataStaticErrorTypes[],
-  undefined
->(
-  'static/Errors',
-  async (_, { rejectWithValue }) => {
-    try {
-      const res = await staticErrorsService();
-      return res;
-    } catch (error) {
-      return rejectWithValue(error);
-    }
-  },
-);
-
 const staticSlice = createSlice({
   name: 'static',
   initialState,
@@ -49,9 +32,6 @@ const staticSlice = createSlice({
   extraReducers(builder) {
     builder.addCase(staticAllAsync.fulfilled, ($state, action) => {
       $state.static = action.payload;
-    });
-    builder.addCase(staticErrorsAsync.fulfilled, ($state, action) => {
-      $state.errors = action.payload;
     });
   },
 });
