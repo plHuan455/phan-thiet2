@@ -46,9 +46,9 @@ const Content = React.memo<ContentProps>(({
 
   return (
     <>
-      <Text modifiers={['20x32', '400', 'copper', 'uppercase']} content={label} />
+      <Text modifiers={['16x28', '400', 'copper', 'uppercase']} content={label} />
       <div className="u-mt-8" />
-      <Heading type="h1" modifiers={['700', 'gradientGreen', 'uppercase']}>
+      <Heading type="h2" modifiers={['700', 'gradientGreen', 'uppercase']}>
         <animated.div className="o-cardIntro_title">
           {countNumberAnimate.number.to((i) => `${formatNumber(i)} ${unit}`)}
         </animated.div>

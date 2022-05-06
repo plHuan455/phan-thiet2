@@ -86,7 +86,6 @@
   }
 
   &_marker {
-    animation: jump 0.5s alternate infinite;
     cursor: pointer;
     margin: auto;
     max-width: rem(24);
@@ -116,8 +115,6 @@
       z-index: 999;
 
       &_marker {
-        animation: 0;
-
         .a-image {
           transform-origin: bottom center;
           transform: scale(1.5);
@@ -143,13 +140,7 @@
       }
     }
   }
-
-  @keyframes jump {
-    0% {transform: translate3d(0, 0, 0);}
-    40% {transform: translate3d(0, -20%, 0);}
-    100% {transform: translate3d(0, -40%, 0);}
-  }
-
+  
   &_utilityMarker {
     align-items: center;
     border: rem(1) solid $white;
