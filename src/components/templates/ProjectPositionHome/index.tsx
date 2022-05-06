@@ -31,6 +31,7 @@ interface ProjectPositionHomeProps {
 
 interface ContentProps extends InfoTypes {
   active?: boolean;
+  isHighlight?: boolean;
 }
 
 const Content = React.memo<ContentProps>(({
@@ -38,6 +39,7 @@ const Content = React.memo<ContentProps>(({
   label,
   unit = '',
   active = false,
+  isHighlight,
 }) => {
   const { animated, countNumberAnimate } = useAnimation({
     countNumber: parseInt(value, 10),
@@ -46,9 +48,9 @@ const Content = React.memo<ContentProps>(({
 
   return (
     <>
-      <Text modifiers={['20x32', '400', 'copper', 'uppercase']} content={label} />
+      <Text modifiers={['16x28', '400', 'copper', 'uppercase']} content={label} />
       <div className="u-mt-8" />
-      <Heading type="h1" modifiers={['700', 'gradientGreen', 'uppercase']}>
+      <Heading type={isHighlight ? 'h2' : 'h3'} modifiers={['700', 'gradientGreen', 'uppercase']}>
         <animated.div className="o-cardIntro_title">
           {countNumberAnimate.number.to((i) => `${formatNumber(i)} ${unit}`)}
         </animated.div>
@@ -94,7 +96,7 @@ const ProjectPositionHome: React.FC<ProjectPositionHomeProps> = ({
           </Animate>
           <div className="t-projectPositionHome_info">
             <div className="t-projectPositionHome_scale">
-              <Content active={countActive} {...scale} />
+              <Content active={countActive} {...scale} isHighlight />
             </div>
             <div className="t-projectPositionHome_wrap">
               <div className="t-projectPositionHome_investment">
