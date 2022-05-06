@@ -33,10 +33,10 @@ const CardDivision: React.FC<CardDivisionProps> = ({
             <div className="m-subDivisionCard_content-title">
               <Text content={title} modifiers={['20x32', '700', 'raisinBlack', 's015']} />
             </div>
-            <div className="m-subDivisionCard_desc u-mt-8">
+            <div className="m-subDivisionCard_desc u-mt-5">
               <Text content={description} modifiers={['12x20', '400', 'davyGrey']} />
             </div>
-            <div className="d-flex align-items-center u-mt-12">
+            <div className="d-flex align-items-center u-mt-8">
               <Text modifiers={['14x20', '400', 'copper']} content={t('button.more')} />
               <div className="u-ml-8">
                 <Icon iconName="arrowRightCopper" size="16" />
