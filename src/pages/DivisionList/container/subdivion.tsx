@@ -65,7 +65,7 @@ const Divisions: React.FC<SectionBlocks> = ({ blocks }) => {
   );
 
   return (
-    <section className="s-divisions u-mt-md-88 u-mt-48">
+    <section className="s-divisions u-pt-lg-80 u-pt-md-60 u-pt-40">
       {/* TODO: Add Animation Later */}
       <div className="s-divisions-balloon">
         <Image src={balloon} ratio="1x1" size="contain" />

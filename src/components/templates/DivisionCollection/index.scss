@@ -1,11 +1,16 @@
 .t-divisionCollection {
   background-color: $anti-flash-white2;
-  padding-top: rem(80);
-  padding-bottom: rem(55);
+  padding-top: rem(40);
+  padding-bottom: rem(40);
 
   @include tablet-down {
-    padding-top: rem(48);
-    padding-bottom: rem(32);
+    padding-top: rem(30);
+    padding-bottom: rem(30);
+  }
+
+  @include mobile-down {
+    padding-top: rem(20);
+    padding-bottom: rem(20);
   }
 
   .slick-list {

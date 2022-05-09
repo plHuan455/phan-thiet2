@@ -97,7 +97,6 @@ const Map: React.FC<SectionBlocks> = ({ blocks }) => {
         list={headquartersList}
         title={mapBlock.title}
         loading={isFetchingNextPage}
-        // TODO: add form general later
         mapApiKey={data?.mapApiKey}
         defaultPosition={activeHeadquarter?.position}
         headQuarterIdx={activeHeadquarter?.idx}

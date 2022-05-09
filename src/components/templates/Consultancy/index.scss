@@ -8,20 +8,28 @@
   }
 
   &-md {
-    padding-bottom: rem(64);
-    padding-top: rem(64);
+    padding-bottom: rem(60);
+    padding-top: rem(30);
     @include tablet-down {
-      padding-bottom: rem(32);
-      padding-top: rem(32);
+      padding-bottom: rem(40);
+      padding-top: rem(20);
+    }
+    @include mobile-down {
+      padding-bottom: rem(20);
+      padding-top: rem(10);
     }
   }
 
   &-lg {
     padding-bottom: rem(80);
-    padding-top: rem(80);
+    padding-top: rem(40);
     @include tablet-down {
-      padding-bottom: rem(48);
-      padding-top: rem(48);
+      padding-bottom: rem(60);
+      padding-top: rem(30);
+    }
+    @include mobile-down {
+      padding-bottom: rem(40);
+      padding-top: rem(20);
     }
   }
 

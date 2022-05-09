@@ -22,7 +22,7 @@ const Summary = React.forwardRef<HTMLDivElement, SummaryProps>(({
   if (!data?.active) return null;
 
   return (
-    <section ref={ref} className="u-pt-md-77 u-pt-48 u-pb-md-77 u-pb-48 position-relative" style={{ color: 'var(--theme)' }}>
+    <section ref={ref} className="u-pt-lg-40 u-pt-md-30 u-pt-20 u-pb-lg-40 u-pb-md-30 u-pb-20 position-relative" style={{ color: 'var(--theme)' }}>
       <DivisionSummary
         title={data?.title}
         description={data?.description}
