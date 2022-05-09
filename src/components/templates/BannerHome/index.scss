@@ -30,20 +30,30 @@
     }
 
     @include desktop-down {
+      min-height: rem(90);
       padding: rem(8) rem(25);
+    }
+
+    @include tablet-down {
+      min-height: rem(70);
     }
 
     @include mobile-down {
       margin-top: rem(-20);
-      min-height: rem(67);
       padding: rem(4) rem(16);
     }
 
     .a-text {
+      width: 100%;
       @include text-overflow (3);
       @include desktop-down {
-        @include font-base(18,24);
+        @include font-base(16,24);
       }
+
+      @include tablet-down {
+        @include font-base(14, 20);
+      }
+      
       @include mobile-down {
         @include font-base(12,18);
       }
@@ -52,19 +62,24 @@
 
   &_imgSub {
     left: 0;
-    margin-top: rem(-50);
+    margin-top: rem(-40);
     position: relative;
     top: 0;
     z-index: 3;
+
+    @include desktop-down {
+      margin-top: rem(-25);
+    }
 
     img {
       width: auto;
       max-width: 100%;
       height: auto;
       margin-left: auto;
-    }
-    @include tablet-down {
-      max-width: 33%;
+      @include tablet-down {
+        max-width: 40%;
+        width: 100%;
+      }
     }
   }
 
