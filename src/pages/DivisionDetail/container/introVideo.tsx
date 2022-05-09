@@ -9,7 +9,7 @@ import Image from 'components/atoms/Image';
 import Animate from 'components/organisms/Animate';
 import Player, { PlayerProps } from 'components/organisms/Player';
 import { SubdivisionVideoTypes } from 'services/subdivision/types';
-import { baseString, youtubeControlIframe } from 'utils/functions';
+import { baseString, baseURL, youtubeControlIframe } from 'utils/functions';
 
 interface IntroPlayerProps extends PlayerProps{}
 
@@ -58,7 +58,9 @@ const IntroVideo: React.FC<IntroVideoProps> = ({ data }) => {
         <Animate extendClassName="s-introVideo_content" type="fadeInUp">
           <IntroPlayer
             isYoutube={isYoutube}
-            src={isYoutube ? youtubeControlIframe(link) : link}
+            src={isYoutube ? youtubeControlIframe(link, true) : baseURL(link)}
+            autoplay
+            isMuted
           />
         </Animate>
       </Container>
