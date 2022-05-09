@@ -35,7 +35,7 @@ const PopupPlayer: React.FC<PopupPlayerProps> = ({
   useEffect(() => {
     if (!src || !videoType) return;
     if (videoType === '2' && youtubeParser(src)) {
-      const iframe = youtubeControlIframe(src);
+      const iframe = youtubeControlIframe(src, false);
       // eslint-disable-next-line consistent-return
       return setVideoSrc(iframe);
     }
