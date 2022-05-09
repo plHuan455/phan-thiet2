@@ -16,12 +16,12 @@
   }
 
   &_map {
-    margin: rem(41) rem(100) 0;
+    margin-top: rem(41);
     position: relative;
     z-index: 1;
 
     @include tablet-down {
-      margin: rem(20) 0 0;
+      margin-top: rem(20);
     }
   }
 
