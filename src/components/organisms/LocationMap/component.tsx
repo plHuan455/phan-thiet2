@@ -40,7 +40,7 @@ const MarkerCard: React.FC<MarkerCardProps> = ({
     {
       modifiers === 'marker' && (
         <div className="m-markerCard_marker" onMouseEnter={handleHover} onMouseLeave={handleLeave}>
-          <Icon iconName="logoMarker" />
+          <Icon iconName="logoMarker" size="16" />
           <div className="m-markerCard_marker-label">
             <Text modifiers={['12x18', 'raisinBlack', '400']} content={title} />
           </div>

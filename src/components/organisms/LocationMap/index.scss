@@ -4,41 +4,40 @@
 
   &_content {
     background-color: $white;
-    border-radius: rem(24);
+    border-radius: rem(12);
     bottom: rem(80);
     box-shadow: 0 4px 36px $black025;
     left: 50%;
     min-width: rem(399);
     opacity: 0;
-    padding: rem(16);
+    padding: rem(8);
     position: absolute;
     transform: translate(-50%, -30%);
     transition: all $transition ease-in-out;
     visibility: hidden;
-    z-index: 10;
+    z-index: 9;
 
     @include break-max(1366px) {
-      min-width: rem(282);
+      min-width: rem(290);
     }
 
     @include desktop-down {
       min-width: rem(215);
-      padding: rem(10);
+      padding: rem(5);
     }
 
     @include tablet-down {
-      min-width: rem(170);
+      min-width: rem(180);
     }
 
     @include mobile-down {
       bottom: rem(55);
-      min-width: rem(180);
+      min-width: rem(200);
     }
 
     @include small-mobile {
-      bottom: rem(30);
+      bottom: rem(55);
       min-width: rem(120);
-      padding: rem(10);
 
       &::after {
         bottom: rem(-5);
@@ -53,20 +52,14 @@
     }
 
     &-title {
-      margin-top: rem(16);
+      margin-top: rem(8);
       @include text-overflow;
 
       @include desktop-down {
         margin-top: rem(5);
       }
 
-      @include mobile-down {
-        margin-top: rem(8);
-      }
-
       @include small-mobile {
-        margin-top: rem(5);
-
         .a-text {
           @include font-base(11,15);
         }
@@ -115,12 +108,12 @@
       border: rem(1) solid $white;
       position: absolute;
       bottom: rem(-24);
-      left: rem(19);
+      left: rem(15);
 
       @include mobile-down {
         height: rem(12);
         bottom: rem(-12);
-        left: rem(15);
+        left: rem(12);
       }
     }
 
@@ -138,45 +131,11 @@
         display: none;
       }
     }
-
-    &-circle {
-      border-radius: 50%;
-      border: 1px solid $white;
-      box-shadow: 0 0 10px $white;
-      left: rem(21);
-      pointer-events: none;
-      position: absolute;
-      bottom: rem(-34);
-      transform: translate(-50%, -20%);
-
-      @include mobile-down {
-        left: rem(16);
-        bottom: rem(-24);
-      }
-    }
   }
 
   &-active {
     #{$root} {
-      z-index: 999;
-
-      &_marker {
-        .a-image {
-          transform-origin: bottom center;
-          transform: scale(1.5);
-        }
-
-        &-circle {
-          animation: rippleMaker 1.5s ease-in-out infinite backwards;
-          transform: translate(-50%, -20%) scale(1.5);
-          @include tablet-down {
-            transform: translate(-50%, -20%) scale(1.25);
-          }
-          @include small-mobile {
-            transform: translate(-50%, -10%);
-          }
-        }
-      }
+      z-index: 10;
 
       &_content {
         opacity: 1;
@@ -292,7 +251,11 @@
       max-width: fit-content;
       position: absolute;
       width: 100%;
-      transform: translate(-15px,-30px);
+      transform: translate(-13px,-23px);
+
+      @include mobile-down {
+      transform: translate(-14px,-23px);
+      }
 
       &.active{
         z-index: 1;
