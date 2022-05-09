@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import useDeviceQueries from 'hooks/useDeviceQueries';
 import mapModifiers from 'utils/functions';
 
-export type SizeImageType = 'cover' | 'contain' | 'inherit' | 'initial';
+export type SizeImageType = 'cover' | 'contain' | 'inherit' | 'initial' | 'fill';
 
 export type ImageProps = {
   src?: string;

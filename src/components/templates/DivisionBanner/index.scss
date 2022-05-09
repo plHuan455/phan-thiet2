@@ -2,23 +2,11 @@
 
   &_thumbnail {
     .a-image {
-      &::after {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        content: '';
-        background: $gradient-black;
-        pointer-events: none;
-      }
-
-      @include tablet-down {
-        padding-bottom: (1024 / 768) * 100%; 
-      }
-      
-      @include mobile-down {
-        padding-bottom: (812 / 375) * 100%; 
+      padding-bottom: 0;
+      min-height: rem(500);
+      height: 100vh;
+      img {
+        object-position: bottom center;
       }
     }
   }
