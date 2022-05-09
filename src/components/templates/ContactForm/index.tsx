@@ -63,19 +63,6 @@ const ContactForm: React.FC<ContactFormProps> = ({
                 )}
               />
             </Col>
-            <Col md={12} className="u-mt-16 u-pl-16 u-pr-16">
-              <Controller
-                name="address"
-                render={({ field, fieldState: { error } }) => (
-                  <Input
-                    {...field}
-                    value={field.value || ''}
-                    placeholder={form?.addressPlaceholder}
-                    error={error?.message}
-                  />
-                )}
-              />
-            </Col>
             <Col md={6} className="u-mt-16 u-pl-16 u-pr-16">
               <Controller
                 name="phone"

@@ -9,7 +9,7 @@ describe('<Consultancy />', () => {
     const div = document.createElement('div');
     const method = useForm<FormConsultancy>();
     // eslint-disable-next-line no-console
-    ReactDOM.render(<Consultancy title="" method={method} handleSubmit={() => console.log()} />, div);
+    ReactDOM.render(<Consultancy method={method} handleSubmit={() => console.log()} />, div);
     ReactDOM.unmountComponentAtNode(div);
   });
 });

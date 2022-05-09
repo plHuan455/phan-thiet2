@@ -11,7 +11,6 @@ export interface FormConsultancy {
   name: string
   phone: string
   email: string
-  address: string
   content: string
   products: string[]
 }
@@ -25,7 +24,6 @@ export interface ConsultancyInfoTypes {
   placeholderName: string;
   placeholderPhone: string;
   placeholderEmail: string;
-  placeholderAddress: string;
   placeholderContent: string;
   btnText: string;
   checkbox?: {
@@ -36,7 +34,6 @@ export interface ConsultancyInfoTypes {
 }
 
 export interface ConsultancyProps {
-  title: string;
   consultancyInfo?: ConsultancyInfoTypes;
   handleSubmit?: (data: FormConsultancy) => void;
   method: UseFormReturn<FormConsultancy>;
@@ -45,7 +42,6 @@ export interface ConsultancyProps {
 }
 
 const Consultancy: React.FC<ConsultancyProps> = ({
-  title,
   consultancyInfo,
   handleSubmit,
   method,
@@ -75,9 +71,6 @@ const Consultancy: React.FC<ConsultancyProps> = ({
 
   return (
     <div className="o-consultancy">
-      <div className="o-consultancy_title">
-        <Text content={title} modifiers={['12x20', 'davyGrey', '400', 'center']} />
-      </div>
       <FormProvider {...method}>
         <form className="o-consultancy_form" onSubmit={method.handleSubmit(onSubmit)} noValidate>
           <div className="o-consultancy_formGroup">
@@ -117,21 +110,6 @@ const Consultancy: React.FC<ConsultancyProps> = ({
                     {...field}
                     value={field.value || ''}
                     placeholder={consultancyInfo?.placeholderEmail}
-                    error={error?.message}
-                  />
-                )}
-              />
-            </div>
-          </div>
-          <div className="o-consultancy_formGroup">
-            <div className="o-consultancy_field">
-              <Controller
-                name="address"
-                render={({ field, fieldState: { error } }) => (
-                  <Input
-                    {...field}
-                    value={field.value || ''}
-                    placeholder={consultancyInfo?.placeholderAddress}
                     error={error?.message}
                   />
                 )}

@@ -32,28 +32,31 @@
   },
   "form": {
     "contact_name": "HỌ VÀ TÊN",
-    "contact_address": "ĐỊA CHỈ",
     "contact_phone": "ĐIỆN THOẠI *",
     "contact_email": "EMAIL *",
-    "contact_content": "NỘI DUNG",
+    "contact_content": "NỘI DUNG KHÔNG BẮT BUỘC",
     "search": "Tìm kiếm",
     "search_event": "Tìm kiếm sự kiện",
     "search_news": "Tìm kiếm tin tức",
     "search_content": "Tìm kiếm nội dung",
-    "consultancy_title": "Quý khách đăng ký nhận email thông tin dự án, các chương trình ưu đãi, khuyến mại  và tin tức mới nhất từ NovaWorld Phan Thiet",
     "consultancy_interest": "Sản phẩm quan tâm: ",
     "consultancy_option": "(Câu hỏi không bắt buộc)",
     "consultancy_name": "Họ và tên",
-    "consultancy_address": "Địa chỉ",
     "consultancy_phone": "Số điện thoại *",
     "consultancy_email": "Email *",
-    "consultancy_content": "Nội dung"
+    "consultancy_content": "Nội dung không bắt buộc"
   },
   "button": {
-    "register": "Đăng ký nhận thông tin",
+    "register": "Xác nhận",
     "visiting_houses": "Tham quan các mẫu nhà",
     "more": "Xem thêm",
     "detail": "Xem Chi Tiết",
     "download": "Tải xuống"
+  },
+  "validation": {
+    "phone_required": "Vui lòng nhập số điện thoại !!",
+    "phone_invalid": "Số điện thoại không hợp lệ !!",
+    "email_required": "Vui lòng nhập email !!",
+    "email_invalid": "Email Không hợp lệ !!"
   }
 }

@@ -23,7 +23,6 @@ export const normal: Story = () => {
         modifiers: ['700', 'gradientGreen', 's015'],
       }}
       form={{
-        title: 'Quý khách đăng ký nhận email thông tin dự án, các chương trình ưu đãi, khuyến mại</br>và tin tức mới nhất từ NovaWorld Phan Thiet',
         method,
         handleSubmit: (data) => console.log(data),
         variantButton: 'primary-green',
@@ -31,7 +30,6 @@ export const normal: Story = () => {
           placeholderName: 'Họ và tên',
           placeholderPhone: 'Số điện thoại *',
           placeholderEmail: 'Email *',
-          placeholderAddress: 'Địa chỉ',
           placeholderContent: 'Nội dung',
           checkbox: {
             label: 'Sản phẩm quan tâm: ',

@@ -29,14 +29,13 @@ const Form: React.FC<SectionBlocks> = ({ blocks }) => {
   const { executeRecaptcha } = useGoogleReCaptcha();
   const dispatch = useAppDispatch();
   const method = useForm<ContactFormType>({
-    resolver: yupResolver(schemasConsultancyForm),
+    resolver: yupResolver(schemasConsultancyForm(t)),
     mode: 'onSubmit',
   });
   const formBlock = useMemo(() => {
     const blockPageContent = getBlockData<FormProps>('form_contact', blocks);
     return {
       form: {
-        addressPlaceholder: t('form.contact_address'),
         contentPlaceholder: t('form.contact_content'),
         emailPlaceholder: t('form.contact_email'),
         namePlaceholder: t('form.contact_name'),
@@ -65,7 +64,6 @@ const Form: React.FC<SectionBlocks> = ({ blocks }) => {
         name: params.name,
         email: params.email,
         phone: params.phone,
-        address: params.address,
         content: params.content,
         grecaptcha_token: grecaptchaToken,
       };

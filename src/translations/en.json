@@ -32,7 +32,6 @@
   },
   "form": {
     "contact_name": "NAME",
-    "contact_address": "ADDRESS",
     "contact_phone": "PHONE *",
     "contact_email": "EMAIL *",
     "contact_content": "CONTENT",
@@ -40,20 +39,24 @@
     "search_event": "Search Event",
     "search_news": "Search News",
     "search_content": "Search Content",
-    "consultancy_title": "You register to receive email project information, preferential programs, promotions and the latest news from NovaWorld Phan Thiet",
     "consultancy_interest": "Products of interest: ",
     "consultancy_option": "(Optional question)",
     "consultancy_name": "Name",
-    "consultancy_address": "Address",
     "consultancy_phone": "Phone *",
     "consultancy_email": "Email *",
     "consultancy_content": "Content"
   },
   "button": {
-    "register": "Sign up to receive information",
+    "register": "Sign up",
     "visiting_houses": "Visiting houses",
     "more": "See more",
     "detail": "See Detail",
     "download": "Download"
+  },
+  "validation": {
+    "phone_required": "Phone required !!",
+    "phone_invalid": "Phone invalid !!",
+    "email_required": "Email required !!",
+    "email_invalid": "Email invalid !!"
   }
 }
