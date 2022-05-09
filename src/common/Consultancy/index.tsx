@@ -37,7 +37,7 @@ const Consultancy: React.FC<ConsultancyCommonProps> = ({
   const topicSelector = useAppSelector((state) => state.topic);
   const dispatch = useAppDispatch();
   const method = useForm<FormConsultancy>({
-    resolver: yupResolver(schemasConsultancyForm),
+    resolver: yupResolver(schemasConsultancyForm(t)),
     mode: 'onSubmit',
   });
 
@@ -57,7 +57,6 @@ const Consultancy: React.FC<ConsultancyCommonProps> = ({
       name: params.name,
       email: params.email,
       phone: params.phone,
-      address: params.address,
       content: params.content,
       topic_ids: topicIds,
       grecaptcha_token: grecaptchaToken,
@@ -116,7 +115,6 @@ const Consultancy: React.FC<ConsultancyCommonProps> = ({
       title={title}
       layer={layer}
       form={{
-        title: t('form.consultancy_title'),
         method,
         loading: consultancyState.loading,
         handleSubmit: consultancyExecute,
@@ -125,7 +123,6 @@ const Consultancy: React.FC<ConsultancyCommonProps> = ({
           placeholderName: t('form.consultancy_name'),
           placeholderPhone: t('form.consultancy_phone'),
           placeholderEmail: t('form.consultancy_email'),
-          placeholderAddress: t('form.consultancy_address'),
           placeholderContent: t('form.consultancy_content'),
           checkbox: {
             label: t('form.consultancy_interest'),
