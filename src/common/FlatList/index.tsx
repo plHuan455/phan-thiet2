@@ -34,7 +34,7 @@ const FlatList = <T, >({
     },
     responsive: [
       {
-        breakpoint: 1281,
+        breakpoint: 1200,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 3,

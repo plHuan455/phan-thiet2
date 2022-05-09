@@ -18,8 +18,8 @@
   }
 
   &_wrapper .a-image {
-    @include desktop-down {
-      @include aspect-ratio(1366, 800);
+    @include tablet-down {
+      @include aspect-ratio(1366, 600);
     }
     @include small-mobile {
       @include aspect-ratio(1366, 1000);
@@ -34,6 +34,12 @@
         top: 0;
         width: 100%;
         z-index: 1;
+      }
+    }
+    
+    #{$root}-isSearch & {
+      @include max-desktop {
+        @include aspect-ratio(1366, 350);
       }
     }
   }
