@@ -36,36 +36,38 @@ const DivisionUtilities: React.FC<DivisionUtilitiesProps> = ({
         <div ref={refUtilitiesMap} className="t-divisionUtilities_title">
           <Heading type="h2" modifiers={['inherit', 's015', '400']} content={title} />
         </div>
-        <Animate type="fadeInUp" extendClassName="t-divisionUtilities_map u-mt-41">
-          <div className="t-divisionUtilities_image" style={{ paddingBottom: heightImage && widthImage ? `calc(${heightImage / widthImage}  * 100%)` : '0%' }}>
-            <img src={background} alt="location-map" loading="lazy" />
-          </div>
-          {
-            listLocations?.map((item, index) => (
-              <div
-                key={`t-divisionUtilities_listDivision-${index.toString()}`}
-                className={`t-divisionUtilities_item ${animate && 'animate animate-dropdown'} 
-                ${active === item.id && 't-divisionUtilities_item-active'}`}
-                style={{
-                  top: `calc(${item.y} / ${heightImage} * 100% - 15px)`,
-                  left: `calc(${item.x} / ${widthImage} * 100% - 15px)`,
-                }}
-              >
-                <MarkerCard
-                  handleHover={() => setActive(item.id)}
-                  handleLeave={() => setActive(undefined)}
-                  active={active === item.id}
-                  modifiers="utilities"
-                  key={index.toString()}
-                  imgSrc={item.imgSrc}
-                  id={item.id}
-                  title={item.title}
-                  utilitiesIcon={item.utilitiesIcon}
-                />
-              </div>
-            ))
-          }
-        </Animate>
+        <div style={{ maxWidth: widthImage, marginLeft: 'auto', marginRight: 'auto' }}>
+          <Animate type="fadeInUp" extendClassName="t-divisionUtilities_map u-mt-41">
+            <div className="t-divisionUtilities_image" style={{ paddingBottom: heightImage && widthImage ? `calc(${heightImage / widthImage}  * 100%)` : '0%' }}>
+              <img src={background} alt="location-map" loading="lazy" />
+            </div>
+            {
+              listLocations?.map((item, index) => (
+                <div
+                  key={`t-divisionUtilities_listDivision-${index.toString()}`}
+                  className={`t-divisionUtilities_item ${animate && 'animate animate-dropdown'} 
+                  ${active === item.id && 't-divisionUtilities_item-active'}`}
+                  style={{
+                    top: `calc(${item.y} / ${heightImage} * 100% - 15px)`,
+                    left: `calc(${item.x} / ${widthImage} * 100% - 15px)`,
+                  }}
+                >
+                  <MarkerCard
+                    handleHover={() => setActive(item.id)}
+                    handleLeave={() => setActive(undefined)}
+                    active={active === item.id}
+                    modifiers="utilities"
+                    key={index.toString()}
+                    imgSrc={item.imgSrc}
+                    id={item.id}
+                    title={item.title}
+                    utilitiesIcon={item.utilitiesIcon}
+                  />
+                </div>
+              ))
+            }
+          </Animate>
+        </div>
       </Container>
     </div>
   );
