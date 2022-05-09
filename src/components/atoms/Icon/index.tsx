@@ -34,6 +34,7 @@ export const iconList = {
   arrowUp: 'arrowUp',
   loadingInherit: 'loadingInherit',
   playerInherit: 'playerInherit',
+  logoMarker: 'logoMarker',
 };
 
 export type IconName = keyof typeof iconList;
