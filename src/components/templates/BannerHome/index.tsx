@@ -26,7 +26,7 @@ export const CardBanner:React.FC<CardBannerProps> = ({
       <Image src={srcImgMain} alt={alt || ''} ratio="1x1" loading="eager" />
     </div>
     <div className="m-cardBanner_title">
-      <Text content={title} modifiers={['700', 'copper', 's015', '20x32']} />
+      <Text content={title} modifiers={['700', 'copper', 's015', '20x32', 'center']} />
     </div>
     <div className="m-cardBanner_imgSub">
       <img src={srcImgSub} alt={alt || ''} loading="eager" />
