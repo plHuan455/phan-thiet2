@@ -22,6 +22,14 @@
       .a-image {
         margin: 0 auto rem(12);
         max-width: rem(930);
+        @include desktop-down {
+          max-width: rem(628);
+          padding-bottom: 39.12%;
+        }
+        @include tablet-down {
+          padding-bottom: 56.31692%;
+          max-width: rem(930);
+        }
       }
     }
   }
