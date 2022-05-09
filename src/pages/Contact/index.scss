@@ -18,6 +18,10 @@
       .a-image {
         padding-bottom: (153 / 213) * 100%;
       }
+      @include tablet-down {
+        max-width: rem(165); 
+      }
+
       @include mobile-down {
         max-width: rem(120);
         top: rem(-22);
@@ -32,6 +36,7 @@
       right: 0;
       width: 100%;
       opacity: 0;
+      z-index: 1;
       .a-image {
         padding-bottom: (414 / 238) * 100%;
       }

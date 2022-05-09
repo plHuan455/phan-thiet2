@@ -17,7 +17,7 @@ const BoxDivision:React.FC<BoxDivisionProps> = ({
       <Heading content={titleBox} type="h5" modifiers={['700', 's015', 'uppercase', 'white']} />
     </div>
     <div className="t-boxDivision_content">
-      <Text modifiers={['16x28', 'white']} content={contentBox} />
+      <Text type="div" modifiers={['16x28', 'white']} content={contentBox} />
     </div>
   </div>
 );

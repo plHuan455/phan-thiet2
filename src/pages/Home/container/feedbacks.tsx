@@ -34,7 +34,7 @@ const Feedbacks: React.FC<SectionBlocks> = ({ blocks }) => {
     [feedbackBlock],
   );
   return (
-    <section className="u-pt-md-80 u-pb-48 u-pt-48 u-pb-md-80 position-relative">
+    <section className="u-pt-md-30 u-pt-lg-40 u-pb-20 u-pt-20 u-pb-md-30 u-pb-lg-40 position-relative">
       <div className="s-feedbacks_leaf">
         <div className="s-feedbacks_leaf_layer">
           <Image src={leaf} alt="leaf" />

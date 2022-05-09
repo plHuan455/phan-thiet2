@@ -47,7 +47,7 @@ const IntroVideo: React.FC<IntroVideoProps> = ({ data }) => {
   if (!data?.active || !data?.link) return null;
 
   return (
-    <section className="u-pt-md-80 u-pt-48 u-pb-md-61 u-pb-32 s-introVideo">
+    <section className="u-pt-lg-80 u-pt-md-60 u-pt-40 u-pb-lg-40 u-pb-md-30 u-pb-20 s-introVideo">
       <animated.div className="s-introVideo_ballon" style={ballonAnimate} ref={ballonRef}>
         <Image src={ballon} alt="ballon" ratio="132x202" />
       </animated.div>

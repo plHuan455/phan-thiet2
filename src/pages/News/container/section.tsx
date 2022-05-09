@@ -5,7 +5,7 @@ const Section = React.forwardRef<
   React.InputHTMLAttributes<HTMLDivElement>
 >(({ className, children }, ref) => (
   <section
-    className={`${className || ''} u-pt-40 u-pb-40 u-pt-md-80 u-pb-md-80 position-relative`}
+    className={`${className || ''} u-pt-20 u-pb-20 u-pt-md-30 u-pb-md-30 u-pt-lg-40 u-pb-lg-40 position-relative`}
     ref={ref}
   >
     {children}

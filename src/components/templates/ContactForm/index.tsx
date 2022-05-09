@@ -41,7 +41,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
   loading,
   handleSubmit,
 }) => (
-  <div className="t-contactForm u-pt-md-80 u-pb-md-78 u-pt-48 u-pb-48">
+  <div className="t-contactForm u-pt-lg-40 u-pt-md-30 u-pb-lg-80 u-pb-md-60 u-pt-20 u-pb-40">
     <Container>
       <Heading type="h4" modifiers={['700', 's015', 'gradientGreen', 'center']} content={titleForm} />
       <div className="t-contactForm_description">

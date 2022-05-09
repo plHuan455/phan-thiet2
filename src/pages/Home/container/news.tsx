@@ -42,7 +42,7 @@ const News: React.FC<SectionBlocks> = ({ blocks }) => {
   })) || [], [newsList, language, t]);
 
   return (
-    <section className="u-pt-md-80 u-pb-48 u-pt-48 u-pb-md-88 position-relative">
+    <section className="u-pt-lg-40 u-pt-md-30 u-pb-20 u-pt-20 u-pb-md-30 u-pb-lg-40 position-relative">
       <Container>
         <FlatMore
           title={{

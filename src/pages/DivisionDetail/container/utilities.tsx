@@ -25,7 +25,7 @@ const Utilities = React.forwardRef<HTMLDivElement, UtilitiesProps>(({ data, map 
   if (!data?.active) return null;
 
   return (
-    <section ref={ref} className="u-pt-md-80 u-pt-48 u-pb-md-80 u-pb-48" style={{ color: 'var(--theme)' }}>
+    <section ref={ref} className="u-pt-lg-80 u-pt-md-60 u-pt-40 u-pb-lg-40 u-pb-md-30 u-pb-20" style={{ color: 'var(--theme)' }}>
       <DivisionUtilities
         background={baseURL(map?.image)}
         title={data?.title}

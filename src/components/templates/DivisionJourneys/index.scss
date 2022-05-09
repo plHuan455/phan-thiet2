@@ -1,9 +1,13 @@
 .t-divisionJourneys {
-  padding: rem(80) 0;
+  padding: rem(40) 0;
   position: relative;
 
+  @include tablet-down {
+    padding: rem(30) 0;
+  }
+
   @include mobile-down {
-    padding: rem(48) 0;
+    padding: rem(20) 0;
   }
 
   &::before {

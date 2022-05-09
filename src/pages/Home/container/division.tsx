@@ -111,7 +111,7 @@ const Division: React.FC<SectionBlocks> = ({ blocks }) => {
 
   return (
     <>
-      <section className="u-pt-md-83 u-pb-80 u-pt-48 u-pb-48 position-relative">
+      <section className="u-pt-lg-40 u-pt-md-30 u-pt-20 u-pb-20 u-pb-lg-40 u-pb-md-30 position-relative">
         <Container>
           <FlatMore
             title={{

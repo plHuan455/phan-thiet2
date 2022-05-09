@@ -1,14 +1,14 @@
 .t-utilityHome {
   $root: &;
-  padding: rem(82) 0 rem(60);
+  padding: rem(80) 0 rem(40);
   position: relative;
 
   @include tablet-down {
-    padding: rem(48) 0 rem(30);
+    padding: rem(60) 0 rem(30);
   }
 
   @include mobile-down {
-    padding: rem(28) 0 rem(15);
+    padding: rem(40) 0 rem(20);
 
   }
 

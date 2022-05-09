@@ -175,7 +175,7 @@ const Library: React.FC<LibraryProps> = ({
 
   return (
     <section
-      className="s-library u-pt-md-80 u-pt-48 u-pb-md-80 u-pb-48"
+      className="s-library u-pt-lg-40 u-pt-md-30 u-pt-20 u-pb-lg-40 u-pb-md-30 u-pb-20"
       style={{ color: 'var(--theme)' }}
     >
       <Container>
