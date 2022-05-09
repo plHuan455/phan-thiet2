@@ -2,7 +2,6 @@
   object-fit: cover;
   position: absolute;
   width: $width;
-  z-index: 2;
 }
 
 @mixin customAnimation($duration, $name, $delay) {
@@ -102,7 +101,7 @@
     bottom: 74%;
     cursor: pointer;
     left: 59.8%;
-    z-index: 3;
+    z-index: 4;
     @include locationInMap(4%);
 
     &:hover {
