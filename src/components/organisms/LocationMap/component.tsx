@@ -1,6 +1,6 @@
 import React from 'react';
 
-import marker from 'assets/images/projectPosition/marker.svg';
+import Icon from 'components/atoms/Icon';
 import Image from 'components/atoms/Image';
 import Text from 'components/atoms/Text';
 import mapModifiers from 'utils/functions';
@@ -40,8 +40,10 @@ const MarkerCard: React.FC<MarkerCardProps> = ({
     {
       modifiers === 'marker' && (
         <div className="m-markerCard_marker" onMouseEnter={handleHover} onMouseLeave={handleLeave}>
-          <div className="m-markerCard_marker-circle" />
-          <Image src={marker} ratio="24x34" alt="marker" />
+          <Icon iconName="logoMarker" />
+          <div className="m-markerCard_marker-label">
+            <Text modifiers={['12x18', 'raisinBlack', '400']} content={title} />
+          </div>
         </div>
       )
     }

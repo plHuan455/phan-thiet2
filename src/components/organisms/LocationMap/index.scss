@@ -4,8 +4,8 @@
 
   &_content {
     background-color: $white;
-    border-radius: rem(16);
-    bottom: rem(70);
+    border-radius: rem(24);
+    bottom: rem(80);
     box-shadow: 0 4px 36px $black025;
     left: 50%;
     min-width: rem(399);
@@ -17,13 +17,17 @@
     visibility: hidden;
     z-index: 10;
 
+    @include break-max(1366px) {
+      min-width: rem(282);
+    }
+
     @include desktop-down {
-      min-width: rem(299);
+      min-width: rem(215);
+      padding: rem(10);
     }
 
     @include tablet-down {
-      min-width: rem(250);
-      padding: rem(10);
+      min-width: rem(170);
     }
 
     @include mobile-down {
@@ -34,7 +38,7 @@
     @include small-mobile {
       bottom: rem(30);
       min-width: rem(120);
-      padding: rem(5);
+      padding: rem(10);
 
       &::after {
         bottom: rem(-5);
@@ -51,6 +55,10 @@
     &-title {
       margin-top: rem(16);
       @include text-overflow;
+
+      @include desktop-down {
+        margin-top: rem(5);
+      }
 
       @include mobile-down {
         margin-top: rem(8);
@@ -88,25 +96,63 @@
   &_marker {
     cursor: pointer;
     margin: auto;
-    max-width: rem(24);
+    max-width: fit-content;
+    background-color: $white;
+    @include adjust-flex();
+    padding: rem(4) rem(8);
+    border-radius: rem(99);
+    position: relative;
+    transform: translateY(-24px);
 
-    .a-image {
-      transition: all $transition linear;
+    @include mobile-down {
+      padding: rem(4);
+    transform: translateY(-12px);
     }
 
-    @include small-mobile {
-      max-width: rem(12);
+    &::before {
+      content: '';
+      height: rem(24);
+      border: rem(1) solid $white;
+      position: absolute;
+      bottom: rem(-24);
+      left: rem(19);
+
+      @include mobile-down {
+        height: rem(12);
+        bottom: rem(-12);
+        left: rem(15);
+      }
+    }
+
+    &-label {
+      white-space: nowrap;
+      margin-left: rem(8);
+
+      .a-text {
+        @include tablet-down {
+          @include font-base(10, 15);
+        }
+      }
+
+      @include mobile-down {
+        display: none;
+      }
     }
 
     &-circle {
       border-radius: 50%;
       border: 1px solid $white;
       box-shadow: 0 0 10px $white;
-      left: 50%;
+      left: rem(21);
       pointer-events: none;
       position: absolute;
-      top: 80%;
+      bottom: rem(-34);
       transform: translate(-50%, -20%);
+
+      @include mobile-down {
+        left: rem(16);
+        bottom: rem(-24);
+      }
     }
   }
 
@@ -243,14 +289,10 @@
 
   &_listDivision {
     &-item {
-      max-width: rem(24);
+      max-width: fit-content;
       position: absolute;
       width: 100%;
       transform: translate(-15px,-30px);
-
-      @include small-mobile {
-        transform: translate(-12px,-17px);
-      }
 
       &.active{
         z-index: 1;
