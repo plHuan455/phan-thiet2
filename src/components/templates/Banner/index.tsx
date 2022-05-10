@@ -71,7 +71,7 @@ const Banner: React.FC<BannerProps> = ({
   return (
     <div className={mapModifiers('t-banner', isLayer && 'layer', search && 'isSearch')}>
       <animated.div className="t-banner_wrapper" style={styles}>
-        <Image {...image} ratio="1366x467" />
+        <Image {...image} ratio="1366x364" />
         <div className="t-banner_content">
           {title && (
             <div className="t-banner_title">
