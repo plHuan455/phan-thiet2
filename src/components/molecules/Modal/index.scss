@@ -53,7 +53,7 @@
     #{$root}_main {
       max-width: rem(1024);
 
-      @include desktop-down {
+      @include break-max(1365px) {
         max-width: rem(900);
       }
     }
