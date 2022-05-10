@@ -142,7 +142,7 @@ const Header: React.FC<HeaderProps> = ({
             </div>
             <div className="t-header_left">
               <Link href={mainLogo?.url} target={mainLogo?.target}>
-                <Image src={mainLogo?.icon} ratio="184x59" alt="logo" />
+                <Image src={mainLogo?.icon} ratio="184x59" alt="logo" loading="eager" />
               </Link>
             </div>
             <div className={mapModifiers('t-header_right', isOpen && 'open')}>
