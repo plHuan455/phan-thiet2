@@ -35,15 +35,13 @@
   }
 
   &_project {
-    cursor: pointer;
+    pointer-events: none;
     left: 9%;
     top: 27%;
     z-index: 3;
     @include locationInMap(31%);
 
     &:hover {
-      animation: 0 !important;
-
       &~#{$root}_expected {
         opacity: 1;
         transform-origin: right bottom;
@@ -65,14 +63,12 @@
 
   &_planeLarge {
     bottom: 10%;
-    cursor: pointer;
+    pointer-events: none;
     left: 2%;
     z-index: 3;
     @include locationInMap(6.6%);
 
     &:hover {
-      animation: 0 !important;
-
       &~#{$root}_airport {
         opacity: 1;
         visibility: visible;
@@ -99,14 +95,12 @@
 
   &_planeSmall {
     bottom: 74%;
-    cursor: pointer;
+    pointer-events: none;
     left: 59.8%;
     z-index: 4;
     @include locationInMap(4%);
 
     &:hover {
-      animation: 0 !important;
-
       &~#{$root}_airportOther {
         opacity: 1;
         visibility: visible;
@@ -286,6 +280,8 @@
   }
 
   .customAnimate-zoomInCasePlaneLarge {
+    cursor: pointer;
+    pointer-events: visible;
     @include mobile-up {
       @include customAnimation(1s, zoomIn, calc(0.4s + 0.3s));
       animation-direction: alternate;
@@ -294,6 +290,8 @@
   }
 
   .customAnimate-zoomInProject {
+    cursor: pointer;
+    pointer-events: visible;
     @include customAnimation(1.5s, zoomInMedium, calc(0.4s + 0.3s + 0.3s));
     animation-direction: alternate;
     animation-iteration-count: infinite;
@@ -301,6 +299,8 @@
   }
 
   .customAnimate-zoomInCasePlaneSmall {
+    cursor: pointer;
+    pointer-events: visible;
     @include mobile-up {
       @include customAnimation(1s,
       zoomIn,
