@@ -162,6 +162,16 @@
       cursor: pointer;
       @include thumbnail-scale-hover();
     }
+
+
+    &_tagLine {
+      position: absolute;
+      top: rem(8);
+      left: rem(12);
+      padding: rem(4) rem(12);
+      background-color: rgba($black, 0.3);
+      border-radius: rem(4);
+    }
   }
 }
 

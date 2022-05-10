@@ -253,6 +253,7 @@ const Library: React.FC<LibraryProps> = ({
                 settings={settingRef.current}
                 render={(item, itemIdx) => (
                   <CardImage
+                    tag={item?.subdivision?.name}
                     thumbnail={baseURL(item.path)}
                     handleClick={() => dispatch({ type: 'update_library', payload: { isPopImageOpen: true, currentImgIdx: itemIdx } })}
                   />
