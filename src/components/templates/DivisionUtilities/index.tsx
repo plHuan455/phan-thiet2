@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import Container from 'common/Container';
 import Heading from 'components/atoms/Heading';
@@ -29,6 +29,23 @@ const DivisionUtilities: React.FC<DivisionUtilitiesProps> = ({
   const [active, setActive] = useState<number | undefined>(undefined);
   const refUtilitiesMap = useRef<HTMLDivElement>(null);
   const animate = useScrollAnimate(refUtilitiesMap);
+  const refWrapImage = useRef<HTMLDivElement|null>(null);
+
+  useEffect(() => {
+    const loadMaxWidth = () => {
+      if (widthImage && heightImage && refWrapImage.current) {
+        const heightWindow = window.innerHeight;
+        const heightMinus = 67 + 64 + 41 + 50; // 67 header + 64 title + 41 margin + 50 bonus
+        const heightRemain = heightWindow - heightMinus;
+        const maxWidthRatio = (heightRemain * widthImage) / heightImage;
+        const maxWidth = heightWindow > 700 ? `${maxWidthRatio}px` : `${100}%`;
+        refWrapImage.current.style.maxWidth = maxWidth;
+      }
+    };
+    loadMaxWidth();
+    window.addEventListener('resize', loadMaxWidth);
+    return () => window.removeEventListener('resize', loadMaxWidth);
+  }, [heightImage, widthImage]);
 
   return (
     <div className="t-divisionUtilities">
@@ -36,7 +53,7 @@ const DivisionUtilities: React.FC<DivisionUtilitiesProps> = ({
         <div ref={refUtilitiesMap} className="t-divisionUtilities_title">
           <Heading type="h2" modifiers={['inherit', 's015', '400']} content={title} />
         </div>
-        <div style={{ maxWidth: widthImage, marginLeft: 'auto', marginRight: 'auto' }}>
+        <div ref={refWrapImage} style={{ marginLeft: 'auto', marginRight: 'auto' }}>
           <Animate type="fadeInUp" extendClassName="t-divisionUtilities_map u-mt-41">
             <div className="t-divisionUtilities_image" style={{ paddingBottom: heightImage && widthImage ? `calc(${heightImage / widthImage}  * 100%)` : '0%' }}>
               <img src={background} alt="location-map" loading="lazy" />
