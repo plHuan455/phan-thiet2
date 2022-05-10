@@ -10,7 +10,7 @@ interface Props {
     name: IconName;
     size?: IconSize;
   };
-  modifiers?: 'notify' | 'image' | 'player'; // add more modifiers
+  modifiers?: 'notify' | 'image' | 'player' | 'register'; // add more modifiers
   handleClose?: () => void;
 }
 
