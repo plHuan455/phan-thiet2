@@ -160,7 +160,7 @@
     width: rem(28);
     z-index: 0;
 
-    @include break-max(1366px) {
+    @include break-max(1365px) {
       height: rem(23);
       width: rem(23);
       > .a-text {
