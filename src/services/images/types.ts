@@ -23,6 +23,7 @@ interface Subdivision {
 
 export interface ImageOnlyTypes {
   id: number;
+  subdivision: Subdivision;
   path: string;
 }
 

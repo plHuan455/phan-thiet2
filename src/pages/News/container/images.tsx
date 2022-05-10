@@ -9,6 +9,7 @@ import Section from './section';
 import Container from 'common/Container';
 import FlatMore from 'common/FlatMore';
 import Image from 'components/atoms/Image';
+import Text from 'components/atoms/Text';
 import Card from 'components/organisms/Card';
 import PopupImage from 'components/templates/PopupImage';
 import { useAsync } from 'hooks/useAsync';
@@ -22,6 +23,7 @@ export interface CardImageProps {
   alt?: string;
   href?: string;
   handleClick?: () => void;
+  tag?: string;
 }
 
 interface ImageState {
@@ -55,6 +57,7 @@ export const CardImage:React.FC<CardImageProps> = ({
   thumbnail,
   alt,
   handleClick,
+  tag,
 }) => (
   <div className="o-cardImage">
     <div
@@ -64,6 +67,13 @@ export const CardImage:React.FC<CardImageProps> = ({
       }}
     >
       <Image src={thumbnail} alt={alt || 'card thumbnail'} ratio="354x221" />
+      {
+        tag && (
+          <div className="o-cardImage_tagLine">
+            <Text modifiers={['14x20', '400', 'white']} content={tag} />
+          </div>
+        )
+      }
     </div>
   </div>
 );

@@ -93,17 +93,6 @@
     }
   }
 
-  .o-cardImage {
-    cursor: pointer;
-
-    &_wrapper {
-      position: relative;
-      border-radius: rem(12);
-      cursor: pointer;
-      @include thumbnail-scale-hover();
-    }
-  }
-
   .s-news {
     position: relative;
 
