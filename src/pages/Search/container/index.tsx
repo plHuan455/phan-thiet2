@@ -155,7 +155,7 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
         href: item.slug,
         dateTime: getTimePastToCurrent(item.publishedAt),
         tag: {
-          text: item.subdivision?.name,
+          text: item?.subdivision?.name,
           url: redirectURL(CONSTANTS.PREFIX.DIVISION, item.slug, language),
         },
         url: {

@@ -1,14 +1,14 @@
 .t-utilityHome {
   $root: &;
-  padding: rem(80) 0 rem(40);
+  padding: rem(60) 0 rem(20);
   position: relative;
 
   @include tablet-down {
-    padding: rem(60) 0 rem(30);
+    padding: rem(50) 0 rem(10);
   }
 
   @include mobile-down {
-    padding: rem(40) 0 rem(20);
+    padding: rem(40) 0 rem(0);
 
   }
 
@@ -63,6 +63,9 @@
 
     &-thumb {
       margin-top: rem(11);
+      @include break-max(1365px) {
+        max-width: rem(760);
+      }
     }
   }
 
@@ -72,7 +75,7 @@
     padding: rem(45) 0;
     position: absolute;
     right: 0;
-    top: 0;
+    top: rem(18);
 
     @include desktop-down {
       margin: rem(20) auto 0;

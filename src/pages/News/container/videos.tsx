@@ -83,7 +83,7 @@ const Videos: React.FC<VideoProps> = ({ videos, blocks, keyword }) => {
       thumbnail: baseURL(item?.thumbnail),
       title: item.name,
       tag: {
-        text: item.subdivision?.name,
+        text: item?.subdivision?.name,
         url: redirectURL(CONSTANTS.PREFIX.DIVISION, item.slug, language),
       },
       dateTime: getTimePastToCurrent(item.publishedAt),

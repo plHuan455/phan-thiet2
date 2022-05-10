@@ -18,7 +18,7 @@ const Selection: React.FC<SectionBlocks> = ({ blocks }) => {
   }, [blocks]);
 
   return (
-    <section className="u-mt-xl-206 u-mt-lg-160 u-mt-0">
+    <section className="u-mt-xl-152 u-mt-lg-125 u-mt-0">
       <SelectionTemplate
         title={positionBlockContent.title}
         image={positionBlockContent.image}

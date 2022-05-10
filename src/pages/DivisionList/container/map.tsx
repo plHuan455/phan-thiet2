@@ -28,25 +28,25 @@ const Map: React.FC<SectionBlocks> = ({ blocks }) => {
   );
 
   const listLocation = useMemo(() => mapData?.items.map((item) => {
-    if (item.subdivision.pinned) {
+    if (item?.subdivision?.pinned) {
       setSelected({
-        label: item.subdivision.name,
-        value: item.subdivisionId,
+        label: item?.subdivision?.name,
+        value: item?.subdivisionId,
       });
     }
     return ({
-      id: Number(item.subdivisionId),
-      imgSrc: baseURL(item.subdivision.thumbnail),
-      title: item.subdivision.name,
-      active: item.subdivision.pinned,
-      y: Number(item.point.y),
-      x: Number(item.point.x),
+      id: Number(item?.subdivisionId),
+      imgSrc: baseURL(item?.subdivision?.thumbnail),
+      title: item?.subdivision?.name,
+      active: item?.subdivision?.pinned,
+      y: Number(item?.point?.y),
+      x: Number(item?.point?.x),
     });
   }), [mapData]);
 
   const listOptions = useMemo(() => mapData?.items?.map((item) => ({
-    label: item.subdivision.name,
-    value: item.subdivisionId,
+    label: item?.subdivision.name,
+    value: item?.subdivisionId,
   })), [mapData]);
 
   return (
