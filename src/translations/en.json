@@ -28,7 +28,10 @@
     "videos": "Videos",
     "search_result": "Results found for",
     "search_placeholder": "Search",
-    "countdown": "{{ totalHours }}:{{ mins }}:{{ secs }} left"
+    "countdown": "{{ totalHours }}:{{ mins }}:{{ secs }} left",
+    "register_project_information": "register to get project information",
+    "sign_up_for_news": "Sign up for news",
+    "sign_up_desc": "You register to receive email project information, incentives, promotions and latest news from NovaWorld Phan Thiet"
   },
   "form": {
     "contact_name": "NAME",

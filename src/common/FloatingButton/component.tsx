@@ -46,7 +46,7 @@ const PopupRegister: React.FC<PopupRegisterProps> = ({
   <CustomModal isOpen={isOpen} handleClose={handleClose} modifiers="register">
     <div className="popupRegister">
       <div className="popupRegister_title">
-        <Heading type="h4" modifiers={['700', 'fontOswald', 's015', 'gradientGreen', 'center']} content={title} />
+        <Heading type="h4" modifiers={['700', 'fontOswald', 's015', 'gradientGreen', 'center', 'uppercase']} content={title} />
       </div>
       <div className="popupRegister_desc u-mt-8">
         <Text modifiers={['11x18', '400', 'raisinBlack', 'center']} content={description} />
@@ -55,7 +55,7 @@ const PopupRegister: React.FC<PopupRegisterProps> = ({
         <form
           noValidate
           onSubmit={method.handleSubmit(handleSubmit)}
-          className="popupRegister_form u-mt-40"
+          className="popupRegister_form u-mt-10 u-mt-md-40"
         >
           <Row className="u-ml-negative-16 u-mr-negative-16">
             <Col lg={12} className="u-mt-16 u-pl-16 u-pr-16">

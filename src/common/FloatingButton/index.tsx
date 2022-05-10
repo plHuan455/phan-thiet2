@@ -56,7 +56,7 @@ const FloatingButton: React.FC = () => {
       useExternal: true,
     },
     {
-      text: 'Đăng ký nhận tin',
+      text: t('general.sign_up_for_news'),
       imgSrc: register,
       handleClick: () => setIsOpen(true),
     },
@@ -180,8 +180,8 @@ const FloatingButton: React.FC = () => {
         </div>
       </div>
       <PopupRegister
-        title="ĐĂNG KÝ NHẬN THÔNG TIN DỰ ÁN"
-        description="Quý khách đăng ký nhận email thông tin dự án, các chương trình ưu đãi, khuyến mại và tin tức mới nhất từ NovaWorld Phan Thiet"
+        title={t('general.register_project_information')}
+        description={t('general.sign_up_desc')}
         form={{
           namePlaceholder: t('form.consultancy_name'),
           phonePlaceholder: t('form.consultancy_phone'),
