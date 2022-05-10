@@ -65,6 +65,26 @@
     height: auto;
     margin: 0;
 
+    @include tablet-up {
+      position: relative;
+      &:hover {
+        background-color: $dim-gray;
+        &::before {
+          content: '';
+        }
+      }
+      &::before {
+        position: absolute;
+        pointer-events: none;
+        top: calc(50% - 8px);
+        right: rem(16);
+        width: rem(16);
+        height: rem(16);
+        background: url('~assets/icons/ic_arrow_carousel_next_white.svg') no-repeat center ;
+        animation: arrowSlide 0.75s ease infinite alternate;
+      }
+    }
+
     @include tablet-down {
       margin-top: rem(16);
     }
@@ -80,6 +100,12 @@
       color: $white;
       @include tablet-down {
         color: $davy-grey;
+      }
+    }
+
+    &.active {
+      @include tablet-down {
+        color: $gamboge-orange;
       }
     }
   }
@@ -136,8 +162,7 @@
     #{$root}-isChild > & {
       width: 100%;
       @include tablet-up {
-        opacity: 0.7;
-        padding: rem(14) rem(8);
+        padding: rem(8) rem(16) rem(8) 0;
       }
     }
 
@@ -159,7 +184,7 @@
 
   &_wrap {
     max-height: 0;
-    min-width: rem(215);
+    min-width: rem(242);
     overflow: hidden;
     transition: $transition ease-in-out;
     visibility: hidden;
@@ -211,8 +236,10 @@
     }
 
     @include tablet-up {
+      overflow: hidden;
       background: $black06;
-      padding: rem(8) 0;
+      padding: 0;
+      border-radius: rem(12);
     }
   }
 }
