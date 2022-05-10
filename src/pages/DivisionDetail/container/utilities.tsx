@@ -14,8 +14,8 @@ const Utilities = React.forwardRef<HTMLDivElement, UtilitiesProps>(({ data, map 
     x: Number(item.point.x),
     y: Number(item.point.y),
     id: index,
-    imgSrc: baseURL(item.image),
-    title: item.title,
+    imgSrc: baseURL(item.utility.thumbnail),
+    title: item.utility.name,
     utilitiesIcon: {
       number: item.number,
       fillColor: item.color,
