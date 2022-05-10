@@ -230,16 +230,15 @@ const PlanningHighway: React.FC<PlanningHighwayProps> = ({
 
         {dataInfo?.san_bay_long_thanh && (
         <div className="t-planningHighway_airport">
-          <div className={`${fnGetClassAnimate('customAnimate-airport')}`}>
+          <div className="t-planningHighway_airport-box">
             <Box
               content={dataInfo?.san_bay_long_thanh?.content}
               variant="blue"
               arrow="blue-top-left"
               isShowPlane
-              animationPlane={`${fnGetClassAnimate('customAnimate-plane')}`}
             />
           </div>
-          <div className={`t-planningHighway_airport_thumbnail ${fnGetClassAnimate('customAnimate-airportThumbnail')}`}>
+          <div className="t-planningHighway_airport_thumbnail">
             <Image src={dataInfo?.san_bay_long_thanh?.imgSrc} ratio="262x147" alt="thumbnail" />
           </div>
         </div>
@@ -247,14 +246,14 @@ const PlanningHighway: React.FC<PlanningHighwayProps> = ({
 
         {dataInfo?.san_bay_phan_thiet && (
         <div className="t-planningHighway_airportOther">
-          <div className={`${fnGetClassAnimate('customAnimate-airportOther')}`}>
+          <div className="t-planningHighway_airportOther-box">
             <Box
               content={dataInfo?.san_bay_phan_thiet?.content}
               variant="blue"
               arrow="blue-bottom-right"
             />
           </div>
-          <div className={`t-planningHighway_airportOther_thumbnail ${fnGetClassAnimate('customAnimate-airportOtherThumbnail')}`}>
+          <div className="t-planningHighway_airportOther_thumbnail">
             <Image src={dataInfo?.san_bay_phan_thiet?.imgSrc} ratio="166x110" alt="plane" />
           </div>
         </div>
