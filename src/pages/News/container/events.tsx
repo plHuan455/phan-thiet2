@@ -41,7 +41,7 @@ const Events: React.FC<EventsProps> = ({ events, blocks, keyword }) => {
   const formatData = useCallback((item:OverviewEventsType):CardEventProps => ({
     thumbnail: baseURL(item.thumbnail),
     tag: {
-      text: item.subdivision?.name,
+      text: item?.subdivision?.name,
       url: redirectURL(CONSTANTS.PREFIX.DIVISION, item.slug, language),
     },
     title: item.title,

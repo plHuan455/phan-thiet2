@@ -26,7 +26,7 @@ const Events: React.FC<SectionBlocks> = ({ blocks }) => {
   const eventsData = useMemo(() => eventList?.data?.map((item) => ({
     thumbnail: baseURL(item.thumbnail),
     tag: {
-      text: item.subdivision?.name,
+      text: item?.subdivision?.name,
       url: redirectURL(CONSTANTS.PREFIX.DIVISION, item.slug, language),
     },
     title: item.title,

@@ -29,8 +29,8 @@ const News: React.FC<SectionBlocks> = ({ blocks }) => {
     title: item.title,
     href: redirectURL(CONSTANTS.PREFIX.NEWS, item.slug, language),
     tag: {
-      text: item.subdivision.name,
-      url: redirectURL(CONSTANTS.PREFIX.DIVISION, item.subdivision.slug, language),
+      text: item?.subdivision?.name,
+      url: redirectURL(CONSTANTS.PREFIX.DIVISION, item?.subdivision?.slug, language),
     },
     // TODO: Update time later
     dateTime: getTimePastToCurrent(item.publishedAt),
