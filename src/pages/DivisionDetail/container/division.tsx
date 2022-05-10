@@ -18,7 +18,7 @@ interface DivisionProps {
 
 const Division: React.FC<DivisionProps> = ({ data, subdivisionId }) => {
   const { language } = i18n;
-  const { data: subDivisionList } = useQuery(['SubdivisionPageDetail', { language }], () => getSubDivisionListService({
+  const { data: subDivisionList } = useQuery(['SubdivisionPageDetail', { language }, subdivisionId], () => getSubDivisionListService({
     except_ids: subdivisionId?.toString(),
   }));
 
