@@ -21,6 +21,8 @@ import LoadingPage from 'common/Navigation/loading';
 import RedirectNav from 'common/Navigation/redirect';
 import i18n from 'i18n';
 import { getSubDivisionDetailService } from 'services/subdivision';
+import { useAppDispatch } from 'store/hooks';
+import { changeMenuDivision } from 'store/menus';
 import CONSTANTS from 'utils/constants';
 import { baseString, baseURL } from 'utils/functions';
 
@@ -36,6 +38,7 @@ const Screen: React.FC<ScreenProps> = ({ setLogoDivision }) => {
   const { language } = i18n;
   const { slug } = useParams<{ slug: string }>();
   const context = useContext(LanguageContext);
+  const dispatch = useAppDispatch();
 
   const { data: subDivisionDetail, isFetching, error } = useQuery(
     ['SubdivisionDetail', { slug, language }],
@@ -59,10 +62,14 @@ const Screen: React.FC<ScreenProps> = ({ setLogoDivision }) => {
       );
       context.translation.setData(divisionDetailTranslation);
     }
+    if (subDivisionDetail?.menu.length) {
+      dispatch(changeMenuDivision(subDivisionDetail.menu));
+    }
     return () => {
       if (context?.translation?.setData) {
         context.translation.setData([]);
       }
+      dispatch(changeMenuDivision([]));
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [subDivisionDetail]);
