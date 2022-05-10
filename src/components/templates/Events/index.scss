@@ -52,7 +52,7 @@
   &_wrapDate {
     @include adjust-flex(space-between, center);
     margin: rem(24) auto 0;
-    max-width: rem(452);
+    max-width: rem(600);
 
     @include mobile-down {
       align-items: flex-start;
@@ -73,12 +73,18 @@
         margin-right: rem(16);
       }
     }
+
+    &-date {
+      @include small-mobile {
+        margin-top: rem(10);
+      }
+    }
   }
 
   &_address {
     @include adjust-flex(flex-start, center);
     margin: rem(16) auto 0;
-    max-width: rem(452);
+    max-width: rem(600);
 
     @include mobile-down {
       justify-content: center;
