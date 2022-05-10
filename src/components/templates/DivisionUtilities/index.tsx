@@ -38,8 +38,7 @@ const DivisionUtilities: React.FC<DivisionUtilitiesProps> = ({
         const heightMinus = 67 + 64 + 41 + 50; // 67 header + 64 title + 41 margin + 50 bonus
         const heightRemain = heightWindow - heightMinus;
         const maxWidthRatio = (heightRemain * widthImage) / heightImage;
-        const maxWidth = heightWindow > 700 ? `${maxWidthRatio}px` : `${100}%`;
-        refWrapImage.current.style.maxWidth = maxWidth;
+        refWrapImage.current.style.maxWidth = `${maxWidthRatio}px`;
       }
     };
     loadMaxWidth();

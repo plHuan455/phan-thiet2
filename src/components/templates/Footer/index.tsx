@@ -69,7 +69,7 @@ const Footer: React.FC<FooterProps> = ({
       <Container>
         <div className="t-footer_header">
           <div className="t-footer_logo">
-            <Image src={logo} alt="footer" ratio="logo-footer" size="cover" />
+            <Image src={logo} alt="footer" ratio="logo-footer" size="cover" loading="eager" />
           </div>
           <div className="t-footer_social">
             <Text modifiers={['700', '12x20', 'davyGrey']} content={socialList?.title} />
