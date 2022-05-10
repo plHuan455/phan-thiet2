@@ -42,6 +42,9 @@ export const menusSlice = createSlice({
         (x) => ({ ...x, importantActive: x.link === action.payload }),
       );
     },
+    changeMenuDivision: ($state, action: PayloadAction<MenuItem[]>) => {
+      $state.header2 = groupMenusCustomLink(action.payload) || [];
+    },
   },
   extraReducers(builder) {
     builder.addCase(menusAsync.fulfilled, ($state, action) => {
@@ -73,6 +76,6 @@ export const menusSlice = createSlice({
   },
 });
 
-export const { setActiveHashDivision } = menusSlice.actions;
+export const { setActiveHashDivision, changeMenuDivision } = menusSlice.actions;
 
 export default menusSlice.reducer;

@@ -24,6 +24,7 @@ interface SubdivisionCommonTypes {
     map: SubdivisionUtilityMapTypes;
   };
   translations: Translation[];
+  menu: MenuItemData[];
 }
 
 interface Title {
