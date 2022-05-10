@@ -1,11 +1,11 @@
-@mixin locationInMap ($width) {
+@mixin locationInMap($width) {
   object-fit: cover;
   position: absolute;
   width: $width;
-  z-index: 2;
 }
 
-@mixin customAnimation ($duration, $name, $delay) {
+@mixin customAnimation($duration, $name, $delay) {
+  animation-delay: $delay;
   -webkit-animation-duration: $duration;
   -webkit-animation-duration: var($duration);
   animation-duration: $duration;
@@ -13,16 +13,16 @@
   animation-fill-mode: both;
   -webkit-animation-name: $name;
   animation-name: $name;
-  animation-delay: $delay;
 }
 
 .t-planningHighway {
   $root: &;
   position: relative;
+
   &_map {
-    padding-bottom: calc(767 / 1366 * 100%);
     display: block;
     overflow: hidden;
+    padding-bottom: calc(767 / 1366 * 100%);
     position: relative;
     width: 100%;
   }
@@ -35,65 +35,106 @@
   }
 
   &_project {
+    pointer-events: none;
     left: 9%;
     top: 27%;
-    @include locationInMap(31%);
     z-index: 3;
-    @include mobile-up {
-      pointer-events: none;
+    @include locationInMap(31%);
+
+    &:hover {
+      &~#{$root}_expected {
+        opacity: 1;
+        transform-origin: right bottom;
+        visibility: visible;
+        @include customAnimation(1s, translateTopToBottom, 0.3s);
+      }
     }
+
     @include mobile-down {
       animation: fadeInBlur 1s ease infinite;
     }
   }
 
   &_locationPoint {
-    left: 0.8%;
     bottom: 60%;
+    left: 0.8%;
     @include locationInMap(3.3%);
   }
-  
+
   &_planeLarge {
-    left: 2%;
     bottom: 10%;
-    @include locationInMap(6.6%);
+    pointer-events: none;
+    left: 2%;
     z-index: 3;
-    @include mobile-up {
-      pointer-events: none;
+    @include locationInMap(6.6%);
+
+    &:hover {
+      &~#{$root}_airport {
+        opacity: 1;
+        visibility: visible;
+
+        &>#{$root}_airport_thumbnail {
+          @include customAnimation(1s, translateBottomToTop, calc(0.4s));
+        }
+
+        &>#{$root}_airport-box {
+          @include customAnimation(1s, translateTopToBottom, 0.4s);
+        }
+
+        .o-box_plane {
+          @include customAnimation(0.8s, zoomIn, calc(0.5s + 0.4s));
+          transform-origin: bottom left;
+        }
+      }
     }
+
     @include mobile-down {
       animation: animationPlane 1s ease infinite alternate;
     }
   }
 
   &_planeSmall {
-    left: 59.8%;
     bottom: 74%;
+    pointer-events: none;
+    left: 59.8%;
+    z-index: 4;
     @include locationInMap(4%);
-    z-index: 3;
-    @include mobile-up {
-      pointer-events: none;
+
+    &:hover {
+      &~#{$root}_airportOther {
+        opacity: 1;
+        visibility: visible;
+
+        &>#{$root}_airportOther_thumbnail {
+          @include customAnimation(0.5s, translateRightToLeft, 0.3s);
+        }
+
+        &>#{$root}_airportOther-box {
+          @include customAnimation(0.5s, translateLeftToRight, 0.3s);
+        }
+      }
     }
+
     @include mobile-down {
       animation: animationPlane 1s ease infinite alternate;
     }
   }
 
   &_svg {
-    position: absolute;
-    z-index: 2;
-    top: 0;
-    left: 0;
-    width: 100%;
     height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 2;
 
     .vector {
-      stroke-miterlimit: 10;
-      stroke-dashoffset: 0;
+      animation: StrokeLine 10s infinite linear;
       stroke: $deer1;
       stroke-dasharray: 10;
+      stroke-dashoffset: 0;
+      stroke-miterlimit: 10;
       stroke-width: 5;
-      animation: StrokeLine 10s infinite linear;
 
       &-blue {
         stroke: $yale-blue1;
@@ -102,13 +143,15 @@
   }
 
   &_expected {
-    position: absolute;
-    max-width: fit-content;
     bottom: 74%;
+    max-width: fit-content;
+    opacity: 0;
+    position: absolute;
     right: 70%;
+    visibility: hidden;
     z-index: 2;
-    
-    @include break (991px,1366px){
+
+    @include break(991px, 1366px) {
       bottom: 70%;
       right: 75%;
     }
@@ -123,10 +166,13 @@
   }
 
   &_airport {
-    position: absolute;
-    max-width: fit-content;
-    top: 80%;
     left: 9.5%;
+    max-width: fit-content;
+    opacity: 0;
+    position: absolute;
+    top: 80%;
+    transition: all $transition ease-in-out;
+    visibility: hidden;
     width: 100%;
     z-index: 2;
 
@@ -143,10 +189,10 @@
     }
 
     &_thumbnail {
-      position: absolute;
-      max-width: rem(262);
       bottom: 120%;
       left: 0;
+      max-width: rem(262);
+      position: absolute;
       width: 100%;
 
       @include desktop-down {
@@ -164,13 +210,16 @@
   }
 
   &_airportOther {
-    position: absolute;
-    max-width: rem(400);
     bottom: 83%;
+    max-width: rem(400);
+    opacity: 0;
+    position: absolute;
     right: 39%;
+    transition: all $transition ease-in-out;
+    visibility: hidden;
     width: 100%;
     z-index: 2;
-  
+
     @include desktop-down {
       max-width: rem(300);
     }
@@ -184,10 +233,10 @@
     }
 
     &_thumbnail {
-      position: absolute;
-      max-width: rem(166);
       bottom: -8%;
       left: 108%;
+      max-width: rem(166);
+      position: absolute;
       width: 100%;
 
       @include desktop-down {
@@ -205,24 +254,24 @@
   }
 
   &_scheduleBox {
-    position: absolute;
-    max-width: rem(451);
     bottom: 6%;
+    max-width: rem(451);
+    position: absolute;
     right: 8%;
     width: 100%;
     z-index: 2;
 
     @include desktop-down {
-      right: 2%;
       max-width: rem(400);
+      right: 2%;
     }
 
     @include tablet-down {
-      position: relative;
-      max-width: 100%;
       bottom: 0;
-      right: 0;
       margin-top: rem(10);
+      max-width: 100%;
+      position: relative;
+      right: 0;
     }
   }
 
@@ -231,79 +280,88 @@
   }
 
   .customAnimate-zoomInCasePlaneLarge {
+    cursor: pointer;
+    pointer-events: visible;
     @include mobile-up {
-      @include customAnimation(0.5s, zoomInCase2, calc(0.4s + 0.3s));
+      @include customAnimation(1s, zoomIn, calc(0.4s + 0.3s));
+      animation-direction: alternate;
+      animation-iteration-count: infinite;
     }
   }
 
   .customAnimate-zoomInProject {
-    @include mobile-up {
-      @include customAnimation(0.5s, zoomIn, calc(0.4s + 0.3s + 0.3s));
-    }
-  }
-
-  .customAnimate-airport {
-    @include customAnimation(1s, translateTopToBottom, calc(0.4s + 0.3s + 0.3s + 0.5s));
-  }
-
-  .customAnimate-airportThumbnail {
-    @include customAnimation(1s, translateBottomToTop, calc(0.4s + 0.3s + 0.3s + 0.5s));
-  }
-
-  .customAnimate-expected {
-    @include customAnimation(1s, zoomInCase2, calc(0.4s + 0.3s + 0.3s + 0.5s + 0.6s));
-    transform-origin: right bottom;
+    cursor: pointer;
+    pointer-events: visible;
+    @include customAnimation(1.5s, zoomInMedium, calc(0.4s + 0.3s + 0.3s));
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out steps(3, end);
   }
 
   .customAnimate-zoomInCasePlaneSmall {
+    cursor: pointer;
+    pointer-events: visible;
     @include mobile-up {
-      @include customAnimation(0.5s, fadeInBlur, calc(0.4s + 0.3s + 0.3s + 0.5s + 0.6s + 0.2s));
+      @include customAnimation(1s,
+      zoomIn,
+        calc(0.4s + 0.3s + 0.3s + 0.5s + 0.6s + 0.2s));
+      animation-direction: alternate;
+      animation-iteration-count: infinite;
     }
   }
 
-  .customAnimate-airportOther {
-    @include customAnimation(0.5s, translateRightToLeft, calc(0.4s + 0.3s + 0.3s + 0.5s + 0.6s + 1s));
-  }
-
-  .customAnimate-airportOtherThumbnail {
-    @include customAnimation(0.5s, translateLeftToRight, calc(0.4s + 0.3s + 0.3s + 0.5s + 0.6s + 1s));
-  }
-
   .customAnimate-plane {
-    @include customAnimation(0.8s, zoomIn, calc(0.4s + 0.3s + 0.3s + 0.5s + 0.6s + 1s + 0.5s));
+    @include customAnimation(0.8s,
+    zoomIn,
+      calc(0.4s + 0.3s + 0.3s + 0.5s + 0.6s + 1s + 0.5s));
     transform-origin: bottom left;
   }
 
   .customAnimate-scheduleBox {
-    @include customAnimation(0.6s, fadeInUp, calc(0.4s + 0.3s + 0.3s + 0.5s + 0.6s + 1s + 0.5s + 1s));
+    @include customAnimation(0.6s,
+    fadeInUp,
+      calc(0.4s + 0.3s + 0.3s + 0.5s + 0.6s + 1s + 0.5s));
+
     @include tablet-down {
       animation-delay: 0.2s;
     }
   }
 
   .customAnimate-scheduleBoxItem-0 {
-    @include customAnimation(0.75s, slideInLeftText, calc(0.4s + 0.3s + 0.3s + 0.5s + 0.6s + 1s + 0.5s + 1s + 0.5s));
+    @include customAnimation(0.75s,
+    slideInLeftText,
+      calc(0.4s + 0.3s + 0.3s + 0.5s + 0.6s + 1s + 0.5s + 0.5s));
+
     @include tablet-down {
       animation-delay: 0.4s;
     }
   }
 
   .customAnimate-scheduleBoxItem-1 {
-    @include customAnimation(0.75s, slideInLeftText, calc(0.4s + 0.3s + 0.3s + 0.5s + 0.6s + 1s + 0.5s + 1s + 0.5s + 0.2s));
+    @include customAnimation(0.75s,
+    slideInLeftText,
+      calc(0.4s + 0.3s + 0.3s + 0.5s + 0.6s + 1s + 0.5s + 0.5s + 0.2s));
+
     @include tablet-down {
       animation-delay: 0.6s;
     }
   }
 
-  .customAnimate-scheduleBoxItem-2 {  
-    @include customAnimation(0.75s, slideInLeftText, calc(0.4s + 0.3s + 0.3s + 0.5s + 0.6s + 1s + 0.5s + 1s + 0.5s + 0.2s + 0.2s));
+  .customAnimate-scheduleBoxItem-2 {
+    @include customAnimation(0.75s,
+    slideInLeftText,
+      calc(0.4s + 0.3s + 0.3s + 0.5s + 0.6s + 1s + 0.5s + 0.5s + 0.2s + 0.2s));
+
     @include tablet-down {
       animation-delay: 0.8s;
     }
   }
 
   .customAnimate-scheduleBoxItem-3 {
-    @include customAnimation(0.75s, slideInLeftText, calc(0.4s + 0.3s + 0.3s + 0.5s + 0.6s + 1s + 0.5s + 1s + 0.5s + 0.2s + 0.2s + 0.2s));
+    @include customAnimation(0.75s,
+    slideInLeftText,
+      calc(0.4s + 0.3s + 0.3s + 0.5s + 0.6s + 1s + 0.5s + 0.5s + 0.2s + 0.2s + 0.2s));
+
     @include tablet-down {
       animation-delay: 0.9s;
     }
@@ -312,8 +370,8 @@
 
 .o-box {
   border-radius: rem(12);
-  position: relative;
   padding: rem(12) rem(16);
+  position: relative;
 
   @include tablet-down {
     padding: rem(12);
@@ -322,7 +380,7 @@
   &_content {
     overflow: auto;
 
-    @include scroll-bars(5,$copper,$gainsboro,8,0,5);
+    @include scroll-bars(5, $copper, $gainsboro, 8, 0, 5);
 
     @include tablet-down {
       max-height: rem(40);
@@ -342,6 +400,7 @@
 
     ul {
       padding-left: rem(24);
+
       @include tablet-down {
         padding-left: rem(16);
       }
@@ -349,13 +408,13 @@
   }
 
   &_plane {
-    position: absolute;
     max-width: rem(182);
-    width: 100%;
-    top: 0;
-    right: 0;
-    transform: translate(40%, -74%);
     pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translate(40%, -74%);
+    width: 100%;
 
     @include tablet-down {
       max-width: rem(100);
@@ -369,58 +428,62 @@
   &-yellow {
     background-color: $deer1;
   }
+
   &-blue {
     background-color: $yale-blue1;
   }
 
   &-blue-top-left {
     border-top-left-radius: 0;
+
     &::before {
-      content: '';
       background: url('~assets/images/planningHighway/blue_top_left.png') no-repeat;
-      position: absolute;
-      width: 100%;
+      bottom: calc(100% - 2px);
+      content: '';
       height: 100%;
+      height: rem(14);
       left: 0;
       pointer-events: none;
-      bottom: calc(100% - 2px);
+      position: absolute;
+      width: 100%;
       width: rem(14);
-      height: rem(14);
     }
   }
 
   &-yellow-bottom-right {
     border-bottom-right-radius: 0;
+
     &::before {
-      content: '';
       background: url('~assets/images/planningHighway/yellow_bottom_right.png') no-repeat;
-      position: absolute;
-      width: rem(14);
+      content: '';
       height: rem(14);
+      pointer-events: none;
+      position: absolute;
       right: 0;
       top: calc(100% - 2px);
-      pointer-events: none;
+      width: rem(14);
     }
   }
 
   &-blue-bottom-right {
     border-bottom-right-radius: 0;
+
     &::before {
-      content: '';
       background: url('~assets/images/planningHighway/blue_bottom_right.png') no-repeat;
-      position: absolute;
-      width: rem(14);
+      content: '';
       height: rem(14);
-      right: 0;
       pointer-events: none;
+      position: absolute;
+      right: 0;
       top: calc(100% - 2px);
+      width: rem(14);
     }
   }
 
   &_content {
     .a-text {
       @include tablet-down {
-        @include font-base(10,18);
+        @include font-base(10, 18);
       }
     }
   }
@@ -449,6 +512,7 @@
     @include tablet-down {
       background: rgba($taupe-gray, 0.4);
     }
+
     .row {
       overflow: hidden;
     }
@@ -459,8 +523,8 @@
 
     &_layer {
       background: $banana-mania;
-      width: rem(2);
       height: 100%;
+      width: rem(2);
     }
   }
 }
@@ -470,8 +534,8 @@
   padding: rem(50) rem(20) rem(30);
 
   &_image {
-    max-width: rem(300);
     margin: 0 auto;
+    max-width: rem(300);
   }
 
   ul {
@@ -491,16 +555,16 @@
 
 @keyframes slideInLeftText {
   from {
+    opacity: 0;
     -webkit-transform: translate3d(-200%, 0, 0);
     transform: translate3d(-200%, 0, 0);
     visibility: hidden;
-    opacity: 0;
   }
-  
+
   to {
+    opacity: 1;
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
     visibility: visible;
-    opacity: 1;
   }
 }
