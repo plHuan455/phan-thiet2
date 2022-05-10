@@ -15,6 +15,7 @@ import project from 'assets/images/planningHighway/project.png';
 import Heading from 'components/atoms/Heading';
 import Image from 'components/atoms/Image';
 import Text from 'components/atoms/Text';
+import useDeviceQueries from 'hooks/useDeviceQueries';
 import useScrollAnimate from 'hooks/useScrollAnimation';
 import mapModifiers from 'utils/functions';
 
@@ -119,6 +120,7 @@ const PlanningHighway: React.FC<PlanningHighwayProps> = ({
   const animate = useScrollAnimate(ref);
   const fnGetClassAnimate = useCallback((_class:string) => (animate ? _class : 'preanimate'), [animate]);
   const [info, setInfo] = useState<InfoItemType>();
+  const { isMobile } = useDeviceQueries();
 
   const stylesLiveYellow = useSpring({
     from: {
@@ -184,7 +186,7 @@ const PlanningHighway: React.FC<PlanningHighwayProps> = ({
           src={project}
           loading="lazy"
           alt="bg"
-          onClick={() => setInfo(dataInfo?.cao_toc)}
+          onClick={() => isMobile && setInfo(dataInfo?.cao_toc)}
         />
         <img
           className={`t-planningHighway_locationPoint ${fnGetClassAnimate('customAnimate-zoomInLocationPoint')}`}
@@ -197,14 +199,14 @@ const PlanningHighway: React.FC<PlanningHighwayProps> = ({
           src={planeLg}
           loading="lazy"
           alt="plane"
-          onClick={() => setInfo(dataInfo?.san_bay_long_thanh)}
+          onClick={() => isMobile && setInfo(dataInfo?.san_bay_long_thanh)}
         />
         <img
           className={`t-planningHighway_planeSmall ${fnGetClassAnimate('customAnimate-zoomInCasePlaneSmall')}`}
           src={planeSm}
           loading="lazy"
           alt="plane"
-          onClick={() => setInfo(dataInfo?.san_bay_phan_thiet)}
+          onClick={() => isMobile && setInfo(dataInfo?.san_bay_phan_thiet)}
         />
 
         <div className="t-planningHighway_svg">
