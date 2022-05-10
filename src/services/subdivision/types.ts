@@ -67,13 +67,18 @@ export type SubdivisionUtilityMapTypes = {
   imageWidth: string;
   items: {
     color: string;
-    image: string;
+    number: string;
     point: {
       x: string;
       y: string;
     };
-    title: string;
-    number: string;
+    utility: {
+      description: string;
+      id: number;
+      name: string;
+      slug: string;
+      thumbnail: string;
+    }
   }[];
 };
 
