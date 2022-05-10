@@ -37,8 +37,8 @@
     @include aspect-ratio(1, 1);
   }
 
-  &-1366x467 {
-    @include aspect-ratio(1366, 467);
+  &-1366x364 {
+    @include aspect-ratio(1366, 364);
   }
 
   &-logo-footer {
