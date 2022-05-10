@@ -17,6 +17,6 @@ export interface ConsultancyFormInput {
   email: string;
   content?: string;
   products?: string[];
-  topic_ids: string;
+  topic_ids?: string;
   grecaptcha_token: string;
 }

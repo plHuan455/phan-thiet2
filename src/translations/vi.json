@@ -28,7 +28,10 @@
     "videos": "Videos",
     "search_result": "kết quả tìm thấy cho",
     "search_placeholder": "Tìm kiếm",
-    "countdown": "Còn {{ totalHours }}:{{ mins }}:{{ secs }}"
+    "countdown": "Còn {{ totalHours }}:{{ mins }}:{{ secs }}",
+    "register_project_information": "ĐĂNG KÝ NHẬN THÔNG TIN DỰ ÁN",
+    "sign_up_for_news": "Đăng kí nhận tin",
+    "sign_up_desc": "Quý khách đăng ký nhận email thông tin dự án, các chương trình ưu đãi, khuyến mại và tin tức mới nhất từ NovaWorld Phan Thiet"
   },
   "form": {
     "contact_name": "HỌ VÀ TÊN",

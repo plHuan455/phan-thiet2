@@ -82,6 +82,26 @@
       position: initial;
     }
   }
+
+  &-register {
+    #{$root}_wrapper {
+      max-width: rem(936);
+      border-radius: rem(12);
+      margin: auto;
+    }
+
+    #{$root}_body {
+      padding: rem(32);
+
+      @include tablet-down {
+        padding: rem(20);
+      }
+
+      @include mobile-down {
+        padding: rem(10);
+      }
+    }
+  }
 }
 
 .ReactModal__Overlay {
