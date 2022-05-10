@@ -126,14 +126,6 @@ const LayoutProvider: React.FC = ({ children }) => {
       title: mainFooter[0],
       list: mainFooter[0]?.subMenu || [],
     },
-    divisionList: {
-      title: mainFooter[1],
-      list: mainFooter[1]?.subMenu || [],
-    },
-    serviceList: {
-      title: mainFooter[2],
-      list: mainFooter[2]?.subMenu || [],
-    },
     addressList,
     socialList,
   }), [mainFooter, dataSystems, menuTermFooter, addressList, socialList]);

@@ -200,69 +200,6 @@ const subMenu = [
   },
 ];
 
-const serviceList = {
-  title: {
-    id: 2,
-    menuId: 1,
-    title: 'Phân khu',
-    link: '',
-    type: 'OneContent\\Page\\Models\\Page',
-    referenceId: 1,
-    cssClass: 'service',
-    icon: '',
-    target: '_self',
-    parentId: 1,
-    lft: 6,
-    rgt: 7,
-    depth: 1,
-    createdAt: '2022-01-12T07:14:30.000000Z',
-    updatedAt: '2022-01-12T07:14:30.000000Z',
-    reference: undefined,
-  },
-  list: [
-    {
-      id: 21,
-      menuId: 1,
-      title: 'Phân khu 1',
-      link: '',
-      type: 'OneContent\\Page\\Models\\Page',
-      referenceId: 1,
-      cssClass: '',
-      icon: '',
-      target: '_self',
-      parentId: 2,
-      lft: 6,
-      rgt: 7,
-      depth: 1,
-      createdAt: '2022-01-12T07:14:30.000000Z',
-      updatedAt: '2022-01-12T07:14:30.000000Z',
-      reference: {
-        slug: 'phan-khu-1',
-      },
-    },
-    {
-      id: 21,
-      menuId: 1,
-      title: 'Phân khu 2',
-      link: '',
-      type: 'OneContent\\Page\\Models\\Page',
-      referenceId: 1,
-      cssClass: '',
-      icon: '',
-      target: '_self',
-      parentId: 2,
-      lft: 6,
-      rgt: 7,
-      depth: 1,
-      createdAt: '2022-01-12T07:14:30.000000Z',
-      updatedAt: '2022-01-12T07:14:30.000000Z',
-      reference: {
-        slug: 'phan-khu-2',
-      },
-    },
-  ],
-};
-
 const copyRightTitle = '@2021. Bản quyền thuộc về Tập đoàn Novaland (Việt Nam). Tất cả các quyền bảo hộ.';
 
 export default {
@@ -270,8 +207,6 @@ export default {
   copyRight,
   addressList,
   menuList,
-  divisionList: menuList,
-  serviceList,
   socialList,
   subMenu,
   copyRightTitle,
