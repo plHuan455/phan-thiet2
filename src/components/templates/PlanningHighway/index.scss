@@ -59,6 +59,7 @@
     bottom: 60%;
     left: 0.8%;
     @include locationInMap(3.3%);
+    visibility: hidden;
   }
 
   &_planeLarge {
@@ -276,7 +277,10 @@
   }
 
   .customAnimate-zoomInLocationPoint {
-    @include customAnimation(0.3s, zoomIn, 0.4s);
+    @include customAnimation(0.5s, jump, 0.4s);
+    animation-iteration-count: infinite;
+    visibility: visible;
+    animation-direction: alternate;
   }
 
   .customAnimate-zoomInCasePlaneLarge {

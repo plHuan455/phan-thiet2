@@ -24,6 +24,16 @@
   }
 }
 
+@keyframes jump {
+  from {
+    transform: translateY(-30%)
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
 @keyframes zoomInCase2 {
   from {
     opacity: 0;
