@@ -39,7 +39,7 @@ const Events: React.FC<SectionBlocks> = ({ blocks }) => {
       },
       {
         iconName: 'calendar' as IconName,
-        text: dayjs(item.startDate).format('DD/MM/YYYY'),
+        text: `${dayjs(item.startDate).format('DD/MM/YYYY')} - ${dayjs(item.endDate).format('DD/MM/YYYY')}`,
       },
       {
         iconName: 'location' as IconName,

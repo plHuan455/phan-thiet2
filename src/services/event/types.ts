@@ -17,6 +17,7 @@ export type EventItemCommonTypes = {
   subdivision: Subdivision;
   startTime: string;
   endTime: string;
+  endDate: string;
 }
 
 export type EventListTypes = EventItemCommonTypes[];
