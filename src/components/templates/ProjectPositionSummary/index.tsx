@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import bgLeft from 'assets/images/projectPosition/summary/bg_left.png';
 import bgRight from 'assets/images/projectPosition/summary/bg_right.png';
@@ -27,14 +27,6 @@ const ProjectPositionSummary: React.FC<ProjectPositionSummaryProps> = ({
   handleSelected,
 }) => {
   const [active, setActive] = useState<number>();
-
-  const handleLeave = useCallback(() => {
-    if (valueDivision) {
-      setActive(Number(valueDivision.value));
-    } else {
-      setActive(undefined);
-    }
-  }, [valueDivision]);
 
   useEffect(() => {
     if (valueDivision) {
@@ -71,7 +63,6 @@ const ProjectPositionSummary: React.FC<ProjectPositionSummaryProps> = ({
               listDivision={listDivision}
               active={active}
               handleHover={(id) => setActive(id)}
-              handleLeave={handleLeave}
             />
           </div>
         </Animate>
