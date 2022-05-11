@@ -132,7 +132,7 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
     isFetching: fetchingNews,
     fetchNextPage: fetchNextNews,
   } = useInfiniteQuery(
-    ['getNews', [keywordParams, sortParams]],
+    ['getNews', [keywordParams, sortParams, language]],
     ({ pageParam = 1 }) => getNewsListService({
       page: pageParam,
       limit: 3,
@@ -152,11 +152,11 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
       ?.map((item) => ({
         thumbnail: baseURL(item.thumbnail),
         title: item.title,
-        href: item.slug,
+        href: redirectURL(CONSTANTS.PREFIX.NEWS, item.slug, language),
         dateTime: getTimePastToCurrent(item.publishedAt),
         tag: {
           text: item?.subdivision?.name,
-          url: redirectURL(CONSTANTS.PREFIX.DIVISION, item.slug, language),
+          url: redirectURL(CONSTANTS.PREFIX.DIVISION, item?.subdivision?.slug, language),
         },
         url: {
           text: t('button.more'),
@@ -175,7 +175,7 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({ pageData, seoData }) => {
     isFetching: fetchingSubdivision,
     fetchNextPage: fetchNextSubdivision,
   } = useInfiniteQuery(
-    ['getSubdivision', [keywordParams, sortParams]],
+    ['getSubdivision', [keywordParams, sortParams, language]],
     ({ pageParam = 1 }) => getSubDivisionListService({
       page: pageParam,
       limit: 3,
