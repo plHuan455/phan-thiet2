@@ -57,13 +57,14 @@
   }
 
   &_info {
-    bottom: 0;
+    bottom: rem(32);
     left: 0;
     position: absolute;
     z-index: 1;
 
     @include tablet-down {
       position: relative;
+      bottom: 0;
     }
   }
 
