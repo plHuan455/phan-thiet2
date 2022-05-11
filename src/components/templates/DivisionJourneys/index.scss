@@ -36,10 +36,10 @@
 
   &_carousel {
     .slick-dots {
-      bottom: rem(-32);
+      bottom: rem(-8);
 
       @include mobile-down {
-        bottom: rem(-15);
+        bottom: rem(6);
       }
     }
 

@@ -111,13 +111,14 @@ const Events: React.FC<EventsProps> = ({
                 <div className="t-events_countDown-item">
                   <div className="t-events_countDown-value">
                     <Heading
+                      type="h5"
                       modifiers={['s015', '400', 'copper', 'center']}
                       content={days}
                     />
                   </div>
                   <div className="t-events_countDown-label">
                     <Text
-                      modifiers={['24x36', '200', 'center', 'copper', 's015']}
+                      modifiers={['20x32', '200', 'center', 'copper', 's015']}
                       content={t('general.day')}
                     />
                   </div>
@@ -125,13 +126,14 @@ const Events: React.FC<EventsProps> = ({
                 <div className="t-events_countDown-item">
                   <div className="t-events_countDown-value">
                     <Heading
+                      type="h5"
                       modifiers={['s015', '400', 'copper', 'center']}
                       content={hours}
                     />
                   </div>
                   <div className="t-events_countDown-label">
                     <Text
-                      modifiers={['24x36', '200', 'center', 'copper', 's015']}
+                      modifiers={['20x32', '200', 'center', 'copper', 's015']}
                       content={t('general.hours')}
                     />
                   </div>
@@ -139,13 +141,14 @@ const Events: React.FC<EventsProps> = ({
                 <div className="t-events_countDown-item">
                   <div className="t-events_countDown-value">
                     <Heading
+                      type="h5"
                       modifiers={['s015', '400', 'copper', 'center']}
                       content={mins}
                     />
                   </div>
                   <div className="t-events_countDown-label">
                     <Text
-                      modifiers={['24x36', '200', 'center', 'copper', 's015']}
+                      modifiers={['20x32', '200', 'center', 'copper', 's015']}
                       content={t('general.min')}
                     />
                   </div>
@@ -153,13 +156,14 @@ const Events: React.FC<EventsProps> = ({
                 <div className="t-events_countDown-item">
                   <div className="t-events_countDown-value">
                     <Heading
+                      type="h5"
                       modifiers={['s015', '400', 'copper', 'center']}
                       content={secs}
                     />
                   </div>
                   <div className="t-events_countDown-label">
                     <Text
-                      modifiers={['24x36', '200', 'center', 'copper', 's015']}
+                      modifiers={['20x32', '200', 'center', 'copper', 's015']}
                       content={t('general.sec')}
                     />
                   </div>
@@ -191,7 +195,7 @@ const Events: React.FC<EventsProps> = ({
                 )}
               <div className="t-events_button">
                 <Link href={firstItem?.button?.url} target={firstItem?.button?.target}>
-                  <Button variant="primary-green">{firstItem?.button?.text}</Button>
+                  <Button variant="primary-green" size="md">{firstItem?.button?.text}</Button>
                 </Link>
               </div>
             </Animate>
