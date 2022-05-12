@@ -49,8 +49,8 @@ const Screen: React.FC = () => {
     related: data?.relatedEvents?.map((item) => ({
       thumbnail: baseURL(item.thumbnail),
       tag: {
-        text: baseString(data?.subdivision?.name),
-        url: redirectURL(CONSTANTS.PREFIX.DIVISION, data?.subdivision?.slug, language),
+        text: baseString(item?.subdivision?.name),
+        url: redirectURL(CONSTANTS.PREFIX.DIVISION, item?.subdivision?.slug, language),
       },
       title: baseString(item.title),
       endTime: item.startDate,

@@ -42,7 +42,7 @@ const Events: React.FC<EventsProps> = ({ events, blocks, keyword }) => {
     thumbnail: baseURL(item.thumbnail),
     tag: {
       text: item?.subdivision?.name,
-      url: redirectURL(CONSTANTS.PREFIX.DIVISION, item.slug, language),
+      url: redirectURL(CONSTANTS.PREFIX.DIVISION, item?.subdivision?.slug, language),
     },
     title: item.title,
     endTime: item.startDate,
