@@ -104,7 +104,7 @@ const PopupImageDetail: React.FC<PopupImageDetailProps> = ({
                     <Image src={item.thumbnail} alt={item.title} ratio="934x526" />
                     <div className="t-popupImageDetail_imageShow-content">
                       <Text modifiers={['16x28', '700', 'white']} content={item.title} />
-                      <div className="u-mt-10 u-mt-md-16 t-popupImageDetail_imageShow-desc">
+                      <div className="t-popupImageDetail_imageShow-desc u-mt-2">
                         <Text modifiers={['16x28', '400', 'white']} content={item.description} />
                       </div>
                     </div>
