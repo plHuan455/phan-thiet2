@@ -4,6 +4,8 @@ interface Subdivision {
   logo: string;
   slug: string;
   thumbnail: string;
+  id: number;
+  displayOder: number;
 }
 
 export interface OverviewNewsType {
@@ -46,6 +48,7 @@ export interface OverviewVideoType {
 
 export interface OverviewImageType {
   path: string;
+  subdivision: Subdivision;
 }
 
 export interface OverviewDocumentType {

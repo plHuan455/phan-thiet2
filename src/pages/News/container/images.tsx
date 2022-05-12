@@ -16,7 +16,9 @@ import { useAsync } from 'hooks/useAsync';
 import useScrollInfinite from 'hooks/useScrollInfinite';
 import { getOverviewListService } from 'services/overviews';
 import { OverviewImageType, PaginationOverview } from 'services/overviews/types';
-import { baseString, baseURL, getBlockData } from 'utils/functions';
+import {
+  baseString, baseURL, getBlockData,
+} from 'utils/functions';
 
 export interface CardImageProps {
   thumbnail: string;
@@ -102,6 +104,7 @@ const Images: React.FC<ImagesProps> = ({ images, blocks, keyword }) => {
 
   const formatData = useCallback((item:OverviewImageType):CardImageProps => ({
     thumbnail: baseURL(item.path),
+    tag: item.subdivision?.name,
   }), []);
 
   const [imageExecute, imagesState] = useAsync(getOverviewListService, {
