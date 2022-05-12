@@ -29,7 +29,7 @@
       padding: rem(8) rem(60);
     }
 
-    @include desktop-down {
+    @include break-max(1281px) {
       min-height: rem(90);
       padding: rem(8) rem(25);
     }
@@ -46,7 +46,11 @@
     .a-text {
       width: 100%;
       @include text-overflow (3);
-      @include desktop-down {
+      @include break-max(1440px) {
+        @include font-base(18,26);
+      }
+
+      @include break-max(1281px) {
         @include font-base(16,24);
       }
 
@@ -168,11 +172,19 @@
     }
 
     .a-text {
-      @include desktop-down {
+      @include break-max(1440px) {
+        @include font-base(18,26);
+      }
+
+      @include break-max(1281px) {
         @include font-base(16,24);
       }
       @include mobile-down {
         @include font-base(14,20);
+      }
+
+      @include mobile-down {
+        @include font-base(12,18);
       }
     }
   }
