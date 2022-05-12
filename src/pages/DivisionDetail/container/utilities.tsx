@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 
 import DivisionUtilities from 'components/templates/DivisionUtilities';
 import { SubdivisionUtilityTypes, SubdivisionUtilityMapTypes } from 'services/subdivision/types';
-import { baseURL } from 'utils/functions';
+import { baseString, baseURL } from 'utils/functions';
 
 interface UtilitiesProps {
   data?: SubdivisionUtilityTypes;
@@ -11,11 +11,11 @@ interface UtilitiesProps {
 
 const Utilities = React.forwardRef<HTMLDivElement, UtilitiesProps>(({ data, map }, ref) => {
   const listLocations = useMemo(() => map?.items?.map((item, index) => ({
-    x: Number(item.point.x),
-    y: Number(item.point.y),
+    x: Number(item?.point?.x),
+    y: Number(item?.point?.y),
     id: index,
-    imgSrc: baseURL(item.utility.thumbnail),
-    title: item.utility.name,
+    imgSrc: baseURL(item?.utility?.thumbnail),
+    title: baseString(item?.utility?.name),
     utilitiesIcon: {
       number: item.number,
       fillColor: item.color,
