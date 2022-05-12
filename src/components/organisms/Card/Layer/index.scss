@@ -52,7 +52,10 @@
 
     #{$root}-pd-24x16 & {
       padding: rem(8) rem(16);
-      top: calc(100% - 44px);
+      top: calc(100% - 36px);
+      @include desktop-down {
+        top: calc(100% - 40px);
+      }
     }
 
     #{$root}-pd-6x16 & {
