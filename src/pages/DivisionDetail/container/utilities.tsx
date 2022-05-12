@@ -11,8 +11,8 @@ interface UtilitiesProps {
 
 const Utilities = React.forwardRef<HTMLDivElement, UtilitiesProps>(({ data, map }, ref) => {
   const listLocations = useMemo(() => map?.items?.map((item, index) => ({
-    x: Number(item.point.x),
-    y: Number(item.point.y),
+    x: Number(item?.point?.x),
+    y: Number(item?.point?.y),
     id: index,
     imgSrc: baseURL(item?.utility?.thumbnail),
     title: baseString(item?.utility?.name),

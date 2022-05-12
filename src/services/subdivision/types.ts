@@ -66,10 +66,10 @@ export type SubdivisionUtilityMapTypes = {
   image: string;
   imageHeight: string;
   imageWidth: string;
-  items: {
+  items?: {
     color: string;
     number: string;
-    point: {
+    point?: {
       x: string;
       y: string;
     };
