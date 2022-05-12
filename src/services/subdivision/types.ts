@@ -73,7 +73,7 @@ export type SubdivisionUtilityMapTypes = {
       x: string;
       y: string;
     };
-    utility: {
+    utility?: {
       description: string;
       id: number;
       name: string;
