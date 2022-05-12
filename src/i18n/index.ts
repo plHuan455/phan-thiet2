@@ -24,16 +24,16 @@ i18n
     },
     ns: ['translation', 'local'],
     //! Only turn this defaultNS on when testing local static translation files
-    defaultNS: 'local',
+    // defaultNS: 'local',
   });
 
-// for (const lang of Object.keys(CONSTANTS.bundledResources)) {
-//   i18n.addResources(lang, 'local', CONSTANTS.bundledResources[lang]);
-// }
+for (const lang of Object.keys(CONSTANTS.bundledResources)) {
+  i18n.addResources(lang, 'local', CONSTANTS.bundledResources[lang]);
+}
 
 //! Only turn this function on when testing static translation files
-for (const lang of Object.keys(CONSTANTS.staticBundledResources)) {
-  i18n.addResourceBundle(lang, 'local', CONSTANTS.staticBundledResources[lang]);
-}
+// for (const lang of Object.keys(CONSTANTS.staticBundledResources)) {
+//   i18n.addResourceBundle(lang, 'local', CONSTANTS.staticBundledResources[lang]);
+// }
 
 export default i18n;
