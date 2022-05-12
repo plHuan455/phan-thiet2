@@ -2,6 +2,10 @@ html,
 body {
   font-family: $font-svn-gotham;
   overflow-x: hidden;
+  font-size: 16px;
+  @include break(1024px, 1281px) {
+    font-size: 14px;
+  }
 }
 
 * {
