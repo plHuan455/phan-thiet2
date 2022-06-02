@@ -28,7 +28,7 @@
     width: rem(153);
     margin-right: rem(40);
     @include tablet-down {
-      margin-right: 0;
+      margin: auto;
     }
     
     @include mobile-down {
