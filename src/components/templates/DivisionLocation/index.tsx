@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useMemo, useRef } from 'react';
 
 import BoxDivision, { BoxDivisionProps } from './boxDivision';
 import mapData from './constants';
@@ -35,6 +35,14 @@ const DivisionLocation: React.FC<DivisionLocationProps> = ({
   const ref = useRef<HTMLDivElement|null>(null);
   const isScroll = useScrollAnimate(ref, 3);
 
+  const bgDivision = useMemo(() => {
+    const indexOf = mapData.findIndex((e) => e.className === type);
+    if (indexOf > -1 && mapData[indexOf].bg) {
+      return mapData[indexOf].bg;
+    }
+    return bg;
+  }, [type]);
+
   return (
     <div
       ref={ref}
@@ -45,7 +53,7 @@ const DivisionLocation: React.FC<DivisionLocationProps> = ({
       </Container>
       <Animate type="fadeInUp" extendClassName="t-divisionLocation_wrapContent u-mt-30 u-mt-md-56">
         <div className="t-divisionLocation_map">
-          <img className="t-divisionLocation_bg" src={bg} loading="lazy" alt="bg" />
+          <img className="t-divisionLocation_bg" src={bgDivision} loading="lazy" alt="bg" />
           {mapData.map((item, index) => (
             <div
               key={`image-${index.toString()}`}

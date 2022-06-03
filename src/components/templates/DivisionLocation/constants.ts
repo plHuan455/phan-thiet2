@@ -1,3 +1,4 @@
+import bgStarAvenue from 'assets/images/divisionLocation/bg_starAvenue.jpg';
 import imgBoutique from 'assets/images/divisionLocation/boutique.png';
 import imgFestivalStreet from 'assets/images/divisionLocation/festivalStreet.png';
 import imgFestivalTown from 'assets/images/divisionLocation/festivalTown.png';
@@ -9,7 +10,14 @@ import imgSanta from 'assets/images/divisionLocation/santa.png';
 import imgStarAvenue from 'assets/images/divisionLocation/starAvenue.png';
 import imgWaikiki from 'assets/images/divisionLocation/waikiki.png';
 
-const mapData = [
+export interface MapDataTypes {
+  className?: string;
+  line?: string;
+  img?: string;
+  bg?: string;
+}
+
+const mapData: MapDataTypes[] = [
   {
     className: 'boutique-hotel',
     line: 'M1285.28 465.529L1295.28 471.029C1294.08 474.229 1237.45 524.029 1209.28 548.529L1195.78 539.029L1285.28 465.529Z',
@@ -59,6 +67,7 @@ const mapData = [
     className: 'star-avenue',
     line: 'M500.616 188.398C499.636 185.137 498.09 179.994 496.08 177.762L474.787 181.369C480.115 197.316 488.943 237.943 501.5 250.5C520.5 269.5 508.818 295.308 504.818 302.308C503.318 304.933 538.778 293.942 550.563 285.228C558.764 267.806 529.897 230.732 526.5 233.487C514.313 243.374 502 193 500.644 188.489L500.616 188.398Z',
     img: imgStarAvenue,
+    bg: bgStarAvenue,
   },
 ];
 
