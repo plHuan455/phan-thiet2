@@ -42,6 +42,9 @@
       @include mobile-down {
         padding: 0 rem(8);
       }
+      .o-cardLayer {
+        cursor: auto;
+      }
     }
   }
 }
