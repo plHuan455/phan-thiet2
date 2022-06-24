@@ -61,18 +61,19 @@ const LanguageProvider: React.FC = ({ children }) => {
 
   const dataSystems = useAppSelector((state) => state.system.data);
   const [pageTranslation, setPageTranslation] = useState<Translation[]>([]);
-  const [flag, setFlag] = useState(false);
   const [locales, setLocales] = useState<OptionType[]>([]);
   const [localesActive, setLocaleActive] = useState<string[]>([]);
   // State detect locale active from localStorage
   const [localeSelected, setLocaleSelected] = useState<OptionType>(INIT_LOCALE);
 
   useEffect(() => {
-    dispatch(staticAllAsync());
-    dispatch(menusAsync());
-    dispatch(systemsGeneralAsync());
+    if (i18n.language) {
+      dispatch(staticAllAsync());
+      dispatch(menusAsync());
+      dispatch(systemsGeneralAsync());
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [flag]);
+  }, [i18n.language]);
 
   useEffect(() => {
     if (
@@ -125,7 +126,6 @@ const LanguageProvider: React.FC = ({ children }) => {
         } else {
           navigate(FUNCTIONS.languageURL(locale?.value));
         }
-        setFlag(!flag);
       });
     }
     if (!inActiveLocale && dataSystems) {
