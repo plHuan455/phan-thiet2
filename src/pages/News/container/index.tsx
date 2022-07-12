@@ -14,6 +14,7 @@ import MenuTag from './menus';
 import News from './news';
 import Videos from './videos';
 
+import ConditionSection from 'common/ConditionSection';
 import HelmetContainer from 'common/Helmet';
 import Icon from 'components/atoms/Icon';
 import Text from 'components/atoms/Text';
@@ -79,24 +80,36 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
           <Text modifiers={['gradientGreen', 'center', '500', '20x32']}>{t('general.not_found_data')}</Text>
         </div>
         )}
-        <div ref={tabMenu.menuList[0].ref}>
-          <News news={data?.news} blocks={blocks} keyword={keywordParams} />
-        </div>
-        <div ref={tabMenu.menuList[1].ref}>
-          <Events events={data?.events} blocks={blocks} keyword={keywordParams} />
-        </div>
-        <div ref={tabMenu.menuList[2].ref}>
-          <Images images={data?.images} blocks={blocks} keyword={keywordParams} />
-        </div>
-        <div ref={tabMenu.menuList[3].ref}>
-          <Videos videos={data?.videos} blocks={blocks} keyword={keywordParams} />
-        </div>
-        <div ref={tabMenu.menuList[4].ref}>
-          <Documents documents={data?.documents} blocks={blocks} keyword={keywordParams} />
-        </div>
-        <div>
-          <Consultancy blocks={blocks} />
-        </div>
+        <ConditionSection blocks={blocks} code="news">
+          <div ref={tabMenu.menuList[0].ref}>
+            <News news={data?.news} blocks={blocks} keyword={keywordParams} />
+          </div>
+        </ConditionSection>
+        <ConditionSection blocks={blocks} code="event">
+          <div ref={tabMenu.menuList[1].ref}>
+            <Events events={data?.events} blocks={blocks} keyword={keywordParams} />
+          </div>
+        </ConditionSection>
+        <ConditionSection blocks={blocks} code="image">
+          <div ref={tabMenu.menuList[2].ref}>
+            <Images images={data?.images} blocks={blocks} keyword={keywordParams} />
+          </div>
+        </ConditionSection>
+        <ConditionSection blocks={blocks} code="video">
+          <div ref={tabMenu.menuList[3].ref}>
+            <Videos videos={data?.videos} blocks={blocks} keyword={keywordParams} />
+          </div>
+        </ConditionSection>
+        <ConditionSection blocks={blocks} code="document">
+          <div ref={tabMenu.menuList[4].ref}>
+            <Documents documents={data?.documents} blocks={blocks} keyword={keywordParams} />
+          </div>
+        </ConditionSection>
+        <ConditionSection blocks={blocks} code="form_register">
+          <div>
+            <Consultancy blocks={blocks} />
+          </div>
+        </ConditionSection>
       </div>
     </>
   );

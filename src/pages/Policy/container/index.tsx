@@ -6,6 +6,7 @@ import Banner from './banner';
 import Ckeditor from './ckeditor';
 
 import imgBalloon from 'assets/images/pages/policy/balloon.png';
+import ConditionSection from 'common/ConditionSection';
 import HelmetContainer from 'common/Helmet';
 import Image from 'components/atoms/Image';
 import { getOgDataPage } from 'utils/functions';
@@ -26,7 +27,9 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
         <animated.div className="s-policy_layer_balloon" ref={balloonRef} style={animate}>
           <Image src={imgBalloon} alt="balloon" />
         </animated.div>
-        <Ckeditor blocks={blocks} />
+        <ConditionSection blocks={blocks} code="introduction">
+          <Ckeditor blocks={blocks} />
+        </ConditionSection>
       </section>
     </>
   );

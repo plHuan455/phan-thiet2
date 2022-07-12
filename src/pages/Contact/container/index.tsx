@@ -8,6 +8,7 @@ import Map from './map';
 
 import imgBalloon from 'assets/images/pages/contact/balloon.png';
 import imgLeaf from 'assets/images/pages/contact/leaf.png';
+import ConditionSection from 'common/ConditionSection';
 import HelmetContainer from 'common/Helmet';
 import Image from 'components/atoms/Image';
 import useScrollAnimate from 'hooks/useScrollAnimation';
@@ -40,11 +41,15 @@ const Screen: React.FC<BasePageDataTypes<any>> = ({
   <>
     <HelmetContainer seoData={seoData} ogData={getOgDataPage(pageData)} />
     <Banner banners={banners} />
-    <Map blocks={blocks} />
-    <section className="s-contact_form position-relative">
-      <Layer />
-      <Form blocks={blocks} />
-    </section>
+    <ConditionSection blocks={blocks} code="contact_headquarter">
+      <Map blocks={blocks} />
+    </ConditionSection>
+    <ConditionSection blocks={blocks} code="form_contact">
+      <section className="s-contact_form position-relative">
+        <Layer />
+        <Form blocks={blocks} />
+      </section>
+    </ConditionSection>
   </>
 );
 export default Screen;
