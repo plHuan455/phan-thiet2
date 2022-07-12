@@ -137,6 +137,14 @@ export function getBlockData<T>(
   return listBlock?.find((item) => item.code === _code)?.blocks;
 }
 
+export function getBlockActive(
+  _code: string,
+  listBlock?: any[],
+): boolean {
+  if (!listBlock) return false;
+  return listBlock?.find((item) => item.code === _code)?.active;
+}
+
 export function getBannerData(
   _code: string,
   listBlock: BannersDataTypes[],

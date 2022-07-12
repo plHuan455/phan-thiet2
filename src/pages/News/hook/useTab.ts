@@ -3,7 +3,9 @@ import {
 } from 'react';
 
 import { OverviewType } from 'services/overviews/types';
-import { baseString, getBlockData, getDimensions } from 'utils/functions';
+import {
+  baseString, getBlockActive, getBlockData, getDimensions,
+} from 'utils/functions';
 
 export type BlockItemTypes = {
   title?: string;
@@ -36,31 +38,31 @@ const useTab = ({ data, blocks } : MenuNewsProps) => {
       label: baseString(newsBlocks?.title),
       value: 'tin-tuc',
       ref: refNews,
-      active: !!data?.news?.total,
+      active: !!data?.news?.total && getBlockActive('news', blocks),
     },
     {
       label: baseString(eventsBlock?.title),
       value: 'su-kien',
       ref: refEvent,
-      active: !!data?.events?.total,
+      active: !!data?.events?.total && getBlockActive('event', blocks),
     },
     {
       label: baseString(imageBlocks?.title),
       value: 'hinh-anh',
       ref: refImage,
-      active: !!data?.images?.total,
+      active: !!data?.images?.total && getBlockActive('image', blocks),
     },
     {
       label: baseString(videoBlock?.title),
       value: 'video',
       ref: refVideo,
-      active: !!data?.videos?.total,
+      active: !!data?.videos?.total && getBlockActive('video', blocks),
     },
     {
       label: baseString(documentBlock?.title),
       value: 'differ',
       ref: refDiffer,
-      active: !!data?.documents?.total,
+      active: !!data?.documents?.total && getBlockActive('document', blocks),
     },
   // eslint-disable-next-line react-hooks/exhaustive-deps
   ]), [data, blocks]);

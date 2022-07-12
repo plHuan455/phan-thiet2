@@ -2,7 +2,9 @@ import React, { useMemo } from 'react';
 
 import fly from 'assets/images/bannerHome/fly.png';
 import BannerHome from 'components/templates/BannerHome';
-import { baseURL, getBannerData, getBlockData } from 'utils/functions';
+import {
+  baseURL, getBannerData, getBlockActive, getBlockData,
+} from 'utils/functions';
 
 export interface BannerBlocks extends SectionBlocks {
   banners: BannersDataTypes[];
@@ -54,7 +56,7 @@ const Banner: React.FC<BannerBlocks> = ({
   return (
     <BannerHome
       description={bannerBlocks?.content}
-      list={utilitiesBlockContent}
+      list={getBlockActive('utilities', blocks) ? utilitiesBlockContent : undefined}
       banner={bannerData}
     />
   );
