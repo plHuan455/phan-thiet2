@@ -126,43 +126,49 @@ const Screen: React.FC<ScreenProps> = ({ setLogoDivision }) => {
         <Banner banners={subDivisionDetail?.banner || []} />
 
         {/* Video */}
-        <IntroVideo data={video} />
+        {video?.active && <IntroVideo data={video} />}
 
         {/* Content */}
-        <Summary ref={refSection.menuList[0].ref} data={content} />
+        {content?.active && <Summary ref={refSection.menuList[0].ref} data={content} />}
 
         {/* Location */}
-        <Location data={location} type={subDivisionDetail?.type} />
+        {location?.active && <Location data={location} type={subDivisionDetail?.type} />}
 
         {/* Utilities */}
-        <Utilities ref={refSection.menuList[1].ref} data={utility} map={map} />
+        {utility?.active && <Utilities ref={refSection.menuList[1].ref} data={utility} map={map} />}
 
         {/* Collection */}
+        {collection?.active && (
         <Collection
           ref={refSection.menuList[2].ref}
           subDivisionId={subDivisionDetail?.id}
           data={collection}
         />
+        )}
 
         {/* Library */}
+        {library?.active && (
         <Library
           subDivisionId={subDivisionDetail?.id || -1}
           subDivisionName={subDivisionDetail?.name}
           data={library}
           color={baseString(subDivisionDetail?.color)}
         />
+        )}
 
         {/* Journey */}
+        {journey?.active && (
         <Journeys
           id={subDivisionDetail?.id}
           data={journey}
         />
+        )}
 
         {/* Related */}
-        <Division subdivisionId={subDivisionDetail?.id} data={related} />
+        {related?.active && <Division subdivisionId={subDivisionDetail?.id} data={related} />}
 
         {/* Consultancy */}
-        <Consultancy data={subscribe} />
+        {subscribe?.active && <Consultancy data={subscribe} />}
       </div>
     </>
   );
